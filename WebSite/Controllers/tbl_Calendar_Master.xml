@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="tbl_Calendar_Master" conflictDetection="overwriteChanges" label="^CalMas^Calendar Master^CalMas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"tbl_Calendar_Master"."CalenderID" "CalenderID"
+	,"tbl_Calendar_Master"."FirstPeriodStartDate" "FirstPeriodStartDate"
+	,"tbl_Calendar_Master"."FirstPeriodEndDate" "FirstPeriodEndDate"
+	,"tbl_Calendar_Master"."Number_Of_Month" "Number_Of_Month"
+	,"tbl_Calendar_Master"."Adjustment_PeriodYN" "Adjustment_PeriodYN"
+from "dbo"."tbl_Calendar_Master" "tbl_Calendar_Master"
+]]></text>
+    </command>
+    <command id="CalenderIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="CalenderID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="CalenderID" type="Int64" allowNulls="false" isPrimaryKey="true" label="^CalId^Calender#^CalId^" readOnly="true" />
+    <field name="FirstPeriodStartDate" type="DateTime" allowNulls="false" label="^FirPerStaDat^First Period Start Date^FirPerStaDat^" showInSummary="true" />
+    <field name="FirstPeriodEndDate" type="DateTime" allowNulls="false" label="^FirPerEndDat^First Period End Date^FirPerEndDat^" showInSummary="true" />
+    <field name="Number_Of_Month" type="Int32" label="^NumOfMon^Number Of Month^NumOfMon^" showInSummary="true" />
+    <field name="Adjustment_PeriodYN" type="Int32" label="^AdjPerYn^Adjustment Period YN^AdjPerYn^" showInSummary="true">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^CalMas^Calendar Master^CalMas^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="FirstPeriodStartDate" columns="10" />
+        <dataField fieldName="FirstPeriodEndDate" columns="10" />
+        <dataField fieldName="Number_Of_Month" columns="15" />
+        <dataField fieldName="Adjustment_PeriodYN" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevCalMas^Review Calendar Master^RevCalMas^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Calendar Master" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FirstPeriodStartDate" columns="10" />
+            <dataField fieldName="FirstPeriodEndDate" columns="10" />
+            <dataField fieldName="Number_Of_Month" columns="15" />
+            <dataField fieldName="Adjustment_PeriodYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewCalMas^New Calendar Master^NewCalMas^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Calendar Master" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FirstPeriodStartDate" columns="10" />
+            <dataField fieldName="FirstPeriodEndDate" columns="10" />
+            <dataField fieldName="Number_Of_Month" columns="15" />
+            <dataField fieldName="Adjustment_PeriodYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>

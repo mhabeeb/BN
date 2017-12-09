@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="XX_SO_LINES_REPORTS" conflictDetection="overwriteChanges" label="XX_SO_LINES_REPORTS" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="XXX_SO_LINES_REPORTS" custom="true">
+      <text><![CDATA[SELECT * FROM XXX_SO_LINES_REPORTS]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="SO_NO" type="Decimal" allowNulls="false" label="So No" showInSummary="true" />
+    <field name="SO_Line_No" type="Decimal" allowNulls="false" label="SO Line No" showInSummary="true" isPrimaryKey="true" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" showInSummary="true" />
+    <field name="SO_Qty" type="Decimal" label="SO Qty" showInSummary="true" dataFormatString="N2" />
+    <field name="CloseYN" type="Int32" label="Close YN" showInSummary="true" />
+    <field name="Item_Desc" type="String" label="Item Desc" length="500" />
+    <field name="Item_Part" type="String" label="Item Part" length="20" />
+    <field name="UOM" type="String" label="Uom" length="50" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="Unit_Price" type="Decimal" label="Unit Price" dataFormatString="N2" />
+    <field name="Line_Net" type="Decimal" label="Line Net" dataFormatString="N2" />
+    <field name="Line_Amt" type="Decimal" label="Line Amt" dataFormatString="N2" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" length="250" />
+    <field name="Date_Ordered" type="DateTime" label="Date Ordered" />
+    <field name="Order_Type" type="Int16" label="Order Type" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="PO_Balance" type="String" allowQBE="false" allowSorting="false" label="PO Balance" readOnly="true" />
+    <field name="PR_Balance" type="String" allowQBE="false" allowSorting="false" label="PR Balance" readOnly="true" />
+    <field name="DV_Balance" type="String" allowQBE="false" allowSorting="false" label="DV Balance" readOnly="true" />
+    <field name="Invoice_Balance" type="String" allowQBE="false" allowSorting="false" label="Invoice Balance" readOnly="true" />
+    <field name="DR_Balance" type="String" allowQBE="false" allowSorting="false" label="DR Balance" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="So Lines Reports" filter="OPU_Code IN (SELECT [OPU_Code] FROM [UserBranchAccess] where [UserID]=@BusinessRules_UserId)">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="SO_Line_No" columns="15" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="SO_Qty" dataFormatString="c" columns="15" />
+        <dataField fieldName="CloseYN" columns="15" hidden="true" />
+        <dataField fieldName="Item_Desc" />
+        <dataField fieldName="Item_Part" columns="20" />
+        <dataField fieldName="UOM" columns="50" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Amt" dataFormatString="c" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Date_Ordered" columns="10" />
+        <dataField fieldName="Order_Type" columns="15" hidden="true" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="PO_Balance" rows="5" />
+        <dataField fieldName="PR_Balance" rows="5" />
+        <dataField fieldName="DV_Balance" rows="5" />
+        <dataField fieldName="Invoice_Balance" rows="5" />
+        <dataField fieldName="DR_Balance" rows="5" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Xxx So Lines Reports">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Xxx So Lines Reports" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="SO_Line_No" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="SO_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="CloseYN" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="UOM" columns="50" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Date_Ordered" columns="10" />
+            <dataField fieldName="Order_Type" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="PO_Balance" rows="5" />
+            <dataField fieldName="PR_Balance" rows="5" />
+            <dataField fieldName="DV_Balance" rows="5" />
+            <dataField fieldName="Invoice_Balance" rows="5" />
+            <dataField fieldName="DR_Balance" rows="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Xxx So Lines Reports">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Xxx So Lines Reports" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="SO_Line_No" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="SO_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="CloseYN" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="UOM" columns="50" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Date_Ordered" columns="10" />
+            <dataField fieldName="Order_Type" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Print Sales line Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

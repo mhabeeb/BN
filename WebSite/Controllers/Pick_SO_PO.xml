@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Pick_SO_PO" conflictDetection="overwriteChanges" label="^PicSoPo^Pick_SO_PO^PicSoPo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="SO_Line_Items" custom="true">
+      <text><![CDATA[SELECT     dbo.SO_Line_Items.SO_NO, dbo.SO_Line_Items.SO_Line_No, dbo.SO_Line_Items.Item_Code, dbo.SO_Line_Items.SO_Qty, dbo.SO_Line_Items.Unit_Price, 
+                      dbo.SO_Line_Items.Line_Remarks, dbo.SO_Line_Items.Pick, dbo.SO_Line_Items.Pick_Qty, dbo.SO_Line_Items.Line_Total, dbo.SO_Line_Items.QT_NO, 
+                      dbo.SO_Line_Items.Pick_Doc, dbo.SO_Line_Items.DeliveryDate, dbo.SO_Line_Items.Line_Net, dbo.SO_Line_Items.DV_Balance, dbo.SO_Line_Items.PR_Balance, 
+                      dbo.SO_Line_Items.Source_LineID, dbo.SO_Line_Items.Item_Desc, dbo.SO_Line_Items.Item_Part, dbo.SO_Line_Items.UOM, dbo.SO_Line_Items.Project_Code, 
+                      dbo.SO_Line_Items.Dept_Code, dbo.PO_Header.PO_NO, dbo.SO_Line_Items.PO_Balance, dbo.SO_Line_Items.YourRefrence, dbo.PO_Header.Doc_Status, 
+                      dbo.SO_Line_Items.SO_OPU_Code, dbo.SO_Line_Items.DR_Line_ID,dbo.SO_Line_Items.Updated_By,dbo.SO_Line_Items.Updated_DateTime,dbo.SO_Line_Items.P_Doc_No
+FROM         dbo.SO_Line_Items CROSS JOIN
+                      dbo.PO_Header
+WHERE     (ISNULL(dbo.SO_Line_Items.CloseYN, 0) = 0) AND (dbo.SO_Line_Items.DV_Balance > 0) AND (dbo.SO_Line_Items.PR_Balance > 0) AND 
+                      (ISNULL(dbo.SO_Line_Items.BO_PO, 0) = 1) AND (dbo.SO_Line_Items.PO_Balance > 0) AND (dbo.PO_Header.Doc_Status <> N'Close')]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="SO_NO" type="Decimal" allowNulls="false" label="^BoqSoId^BOQ/SO #^BoqSoId^" showInSummary="true" />
+    <field name="P_Doc_No" type="Int64" label="^BoqSo^BOQ/SO^BoqSo^" />
+    <field name="SO_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^SOLinNo^SO Line No^SOLinNo^" readOnly="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
+    <field name="SO_Qty" type="Decimal" label="^SoQty^BOQ/SO^SoQty^" showInSummary="true" />
+    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" showInSummary="true" />
+    <field name="Pick" type="Int16" label="^Pic^Pick^Pic^" />
+    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
+    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" />
+    <field name="QT_NO" type="Decimal" label="^QtNo^Qt No^QtNo^" />
+    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
+    <field name="DeliveryDate" type="DateTime" label="^DelDat^Delivery Date^DelDat^" />
+    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" readOnly="true" />
+    <field name="DV_Balance" type="Decimal" label="^DVBal^DV Balance^DVBal^" />
+    <field name="PR_Balance" type="Decimal" label="^PRBal^PR Balance^PRBal^" />
+    <field name="Source_LineID" type="Decimal" label="^SouLin^Source Line#^SourLin^" />
+    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
+    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="20" />
+    <field name="UOM" type="String" label="^UOM^UOM^UOM^" length="50" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="PO_NO" type="Decimal" allowNulls="false" label="^PoNo^Po No^PoNo^" readOnly="true" />
+    <field name="PO_Balance" type="Decimal" label="^POBal^PO Balance^POBal^" />
+    <field name="YourRefrence" type="String" label="^RefId^Ref.#^RefId^" length="15" />
+    <field name="Doc_Status" type="String" label="^DocSta^Doc Status^DocSta^" readOnly="true" length="15" />
+    <field name="SO_OPU_Code" type="Int32" label="^SOOPUCod^SO OPU Code^SOOPUCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^SoLinIte^SO Line Items^SoLinIte^" reportTemplate="true" filter="SO_OPU_Code=@Session_OPU_Code " showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="P_Doc_No" columns="15" readOnly="true" />
+        <dataField fieldName="SO_NO" columns="15" readOnly="true" />
+        <dataField fieldName="Item_Code" columns="20" readOnly="true" />
+        <dataField fieldName="Item_Desc" readOnly="true" />
+        <dataField fieldName="Item_Part" columns="20" readOnly="true" />
+        <dataField fieldName="Pick_Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="UOM" columns="50" readOnly="true" />
+        <dataField fieldName="DeliveryDate" columns="10" readOnly="true" />
+        <dataField fieldName="SO_Qty" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="PR_Balance" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="DV_Balance" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="PO_Balance" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Project_Code" columns="50" readOnly="true" />
+        <dataField fieldName="Dept_Code" columns="50" readOnly="true" />
+        <dataField fieldName="YourRefrence" columns="15" readOnly="true" />
+        <dataField fieldName="Pick" columns="15" hidden="true" />
+        <dataField fieldName="Line_Remarks" readOnly="true" />
+        <dataField fieldName="Line_Total" dataFormatString="c" columns="15" hidden="true" readOnly="true" />
+        <dataField fieldName="QT_NO" columns="15" hidden="true" readOnly="true" />
+        <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
+        <dataField fieldName="Line_Net" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Source_LineID" columns="15" hidden="true" />
+        <dataField fieldName="PO_NO" columns="15" hidden="true" />
+        <dataField fieldName="Doc_Status" columns="15" hidden="true" />
+        <dataField fieldName="SO_OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+        <dataField fieldName="Updated_By" columns="15" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevSoLinIte^Review SO Line Items^RevSoLinIte^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="dbo SO Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="SO_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="QT_NO" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="DeliveryDate" columns="10" />
+            <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="DV_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="PR_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Source_LineID" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="UOM" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="PO_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="YourRefrence" columns="15" />
+            <dataField fieldName="Doc_Status" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewSoLinIte^New SO Line Items^NewSoLinIte^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New dbo SO Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="SO_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="QT_NO" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="DeliveryDate" columns="10" />
+            <dataField fieldName="DV_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="PR_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Source_LineID" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="UOM" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="PO_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="YourRefrence" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true" />
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true" />
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" headerText="^AddtoPO^Add to PO^AddtoPO^" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Update" type="Sql" phase="Before"><![CDATA[IF IsNull(@Pick_Qty,0) > 0
+BEGIN
+SET @Pick=3 
+SET @Pick_Doc=@PO_NO
+SET @Updated_By=@BusinessRules_UserId
+SET @Updated_DateTime=GETDATE()
+END]]></rule>
+    <rule id="r101" type="Sql" commandName="Insert|Update" phase="Before" name="Pick_Qty_Validator"><![CDATA[if @Pick_Qty > @DV_Balance
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Pick_Qty,PO Qty Cannot Be MoreThen DV Balance '
+end
+if @Pick_Qty > @PO_Balance
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Pick_Qty,PO Qty Cannot be morethen PO Balance Qty'
+end]]></rule>
+  </businessRules>
+</dataController>

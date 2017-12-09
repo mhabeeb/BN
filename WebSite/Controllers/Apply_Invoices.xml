@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Apply_Invoices" conflictDetection="overwriteChanges" label="^AppInv^Apply_Invoices^AppInv^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Credit_Trx_Header" custom="true">
+      <text><![CDATA[SELECT  dbo.Credit_Trx_Header.Invoice_NO, dbo.Credit_Trx_Header.Invoice_Date, dbo.Credit_Trx_Header.Trx_ID, dbo.Credit_Trx_Header.Sys_Number, dbo.Credit_Trx_Header.Project_Code, dbo.Credit_Trx_Header.Dept_Code, 
+                   dbo.Credit_Trx_Header.APAR_Flag, dbo.Credit_Trx_Header.Vendor_Name, dbo.Credit_Trx_Header.Pick_Amount, dbo.Credit_Trx_Header.Pick, dbo.Credit_Trx_Header.Pick_Doc, dbo.Credit_Trx_Header.Header_Net, 
+                   dbo.Credit_Trx_Header.APPLY_BAL, dbo.APAR_Payments.PaymentID, ISNULL(dbo.APAR_Payments.PMT_APPLY_BAL, 0) AS PMT_APPLY_BAL, dbo.Credit_Trx_Header.OPU_Code, dbo.Credit_Trx_Header.Company_Code, 
+                   dbo.Credit_Trx_Header.Currency_Code, dbo.Credit_Trx_Header.Cur_Rate AS Inv_Cur_Rate, dbo.APAR_Payments.Cur_Rate, dbo.Credit_Trx_Header.Rec_Status, dbo.Credit_Trx_Header.Doc_No, dbo.Credit_Trx_Header.Location_Name
+FROM      dbo.Credit_Trx_Header INNER JOIN
+                   dbo.APAR_Payments ON dbo.Credit_Trx_Header.Sys_Number = dbo.APAR_Payments.Sys_Number AND dbo.Credit_Trx_Header.LocationID = dbo.APAR_Payments.LocationID
+WHERE   (ISNULL(dbo.Credit_Trx_Header.APPLY_BAL, 0) <> 0)]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Invoice_NO" type="Decimal" label="^InvNO^InvoiceNO^InvNO^" showInSummary="true" />
+    <field name="Invoice_Date" type="DateTime" label="^InvDat^Invoice Date^InvDat^" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TrxId^Trx#^TrxId^" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Supplier No^SysNum^" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" />
+    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
+    <field name="Pick_Amount" type="Decimal" label="^PicAmo^Pick Amount^PicAmo^" />
+    <field name="Pick" type="Int32" label="^Pic^Pick^Pic^" />
+    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
+    <field name="Header_Net" type="Decimal" label="^HeaNet^Header Net^HeaNet^" />
+    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Apply Bal^AppBal^" />
+    <field name="PaymentID" type="Decimal" allowNulls="false" label="^PayId^Payment#^PayId^" readOnly="true" />
+    <field name="PMT_APPLY_BAL" type="Decimal" allowNulls="false" label="^PmtAppBal^Pmt Apply Bal^PmtAppBal^" readOnly="true" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
+    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
+    <field name="Inv_Cur_Rate" type="Decimal" label="^InvCurRat^Inv Cur Rate^InvCurRat^" />
+    <field name="Cur_Rate" type="Decimal" label="^CurRat^Cur Rate^CurRat^" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="Doc_No" type="Int64" label="^DocNo^InvoiceNo^DocNo^" />
+    <field name="Location_Name" type="String" label="Location Name" length="150" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^AvaInv^Available Invoices^AvaInv^" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="PaymentID" columns="15" hidden="true" readOnly="true" />
+        <dataField fieldName="Doc_No" columns="15" readOnly="true" />
+        <dataField fieldName="Invoice_NO" columns="15" readOnly="true" hidden="true" />
+        <dataField fieldName="Invoice_Date" columns="10" readOnly="true" />
+        <dataField fieldName="Sys_Number" columns="15" readOnly="true" />
+        <dataField fieldName="Pick" columns="15" hidden="true" />
+        <dataField fieldName="Pick_Amount" dataFormatString="N2" columns="15" />
+        <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
+        <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Project_Code" columns="50" readOnly="true" />
+        <dataField fieldName="Dept_Code" columns="50" readOnly="true" />
+        <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+        <dataField fieldName="Vendor_Name" readOnly="true" />
+        <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+        <dataField fieldName="Inv_Cur_Rate" columns="15" readOnly="true" />
+        <dataField fieldName="Cur_Rate" columns="15" readOnly="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="Location_Name" rows="1" readOnly="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^AvaInv^Available Invoices^AvaInv^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Available Invoices" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Invoice_NO" columns="15" readOnly="true" />
+            <dataField fieldName="Invoice_Date" columns="10" readOnly="true" />
+            <dataField fieldName="Sys_Number" columns="15" readOnly="true" />
+            <dataField fieldName="Pick_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Project_Code" columns="50" readOnly="true" />
+            <dataField fieldName="Dept_Code" columns="50" readOnly="true" />
+            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+            <dataField fieldName="Pick" columns="15" hidden="true" />
+            <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
+            <dataField fieldName="Vendor_Name" readOnly="true" />
+            <dataField fieldName="PaymentID" columns="15" hidden="true" />
+            <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+            <dataField fieldName="Trx_ID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^AvaInv^Available Invoices^AvaInv^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Available Invoices" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Pick_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Currency_Code" columns="4" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true" />
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" headerText="^Apply^Apply^Apply^">
+        <data />
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r101" type="Sql" commandName="Insert|Update" phase="Before" name="Pick_Amount_Validator"><![CDATA[DECLARE @Pick_Amount_BC money , @APPLY_BAL_BC money , @PMT_APPLY_BAL_BC money
+
+SET @Pick_Amount_BC=@Pick_Amount * @Cur_Rate
+SET @PMT_APPLY_BAL_BC=@PMT_APPLY_BAL * @Cur_Rate
+
+SET @APPLY_BAL_BC=@APPLY_BAL * @Inv_Cur_Rate
+
+If @Pick_Amount_BC > 0
+BEGIN
+ IF @Pick_Amount_BC > 0 and @Pick_Amount_BC > @APPLY_BAL_BC 
+    BEGIN
+    /* prevent the default action processing */
+    SET @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    SET @Result_Focus = 'Pick_Amount, Applied Amount Is MoreThan Inv Or Payment Balance Amount Cannot Be Applied, Pls Change'
+	    
+	END
+						  
+	IF @Pick_Amount_BC > 0 and @Pick_Amount_BC > @PMT_APPLY_BAL_BC
+	BEGIN
+	 /* prevent the default action processing */
+    SET @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    SET @Result_Focus = 'Pick_Amount, Applied Amount Is MoreThan Inv Or Payment Balance Amount Cannot Be Applied, Pls Change'
+	END
+						  
+END
+]]></rule>
+    <rule id="r100" commandName="Update" type="Sql" phase="Before"><![CDATA[IF @Pick_Amount > 0 
+BEGIN
+
+SET @Pick=1
+SET @Pick_Doc=@PaymentID
+
+END]]></rule>
+  </businessRules>
+</dataController>

@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Recurring_Trx_Lines" conflictDetection="overwriteChanges" label="^RecTrxLin^Recurring_Trx_Lines^RecTrxLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Recurring_Trx_Lines" custom="true">
+      <text><![CDATA[SELECT * FROM Recurring_Trx_Lines]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Recurring_Line_ID" type="Int64" allowNulls="false" isPrimaryKey="true" label="^RecLinId^Recurring Line#^RecLinId^" readOnly="true" />
+    <field name="RecurringID" type="Int64" label="^RecId^Recurring#^RecId^" showInSummary="true" />
+    <field name="Distribution_AccountID" type="String" label="^DisAccId^Distribution Account#^DisAccId^" length="50" showInSummary="true">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Item_Code" type="String" label="^IteCod^Item_Code^IteCod^" length="20" showInSummary="true" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Item_Master_Ac_Default" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" />
+    </field>
+    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" showInSummary="true" allowNulls="false" />
+    <field name="DistributionPercentage" type="Decimal" label="^DisPer^Distribution Percentage^DisPer^" showInSummary="true" />
+    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" allowNulls="false" />
+    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" />
+    <field name="Item_Desc" type="String" label="^IteDec^Item Desc^IteDec^" length="50" allowNulls="false" />
+    <field name="Item_Code_Ref_No" type="String" label="^IteCodRefNo^Item Code^IteCodRefNo^ " length="20" allowNulls="false" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50">
+      <items style="Lookup" dataController="ProjectMaster" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    </field>
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50">
+      <items style="Lookup" dataController="DepartmentMaster" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
+    </field>
+    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50">
+      <items style="Lookup" dataController="ProjectsSites" dataView="grid1" dataTextField="SiteName" dataValueField="SiteCode" />
+    </field>
+    <field name="S1" type="String" label="^S1^S1^S2^" length="50" />
+    <field name="S2" type="String" label="^S2^S2^S2^" length="50" />
+    <field name="S3" type="String" label="^S3^S3^S3^" length="50" />
+    <field name="S4" type="String" label="^S4^S4^S4^" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^RecTrxLin^Recurring Trx Lines^RecTrxLin^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="RecurringID" columns="15" />
+        <dataField fieldName="Distribution_AccountID" columns="50" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="DistributionPercentage" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Line_Total" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Item_Desc" columns="50" hidden="true" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" hidden="true" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="SiteCode" columns="50" />
+        <dataField fieldName="S1" columns="50" hidden="true" />
+        <dataField fieldName="S2" columns="50" hidden="true" />
+        <dataField fieldName="S3" columns="50" hidden="true" />
+        <dataField fieldName="S4" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevTRecTrxLin^Review Recurring Trx Lines^RevTRecTrxLin^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Recurring Trx Lines" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RecurringID" columns="15" />
+            <dataField fieldName="Distribution_AccountID" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="DistributionPercentage" dataFormatString="c" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Desc" columns="50" />
+            <dataField fieldName="Item_Code_Ref_No" columns="20" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="SiteCode" columns="50" />
+            <dataField fieldName="S1" columns="50" hidden="true" />
+            <dataField fieldName="S2" columns="50" hidden="true" />
+            <dataField fieldName="S3" columns="50" hidden="true" />
+            <dataField fieldName="S4" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewRecTrxLin^New Recurring Trx Lines^NewRecTrxLin^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Recurring Trx Lines" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Desc" columns="50" hidden="true" />
+            <dataField fieldName="Item_Code_Ref_No" columns="20" hidden="true" />
+            <dataField fieldName="Qty" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="RecurringID" columns="15" hidden="true" />
+            <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="DistributionPercentage" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Distribution_AccountID" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" hidden="true" />
+            <dataField fieldName="Line_Total" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="SiteCode" columns="50" />
+            <dataField fieldName="S1" columns="50" hidden="true" />
+            <dataField fieldName="S2" columns="50" hidden="true" />
+            <dataField fieldName="S3" columns="50" hidden="true" />
+            <dataField fieldName="S4" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @Qty=1]]></rule>
+  </businessRules>
+</dataController>

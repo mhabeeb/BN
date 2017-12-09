@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Sales_Opportunity_Line" conflictDetection="overwriteChanges" label="Sales Opportunity Line" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Sales_Opportunity_Line"."Opportunity_Line" "Opportunity_Line"
+	,"Sales_Opportunity_Line"."Opportunity_ID" "Opportunity_ID"
+	,"Opportunity_"."Opportunity_Title" "Opportunity_Opportunity_Title"
+	,"Opportunity_SalesTeam"."TeamName" "Opportunity_SalesTeamTeamName"
+	,"Opportunity_Sys_Number"."Vendor_Name" "Opportunity_Sys_NumberVendor_Name"
+	,"Opportunity_Sys_NumberUnbilled_AC"."Account_Description" "Opportunity_Sys_NumberUnbilled_ACAccount_Description"
+	,"Opportunity_Sys_NumberBilled_AC"."Account_Description" "Opportunity_Sys_NumberBilled_ACAccount_Description"
+	,"Sales_Opportunity_Line"."Item_Category_Major" "Item_Category_Major"
+	,"Sales_Opportunity_Line"."Item_Category" "Item_Category"
+	,"TheItem_Category"."Item_Category_Major" "TheItem_CategoryItem_Category_Major"
+	,"Sales_Opportunity_Line"."Item_Code" "Item_Code"
+	,"Item_"."Part_No" "Item_Part_No"
+	,"Item_Inventory_AC"."Account_Description" "Item_Inventory_ACAccount_Description"
+	,"Item_Inventory_ACAccount_Type"."Account_Type_Ar" "Item_Inventory_ACAccount_TypeAccount_Type_Ar"
+	,"Item_CostOfSales_AC"."Account_Description" "Item_CostOfSales_ACAccount_Description"
+	,"Item_CostOfSales_ACAccount_Type"."Account_Type_Ar" "Item_CostOfSales_ACAccount_TypeAccount_Type_Ar"
+	,"Item_Revenue_AC"."Account_Description" "Item_Revenue_ACAccount_Description"
+	,"Item_Revenue_ACAccount_Type"."Account_Type_Ar" "Item_Revenue_ACAccount_TypeAccount_Type_Ar"
+	,"Item_Misc_Issue_AC"."Account_Description" "Item_Misc_Issue_ACAccount_Description"
+	,"Item_Misc_Issue_ACAccount_Type"."Account_Type_Ar" "Item_Misc_Issue_ACAccount_TypeAccount_Type_Ar"
+	,"Item_Misc_Receipt_AC"."Account_Description" "Item_Misc_Receipt_ACAccount_Description"
+	,"Item_Misc_Receipt_ACAccount_Type"."Account_Type_Ar" "Item_Misc_Receipt_ACAccount_TypeAccount_Type_Ar"
+	,"Sales_Opportunity_Line"."Partner" "Partner"
+	,"Sales_Opportunity_Line"."Competitors" "Competitors"
+	,"Sales_Opportunity_Line"."Comments" "Comments"
+	,"Sales_Opportunity_Line"."Created_By" "Created_By"
+	,"Sales_Opportunity_Line"."Created_DateTime" "Created_DateTime"
+	,"Sales_Opportunity_Line"."Updated_By" "Updated_By"
+	,"Sales_Opportunity_Line"."Updated_DateTime" "Updated_DateTime"
+	,"Sales_Opportunity_Line"."Est_Revenue" "Est_Revenue"
+	,"Sales_Opportunity_Line"."Qty" "Qty"
+	,"Sales_Opportunity_Line"."UnitPrice" "UnitPrice"
+	,"Sales_Opportunity_Line"."Line_Details" "Line_Details"
+	,"Sales_Opportunity_Line"."SalesManID" "SalesManID"
+	,"Sales_Opportunity_Line"."SalesTeamID" "SalesTeamID"
+	,"Sales_Opportunity_Line"."OPU_Code" "OPU_Code"
+from "dbo"."Sales_Opportunity_Line" "Sales_Opportunity_Line"
+	left join "dbo"."Sales_Opportunity" "Opportunity_" on "Sales_Opportunity_Line"."Opportunity_ID" = "Opportunity_"."Opportunity_ID"
+	left join "dbo"."Team_Header" "Opportunity_SalesTeam" on "Opportunity_"."SalesTeamID" = "Opportunity_SalesTeam"."TeamID"
+	left join "dbo"."tbl_Customer_Supplier" "Opportunity_Sys_Number" on "Opportunity_"."Sys_Number" = "Opportunity_Sys_Number"."Sys_Number"
+	left join "dbo"."COA_Natural_Account" "Opportunity_Sys_NumberUnbilled_AC" on "Opportunity_Sys_Number"."Unbilled_AC" = "Opportunity_Sys_NumberUnbilled_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account" "Opportunity_Sys_NumberBilled_AC" on "Opportunity_Sys_Number"."Billed_AC" = "Opportunity_Sys_NumberBilled_AC"."AccountID"
+	left join "dbo"."tbl_Item_Category" "TheItem_Category" on "Sales_Opportunity_Line"."Item_Category" = "TheItem_Category"."Item_Category"
+	left join "dbo"."tbl_Item_Master" "Item_" on "Sales_Opportunity_Line"."Item_Code" = "Item_"."Item_Code"
+	left join "dbo"."COA_Natural_Account" "Item_Inventory_AC" on "Item_"."Inventory_AC" = "Item_Inventory_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_Inventory_ACAccount_Type" on "Item_Inventory_AC"."Account_Type" = "Item_Inventory_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "Item_CostOfSales_AC" on "Item_"."CostOfSales_AC" = "Item_CostOfSales_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_CostOfSales_ACAccount_Type" on "Item_CostOfSales_AC"."Account_Type" = "Item_CostOfSales_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "Item_Revenue_AC" on "Item_"."Revenue_AC" = "Item_Revenue_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_Revenue_ACAccount_Type" on "Item_Revenue_AC"."Account_Type" = "Item_Revenue_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "Item_Misc_Issue_AC" on "Item_"."Misc_Issue_AC" = "Item_Misc_Issue_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_Misc_Issue_ACAccount_Type" on "Item_Misc_Issue_AC"."Account_Type" = "Item_Misc_Issue_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "Item_Misc_Receipt_AC" on "Item_"."Misc_Receipt_AC" = "Item_Misc_Receipt_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_Misc_Receipt_ACAccount_Type" on "Item_Misc_Receipt_AC"."Account_Type" = "Item_Misc_Receipt_ACAccount_Type"."Account_Type"
+]]></text>
+    </command>
+    <command id="Opportunity_LineIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Opportunity_Line" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Opportunity_Line" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Opportunity Line" readOnly="true" />
+    <field name="Opportunity_ID" type="Decimal" allowNulls="false" label="Opportunity#" showInSummary="true">
+      <items style="Lookup" dataController="Sales_Opportunity" newDataView="createForm1" dataValueField="Opportunity_ID" />
+    </field>
+    <field name="Opportunity_Opportunity_Title" type="String" readOnly="true" label="Opportunity Title" length="1000" />
+    <field name="Opportunity_SalesTeamTeamName" type="String" readOnly="true" label="Opportunity Sales Team Name" length="50" />
+    <field name="Opportunity_Sys_NumberVendor_Name" type="String" readOnly="true" label="Opportunity Sys Number Vendor Name" length="150" />
+    <field name="Opportunity_Sys_NumberUnbilled_ACAccount_Description" type="String" readOnly="true" label="Opportunity Sys Number Unbilled AC Account Description" length="200" />
+    <field name="Opportunity_Sys_NumberBilled_ACAccount_Description" type="String" readOnly="true" label="Opportunity Sys Number Billed AC Account Description" length="200" />
+    <field name="Item_Category_Major" type="String" label="Item Category Major" length="255" showInSummary="true" />
+    <field name="Item_Category" type="String" label="Item Category" length="255" showInSummary="true">
+      <items />
+    </field>
+    <field name="TheItem_CategoryItem_Category_Major" type="String" readOnly="true" label="Item Category Major" length="50" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" showInSummary="true">
+      <items />
+    </field>
+    <field name="Item_Part_No" type="String" readOnly="true" label="Item Part No" length="20" />
+    <field name="Item_Inventory_ACAccount_Description" type="String" readOnly="true" label="Item Inventory AC Account Description" length="200" />
+    <field name="Item_Inventory_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="Item Inventory AC Account Type Ar" length="50" />
+    <field name="Item_CostOfSales_ACAccount_Description" type="String" readOnly="true" label="Item Cost Of Sales AC Account Description" length="200" />
+    <field name="Item_CostOfSales_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="Item Cost Of Sales AC Account Type Ar" length="50" />
+    <field name="Item_Revenue_ACAccount_Description" type="String" readOnly="true" label="Item Revenue AC Account Description" length="200" />
+    <field name="Item_Revenue_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="Item Revenue AC Account Type Ar" length="50" />
+    <field name="Item_Misc_Issue_ACAccount_Description" type="String" readOnly="true" label="Item Misc Issue AC Account Description" length="200" />
+    <field name="Item_Misc_Issue_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="Item Misc Issue AC Account Type Ar" length="50" />
+    <field name="Item_Misc_Receipt_ACAccount_Description" type="String" readOnly="true" label="Item Misc Receipt AC Account Description" length="200" />
+    <field name="Item_Misc_Receipt_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="Item Misc Receipt AC Account Type Ar" length="50" />
+    <field name="Partner" type="String" label="Partner" length="200" showInSummary="true" />
+    <field name="Competitors" type="String" label="Competitors" length="100" />
+    <field name="Comments" type="String" allowQBE="false" allowSorting="false" label="Comments" length="3000" />
+    <field name="Created_By" type="Decimal" default="((-1))" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" default="(getdate())" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="Est_Revenue" type="Decimal" label="Est Revenue" />
+    <field name="Qty" type="Decimal" label="Qty" />
+    <field name="UnitPrice" type="Decimal" label="Unit Price" />
+    <field name="Line_Details" type="String" allowQBE="false" allowSorting="false" label="Line Details" />
+    <field name="SalesManID" type="Int32" label="Sales Man#" />
+    <field name="SalesTeamID" type="Int32" label="Sales Team#" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Sales Opportunity Line">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Opportunity_ID" aliasFieldName="Opportunity_Opportunity_Title" />
+        <dataField fieldName="Item_Category_Major" />
+        <dataField fieldName="Item_Category" aliasFieldName="TheItem_CategoryItem_Category_Major" hyperlinkFormatString="~/Pages/tbl_Item_Category.aspx?Item_Category={Item_Category}&amp;_controller=tbl_Item_Category&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="Item_Code" aliasFieldName="Item_Part_No" hyperlinkFormatString="~/Pages/tbl_Item_Master.aspx?Item_Code={Item_Code}&amp;_controller=tbl_Item_Master&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="Partner" />
+        <dataField fieldName="Competitors" />
+        <dataField fieldName="Comments" rows="5" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Sales Opportunity Line">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Sales Opportunity Line" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Opportunity_ID" aliasFieldName="Opportunity_Opportunity_Title" hyperlinkFormatString="~/Pages/Sales_Opportunity.aspx?Opportunity_ID={Opportunity_ID}&amp;_controller=Sales_Opportunity&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Item_Category_Major" />
+            <dataField fieldName="Item_Category" aliasFieldName="TheItem_CategoryItem_Category_Major" hyperlinkFormatString="~/Pages/tbl_Item_Category.aspx?Item_Category={Item_Category}&amp;_controller=tbl_Item_Category&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Item_Code" aliasFieldName="Item_Part_No" hyperlinkFormatString="~/Pages/tbl_Item_Master.aspx?Item_Code={Item_Code}&amp;_controller=tbl_Item_Master&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Partner" />
+            <dataField fieldName="Competitors" />
+            <dataField fieldName="Comments" rows="5" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Est_Revenue" dataFormatString="c" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="UnitPrice" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Details" rows="5" />
+            <dataField fieldName="SalesManID" columns="15" />
+            <dataField fieldName="SalesTeamID" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Reference Information">
+          <description><![CDATA[$DefaultReferenceDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Opportunity_SalesTeamTeamName" columns="50" />
+            <dataField fieldName="Opportunity_Sys_NumberVendor_Name" />
+            <dataField fieldName="Opportunity_Sys_NumberUnbilled_ACAccount_Description" />
+            <dataField fieldName="Opportunity_Sys_NumberBilled_ACAccount_Description" />
+            <dataField fieldName="Item_Inventory_ACAccount_Description" />
+            <dataField fieldName="Item_Inventory_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_CostOfSales_ACAccount_Description" />
+            <dataField fieldName="Item_CostOfSales_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_Revenue_ACAccount_Description" />
+            <dataField fieldName="Item_Revenue_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_Misc_Issue_ACAccount_Description" />
+            <dataField fieldName="Item_Misc_Issue_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_Misc_Receipt_ACAccount_Description" />
+            <dataField fieldName="Item_Misc_Receipt_ACAccount_TypeAccount_Type_Ar" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Sales Opportunity Line">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Sales Opportunity Line" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Opportunity_ID" aliasFieldName="Opportunity_Opportunity_Title" />
+            <dataField fieldName="Item_Category_Major" />
+            <dataField fieldName="Item_Category" aliasFieldName="TheItem_CategoryItem_Category_Major" />
+            <dataField fieldName="Item_Code" aliasFieldName="Item_Part_No" />
+            <dataField fieldName="Partner" />
+            <dataField fieldName="Competitors" />
+            <dataField fieldName="Comments" rows="5" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Est_Revenue" dataFormatString="c" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="UnitPrice" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Details" rows="5" />
+            <dataField fieldName="SalesManID" columns="15" />
+            <dataField fieldName="SalesTeamID" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>

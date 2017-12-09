@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="QAQC_Recording" conflictDetection="overwriteChanges" label="^QaqRec^QAQC_Recording^QaqRec^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="ODMOPM.dbo.QA_QC_Transactions" custom="true">
+      <text><![CDATA[SELECT     ODMOPM.dbo.QA_QC_Elements_Header.ElementDescription, ODMOPM.dbo.QA_QC_ElementType.ElementTypeName, ODMOPM.dbo.QA_QC_Transactions.*
+FROM         ODMOPM.dbo.QA_QC_Transactions INNER JOIN
+                      ODMOPM.dbo.QA_QC_Elements_Header ON ODMOPM.dbo.QA_QC_Transactions.ElementID = ODMOPM.dbo.QA_QC_Elements_Header.ElementID INNER JOIN
+                      ODMOPM.dbo.QA_QC_ElementType ON ODMOPM.dbo.QA_QC_Elements_Header.ElementType = ODMOPM.dbo.QA_QC_ElementType.ElementType]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="ElementDescription" type="String" label="^EleDes^Element Description^EleDes^" length="4000" showInSummary="true" />
+    <field name="ElementTypeName" type="String" label="^EleTypNam^Element Type Name^EleTypNam^" length="50" showInSummary="true" />
+    <field name="ElementID" type="Decimal" label="^EleId^Element#^EleId^" showInSummary="true" />
+    <field name="WC_Sch_ID" type="Decimal" label="^WCSchId^WC Sch#^WCSchId^" showInSummary="true" />
+    <field name="Image1" type="Byte[]" onDemand="true" sourceFields="QAQC_Trx_ID" onDemandHandler="ODMOPMdboQA_QC_TransactionsImage1" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^Ima1^Image1^Ima1^" showInSummary="true" />
+    <field name="Image2" type="Byte[]" onDemand="true" sourceFields="QAQC_Trx_ID" onDemandHandler="ODMOPMdboQA_QC_TransactionsImage2" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^Ima2^Image2^Ima2^" />
+    <field name="ResultID" type="Decimal" label="^ResId^Result#^ResId^" contextFields="ElementID=ElementID">
+      <items style="RadioButtonList" dataController="QAQC_Element_List" dataView="grid1" dataTextField="ResultDescription" dataValueField="ResultID" />
+    </field>
+    <field name="Note" type="String" allowQBE="false" allowSorting="false" label="^Note^Note^Note^" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" />
+    <field name="Other" type="String" label="^Other^Other^Other^" length="4000" />
+    <field name="QAQC_Trx_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^QaqTrxId^QAQC Trx#^QaqTrxId^" readOnly="true" />
+    <field name="Line_ID" type="Decimal" label="^LinId^Line#^LinId^" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABranch^Branch Name^ABranch^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" computed="true" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^QaqRec^QA / QC Recording^QaqRec^" reportTemplate="true" reportOrientation="Portrait" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ElementDescription" />
+        <dataField fieldName="ElementTypeName" columns="50" />
+        <dataField fieldName="ElementID" columns="15" />
+        <dataField fieldName="Image1" columns="15" />
+        <dataField fieldName="Image2" columns="15" />
+        <dataField fieldName="ResultID" columns="15" />
+        <dataField fieldName="Note" rows="5" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="InActive" columns="15" />
+        <dataField fieldName="Other" />
+        <dataField fieldName="Line_ID" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevQaqRec^Review QA / QC Recording^RevQaqRec^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Review QA / QC Recording" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ElementDescription" readOnly="true" />
+            <dataField fieldName="ElementTypeName" columns="50" readOnly="true" />
+            <dataField fieldName="ElementID" columns="15" hidden="true" />
+            <dataField fieldName="ResultID" columns="15" />
+            <dataField fieldName="Other" />
+            <dataField fieldName="Image1" columns="15" />
+            <dataField fieldName="Image2" columns="15" />
+            <dataField fieldName="Note" rows="5" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="InActive" columns="15" hidden="true" />
+            <dataField fieldName="Line_ID" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewQaqRec^New QA / QC Recording^NewQaqRec^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New QA / QC Recording" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ElementDescription" />
+            <dataField fieldName="ElementTypeName" columns="50" />
+            <dataField fieldName="ElementID" columns="15" />
+            <dataField fieldName="WC_Sch_ID" columns="15" />
+            <dataField fieldName="Image1" columns="15" />
+            <dataField fieldName="Image2" columns="15" />
+            <dataField fieldName="ResultID" columns="15" />
+            <dataField fieldName="Note" rows="5" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="Other" />
+            <dataField fieldName="Line_ID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" headerText="Inspection" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Inspection" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" headerText="Inspection" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" headerText="Inspection" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Report" flat="false">
+      <action id="a1" commandName="ReportAsPdf">
+        <data><![CDATA[_controller=QAQC_Recording
+_view=grid1ar]]></data>
+      </action>
+      <action id="a2" commandName="ReportAsImage">
+        <data><![CDATA[_controller=QAQC_Recording
+_view=grid1ar]]></data>
+      </action>
+      <action id="a3" commandName="ReportAsExcel">
+        <data><![CDATA[_controller=QAQC_Recording
+_view=grid1ar]]></data>
+      </action>
+      <action id="a4" commandName="ReportAsWord">
+        <data><![CDATA[_controller=QAQC_Recording
+_view=grid1ar]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+</dataController>

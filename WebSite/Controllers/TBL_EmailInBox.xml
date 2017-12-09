@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TBL_EmailInBox" conflictDetection="overwriteChanges" label="^EmaInBox^Email In Box^EmaInBox^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"TBL_EmailInBox"."Mail_From" "Mail_From"
+	,"TBL_EmailInBox"."CreatedDateTime" "CreatedDateTime"
+	,"TBL_EmailInBox"."Subject" "Subject"
+	,"TBL_EmailInBox"."Mail_To" "Mail_To"
+	,"TBL_EmailInBox"."Mail_Message" "Mail_Message"
+	,"TBL_EmailInBox"."EmailInID" "EmailInID"
+	,"TBL_EmailInBox"."ReadUnread" "ReadUnread"
+	,"TBL_EmailInBox"."SeenDate" "SeenDate"
+	,"TBL_EmailInBox"."URL" "URL"
+	,"TBL_EmailInBox"."DocumentID" "DocumentID"
+from "dbo"."TBL_EmailInBox" "TBL_EmailInBox"
+]]></text>
+    </command>
+    <command id="EmailInIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="EmailInID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Mail_From" type="String" allowQBE="false" allowSorting="false" label="^MaiFro^Mail From^MaiFro^" length="2000" showInSummary="true" />
+    <field name="CreatedDateTime" type="DateTime" default="(getdate())" label="^CreDat^Created Date Time^CreDat^" showInSummary="true" />
+    <field name="Subject" type="String" allowQBE="false" allowSorting="false" label="^Sub^Subject^Sub^" length="2000" showInSummary="true" />
+    <field name="Mail_To" type="String" allowQBE="false" allowSorting="false" label="^MaiTo^Mail To^MaiTo^" length="2000" showInSummary="true" />
+    <field name="Mail_Message" type="String" allowQBE="false" allowSorting="false" label="^MaiMes^Mail Message^MaiMes^" showInSummary="true" />
+    <field name="EmailInID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^EmaiInId^Email In#^EmaiInId^" readOnly="true" />
+    <field name="ReadUnread" type="Int32" default="((0))" label="^ReaUnre^Read Unread^ReaUnre^" />
+    <field name="SeenDate" type="DateTime" label="^SeeDat^Seen Date^SeeDat^" />
+    <field name="URL" type="String" label="^Url^Url^Url^" length="150" />
+    <field name="DocumentID" type="Decimal" label="^DocId^Document#^DocId^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^EmaiInBox^Email In Box^EmaiInBox^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Mail_From" rows="5" />
+        <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" />
+        <dataField fieldName="Subject" rows="5" />
+        <dataField fieldName="Mail_To" rows="5" />
+        <dataField fieldName="Mail_Message" rows="5" />
+        <dataField fieldName="ReadUnread" columns="15" />
+        <dataField fieldName="SeenDate" columns="10" />
+        <dataField fieldName="URL" />
+        <dataField fieldName="DocumentID" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevEmaiInBox^Review Email In Box^RevEmaiInBox^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="TBL Email In Box" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Mail_From" rows="5" />
+            <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Subject" rows="5" />
+            <dataField fieldName="Mail_To" rows="5" />
+            <dataField fieldName="Mail_Message" rows="5" />
+            <dataField fieldName="ReadUnread" columns="15" />
+            <dataField fieldName="SeenDate" columns="10" />
+            <dataField fieldName="URL" />
+            <dataField fieldName="DocumentID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewEmaiInBox^New Email In Box^NewEmaiInBox^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New TBL Email In Box" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Mail_From" rows="5" />
+            <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Subject" rows="5" />
+            <dataField fieldName="Mail_To" rows="5" />
+            <dataField fieldName="Mail_Message" rows="5" />
+            <dataField fieldName="ReadUnread" columns="15" />
+            <dataField fieldName="SeenDate" columns="10" />
+            <dataField fieldName="URL" />
+            <dataField fieldName="DocumentID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>

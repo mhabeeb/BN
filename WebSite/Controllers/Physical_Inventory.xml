@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Physical_Inventory" conflictDetection="overwriteChanges" label="^PhyInv^Physical_Inventory^PhyInv^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Item_Warehouse" custom="true">
+      <text><![CDATA[SELECT * FROM tbl_Item_Warehouse]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="StoreID" type="Int32" allowNulls="false" label="^StoId^Store#^StoId^" isPrimaryKey="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" isPrimaryKey="true" />
+    <field name="Bin_Location" type="String" label="^BinLoc^Bin Location^BinLoc^" length="50" showInSummary="true" />
+    <field name="CountedQty" type="Decimal" label="^CouQty^Counted Qty^CouQty^" />
+    <field name="Stock_On_Hand" type="Decimal" label="^StoOnHan^Stock On Hand^StoOnHan^" />
+    <field name="Unit_Cost" type="Decimal" label="^UniCos^Unit Cost^UniCos^" />
+    <field name="Pick" type="SByte" label="^Pick^Pick^Pick^" />
+    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
+    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" />
+    <field name="Item_Category" type="String" label="^IteCat^Item Category^IteCat^" length="255" />
+    <field name="Stock_Values" type="Decimal" label="^StoVal^Stock Values^StoVal^" readOnly="true" />
+    <field name="Diff_Qty" type="Decimal" label="^DifQty^Diff Qty^DifQty^" readOnly="true" />
+    <field name="Diff_Amount" type="Decimal" label="^DifAmo^Diff Amount^DifAmo^" readOnly="true" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="ABranch_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^IteWar^Item Warehouse^IteWar^" filter="StoreID=@Session_StoreID" reportTemplate="true" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="StoreID" columns="15" readOnly="true" />
+        <dataField fieldName="Item_Code" columns="20" readOnly="true" />
+        <dataField fieldName="Item_Description" readOnly="true" />
+        <dataField fieldName="UOM" columns="10" readOnly="true" />
+        <dataField fieldName="Bin_Location" columns="50" />
+        <dataField fieldName="CountedQty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Unit_Cost" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Stock_Values" dataFormatString="N2" columns="15" readOnly="true" aggregate="Sum" />
+        <dataField fieldName="Diff_Qty" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Diff_Amount" dataFormatString="N2" columns="15" readOnly="true" aggregate="Sum" />
+        <dataField fieldName="Item_Category" readOnly="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevIteWar^Review tbl Item Warehouse^RevIteWar^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Item Warehouse" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StoreID" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Bin_Location" columns="50" />
+            <dataField fieldName="CountedQty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Stock_On_Hand" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Cost" dataFormatString="c" columns="15" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Item_Description" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Item_Category" />
+            <dataField fieldName="Stock_Values" dataFormatString="c" columns="15" />
+            <dataField fieldName="Diff_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Diff_Amount" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewIteWar^New Item Warehouse^NewIteWar^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New tbl Item Warehouse" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StoreID" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Bin_Location" columns="50" />
+            <dataField fieldName="CountedQty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Stock_On_Hand" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Cost" dataFormatString="c" columns="15" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Item_Description" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Item_Category" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Snap Shot" flat="true">
+      <action commandName="SQL" headerText="SnapShot" id="a100" whenLastCommandName="Select" whenKeySelected="true">
+        <data><![CDATA[EXEC [UPDATE_ITEM_WAREHOUSE_SNAPSHOT] @Session_StoreID]]></data>
+      </action>
+      <action commandName="Import" headerText="Import Data" id="a101" whenLastCommandName="Select" whenKeySelected="true" />
+      <action commandName="SQL" headerText="Pass Adjustment" id="a102" />
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionColumn" headerText="Update">
+      <action commandName="Edit" whenLastCommandName="Select" id="a100" headerText="Update" />
+    </actionGroup>
+  </actions>
+</dataController>

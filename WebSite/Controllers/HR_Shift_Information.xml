@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="HR_Shift_Information" conflictDetection="overwriteChanges" label="HR Shift Information" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"HR_Shift_Information"."Shift_ID" "Shift_ID"
+	,"HR_Shift_Information"."Description" "Description"
+	,"HR_Shift_Information"."TimeIn1" "TimeIn1"
+	,"HR_Shift_Information"."TimeOut1" "TimeOut1"
+	,"HR_Shift_Information"."TimeIn2" "TimeIn2"
+	,"HR_Shift_Information"."TimeOut2" "TimeOut2"
+	,"HR_Shift_Information"."TimeIn3" "TimeIn3"
+	,"HR_Shift_Information"."TimeOut3" "TimeOut3"
+	,"HR_Shift_Information"."NoHoursPerDay" "NoHoursPerDay"
+	,"HR_Shift_Information"."Sunday" "Sunday"
+	,"HR_Shift_Information"."Monday" "Monday"
+	,"HR_Shift_Information"."Tuesday" "Tuesday"
+	,"HR_Shift_Information"."Wednesday" "Wednesday"
+	,"HR_Shift_Information"."Thursday" "Thursday"
+	,"HR_Shift_Information"."Friday" "Friday"
+	,"HR_Shift_Information"."Saturday" "Saturday"
+	,"HR_Shift_Information"."Created_By" "Created_By"
+	,"HR_Shift_Information"."Created_DateTime" "Created_DateTime"
+	,"HR_Shift_Information"."Updated_By" "Updated_By"
+	,"HR_Shift_Information"."Updated_DateTime" "Updated_DateTime"
+from "dbo"."HR_Shift_Information" "HR_Shift_Information"
+]]></text>
+    </command>
+    <command id="Shift_IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Shift_ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Shift_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^Shift^Shift#^Shift^" readOnly="true" />
+    <field name="Description" type="String" label="^Description^Description^Description^" length="50" showInSummary="true" />
+    <field name="TimeIn1" type="TimeSpan" label="^TimeIn1^Time In1^TimeIn1^" showInSummary="true" />
+    <field name="TimeOut1" type="TimeSpan" label="^TimeOut1^Time Out1^TimeOut1^" showInSummary="true" />
+    <field name="TimeIn2" type="TimeSpan" label="^TimeIn2^Time In2^TimeIn2^" showInSummary="true" />
+    <field name="TimeOut2" type="TimeSpan" label="^TimeOut2^Time Out2^TimeOut2^" showInSummary="true" />
+    <field name="TimeIn3" type="TimeSpan" label="^TimeIn3^Time In3^TimeIn3^" />
+    <field name="TimeOut3" type="TimeSpan" label="^TimeOut3^Time Out3^TimeOut3^" />
+    <field name="NoHoursPerDay" type="Decimal" label="^NoHoursPerDay^No Hours Per Day^NoHoursPerDay^" readOnly="true" />
+    <field name="Sunday" type="Int32" label="^Sunday^Sunday^Sunday^" />
+    <field name="Monday" type="Int32" label="^Monday^Monday^Monday^" />
+    <field name="Tuesday" type="Int32" label="^Tuesday^Tuesday^Tuesday^" />
+    <field name="Wednesday" type="Int32" label="^Wednesday^Wednesday^Wednesday^" />
+    <field name="Thursday" type="Int32" label="^Thursday^Thursday^Thursday^" />
+    <field name="Friday" type="Int32" label="^Friday^Friday^Friday^" />
+    <field name="Saturday" type="Int32" label="^Saturday^Saturday^Saturday^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="HR Shift Information">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="TimeIn1" columns="15" />
+        <dataField fieldName="TimeOut1" columns="15" />
+        <dataField fieldName="TimeIn2" columns="15" />
+        <dataField fieldName="TimeOut2" columns="15" />
+        <dataField fieldName="TimeIn3" columns="15" />
+        <dataField fieldName="TimeOut3" columns="15" />
+        <dataField fieldName="NoHoursPerDay" dataFormatString="c" columns="15" />
+        <dataField fieldName="Sunday" columns="15" />
+        <dataField fieldName="Monday" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review HR Shift Information">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="HR Shift Information" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="TimeIn1" columns="15" />
+            <dataField fieldName="TimeOut1" columns="15" />
+            <dataField fieldName="TimeIn2" columns="15" />
+            <dataField fieldName="TimeOut2" columns="15" />
+            <dataField fieldName="TimeIn3" columns="15" />
+            <dataField fieldName="TimeOut3" columns="15" />
+            <dataField fieldName="NoHoursPerDay" dataFormatString="c" columns="15" />
+            <dataField fieldName="Sunday" columns="15" />
+            <dataField fieldName="Monday" columns="15" />
+            <dataField fieldName="Tuesday" columns="15" />
+            <dataField fieldName="Wednesday" columns="15" />
+            <dataField fieldName="Thursday" columns="15" />
+            <dataField fieldName="Friday" columns="15" />
+            <dataField fieldName="Saturday" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New HR Shift Information">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New HR Shift Information" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="TimeIn1" columns="15" />
+            <dataField fieldName="TimeOut1" columns="15" />
+            <dataField fieldName="TimeIn2" columns="15" />
+            <dataField fieldName="TimeOut2" columns="15" />
+            <dataField fieldName="TimeIn3" columns="15" />
+            <dataField fieldName="TimeOut3" columns="15" />
+            <dataField fieldName="Sunday" columns="15" />
+            <dataField fieldName="Monday" columns="15" />
+            <dataField fieldName="Tuesday" columns="15" />
+            <dataField fieldName="Wednesday" columns="15" />
+            <dataField fieldName="Thursday" columns="15" />
+            <dataField fieldName="Friday" columns="15" />
+            <dataField fieldName="Saturday" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

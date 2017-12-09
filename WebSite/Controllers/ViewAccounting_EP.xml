@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ViewAccounting_EP" conflictDetection="overwriteChanges" label="^VieAccEp^ViewAccounting_EP^VieAccEp^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="COA_Natural_Account" custom="true">
+      <text><![CDATA[SELECT     dbo.GL_Transaction_Header.GL_NO, dbo.GL_Transaction_Header.Transaction_Date, dbo.GL_Transaction_Line.Remark, dbo.GL_Transaction_Header.Tran_Type, 
+                      dbo.GL_Transaction_Line.Debit_Amount, dbo.GL_Transaction_Line.Credit_Amount, dbo.GL_Transaction_Line.Dept_Code, dbo.GL_Transaction_Line.Ac_Description, 
+                      dbo.GL_Transaction_Line.Project_Code, dbo.GL_Transaction_Line.Created_By, dbo.GL_Transaction_Line.Created_DateTime, dbo.GL_Transaction_Line.Line_NO, 
+                      dbo.GL_Transaction_Line.TrxYear, dbo.GL_Transaction_Line.TrxMonths, dbo.GL_Transaction_Line.CalcDate, dbo.GL_Transaction_Line.Transaction_ID, 
+                      dbo.GL_Transaction_Line.Trx_ID, dbo.GL_Transaction_Line.PaymentID, dbo.GL_Transaction_Line.Account_Type, dbo.GL_Transaction_Line.Lineage, 
+                      dbo.GL_Transaction_Line.Line_ID, dbo.GL_Transaction_Line.AccountID, dbo.GL_Transaction_Line.Item_Code, dbo.GL_Transaction_Line.AssetID, 
+                      dbo.GL_Transaction_Line.ApplicationID, dbo.GL_Transaction_Header.GL_Serial_No, dbo.GL_Transaction_Line.OPU_Code_Ln, dbo.GL_Transaction_Line.Sys_Number, 
+                      dbo.GL_Transaction_Line.Company_Code_Ln, dbo.GL_Transaction_Line.Line_Ref_Account_No, ISNULL(dbo.GL_Transaction_Line.Debit_Amount, 0) 
+                      - ISNULL(dbo.GL_Transaction_Line.Credit_Amount, 0) AS ClosingBalance
+FROM         dbo.GL_Transaction_Header INNER JOIN
+                      dbo.GL_Transaction_Line ON dbo.GL_Transaction_Header.GL_Serial_No = dbo.GL_Transaction_Line.GL_Serial_No]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="OPU_Code_Ln" type="Int32" label="^OpuCodLn^OPU Code Ln^OpuCodLn^" />
+    <field name="GL_NO" type="Decimal" allowNulls="false" label="^GlNo^Gl No^GlNo^" showInSummary="true" />
+    <field name="Transaction_Date" type="DateTime" allowNulls="false" label="^TraDat^Transaction Date^TraDat^" showInSummary="true" />
+    <field name="Remark" type="String" label="^Rem^Remark^Rem^" length="500" showInSummary="true" />
+    <field name="Tran_Type" type="String" allowNulls="false" label="^TraTyp^Tran Type^TraTyp^" length="50" showInSummary="true" />
+    <field name="Debit_Amount" type="Decimal" allowNulls="false" label="^DebAmo^Debit Amount^DebAmo^" showInSummary="true" />
+    <field name="Credit_Amount" type="Decimal" allowNulls="false" label="^CreAmo^Credit Amount^CreAmo^" />
+    <field name="Dept_Code" type="String" label="^DeptCod^Dept Code^DeptCod^" length="50" />
+    <field name="Ac_Description" type="String" label="^AcDes^Ac Description^AcDes^" length="250" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Line_NO" type="Decimal" label="^LinNo^Line NO^LinNo^" />
+    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" />
+    <field name="TrxMonths" type="Int32" label="^TraMan^Trx Months^TraMan^" />
+    <field name="CalcDate" type="Int32" label="^calDat^Calc Date^calDat^" />
+    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction#^TraId^" />
+    <field name="Trx_ID" type="Decimal" label="^TraId^Trx#^TraId^" />
+    <field name="PaymentID" type="Decimal" label="^PayId^Payment#^PayId^" />
+    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50" />
+    <field name="Lineage" type="String" label="^LinAge^Lineage^LinAge^" length="255" />
+    <field name="Line_ID" type="Decimal" label="^LinId^Line#^LinId^" />
+    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" />
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" />
+    <field name="AssetID" type="Decimal" label="^AssId^Asset#^AssId^" />
+    <field name="ApplicationID" type="Decimal" label="^AppId^Application#^AppId^" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
+    <field name="Company_Code_Ln" type="Decimal" label="^ComCodLn^Company Code Ln^ComCodLn^" />
+    <field name="Line_Ref_Account_No" type="String" label="^LinRefAccNo^Line Ref Account No^LinRefAccNo^" length="50" />
+    <field name="ClosingBalance" type="Decimal" label="^CloBal^Closing Balance^CloBal^" readOnly="true" />
+    <field name="oCalcDate" type="Int32" label="^OCalcDat^o Calc Date^OCalcDat^" computed="true" htmlEncode="false" hidden="false" readOnly="true">
+      <formula>CalcDate</formula>
+    </field>
+    <field name="GL_Serial_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^GlSerNo^GL Serial No^GlSerNo^" readOnly="true" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^JouDet^Journal Details^JouDet^" filter="OPU_Code_Ln=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="GL_Serial_No" columns="15" />
+        <dataField fieldName="GL_NO" columns="15" />
+        <dataField fieldName="Transaction_Date" columns="10" />
+        <dataField fieldName="Tran_Type" columns="50" />
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="Ac_Description" />
+        <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="ClosingBalance" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Line_Ref_Account_No" columns="50" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Line_NO" columns="15" hidden="true" />
+        <dataField fieldName="TrxYear" columns="15" hidden="true" />
+        <dataField fieldName="TrxMonths" columns="15" hidden="true" />
+        <dataField fieldName="CalcDate" columns="15" hidden="true" />
+        <dataField fieldName="Transaction_ID" columns="15" hidden="true" />
+        <dataField fieldName="Trx_ID" columns="15" hidden="true" />
+        <dataField fieldName="PaymentID" columns="15" hidden="true" />
+        <dataField fieldName="Lineage" hidden="true" />
+        <dataField fieldName="Line_ID" columns="15" hidden="true" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="AssetID" columns="15" hidden="true" />
+        <dataField fieldName="ApplicationID" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Company_Code_Ln" columns="15" hidden="true" />
+        <dataField fieldName="Remark" />
+        <dataField fieldName="oCalcDate" columns="15" hidden="true" />
+        <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevCoaNatAcc^Review COA Natural Account^RevCoaNatAcc^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="COA Natural Account" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GL_NO" columns="15" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="Tran_Type" columns="50" />
+            <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Ac_Description" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Line_NO" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="PaymentID" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Lineage" />
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="AssetID" columns="15" />
+            <dataField fieldName="ApplicationID" columns="15" />
+            <dataField fieldName="OPU_Code_Ln" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Company_Code_Ln" columns="15" />
+            <dataField fieldName="Line_Ref_Account_No" columns="50" />
+            <dataField fieldName="ClosingBalance" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewCoaNatAcc^New COA Natural Account^NewCoaNatAcc^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New COA Natural Account" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GL_NO" columns="15" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="Tran_Type" columns="50" />
+            <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Ac_Description" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Line_NO" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="PaymentID" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Lineage" />
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="AssetID" columns="15" />
+            <dataField fieldName="ApplicationID" columns="15" />
+            <dataField fieldName="OPU_Code_Ln" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Company_Code_Ln" columns="15" />
+            <dataField fieldName="Line_Ref_Account_No" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^Return^Return^Return^ " flat="true">
+      <action commandName="SQL" headerText="^Return^Return^Return^ " id="a100">
+        <data><![CDATA[IF @Session_Report=1 SET @Result_NavigateUrl = 'TrialBalance.aspx'
+IF @Session_Report=2 SET @Result_NavigateUrl = 'ProfitandLossStatement.aspx'
+IF @Session_Report=3 SET @Result_NavigateUrl = 'BalanceSheetStatement.aspx'
+]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Select" type="Sql" phase="Before"><![CDATA[declare  @PostableYN nvarchar(1), @AccountID  nvarchar(50), @ReportID   int, @CalcDate   int,  @OPU_Code   int
+declare  @Project_Code nvarchar(50), @Dept_Code    nvarchar(50), @FromEPFormat int, @ToEPFormat   int
+declare  @To_Date      datetime, @Account_Type nvarchar(50), @mCalcDate int
+
+SELECT @ReportID     = ReportID, @AccountID    = AccountID,  @CalcDate     = CalcDate,
+       @To_Date      = To_Date,  @PostableYN   = PostableYN, @Project_Code = Project_Code,
+       @Dept_Code    = Dept_Code,@FromEPFormat = FromEPFormat,@ToEPFormat   = ToEPFormat,
+       @OPU_Code     = OPU_Code, @Account_Type = Account_Type 
+	   FROM End_Period WHERE RowID = @Session_RowID
+
+IF @Session_BType=2 SET @mCalcDate=@CalcDate + 1 -- FOR CLOSING BALANCE
+IF @Session_BType=1 SET @mCalcDate=@CalcDate     -- FOR OPENING BALANCE
+
+IF @BusinessRules_Tags IS NULL
+  BEGIN
+    SET @BusinessRules_Tags     = 'Filtered'
+    
+	IF @OPU_Code is not null SET @OPU_Code_Ln_Filter_Equals = @OPU_Code
+    
+	IF @AccountID is not null and @PostableYN = 'Y' SET @AccountID_Filter_Equals = @AccountID
+    IF @AccountID is not null and @PostableYN = 'N' SET @Lineage_Filter_Contains = @AccountID
+	
+	IF @Session_BType IN (1,2) SET @CalcDate_Filter_LessThan = @mCalcDate
+	IF @Session_BType IN (4) SET @CalcDate_Filter_Equals = @CalcDate
+	
+	IF @Account_Type NOT IN ('Expense', 'Revenue', 'Cogs') AND @Session_BType =3
+	BEGIN
+	    SET @oCalcDate_Filter_Between1 = @FromEPFormat
+        SET @oCalcDate_Filter_Between2 = @ToEPFormat
+	END
+	
+    IF @CalcDate IS NOT NULL and @Account_Type IN ('Expense', 'Revenue', 'Cogs')
+      BEGIN
+        SET @oCalcDate_Filter_Between1 = @FromEPFormat
+        SET @oCalcDate_Filter_Between2 = @ToEPFormat
+      END
+  END]]></rule>
+  </businessRules>
+</dataController>

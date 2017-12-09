@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="View_Invoice_Lines" conflictDetection="overwriteChanges" label="^VieInvLin^View_Invoice_Lines^VieInvLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Credit_Trx_Line_Items" custom="true">
+      <text><![CDATA[SELECT        dbo.Credit_Trx_Line_Items.Item_Code, dbo.Credit_Trx_Line_Items.Qty, dbo.Credit_Trx_Line_Items.Unit_Price, dbo.Credit_Trx_Line_Items.Line_Total, dbo.Credit_Trx_Line_Items.Cr_OPU_Code, 
+                         dbo.Credit_Trx_Line_Items.Transaction_ID, dbo.Credit_Trx_Line_Items.Line_Remarks, dbo.Credit_Trx_Line_Items.PO_NO, dbo.Credit_Trx_Line_Items.Trx_ID, dbo.Credit_Trx_Line_Items.SO_NO, 
+                         dbo.Credit_Trx_Line_Items.Line_Net, dbo.Credit_Trx_Line_Items.Item_Desc, dbo.Credit_Trx_Line_Items.Item_Part, dbo.Credit_Trx_Line_Items.UOM, dbo.Credit_Trx_Line_Items.Project_Code, 
+                         dbo.Credit_Trx_Line_Items.Dept_Code, dbo.Credit_Trx_Header.Invoice_Date, dbo.Credit_Trx_Header.Invoice_NO, dbo.Credit_Trx_Header.Vendor_Name, 
+                         (CASE dbo.Credit_Trx_Header.APAR_Flag WHEN 1 THEN 'Customer Invoice' WHEN 2 THEN 'Supplier Invoice' END) AS InvoiceType, dbo.Credit_Trx_Line_Items.Source_SOPO_LineID AS PO_Line_No, 
+                         dbo.Credit_Trx_Line_Items.Source_SOPO_LineID AS SO_Line_No, dbo.Credit_Trx_Line_Items.Item_Code_Ref_No
+FROM            dbo.Credit_Trx_Line_Items INNER JOIN
+                         dbo.Credit_Trx_Header ON dbo.Credit_Trx_Line_Items.Trx_ID = dbo.Credit_Trx_Header.Trx_ID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
+    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" showInSummary="true" />
+    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" showInSummary="true" />
+    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" showInSummary="true" />
+    <field name="Cr_OPU_Code" type="Int32" label="^CrOPUCod^Cr OPU Code^CrOPUCod^" showInSummary="true" />
+    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction#^TraId^" />
+    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="555" />
+    <field name="PO_NO" type="Decimal" label="^PoNo^Po No^PoNo^" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" />
+    <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" />
+    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" readOnly="true" />
+    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" readOnly="true" length="500" />
+    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" readOnly="true" length="20" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" readOnly="true" length="10" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="Invoice_Date" type="DateTime" label="^InvDat^Invoice Date^InvDat^" />
+    <field name="Invoice_NO" type="Decimal" label="^InvNO^Invoice NO^InvNO^" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
+    <field name="InvoiceType" type="String" label="^InvTyp^Invoice Type^InvTyp^" readOnly="true" length="16" />
+    <field name="PO_Line_No" type="Decimal" label="^POLinNo^PO Line No^POLinNo^" />
+    <field name="SO_Line_No" type="Decimal" label="^SOLinNo^SO Line No^SOLinNo^" />
+    <field name="Item_Code_Ref_No" type="String" label="^IteRefNo^Item Code Ref No^IteRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true" showInSummary="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true" showInSummary="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^CreTrxLin^Credit Trx Line Items^CreTrxLin^" filter="Cr_OPU_Code=@Session_OPU_Code" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Invoice_Date" columns="10" />
+        <dataField fieldName="Trx_ID" columns="15" />
+        <dataField fieldName="Invoice_NO" columns="15" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" />
+        <dataField fieldName="Item_Part" columns="20" />
+        <dataField fieldName="Item_Desc" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Line_Total" dataFormatString="N2" columns="15" aggregate="Sum" hidden="true" />
+        <dataField fieldName="Cr_OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Transaction_ID" columns="15" />
+        <dataField fieldName="Line_Remarks" />
+        <dataField fieldName="PO_NO" columns="15" />
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="Line_Net" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="InvoiceType" columns="16" hidden="true" />
+        <dataField fieldName="PO_Line_No" columns="15" hidden="true" />
+        <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevTrxLinIte^Review Credit Trx Line Items^RevTrxLinIte^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Credit Trx Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="Cr_OPU_Code" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="InvoiceType" columns="16" />
+            <dataField fieldName="PO_Line_No" columns="15" />
+            <dataField fieldName="SO_Line_No" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewCreTrxLinIte^New Credit Trx Line Items^NewCreTrxLinIte^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Credit Trx Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Cr_OPU_Code" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="PO_Line_No" columns="15" />
+            <dataField fieldName="SO_Line_No" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

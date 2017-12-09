@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="tbl_CompanyInformation" conflictDetection="overwriteChanges" label="^ComInf^CompanyInformation^ComInf^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_CompanyInformation" custom="true">
+      <text><![CDATA[SELECT * FROM tbl_CompanyInformation]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="CompanyID" type="Int32" allowNulls="false" label="^ComId^Company#^ComId^" showInSummary="true" isPrimaryKey="true" />
+    <field name="Company_Ref_No" type="String" label="^ComRefNo^Company Ref No^ComRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="15" allowNulls="false" />
+    <field name="CompanyName" type="String" label="^ComNam^Company Name^ComNam^" length="255" showInSummary="true" allowNulls="false" />
+    <field name="Street" type="String" label="^Str^Street^Str^" length="50" showInSummary="true" />
+    <field name="PostalCode" type="String" label="^PosCod^Postal Code^PosCod^" length="50" showInSummary="true" />
+    <field name="City" type="String" label="^Cit^City^Cit^" length="50" showInSummary="true" />
+    <field name="Country" type="String" label="^Cou^Country^Cou^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Countries" dataView="grid1" dataTextField="CountryName" dataValueField="CountryName" />
+    </field>
+    <field name="Phone" type="String" label="^Phone^Phone^Phone^" length="50" />
+    <field name="Fax" type="String" label="^Fax^Fax^Fax^" length="50" />
+    <field name="eMailID" type="String" label="^eMaiId^e Mail#^eMaiId^" length="50" />
+    <field name="WebSite" type="String" label="^WebSit^Web Site^WebSit^" length="50" />
+    <field name="Address" type="String" label="^Add^Address^Add^" length="4000" />
+    <field name="DomainName" type="String" label="^DomNam^Domain Name^DomNam^" length="50" />
+    <field name="CompanyNameAR" type="String" label="^ComNamAr^Company Name AR^ComNamAr^" length="255" />
+    <field name="CompanyReg" type="String" label="^ComReg^Company Reg^ComReg^" length="255" />
+    <field name="CompanyRegAR" type="String" label="^ComRegAr^Company Reg AR^ComRegAr^" length="255" />
+    <field name="Footer1" type="String" label="^Foo1^Footer1^Foo1^" length="255" />
+    <field name="Footer2" type="String" label="^Foo2^Footer2^Foo2^" length="255" />
+    <field name="DefaultCurrency" type="String" allowNulls="false" label="^DefCur^Default Currency^DefCur^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4">
+      <items style="DropDownList" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" />
+    </field>
+    <field name="CalenderID" type="Int32" allowNulls="false" label="^CalId^Calender#^CalId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="Lookup" dataController="Calendar_Defination" dataView="grid1" dataTextField="YearCode" dataValueField="CalenderID" />
+    </field>
+    <field name="AdhocReportUrl" type="String" label="^AdhRepUrl^Adhoc Report Url^AdhRepUrl^" length="150" allowNulls="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^OrgDef^Organization Definition^OrgDef^" sortExpression="CompanyID desc" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="CompanyName" />
+        <dataField fieldName="CompanyID" columns="15" />
+        <dataField fieldName="Company_Ref_No" columns="15" />
+        <dataField fieldName="CompanyReg" />
+        <dataField fieldName="CalenderID" columns="15" />
+        <dataField fieldName="Street" columns="50" />
+        <dataField fieldName="PostalCode" columns="50" />
+        <dataField fieldName="City" columns="50" />
+        <dataField fieldName="Country" columns="50" />
+        <dataField fieldName="Phone" columns="50" />
+        <dataField fieldName="Fax" columns="50" />
+        <dataField fieldName="eMailID" columns="50" hidden="true" />
+        <dataField fieldName="WebSite" columns="50" hidden="true" />
+        <dataField fieldName="Address" />
+        <dataField fieldName="DomainName" columns="50" hidden="true" />
+        <dataField fieldName="CompanyNameAR" hidden="true" />
+        <dataField fieldName="CompanyRegAR" hidden="true" />
+        <dataField fieldName="Footer1" hidden="true" />
+        <dataField fieldName="Footer2" hidden="true" />
+        <dataField fieldName="DefaultCurrency" columns="4" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevOrg^Review Organization^RevOrg^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Review Organization" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Company_Ref_No" columns="15" />
+            <dataField fieldName="CompanyName" columns="50" rows="2" />
+            <dataField fieldName="DefaultCurrency" columns="4" />
+            <dataField fieldName="CalenderID" columns="15" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Street" columns="50" />
+            <dataField fieldName="PostalCode" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="Country" columns="50" readOnly="true" />
+            <dataField fieldName="Phone" columns="50" />
+            <dataField fieldName="Fax" columns="50" />
+            <dataField fieldName="eMailID" columns="50" />
+            <dataField fieldName="WebSite" columns="50" />
+            <dataField fieldName="DomainName" columns="50" />
+            <dataField fieldName="CompanyNameAR" />
+            <dataField fieldName="CompanyReg" />
+            <dataField fieldName="CompanyRegAR" />
+            <dataField fieldName="Footer1" hidden="true" />
+            <dataField fieldName="Footer2" hidden="true" />
+            <dataField fieldName="AdhocReportUrl" rows="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewOrg^New Organization^NewOrg^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Organization" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Company_Ref_No" columns="15" />
+            <dataField fieldName="CompanyName" columns="50" rows="2" />
+            <dataField fieldName="DefaultCurrency" columns="4" />
+            <dataField fieldName="CalenderID" columns="15" />
+            <dataField fieldName="Address" columns="30" />
+            <dataField fieldName="Street" columns="30" />
+            <dataField fieldName="PostalCode" columns="30" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="Country" columns="30" />
+            <dataField fieldName="Phone" columns="30" />
+            <dataField fieldName="Fax" columns="30" />
+            <dataField fieldName="eMailID" columns="30" />
+            <dataField fieldName="WebSite" columns="30" />
+            <dataField fieldName="DomainName" columns="30" />
+            <dataField fieldName="CompanyNameAR" columns="30" />
+            <dataField fieldName="CompanyReg" columns="30" />
+            <dataField fieldName="CompanyRegAR" columns="30" />
+            <dataField fieldName="Footer1" hidden="true" columns="30" />
+            <dataField fieldName="Footer2" hidden="true" columns="30" />
+            <dataField fieldName="AdhocReportUrl" rows="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if [dbo].[IsUserReadOnly](@BusinessRules_UserId)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if [dbo].[IsUserWriteOnly](@BusinessRules_UserId)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+    <rule id="r102" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @AdhocReportUrl='_blank:http://']]></rule>
+  </businessRules>
+</dataController>

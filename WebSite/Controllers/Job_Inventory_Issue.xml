@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Job_Inventory_Issue" label="^JobInvIss^Job_Inventory_Issue^JobInvIss^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="dbo.tbl_Transactions_Header" custom="true">
+      <text><![CDATA[SELECT     Transaction_No, Transaction_ID, Transaction_Type, Transaction_Date, Currency_Code, Sys_Number, OPU_Code, Company_Code, Remarks, TermsANDConditions, 
+                      Header_Disc_Percent, Header_Disc_Amount, HeaderDiscountYN, Approve, PostYN, APAR_Flag, Created_By, Created_DateTime, Updated_By, Updated_DateTime, 
+                      Salesman_Code, Payment_Terms, ConvertYN, WalkinCustomerAdd, CashInvoiceYN, MonthAndYear, Header_Amount, Header_Net, Project_Code, Dept_Code, 
+                      Vendor_Name, RefreshTrx,StoreID
+FROM         dbo.tbl_Transactions_Header
+WHERE     (IsNull(APAR_Flag,0) = 0) AND (ISNULL(CashInvoiceYN, 0) = 0) AND (Transaction_Type = N'Job. Issue')]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Transaction_No" type="Decimal" label="^TraNo^Issuance No.^TraNo^" />
+    <field name="Transaction_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TraId^Sequence #^TraId^" readOnly="true" />
+    <field name="Transaction_Type" type="String" label="^TraTyp^Transaction Type^TraTyp^" length="25" />
+    <field name="Transaction_Date" type="DateTime" label="^TraDat^Transaction Date^TraDat^" />
+    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" hidden="true">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" />
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
+    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="50" />
+    <field name="TermsANDConditions" type="String" label="^TerCon^Term and Conditions^TerCon^" length="4000" />
+    <field name="Header_Disc_Percent" type="Decimal" label="^HeaDisPer^Header Disc Percent^HeaDisPer^" />
+    <field name="Header_Disc_Amount" type="Decimal" label="^HeaDisAmo^Header Disc Amount^HeaDisAmo^" />
+    <field name="HeaderDiscountYN" type="Boolean" label="^HeaDisYN^Header Discount YN^HeaDisYN^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="Approve" type="Boolean" label="^App^Approve^App^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="PostYN" type="Int32" label="^GLPosYN^GL Posted YN^GLPosYN^" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="APAR_Flag" type="Int32" label="^APAFla^APAR Flag^APAFla^" hidden="true" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTime^Created Date Time^CreDatTim^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
+    <field name="Salesman_Code" type="Decimal" label="^SalCod^Salesman Code^SalCod^" hidden="true" />
+    <field name="Payment_Terms" type="Int32" label="^PayTer^Payment Terms^PayTer^" hidden="true" />
+    <field name="ConvertYN" type="Int32" label="^ConYN^Convert YN^ConYN^" hidden="true" />
+    <field name="WalkinCustomerAdd" type="String" label="^WalCusAdd^Walkin Customer Add^WalCusAdd^" length="4000" hidden="true" />
+    <field name="CashInvoiceYN" type="Int32" label="^CasInvYN^Cash Invoice YN^CasInvYN^" hidden="true" />
+    <field name="MonthAndYear" type="String" label="^MonAndYea^Month And Year^MonAndYea^" readOnly="true" length="12" hidden="true" />
+    <field name="Header_Amount" type="Decimal" label="^HeaAmo^Header Amount^HeaAmo^" readOnly="true" hidden="true" />
+    <field name="Header_Net" type="Decimal" label="^HeaNet^Header Net^HeaNet^" readOnly="true" hidden="true" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" hidden="false">
+      <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    </field>
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" hidden="true">
+      <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
+    </field>
+    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" hidden="true" />
+    <field name="RefreshTrx" type="Int32" allowNulls="false" label="^RefTrx^Refresh Trx^RefTrx^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="StoreID" type="Int16" label="^StoId^Store ID^StoId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^InvMisIss^Inventory Misc. Issue^InvMisIss^ " reportTemplate="true" sortExpression="Transaction_ID desc" filter="OPU_Code=@Session_OPU_Code AND &#xD;&#xA;StoreID=@Session_StoreID" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Transaction_ID" columns="15" />
+        <dataField fieldName="Transaction_No" columns="15" />
+        <dataField fieldName="Transaction_Type" columns="25" />
+        <dataField fieldName="Transaction_Date" columns="10" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Vendor_Name" hidden="true" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="TermsANDConditions" hidden="true" />
+        <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="HeaderDiscountYN" columns="15" hidden="true" />
+        <dataField fieldName="Approve" columns="15" hidden="true" />
+        <dataField fieldName="PostYN" columns="15" />
+        <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+        <dataField fieldName="Salesman_Code" columns="15" hidden="true" />
+        <dataField fieldName="Payment_Terms" columns="15" hidden="true" />
+        <dataField fieldName="ConvertYN" columns="15" hidden="true" />
+        <dataField fieldName="WalkinCustomerAdd" hidden="true" />
+        <dataField fieldName="CashInvoiceYN" columns="15" hidden="true" />
+        <dataField fieldName="MonthAndYear" columns="12" hidden="true" />
+        <dataField fieldName="Header_Amount" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Header_Net" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Remarks" columns="50" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevInvMisIss^Review Inventory Misc. Issue^RevInvMisIss^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Transactions Header" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Transaction_No" columns="15" readOnly="true" />
+            <dataField fieldName="Transaction_Type" columns="25" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+            <dataField fieldName="Vendor_Name" hidden="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Remarks" columns="30" />
+            <dataField fieldName="TermsANDConditions" hidden="true" />
+            <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="HeaderDiscountYN" columns="15" hidden="true" />
+            <dataField fieldName="Approve" columns="15" hidden="true" />
+            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Salesman_Code" columns="15" hidden="true" />
+            <dataField fieldName="Payment_Terms" columns="15" hidden="true" />
+            <dataField fieldName="ConvertYN" columns="15" hidden="true" />
+            <dataField fieldName="WalkinCustomerAdd" hidden="true" />
+            <dataField fieldName="CashInvoiceYN" columns="15" hidden="true" />
+            <dataField fieldName="MonthAndYear" columns="12" hidden="true" />
+            <dataField fieldName="Header_Amount" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50">
+              <visibility>
+                <expression test="Session[&quot;Session_ProjectEnabled&quot;] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Dept_Code" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="Posting" id="c2">
+          <dataFields>
+            <dataField fieldName="PostYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewInvMisIss^New Inventory Misc. Issue^NewInvMisIss^ " showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Item Misc. Issue" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Transaction_No" columns="15" />
+            <dataField fieldName="Transaction_Type" columns="25" hidden="true" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Remarks" columns="30" />
+            <dataField fieldName="TermsANDConditions" hidden="true" />
+            <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="HeaderDiscountYN" columns="15" hidden="true" />
+            <dataField fieldName="Approve" columns="15" hidden="true" />
+            <dataField fieldName="PostYN" columns="15" hidden="true" />
+            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Salesman_Code" columns="15" hidden="true" />
+            <dataField fieldName="Payment_Terms" columns="15" hidden="true" />
+            <dataField fieldName="ConvertYN" columns="15" hidden="true" />
+            <dataField fieldName="WalkinCustomerAdd" hidden="true" />
+            <dataField fieldName="CashInvoiceYN" columns="15" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50">
+              <visibility>
+                <expression test="Session[&quot;Session_ProjectEnabled&quot;] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="StoreID" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Misc. Issue" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action commandName="SQL" headerText="^Refresh^Refresh^Refresh^" id="a100">
+        <data><![CDATA[DECLARE @A INT
+SET @A =0
+if IsNull(@RefreshTrx,0)=0  SET @A =1
+
+UPDATE tbl_Transactions_Header
+SET RefreshTrx=@A  WHERE Transaction_ID=@Transaction_ID]]></data>
+      </action>
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag105" scope="ActionBar" headerText="Post GL" flat="true">
+      <action commandName="SQL" headerText="Post Gl" id="a100" whenLastCommandName="Select" whenClientScript="[PostYN]==0">
+        <data><![CDATA[EXEC  dbo.DOC_POST_TO_GL @Transaction_ID,4]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @APAR_Flag=0
+SET @CashInvoiceYN=0
+SET @Transaction_Type='Job. Issue'
+SET @Sys_Number=0
+
+SET @StoreID=@Session_StoreID
+SET @OPU_Code=@Session_OPU_Code
+SET @Company_Code=@Session_Company_Code]]></rule>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Transaction_Date=GetDate()
+SET @Transaction_Type='Job. Issue'
+SET @APAR_Flag=0
+SELECT @Transaction_No=(IsNull(MAX(Transaction_No),0)+1) FROM dbo.tbl_Transactions_Header
+WHERE Transaction_Type=@Transaction_Type
+SET @Sys_Number=0
+SET @Salesman_Code=-1
+SET @Project_Code='None'
+SET @Dept_Code='None']]></rule>
+    <rule id="r102" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[IF dbo.CHECK_VALID_OPU_STORE(@BusinessRules_UserId, @Session_OPU_Code, @Session_StoreID) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Transaction_Date,Invalid Store/Branch Selection Please select valid Organization from Change Organization Page.'
+END
+if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r103" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

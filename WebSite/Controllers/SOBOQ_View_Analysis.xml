@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SOBOQ_View_Analysis" conflictDetection="overwriteChanges" label="^SoBoqVieAna^SOBOQ_View_Analysis^SoBoqVieAna^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="SO_NO" type="Decimal" allowNulls="false" label="^BOQId^BOQ #^BOQId^" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" />
+    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="50" showInSummary="true" />
+    <field name="SO_Qty" type="Decimal" label="^SOQty^SO Qty^SOQty^" />
+    <field name="BudgetedValues" type="Decimal" label="^BudVal^Budgeted Values^BudVal^" readOnly="true" showInSummary="true" />
+    <field name="EstimatedCost" type="Decimal" label="^EstCos^Estimated Cost^EstCos^" readOnly="true" showInSummary="true" />
+    <field name="ActualCost" type="Decimal" label="^ActCos^Actual Cost^ActCos^" readOnly="true" showInSummary="true" />
+    <field name="Unit_Price" type="Decimal" label="^UnitPrice^Unit Price^UnitPrice^" showInSummary="true" />
+    <field name="DV_Balance" type="Decimal" label="^DVBal^DV Balance^DVBal^" showInSummary="true" />
+    <field name="SellingValue" type="Decimal" label="^SelVal^Selling Value^SelVal^" readOnly="true" showInSummary="true" />
+    <field name="INV_Balance" type="Decimal" label="^INVBal^INV Balance^INVBal^" showInSummary="true" />
+    <field name="Vendor_Name" type="String" label="^CusNam^Customer Name^CusNam^" length="250" />
+    <field name="YourRefrence" type="String" label="^RefId^Ref.#^RefId^" length="15" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^SoBoqVieAna^SOBOQ View Analysis^SoBoqVieAna^" reportTemplate="true" sortExpression="SO_NO DESC" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="Item_Desc" />
+        <dataField fieldName="UOM" columns="50" />
+        <dataField fieldName="SO_Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="BudgetedValues" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="EstimatedCost" dataFormatString="N2" columns="15" aggregate="Sum" hidden="true" />
+        <dataField fieldName="ActualCost" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+        <dataField fieldName="DV_Balance" dataFormatString="N2" columns="15" />
+        <dataField fieldName="SellingValue" dataFormatString="N2" columns="15" />
+        <dataField fieldName="INV_Balance" dataFormatString="N2" columns="15" />
+        <dataField fieldName="YourRefrence" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevSoBoqAna^Review SOBOQ View Analysis^RevSoBoqAna^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="SOBOQ View Analysis" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="UOM" columns="50" />
+            <dataField fieldName="SO_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="BudgetedValues" dataFormatString="c" columns="15" />
+            <dataField fieldName="EstimatedCost" dataFormatString="c" columns="15" />
+            <dataField fieldName="ActualCost" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="DV_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="SellingValue" dataFormatString="c" columns="15" />
+            <dataField fieldName="INV_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="YourRefrence" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewSoBoqVieAna^New SOBOQ View Analysis^NewSoBoqVieAna^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New SOBOQ View Analysis" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="UOM" columns="50" />
+            <dataField fieldName="SO_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="DV_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="INV_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="YourRefrence" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[SELECT     dbo.SO_Line_Items.SO_NO, dbo.SO_Line_Items.Item_Code, dbo.SO_Line_Items.Item_Desc, dbo.SO_Line_Items.UOM, dbo.SO_Line_Items.SO_Qty, 
+                      dbo.SO_Line_Items.BudgetedPrice * dbo.SO_Line_Items.SO_Qty AS BudgetedValues, 
+                      dbo.SO_Line_Items.CostUnitPrice * dbo.SO_Line_Items.SO_Qty AS EstimatedCost, 
+                      dbo.tbl_Item_Master.Unit_Cost * (dbo.SO_Line_Items.SO_Qty - dbo.SO_Line_Items.DV_Balance) AS ActualCost, dbo.SO_Line_Items.Unit_Price, 
+                      dbo.SO_Line_Items.DV_Balance, dbo.SO_Line_Items.Line_Net AS SellingValue, dbo.SO_Line_Items.INV_Balance, dbo.SO_Header.Vendor_Name, 
+                      dbo.SO_Header.YourRefrence
+FROM         dbo.SO_Line_Items INNER JOIN
+                      dbo.tbl_Item_Master ON dbo.SO_Line_Items.Item_Code = dbo.tbl_Item_Master.Item_Code INNER JOIN
+                      dbo.SO_Header ON dbo.SO_Line_Items.SO_NO = dbo.SO_Header.SO_NO
+WHERE     (dbo.SO_Header.BOQ = 1)]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

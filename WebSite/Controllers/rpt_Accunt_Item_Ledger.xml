@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="rpt_Accunt_Item_Ledger" conflictDetection="overwriteChanges" label="^RepAccIteLed^rpt_Accunt_Item_Ledger^RepAccIteLed^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" isPrimaryKey="true" />
+    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" showInSummary="true" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" showInSummary="true" />
+    <field name="Part_No" type="String" label="^ParNo^Part No^ParNo^" length="20" showInSummary="true" />
+    <field name="Item_Category_Major" type="String" label="^IteCatMaj^Item Category Major^IteCatMaj^" length="255" showInSummary="true" />
+    <field name="Item_Category" type="String" label="^IteCat^Item CatItgory^IteCat^" length="255" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" />
+    <field name="Item_Code_Ref_No" type="String" label="^IteCodRefNo^Item Code Ref No^IteCodRefNo^" length="20" />
+    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" readOnly="true" />
+    <field name="Period_Debit" type="Decimal" label="^PerDeb^Period Debit^PerDeb^" readOnly="true" />
+    <field name="Period_Credit" type="Decimal" label="^PerCre^Period Credit^PerCre^" readOnly="true" />
+    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^RepAccIteLed^rpt Accunt Item Ledger^RepAccIteLed^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="Item_Description" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="Part_No" columns="20" />
+        <dataField fieldName="Item_Category_Major" />
+        <dataField fieldName="Item_Category" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="CalcDate" columns="15" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" />
+        <dataField fieldName="OpeningBalance" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Period_Debit" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Period_Credit" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Closing_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevRepAccIteLed^Review rpt Accunt Item Ledger^RevRepAccIteLed^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="rpt Accunt Item Ledger" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Description" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Part_No" columns="20" />
+            <dataField fieldName="Item_Category_Major" />
+            <dataField fieldName="Item_Category" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="Item_Code_Ref_No" columns="20" />
+            <dataField fieldName="OpeningBalance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Period_Debit" dataFormatString="c" columns="15" />
+            <dataField fieldName="Period_Credit" dataFormatString="c" columns="15" />
+            <dataField fieldName="Closing_Amount" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewRepAccIteLed^New rpt Accunt Item Ledger^NewRepAccIteLed^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New rpt Accunt Item Ledger" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Description" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Part_No" columns="20" />
+            <dataField fieldName="Item_Category_Major" />
+            <dataField fieldName="Item_Category" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="Item_Code_Ref_No" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Parameter" flat="true">
+      <action commandName="SQL" headerText="Parameter" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500">
+        <data><![CDATA[SET @Session_LedDate=@Parameters_EndDate
+SET @Result_NavigateUrl = 'ItemAccountLedger.aspx']]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[IF @Session_LedDate IS NULL SET @Session_LedDate=GETDATE()
+
+SELECT A.[Item_Code],
+       A.[Item_Description],
+       A.[UOM],
+       A.[Part_No],
+       A.[Item_Category_Major],
+       A.[Item_Category],
+       A.[BranchID] OPU_Code,
+       c.rdate CalcDate,
+       A.[Item_Code_Ref_No],
+       (CAST(
+            (
+                SELECT CAST(SUM(O.Debit_Amount - O.Credit_Amount) AS MONEY)
+                FROM GL_Transaction_Line O
+                WHERE 1 = (CASE
+                               WHEN(O.Account_Type NOT IN('Expense', 'Revenue', 'Cogs')
+                      AND O.CalcDate < c.rdate)
+                               THEN 1
+                               WHEN(O.Account_Type IN('Expense', 'Revenue', 'Cogs')
+                AND O.CalcDate < c.rdate
+                AND O.CalcDate BETWEEN c.FromEPFormat AND c.ToEPFormat)
+                               THEN 1
+                               ELSE 0
+                           END)
+                AND O.Item_Code = A.Item_Code
+			 AND O.PostType=5
+                AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
+            ) AS MONEY)) OpeningBalance,
+       (CAST(
+            (
+                SELECT SUM(O.Debit_Amount)
+                FROM GL_Transaction_Line O
+                WHERE O.CalcDate = c.rdate
+                      AND O.Item_Code = A.Item_Code
+				  AND O.PostType=5
+                      AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
+            ) AS MONEY)) Period_Debit,
+       (CAST(
+            (
+                SELECT CAST(SUM(O.Credit_Amount) AS MONEY)
+                FROM GL_Transaction_Line O
+                WHERE O.CalcDate = c.rdate
+                      AND O.Item_Code = A.Item_Code
+				  AND O.PostType=5
+                      AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
+            ) AS MONEY)) Period_Credit,
+       (CAST(
+            (
+                SELECT SUM(O.Debit_Amount - O.Credit_Amount)
+                FROM GL_Transaction_Line O
+                WHERE 1 = (CASE
+                               WHEN(O.Account_Type NOT IN('Expense', 'Revenue', 'Cogs')
+                      AND O.CalcDate <= c.rdate)
+                               THEN 1
+                               WHEN(O.Account_Type IN('Expense', 'Revenue', 'Cogs')
+                AND O.CalcDate <= c.rdate
+                AND O.CalcDate BETWEEN c.FromEPFormat AND c.ToEPFormat)
+                               THEN 1
+                               ELSE 0
+                           END)
+                AND O.Item_Code = A.Item_Code
+			 AND O.PostType=5
+                AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
+            ) AS MONEY)) Closing_Amount
+FROM [dbo].[tbl_Item_Master] A,
+     [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE](@Session_LedDate) c
+WHERE A.[BranchID] = @Session_OPU_Code and IsNull(A.OverHeadElements,0)=0
+]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

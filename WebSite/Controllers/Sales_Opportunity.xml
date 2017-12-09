@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Sales_Opportunity" conflictDetection="overwriteChanges" label="Sales Opportunity" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Sales_Opportunity"."Opportunity_ID" "Opportunity_ID"
+	,"Sales_Opportunity"."Opportunity_Title" "Opportunity_Title"
+	,"Sales_Opportunity"."Sys_Number" "Sys_Number"
+	,"TheSys_Number"."Vendor_Name" "TheSys_NumberVendor_Name"
+	,"TheSys_NumberUnbilled_AC"."Account_Description" "TheSys_NumberUnbilled_ACAccount_Description"
+	,"TheSys_NumberUnbilled_ACAccount_Type"."Account_Type_Ar" "TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar"
+	,"TheSys_NumberBilled_AC"."Account_Description" "TheSys_NumberBilled_ACAccount_Description"
+	,"TheSys_NumberBilled_ACAccount_Type"."Account_Type_Ar" "TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar"
+	,"Sales_Opportunity"."Party_Name" "Party_Name"
+	,"Sales_Opportunity"."RefNo" "RefNo"
+	,"Sales_Opportunity"."ContactID" "ContactID"
+	,"Sales_Opportunity"."SalesManID" "SalesManID"
+	,"Sales_Opportunity"."SalesTeamID" "SalesTeamID"
+	,"SalesTeam"."TeamName" "SalesTeamTeamName"
+	,"Sales_Opportunity"."Opp_Category" "Opp_Category"
+	,"Sales_Opportunity"."Rating" "Rating"
+	,"Sales_Opportunity"."How_Found" "How_Found"
+	,"Sales_Opportunity"."Open_Date" "Open_Date"
+	,"Sales_Opportunity"."Est_ClosedDate" "Est_ClosedDate"
+	,"Sales_Opportunity"."Probability" "Probability"
+	,"Sales_Opportunity"."Est_Revenue" "Est_Revenue"
+	,"Sales_Opportunity"."Opportunity_Description" "Opportunity_Description"
+	,"Sales_Opportunity"."Comments" "Comments"
+	,"Sales_Opportunity"."Created_By" "Created_By"
+	,"Sales_Opportunity"."Created_DateTime" "Created_DateTime"
+	,"Sales_Opportunity"."Updated_By" "Updated_By"
+	,"Sales_Opportunity"."Updated_DateTime" "Updated_DateTime"
+	,"Sales_Opportunity"."Revision_No" "Revision_No"
+	,"Sales_Opportunity"."LeadGen_Name" "LeadGen_Name"
+	,"Sales_Opportunity"."LG_Role" "LG_Role"
+	,"Sales_Opportunity"."ProposalDLDate" "ProposalDLDate"
+	,"Sales_Opportunity"."Commission" "Commission"
+	,"Sales_Opportunity"."Approve_Ask" "Approve_Ask"
+	,"Sales_Opportunity"."Rec_Status" "Rec_Status"
+	,"Sales_Opportunity"."OPU_Code" "OPU_Code"
+	,"Sales_Opportunity"."Next_FollowUpDate" "Next_FollowUpDate"
+	,"Sales_Opportunity"."Email" "Email"
+	,"Sales_Opportunity"."Phone_Mobile" "Phone_Mobile"
+from "dbo"."Sales_Opportunity" "Sales_Opportunity"
+	left join "dbo"."tbl_Customer_Supplier" "TheSys_Number" on "Sales_Opportunity"."Sys_Number" = "TheSys_Number"."Sys_Number"
+	left join "dbo"."COA_Natural_Account" "TheSys_NumberUnbilled_AC" on "TheSys_Number"."Unbilled_AC" = "TheSys_NumberUnbilled_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "TheSys_NumberUnbilled_ACAccount_Type" on "TheSys_NumberUnbilled_AC"."Account_Type" = "TheSys_NumberUnbilled_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "TheSys_NumberBilled_AC" on "TheSys_Number"."Billed_AC" = "TheSys_NumberBilled_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "TheSys_NumberBilled_ACAccount_Type" on "TheSys_NumberBilled_AC"."Account_Type" = "TheSys_NumberBilled_ACAccount_Type"."Account_Type"
+	left join "dbo"."Team_Header" "SalesTeam" on "Sales_Opportunity"."SalesTeamID" = "SalesTeam"."TeamID"
+]]></text>
+    </command>
+    <command id="Opportunity_IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Opportunity_ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Opportunity_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Opportunity#" readOnly="true" />
+    <field name="Opportunity_Title" type="String" label="Opportunity Title" length="1000" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" showInSummary="true">
+      <items />
+    </field>
+    <field name="TheSys_NumberVendor_Name" type="String" readOnly="true" label="Sys Number Vendor Name" length="150" />
+    <field name="TheSys_NumberUnbilled_ACAccount_Description" type="String" readOnly="true" label="Sys Number Unbilled AC Account Description" length="200" />
+    <field name="TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="Sys Number Unbilled AC Account Type Ar" length="50" />
+    <field name="TheSys_NumberBilled_ACAccount_Description" type="String" readOnly="true" label="Sys Number Billed AC Account Description" length="200" />
+    <field name="TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="Sys Number Billed AC Account Type Ar" length="50" />
+    <field name="Party_Name" type="String" label="Party Name" length="150" showInSummary="true" />
+    <field name="RefNo" type="String" label="Ref No" length="25" showInSummary="true" />
+    <field name="ContactID" type="Decimal" label="Contact#" showInSummary="true" />
+    <field name="SalesManID" type="Int32" label="Sales Man#" />
+    <field name="SalesTeamID" type="Int32" label="Sales Team#">
+      <items style="Lookup" dataController="Team_Header" newDataView="createForm1" dataValueField="TeamID" />
+    </field>
+    <field name="SalesTeamTeamName" type="String" readOnly="true" label="Sales Team Name" length="50" />
+    <field name="Opp_Category" type="String" label="Opp Category" length="50" />
+    <field name="Rating" type="Int32" label="Rating" />
+    <field name="How_Found" type="String" label="How Found" length="50" />
+    <field name="Open_Date" type="DateTime" label="Open Date" />
+    <field name="Est_ClosedDate" type="DateTime" label="Est Closed Date" />
+    <field name="Probability" type="String" label="Probability" length="50" />
+    <field name="Est_Revenue" type="Decimal" label="Est Revenue" />
+    <field name="Opportunity_Description" type="String" allowQBE="false" allowSorting="false" label="Opportunity Description" length="3000" />
+    <field name="Comments" type="String" allowQBE="false" allowSorting="false" label="Comments" length="3000" />
+    <field name="Created_By" type="Decimal" default="((-1))" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" default="(getdate())" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="Revision_No" type="Int32" label="Revision No" />
+    <field name="LeadGen_Name" type="String" label="Lead Gen Name" length="200" />
+    <field name="LG_Role" type="String" label="LG Role" length="50" />
+    <field name="ProposalDLDate" type="DateTime" label="Proposal DL Date" />
+    <field name="Commission" type="Decimal" label="Commission" />
+    <field name="Approve_Ask" type="Int32" label="Approve Ask" />
+    <field name="Rec_Status" type="Int32" label="Rec Status" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Next_FollowUpDate" type="DateTime" label="Next Follow Up Date" />
+    <field name="Email" type="String" label="Email" length="50" />
+    <field name="Phone_Mobile" type="String" label="Phone Mobile" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Sales Opportunity">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Opportunity_Title" />
+        <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" hyperlinkFormatString="~/Pages/tbl_Customer_Supplier.aspx?Sys_Number={Sys_Number}&amp;_controller=tbl_Customer_Supplier&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="Party_Name" />
+        <dataField fieldName="RefNo" columns="25" />
+        <dataField fieldName="ContactID" columns="15" />
+        <dataField fieldName="SalesManID" columns="15" />
+        <dataField fieldName="SalesTeamID" aliasFieldName="SalesTeamTeamName" hyperlinkFormatString="~/Pages/Team_Header.aspx?TeamID={SalesTeamID}&amp;_controller=Team_Header&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="Opp_Category" columns="50" />
+        <dataField fieldName="Rating" columns="15" />
+        <dataField fieldName="How_Found" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Sales Opportunity">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Sales Opportunity" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Opportunity_Title" />
+            <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" hyperlinkFormatString="~/Pages/tbl_Customer_Supplier.aspx?Sys_Number={Sys_Number}&amp;_controller=tbl_Customer_Supplier&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Party_Name" />
+            <dataField fieldName="RefNo" columns="25" />
+            <dataField fieldName="ContactID" columns="15" />
+            <dataField fieldName="SalesManID" columns="15" />
+            <dataField fieldName="SalesTeamID" aliasFieldName="SalesTeamTeamName" hyperlinkFormatString="~/Pages/Team_Header.aspx?TeamID={SalesTeamID}&amp;_controller=Team_Header&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Opp_Category" columns="50" />
+            <dataField fieldName="Rating" columns="15" />
+            <dataField fieldName="How_Found" columns="50" />
+            <dataField fieldName="Open_Date" columns="10" />
+            <dataField fieldName="Est_ClosedDate" columns="10" />
+            <dataField fieldName="Probability" columns="50" />
+            <dataField fieldName="Est_Revenue" dataFormatString="c" columns="15" />
+            <dataField fieldName="Opportunity_Description" rows="5" />
+            <dataField fieldName="Comments" rows="5" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Revision_No" columns="15" />
+            <dataField fieldName="LeadGen_Name" />
+            <dataField fieldName="LG_Role" columns="50" />
+            <dataField fieldName="ProposalDLDate" columns="10" />
+            <dataField fieldName="Commission" dataFormatString="c" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Next_FollowUpDate" columns="10" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="Phone_Mobile" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Reference Information">
+          <description><![CDATA[$DefaultReferenceDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TheSys_NumberUnbilled_ACAccount_Description" />
+            <dataField fieldName="TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="TheSys_NumberBilled_ACAccount_Description" />
+            <dataField fieldName="TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Sales Opportunity">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Sales Opportunity" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Opportunity_Title" />
+            <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" />
+            <dataField fieldName="Party_Name" />
+            <dataField fieldName="RefNo" columns="25" />
+            <dataField fieldName="ContactID" columns="15" />
+            <dataField fieldName="SalesManID" columns="15" />
+            <dataField fieldName="SalesTeamID" aliasFieldName="SalesTeamTeamName" />
+            <dataField fieldName="Opp_Category" columns="50" />
+            <dataField fieldName="Rating" columns="15" />
+            <dataField fieldName="How_Found" columns="50" />
+            <dataField fieldName="Open_Date" columns="10" />
+            <dataField fieldName="Est_ClosedDate" columns="10" />
+            <dataField fieldName="Probability" columns="50" />
+            <dataField fieldName="Est_Revenue" dataFormatString="c" columns="15" />
+            <dataField fieldName="Opportunity_Description" rows="5" />
+            <dataField fieldName="Comments" rows="5" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Revision_No" columns="15" />
+            <dataField fieldName="LeadGen_Name" />
+            <dataField fieldName="LG_Role" columns="50" />
+            <dataField fieldName="ProposalDLDate" columns="10" />
+            <dataField fieldName="Commission" dataFormatString="c" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Next_FollowUpDate" columns="10" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="Phone_Mobile" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SupplierMaster1" label="SupplierMaster1" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Customer_Supplier" custom="true">
+      <text><![CDATA[SELECT * FROM [tbl_Customer_Supplier] where [RecordType]=2]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Sys_Number" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Sequence^Sequence #^Sequence^" readOnly="true" />
+    <field name="RefNo" type="String" label="^RefNo^Ref No^RefNo^" length="25">
+      <configuration />
+    </field>
+    <field name="Vendor_Name" type="String" allowNulls="false" label="Supplier Name" length="150" />
+    <field name="ContactName" type="String" label="^ContactName^Contact Name^ContactName^" length="30" />
+    <field name="ContactTitle" type="String" label="^Title^Title^Title^" length="30" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Title" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="Street" type="String" label="^Street^Street^Street^" length="50" showInSummary="true" />
+    <field name="PostalCode" type="String" label="^PostalCode^Postal Code^PostalCode^" length="50" showInSummary="true" />
+    <field name="City" type="String" label="^City^City^City^" length="50" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_City" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="Country" type="String" label="^Country^Country^Country^" length="50" showInSummary="true" />
+    <field name="Phone" type="String" label="^Phone^Phone #^Phone^" length="50" />
+    <field name="Fax" type="String" label="^Fax^Fax #^Fax^" length="50" showInSummary="true" />
+    <field name="eMailID" type="String" label="^Email^Email^Email^" length="50" showInSummary="true" />
+    <field name="Address" type="String" label="^Address^Address^Address^" readOnly="true" length="4000" />
+    <field name="RecordType" type="Int32" label="^RecordType^Record Type^RecordType^" />
+    <field name="InActive" type="Int16" label="^InActive^In Active^InActive^" showInSummary="true">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="ParentSys_Number" type="Decimal" label="^ParentCompany^Parent Company#^ParentCompany^" showInSummary="true">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="Unbilled_AC" type="String" label="^UnbilledAC^Unbilled A/C^UnbilledAC^" length="50" showInSummary="true">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" letters="true" />
+    </field>
+    <field name="Billed_AC" type="String" label="^LiabilitySupplierAC^Liability Supplier A/C^LiabilitySupplierAC^" length="50" showInSummary="true">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" letters="true" />
+    </field>
+    <field name="DefaultCurrency" type="String" allowNulls="false" label="^DefaultCurrency^Default Currency^DefaultCurrency^" length="4" showInSummary="true">
+      <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" />
+    </field>
+    <field name="BranchID" type="Int32" label="^Branch^Branch#^Branch^" showInSummary="true" />
+    <field name="BalanceAmt" type="Decimal" label="^BalanceAmountBC^Balance Amount (BC) ^BalanceAmountBC^" dataFormatString="N2" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" showInSummary="true" />
+    <field name="BalanceAmt_fc" type="Decimal" label="^BalanceAmountFC^Balance Amount (FC)^BalanceAmountFC^" dataFormatString="N2" />
+    <field name="OverHead" type="Boolean" label="^OverHeadAlert^Over Head Alert^OverHeadAlert^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="OrderAlert" type="Boolean" label="^OrderAlert^Order Alert^OrderAlert^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="ShipmentAlert" type="Boolean" label="^ShipmentAlert^Shipment Alert^ShipmentAlert^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="QuotationAlert" type="Boolean" label="^QuotationAlert^Quotation Alert^QuotationAlert^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="InvoiceAlert" type="Boolean" label="^InvoiceAlert^Invoice Alert^InvoiceAlert^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="PaymentAlert" type="Boolean" label="^PaymentAlert^Payment Alert^PaymentAlert^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="SendStatmentAlert" type="Boolean" label="^SendStatmentAlert^Send Statment Alert^SendStatmentAlert^" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="Multiplier" type="Int32" label="^Multiplier^Multiplier^Multiplier^" readOnly="true" />
+    <field name="CRNumber" type="String" label="^CRNumber^CR Number^CRNumber^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" showInSummary="true">
+      <items letters="false" />
+    </field>
+    <field name="Partner_Type" type="String" label="Supplier Type" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" contextFields="LookUpType=500001" showInSummary="true" allowNulls="false">
+      <items letters="false" style="DropDownList" dataController="LookUp_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" description="Supplier Types" />
+    </field>
+    <field name="PrePayment_AC" type="String" allowNulls="false" label="^PrePaymentAC^Pre Payment AC^PrePaymentAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items letters="false" style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="RefreshBalance" type="Int16" label="^RefreshBalance^Refresh Balance^RefreshBalance^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="Payment_Terms" type="Int32" label="Payment Terms" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" style="DropDownList" dataController="LookUp_PaymentTerms" dataView="grid1" dataTextField="PaymentTerms_Name" dataValueField="Pay_Terms_ID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Supplier Definition" reportTemplate="true" sortExpression="Sys_Number desc" filter="BranchID=@Session_OPU_Code">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="ContactName" columns="30" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="Phone" columns="50" />
+        <dataField fieldName="BalanceAmt" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="BalanceAmt_fc" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="RefNo" columns="15" />
+        <dataField fieldName="CRNumber" columns="20" />
+        <dataField fieldName="Partner_Type" columns="50" />
+        <dataField fieldName="RefreshBalance" columns="15" hidden="true" />
+        <dataField fieldName="BranchID" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Edit Supplier Definition">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Edit Supplier Definition" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="RefNo" columns="15" />
+            <dataField fieldName="Vendor_Name" columns="30">
+              <headerText>Supplier Name</headerText>
+            </dataField>
+            <dataField fieldName="ContactName" columns="30" />
+            <dataField fieldName="ContactTitle" columns="30" />
+            <dataField fieldName="Street" columns="30" />
+            <dataField fieldName="PostalCode" columns="10" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="Country" columns="30" />
+            <dataField fieldName="Phone" columns="30" />
+            <dataField fieldName="Fax" columns="30" />
+            <dataField fieldName="eMailID" columns="30" />
+            <dataField fieldName="Address" hidden="true" />
+            <dataField fieldName="RecordType" columns="15" hidden="true" />
+            <dataField fieldName="ParentSys_Number" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Posting" id="c3">
+          <dataFields>
+            <dataField fieldName="InActive" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="AdditionalInformation" id="c2">
+          <dataFields>
+            <dataField fieldName="Unbilled_AC" columns="50" readOnly="true" />
+            <dataField fieldName="Billed_AC" columns="50" readOnly="true" />
+            <dataField fieldName="PrePayment_AC" columns="50" readOnly="true" />
+            <dataField fieldName="DefaultCurrency" columns="4" />
+            <dataField fieldName="BranchID" columns="15" hidden="true" />
+            <dataField fieldName="BalanceAmt" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="BalanceAmt_fc" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="OverHead" columns="15" />
+            <dataField fieldName="OrderAlert" columns="15" />
+            <dataField fieldName="ShipmentAlert" columns="15" />
+            <dataField fieldName="QuotationAlert" columns="15" />
+            <dataField fieldName="InvoiceAlert" columns="15" />
+            <dataField fieldName="PaymentAlert" columns="15" />
+            <dataField fieldName="SendStatmentAlert" columns="15" />
+            <dataField fieldName="Multiplier" columns="15" hidden="true" />
+            <dataField fieldName="CRNumber" columns="20" />
+            <dataField fieldName="Partner_Type" columns="50" />
+            <dataField fieldName="Payment_Terms" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Supplier Definition">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Supplier Definition" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="RefNo" columns="15" />
+            <dataField fieldName="Vendor_Name" columns="30">
+              <headerText>Supplier Name</headerText>
+            </dataField>
+            <dataField fieldName="ContactTitle" columns="30" />
+            <dataField fieldName="ContactName" columns="30" />
+            <dataField fieldName="Street" columns="30" />
+            <dataField fieldName="PostalCode" columns="10" />
+            <dataField fieldName="Country" columns="30" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="Phone" columns="30" />
+            <dataField fieldName="Fax" columns="30" />
+            <dataField fieldName="eMailID" columns="30" />
+            <dataField fieldName="RecordType" columns="15" hidden="true" />
+            <dataField fieldName="ParentSys_Number" columns="15" />
+            <dataField fieldName="InActive" columns="15" hidden="true" />
+            <dataField fieldName="Partner_Type" columns="50" />
+            <dataField fieldName="CRNumber" columns="20" />
+          </dataFields>
+        </category>
+        <category headerText="Additional.Information" id="c2">
+          <dataFields>
+            <dataField fieldName="Unbilled_AC" columns="50" />
+            <dataField fieldName="Billed_AC" columns="50" />
+            <dataField fieldName="PrePayment_AC" columns="50" />
+            <dataField fieldName="DefaultCurrency" columns="4" />
+            <dataField fieldName="BranchID" columns="15" hidden="true" />
+            <dataField fieldName="BalanceAmt" dataFormatString="c" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="BalanceAmt_fc" dataFormatString="c" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="Payment_Terms" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Alert" id="c3">
+          <dataFields>
+            <dataField fieldName="OverHead" columns="15" />
+            <dataField fieldName="OrderAlert" columns="15" />
+            <dataField fieldName="ShipmentAlert" columns="15" />
+            <dataField fieldName="QuotationAlert" columns="15" />
+            <dataField fieldName="InvoiceAlert" columns="15" />
+            <dataField fieldName="PaymentAlert" columns="15" />
+            <dataField fieldName="SendStatmentAlert" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="About" commandId="command1" type="Form" label="Record History">
+      <categories>
+        <category id="c1" headerText="Supplier Master" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="^PrintSupplierMaster^Print Supplier Master^PrintSupplierMaster^">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action commandName="SQL" headerText="^Refresh^Refresh^Refresh^" id="a100">
+        <data><![CDATA[DECLARE @A INT
+SET @A =0
+if IsNull(@RefreshBalance,0)=0  SET @A =1
+
+UPDATE tbl_Customer_Supplier
+SET RefreshBalance=@A  WHERE Sys_Number=@Sys_Number]]></data>
+      </action>
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="^AboutRecord^About Record^AboutRecord^" flat="true">
+      <action commandName="EditModal" commandArgument="About" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[set @RecordType=2
+set @Created_By=@BusinessRules_UserId
+set @Created_DateTime=getdate()
+SET @BranchID=@Session_OPU_Code]]></rule>
+    <rule id="r101" commandName="Update" type="Sql" phase="Before"><![CDATA[set @Updated_By=@BusinessRules_UserId
+set @Updated_DateTime=getdate()
+
+SET @InActive=IsNull(@InActive,0)]]></rule>
+    <rule id="r102" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Country=@Session_Country
+ SELECT  @Unbilled_AC=BR.AP_Unbilled_AC,
+             @Billed_AC=BR.AP_Billed_AC,
+             @DefaultCurrency=BR.DefaultCurrency,
+			 @PrePayment_AC=BR.AP_PrePayment_AC
+			 FROM dbo.tbl_BranchInfo BR WHERE BranchID=@Session_OPU_Code]]></rule>
+    <rule id="r104" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[SET @BranchID=@Session_OPU_Code
+
+if @Session_IsReadOnly=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end]]></rule>
+    <rule id="r105" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if @Session_IsWriteOnly=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+    <rule id="r103" commandName="Update" type="Sql" phase="Execute"><![CDATA[SET @InActive=IsNull(@InActive,0)]]></rule>
+  </businessRules>
+</dataController>

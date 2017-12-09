@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="V_Transactions_Line_LOG" conflictDetection="overwriteChanges" label="V Transactions Line LOG" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"V_Transactions_Line_LOG"."Line_ID" "Line_ID"
+	,"V_Transactions_Line_LOG"."Transaction_No" "Transaction_No"
+	,"V_Transactions_Line_LOG"."Transaction_ID" "Transaction_ID"
+	,"V_Transactions_Line_LOG"."Transaction_Type" "Transaction_Type"
+	,"V_Transactions_Line_LOG"."Transaction_Date" "Transaction_Date"
+	,"V_Transactions_Line_LOG"."Currency_Code" "Currency_Code"
+	,"V_Transactions_Line_LOG"."Sys_Number" "Sys_Number"
+	,"V_Transactions_Line_LOG"."Header_Net" "Header_Net"
+	,"V_Transactions_Line_LOG"."Header_Amount" "Header_Amount"
+	,"V_Transactions_Line_LOG"."Vendor_Name" "Vendor_Name"
+	,"V_Transactions_Line_LOG"."MonthAndYear" "MonthAndYear"
+	,"V_Transactions_Line_LOG"."CashInvoiceYN" "CashInvoiceYN"
+	,"V_Transactions_Line_LOG"."WalkinCustomerAdd" "WalkinCustomerAdd"
+	,"V_Transactions_Line_LOG"."ConvertYN" "ConvertYN"
+	,"V_Transactions_Line_LOG"."Payment_Terms" "Payment_Terms"
+	,"V_Transactions_Line_LOG"."Salesman_Code" "Salesman_Code"
+	,"V_Transactions_Line_LOG"."APAR_Flag" "APAR_Flag"
+	,"V_Transactions_Line_LOG"."PostYN" "PostYN"
+	,"V_Transactions_Line_LOG"."Approve" "Approve"
+	,"V_Transactions_Line_LOG"."HeaderDiscountYN" "HeaderDiscountYN"
+	,"V_Transactions_Line_LOG"."Header_Disc_Amount" "Header_Disc_Amount"
+	,"V_Transactions_Line_LOG"."Header_Disc_Percent" "Header_Disc_Percent"
+	,"V_Transactions_Line_LOG"."TermsANDConditions" "TermsANDConditions"
+	,"V_Transactions_Line_LOG"."Item_Code" "Item_Code"
+	,"V_Transactions_Line_LOG"."Qty" "Qty"
+	,"V_Transactions_Line_LOG"."QtyEnter" "QtyEnter"
+	,"V_Transactions_Line_LOG"."Line_Remarks" "Line_Remarks"
+	,"V_Transactions_Line_LOG"."Unit_Price" "Unit_Price"
+	,"V_Transactions_Line_LOG"."PO_NO" "PO_NO"
+	,"V_Transactions_Line_LOG"."SO_NO" "SO_NO"
+	,"V_Transactions_Line_LOG"."Line_Total" "Line_Total"
+	,"V_Transactions_Line_LOG"."Dr_AC" "Dr_AC"
+	,"V_Transactions_Line_LOG"."Cr_AC" "Cr_AC"
+	,"V_Transactions_Line_LOG"."Order_Price" "Order_Price"
+	,"V_Transactions_Line_LOG"."Line_Net" "Line_Net"
+	,"V_Transactions_Line_LOG"."Invoice_Balance_Qty" "Invoice_Balance_Qty"
+	,"V_Transactions_Line_LOG"."Item_Desc" "Item_Desc"
+	,"V_Transactions_Line_LOG"."Item_Part" "Item_Part"
+	,"V_Transactions_Line_LOG"."UOM" "UOM"
+	,"V_Transactions_Line_LOG"."Avg_Cost" "Avg_Cost"
+from "dbo"."V_Transactions_Line_LOG" "V_Transactions_Line_LOG"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Line_ID" type="Decimal" allowNulls="false" label="Line#" showInSummary="true" />
+    <field name="Transaction_No" type="Decimal" label="Transaction No" showInSummary="true" />
+    <field name="Transaction_ID" type="Decimal" allowNulls="false" label="Transaction#" showInSummary="true" />
+    <field name="Transaction_Type" type="String" label="Transaction Type" length="25" showInSummary="true" />
+    <field name="Transaction_Date" type="DateTime" label="Transaction Date" showInSummary="true" />
+    <field name="Currency_Code" type="String" label="Currency Code" length="4" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="Header_Net" type="Decimal" label="Header Net" readOnly="true" />
+    <field name="Header_Amount" type="Decimal" label="Header Amount" readOnly="true" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" readOnly="true" length="150" />
+    <field name="MonthAndYear" type="String" label="Month And Year" readOnly="true" length="12" />
+    <field name="CashInvoiceYN" type="Int32" label="Cash Invoice YN" />
+    <field name="WalkinCustomerAdd" type="String" allowQBE="false" allowSorting="false" label="Walkin Customer Add" length="4000" />
+    <field name="ConvertYN" type="Int32" label="Convert YN" />
+    <field name="Payment_Terms" type="Int32" label="Payment Terms" />
+    <field name="Salesman_Code" type="Decimal" label="Salesman Code" />
+    <field name="APAR_Flag" type="Int32" label="APAR Flag" />
+    <field name="PostYN" type="Int32" label="Post YN" />
+    <field name="Approve" type="Int32" label="Approve" />
+    <field name="HeaderDiscountYN" type="Int32" label="Header Discount YN" />
+    <field name="Header_Disc_Amount" type="Decimal" label="Header Disc Amount" />
+    <field name="Header_Disc_Percent" type="Decimal" label="Header Disc Percent" />
+    <field name="TermsANDConditions" type="String" allowQBE="false" allowSorting="false" label="Terms AND Conditions" length="4000" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" />
+    <field name="Qty" type="Decimal" label="Qty" />
+    <field name="QtyEnter" type="Decimal" label="Qty Enter" />
+    <field name="Line_Remarks" type="String" label="Line Remarks" length="255" />
+    <field name="Unit_Price" type="Decimal" label="Unit Price" />
+    <field name="PO_NO" type="Decimal" label="Po No" />
+    <field name="SO_NO" type="Decimal" label="So No" />
+    <field name="Line_Total" type="Decimal" label="Line Total" readOnly="true" />
+    <field name="Dr_AC" type="String" label="Dr AC" length="50" />
+    <field name="Cr_AC" type="String" label="Cr AC" length="50" />
+    <field name="Order_Price" type="Decimal" label="Order Price" />
+    <field name="Line_Net" type="Decimal" label="Line Net" readOnly="true" />
+    <field name="Invoice_Balance_Qty" type="Decimal" label="Invoice Balance Qty" readOnly="true" />
+    <field name="Item_Desc" type="String" label="Item Desc" length="500" />
+    <field name="Item_Part" type="String" label="Item Part" length="50" />
+    <field name="UOM" type="String" label="Uom" length="50" />
+    <field name="Avg_Cost" type="Decimal" label="Avg Cost" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="V Transactions Line LOG">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Line_ID" columns="15" />
+        <dataField fieldName="Transaction_No" columns="15" />
+        <dataField fieldName="Transaction_ID" columns="15" />
+        <dataField fieldName="Transaction_Type" columns="25" />
+        <dataField fieldName="Transaction_Date" columns="10" />
+        <dataField fieldName="Currency_Code" columns="4" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+        <dataField fieldName="Header_Amount" dataFormatString="c" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review V Transactions Line LOG">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="V Transactions Line LOG" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="Transaction_No" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Transaction_Type" columns="25" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Header_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="MonthAndYear" columns="12" />
+            <dataField fieldName="CashInvoiceYN" columns="15" />
+            <dataField fieldName="WalkinCustomerAdd" rows="5" />
+            <dataField fieldName="ConvertYN" columns="15" />
+            <dataField fieldName="Payment_Terms" columns="15" />
+            <dataField fieldName="Salesman_Code" columns="15" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="Approve" columns="15" />
+            <dataField fieldName="HeaderDiscountYN" columns="15" />
+            <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="TermsANDConditions" rows="5" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="QtyEnter" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="Dr_AC" columns="50" />
+            <dataField fieldName="Cr_AC" columns="50" />
+            <dataField fieldName="Order_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Invoice_Balance_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="50" />
+            <dataField fieldName="UOM" columns="50" />
+            <dataField fieldName="Avg_Cost" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New V Transactions Line LOG">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New V Transactions Line LOG" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="Transaction_No" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Transaction_Type" columns="25" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="CashInvoiceYN" columns="15" />
+            <dataField fieldName="WalkinCustomerAdd" rows="5" />
+            <dataField fieldName="ConvertYN" columns="15" />
+            <dataField fieldName="Payment_Terms" columns="15" />
+            <dataField fieldName="Salesman_Code" columns="15" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="Approve" columns="15" />
+            <dataField fieldName="HeaderDiscountYN" columns="15" />
+            <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="TermsANDConditions" rows="5" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="QtyEnter" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Dr_AC" columns="50" />
+            <dataField fieldName="Cr_AC" columns="50" />
+            <dataField fieldName="Order_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="50" />
+            <dataField fieldName="UOM" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Auto_Expected_PO_Receipt" conflictDetection="overwriteChanges" label="^AutExpPoRec^Auto_Expected_PO_Receipt^AutExpPoRec^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="PO_Header" custom="true">
+      <text><![CDATA[SELECT PO_Type,
+       PO_Date,
+       PO_NO,
+       Supplier_QT_No,
+       Sys_Number,
+       Currency_Code,
+       Vendor_Name,
+       Header_Net,
+       Project_Code,
+       Doc_Status,
+       Dept_Code,
+       Company_Code,
+       OPU_Code,
+	   Approve_Ask,
+	   Doc_No
+FROM dbo.PO_Header
+WHERE(PO_NO IN
+     (
+         SELECT PO_NO
+         FROM dbo.PO_Line_Items
+         WHERE(RV_Balance > 0)
+     ))
+	and Rec_Status=1]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PO_Type" type="String" label="^PoTyp^PO Type^PoTyp^" length="30" />
+    <field name="PO_Date" type="DateTime" allowNulls="false" label="^PoDat^PO Date^PoDat^" />
+    <field name="Doc_No" type="Int64" label="^DocNo^PONo^DocNo^" />
+    <field name="PO_NO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PoNo^PoNOSeq^PoNo^" readOnly="true" />
+    <field name="Supplier_QT_No" type="String" label="^SupQtNo^Supplier QT No^SupQtNo^" length="15" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Supplier Number^SysNum^" />
+    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" />
+    <field name="Header_Net" type="Decimal" label="^HeaNet^Header Net^HeaNet^" readOnly="true" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Doc_Status" type="String" label="^DocSta^Doc Status^DocSta^" readOnly="true" length="15" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
+    <field name="OPU_Code" type="Int64" label="^OpuCode^OPU Code^OpuCode^" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" computed="true" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" />
+    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^ExpPoRec^Expected PO Receipt^ExpPoRec^" sortExpression="PO_NO DESC" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+      <headerText>&lt;font color="red"&gt;Note : PO With Manual Serial OR Batch Items Will not Taken for Full Receipt
+&lt;/font&gt;</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="PO_NO" columns="15" />
+        <dataField fieldName="PO_Date" columns="10" />
+        <dataField fieldName="PO_Type" columns="30" />
+        <dataField fieldName="Supplier_QT_No" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Doc_Status" columns="15" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Currency_Code" columns="4" />
+        <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevPoHea^Review PO Header^RevPoHea^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="PO Header" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PO_Type" columns="30" />
+            <dataField fieldName="PO_Date" columns="10" />
+            <dataField fieldName="Supplier_QT_No" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Doc_Status" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewPoHea^New PO Header^NewPoHea^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New PO Header" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PO_Type" columns="30" />
+            <dataField fieldName="PO_Date" columns="10" />
+            <dataField fieldName="Supplier_QT_No" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="grid1ar" commandId="command1" type="Grid" label="^AutExpPoRec^Auto Expected PO Receipt^AutExpPoRec^" showInSelector="false">
+      <dataFields>
+        <dataField fieldName="PO_NO" columns="15" />
+        <dataField fieldName="PO_Date" columns="10" />
+        <dataField fieldName="PO_Type" columns="30" />
+        <dataField fieldName="Supplier_QT_No" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Doc_Status" columns="15" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Currency_Code" columns="4" />
+        <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn" headerText="Full Receipt">
+      <action commandName="SQL" headerText="Full Receipt" id="a100">
+        <data><![CDATA[IF ISNULL(@Session_StoreID, 0) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Transaction_Date, Inventory Organization Access Is Invlid..Please select Inventory Org from Change Organization'
+    END
+
+
+IF ISNULL(@Session_StoreID, 0) > 0
+    BEGIN
+        EXEC [dbo].[MASS_PO_TO_RV_TRX]
+             @PO_NO,
+             @BusinessRules_UserId
+    END
+]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Action" flat="false">
+      <action id="a1" commandName="ReportAsPdf">
+        <data><![CDATA[_controller=Auto_Expected_PO_Receipt
+_view=grid1ar ]]></data>
+      </action>
+      <action id="a2" commandName="ReportAsImage">
+        <data><![CDATA[_controller=Auto_Expected_PO_Receipt
+_view=grid1ar ]]></data>
+      </action>
+      <action id="a3" commandName="ReportAsExcel">
+        <data><![CDATA[_controller=Auto_Expected_PO_Receipt
+_view=grid1ar ]]></data>
+      </action>
+      <action id="a4" commandName="ReportAsWord">
+        <data><![CDATA[_controller=Auto_Expected_PO_Receipt
+_view=grid1ar ]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="Reports" flat="false">
+      <action id="a1" commandName="ReportAsPdf">
+        <data />
+      </action>
+      <action id="a2" commandName="ReportAsImage">
+        <data />
+      </action>
+      <action id="a3" commandName="ReportAsExcel">
+        <data />
+      </action>
+      <action id="a4" commandName="ReportAsWord">
+        <data />
+      </action>
+    </actionGroup>
+  </actions>
+</dataController>

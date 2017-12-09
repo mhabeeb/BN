@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Item_By_Store" conflictDetection="overwriteChanges" label="Item_By_Store" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Transactions_Line" custom="true">
+      <text><![CDATA[  SELECT *
+FROM (
+    SELECT Trx_OPU_Code,Item_Code,Item_Desc,Item_Part,UOM,StoreID,
+      IsNull(Qty,0) Qty
+    FROM dbo.tbl_Transactions_Line
+) as s
+PIVOT
+(
+    SUM(Qty)
+    FOR [StoreID] IN ([0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[12],[13],[14],[15])
+)AS p]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Trx_OPU_Code" type="Int32" label="Trx OPU Code" showInSummary="true" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" showInSummary="true" />
+    <field name="Item_Desc" type="String" label="Item Desc" length="500" showInSummary="true" />
+    <field name="Item_Part" type="String" label="Item Part" length="50" showInSummary="true" />
+    <field name="UOM" type="String" label="Uom" length="50" showInSummary="true" />
+    <field name="n0" type="Decimal" label="0" readOnly="true" />
+    <field name="n1" type="Decimal" label="1" readOnly="true" />
+    <field name="n2" type="Decimal" label="2" readOnly="true" />
+    <field name="n3" type="Decimal" label="3" readOnly="true" />
+    <field name="n4" type="Decimal" label="4" readOnly="true" />
+    <field name="n5" type="Decimal" label="5" readOnly="true" />
+    <field name="n6" type="Decimal" label="6" readOnly="true" />
+    <field name="n7" type="Decimal" label="7" readOnly="true" />
+    <field name="n8" type="Decimal" label="8" readOnly="true" />
+    <field name="n9" type="Decimal" label="9" readOnly="true" />
+    <field name="n10" type="Decimal" label="10" readOnly="true" />
+    <field name="n12" type="Decimal" label="12" readOnly="true" />
+    <field name="n13" type="Decimal" label="13" readOnly="true" />
+    <field name="n14" type="Decimal" label="14" readOnly="true" />
+    <field name="n15" type="Decimal" label="15" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="tbl Transactions Line">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Trx_OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="Item_Desc" />
+        <dataField fieldName="Item_Part" columns="50" />
+        <dataField fieldName="UOM" columns="50" />
+        <dataField fieldName="n0" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n1" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n2" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n3" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n4" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n5" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n6" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n7" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n8" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n9" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n10" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n12" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n13" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n14" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="n15" dataFormatString="N2" columns="15" aggregate="Sum" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Transactions Line">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Transactions Line" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Trx_OPU_Code" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="50" />
+            <dataField fieldName="UOM" columns="50" />
+            <dataField fieldName="n0" dataFormatString="c" columns="15" />
+            <dataField fieldName="n1" dataFormatString="c" columns="15" />
+            <dataField fieldName="n2" dataFormatString="c" columns="15" />
+            <dataField fieldName="n3" dataFormatString="c" columns="15" />
+            <dataField fieldName="n4" dataFormatString="c" columns="15" />
+            <dataField fieldName="n5" dataFormatString="c" columns="15" />
+            <dataField fieldName="n6" dataFormatString="c" columns="15" />
+            <dataField fieldName="n7" dataFormatString="c" columns="15" />
+            <dataField fieldName="n8" dataFormatString="c" columns="15" />
+            <dataField fieldName="n9" dataFormatString="c" columns="15" />
+            <dataField fieldName="n10" dataFormatString="c" columns="15" />
+            <dataField fieldName="n12" dataFormatString="c" columns="15" />
+            <dataField fieldName="n13" dataFormatString="c" columns="15" />
+            <dataField fieldName="n14" dataFormatString="c" columns="15" />
+            <dataField fieldName="n15" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Transactions Line">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New tbl Transactions Line" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Trx_OPU_Code" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="50" />
+            <dataField fieldName="UOM" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

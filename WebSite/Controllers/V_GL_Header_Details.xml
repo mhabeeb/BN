@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="V_GL_Header_Details" conflictDetection="overwriteChanges" label="V GL Header Details" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"V_GL_Header_Details"."GL_Serial_No" "GL_Serial_No"
+	,"V_GL_Header_Details"."GL_NO" "GL_NO"
+	,"V_GL_Header_Details"."Transaction_Date" "Transaction_Date"
+	,"V_GL_Header_Details"."Tran_Type" "Tran_Type"
+	,"V_GL_Header_Details"."GL_PostedYN" "GL_PostedYN"
+	,"V_GL_Header_Details"."Dr_Amt" "Dr_Amt"
+	,"V_GL_Header_Details"."Cr_Amt" "Cr_Amt"
+	,"V_GL_Header_Details"."Diff_Amt" "Diff_Amt"
+	,"V_GL_Header_Details"."Remark" "Remark"
+	,"V_GL_Header_Details"."Transaction_ID" "Transaction_ID"
+	,"V_GL_Header_Details"."Trx_ID" "Trx_ID"
+	,"V_GL_Header_Details"."PaymentID" "PaymentID"
+	,"V_GL_Header_Details"."Created_DateTime" "Created_DateTime"
+from "dbo"."V_GL_Header_Details" "V_GL_Header_Details"
+]]></text>
+    </command>
+    <command id="GL_Serial_NoIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="GL_Serial_No" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="GL_Serial_No" type="Decimal" allowNulls="false" label="GL Serial No" readOnly="true" showInSummary="true" />
+    <field name="GL_NO" type="Decimal" allowNulls="false" label="Gl No" showInSummary="true" />
+    <field name="Transaction_Date" type="DateTime" allowNulls="false" label="Transaction Date" showInSummary="true" />
+    <field name="Tran_Type" type="String" allowNulls="false" label="Tran Type" length="50" showInSummary="true" />
+    <field name="GL_PostedYN" type="String" label="GL Posted YN" readOnly="true" length="1" showInSummary="true" />
+    <field name="Dr_Amt" type="Decimal" label="Dr Amt" readOnly="true" />
+    <field name="Cr_Amt" type="Decimal" label="Cr Amt" readOnly="true" />
+    <field name="Diff_Amt" type="Decimal" label="Diff Amt" readOnly="true" />
+    <field name="Remark" type="String" label="Remark" length="150" />
+    <field name="Transaction_ID" type="Decimal" label="Transaction#" />
+    <field name="Trx_ID" type="Decimal" label="Trx#" />
+    <field name="PaymentID" type="Decimal" label="Payment#" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="V GL Header Details">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="GL_Serial_No" columns="15" />
+        <dataField fieldName="GL_NO" columns="15" />
+        <dataField fieldName="Transaction_Date" columns="10" />
+        <dataField fieldName="Tran_Type" columns="50" />
+        <dataField fieldName="GL_PostedYN" columns="1" />
+        <dataField fieldName="Dr_Amt" dataFormatString="c" columns="15" />
+        <dataField fieldName="Cr_Amt" dataFormatString="c" columns="15" />
+        <dataField fieldName="Diff_Amt" dataFormatString="c" columns="15" />
+        <dataField fieldName="Remark" />
+        <dataField fieldName="Transaction_ID" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review V GL Header Details">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="V GL Header Details" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GL_Serial_No" columns="15" />
+            <dataField fieldName="GL_NO" columns="15" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Tran_Type" columns="50" />
+            <dataField fieldName="GL_PostedYN" columns="1" />
+            <dataField fieldName="Dr_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Cr_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Diff_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="PaymentID" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New V GL Header Details">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New V GL Header Details" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GL_NO" columns="15" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Tran_Type" columns="50" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="PaymentID" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

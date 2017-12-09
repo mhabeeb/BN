@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="NotificationComments" conflictDetection="overwriteChanges" label="^NotCom^NotificationComments^NotCom^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="dbo.TBL_Document_Approvals_Detail" custom="true">
+      <text><![CDATA[SELECT  dbo.TBL_DocumetTypes.DocShortName, dbo.TBL_DocumetTypes.DocDescrition, dbo.TBL_Document_Header.OPU_Code, dbo.TBL_Document_Header.Company_Code, dbo.TBL_Document_Header.DocRefNo, 
+                   dbo.TBL_Document_Header.DocumentDate, dbo.TBL_Document_Header.DocDescription, dbo.TBL_Document_Approvals_Detail.Hirarchy, dbo.TBL_Document_Approvals_Detail.CurrentApp, dbo.TBL_Document_Approvals_Detail.Comments, 
+                   dbo.TBL_Document_Approvals_Detail.DocAPP_SNO, dbo.TBL_Document_Header.DocumentID, dbo.Users.Email, dbo.Users.UserFullName, dbo.Users.Mobile, dbo.TBL_Document_Header.Net, dbo.TBL_Document_Approvals_Detail.ApprovalStatus, 
+                   dbo.TBL_Document_Approvals_Detail.Updated_DateTime, dbo.TBL_Document_Approvals_Detail.ApprovalLimit, dbo.TBL_Document_Approvals_Detail.Delegated_Flag, dbo.TBL_Document_Approvals_Detail.Delegator_UserID
+FROM      dbo.TBL_Document_Approvals_Detail INNER JOIN
+                   dbo.TBL_Document_Header ON dbo.TBL_Document_Approvals_Detail.DocumentID = dbo.TBL_Document_Header.DocumentID INNER JOIN
+                   dbo.TBL_DocumetTypes ON dbo.TBL_Document_Header.DocTypeID = dbo.TBL_DocumetTypes.DocTypeID INNER JOIN
+                   dbo.Users ON dbo.TBL_Document_Approvals_Detail.UserID = dbo.Users.UserID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="DocShortName" type="String" label="^ShoNam^ShortName^ShoNam^" length="10" showInSummary="true" />
+    <field name="DocDescrition" type="String" label="^DocDes^Desc.^DocDes^" length="50" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^Branch Name^OpuCod^" showInSummary="true" />
+    <field name="Company_Code" type="Decimal" label="^CompCod^Company Code^CompCod^" showInSummary="true" />
+    <field name="DocRefNo" type="Decimal" label="^DocRefNo^Ref.No #^DocRefNo^" showInSummary="true" />
+    <field name="DocumentDate" type="DateTime" label="^DocDat^Document Date^DocDat^" />
+    <field name="DocDescription" type="String" allowQBE="false" allowSorting="false" label="^DocDes^Doc Description^DocDes^" />
+    <field name="Hirarchy" type="Int32" label="^Hir^Approval Seq.^Hir^" />
+    <field name="CurrentApp" type="Int32" label="^CurApp^Current App^CurApp^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Comments" type="String" label="^Com^Comments^Com^" length="4000" />
+    <field name="DocAPP_SNO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DocAppSno^Doc APP SNO^DocAppSno^" readOnly="true" />
+    <field name="DocumentID" type="Decimal" allowNulls="false" label="^DocId^Document#^DocId^" readOnly="true" />
+    <field name="Email" type="String" label="^Email^Email^Email^" length="128" />
+    <field name="UserFullName" type="String" label="^UseFulNam^Doc. With Whom^UseFulNam^" length="150" />
+    <field name="Mobile" type="String" label="^Mob^Mobile^Mob^" length="15" />
+    <field name="ApprovalStatus" type="Int16" allowNulls="false" label="^AppSta^Approval Status^AppSta^">
+      <items style="DropDownList">
+        <item value="0" text="InProcess" />
+        <item value="1" text="Approved" />
+        <item value="2" text="Rejected" />
+      </items>
+    </field>
+    <field name="Updated_DateTime" type="^UpdDatTim^DateTime^UpdDatTim^" label="^ActDat^Action Date^ActDat^" />
+    <field name="Delegated_Flag" type="Int16" label="^DelegatedFlag^Delegated Flag^DelegatedFlag^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Delegator_UserID" type="Int64" label="Delegator User ID">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="ApprovalLimit" type="Decimal" label="Approval Limit" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^NotSum^Notification Summary^NotSum^">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="DocumentID" columns="15" />
+        <dataField fieldName="DocShortName" columns="10" hidden="true" />
+        <dataField fieldName="DocDescrition" columns="50" hidden="true" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="DocRefNo" columns="15" />
+        <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+        <dataField fieldName="DocumentDate" columns="10" hidden="true" />
+        <dataField fieldName="DocDescription" rows="5" />
+        <dataField fieldName="Hirarchy" columns="15" />
+        <dataField fieldName="CurrentApp" columns="15" />
+        <dataField fieldName="Comments" />
+        <dataField fieldName="Email" />
+        <dataField fieldName="UserFullName" />
+        <dataField fieldName="Mobile" columns="15" hidden="true" />
+        <dataField fieldName="ApprovalStatus" columns="15" />
+        <dataField fieldName="ApprovalLimit" columns="15" dataFormatString="N" />
+        <dataField fieldName="Delegated_Flag" columns="15" />
+        <dataField fieldName="Delegator_UserID" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Document Approvals Detail" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="^DocAppDet^Document Approvals Detail^DocAppDet^" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DocShortName" columns="10" />
+            <dataField fieldName="DocDescrition" columns="50" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="DocRefNo" columns="15" />
+            <dataField fieldName="DocumentDate" columns="10" />
+            <dataField fieldName="DocDescription" rows="5" />
+            <dataField fieldName="Hirarchy" columns="15" />
+            <dataField fieldName="CurrentApp" columns="15" />
+            <dataField fieldName="Comments" />
+            <dataField fieldName="DocumentID" columns="15" />
+            <dataField fieldName="Email" />
+            <dataField fieldName="UserFullName" />
+            <dataField fieldName="Mobile" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewDocAppDet^New Document Approvals Detail^NewDocAppDet^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Document Approvals Detail" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DocShortName" columns="10" />
+            <dataField fieldName="DocDescrition" columns="50" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="DocRefNo" columns="15" />
+            <dataField fieldName="DocumentDate" columns="10" />
+            <dataField fieldName="DocDescription" rows="5" />
+            <dataField fieldName="Hirarchy" columns="15" />
+            <dataField fieldName="CurrentApp" columns="15" />
+            <dataField fieldName="Comments" />
+            <dataField fieldName="Email" />
+            <dataField fieldName="UserFullName" />
+            <dataField fieldName="Mobile" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true" />
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true" />
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

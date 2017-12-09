@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CurrentUserDetails" label="CurrentUserDetails" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompanyName^Company Name^CompanyName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BranchName^Branch Name^BranchName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" label="User Details">
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" />
+        <dataField fieldName="ABranch" rows="5" />
+        <dataField fieldName="AStoreName" rows="5" />
+        <dataField fieldName="ABranchAR" rows="5" />
+        <dataField fieldName="AddressEn" rows="5" />
+        <dataField fieldName="AddressAr" rows="5" />
+      </dataFields>
+    </view>
+  </views>
+  <businessRules>
+    <rule id="r100" commandName="Select" type="Sql" phase="Execute"><![CDATA[SET @ACompanyName='hABEEB']]></rule>
+  </businessRules>
+</dataController>

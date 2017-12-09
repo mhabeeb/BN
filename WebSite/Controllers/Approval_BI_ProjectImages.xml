@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Approval_BI_ProjectImages" conflictDetection="overwriteChanges" label="Approval_BI_ProjectImages" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="BI_ProjectImages" custom="true">
+      <text><![CDATA[SELECT * FROM BI_ProjectImages WHERE IsNull(Approved,0)=0]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Project_Code" type="String" label="Project Code" length="50" showInSummary="true" />
+    <field name="Project_Name" type="String" label="Project Name" length="250" showInSummary="true" />
+    <field name="Year_Code" type="Int32" label="Year Code" showInSummary="true" />
+    <field name="Month_Code" type="Int32" label="Month Code" showInSummary="true" />
+    <field name="TrxDate" type="DateTime" label="Trx Date" showInSummary="true" />
+    <field name="ProjectImages" type="Byte[]" onDemand="true" sourceFields="ImageID" onDemandHandler="BI_ProjectImagesProjectImages" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Project Images" />
+    <field name="ImageID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Image#" readOnly="true" />
+    <field name="Approved" type="Int32" label="Approved" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="BI Project Images" filter="Project_Code IN (SELECT Project_Code  FROM UserProjectAccess where UserID=@BusinessRules_UserId)">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Project_Name" />
+        <dataField fieldName="Year_Code" columns="15" />
+        <dataField fieldName="Month_Code" columns="15" />
+        <dataField fieldName="TrxDate" columns="10" />
+        <dataField fieldName="ProjectImages" columns="15" />
+        <dataField fieldName="Approved" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review BI Project Images">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="BI Project Images" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Project_Name" />
+            <dataField fieldName="Year_Code" columns="15" />
+            <dataField fieldName="Month_Code" columns="15" />
+            <dataField fieldName="TrxDate" columns="10" />
+            <dataField fieldName="ProjectImages" columns="15" />
+            <dataField fieldName="Approved" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

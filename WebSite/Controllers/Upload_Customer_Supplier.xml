@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Upload_Customer_Supplier" conflictDetection="overwriteChanges" label="^UplCusSup^Upload_Customer_Supplier^UplCusSup^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Customer_Supplier" custom="true">
+      <text><![CDATA[SELECT        RefNo, Vendor_Name, ContactName, ContactTitle, Street, PostalCode, City, RecordType,
+BranchID
+FROM            dbo.tbl_Customer_Supplier]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="RefNo" type="String" label="^RefNo^Ref No^RefNo^" length="25" showInSummary="true" />
+    <field name="Vendor_Name" type="String" allowNulls="false" label="^VenNam^Vendor Name^VenNam^" length="150" showInSummary="true" />
+    <field name="ContactName" type="String" label="^ConNam^Contact Name^ConNam^" length="30" showInSummary="true" />
+    <field name="ContactTitle" type="String" label="^ConTit^Contact Title^ConTit^" length="30" showInSummary="true" />
+    <field name="Street" type="String" label="^Street^Street^Street^" length="230" showInSummary="true" />
+    <field name="PostalCode" type="String" label="^PosCod^Postal Code^PosCod^" length="50" />
+    <field name="City" type="String" label="^City^City^City^" length="50" />
+    <field name="RecordType" type="Int32" label="^RecTyp^Record Type^RecTyp^" />
+    <field name="BranchID" type="Int32" label="^BraId^Branch#^BraId^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^CusSup^Customer Supplier^CusSup^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="RefNo" columns="25" />
+        <dataField fieldName="ContactName" columns="30" />
+        <dataField fieldName="ContactTitle" columns="30" />
+        <dataField fieldName="Street" />
+        <dataField fieldName="PostalCode" columns="50" />
+        <dataField fieldName="City" columns="50" />
+        <dataField fieldName="RecordType" columns="15" />
+        <dataField fieldName="BranchID" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevCusSup^Review tbl Customer Supplier^RevCusSup^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Customer Supplier" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefNo" columns="25" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="ContactName" columns="30" />
+            <dataField fieldName="ContactTitle" columns="30" />
+            <dataField fieldName="Street" />
+            <dataField fieldName="PostalCode" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="RecordType" columns="15" />
+            <dataField fieldName="BranchID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewCusSup^New Customer Supplier^NewCusSup^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New tbl Customer Supplier" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefNo" columns="25" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="ContactName" columns="30" />
+            <dataField fieldName="ContactTitle" columns="30" />
+            <dataField fieldName="Street" />
+            <dataField fieldName="PostalCode" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="RecordType" columns="15" />
+            <dataField fieldName="BranchID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Import" flat="true">
+      <action commandName="Import" headerText="Customer Supplier Import" id="a100" />
+    </actionGroup>
+  </actions>
+</dataController>

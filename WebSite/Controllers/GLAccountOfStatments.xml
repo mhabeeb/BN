@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="GLAccountOfStatments" conflictDetection="overwriteChanges" label="GLAccountOfStatments" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="End_Period" custom="true">
+      <text><![CDATA[SELECT     Row, Trx_Date, AccountID, Account_Description, OpeningBalance, Debit_Amount, Credit_Amount, Closing_Amount, Account_Type, Transaction_Type, Transaction_No, 
+                      Sys_Number, Vendor_Name, Ref_Account_No, UserID, ReportID, Remarks, TrxMonths, TrxYear,Project_Code,Dept_Code
+FROM         dbo.End_Period
+WHERE     (ReportID =11)]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Row" type="Int32" label="^Row^Row^Row^" showInSummary="true" />
+    <field name="Trx_Date" type="DateTime" label="^TrxDat^Trx Date^TrxDat^" showInSummary="true" />
+    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" showInSummary="true" />
+    <field name="Account_Description" type="String" label="^Accdes^Account Description^Accdes^" length="4000" showInSummary="true" htmlEncode="false" />
+    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" showInSummary="true" />
+    <field name="Debit_Amount" type="Decimal" label="^DebAmo^Debit Amount^DebAmo^" />
+    <field name="Credit_Amount" type="Decimal" label="^CreAmo^Credit Amount^CreAmo^" />
+    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" />
+    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50" />
+    <field name="Transaction_Type" type="String" label="^TraTyp^Transaction Type^TraTyp^" length="50" />
+    <field name="Transaction_No" type="Decimal" label="^TraNo^Transaction No^TraNo^" />
+    <field name="Sys_Number" type="Decimal" label="^sysNum^Sys Number^sysNum^" />
+    <field name="Vendor_Name" type="String" label="^venNam^Vendor Name^venNam^" readOnly="true" length="150" />
+    <field name="Ref_Account_No" type="String" label="^RefAccNo^Ref Account No^RefAccNo^" length="50" />
+    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" />
+    <field name="ReportID" type="Int32" label="^RepId^Report#^RepId^" />
+    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="500" />
+    <field name="TrxMonths" type="Int32" label="^TrxMon^Trx Months^TrxMon^" />
+    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="aOPU_Code" type="Int16" readOnly="true" label="^aOpuCod^aOPU Code^aOpuCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="aOPU_Code" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BraLog^Branch Logo^BraLog^" readOnly="true" computed="true" showInSummary="true" />
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^AccSta^Account Statement^AccSta^" filter="UserID=@BusinessRules_UserId" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="Row" columns="15" />
+        <dataField fieldName="Trx_Date" columns="10" />
+        <dataField fieldName="Ref_Account_No" columns="50" />
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Account_Description" />
+        <dataField fieldName="OpeningBalance" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Closing_Amount" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Account_Type" columns="50" hidden="true" />
+        <dataField fieldName="Transaction_Type" columns="50" hidden="true" />
+        <dataField fieldName="Transaction_No" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Vendor_Name" hidden="true" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="ReportID" columns="15" hidden="true" />
+        <dataField fieldName="Remarks" />
+        <dataField fieldName="TrxMonths" columns="15" hidden="true" />
+        <dataField fieldName="TrxYear" columns="15" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="aOPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="BranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevEndPer^Review End Period^RevEndPer^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="End Period" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Row" columns="15" />
+            <dataField fieldName="Trx_Date" columns="10" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="OpeningBalance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Closing_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Transaction_Type" columns="50" />
+            <dataField fieldName="Transaction_No" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Ref_Account_No" columns="50" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="ReportID" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New End Period" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New End Period" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Row" columns="15" />
+            <dataField fieldName="Trx_Date" columns="10" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="OpeningBalance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Closing_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Transaction_Type" columns="50" />
+            <dataField fieldName="Transaction_No" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Ref_Account_No" columns="50" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="ReportID" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^RunReports^Run Reports^RunReports^" flat="true">
+      <action commandName="SQL" id="a100" headerText="^ByAccount^By Account^ByAccount^" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500">
+        <data><![CDATA[EXECUTE [dbo].[Account_Statments] 
+   @Parameters_AccountID
+  ,@Parameters_FromDate
+  ,@Parameters_EndDate
+  ,@BusinessRules_UserId]]></data>
+      </action>
+      <action commandName="SQL" headerText="^ByAccountProject^By Account &amp; Project^ByAccountProject^" id="a101" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500">
+        <data><![CDATA[EXECUTE [dbo].[Account_Statments_BY_PROJECT] 
+   @Parameters_AccountID
+  ,@Parameters_FromDate
+  ,@Parameters_EndDate
+  ,@BusinessRules_UserId
+  ,@Parameters_PROJECT_CODE]]></data>
+      </action>
+      <action commandName="SQL" headerText="^ByAccountDept^By Account &amp; Dept^ByAccountDept^" id="a102" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500">
+        <data><![CDATA[EXECUTE [dbo].[Account_Statments_BY_DEPT] 
+   @Parameters_AccountID
+  ,@Parameters_FromDate
+  ,@Parameters_EndDate
+  ,@BusinessRules_UserId
+  ,@Parameters_DEPT_CODE]]></data>
+      </action>
+      <action commandName="SQL" headerText="^ByAccountProjectDept^By Account, Project &amp; Dept^ByAccountProjectDept^" id="a103" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500">
+        <data><![CDATA[EXECUTE [dbo].[Account_Statments_BY_PROJECT_DEPT] 
+   @Parameters_AccountID
+  ,@Parameters_FromDate
+  ,@Parameters_EndDate
+  ,@BusinessRules_UserId
+  ,@Parameters_PROJECT_CODE
+  ,@Parameters_DEPT_CODE]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+</dataController>

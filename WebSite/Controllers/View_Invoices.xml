@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="View_Invoices" conflictDetection="overwriteChanges" label="^VieInvo^View_Invoices^VieInvo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Credit_Trx_Header" custom="true">
+      <text><![CDATA[SELECT     Invoice_NO, Invoice_Date, Trx_ID, Sys_Number, Vendor_Name, Project_Code, Dept_Code, Header_Net, APPLY_BAL, Header_Net_BC, APPLY_BAL_BC, RetentionYN, 
+                      Retention_ReleasedYN, RefreshBalance, Cur_Rate, Currency_Code, OPU_Code, APAR_Flag, PostYN, CreditNote
+FROM         dbo.Credit_Trx_Header]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Invoice_NO" type="Decimal" label="^InvNO^Invoice NO^InvNO^" showInSummary="true" />
+    <field name="Invoice_Date" type="DateTime" label="^InvDat^Invoice Date^InvDat^" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TrxId^Trx#^TrxId^" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" showInSummary="true" />
+    <field name="Vendor_Name" type="String" label="^ParNam^Party Name^ParNam^" length="150" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="Header_Net" type="Decimal" label="^InvNet^Invoice Net^InvNet^" dataFormatString="N2" />
+    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Apply Bal^AppBal^" />
+    <field name="Header_Net_BC" type="Decimal" label="^InvNetBC^Invoice Net (BC)^InvNetBC^" readOnly="true" />
+    <field name="APPLY_BAL_BC" type="Decimal" label="^AppBalBC^Apply Bal (BC)^AppBalBC^" />
+    <field name="RetentionYN" type="Int32" label="^RetYN^Retention YN^RetYN^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Retention_ReleasedYN" type="Int32" label="^RetRelYN^Ret. Rel. YN^RetRelYN^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="RefreshBalance" type="Int32" label="^RefBal^Refresh Balance^RefBal^" />
+    <field name="Cur_Rate" type="Decimal" allowNulls="false" label="^CurRat^Cur Rate^CurRat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Currency_Code" type="Decimal" allowNulls="false" label="^CurCod^Curr^CurCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="APAR_Flag" type="Int32" label="^ApaFla^Module^ApaFla^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList">
+        <item value="1" text="Receivable" />
+        <item value="2" text="Payable" />
+      </items>
+    </field>
+    <field name="PostYN" type="Int32" label="^PosYN^Post YN^PosYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="CreditNote" type="Int32" label="^CreNot^Credit Note^CreNot^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStorNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^VieInv^View Invoices^VieInv^" sortExpression="Trx_ID DESC" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Invoice_NO" columns="15" />
+        <dataField fieldName="Invoice_Date" columns="10" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Currency_Code" columns="15" />
+        <dataField fieldName="Cur_Rate" columns="15" />
+        <dataField fieldName="Header_Net_BC" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="APPLY_BAL_BC" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="RetentionYN" columns="15" />
+        <dataField fieldName="Retention_ReleasedYN" columns="15" />
+        <dataField fieldName="RefreshBalance" columns="15" hidden="true" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevCreTraHea^Review Credit Trx Header^RevCreTraHea^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Credit Trx Header" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Header_Net_BC" dataFormatString="N2" columns="15" />
+            <dataField fieldName="APPLY_BAL_BC" dataFormatString="N2" columns="15" />
+            <dataField fieldName="RetentionYN" columns="15" />
+            <dataField fieldName="Retention_ReleasedYN" columns="15" />
+            <dataField fieldName="RefreshBalance" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewCreTraHea^New Credit Trx Header^NewCreTraHea^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Credit Trx Header" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" />
+            <dataField fieldName="APPLY_BAL_BC" dataFormatString="N2" columns="15" />
+            <dataField fieldName="RetentionYN" columns="15" />
+            <dataField fieldName="Retention_ReleasedYN" columns="15" />
+            <dataField fieldName="RefreshBalance" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="SQL" headerText="^Refresh^Refresh^Refresh^">
+        <data><![CDATA[DECLARE @A INT
+SET @A =0
+if IsNull(@RefreshBalance,0)=0  SET @A =1
+
+UPDATE Credit_Trx_Header
+SET RefreshBalance=@A,
+APPLY_BAL=([dbo].[GET_INVOICE_APPLY_BAL_AMT]([Trx_ID]))  WHERE Trx_ID=@Trx_ID]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+</dataController>

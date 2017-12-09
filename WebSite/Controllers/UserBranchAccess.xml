@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="UserBranchAccess" conflictDetection="overwriteChanges" label="^UseBraAcc^UserBranchAccess^UseBraAcc^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="UserBranchAccess" custom="true">
+      <text><![CDATA[SELECT a.UserID,a.OPU_Code,a.DefaultBranch,a.Created_By,a.Created_DateTime,a.Updated_By,a.Updated_DateTime,b.BranchID,b.BranchName,
+c.CompanyID,c.CompanyName,c.Country,c.Address,c.Street,c.City,c.CalenderID,c.CompanyNameAR,c.CompanyReg,c.Phone,c.DefaultCurrency
+FROM UserBranchAccess a, tbl_BranchInfo b, tbl_CompanyInformation c
+WHERE a.OPU_Code=b.BranchID AND b.CompanyID=c.CompanyID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="UserID" type="Int32" allowNulls="false" label="^UseId^User#^UseId^" showInSummary="true" isPrimaryKey="true">
+      <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserFullName" dataValueField="UserID" />
+    </field>
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^Branch Name^OpuCod^" showInSummary="true" isPrimaryKey="true">
+      <items style="Lookup" dataController="Pick_Company_Branch" dataView="grid1" dataTextField="BranchName" dataValueField="BranchID" />
+    </field>
+    <field name="DefaultBranch" type="Int32" label="^DefBra^Default Branch^DefBra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="CompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="255">
+      <items style="Lookup" dataController="Pick_Company_Branch" dataView="grid1" dataTextField="BranchName" dataValueField="BranchID" />
+    </field>
+    <field name="DefaultCurrency" type="String" allowNulls="false" label="^DefCur^Default Currency^DefCur^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4" />
+    <field name="BranchName" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^UseComAcc^User Company Access^UseComAcc^" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="CompanyName" rows="5" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="DefaultBranch" columns="15" />
+        <dataField fieldName="DefaultCurrency" columns="4" />
+        <dataField fieldName="BranchName" rows="5" readOnly="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevUseComAcc^Review User Company Access^RevUseComAcc^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Review User Company Access" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="OPU_Code" columns="15" />
+            <dataField fieldName="DefaultBranch" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewUseComAcc^New User Company Access^NewUseComAcc^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New User Company Access" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="OPU_Code" columns="15" />
+            <dataField fieldName="DefaultBranch" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[Declare @a int ,@br int
+
+SELECT @a=COUNT(OPU_Code), @br=max(OPU_Code)
+FROM dbo.UserBranchAccess
+WHERE UserID = @BusinessRules_UserId and IsNull(DefaultBranch,0)=1
+
+IF IsNull(@a,0)=0 AND IsNull(@DefaultBranch,0)=0 SET @DefaultBranch=1
+
+IF IsNull(@a,0) > 0 AND IsNull(@DefaultBranch,0)=1 update UserBranchAccess set DefaultBranch=0 where UserID = @BusinessRules_UserId
+
+IF IsNull(@br,0) = IsNull(@OPU_Code,0) AND IsNull(@a,0) >0  AND IsNull(@DefaultBranch,0)=0 SET @DefaultBranch=1
+IF IsNull(@br,0) = IsNull(@OPU_Code,0) AND IsNull(@a,0) >0  AND IsNull(@DefaultBranch,0)=1 SET @DefaultBranch=1]]></rule>
+    <rule id="r101" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+
+]]></rule>
+    <rule id="r102" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

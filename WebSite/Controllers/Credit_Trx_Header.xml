@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Credit_Trx_Header" conflictDetection="overwriteChanges" label="Credit_Trx_Header" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Credit_Trx_Header" custom="true">
+      <text><![CDATA[SELECT * FROM Credit_Trx_Header]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Invoice_NO" type="Decimal" label="Invoice NO" showInSummary="true" />
+    <field name="Invoice_Date" type="DateTime" label="Invoice Date" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Trx#" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" showInSummary="true" />
+    <field name="Payment_Terms" type="Int32" label="Payment Terms" showInSummary="true" />
+    <field name="Remarks" type="String" label="Remarks" length="500" showInSummary="true" />
+    <field name="Project_Code" type="String" label="Project Code" length="50" />
+    <field name="Dept_Code" type="String" label="Dept Code" length="50" />
+    <field name="TermsANDConditions" type="String" label="Terms AND Conditions" length="4000" />
+    <field name="Header_Disc_Percent" type="Decimal" label="Header Disc Percent" />
+    <field name="Header_Disc_Amount" type="Decimal" label="Header Disc Amount" />
+    <field name="Approve" type="Int32" label="Approve" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="HeaderDiscountYN" type="Int32" label="Header Discount YN" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="APAR_Flag" type="Int32" label="APAR Flag" />
+    <field name="PostYN" type="Int32" label="Post YN" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" readOnly="true" length="150" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
+    <field name="ProjectName" type="String" label="Project Name" length="100" />
+    <field name="MonthAndYear" type="String" label="Month And Year" readOnly="true" length="12" />
+    <field name="Currency_Code" type="String" label="Currency Code" length="4" />
+    <field name="Pick_Amount" type="Decimal" label="Pick Amount" />
+    <field name="Pick" type="Int32" label="Pick" />
+    <field name="Pick_Doc" type="Decimal" label="Pick Doc" />
+    <field name="Header_Amount" type="Decimal" label="Header Amount" readOnly="true" />
+    <field name="Header_Net" type="Decimal" label="Header Net" readOnly="true" />
+    <field name="APPLY_BAL" type="Decimal" label="Apply Bal" readOnly="true" />
+    <field name="ADDRESS_ALL" type="String" label="Address All" readOnly="true" length="4000" />
+    <field name="Cur_Rate" type="Decimal" label="Cur Rate" />
+    <field name="OpenBalYN" type="Int32" label="Open Bal YN" />
+    <field name="OverHeadID" type="Decimal" label="Over Head#" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Credit Trx Header">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Invoice_NO" columns="15" />
+        <dataField fieldName="Invoice_Date" columns="10" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Payment_Terms" columns="15" />
+        <dataField fieldName="Remarks" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="TermsANDConditions" />
+        <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" />
+        <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" />
+        <dataField fieldName="Approve" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="HeaderDiscountYN" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="APAR_Flag" columns="15" />
+        <dataField fieldName="PostYN" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="ProjectName" />
+        <dataField fieldName="MonthAndYear" columns="12" />
+        <dataField fieldName="Currency_Code" columns="4" />
+        <dataField fieldName="Pick_Amount" dataFormatString="c" columns="15" />
+        <dataField fieldName="Pick" columns="15" />
+        <dataField fieldName="Pick_Doc" columns="15" />
+        <dataField fieldName="Header_Amount" dataFormatString="c" columns="15" />
+        <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+        <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+        <dataField fieldName="ADDRESS_ALL" />
+        <dataField fieldName="Cur_Rate" dataFormatString="c" columns="15" />
+        <dataField fieldName="OpenBalYN" columns="15" />
+        <dataField fieldName="OverHeadID" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Credit Trx Header">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Credit Trx Header" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Payment_Terms" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="TermsANDConditions" />
+            <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Approve" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="HeaderDiscountYN" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="ProjectName" />
+            <dataField fieldName="MonthAndYear" columns="12" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Pick_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="Header_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+            <dataField fieldName="ADDRESS_ALL" />
+            <dataField fieldName="Cur_Rate" dataFormatString="c" columns="15" />
+            <dataField fieldName="OpenBalYN" columns="15" />
+            <dataField fieldName="OverHeadID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Credit Trx Header">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Credit Trx Header" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Payment_Terms" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="TermsANDConditions" />
+            <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Approve" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="HeaderDiscountYN" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="ProjectName" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Pick_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="Cur_Rate" dataFormatString="c" columns="15" />
+            <dataField fieldName="OpenBalYN" columns="15" />
+            <dataField fieldName="OverHeadID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

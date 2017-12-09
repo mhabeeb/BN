@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TAX_SUMMARY_BY_TRX" conflictDetection="overwriteChanges" label="^TaxSumByTRX^Tax Summary By Trx^TaxSumByTRX^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"TAX_SUMMARY_BY_TRX"."Trx_ID" "Trx_ID"
+	,"TAX_SUMMARY_BY_TRX"."Tax_Desc" "Tax_Desc"
+	,"TAX_SUMMARY_BY_TRX"."Tax_Type" "Tax_Type"
+	,"TAX_SUMMARY_BY_TRX"."Tax_Amount" "Tax_Amount"
+	,"TAX_SUMMARY_BY_TRX"."Tax_Payable_AC" "Tax_Payable_AC"
+	,"TAX_SUMMARY_BY_TRX"."Tax_Input_Credit_AC" "Tax_Input_Credit_AC"
+	,"TAX_SUMMARY_BY_TRX"."Tax_Percentage" "Tax_Percentage"
+	,"TAX_SUMMARY_BY_TRX"."IsIntegratedYN" "IsIntegratedYN"
+from "dbo"."TAX_SUMMARY_BY_TRX" "TAX_SUMMARY_BY_TRX"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" showInSummary="true" />
+    <field name="Tax_Desc" type="String" label="^TaxDes^Tax Desc^TaxDes^" length="255" showInSummary="true" />
+    <field name="Tax_Type" type="String" label="^TaxTyp^Tax Type^TaxTyp^" length="50" showInSummary="true" />
+    <field name="Tax_Amount" type="Decimal" label="^TaxAmo^Tax Amount^TaxAmo^" showInSummary="true" />
+    <field name="Tax_Payable_AC" type="String" label="^TaxPay^Tax Payable AC^TaxPay^" length="50" showInSummary="true" />
+    <field name="Tax_Input_Credit_AC" type="String" label="^TaxInpCreAc^Tax Input Credit AC^TaxInpCreAc^" length="50" />
+    <field name="Tax_Percentage" type="Int32" label="^TaxPer^Tax Percentage^TaxPer^" />
+    <field name="IsIntegratedYN" type="Int32" label="^IsIntYn^Is Integrated YN^IsIntYn^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^TaxSumByTrx^Tax Summary By Trx^TaxSumByTrx^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Trx_ID" columns="15" />
+        <dataField fieldName="Tax_Desc" />
+        <dataField fieldName="Tax_Type" columns="50" />
+        <dataField fieldName="Tax_Amount" dataFormatString="c" columns="15" />
+        <dataField fieldName="Tax_Payable_AC" columns="50" />
+        <dataField fieldName="Tax_Input_Credit_AC" columns="50" />
+        <dataField fieldName="Tax_Percentage" columns="15" />
+        <dataField fieldName="IsIntegratedYN" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevTaxSumByTrx^Review Tax Summary By Trx^RevTaxSumByTrx^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Tax Summary By Trx" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Tax_Desc" />
+            <dataField fieldName="Tax_Type" columns="50" />
+            <dataField fieldName="Tax_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Tax_Payable_AC" columns="50" />
+            <dataField fieldName="Tax_Input_Credit_AC" columns="50" />
+            <dataField fieldName="Tax_Percentage" columns="15" />
+            <dataField fieldName="IsIntegratedYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewTaxSumByTrx^New Tax Summary By Trx^NewTaxSumByTrx^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Tax Summary By Trx" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Tax_Desc" />
+            <dataField fieldName="Tax_Type" columns="50" />
+            <dataField fieldName="Tax_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Tax_Payable_AC" columns="50" />
+            <dataField fieldName="Tax_Input_Credit_AC" columns="50" />
+            <dataField fieldName="Tax_Percentage" columns="15" />
+            <dataField fieldName="IsIntegratedYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

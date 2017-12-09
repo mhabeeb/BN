@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Dimension_ValueSet_Master" conflictDetection="overwriteChanges" label="^DimValSetMas^Dimension_ValueSet_Master^DimValSetMas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="LookUp_Type" custom="true">
+      <text><![CDATA[SELECT LookUpType,Looup_Description , Company_Code,OPU_Code,Accounts
+ FROM LookUp_Type WHERE Accounts=1]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="LookUpType" type="Int32" allowNulls="false" isPrimaryKey="true" label="^LooUpTyp^Look Up Type^LooUpTyp^" readOnly="true" />
+    <field name="Looup_Description" type="String" label="^LooUpDes^LooKup Description^LooUpDes^" length="100" showInSummary="true">
+      <items style="DropDownList">
+        <item value="D1" text="Dimension-1" />
+        <item value="D2" text="Dimension-2" />
+        <item value="D3" text="Dimension-3" />
+        <item value="D4" text="Dimension-4" />
+        <item value="D5" text="Dimension-5" />
+        <item value="D6" text="Dimension-6" />
+        <item value="D7" text="Dimension-7" />
+        <item value="D8" text="Dimension-8" />
+        <item value="D9" text="Dimension-9" />
+      </items>
+    </field>
+    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
+    <field name="Accounts" type="Int16" label="^Acc^Accounts^Acc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^LooUpTyp^Look Up Type^LooUpTyp^" filter="Company_Code=@Session_Company_Code" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Looup_Description" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevLooUpTyp^Review Look Up Type^RevLooUpTyp^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Look Up Type" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Looup_Description" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewLooUpTyp^New Look Up Type^NewLooUpTyp^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Look Up Type" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Looup_Description" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Accounts" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @OPU_Code=@Session_OPU_Code
+SET @Company_Code=@Session_Company_Code
+SET @Accounts=1]]></rule>
+    <rule id="r101" type="Sql" commandName="Insert|Update" phase="Before" name="Looup_Description_Validator"><![CDATA[IF EXISTS (SELECT Looup_Description FROM LookUp_Type
+WHERE Looup_Description=@Looup_Description AND Company_Code=@Session_Company_Code)
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Looup_Description,Duplicate'
+end
+]]></rule>
+  </businessRules>
+</dataController>

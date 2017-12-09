@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Pick_Project" conflictDetection="overwriteChanges" label="^PicPro^Pick_Project^PicPro^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Projects" custom="true">
+      <text><![CDATA[SELECT * FROM tbl_Projects WHERE IsNull(Is_Active,0)=1]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Project_Name" type="String" label="^ProNam^Project Name^ProNam^" length="250" showInSummary="true" />
+    <field name="Project_Value" type="Decimal" label="^ProVal^Project Value^ProVal^" showInSummary="true" />
+    <field name="Is_Active" type="Int32" allowNulls="false" label="^IsAct^Is Active^IsAct^" showInSummary="true" />
+    <field name="TotalBudget" type="Decimal" label="^TotBud^Total Budget^TotBud^" showInSummary="true" />
+    <field name="MateriaBudget" type="Decimal" label="^MatBud^Materia Budget^MatBud^" />
+    <field name="HRBudget" type="Decimal" label="^HrBud^HR Budget^HrBud^" />
+    <field name="OtherBudget" type="Decimal" label="^OthBud^Other Budget^OthBud^" />
+    <field name="ProjectManager" type="Decimal" label="^ProMan^Project Manager^ProMan^" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
+    <field name="Project_Start_Date" type="DateTime" label="^ProStrDat^Project Start Date^ProStrDat^" />
+    <field name="Project_End_Date" type="DateTime" label="^ProEndDat^Project End Date^ProEndDat^" />
+    <field name="ProjectType" type="String" label="^ProTyp^Project Type^ProTyp^" length="50" />
+    <field name="Project_Location" type="String" label="^ProLoc^Project Location^ProLoc^" length="300" />
+    <field name="Job_No" type="String" label="^JobNo^Job No^JobNo^" length="50" />
+    <field name="Customer_ProjectRef" type="String" label="^CusProRef^Customer Project Ref^CusProRef^" length="50" />
+    <field name="Project_Status" type="String" label="^ProSta^Project Status^ProSta^" length="50" />
+    <field name="ImportYN" type="Int32" label="^ImpYn^Import YN^ImpYn^" />
+    <field name="ImportDate" type="DateTime" label="^ImpDat^ImportDate^ImpDat^" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="RevisedFinishedDate" type="DateTime" label="^RevFinDat^Revised Finished Date^RevFinDat^" />
+    <field name="RevisedContractAmt" type="Decimal" label="^RevConAmt^Revised Contract Amt^RevConAmt^" />
+    <field name="ActualCostTillDate" type="Decimal" label="^ActCosTilDat^Actual Cost Till Date^ActCosTilDat^" />
+    <field name="ProjectImage" type="Byte[]" onDemand="true" sourceFields="" onDemandHandler="tbl_ProjectsProjectImage" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^ProIma^Project Image^ProIma^" />
+    <field name="Currency_Code" type="String" allowNulls="false" label="^CurCod^Currency Code^CurCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4">
+      <items style="DropDownList" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Code" dataValueField="Currency_Code" />
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^Pro^Projects^Pro^" filter="(OPU_Code=@Session_OPU_Code and Project_Code IN ( SELECT Project_Code FROM UserProjectAccess WHERE UserID=@BusinessRules_UserId))&#xD;&#xA;OR Project_Code='None'" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Project_Name" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Project_Start_Date" columns="10" />
+        <dataField fieldName="Project_End_Date" columns="10" />
+        <dataField fieldName="ProjectType" columns="50" />
+        <dataField fieldName="Project_Status" columns="50" />
+        <dataField fieldName="Currency_Code" columns="4" />
+        <dataField fieldName="Dept_Code" columns="50" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevPro^Review Projects^RevPro^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Projects Master" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Project_Name" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="ProjectManager" columns="15" />
+            <dataField fieldName="ProjectType" columns="50" />
+            <dataField fieldName="Project_Location" columns="50" />
+            <dataField fieldName="Job_No" columns="50" />
+            <dataField fieldName="Customer_ProjectRef" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="Additional Information" id="c2">
+          <dataFields>
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="TotalBudget" dataFormatString="N2" columns="15" />
+            <dataField fieldName="MateriaBudget" dataFormatString="N2" columns="15" />
+            <dataField fieldName="HRBudget" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Project_Status" columns="50" />
+            <dataField fieldName="OtherBudget" dataFormatString="N2" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Project Contract Info" id="c3">
+          <dataFields>
+            <dataField fieldName="Project_Value" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Project_Start_Date" columns="10" />
+            <dataField fieldName="Project_End_Date" columns="10" />
+            <dataField fieldName="RevisedFinishedDate" columns="10" />
+            <dataField fieldName="RevisedContractAmt" columns="15" />
+            <dataField fieldName="ActualCostTillDate" columns="15" />
+            <dataField fieldName="ProjectImage" columns="15" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Dept_Code" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewPro^New Projects^NewPro^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New tbl Projects" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Project_Name" />
+            <dataField fieldName="Project_Value" dataFormatString="c" columns="15" />
+            <dataField fieldName="Is_Active" columns="15" />
+            <dataField fieldName="TotalBudget" dataFormatString="c" columns="15" />
+            <dataField fieldName="MateriaBudget" dataFormatString="c" columns="15" />
+            <dataField fieldName="HRBudget" dataFormatString="c" columns="15" />
+            <dataField fieldName="OtherBudget" dataFormatString="c" columns="15" />
+            <dataField fieldName="ProjectManager" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Project_Start_Date" columns="10" />
+            <dataField fieldName="Project_End_Date" columns="10" />
+            <dataField fieldName="ProjectType" columns="50" />
+            <dataField fieldName="Project_Location" />
+            <dataField fieldName="Job_No" columns="50" />
+            <dataField fieldName="Customer_ProjectRef" columns="50" />
+            <dataField fieldName="Project_Status" columns="50" />
+            <dataField fieldName="ImportYN" columns="15" />
+            <dataField fieldName="ImportDate" columns="10" />
+            <dataField fieldName="RevisedFinishedDate" columns="10" />
+            <dataField fieldName="RevisedContractAmt" dataFormatString="c" columns="15" />
+            <dataField fieldName="ActualCostTillDate" dataFormatString="c" columns="15" />
+            <dataField fieldName="ProjectImage" columns="15" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Dept_Code" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules />
+</dataController>

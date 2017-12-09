@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="FA_Depreciation1" label="FA_Depreciation1" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Depreciation" custom="true">
+      <text><![CDATA[SELECT        dbo.Assets.AssetNo, dbo.Assets.AssetDescription, dbo.Assets.PurchasePrice, dbo.Assets.DepreciableLife, dbo.Assets.SalvageValue, dbo.Assets.CurrentValue, dbo.Depreciation.AssetID, dbo.Depreciation.DepreciationDate, 
+                         dbo.Depreciation.DepreciationAmount, dbo.Depreciation.Dept_Code, dbo.Depreciation.Project_Code, dbo.Depreciation.Created_By, dbo.Depreciation.Created_DateTime, dbo.Depreciation.Updated_By, 
+                         dbo.Depreciation.Updated_DateTime, dbo.Depreciation.Company_Code, dbo.Depreciation.OPU_Code, dbo.Depreciation.Depr_Year, dbo.Depreciation.Depr_Month, dbo.Depreciation.DepreciationMethod, 
+                         dbo.Depreciation.PostedYN, dbo.Assets.AssetCategoryID, dbo.Assets.AssetsStatus, dbo.Depreciation.DepreciationID, dbo.Depreciation.Item_Code, dbo.Depreciation.SiteCode
+FROM            dbo.Depreciation INNER JOIN
+                         dbo.Assets ON dbo.Depreciation.AssetID = dbo.Assets.AssetID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="AssetNo" type="String" label="^AssNo^Asset No^AssNo^" length="20" />
+    <field name="AssetID" type="Decimal" label="^Ass^Asset#^Ass^" />
+    <field name="AssetDescription" type="String" label="^AssDes^Asset Description^AssDes^" length="255" />
+    <field name="PurchasePrice" type="Decimal" label="^PurPri^Pur. Price^PurPri^" />
+    <field name="DepreciationMethod" type="String" label="^DepMet^Dep. Method^DepMet^" length="50" />
+    <field name="DepreciableLife" type="Single" label="^Lif^Life^Lif^" />
+    <field name="SalvageValue" type="Decimal" label="^Sal^Salvage^Sal^" />
+    <field name="CurrentValue" type="Decimal" label="^CurVal^Current Value^CurValu^" readOnly="true" />
+    <field name="DepreciationDate" type="DateTime" label="^DepDat^Depreciation Date^DepDat^" />
+    <field name="DepreciationAmount" type="Decimal" label="^DepAmo^Depreciation Amount^DepAmo^" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
+    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" />
+    <field name="Depr_Year" type="Int32" label="^DepYea^Depr Year^DepYea^" />
+    <field name="Depr_Month" type="Int32" label="^DepMon^Depr Month^DepMon^" />
+    <field name="PostedYN" type="Int32" label="^PosYN^Posted YN^PosYN^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="AssetCategoryID" type="Int32" allowNulls="false" label="^AssCatID^Asset Category ID^AssCatID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="DropDownList" dataController="FA_Assets_Catory" dataView="grid1" dataTextField="AssetCategory" dataValueField="AssetCategoryID" />
+    </field>
+    <field name="AssetsStatus" type="String" allowNulls="false" label="^AssSta^Assets Status^AssSta^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
+    <field name="DepreciationID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DepID^Depreciation ID^DepID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" />
+    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^Dep^Depreciation^Dep^" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="AssetID" columns="15" />
+        <dataField fieldName="AssetNo" columns="20" />
+        <dataField fieldName="AssetDescription" />
+        <dataField fieldName="PurchasePrice" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="DepreciationMethod" columns="50" />
+        <dataField fieldName="DepreciableLife" columns="15" />
+        <dataField fieldName="SalvageValue" dataFormatString="N2" columns="15" />
+        <dataField fieldName="CurrentValue" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="DepreciationDate" columns="10" hidden="true" />
+        <dataField fieldName="DepreciationAmount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Depr_Year" columns="15" />
+        <dataField fieldName="Depr_Month" columns="15" />
+        <dataField fieldName="PostedYN" columns="15" />
+        <dataField fieldName="AssetCategoryID" columns="15" />
+        <dataField fieldName="AssetsStatus" columns="20" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="SiteCode" columns="50" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevDep^Review Depreciation^RevDep^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Depreciation" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AssetNo" columns="20" />
+            <dataField fieldName="AssetDescription" />
+            <dataField fieldName="PurchasePrice" dataFormatString="c" columns="15" />
+            <dataField fieldName="DepreciationMethod" columns="50" />
+            <dataField fieldName="DepreciableLife" columns="15" />
+            <dataField fieldName="SalvageValue" dataFormatString="c" columns="15" />
+            <dataField fieldName="CurrentValue" dataFormatString="c" columns="15" />
+            <dataField fieldName="AssetID" columns="15" />
+            <dataField fieldName="DepreciationDate" columns="10" />
+            <dataField fieldName="DepreciationAmount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Depr_Year" columns="15" />
+            <dataField fieldName="Depr_Month" columns="15" />
+            <dataField fieldName="PostedYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewDep^New Depreciation^NewDep^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Depreciation" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AssetNo" columns="20" />
+            <dataField fieldName="AssetDescription" />
+            <dataField fieldName="PurchasePrice" dataFormatString="c" columns="15" />
+            <dataField fieldName="DepreciationMethod" columns="50" />
+            <dataField fieldName="DepreciableLife" columns="15" />
+            <dataField fieldName="SalvageValue" dataFormatString="c" columns="15" />
+            <dataField fieldName="AssetID" columns="15" />
+            <dataField fieldName="DepreciationDate" columns="10" />
+            <dataField fieldName="DepreciationAmount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Depr_Year" columns="15" />
+            <dataField fieldName="Depr_Month" columns="15" />
+            <dataField fieldName="PostedYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action commandName="Select" id="a100" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" flat="true" headerText="^RunDepreciationNoPost^Run Depreciation (No Post )^RunDepreciationNoPost^">
+      <action commandName="SQL" headerText="^RunDepreciationNoPost^Run Depreciation (No Post )^RunDepreciationNoPost^" id="a100" confirmation="_controller=Parameter_FA_DEP&#xD;&#xA;_title=Enter the Date for Year &amp; Month&#xD;&#xA;_width=500&#xD;&#xA;" cssClass="glyphicon-saved">
+        <data><![CDATA[DECLARE @A INT ,@B INT
+
+SELECT  @B= OPU_Code
+  FROM Users WHERE UserID=@BusinessRules_UserId      
+
+
+SET @A=0
+IF NOT EXISTS (SELECT TOP 1 Month_Code  FROM FA_Book_Period_Close_History  
+WHERE  Month_Code = MONTH (@Parameters_EndDate)
+          AND Year_Code = YEAR (@Parameters_EndDate) AND BookID=@Parameters_BookID)
+
+BEGIN
+SET @A=1
+EXEC [dbo].[FA_Depreciation] @Parameters_EndDate,   @BusinessRules_UserId,   0 ,@Parameters_BookID
+END
+
+IF @A=0 SET @Result_ShowMessage =  ' FOR SELECTED PERIOD TRANSACTIONS ALREADY POSTED TO GL , YOU CANNOT POST AGAIN ' ]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="^RunDepreciationWithFinalPost^Run Depreciation (With Final Post)^RunDepreciationWithFinalPost^" flat="true">
+      <action commandName="SQL" headerText="^RunDepreciationWithFinalPost^Run Depreciation (With Final Post)^RunDepreciationWithFinalPost^" id="a100" confirmation="_controller=Parameter_FA_DEP&#xD;&#xA;_title=Enter the Date for Year &amp; Month&#xD;&#xA;_width=500" cssClass="glyphicon-tasks">
+        <data><![CDATA[DECLARE @A INT ,@B INT
+
+SELECT  @B= OPU_Code
+  FROM Users WHERE UserID=@BusinessRules_UserId   
+
+SET @A=0
+IF NOT EXISTS (SELECT TOP 1 Month_Code  FROM FA_Book_Period_Close_History  
+WHERE  Month_Code = MONTH (@Parameters_EndDate)
+          AND Year_Code = YEAR (@Parameters_EndDate) AND BookID=@Parameters_BookID)
+BEGIN
+SET @A=1
+EXEC [dbo].[FA_Depreciation] @Parameters_EndDate,   @BusinessRules_UserId,   0 ,@Parameters_BookID
+EXEC [dbo].[FA_POST_TO_GL] @Parameters_EndDate,   @BusinessRules_UserId,@Parameters_BookID
+END
+
+IF @A=0 SET @Result_ShowMessage =  ' FOR SELECTED PERIOD TRANSACTIONS ALREADY POSTED TO GL , YOU CANNOT POST AGAIN ' 
+]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+</dataController>

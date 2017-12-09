@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="tbl_Material_Overheads" conflictDetection="overwriteChanges" label="tbl Material Overheads" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"tbl_Material_Overheads"."Transaction_ID" "Transaction_ID"
+	,"tbl_Material_Overheads"."OverHeadID" "OverHeadID"
+	,"tbl_Material_Overheads"."OverHeadDate" "OverHeadDate"
+	,"tbl_Material_Overheads"."OverHead_Remarks" "OverHead_Remarks"
+	,"tbl_Material_Overheads"."Created_By" "Created_By"
+	,"tbl_Material_Overheads"."Created_DateTime" "Created_DateTime"
+	,"tbl_Material_Overheads"."Updated_By" "Updated_By"
+	,"tbl_Material_Overheads"."Updated_DateTime" "Updated_DateTime"
+	,"tbl_Material_Overheads"."PostYN" "PostYN"
+	,"tbl_Material_Overheads"."OverHead10" "OverHead10"
+	,"tbl_Material_Overheads"."OverHead11" "OverHead11"
+	,"tbl_Material_Overheads"."OverHead12" "OverHead12"
+	,"tbl_Material_Overheads"."OverHead13" "OverHead13"
+	,"tbl_Material_Overheads"."OverHead14" "OverHead14"
+	,"tbl_Material_Overheads"."OverHead15" "OverHead15"
+	,"tbl_Material_Overheads"."OverHead16" "OverHead16"
+	,"tbl_Material_Overheads"."OverHead17" "OverHead17"
+	,"tbl_Material_Overheads"."OverHead18" "OverHead18"
+	,"tbl_Material_Overheads"."OverHead19" "OverHead19"
+	,"tbl_Material_Overheads"."TotalOverHeads" "TotalOverHeads"
+	,"tbl_Material_Overheads"."Line_ID" "Line_ID"
+	,"tbl_Material_Overheads"."Sys_Number" "Sys_Number"
+	,"tbl_Material_Overheads"."Sys_Number10" "Sys_Number10"
+	,"tbl_Material_Overheads"."Sys_Number11" "Sys_Number11"
+	,"tbl_Material_Overheads"."Sys_Number12" "Sys_Number12"
+	,"tbl_Material_Overheads"."Sys_Number13" "Sys_Number13"
+	,"tbl_Material_Overheads"."Sys_Number14" "Sys_Number14"
+	,"tbl_Material_Overheads"."Sys_Number15" "Sys_Number15"
+	,"tbl_Material_Overheads"."Sys_Number16" "Sys_Number16"
+	,"tbl_Material_Overheads"."Sys_Number17" "Sys_Number17"
+	,"tbl_Material_Overheads"."Sys_Number18" "Sys_Number18"
+	,"tbl_Material_Overheads"."Sys_Number19" "Sys_Number19"
+from "dbo"."tbl_Material_Overheads" "tbl_Material_Overheads"
+]]></text>
+    </command>
+    <command id="OverHeadIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="OverHeadID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Transaction_ID" type="Decimal" label="Transaction#" showInSummary="true" />
+    <field name="OverHeadID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Over Head#" readOnly="true" />
+    <field name="OverHeadDate" type="DateTime" label="Over Head Date" showInSummary="true" />
+    <field name="OverHead_Remarks" type="String" label="Over Head Remarks" length="255" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="PostYN" type="Int32" label="Post YN" />
+    <field name="OverHead10" type="Decimal" label="Over Head10" />
+    <field name="OverHead11" type="Decimal" label="Over Head11" />
+    <field name="OverHead12" type="Decimal" label="Over Head12" />
+    <field name="OverHead13" type="Decimal" label="Over Head13" />
+    <field name="OverHead14" type="Decimal" label="Over Head14" />
+    <field name="OverHead15" type="Decimal" label="Over Head15" />
+    <field name="OverHead16" type="Decimal" label="Over Head16" />
+    <field name="OverHead17" type="Decimal" label="Over Head17" />
+    <field name="OverHead18" type="Decimal" label="Over Head18" />
+    <field name="OverHead19" type="Decimal" label="Over Head19" />
+    <field name="TotalOverHeads" type="Decimal" label="Total Over Heads" readOnly="true" />
+    <field name="Line_ID" type="Decimal" label="Line#" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="Sys_Number10" type="Decimal" label="Sys Number10" />
+    <field name="Sys_Number11" type="Decimal" label="Sys Number11" />
+    <field name="Sys_Number12" type="Decimal" label="Sys Number12" />
+    <field name="Sys_Number13" type="Decimal" label="Sys Number13" />
+    <field name="Sys_Number14" type="Decimal" label="Sys Number14" />
+    <field name="Sys_Number15" type="Decimal" label="Sys Number15" />
+    <field name="Sys_Number16" type="Decimal" label="Sys Number16" />
+    <field name="Sys_Number17" type="Decimal" label="Sys Number17" />
+    <field name="Sys_Number18" type="Decimal" label="Sys Number18" />
+    <field name="Sys_Number19" type="Decimal" label="Sys Number19" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="tbl Material Overheads">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Transaction_ID" columns="15" />
+        <dataField fieldName="OverHeadDate" columns="10" />
+        <dataField fieldName="OverHead_Remarks" />
+        <dataField fieldName="Created_By" columns="15" />
+        <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" columns="15" />
+        <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+        <dataField fieldName="PostYN" columns="15" />
+        <dataField fieldName="OverHead10" dataFormatString="c" columns="15" />
+        <dataField fieldName="OverHead11" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Material Overheads">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Material Overheads" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="OverHeadDate" columns="10" />
+            <dataField fieldName="OverHead_Remarks" />
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="OverHead10" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead11" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead12" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead13" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead14" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead15" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead16" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead17" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead18" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead19" dataFormatString="c" columns="15" />
+            <dataField fieldName="TotalOverHeads" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Sys_Number10" columns="15" />
+            <dataField fieldName="Sys_Number11" columns="15" />
+            <dataField fieldName="Sys_Number12" columns="15" />
+            <dataField fieldName="Sys_Number13" columns="15" />
+            <dataField fieldName="Sys_Number14" columns="15" />
+            <dataField fieldName="Sys_Number15" columns="15" />
+            <dataField fieldName="Sys_Number16" columns="15" />
+            <dataField fieldName="Sys_Number17" columns="15" />
+            <dataField fieldName="Sys_Number18" columns="15" />
+            <dataField fieldName="Sys_Number19" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Material Overheads">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New tbl Material Overheads" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="OverHeadDate" columns="10" />
+            <dataField fieldName="OverHead_Remarks" />
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="OverHead10" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead11" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead12" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead13" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead14" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead15" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead16" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead17" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead18" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverHead19" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Sys_Number10" columns="15" />
+            <dataField fieldName="Sys_Number11" columns="15" />
+            <dataField fieldName="Sys_Number12" columns="15" />
+            <dataField fieldName="Sys_Number13" columns="15" />
+            <dataField fieldName="Sys_Number14" columns="15" />
+            <dataField fieldName="Sys_Number15" columns="15" />
+            <dataField fieldName="Sys_Number16" columns="15" />
+            <dataField fieldName="Sys_Number17" columns="15" />
+            <dataField fieldName="Sys_Number18" columns="15" />
+            <dataField fieldName="Sys_Number19" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

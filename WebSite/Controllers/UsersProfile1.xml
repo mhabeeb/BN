@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="UsersProfile1" label="UsersProfile1" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.UsersProfile1BusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Users" custom="true">
+      <text><![CDATA[SELECT * FROM Users]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="UserID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^User^User#^User^" readOnly="true" />
+    <field name="UserFullName" type="String" allowNulls="false" label="^UserFullName^User Full Name^UserFullName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="150">
+      <items letters="false" />
+    </field>
+    <field name="UserName" type="String" allowNulls="false" label="^UserName^User Name^UserName^" length="128" showInSummary="true" />
+    <field name="Password" type="String" allowNulls="false" label="^Password^Password^Password^" length="128" />
+    <field name="Email" type="String" label="^Email^Email^Email^" length="128" showInSummary="true" />
+    <field name="Comment" type="String" allowQBE="false" allowSorting="false" label="^Comment^Comment^Comment^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Name" showInSummary="true">
+      <items style="DropDownList" dataController="tbl_BranchInfo" dataView="grid1" dataTextField="BranchName" dataValueField="BranchID" copy="Company_Code=CompanyID" />
+    </field>
+    <field name="Company_Code" type="Int32" label="Company Name" showInSummary="true">
+      <items style="DropDownList" dataController="tbl_CompanyInformation" dataView="grid1" dataTextField="CompanyName" dataValueField="CompanyID" />
+    </field>
+    <field name="Store_ID" type="Int32" label="^Store^Store#^Store^">
+      <items style="DropDownList" dataController="tbl_Store" dataView="grid1" dataTextField="Store_Name" dataValueField="Store_ID" />
+    </field>
+    <field name="PasswordQuestion" type="String" label="Password Question" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="256">
+      <items letters="false" />
+    </field>
+    <field name="PasswordAnswer" type="String" label="Password Answer" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="128">
+      <items letters="false" />
+    </field>
+    <field name="IsApproved" type="Int16" allowNulls="false" label="Is Approved" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" letters="false" />
+    </field>
+    <field name="LastActivityDate" type="DateTime" label="Last Activity Date" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="LastLoginDate" type="DateTime" label="Last Login Date" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="LastPasswordChangedDate" type="DateTime" label="Last Password Changed Date" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="IsLockedOut" type="Int16" label="Is Locked Out" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" letters="false" />
+    </field>
+    <field name="LastLockedOutDate" type="DateTime" label="Last Locked Out Date" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="FailedPasswordAttemptCount" type="Int16" allowNulls="false" label="Failed Password Attempt Count" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="FailedPasswordAttemptWindowStart" type="DateTime" label="Failed Password Attempt Window Start" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="FailedPasswordAnswerAttemptCount" type="Int16" label="Failed Password Answer Attempt Count" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="FailedPasswordAnswerAttemptWindowStart" type="DateTime" label="Failed Password Answer Attempt Window Start" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="DoctorID" type="UInt16" label="Doctor ID" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="Created_By" type="Decimal" label="Created By" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="Updated_By" type="Decimal" label="Updated By" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+    <field name="CreationDate" type="DateTime" label="Creation Date" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items letters="false" />
+    </field>
+  </fields>
+  <views>
+    <view id="editForm1" type="Form" commandId="command1" label="My Profile" filter="UserID=@BusinessRules_UserId" showInSelector="false">
+      <headerText />
+      <categories>
+        <category headerText="Login Company" id="c3" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Company_Code" columns="20" readOnly="true" />
+            <dataField fieldName="OPU_Code" columns="20" readOnly="true" />
+            <dataField fieldName="Store_ID" columns="20" readOnly="true" />
+          </dataFields>
+        </category>
+        <category id="c1" headerText="My Profile">
+          <description />
+          <dataFields>
+            <dataField fieldName="UserFullName" rows="1" columns="20" />
+            <dataField fieldName="UserName" readOnly="true" columns="20" />
+            <dataField fieldName="Password" textMode="Password" columns="20" />
+            <dataField fieldName="Email" columns="20" />
+            <dataField fieldName="Comment" rows="1" hidden="true" columns="20" />
+            <dataField fieldName="PasswordQuestion" rows="1" columns="20" hidden="true" />
+            <dataField fieldName="PasswordAnswer" rows="1" columns="20" hidden="true" />
+            <dataField fieldName="UserID" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+        <category headerText="Auditing Information" id="c2">
+          <dataFields>
+            <dataField fieldName="IsApproved" columns="15" readOnly="true" />
+            <dataField fieldName="LastActivityDate" columns="10" readOnly="true" />
+            <dataField fieldName="LastLoginDate" columns="10" readOnly="true" />
+            <dataField fieldName="LastPasswordChangedDate" columns="10" readOnly="true" />
+            <dataField fieldName="IsLockedOut" columns="15" readOnly="true" />
+            <dataField fieldName="LastLockedOutDate" columns="10" readOnly="true" />
+            <dataField fieldName="FailedPasswordAttemptCount" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="FailedPasswordAttemptWindowStart" columns="10" readOnly="true" hidden="true" />
+            <dataField fieldName="FailedPasswordAnswerAttemptCount" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="FailedPasswordAnswerAttemptWindowStart" columns="10" readOnly="true" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" columns="10" />
+            <dataField fieldName="CreationDate" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" headerText="Update Profile......" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" headerText="." />
+      <action id="a7" whenLastCommandName="Update" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r101" commandName="Insert" type="Sql" phase="Before"><![CDATA[--EXEC DB_LIST_UPDATE @Password, @UserName]]></rule>
+    <rule id="r102" commandName="Update" type="Sql" phase="Before"><![CDATA[--EXEC DB_LIST_UPDATE @Password, @UserName]]></rule>
+    <rule id="r100" commandName="Insert|Update" type="Code" phase="Before" />
+  </businessRules>
+</dataController>

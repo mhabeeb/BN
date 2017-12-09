@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="V_VENDOR_STATMENT_TOT" conflictDetection="overwriteChanges" label="V Vendor Statment Tot" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"V_VENDOR_STATMENT_TOT"."Row" "Row"
+	,"V_VENDOR_STATMENT_TOT"."DOC_Type" "DOC_Type"
+	,"V_VENDOR_STATMENT_TOT"."Sys_Number" "Sys_Number"
+	,"V_VENDOR_STATMENT_TOT"."TRX_Date" "TRX_Date"
+	,"V_VENDOR_STATMENT_TOT"."DOC_NO" "DOC_NO"
+	,"V_VENDOR_STATMENT_TOT"."Trx_ID" "Trx_ID"
+	,"V_VENDOR_STATMENT_TOT"."Vendor_Name" "Vendor_Name"
+	,"V_VENDOR_STATMENT_TOT"."Invoice_Amt" "Invoice_Amt"
+	,"V_VENDOR_STATMENT_TOT"."Amount_Paid" "Amount_Paid"
+	,"V_VENDOR_STATMENT_TOT"."APPLY_BAL" "APPLY_BAL"
+	,"V_VENDOR_STATMENT_TOT"."Remarks" "Remarks"
+from "dbo"."V_VENDOR_STATMENT_TOT" "V_VENDOR_STATMENT_TOT"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Row" type="Int64" label="Row" showInSummary="true" />
+    <field name="DOC_Type" type="String" allowNulls="false" label="DOC Type" length="7" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" showInSummary="true" />
+    <field name="TRX_Date" type="DateTime" label="TRX Date" showInSummary="true" />
+    <field name="DOC_NO" type="Decimal" label="Doc No" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" label="Trx#" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" length="150" />
+    <field name="Invoice_Amt" type="Decimal" label="Invoice Amt" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="Amount Paid" />
+    <field name="APPLY_BAL" type="Decimal" label="Apply Bal" />
+    <field name="Remarks" type="String" label="Remarks" length="200" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="V Vendor Statment Tot">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="DOC_Type" columns="7" />
+        <dataField fieldName="Row" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="TRX_Date" columns="10" />
+        <dataField fieldName="DOC_NO" columns="15" />
+        <dataField fieldName="Trx_ID" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Invoice_Amt" dataFormatString="c" columns="15" />
+        <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+        <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review V Vendor Statment Tot">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="V Vendor Statment Tot" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Row" columns="15" />
+            <dataField fieldName="DOC_Type" columns="7" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="TRX_Date" columns="10" />
+            <dataField fieldName="DOC_NO" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Invoice_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New V Vendor Statment Tot">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New V Vendor Statment Tot" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Row" columns="15" />
+            <dataField fieldName="DOC_Type" columns="7" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="TRX_Date" columns="10" />
+            <dataField fieldName="DOC_NO" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Invoice_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

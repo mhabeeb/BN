@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Account_Analysis_View" conflictDetection="overwriteChanges" label="Account_Analysis_View" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command type="Text" id="Ac" custom="false">
+      <text><![CDATA[select * from End_Period where ReportID=2]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Row" type="Int32" label="Row" showInSummary="true" />
+    <field name="UserID" type="Int32" label="User#" showInSummary="true" />
+    <field name="ReportID" type="Int32" label="Report#" showInSummary="true" />
+    <field name="AccountID" type="String" label="Account#" length="50" showInSummary="true" />
+    <field name="Account_Description" type="String" label="Account Description" length="4000" showInSummary="true" />
+    <field name="OpeningBalance" type="Decimal" label="Opening Balance" />
+    <field name="Debit_Amount" type="Decimal" label="Debit Amount" />
+    <field name="Credit_Amount" type="Decimal" label="Credit Amount" />
+    <field name="Closing_Amount" type="Decimal" label="Closing Amount" />
+    <field name="YTD" type="Decimal" label="Ytd" />
+    <field name="MTD" type="Decimal" label="Mtd" />
+    <field name="Lineage" type="String" label="Lineage" length="255" />
+    <field name="Mtotal" type="Decimal" label="Mtotal" />
+    <field name="Account_Type" type="String" label="Account Type" length="50" />
+    <field name="CalcDate" type="Int32" label="Calc Date" />
+    <field name="To_Date" type="DateTime" label="To Date" />
+    <field name="TrxYear" type="Int32" label="Trx Year" />
+    <field name="TrxMonths" type="Int32" label="Trx Months" />
+    <field name="PostableYN" type="String" label="Postable YN" length="1" />
+    <field name="Remarks" type="String" label="Remarks" length="500" />
+    <field name="Transaction_Type" type="String" label="Transaction Type" length="50" />
+    <field name="Transaction_No" type="Decimal" label="Transaction No" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" readOnly="true" length="150" />
+    <field name="RowID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Row#" readOnly="true" />
+    <field name="RunID" type="Decimal" label="Run#" />
+    <field name="Ref_Account_No" type="String" allowNulls="false" label="Ref Account No" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items letters="false" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Account Analysis Statement" filter="UserID=@BusinessRules_UserId&#xD;&#xA;" reportTemplate="true">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="RunID" columns="15" />
+        <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Account_Description" />
+        <dataField fieldName="OpeningBalance" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="MTD" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="YTD" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Closing_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Row" columns="15" hidden="true" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="ReportID" columns="15" hidden="true" />
+        <dataField fieldName="Lineage" hidden="true" />
+        <dataField fieldName="Mtotal" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="CalcDate" columns="15" hidden="true" />
+        <dataField fieldName="To_Date" columns="10" hidden="true" />
+        <dataField fieldName="TrxYear" columns="15" hidden="true" />
+        <dataField fieldName="TrxMonths" columns="15" hidden="true" />
+        <dataField fieldName="PostableYN" columns="1" hidden="true" />
+        <dataField fieldName="Remarks" hidden="true" />
+        <dataField fieldName="Transaction_Type" columns="50" hidden="true" />
+        <dataField fieldName="Transaction_No" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Vendor_Name" hidden="true" />
+        <dataField fieldName="Ref_Account_No" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Account Analysis Statement">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Account Analysis Statement" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Row" columns="15" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="ReportID" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="OpeningBalance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Closing_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="YTD" dataFormatString="c" columns="15" />
+            <dataField fieldName="MTD" dataFormatString="c" columns="15" />
+            <dataField fieldName="Lineage" />
+            <dataField fieldName="Mtotal" dataFormatString="c" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="To_Date" columns="10" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="PostableYN" columns="1" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="Transaction_Type" columns="50" />
+            <dataField fieldName="Transaction_No" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="RunID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Account Analysis Statement">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Account Analysis Statement" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Row" columns="15" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="ReportID" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="OpeningBalance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Closing_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="YTD" dataFormatString="c" columns="15" />
+            <dataField fieldName="MTD" dataFormatString="c" columns="15" />
+            <dataField fieldName="Lineage" />
+            <dataField fieldName="Mtotal" dataFormatString="c" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="To_Date" columns="10" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="PostableYN" columns="1" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="Transaction_Type" columns="50" />
+            <dataField fieldName="Transaction_No" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="RunID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+      <action id="a6" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true" />
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true" />
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[select * from End_Period where ReportID=2]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

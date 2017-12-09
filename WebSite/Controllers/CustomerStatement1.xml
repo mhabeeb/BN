@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CustomerStatement1" label="CustomerStatement1" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="APAR_Flag" type="Int32" label="APAR Flag" showInSummary="true" />
+    <field name="DOC_Type" type="String" allowNulls="false" label="DOC Type" length="7" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" showInSummary="true" />
+    <field name="TRX_Date" type="DateTime" label="TRX Date" showInSummary="true" />
+    <field name="DOC_NO" type="Decimal" label="Doc No" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="Trx#" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" length="150" />
+    <field name="Invoice_Amt" type="Decimal" label="Invoice Amt" dataFormatString="N2" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="Amount Paid" dataFormatString="N2" />
+    <field name="APPLY_BAL" type="Decimal" label="Apply Bal" dataFormatString="N2" />
+    <field name="Remarks" type="String" label="Remarks" length="500" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Customer Statment">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="DOC_Type" columns="7" />
+        <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number" columns="15">
+          <headerText>Customer No#</headerText>
+        </dataField>
+        <dataField fieldName="TRX_Date" columns="10">
+          <headerText>TRX Date</headerText>
+        </dataField>
+        <dataField fieldName="DOC_NO" columns="15" />
+        <dataField fieldName="Trx_ID" columns="15" />
+        <dataField fieldName="Vendor_Name">
+          <headerText>Customer Name</headerText>
+        </dataField>
+        <dataField fieldName="Invoice_Amt" dataFormatString="c" columns="15" aggregate="Sum" />
+        <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" aggregate="Sum" />
+        <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" aggregate="Sum" />
+        <dataField fieldName="Remarks" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Customer Statment">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Customer Statment" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="DOC_Type" columns="7" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="TRX_Date" columns="10" />
+            <dataField fieldName="DOC_NO" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Invoice_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Customer Statment">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Customer Statment" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="DOC_Type" columns="7" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="TRX_Date" columns="10" />
+            <dataField fieldName="DOC_NO" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Invoice_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[SELECT * FROM V_VENDOR_STATMENT where APAR_Flag=1]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

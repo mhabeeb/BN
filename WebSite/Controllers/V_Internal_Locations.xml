@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="V_Internal_Locations" conflictDetection="overwriteChanges" label="V Internal Locations" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"V_Internal_Locations"."Sys_Number" "Sys_Number"
+	,"V_Internal_Locations"."LocationID" "LocationID"
+	,"V_Internal_Locations"."Location_Name" "Location_Name"
+	,"V_Internal_Locations"."ContactName" "ContactName"
+	,"V_Internal_Locations"."ContactTitle" "ContactTitle"
+	,"V_Internal_Locations"."Street" "Street"
+	,"V_Internal_Locations"."PostalCode" "PostalCode"
+	,"V_Internal_Locations"."City" "City"
+	,"V_Internal_Locations"."Country" "Country"
+	,"V_Internal_Locations"."Phone" "Phone"
+	,"V_Internal_Locations"."Fax" "Fax"
+	,"V_Internal_Locations"."eMailID" "eMailID"
+	,"V_Internal_Locations"."Address" "Address"
+	,"V_Internal_Locations"."InActive" "InActive"
+	,"V_Internal_Locations"."InternalYN" "InternalYN"
+from "dbo"."V_Internal_Locations" "V_Internal_Locations"
+]]></text>
+    </command>
+    <command id="LocationIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="LocationID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="Sys Number" showInSummary="true" />
+    <field name="LocationID" type="Decimal" allowNulls="false" label="Location#" readOnly="true" showInSummary="true" />
+    <field name="Location_Name" type="String" allowNulls="false" label="Location Name" length="150" showInSummary="true" />
+    <field name="ContactName" type="String" label="Contact Name" length="30" showInSummary="true" />
+    <field name="ContactTitle" type="String" label="Contact Title" length="30" showInSummary="true" />
+    <field name="Street" type="String" label="Street" length="50" />
+    <field name="PostalCode" type="String" label="Postal Code" length="50" />
+    <field name="City" type="String" label="City" length="50" />
+    <field name="Country" type="String" label="Country" length="50" />
+    <field name="Phone" type="String" label="Phone" length="50" />
+    <field name="Fax" type="String" label="Fax" length="50" />
+    <field name="eMailID" type="String" label="e Mail#" length="50" />
+    <field name="Address" type="String" allowQBE="false" allowSorting="false" label="Address" readOnly="true" length="4000" />
+    <field name="InActive" type="Int32" label="In Active" />
+    <field name="InternalYN" type="Int32" label="Internal YN" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="V Internal Locations">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="LocationID" columns="15" />
+        <dataField fieldName="Location_Name" />
+        <dataField fieldName="ContactName" columns="30" />
+        <dataField fieldName="ContactTitle" columns="30" />
+        <dataField fieldName="Street" columns="50" />
+        <dataField fieldName="PostalCode" columns="50" />
+        <dataField fieldName="City" columns="50" />
+        <dataField fieldName="Country" columns="50" />
+        <dataField fieldName="Phone" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review V Internal Locations">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="V Internal Locations" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="LocationID" columns="15" />
+            <dataField fieldName="Location_Name" />
+            <dataField fieldName="ContactName" columns="30" />
+            <dataField fieldName="ContactTitle" columns="30" />
+            <dataField fieldName="Street" columns="50" />
+            <dataField fieldName="PostalCode" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="Phone" columns="50" />
+            <dataField fieldName="Fax" columns="50" />
+            <dataField fieldName="eMailID" columns="50" />
+            <dataField fieldName="Address" rows="5" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="InternalYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New V Internal Locations">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New V Internal Locations" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Location_Name" />
+            <dataField fieldName="ContactName" columns="30" />
+            <dataField fieldName="ContactTitle" columns="30" />
+            <dataField fieldName="Street" columns="50" />
+            <dataField fieldName="PostalCode" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="Phone" columns="50" />
+            <dataField fieldName="Fax" columns="50" />
+            <dataField fieldName="eMailID" columns="50" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="InternalYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

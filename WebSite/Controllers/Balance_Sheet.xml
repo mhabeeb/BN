@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Balance_Sheet" conflictDetection="overwriteChanges" label="Balance_Sheet" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Run_Utility" custom="true">
+      <text><![CDATA[SELECT * FROM tbl_Run_Utility where ReportID=11 and UtilityID=8]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="RunID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Run#" readOnly="true" />
+    <field name="From_Date" type="DateTime" label="From Date" showInSummary="true" />
+    <field name="To_Date" type="DateTime" label="To Date" showInSummary="true" />
+    <field name="UtilityID" type="Int32" label="Utility#" showInSummary="true" />
+    <field name="Doc_Number" type="Decimal" label="Doc Number" showInSummary="true" />
+    <field name="UtilityMessage" type="String" label="Utility Message" length="100" showInSummary="true" />
+    <field name="NewDocNo" type="Decimal" label="New Doc No" />
+    <field name="CurRate" type="Decimal" label="Cur Rate" />
+    <field name="Currency_Code" type="String" label="Currency Code" length="4" />
+    <field name="UserName" type="String" label="User Name" length="20" />
+    <field name="CreatedDateTime" type="DateTime" label="Created Date Time" />
+    <field name="ReportID" type="Int32" label="Report#" />
+    <field name="UserID" type="Int32" label="User#" />
+    <field name="CalcDate" type="Int32" label="Calc Date" readOnly="true" />
+    <field name="AccountID" type="String" label="Account#" length="50" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Balance Sheet Statement" reportTemplate="true">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="From_Date" columns="10" hidden="true" />
+        <dataField fieldName="To_Date" columns="10" />
+        <dataField fieldName="RunID" />
+        <dataField fieldName="UtilityID" columns="15" hidden="true" />
+        <dataField fieldName="Doc_Number" columns="15" hidden="true" />
+        <dataField fieldName="UtilityMessage" hidden="true" />
+        <dataField fieldName="NewDocNo" columns="15" hidden="true" />
+        <dataField fieldName="CurRate" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+        <dataField fieldName="UserName" columns="20" hidden="true" />
+        <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" hidden="true" />
+        <dataField fieldName="ReportID" columns="15" hidden="true" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="CalcDate" columns="15" hidden="true" />
+        <dataField fieldName="AccountID" columns="50" hidden="true" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Balance Sheet Statement">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Run Utility" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="From_Date" columns="10" />
+            <dataField fieldName="To_Date" columns="10" />
+            <dataField fieldName="UtilityID" columns="15" />
+            <dataField fieldName="Doc_Number" columns="15" />
+            <dataField fieldName="UtilityMessage" />
+            <dataField fieldName="NewDocNo" columns="15" />
+            <dataField fieldName="CurRate" dataFormatString="c" columns="15" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="UserName" columns="20" />
+            <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="ReportID" columns="15" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="Balance Sheet Parameter">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Balance Sheet Parameter" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="From_Date" columns="10" hidden="true" />
+            <dataField fieldName="To_Date" columns="10" />
+            <dataField fieldName="UtilityID" columns="15" hidden="true" />
+            <dataField fieldName="Doc_Number" columns="15" hidden="true" />
+            <dataField fieldName="UtilityMessage" hidden="true" />
+            <dataField fieldName="NewDocNo" columns="15" hidden="true" />
+            <dataField fieldName="CurRate" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+            <dataField fieldName="UserName" columns="20" hidden="true" />
+            <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" hidden="true" />
+            <dataField fieldName="ReportID" columns="15" hidden="true" />
+            <dataField fieldName="UserID" columns="15" hidden="true" />
+            <dataField fieldName="AccountID" columns="50" hidden="true" />
+            <dataField fieldName="Item_Code" columns="20" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="Refresh Parameter" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="Form">
+      <action commandName="Insert" whenLastCommandName="New" id="a100" />
+      <action commandName="Cancel" whenLastCommandName="New" id="a101" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @UserID=@BusinessRules_UserId
+SET @CreatedDateTime=GETDATE()]]></rule>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @From_Date=getdate()
+SET @UtilityID=8
+SET @ReportID=11]]></rule>
+    <rule id="r102" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if [dbo].[IsUserReadOnly](@BusinessRules_UserId)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r103" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if [dbo].[IsUserWriteOnly](@BusinessRules_UserId)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Accouting_Dimensions" conflictDetection="overwriteChanges" label="^AccDim^Accouting_Dimensions^AccDim^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Accounting_Dimensions" custom="true">
+      <text><![CDATA[SELECT * FROM Accounting_Dimensions]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" showInSummary="true" isPrimaryKey="true" allowNulls="false" />
+    <field name="Dimension1" type="Int32" label="^Dim1^Dimension1^Dim1^" showInSummary="true" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D1Caption" type="String" label="^D1Cap^D1 Caption^D1Cap^" length="50" showInSummary="true" />
+    <field name="Dimension2" type="Int32" label="^Dim2^Dimension2^Dim2^" showInSummary="true" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D2Caption" type="String" label="^D2Cap^D2 Caption^D2Cap^" length="50" showInSummary="true" />
+    <field name="Dimension3" type="Int32" label="^Dimension3^Dim3^Dim3^" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D3Caption" type="String" label="^D3Cap^D3 Caption^D3Cap^" length="50" />
+    <field name="Dimension4" type="Int32" label="^Dim4^Dimension4^Dim4^" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D4Caption" type="String" label="^D4Cap^D4 Caption^D4Cap^" length="50" />
+    <field name="Dimension5" type="Int32" label="^Dim5^Dimension5^Dim5^" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D5Caption" type="String" label="^D5Cap^D5 Caption^D5Cap^" length="50" />
+    <field name="Dimension6" type="Int32" label="^Dim6^Dimension6^Dim6^" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D6Caption" type="String" label="^D6Cap^D6 Caption^D6Cap^" length="50" />
+    <field name="Dimension7" type="Int32" label="^Dim7^Dimension7^Dim7^" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D7Caption" type="String" label="^D7Cap^D7 Caption^D7Cap^" length="50" />
+    <field name="Dimension8" type="Int32" label="^Dim8^Dimension8^Dim8^" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D8Caption" type="String" label="^D8Cap^D8 Caption^D8Cap^" length="50" />
+    <field name="Dimension9" type="Int32" label="^Dim9^Dimension9^Dim9^" allowNulls="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="D9Caption" type="String" label="^D9Cap^D9 Caption^D9Cap^" length="50" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="FreezYN" type="Int16" allowNulls="false" label="^FreYn^Freeze YN^FreYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="ABranchID" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BranchLogo^Branch Logo^BranchLogo^" readOnly="true" computed="true" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranchAR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchID" type="Int32" readOnly="true" label="^ABraId^ABranch ID^ABraId^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^AccDim^Accouting Dimensions^AccDim^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="Dimension1" columns="15" />
+        <dataField fieldName="D1Caption" columns="50" />
+        <dataField fieldName="Dimension2" columns="15" />
+        <dataField fieldName="D2Caption" columns="50" />
+        <dataField fieldName="Dimension3" columns="15" />
+        <dataField fieldName="D3Caption" columns="50" />
+        <dataField fieldName="Dimension4" columns="15" />
+        <dataField fieldName="D4Caption" columns="50" />
+        <dataField fieldName="Dimension5" columns="15" />
+        <dataField fieldName="D5Caption" columns="50" />
+        <dataField fieldName="Dimension6" columns="15" hidden="true" />
+        <dataField fieldName="D6Caption" columns="50" hidden="true" />
+        <dataField fieldName="Dimension7" columns="15" hidden="true" />
+        <dataField fieldName="D7Caption" columns="50" hidden="true" />
+        <dataField fieldName="Dimension8" columns="15" hidden="true" />
+        <dataField fieldName="D8Caption" columns="50" hidden="true" />
+        <dataField fieldName="Dimension9" columns="15" hidden="true" />
+        <dataField fieldName="D9Caption" columns="50" hidden="true" />
+        <dataField fieldName="FreezYN" columns="15" />
+        <dataField fieldName="BranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchID" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevAccDim^Review Accouting Dimensions^RevAccDim^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Accouting Dimensions" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Dimension1" columns="15" />
+            <dataField fieldName="Dimension2" columns="15" />
+            <dataField fieldName="Dimension3" columns="15" />
+            <dataField fieldName="Dimension4" columns="15" />
+            <dataField fieldName="Dimension5" columns="15" />
+            <dataField fieldName="Dimension6" columns="15" />
+            <dataField fieldName="Dimension7" columns="15" />
+            <dataField fieldName="Dimension8" columns="15" />
+            <dataField fieldName="Dimension9" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Captions" id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="D1Caption" columns="50" />
+            <dataField fieldName="D2Caption" columns="50" />
+            <dataField fieldName="D3Caption" columns="50" />
+            <dataField fieldName="D4Caption" columns="50" />
+            <dataField fieldName="D5Caption" columns="50" />
+            <dataField fieldName="D6Caption" columns="50" />
+            <dataField fieldName="D7Caption" columns="50" />
+            <dataField fieldName="D8Caption" columns="50" />
+            <dataField fieldName="D9Caption" columns="50" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="FreezYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewAccDim^New Accouting Dimensions^NewAccDim^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Accouting Dimensions" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Dimension1" columns="15" />
+            <dataField fieldName="D1Caption" columns="50" />
+            <dataField fieldName="Dimension2" columns="15" />
+            <dataField fieldName="D2Caption" columns="50" />
+            <dataField fieldName="Dimension3" columns="15" />
+            <dataField fieldName="D3Caption" columns="50" />
+            <dataField fieldName="Dimension4" columns="15" />
+            <dataField fieldName="D4Caption" columns="50" />
+            <dataField fieldName="Dimension5" columns="15" />
+            <dataField fieldName="D5Caption" columns="50" />
+            <dataField fieldName="Dimension6" columns="15" />
+            <dataField fieldName="D6Caption" columns="50" />
+            <dataField fieldName="Dimension7" columns="15" />
+            <dataField fieldName="D7Caption" columns="50" />
+            <dataField fieldName="Dimension8" columns="15" />
+            <dataField fieldName="D8Caption" columns="50" />
+            <dataField fieldName="Dimension9" columns="15" />
+            <dataField fieldName="D9Caption" columns="50" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="FreezYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="UnFreez" flat="true">
+      <action commandName="SQL" headerText="Unfreez" whenLastCommandName="Select" whenKeySelected="true" id="a100" whenClientScript="[FreezYN]==1">
+        <data><![CDATA[UPDATE Accounting_Dimensions
+SET FreezYN=0
+WHERE FreezYN=1 AND Company_Code=@Company_Code]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" type="Sql" commandName="Update" phase="Before" name="FreezYN_Validator"><![CDATA[if IsNull(@FreezYN_OldValue,0) <> IsNull(@FreezYN_NewValue,0) and IsNull(@FreezYN_OldValue,0)=1
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'FreezYN,Dimenssion Has been Frozen...'
+end
+]]></rule>
+  </businessRules>
+</dataController>

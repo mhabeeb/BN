@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PO_Line_Items1" label="PO_Line_Items1" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="PO_Line_Items" custom="true">
+      <text><![CDATA[SELECT        dbo.PO_Line_Items.PO_NO, dbo.PO_Line_Items.SO_NO, dbo.PO_Line_Items.SO_Line_No, dbo.PO_Line_Items.Item_Code, dbo.PO_Line_Items.PR_NO, dbo.PO_Line_Items.PO_Line_No, dbo.PO_Line_Items.PO_Qty, 
+                         dbo.PO_Line_Items.Unit_Price, dbo.PO_Line_Items.Pick, dbo.PO_Line_Items.Pick_Qty, dbo.PO_Line_Items.Line_Total, dbo.PO_Line_Items.Line_Disc_Percent, dbo.PO_Line_Items.Line_Disc_Amount, 
+                         dbo.PO_Line_Items.Source_LineID, dbo.PO_Line_Items.Pick_Doc, dbo.PO_Line_Items.Line_Remarks, dbo.PO_Line_Items.DeliveryDate, dbo.PO_Line_Items.CloseYN, dbo.PO_Line_Items.Line_Net, 
+                         dbo.PO_Line_Items.RV_Balance, dbo.PO_Line_Items.Invoice_Balance, dbo.PO_Line_Items.Item_Desc, dbo.PO_Line_Items.Item_Part, dbo.PO_Line_Items.UOM, dbo.PO_Line_Items.Created_By, 
+                         dbo.PO_Line_Items.Created_DateTime, dbo.PO_Line_Items.Updated_By, dbo.PO_Line_Items.Updated_DateTime, dbo.PO_Line_Items.Sys_Number, dbo.PO_Line_Items.Project_Code, dbo.PO_Line_Items.Dept_Code, 
+                         dbo.PO_Line_Items.IsServiceItem, dbo.PO_Line_Items.FulFillmentBalance, dbo.PO_Line_Items.DR_Line_ID, dbo.PO_Line_Items.Job_ID, dbo.PO_Line_Items.PO_OPU_Code, dbo.PO_Header.PO_Type, dbo.PO_Header.PO_Date, 
+                         dbo.PO_Header.Supplier_QT_No, dbo.PO_Header.Sys_Number AS H_Sys_Number, dbo.PO_Header.Currency_Code, dbo.PO_Header.Company_Code, dbo.PO_Header.OPU_Code, dbo.PO_Header.TermsANDConditions, 
+                         dbo.PO_Header.Payment_Terms, dbo.PO_Header.Header_Amount, dbo.PO_Header.Header_Net, dbo.PO_Header.Vendor_Name, dbo.PO_Header.ADDRESS_ALL, dbo.PO_Header.Header_Disc_Amount, 
+                         dbo.PO_Header.Header_Disc_Percent, dbo.PO_Header.Doc_Status, dbo.tbl_Contacts.ContactName, dbo.tbl_Contacts.ContactTitle, dbo.tbl_Contacts.eMailID AS ContacteMailID, dbo.tbl_Contacts.Phone AS ConactPhone, 
+                         dbo.tbl_Locations.Location_Name, dbo.tbl_Locations.ContactName AS Loc_ContactName, dbo.tbl_Locations.ContactTitle AS Loc_ContactTitle, dbo.tbl_Locations.Street AS Loc_Street, 
+                         dbo.tbl_Locations.PostalCode AS Loc_PostalCode, dbo.tbl_Locations.City AS Loc_City, dbo.tbl_Locations.Country AS Loc_Country, dbo.tbl_Locations.Phone AS Loc_Phone, dbo.tbl_Locations.Fax AS Loc_Fax, 
+                         dbo.tbl_Locations.eMailID AS Loc_eMailID, dbo.tbl_Locations.Address AS Loc_Address, dbo.PO_Line_Items.ShippingStoreID, dbo.PO_Line_Items.IsBatchControl, dbo.PO_Line_Items.IsItemSerialized, 
+                         dbo.PO_Line_Items.Item_Code_Ref_No, dbo.PO_Line_Items.PO_Currency_Code, dbo.PO_Line_Items.Item_Serial_No, dbo.PO_Line_Items.BatchExpiry, dbo.PO_Line_Items.BatchNo, dbo.PO_Line_Items.PBarcode, 
+                         dbo.PO_Line_Items.SiteCode, dbo.PO_Header.Doc_No, dbo.PO_Header.RFQ_NO, dbo.PO_Line_Items.BudgetCode, dbo.PO_Line_Items.BudgetAccount
+FROM            dbo.PO_Header INNER JOIN
+                         dbo.PO_Line_Items ON dbo.PO_Header.PO_NO = dbo.PO_Line_Items.PO_NO LEFT OUTER JOIN
+                         dbo.tbl_Locations ON dbo.PO_Header.LocationID = dbo.tbl_Locations.LocationID LEFT OUTER JOIN
+                         dbo.tbl_Contacts ON dbo.PO_Header.ContactID = dbo.tbl_Contacts.ContactID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PO_NO" type="Decimal" allowNulls="false" label="Po No" showInSummary="true" />
+    <field name="SO_NO" type="Decimal" label="So No" showInSummary="true" />
+    <field name="SO_Line_No" type="Decimal" label="SO Line No" showInSummary="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="Item Code" length="20" showInSummary="true">
+      <items style="Lookup" dataController="Pick_Item_Master" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" copy="Item_Desc=Item_Description&#xD;&#xA;Part_No=Part_No&#xD;&#xA;UOM=UOM&#xD;&#xA;IsBatchControl=IsBatchControl&#xD;&#xA;IsItemSerialized=IsItemSerialized&#xD;&#xA;Item_Code_Ref_No=Item_Code_Ref_No" />
+    </field>
+    <field name="PR_NO" type="Decimal" label="Pr No" showInSummary="true" />
+    <field name="PO_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="PO Line No" readOnly="true" />
+    <field name="PO_Qty" type="Decimal" label="PO Qty" allowNulls="false" />
+    <field name="Unit_Price" type="Decimal" label="Unit Price" allowNulls="false" />
+    <field name="Pick" type="Int16" label="Pick" />
+    <field name="Pick_Qty" type="Decimal" label="Pick Qty" />
+    <field name="Line_Total" type="Decimal" label="Line Total" readOnly="true" />
+    <field name="Line_Disc_Percent" type="Decimal" label="Line Disc Percent" />
+    <field name="Line_Disc_Amount" type="Decimal" label="Line Disc Amount" />
+    <field name="Source_LineID" type="Decimal" label="Source Line#" />
+    <field name="Pick_Doc" type="Decimal" label="Pick Doc" />
+    <field name="Line_Remarks" type="String" label="Line Remarks" length="255" />
+    <field name="DeliveryDate" type="DateTime" label="Delivery Date" />
+    <field name="CloseYN" type="Int32" label="Close YN">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Line_Net" type="Decimal" label="Line Net" readOnly="true" />
+    <field name="RV_Balance" type="Decimal" label="RV Balance" />
+    <field name="Invoice_Balance" type="Decimal" label="Invoice Balance" />
+    <field name="Item_Desc" type="String" label="Item Desc" length="500" />
+    <field name="Item_Part" type="String" label="Item Part" length="50" />
+    <field name="UOM" type="String" label="Uom" length="10" />
+    <field name="Created_By" type="Decimal" label="Created By">
+      <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By">
+      <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="Project_Code" type="String" label="Project Code" length="50">
+      <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    </field>
+    <field name="Dept_Code" type="String" label="Dept Code" length="50">
+      <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
+    </field>
+    <field name="IsServiceItem" type="Int32" label="Is Service Item" />
+    <field name="FulFillmentBalance" type="Decimal" label="Ful Fillment Balance" />
+    <field name="DR_Line_ID" type="Decimal" label="DR Line#" />
+    <field name="Job_ID" type="Decimal" label="Job#" />
+    <field name="PO_OPU_Code" type="Int32" label="PO OPU Code" />
+    <field name="PO_Type" type="String" label="PO Type" length="30" />
+    <field name="PO_Date" type="DateTime" allowNulls="false" label="PO Date" />
+    <field name="Supplier_QT_No" type="String" label="Supplier QT No" length="15" />
+    <field name="H_Sys_Number" type="Decimal" label="H Sys Number" />
+    <field name="Currency_Code" type="String" label="Currency Code" length="4" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="TermsANDConditions" type="String" label="Terms AND Conditions" length="4000" />
+    <field name="Payment_Terms" type="Int32" label="Payment Terms" />
+    <field name="Header_Amount" type="Decimal" label="Header Amount" />
+    <field name="Header_Net" type="Decimal" label="Header Net" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" length="150" />
+    <field name="ADDRESS_ALL" type="String" label="Address All" length="4000" />
+    <field name="Header_Disc_Amount" type="Decimal" label="Header Disc Amount" />
+    <field name="Header_Disc_Percent" type="Decimal" label="Header Disc Percent" />
+    <field name="Doc_Status" type="String" label="Doc Status" length="50" />
+    <field name="ContactName" type="String" label="Contact Name" length="100" />
+    <field name="ContactTitle" type="String" label="Contact Title" length="30" />
+    <field name="ContacteMailID" type="String" label="Contacte Mail#" length="50" />
+    <field name="ConactPhone" type="String" label="Conact Phone" length="50" />
+    <field name="Location_Name" type="String" label="Location Name" length="150" />
+    <field name="Loc_ContactName" type="String" label="Loc Contact Name" length="30" />
+    <field name="Loc_ContactTitle" type="String" label="Loc Contact Title" length="30" />
+    <field name="Loc_Street" type="String" label="Loc Street" length="50" />
+    <field name="Loc_PostalCode" type="String" label="Loc Postal Code" length="50" />
+    <field name="Loc_City" type="String" label="Loc City" length="50" />
+    <field name="Loc_Country" type="String" label="Loc Country" length="50" />
+    <field name="Loc_Phone" type="String" label="Loc Phone" length="50" />
+    <field name="Loc_Fax" type="String" label="Loc Fax" length="50" />
+    <field name="Loc_eMailID" type="String" label="Loc e Mail#" length="50" />
+    <field name="Loc_Address" type="String" label="Loc Address" readOnly="true" length="4000" />
+    <field name="ShippingStoreID" type="Int32" label="Shipping Store#" />
+    <field name="IsBatchControl" type="Int32" label="Is Batch Control">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="IsItemSerialized" type="Int32" label="Is Item Serialized" />
+    <field name="Item_Code_Ref_No" type="String" label="Item Code Ref No" length="20" />
+    <field name="PO_Currency_Code" type="String" label="PO Currency Code" length="4" />
+    <field name="Item_Serial_No" type="String" label="Item Serial No" length="50" />
+    <field name="BatchExpiry" type="DateTime" label="Batch Expiry" />
+    <field name="BatchNo" type="String" label="Batch No" length="20" />
+    <field name="SiteCode" type="String" label="Site Code" length="50" />
+    <field name="Doc_No" type="Int64" label="Doc No" />
+    <field name="RFQ_NO" type="Decimal" label="Rfq No" />
+    <field name="BudgetCode" type="Decimal" label="Budget Code" allowNulls="false">
+      <items style="Lookup" dataController="GL_Budget_Master" dataView="grid1" dataTextField="BudgetName" dataValueField="BudgetCode" />
+    </field>
+    <field name="BudgetAccount" type="String" label="Budget Account" length="50" allowNulls="false">
+      <items style="DropDownList" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="PO Line Items">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PO_NO" columns="15" />
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="PR_NO" columns="15" />
+        <dataField fieldName="PO_Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Pick" columns="15" hidden="true" />
+        <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Line_Total" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Line_Disc_Percent" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Line_Disc_Amount" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Source_LineID" columns="15" hidden="true" />
+        <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
+        <dataField fieldName="Line_Remarks" hidden="true" />
+        <dataField fieldName="DeliveryDate" columns="10" />
+        <dataField fieldName="CloseYN" columns="15" />
+        <dataField fieldName="Line_Net" dataFormatString="N2" columns="15" />
+        <dataField fieldName="RV_Balance" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Invoice_Balance" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Item_Desc" />
+        <dataField fieldName="Item_Part" columns="50" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="IsServiceItem" columns="15" hidden="true" />
+        <dataField fieldName="FulFillmentBalance" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="DR_Line_ID" columns="15" hidden="true" />
+        <dataField fieldName="Job_ID" columns="15" hidden="true" />
+        <dataField fieldName="PO_OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="PO_Type" columns="30" hidden="true" />
+        <dataField fieldName="PO_Date" columns="10" hidden="true" />
+        <dataField fieldName="Supplier_QT_No" columns="15" hidden="true" />
+        <dataField fieldName="H_Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="TermsANDConditions" hidden="true" />
+        <dataField fieldName="Payment_Terms" columns="15" hidden="true" />
+        <dataField fieldName="Header_Amount" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Vendor_Name" hidden="true" />
+        <dataField fieldName="ADDRESS_ALL" hidden="true" />
+        <dataField fieldName="Header_Disc_Amount" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Header_Disc_Percent" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Doc_Status" columns="50" hidden="true" />
+        <dataField fieldName="ContactName" hidden="true" />
+        <dataField fieldName="ContactTitle" columns="30" hidden="true" />
+        <dataField fieldName="ContacteMailID" columns="50" hidden="true" />
+        <dataField fieldName="ConactPhone" columns="50" hidden="true" />
+        <dataField fieldName="Location_Name" hidden="true" />
+        <dataField fieldName="Loc_ContactName" columns="30" hidden="true" />
+        <dataField fieldName="Loc_ContactTitle" columns="30" hidden="true" />
+        <dataField fieldName="Loc_Street" columns="50" hidden="true" />
+        <dataField fieldName="Loc_PostalCode" columns="50" hidden="true" />
+        <dataField fieldName="Loc_City" columns="50" hidden="true" />
+        <dataField fieldName="Loc_Country" columns="50" hidden="true" />
+        <dataField fieldName="Loc_Phone" columns="50" hidden="true" />
+        <dataField fieldName="Loc_Fax" columns="50" hidden="true" />
+        <dataField fieldName="Loc_eMailID" columns="50" hidden="true" />
+        <dataField fieldName="Loc_Address" hidden="true" />
+        <dataField fieldName="ShippingStoreID" columns="15" hidden="true" />
+        <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
+        <dataField fieldName="IsItemSerialized" columns="15" hidden="true" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" />
+        <dataField fieldName="PO_Currency_Code" columns="4" hidden="true" />
+        <dataField fieldName="Item_Serial_No" columns="50" hidden="true" />
+        <dataField fieldName="BatchExpiry" columns="10" hidden="true" />
+        <dataField fieldName="BatchNo" columns="20" hidden="true" />
+        <dataField fieldName="SiteCode" columns="50" hidden="true" />
+        <dataField fieldName="Doc_No" columns="15" hidden="true" />
+        <dataField fieldName="RFQ_NO" columns="15" hidden="true" />
+        <dataField fieldName="BudgetCode" columns="15" hidden="true" />
+        <dataField fieldName="BudgetAccount" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review PO Line Items">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Edit PO Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PO_Qty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Line_Disc_Percent" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Line_Disc_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="DeliveryDate" columns="10" />
+            <dataField fieldName="RV_Balance" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="Invoice_Balance" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="Item_Desc" hidden="true" />
+            <dataField fieldName="Item_Part" columns="50" hidden="true" />
+            <dataField fieldName="UOM" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+            <dataField fieldName="PO_OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="BudgetCode" columns="15" />
+            <dataField fieldName="BudgetAccount" columns="50" />
+            <dataField fieldName="PO_NO" columns="15" hidden="true" />
+            <dataField fieldName="CloseYN" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New PO Line Items">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New PO Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PO_Qty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Line_Disc_Percent" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Line_Disc_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="DeliveryDate" columns="10" />
+            <dataField fieldName="RV_Balance" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="Invoice_Balance" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="Item_Desc" hidden="true" />
+            <dataField fieldName="Item_Part" columns="50" hidden="true" />
+            <dataField fieldName="UOM" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+            <dataField fieldName="PO_OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="BudgetCode" columns="15" />
+            <dataField fieldName="BudgetAccount" columns="50" />
+            <dataField fieldName="PO_NO" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action commandName="DataSheet" headerText="DataSheet" id="a100" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SELECT @Project_Code=Project_Code,@Dept_Code=Dept_Code,
+@Sys_Number=Sys_Number FROM dbo.PO_Header WHERE PO_NO=@PO_NO
+SET @DeliveryDate= GETDATE()    
+SET @PO_OPU_Code=@Session_OPU_Code
+
+SET @BudgetCode=@Session_BudgetCode]]></rule>
+    <rule id="r101" commandName="Insert" type="Sql" phase="Execute"><![CDATA[SET @RV_Balance=@PO_Qty
+SET @Invoice_Balance=@PO_Qty
+SET @IsBatchControl=IsNull(@IsBatchControl,0)
+SET @IsItemSerialized=IsNull(@IsItemSerialized,0)]]></rule>
+    <rule id="r103" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    --SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+	SET @Result_Focus = 'PO_Line_No,You Are ReadOnly User ....You Cannot Change Record'
+end
+
+
+if [dbo].[CHECK_APPROVAL_STATUS](@PO_NO,2)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, The Docuement Is InProcess/Approved, Can not be Update'
+end]]></rule>
+    <rule id="r104" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+    <rule id="r105" type="Sql" commandName="Insert|Update" phase="Before" name="Unit_Price_Validator"><![CDATA[if IsNull(@Unit_Price,0)=0
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Unit_Price,Cannot Be Null or Zero'
+end]]></rule>
+  </businessRules>
+</dataController>

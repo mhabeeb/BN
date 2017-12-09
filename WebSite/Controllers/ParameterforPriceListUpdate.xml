@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ParameterforPriceListUpdate" label="^ParForPriLisUpDat^ParameterforPriceListUpdate^ParForPriLisUpDat^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="frItem_Code" type="String" label="^frIteCod^fr Item Code^frIteCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20">
+      <items style="Lookup" dataController="Pick_Item_Master" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" />
+    </field>
+    <field name="toItem_Code" type="String" label="^toIteCod^to Item Code^toIteCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20">
+      <items style="Lookup" dataController="Pick_Item_Master" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" />
+    </field>
+    <field name="frItem_Category" type="String" label="^frIteCat^fr Item Category^frIteCat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="225" contextFields="[Item_Category_Major]=Null">
+      <items style="Lookup" dataController="ItemCategory" dataView="grid1" dataTextField="Item_Category" dataValueField="Item_Category" />
+    </field>
+    <field name="toItem_Category" type="String" label="^ToIteCat^to Item Category^ToIteCat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="225" contextFields="[Item_Category_Major]=Null">
+      <items style="Lookup" dataController="ItemCategory" dataView="grid1" dataTextField="Item_Category" dataValueField="Item_Category" />
+    </field>
+    <field name="ListPrice" type="Decimal" allowNulls="false" label="^ManPri^Manual Price^ManPri^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="PricePercentage" type="Decimal" allowNulls="false" label="^PriPer^Price Percentage^PriPer^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="UpdateType" type="Int32" allowNulls="false" label="^UpdatTyp^Update Type^UpdatTyp^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList">
+        <item value="1" text="Item Cost" />
+        <item value="2" text="Manual Price" />
+      </items>
+    </field>
+  </fields>
+  <businessRules />
+</dataController>

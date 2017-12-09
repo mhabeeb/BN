@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Employee_Salary" conflictDetection="overwriteChanges" label="Employee Salary" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Employee_Salary"."Emp_id" "Emp_id"
+	,"Emp_"."Emp_Login" "Emp_Emp_Login"
+	,"Emp_Shift_"."Description" "Emp_Shift_Description"
+	,"Emp_SubDesignation_"."Description" "Emp_SubDesignation_Description"
+	,"Emp_SubDesignation_Designation_"."Description" "Emp_SubDesignation_Designation_Description"
+	,"Employee_Salary"."Employee_Num" "Employee_Num"
+	,"Employee_Salary"."Emp_Name" "Emp_Name"
+	,"Employee_Salary"."SalaryYear" "SalaryYear"
+	,"Employee_Salary"."SalaryMonths" "SalaryMonths"
+	,"Employee_Salary"."Contract_Salary" "Contract_Salary"
+	,"Employee_Salary"."Basic_Salary" "Basic_Salary"
+	,"Employee_Salary"."TransportationAllowance" "TransportationAllowance"
+	,"Employee_Salary"."HousingAllowance" "HousingAllowance"
+	,"Employee_Salary"."FoodAllowance" "FoodAllowance"
+	,"Employee_Salary"."MobileAllowance" "MobileAllowance"
+	,"Employee_Salary"."CarAllowance" "CarAllowance"
+	,"Employee_Salary"."EducationAllowance" "EducationAllowance"
+	,"Employee_Salary"."OtherAllowance" "OtherAllowance"
+	,"Employee_Salary"."OverTimeAddition" "OverTimeAddition"
+	,"Employee_Salary"."Gosi" "Gosi"
+	,"Employee_Salary"."Penalty" "Penalty"
+	,"Employee_Salary"."OtherAdditions" "OtherAdditions"
+	,"Employee_Salary"."PersonalCallDeductions" "PersonalCallDeductions"
+	,"Employee_Salary"."LoanDeduction" "LoanDeduction"
+	,"Employee_Salary"."GrossPay" "GrossPay"
+	,"Employee_Salary"."TotalDeduction" "TotalDeduction"
+	,"Employee_Salary"."OtherDeduction" "OtherDeduction"
+	,"Employee_Salary"."NetAmount" "NetAmount"
+	,"Employee_Salary"."IQamaDeduction" "IQamaDeduction"
+	,"Employee_Salary"."Insurance" "Insurance"
+	,"Employee_Salary"."PerDaySalary" "PerDaySalary"
+	,"Employee_Salary"."Attandence" "Attandence"
+	,"Employee_Salary"."DaysinMonth" "DaysinMonth"
+	,"Employee_Salary"."DateOfJoining" "DateOfJoining"
+	,"Employee_Salary"."Nationality" "Nationality"
+	,"Employee_Salary"."GosiBasic" "GosiBasic"
+	,"Employee_Salary"."ContractType" "ContractType"
+	,"Employee_Salary"."Dept_Code" "Dept_Code"
+	,"Employee_Salary"."Project_Code" "Project_Code"
+	,"Employee_Salary"."Created_DateTime" "Created_DateTime"
+	,"Employee_Salary"."Updated_By" "Updated_By"
+	,"Employee_Salary"."Created_By" "Created_By"
+	,"Employee_Salary"."Updated_DateTime" "Updated_DateTime"
+from "dbo"."Employee_Salary" "Employee_Salary"
+	left join "dbo"."Employees" "Emp_" on "Employee_Salary"."Emp_id" = "Emp_"."Emp_id"
+	left join "dbo"."HR_Shift_Information" "Emp_Shift_" on "Emp_"."Shift_ID" = "Emp_Shift_"."Shift_ID"
+	left join "dbo"."HR_SubDesignation" "Emp_SubDesignation_" on "Emp_"."SubDesignation_ID" = "Emp_SubDesignation_"."SubDesignation_ID"
+	left join "dbo"."HR_Designation" "Emp_SubDesignation_Designation_" on "Emp_SubDesignation_"."Designation_ID" = "Emp_SubDesignation_Designation_"."Designation_ID"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Emp_id" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Emp^Emp#^Emp^" showInSummary="true">
+      <items style="Lookup" dataController="Employees" newDataView="createForm1" dataValueField="Emp_id" />
+    </field>
+    <field name="Emp_Emp_Login" type="String" readOnly="true" label="^EmpLogin^Emp Login^EmpLogin^" length="20" />
+    <field name="Emp_Shift_Description" type="String" readOnly="true" label="^EmpShiftDescription^Emp Shift Description^EmpShiftDescription^" length="50" />
+    <field name="Emp_SubDesignation_Description" type="String" readOnly="true" label="^EmpSubDesignationDescription^Emp Sub Designation Description^EmpSubDesignationDescription^" length="50" />
+    <field name="Emp_SubDesignation_Designation_Description" type="String" readOnly="true" label="^EmpSubDesignationDescription^Emp Sub Designation Description^EmpSubDesignationDescription^" length="50" />
+    <field name="Employee_Num" type="String" label="^EmployeeNum^Employee Num^EmployeeNum^" length="50" showInSummary="true" />
+    <field name="Emp_Name" type="String" label="^EmpName^Emp Name^EmpName^" length="50" showInSummary="true" />
+    <field name="SalaryYear" type="Int32" allowNulls="false" isPrimaryKey="true" label="^SalaryYear^Salary Year^SalaryYear^" />
+    <field name="SalaryMonths" type="Int32" allowNulls="false" isPrimaryKey="true" label="^SalaryMonths^Salary Months^SalaryMonths^" />
+    <field name="Contract_Salary" type="Decimal" default="((0))" label="^ContractSalary^Contract Salary^ContractSalary^" showInSummary="true" />
+    <field name="Basic_Salary" type="Decimal" default="((0))" label="^BasicSalary^Basic Salary^BasicSalary^" showInSummary="true" />
+    <field name="TransportationAllowance" type="Decimal" default="((0))" label="^TransportationAllowance^Transportation Allowance^TransportationAllowance^" />
+    <field name="HousingAllowance" type="Decimal" default="((0))" label="^HousingAllowance^Housing Allowance^HousingAllowance^" />
+    <field name="FoodAllowance" type="Decimal" default="((0))" label="^FoodAllowance^Food Allowance^FoodAllowance^" />
+    <field name="MobileAllowance" type="Decimal" default="((0))" label="^MobileAllowance^Mobile Allowance^MobileAllowance^" />
+    <field name="CarAllowance" type="Decimal" default="((0))" label="^CarAllowance^Car Allowance^CarAllowance^" />
+    <field name="EducationAllowance" type="Decimal" default="((0))" label="^EducationAllowance^Education Allowance^EducationAllowance^" />
+    <field name="OtherAllowance" type="Decimal" default="((0))" label="^OtherAllowance^Other Allowance^OtherAllowance^" />
+    <field name="OverTimeAddition" type="Decimal" default="((0))" label="^OverTimeAddition^Over Time Addition^OverTimeAddition^" />
+    <field name="Gosi" type="Decimal" default="((0))" label="^Gosi^Gosi^Gosi^" />
+    <field name="Penalty" type="Decimal" default="((0))" label="^Penalty^Penalty^Penalty^" />
+    <field name="OtherAdditions" type="Decimal" default="((0))" label="^OtherAdditions^Other Additions^OtherAdditions^" />
+    <field name="PersonalCallDeductions" type="Decimal" default="((0))" label="^PersonalCallDeductions^Personal Call Deductions^PersonalCallDeductions^" />
+    <field name="LoanDeduction" type="Decimal" default="((0))" label="^LoanDeduction^Loan Deduction^LoanDeduction^" />
+    <field name="GrossPay" type="Decimal" label="^GrossPay^Gross Pay^GrossPay^" readOnly="true" />
+    <field name="TotalDeduction" type="Decimal" label="^TotalDeduction^Total Deduction^TotalDeduction^" readOnly="true" />
+    <field name="OtherDeduction" type="Decimal" default="((0))" label="^OtherDeduction^Other Deduction^OtherDeduction^" />
+    <field name="NetAmount" type="Decimal" default="((0))" label="^NetAmount^Net Amount^NetAmount^" />
+    <field name="IQamaDeduction" type="Decimal" default="((0))" label="^IQamaDeduction^I Qama Deduction^IQamaDeduction^" />
+    <field name="Insurance" type="Decimal" default="((0))" label="^Insurance^Insurance^Insurance^" />
+    <field name="PerDaySalary" type="Decimal" default="((0))" label="^PerDaySalary^Per Day Salary^PerDaySalary^" />
+    <field name="Attandence" type="Decimal" default="((0))" label="^Attandence^Attandence^Attandence^" />
+    <field name="DaysinMonth" type="Decimal" default="((0))" label="^DaysinMonth^Daysin Month^DaysinMonth^" />
+    <field name="DateOfJoining" type="DateTime" label="^DateOfJoining^Date Of Joining^DateOfJoining^" />
+    <field name="Nationality" type="String" label="^Nationality^Nationality^Nationality^" length="50" />
+    <field name="GosiBasic" type="Decimal" default="((0))" label="^GosiBasic^Gosi Basic^GosiBasic^" />
+    <field name="ContractType" type="Int32" label="^ContractType^Contract Type^ContractType^" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Employee Salary">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Emp_id" aliasFieldName="Emp_Emp_Login" />
+        <dataField fieldName="Employee_Num" columns="50" />
+        <dataField fieldName="Emp_Name" columns="50" />
+        <dataField fieldName="Contract_Salary" dataFormatString="c" columns="15" />
+        <dataField fieldName="Basic_Salary" dataFormatString="c" columns="15" />
+        <dataField fieldName="TransportationAllowance" dataFormatString="c" columns="15" />
+        <dataField fieldName="HousingAllowance" dataFormatString="c" columns="15" />
+        <dataField fieldName="FoodAllowance" dataFormatString="c" columns="15" />
+        <dataField fieldName="MobileAllowance" dataFormatString="c" columns="15" />
+        <dataField fieldName="CarAllowance" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Employee Salary">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Employee Salary" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Emp_id" aliasFieldName="Emp_Emp_Login" hyperlinkFormatString="~/Pages/Employees.aspx?Emp_id={Emp_id}&amp;_controller=Employees&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Employee_Num" columns="50" />
+            <dataField fieldName="Emp_Name" columns="50" />
+            <dataField fieldName="Contract_Salary" dataFormatString="c" columns="15" />
+            <dataField fieldName="Basic_Salary" dataFormatString="c" columns="15" />
+            <dataField fieldName="TransportationAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="HousingAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="FoodAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="MobileAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="CarAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="EducationAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="OtherAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverTimeAddition" dataFormatString="c" columns="15" />
+            <dataField fieldName="Gosi" dataFormatString="c" columns="15" />
+            <dataField fieldName="Penalty" dataFormatString="c" columns="15" />
+            <dataField fieldName="OtherAdditions" dataFormatString="c" columns="15" />
+            <dataField fieldName="PersonalCallDeductions" dataFormatString="c" columns="15" />
+            <dataField fieldName="LoanDeduction" dataFormatString="c" columns="15" />
+            <dataField fieldName="GrossPay" dataFormatString="c" columns="15" />
+            <dataField fieldName="TotalDeduction" dataFormatString="c" columns="15" />
+            <dataField fieldName="OtherDeduction" dataFormatString="c" columns="15" />
+            <dataField fieldName="NetAmount" dataFormatString="c" columns="15" />
+            <dataField fieldName="IQamaDeduction" dataFormatString="c" columns="15" />
+            <dataField fieldName="Insurance" dataFormatString="c" columns="15" />
+            <dataField fieldName="PerDaySalary" dataFormatString="c" columns="15" />
+            <dataField fieldName="Attandence" dataFormatString="c" columns="15" />
+            <dataField fieldName="DaysinMonth" dataFormatString="c" columns="15" />
+            <dataField fieldName="DateOfJoining" columns="10" />
+            <dataField fieldName="Nationality" columns="50" />
+            <dataField fieldName="GosiBasic" dataFormatString="c" columns="15" />
+            <dataField fieldName="ContractType" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Reference Information">
+          <description><![CDATA[$DefaultReferenceDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Emp_Shift_Description" columns="50" />
+            <dataField fieldName="Emp_SubDesignation_Description" columns="50" />
+            <dataField fieldName="Emp_SubDesignation_Designation_Description" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Employee Salary">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Employee Salary" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Emp_id" aliasFieldName="Emp_Emp_Login" />
+            <dataField fieldName="Employee_Num" columns="50" />
+            <dataField fieldName="Emp_Name" columns="50" />
+            <dataField fieldName="SalaryYear" columns="15" />
+            <dataField fieldName="SalaryMonths" columns="15" />
+            <dataField fieldName="Contract_Salary" dataFormatString="c" columns="15" />
+            <dataField fieldName="Basic_Salary" dataFormatString="c" columns="15" />
+            <dataField fieldName="TransportationAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="HousingAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="FoodAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="MobileAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="CarAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="EducationAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="OtherAllowance" dataFormatString="c" columns="15" />
+            <dataField fieldName="OverTimeAddition" dataFormatString="c" columns="15" />
+            <dataField fieldName="Gosi" dataFormatString="c" columns="15" />
+            <dataField fieldName="Penalty" dataFormatString="c" columns="15" />
+            <dataField fieldName="OtherAdditions" dataFormatString="c" columns="15" />
+            <dataField fieldName="PersonalCallDeductions" dataFormatString="c" columns="15" />
+            <dataField fieldName="LoanDeduction" dataFormatString="c" columns="15" />
+            <dataField fieldName="OtherDeduction" dataFormatString="c" columns="15" />
+            <dataField fieldName="NetAmount" dataFormatString="c" columns="15" />
+            <dataField fieldName="IQamaDeduction" dataFormatString="c" columns="15" />
+            <dataField fieldName="Insurance" dataFormatString="c" columns="15" />
+            <dataField fieldName="PerDaySalary" dataFormatString="c" columns="15" />
+            <dataField fieldName="Attandence" dataFormatString="c" columns="15" />
+            <dataField fieldName="DaysinMonth" dataFormatString="c" columns="15" />
+            <dataField fieldName="DateOfJoining" columns="10" />
+            <dataField fieldName="Nationality" columns="50" />
+            <dataField fieldName="GosiBasic" dataFormatString="c" columns="15" />
+            <dataField fieldName="ContractType" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

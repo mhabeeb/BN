@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="rpt_PO_Details_Lines" conflictDetection="overwriteChanges" label="^RptPoDetLin^rpt PO Details Lines^RptPoDetLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"rpt_PO_Details_Lines"."PO_Type" "PO_Type"
+	,"rpt_PO_Details_Lines"."PO_Date" "PO_Date"
+	,"rpt_PO_Details_Lines"."PO_NO" "PO_NO"
+	,"rpt_PO_Details_Lines"."Supplier_No" "Supplier_No"
+	,"rpt_PO_Details_Lines"."Vendor_Name" "Vendor_Name"
+	,"rpt_PO_Details_Lines"."Currency_Code" "Currency_Code"
+	,"rpt_PO_Details_Lines"."OPU_Code" "OPU_Code"
+	,"rpt_PO_Details_Lines"."Item_Code" "Item_Code"
+	,"rpt_PO_Details_Lines"."Item_Desc" "Item_Desc"
+	,"rpt_PO_Details_Lines"."PO_Qty" "PO_Qty"
+	,"rpt_PO_Details_Lines"."Unit_Price" "Unit_Price"
+	,"rpt_PO_Details_Lines"."Line_Total" "Line_Total"
+	,"rpt_PO_Details_Lines"."SO_NO" "SO_NO"
+	,"rpt_PO_Details_Lines"."PR_NO" "PR_NO"
+from "dbo"."rpt_PO_Details_Lines" "rpt_PO_Details_Lines"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PO_Type" type="String" label="^PoTyp^PO Type^PoTyp^" length="30" showInSummary="true" />
+    <field name="PO_Date" type="DateTime" allowNulls="false" label="^poDat^PO Date^poDat^" showInSummary="true" />
+    <field name="PO_NO" type="Decimal" allowNulls="false" label="^PoNo^Po No^PoNo^" showInSummary="true" />
+    <field name="Supplier_No" type="Decimal" label="^SupNo^Supplier No^SupNo^" showInSummary="true" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" showInSummary="true" />
+    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
+    <field name="OPU_Code" type="Int32" label="^opuCod^OPU Code^opuCod^" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^ItmCod^Item Code^ItmCod^" length="20" />
+    <field name="Item_Desc" type="String" label="^ItmDes^Item Desc^ItmDes^" length="500" />
+    <field name="PO_Qty" type="Decimal" label="^PoQty^PO Qty^PoQty^" />
+    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" />
+    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" />
+    <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" />
+    <field name="PR_NO" type="Decimal" label="^PrNo^Pr No^PrNo^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^RptPoDetLin^rpt PO Details Lines^RptPoDetLin^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PO_Date" columns="10" />
+        <dataField fieldName="PO_Type" columns="30" />
+        <dataField fieldName="PO_NO" columns="15" />
+        <dataField fieldName="Supplier_No" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Currency_Code" columns="4" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="Item_Desc" />
+        <dataField fieldName="PO_Qty" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevRptPoDeTLin^Review rpt PO Details Lines^RevRptPoDeTLin^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="rpt PO Details Lines" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PO_Type" columns="30" />
+            <dataField fieldName="PO_Date" columns="10" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="Supplier_No" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="PO_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="PR_NO" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewRptPoDetLin^New rpt PO Details Lines^NewRptPoDetLin^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New rpt PO Details Lines" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PO_Type" columns="30" />
+            <dataField fieldName="PO_Date" columns="10" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="Supplier_No" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="PO_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="PR_NO" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

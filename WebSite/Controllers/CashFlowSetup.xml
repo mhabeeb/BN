@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CashFlowSetup" conflictDetection="overwriteChanges" label="CashFlowSetup" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="CashFlowStatments" custom="true">
+      <text><![CDATA[SELECT * FROM CashFlowStatments WHERE UserID=0]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="LineID" type="Int32" allowNulls="false" label="Line#" showInSummary="true" isPrimaryKey="true" />
+    <field name="LineNumber" type="Int32" label="Line Number" showInSummary="true" />
+    <field name="AccountDesription" type="String" label="Account Desription" length="255" showInSummary="true" />
+    <field name="UserID" type="Int32" label="User#" showInSummary="true" />
+    <field name="Amount" type="Decimal" label="Amount" showInSummary="true" />
+    <field name="DisplayName" type="String" label="Display Name" length="1000" htmlEncode="false" />
+    <field name="Account_Type" type="String" label="Account Type" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" allowNulls="false">
+      <items letters="false" style="DropDownList" dataController="COA_Natural_Account_Type" dataView="grid1" dataTextField="Account_Type" dataValueField="Account_Type" />
+    </field>
+    <field name="FromAccountRange1" type="String" label="From Account Range1" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="ToAccountRange1" type="String" label="To Account Range1" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="FromAccountRange2" type="String" label="From Account Range2" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="ToAccountRange2" type="String" label="To Account Range2" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="FromLine" type="Int32" label="From Line">
+      <items style="Lookup" dataController="CashFlowSetup" dataView="grid1" dataTextField="AccountDesription" dataValueField="LineNumber" />
+    </field>
+    <field name="ToLine" type="Int32" label="To Line">
+      <items style="Lookup" dataController="CashFlowSetup" dataView="grid1" dataTextField="AccountDesription" dataValueField="LineNumber" />
+    </field>
+    <field name="MinusLine" type="Int32" label="Minus Line">
+      <items style="Lookup" dataController="CashFlowSetup" dataView="grid1" dataTextField="AccountDesription" dataValueField="LineNumber" />
+    </field>
+    <field name="MinusRangeFrom" type="String" label="Minus Range From" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="MinusRangeTo" type="String" label="Minus Range To" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="InActive" type="Int32" label="In Active">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Cash Flow Statments">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="LineID" columns="15" hidden="true" readOnly="true" />
+        <dataField fieldName="LineNumber" columns="15" readOnly="true" />
+        <dataField fieldName="AccountDesription" readOnly="true" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="Amount" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="DisplayName" readOnly="true" />
+        <dataField fieldName="FromAccountRange1" columns="50" />
+        <dataField fieldName="ToAccountRange1" columns="50" />
+        <dataField fieldName="FromAccountRange2" columns="50" hidden="true" />
+        <dataField fieldName="ToAccountRange2" columns="50" hidden="true" />
+        <dataField fieldName="FromLine" columns="15" hidden="true" />
+        <dataField fieldName="ToLine" columns="15" hidden="true" />
+        <dataField fieldName="MinusLine" columns="15" hidden="true" />
+        <dataField fieldName="MinusRangeFrom" columns="50" hidden="true" />
+        <dataField fieldName="MinusRangeTo" columns="50" hidden="true" />
+        <dataField fieldName="InActive" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Cash Flow Statments">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Cash Flow Statments" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="LineID" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="LineNumber" columns="15" readOnly="true" />
+            <dataField fieldName="AccountDesription" readOnly="true" />
+            <dataField fieldName="UserID" columns="15" hidden="true" />
+            <dataField fieldName="Amount" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="DisplayName" readOnly="true" />
+            <dataField fieldName="FromAccountRange1" columns="50" />
+            <dataField fieldName="ToAccountRange1" columns="50" />
+            <dataField fieldName="FromAccountRange2" columns="50" />
+            <dataField fieldName="ToAccountRange2" columns="50" />
+            <dataField fieldName="FromLine" columns="15" />
+            <dataField fieldName="ToLine" columns="15" />
+            <dataField fieldName="MinusLine" columns="15" />
+            <dataField fieldName="MinusRangeFrom" columns="50" />
+            <dataField fieldName="MinusRangeTo" columns="50" />
+            <dataField fieldName="InActive" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>

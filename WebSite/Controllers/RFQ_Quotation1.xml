@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="RFQ_Quotation1" label="^RfqQuo1^RFQ_Quotation1^RfqQuo1^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="RFQ_Quotation" custom="true">
+      <text><![CDATA[SELECT * FROM RFQ_Quotation]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="RFQ_NO" type="Decimal" allowNulls="false" label="^RfqNo^Rfq No^RfqNo^" showInSummary="true" isPrimaryKey="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SupNoId^Supplier No.#^SupNoId^" showInSummary="true" isPrimaryKey="true" contextFields="RFQ_NO=RFQ_NO">
+      <items style="Lookup" dataController="RFQ_Invitaion_List" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" copy="Vendor_Name=Vendor_Name" />
+    </field>
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" label="^PRLinNo^PR Line No^PRLinNo^" showInSummary="true" isPrimaryKey="true" />
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" readOnly="true" length="10" showInSummary="true" />
+    <field name="RFQ_Qty" type="Decimal" label="^RFQQty^RFQ Qty^RFQQty^" dataFormatString="N2" />
+    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" dataFormatString="N2" isPrimaryKey="true" allowNulls="false" />
+    <field name="Notes" type="String" allowQBE="false" allowSorting="false" label="^Not^Notes^Not^" />
+    <field name="Terms" type="String" allowQBE="false" allowSorting="false" label="^Ter^Terms^Ter^" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
+    <field name="Promised_Date" type="DateTime" label="^ProDat^Promised Date^ProDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ConvertToPO" type="Int32" label="^ConToPO^Convert To PO^ConToPO^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^RfqQuo^RFQ Quotation^RfqQuo^" reportTemplate="true" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="RFQ_NO" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="PR_Line_No" columns="15" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="RFQ_Qty" dataFormatString="c" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+        <dataField fieldName="Notes" rows="5" />
+        <dataField fieldName="Terms" rows="5" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Promised_Date" columns="10" />
+        <dataField fieldName="ConvertToPO" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevRfqQuo^Review RFQ Quotation^RevRfqQuo^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="RFQ Quotation" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RFQ_NO" columns="15" readOnly="true" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" readOnly="true" />
+            <dataField fieldName="PR_Line_No" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" readOnly="true" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="RFQ_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Notes" rows="5" />
+            <dataField fieldName="Terms" rows="5" />
+            <dataField fieldName="Promised_Date" columns="10" readOnly="true" />
+            <dataField fieldName="ConvertToPO" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewRfqQuo^New RFQ Quotation^NewRfqQuo^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New RFQ Quotation" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RFQ_NO" columns="15" hidden="true" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="PR_Line_No" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" hidden="true" />
+            <dataField fieldName="RFQ_Qty" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Promised_Date" columns="10" />
+            <dataField fieldName="Notes" rows="5" />
+            <dataField fieldName="Terms" rows="5" />
+            <dataField fieldName="Vendor_Name" hidden="true" />
+            <dataField fieldName="ConvertToPO" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Convert to PO" flat="true">
+      <action commandName="SQL" headerText="Convert to PO" id="a100" whenLastCommandName="Select">
+        <data><![CDATA[UPDATE [dbo].[RFQ_Quotation]
+  SET
+      ConvertToPO = 1
+WHERE RFQ_NO = @RFQ_NO
+      AND Sys_Number = @Sys_Number
+      AND PR_Line_No = @PR_Line_No;]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SELECT @Item_Code=Item_Code,@RFQ_Qty=RFQ_Qty,@RFQ_NO=RFQ_NO
+FROM PR_Line_Items WHERE PR_Line_No=@PR_Line_No]]></rule>
+    <rule id="r101" commandName="Update" type="Sql" phase="Before"><![CDATA[IF @ConvertToPO=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, Quotaion has already been Converted to PO.'
+end
+]]></rule>
+  </businessRules>
+</dataController>

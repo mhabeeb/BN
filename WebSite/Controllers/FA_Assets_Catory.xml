@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="FA_Assets_Catory" conflictDetection="overwriteChanges" label="^FaAssCat^FA_Assets_Catory^FaAssCat^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="AssetCategories" custom="true">
+      <text><![CDATA[SELECT * FROM AssetCategories]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="AssetCategoryID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^AssCatId^Asset Category#^AssCatId^" readOnly="true" />
+    <field name="BookID" type="Int32" allowNulls="false" label="^BooId^Book ID^BooId^" htmlEncode="false" hidden="false">
+      <items style="DropDownList" dataController="AssetsValueSet" dataView="grid1" dataTextField="BookName" dataValueField="BookID" copy="OPU_Code=OPU_Code&#xD;&#xA;Company_Code=Company_Code&#xD;&#xA;" />
+    </field>
+    <field name="AssetCategory" type="String" label="^AssCat^Asset Category^AssCat^" length="50" allowNulls="false" />
+    <field name="Assets_Cost_Account" type="String" label="^AssCosAc^Assets Cost A/C^AssCosAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Assets_Cost_Clearing_AC" type="String" label="^AssCosCleAc^Assets Cost Clearing A/C^AssCosCleAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Assets_Depr_Account" type="String" label="^AssDepAc^Assets Depr. A/C^AssDepAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Assets_Sale_Account" type="String" label="^AssSalAc^Assets Sale A/C^AssSalAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Assets_Accum_Depr_Account" type="String" label="^AssAccDepAc^Assets Accum Depr. A/C^AssAccDepAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
+    <field name="Updated_By" type="Double" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
+    <field name="InActive" type="Int32" label="^InAct^In-Active^InAct^" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Assets_Loss_And_Gain_Account" type="String" label="^AssLosAndGaiAcc^Assets Loss And Gain Account^AssLosAndGaiAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^AssCat^Asset Categories^AssCat^" reportTemplate="true" filter="BookID IN ( SELECT BookID FROM UserAssetsBookAccess WHERE UserID=@BusinessRules_UserId)" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="BookID" columns="15" />
+        <dataField fieldName="AssetCategoryID" columns="15" />
+        <dataField fieldName="AssetCategory" columns="50" />
+        <dataField fieldName="Assets_Cost_Account" columns="50" />
+        <dataField fieldName="Assets_Cost_Clearing_AC" columns="50" />
+        <dataField fieldName="Assets_Depr_Account" columns="50" />
+        <dataField fieldName="Assets_Sale_Account" columns="50" />
+        <dataField fieldName="Assets_Accum_Depr_Account" columns="50" />
+        <dataField fieldName="InActive" columns="15" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Company_Code" columns="15" hidden="true" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevAsscat^Review Asset Categories^RevAsscat^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Asset Categories" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="BookID" columns="15" />
+            <dataField fieldName="AssetCategory" columns="50" />
+            <dataField fieldName="Assets_Cost_Account" columns="50" readOnly="true" />
+            <dataField fieldName="Assets_Cost_Clearing_AC" columns="50" readOnly="true" />
+            <dataField fieldName="Assets_Depr_Account" columns="50" readOnly="true" />
+            <dataField fieldName="Assets_Sale_Account" columns="50" readOnly="true" />
+            <dataField fieldName="Assets_Accum_Depr_Account" columns="50" readOnly="true" />
+            <dataField fieldName="Assets_Loss_And_Gain_Account" columns="50" readOnly="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+        <category headerText="Posting" id="c2">
+          <dataFields>
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="Company_Code" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewAssCat^New Asset Categories^NewAssCat^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Asset Categories" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="BookID" columns="15" />
+            <dataField fieldName="AssetCategory" columns="50" />
+            <dataField fieldName="Assets_Cost_Account" columns="50" />
+            <dataField fieldName="Assets_Cost_Clearing_AC" columns="50" />
+            <dataField fieldName="Assets_Depr_Account" columns="50" />
+            <dataField fieldName="Assets_Sale_Account" columns="50" />
+            <dataField fieldName="Assets_Accum_Depr_Account" columns="50" />
+            <dataField fieldName="Assets_Loss_And_Gain_Account" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="InActive" columns="15" hidden="true" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="Company_Code" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="^PrintAssetCategory^Print Asset Category^PrintAssetCategory^">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

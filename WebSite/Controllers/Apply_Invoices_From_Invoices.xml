@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Apply_Invoices_From_Invoices" conflictDetection="overwriteChanges" label="^AppInvFroInv^Apply_Invoices_From_Invoices^AppInvFroInv^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="APAR_Payments" custom="true">
+      <text><![CDATA[SELECT  dbo.Credit_Trx_Header.Trx_ID, dbo.APAR_Payments.PaymentID, dbo.Credit_Trx_Header.Sys_Number, dbo.Credit_Trx_Header.APAR_Flag, dbo.Credit_Trx_Header.APPLY_BAL, ISNULL(dbo.APAR_Payments.PMT_APPLY_BAL, 0) 
+                   AS PMT_APPLY_BAL, dbo.APAR_Payments.Payment_Date, dbo.APAR_Payments.Amount_Paid, dbo.APAR_Payments.CheckNo, dbo.APAR_Payments.PaymentType, dbo.APAR_Payments.Cur_Rate, dbo.APAR_Payments.CashBankID, 
+                   dbo.APAR_Payments.Currency_Code, dbo.Credit_Trx_Header.Cur_Rate AS Inv_Cur_Rate, dbo.APAR_Payments.Pick_Amount, dbo.APAR_Payments.Pick, dbo.APAR_Payments.Pick_Doc, dbo.APAR_Payments.Doc_No, 
+                   dbo.APAR_Payments.Location_Name
+FROM      dbo.Credit_Trx_Header INNER JOIN
+                   dbo.APAR_Payments ON dbo.Credit_Trx_Header.Sys_Number = dbo.APAR_Payments.Sys_Number AND dbo.Credit_Trx_Header.LocationID = dbo.APAR_Payments.LocationID
+WHERE   (ISNULL(dbo.Credit_Trx_Header.APPLY_BAL, 0) > 0) AND (ISNULL(dbo.APAR_Payments.PMT_APPLY_BAL, 0) > 0) AND (ISNULL(dbo.Credit_Trx_Header.Rec_Status, 0) = 1) AND (ISNULL(dbo.APAR_Payments.Rec_Status, 0) = 1)]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" readOnly="true" />
+    <field name="PaymentID" type="Decimal" allowNulls="false" label="^PayId^Payment#^PayId^" readOnly="true" showInSummary="true" isPrimaryKey="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" showInSummary="true" />
+    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" showInSummary="true" />
+    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" showInSummary="true" />
+    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Inv. Apply Bal^AppBal^" showInSummary="true" />
+    <field name="PMT_APPLY_BAL" type="Decimal" allowNulls="false" label="^PmtAppBal^Pmt Apply Bal^PmtAppBal^" readOnly="true" />
+    <field name="Pick_Amount" type="Decimal" label="^PicAmo^Apply Amt. In PMT Curr^PicAmo^" />
+    <field name="Pick" type="Int32" label="^Pick^Pick^Pick^" />
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount Paid^AmoPai^" />
+    <field name="CheckNo" type="Decimal" label="^CheNo^Check No^CheNo^" />
+    <field name="PaymentType" type="String" label="^PayTyp^Payment Type^PayTyp^" length="20" />
+    <field name="Cur_Rate" type="Decimal" label="^CurRat^PMT Cur Rate^CurRat^" />
+    <field name="CashBankID" type="Decimal" allowNulls="false" label="^CasBanId^Cash Bank ID^CasBanId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="DropDownList" dataController="BankCashInformation" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" />
+    </field>
+    <field name="Currency_Code" type="String" allowNulls="false" label="^CurCod^PMT Curr^CurCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4" />
+    <field name="Inv_Cur_Rate" type="Decimal" label="^InvCurRat^Inv Cur Rate^InvCurRat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABra^ABranch AR^ABra^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraCod^ABranch Logo^ABraCod^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="Doc_No" type="Int32" label="^DocNo^Doc No^DocNo^" />
+    <field name="Location_Name" type="String" label="Location Name" length="150" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^AvaPayToApp^Available Payments to Applied^AvaPayToApp^" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Trx_ID" columns="15" />
+        <dataField fieldName="Doc_No" columns="15" readOnly="true" />
+        <dataField fieldName="Pick_Amount" dataFormatString="N2" columns="15" />
+        <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="PaymentID" columns="15" />
+        <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Currency_Code" columns="4" readOnly="true" />
+        <dataField fieldName="CashBankID" columns="15" readOnly="true" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+        <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
+        <dataField fieldName="Pick" columns="15" hidden="true" />
+        <dataField fieldName="Payment_Date" columns="10" readOnly="true" />
+        <dataField fieldName="CheckNo" dataFormatString="N" columns="15" readOnly="true" />
+        <dataField fieldName="PaymentType" columns="20" readOnly="true" />
+        <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Inv_Cur_Rate" columns="15" readOnly="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="Location_Name" rows="1" readOnly="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevCreTraHea^Review Credit Trx Header^RevCreTraHea^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Credit Trx Header" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Pick_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="PaymentID" columns="15" readOnly="true" />
+            <dataField fieldName="Sys_Number" columns="15" readOnly="true" />
+            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+            <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Pick" columns="15" hidden="true" />
+            <dataField fieldName="Payment_Date" columns="10" readOnly="true" />
+            <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="CheckNo" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="PaymentType" columns="20" readOnly="true" />
+            <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Inv_Cur_Rate" columns="15" readOnly="true" />
+            <dataField fieldName="CashBankID" columns="15" readOnly="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewCreTraHea^New Credit Trx Header^NewCreTraHea^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Credit Trx Header" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Pick_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Payment_Date" columns="10" />
+            <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" />
+            <dataField fieldName="CheckNo" dataFormatString="N2" columns="15" />
+            <dataField fieldName="PaymentType" columns="20" />
+            <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" headerText="^Apply^Apply^Apply^" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Update" type="Sql" phase="Before"><![CDATA[IF @Pick_Amount > 0 
+BEGIN
+
+SET @Pick=1
+SET @Pick_Doc=@Trx_ID
+
+END]]></rule>
+    <rule id="r101" type="Sql" commandName="Insert|Update" phase="Before" name="Pick_Amount_Validator"><![CDATA[DECLARE @Pick_Amount_BC money , @APPLY_BAL_BC money , @PMT_APPLY_BAL_BC money
+
+SET @Pick_Amount_BC=@Pick_Amount * @Cur_Rate
+SET @PMT_APPLY_BAL_BC=@PMT_APPLY_BAL * @Cur_Rate
+
+SET @APPLY_BAL_BC=@APPLY_BAL * @Inv_Cur_Rate
+
+If @Pick_Amount_BC > 0
+BEGIN
+ IF @Pick_Amount_BC > 0 and @Pick_Amount_BC > @APPLY_BAL_BC 
+    BEGIN
+    /* prevent the default action processing */
+    SET @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    SET @Result_Focus = 'Pick_Amount, Applied Amount Is MoreThan Inv Or Payment Balance Amount Cannot Be Applied, Pls Change'
+	    
+	END
+						  
+	IF @Pick_Amount_BC > 0 and @Pick_Amount_BC > @PMT_APPLY_BAL_BC
+	BEGIN
+	 /* prevent the default action processing */
+    SET @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    SET @Result_Focus = 'Pick_Amount, Applied Amount Is MoreThan Inv Or Payment Balance Amount Cannot Be Applied, Pls Change'
+	END
+						  
+END
+]]></rule>
+  </businessRules>
+</dataController>

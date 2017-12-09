@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DIM_PROFIT_LOSSJeddah" conflictDetection="overwriteChanges" label="DIM PROFIT LOSS Jeddah" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"DIM_PROFIT_LOSSJeddah"."FY_Code" "FY_Code"
+	,"DIM_PROFIT_LOSSJeddah"."AccountID" "AccountID"
+	,"DIM_PROFIT_LOSSJeddah"."Ac_Description" "Ac_Description"
+	,"DIM_PROFIT_LOSSJeddah"."GL_Serial_No" "GL_Serial_No"
+	,"DIM_PROFIT_LOSSJeddah"."Debit_Amount" "Debit_Amount"
+	,"DIM_PROFIT_LOSSJeddah"."Credit_Amount" "Credit_Amount"
+	,"DIM_PROFIT_LOSSJeddah"."Project_Code" "Project_Code"
+	,"DIM_PROFIT_LOSSJeddah"."Dept_Code" "Dept_Code"
+	,"DIM_PROFIT_LOSSJeddah"."TrxMonths" "TrxMonths"
+	,"DIM_PROFIT_LOSSJeddah"."Account_Type" "Account_Type"
+	,"DIM_PROFIT_LOSSJeddah"."OPU_Code" "OPU_Code"
+	,"DIM_PROFIT_LOSSJeddah"."Remark" "Remark"
+	,"DIM_PROFIT_LOSSJeddah"."Product" "Product"
+	,"DIM_PROFIT_LOSSJeddah"."Unit1" "Unit1"
+	,"DIM_PROFIT_LOSSJeddah"."Location" "Location"
+	,"DIM_PROFIT_LOSSJeddah"."Category" "Category"
+from "dbo"."DIM_PROFIT_LOSSJeddah" "DIM_PROFIT_LOSSJeddah"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="FY_Code" type="Int32" label="FY Code" readOnly="true" showInSummary="true" />
+    <field name="AccountID" type="String" allowNulls="false" label="Account#" length="50" showInSummary="true" />
+    <field name="Ac_Description" type="String" label="Ac Description" length="250" showInSummary="true" />
+    <field name="GL_Serial_No" type="Decimal" allowNulls="false" label="GL Serial No" showInSummary="true" />
+    <field name="Debit_Amount" type="Decimal" allowNulls="false" label="Debit Amount" showInSummary="true" />
+    <field name="Credit_Amount" type="Decimal" allowNulls="false" label="Credit Amount" />
+    <field name="Project_Code" type="String" label="Project Code" length="50" />
+    <field name="Dept_Code" type="String" label="Dept Code" length="50" />
+    <field name="TrxMonths" type="Int32" label="Trx Months" />
+    <field name="Account_Type" type="String" label="Account Type" length="50" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Remark" type="String" label="Remark" length="500" />
+    <field name="Product" type="String" label="Product" length="50" />
+    <field name="Unit1" type="String" label="Unit1" length="50" />
+    <field name="Location" type="String" label="Location" length="50" />
+    <field name="Category" type="String" label="Category" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="DIM PROFIT LOSS Jeddah">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="FY_Code" columns="15" />
+        <dataField fieldName="Ac_Description" />
+        <dataField fieldName="GL_Serial_No" columns="15" />
+        <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+        <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="TrxMonths" columns="15" />
+        <dataField fieldName="Account_Type" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review DIM PROFIT LOSS Jeddah">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="DIM PROFIT LOSS Jeddah" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FY_Code" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Ac_Description" />
+            <dataField fieldName="GL_Serial_No" columns="15" />
+            <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="Product" columns="50" />
+            <dataField fieldName="Unit1" columns="50" />
+            <dataField fieldName="Location" columns="50" />
+            <dataField fieldName="Category" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New DIM PROFIT LOSS Jeddah">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New DIM PROFIT LOSS Jeddah" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Ac_Description" />
+            <dataField fieldName="GL_Serial_No" columns="15" />
+            <dataField fieldName="Debit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="Product" columns="50" />
+            <dataField fieldName="Unit1" columns="50" />
+            <dataField fieldName="Location" columns="50" />
+            <dataField fieldName="Category" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ItemMaster" conflictDetection="overwriteChanges" label="^IteMas^ItemMaster^IteMas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Item_Master" custom="true">
+      <text><![CDATA[SELECT * FROM tbl_Item_Master where IsNull(OverHeadElements,0)=0]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Item_Code" type="String" label="^IteNo^Item No.^IteNo^" length="20" isPrimaryKey="true" allowNulls="false" />
+    <field name="Item_Code_Ref_No" type="String" label="^IteCodRefNo^Item Code^IteCodRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" allowNulls="false" />
+    <field name="Part_No" type="String" label="^SupParNo^Part No.^SupParNo^" length="20" />
+    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" allowNulls="false" />
+    <field name="UOM" type="String" label="^PriUOM^UOM^PriUOM^" length="10" allowNulls="false">
+      <items style="Lookup" dataController="tbl_UOM" dataView="grid1" dataTextField="Unit_Of_Measure" dataValueField="Unit_Of_Measure" />
+    </field>
+    <field name="Secondry_UOM" type="String" allowNulls="false" label="^SecUOM^Secondry UOM^SecUOM^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+      <items style="Lookup" dataController="tbl_UOM" dataView="grid1" dataTextField="Unit_Of_Measure" dataValueField="Unit_Of_Measure" />
+    </field>
+    <field name="Item_Category_Major" type="String" label="^IteMajCat^Item Major Category^IteMajCat^" length="255" contextFields="MajorYN=1" allowNulls="false" showInSummary="true">
+      <items style="Lookup" dataController="ItemCategory_Major" dataView="grid1" dataTextField="Item_Category_Name" dataValueField="Item_Category" copy="Tax_Slab_ID=Tax_Slab_ID" />
+    </field>
+    <field name="Item_Category" type="String" label="^IteCat^Item Category^IteCat^" length="255" contextFields="Item_Category_Major=Item_Category_Major" allowNulls="false" causesCalculate="true">
+      <items style="Lookup" dataController="ItemCategory" dataView="grid1" dataTextField="Item_Category_Name" dataValueField="Item_Category" />
+    </field>
+    <field name="Bin_Location" type="String" label="^BinLoc^Bin Location^BinLoc^" length="50" />
+    <field name="Re_Order_Qty" type="Decimal" label="^ReOrdQty^Re-Order Qty^ReOrdQty^" />
+    <field name="CountedQty" type="Decimal" label="^CouQty^Counted Qty^CouQty^" />
+    <field name="Item_Active" type="Int16" label="^IteInAct^Item In-Active^IteInAct^" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Unit_Price" type="Decimal" label="^LisPri^List Price^LisPri^" />
+    <field name="LastUpdatedDate" type="DateTime" label="^LasUpdDat^Last Updated Date^LasUpdDat^" />
+    <field name="LastUpdatedBy" type="String" label="^LasUpdBy^Last Updated By^LasUpdBy^" length="255">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="CreatedDate" type="DateTime" label="^CreDat^Created Date^CreDat^" />
+    <field name="CreatedBy" type="String" label="^CreBy^Created By^CreBy^" length="255">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Inventory_AC" type="String" label="^InvAcc^Inventory A/C^InvAcc^" length="50" hidden="false" allowNulls="false">
+      <items dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" description="Material Account" letters="true" style="Lookup" />
+    </field>
+    <field name="CostOfSales_AC" type="String" label="^CosOfSalAcc^Cost Of Sales A/C^CosOfSalAcc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" letters="true" description="Cost Of Sales Account" />
+    </field>
+    <field name="Revenue_AC" type="String" label="^RevAcc^Revenue A/C^RevAcc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" letters="true" description="Sales Revenue Account" />
+    </field>
+    <field name="Misc_Issue_AC" type="String" label="^MisIssAcc^Misc Issue A/C^MisIssAcc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" letters="true" description="Misc. Default Issuance Debit Account " />
+    </field>
+    <field name="Misc_Receipt_AC" type="String" label="^MisRecAcc^Misc Receipt A/C^MisRecAcc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" letters="true" description="Misc. Default Receipt Credit Account " />
+    </field>
+    <field name="Expence_AC" type="String" allowNulls="false" label="^ExpAcc^Expense A/C^ExpAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Assets_Clearing_AC" type="String" allowNulls="false" label="^AssCleAcc^Assets Clearing A/C^AssCleAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Job_Issuance_Intransit_AC" type="String" allowNulls="false" label="^JobIssIntAcc^Job Issuance Intransit AC^JobIssIntAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="BranchID" type="Int32" label="^BraId^Branch#^BraId^" />
+    <field name="Reserved_Qty" type="Decimal" label="^ResQty^Reserved Qty^ResQty^" readOnly="true" />
+    <field name="Stock_On_Hand" type="Decimal" label="^OnHanQty^On Hand Qty^OnHanQty^" />
+    <field name="Unit_Cost" type="Decimal" label="^UniCos^Unit Cost^UniCos^" />
+    <field name="IsServiceItem" type="Int32" label="^IsSerIte^Is Service Item^IsSerIte^" allowNulls="false">
+      <items style="RadioButtonList">
+        <item value="0" text="No" />
+        <item value="1" text="Yes" />
+      </items>
+    </field>
+    <field name="ItemType" type="String" allowNulls="false" label="^IteTyp^Item Type^IteTyp^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+      <items style="DropDownList">
+        <item value="1" text="Finished Good" />
+        <item value="2" text="Raw Material" />
+        <item value="3" text="Semi Finished " />
+        <item value="4" text="Fixed Assets" />
+        <item value="10" text="OtherItems" />
+      </items>
+    </field>
+    <field name="Point_Of_SaleYN" type="Int16" allowNulls="false" label="^PoiOfSalYN^Point Of Sale Y/N^PoiOfSalYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="RefreshITM" type="Int32" allowNulls="false" label="^RefITM^Refresh ITM^RefITM^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="PhotoFileName" type="String" allowNulls="false" label="^PhoFilNam^Photo File Name^PhoFilNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="250" />
+    <field name="PhotoLength" type="Int32" allowNulls="false" label="^PhoLen^Photo Length^PhoLen^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="PhotoContentType" type="String" allowNulls="false" label="^PhoConTyp^Photo Content Type^PhoConTyp^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
+    <field name="Photo" type="Byte[]" label="^Pho^Photo^Pho^" allowQBE="false" allowSorting="false" sourceFields="Item_Code" onDemand="true" onDemandHandler="ItemPhotoHandler" onDemandStyle="Thumbnail" htmlEncode="false" hidden="false" computed="true">
+      <formula>NULL</formula>
+    </field>
+    <field name="BOQYN" type="Int32" label="^BOQYN^BOQYN^BOQYN^" allowNulls="false" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Item_Code_Scrap" type="String" label="^IteCodScr^Item Code Scrap^IteCodScr^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20">
+      <items style="Lookup" dataController="ItemMaster" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" />
+    </field>
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
+    <field name="Barcode" type="String" allowNulls="false" label="^Bar^Barcode^Bar^" hidden="false" length="200" />
+    <field name="IsBatchControl" type="Int16" allowNulls="false" label="^IsBat^IsBatch^IsBat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="IsItemSerialized" type="Int32" label="^IsIteSer^IsSerialized^IsIteSer^" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="AutoGenLotSerialYN" type="Int16" label="^AutGenLotSn^AutoGenLotSn^AutGenLotSn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="IsAssets" type="Int16" allowNulls="false" label="^IsAss^Is Assets^IsAss^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="TaxItemsYN" type="Int32" label="^TaxIteYN^Tax Items YN^TaxIteYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="ItemImage" type="Byte[]" onDemand="true" sourceFields="Item_Code" onDemandHandler="tbl_Item_MasterItemImage" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^ItemImage^Item Image^ItemImage^" showInSummary="true" />
+    <field name="BudgetAccount" type="String" label="^BudAcc^Budget Account^BudAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="autoItem" type="Int16" label="^IteCodAutYn^Item Code Auto YN^IteCodAutYn^" computed="true" readOnly="true">
+      <formula>SELECT @Session_ItemCodeAutoYN</formula>
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="ItemSequence" type="Int64" label="^IteSeq^Item Sequence^IteSeq^" />
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="Long_Description" type="String" label="^LonDes^Long Description^LonDes^" length="4000" />
+    <field name="UOM_Con_Rate" type="Decimal" label="^UomConRat^UOM Con Rate^UomConRat^" />
+    <field name="Sec_UOM_Stock" type="Decimal" allowNulls="false" label="^SecSto^Secodry Stock^SecSto^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^IteMas^Item Master^IteMas^" reportTemplate="true" sortExpression="Created_DateTime desc" filter="BranchID=@Session_OPU_Code" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" />
+        <dataField fieldName="Item_Description" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="Part_No" columns="20" hidden="true" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="Item_Category" />
+        <dataField fieldName="Bin_Location" columns="50" hidden="true" />
+        <dataField fieldName="BudgetAccount" rows="5" />
+        <dataField fieldName="Re_Order_Qty" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="CountedQty" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Item_Active" columns="15" hidden="true" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Inventory_AC" columns="50" />
+        <dataField fieldName="CostOfSales_AC" columns="50" hidden="true" />
+        <dataField fieldName="Revenue_AC" columns="50" />
+        <dataField fieldName="Misc_Issue_AC" columns="50" hidden="true" />
+        <dataField fieldName="Misc_Receipt_AC" columns="50" hidden="true" />
+        <dataField fieldName="Expence_AC" rows="5" />
+        <dataField fieldName="BranchID" columns="15" hidden="true" />
+        <dataField fieldName="Reserved_Qty" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Item_Category_Major" hidden="true" />
+        <dataField fieldName="Stock_On_Hand" dataFormatString="N4" columns="15" />
+        <dataField fieldName="Unit_Cost" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Barcode" rows="5" hidden="true" />
+        <dataField fieldName="IsBatchControl" columns="15" />
+        <dataField fieldName="IsItemSerialized" columns="15" />
+        <dataField fieldName="AutoGenLotSerialYN" columns="15" />
+        <dataField fieldName="CreatedBy" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="10" hidden="true" />
+        <dataField fieldName="LastUpdatedBy" hidden="true" />
+        <dataField fieldName="LastUpdatedDate" columns="10" hidden="true" />
+        <dataField fieldName="ItemImage" columns="15" hidden="true" />
+        <dataField fieldName="Created_By" columns="15" hidden="true" />
+        <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+        <dataField fieldName="Updated_By" columns="15" hidden="true" />
+        <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="IsAssets" columns="15" />
+        <dataField fieldName="IsServiceItem" columns="15" />
+        <dataField fieldName="Sec_UOM_Stock" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevIteMas^Review Item Master^RevIteMas^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Edit Item Master" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code_Ref_No" columns="20" readOnly="true" />
+            <dataField fieldName="Item_Code" columns="20" readOnly="true" />
+            <dataField fieldName="Item_Description" textMode="Note" columns="50" rows="2" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Part_No" columns="20" />
+            <dataField fieldName="Secondry_UOM" rows="5" />
+            <dataField fieldName="Item_Category_Major" />
+            <dataField fieldName="Item_Category" />
+            <dataField fieldName="LastUpdatedDate" columns="10" hidden="true" />
+            <dataField fieldName="LastUpdatedBy" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="10" hidden="true" />
+            <dataField fieldName="CreatedBy" hidden="true" />
+            <dataField fieldName="BOQYN" columns="15" rows="1" />
+            <dataField fieldName="IsServiceItem" columns="15" rows="1" />
+            <dataField fieldName="ItemType" rows="5" />
+            <dataField fieldName="Point_Of_SaleYN" columns="15" rows="1" />
+            <dataField fieldName="IsItemSerialized" columns="15" rows="1" />
+            <dataField fieldName="Unit_Cost" dataFormatString="N2" columns="15" />
+            <dataField fieldName="IsBatchControl" columns="15" />
+            <dataField fieldName="AutoGenLotSerialYN" columns="15" />
+            <dataField fieldName="BudgetAccount" rows="5" />
+            <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Bin_Location" columns="25" textMode="Note" />
+          </dataFields>
+        </category>
+        <category headerText="Additional.Information" id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Inventory_AC" columns="50" />
+            <dataField fieldName="CostOfSales_AC" columns="50" />
+            <dataField fieldName="Revenue_AC" columns="50" />
+            <dataField fieldName="Misc_Issue_AC" columns="50" />
+            <dataField fieldName="Misc_Receipt_AC" columns="50" />
+            <dataField fieldName="Expence_AC" rows="5" />
+            <dataField fieldName="Job_Issuance_Intransit_AC" columns="50" />
+            <dataField fieldName="Assets_Clearing_AC" columns="50" />
+            <dataField fieldName="BranchID" columns="15" hidden="true" />
+            <dataField fieldName="Reserved_Qty" dataFormatString="D" columns="15" readOnly="true" />
+            <dataField fieldName="Stock_On_Hand" dataFormatString="D" columns="15" readOnly="true" />
+            <dataField fieldName="Item_Code_Scrap" columns="20" />
+            <dataField fieldName="Re_Order_Qty" dataFormatString="D" columns="15" />
+            <dataField fieldName="CountedQty" dataFormatString="D" columns="15" />
+            <dataField fieldName="IsAssets" columns="15" />
+            <dataField fieldName="Item_Active" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="ItemImage" columns="15" />
+            <dataField fieldName="Company_Code" columns="15" hidden="true" />
+            <dataField fieldName="Long_Description" rows="5" textMode="Note" />
+            <dataField fieldName="UOM_Con_Rate" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewIteMas^New Item Master^NewIteMas^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Item Master" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="autoItem" columns="15" />
+            <dataField fieldName="ItemSequence" columns="15" hidden="true" />
+            <dataField fieldName="Item_Code_Ref_No" columns="20">
+              <visibility>
+                <expression test="[autoItem]==0" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Item_Code" columns="20" hidden="true" />
+            <dataField fieldName="Item_Description" textMode="Note" columns="50" rows="2" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Part_No" columns="20" />
+            <dataField fieldName="Secondry_UOM" rows="5" />
+            <dataField fieldName="Item_Category_Major" />
+            <dataField fieldName="Item_Category" />
+            <dataField fieldName="LastUpdatedDate" columns="10" hidden="true" />
+            <dataField fieldName="LastUpdatedBy" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="10" hidden="true" />
+            <dataField fieldName="CreatedBy" hidden="true" />
+            <dataField fieldName="BOQYN" columns="15" rows="1" />
+            <dataField fieldName="IsServiceItem" columns="15" rows="1" />
+            <dataField fieldName="ItemType" rows="5" />
+            <dataField fieldName="Point_Of_SaleYN" columns="15" rows="1" />
+            <dataField fieldName="IsItemSerialized" columns="15" rows="1" />
+            <dataField fieldName="Unit_Cost" dataFormatString="N2" columns="15" />
+            <dataField fieldName="IsBatchControl" columns="15" />
+            <dataField fieldName="AutoGenLotSerialYN" columns="15" />
+            <dataField fieldName="IsAssets" columns="15" />
+            <dataField fieldName="BudgetAccount" rows="5" />
+            <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Bin_Location" columns="25" textMode="Note" />
+          </dataFields>
+        </category>
+        <category headerText="Additional.Information" id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Inventory_AC" columns="50" />
+            <dataField fieldName="CostOfSales_AC" columns="50" />
+            <dataField fieldName="Revenue_AC" columns="50" />
+            <dataField fieldName="Misc_Issue_AC" columns="50" />
+            <dataField fieldName="Misc_Receipt_AC" columns="50" />
+            <dataField fieldName="Expence_AC" rows="5" />
+            <dataField fieldName="Job_Issuance_Intransit_AC" columns="50" />
+            <dataField fieldName="Assets_Clearing_AC" columns="50" />
+            <dataField fieldName="BranchID" columns="15" hidden="true" />
+            <dataField fieldName="Reserved_Qty" dataFormatString="D" columns="15" readOnly="true" />
+            <dataField fieldName="Stock_On_Hand" dataFormatString="D" columns="15" readOnly="true" />
+            <dataField fieldName="Item_Code_Scrap" columns="20" />
+            <dataField fieldName="Re_Order_Qty" dataFormatString="D" columns="15" />
+            <dataField fieldName="CountedQty" dataFormatString="D" columns="15" />
+            <dataField fieldName="Item_Active" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Company_Code" columns="15" hidden="true" />
+            <dataField fieldName="Long_Description" rows="5" textMode="Note" />
+            <dataField fieldName="UOM_Con_Rate" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
+      <categories>
+        <category id="c1" headerText="Item Master" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="grid1import" commandId="command1" type="DataSheet" label="^IteMasImp^Item Master Import^IteMasImp^" showInSelector="false">
+      <headerText>Item Master Import</headerText>
+      <dataFields>
+        <dataField fieldName="Item_Code_Ref_No" columns="20">
+          <headerText>Item_Code_Ref_No</headerText>
+        </dataField>
+        <dataField fieldName="Item_Description">
+          <headerText>Item_Description</headerText>
+        </dataField>
+        <dataField fieldName="UOM" columns="10">
+          <headerText>UOM</headerText>
+        </dataField>
+        <dataField fieldName="Part_No" columns="20">
+          <headerText>Part_No</headerText>
+        </dataField>
+        <dataField fieldName="Item_Code" columns="20">
+          <headerText>Item_Code</headerText>
+        </dataField>
+        <dataField fieldName="Item_Category_Major">
+          <headerText>Item_Category_Major</headerText>
+        </dataField>
+        <dataField fieldName="Item_Category">
+          <headerText>Item_Category</headerText>
+        </dataField>
+        <dataField fieldName="ItemType" rows="5">
+          <headerText>ItemType</headerText>
+        </dataField>
+        <dataField fieldName="Bin_Location" columns="50">
+          <headerText>Bin_Location</headerText>
+        </dataField>
+        <dataField fieldName="Re_Order_Qty" dataFormatString="c" columns="15">
+          <headerText>Re_Order_Qty</headerText>
+        </dataField>
+        <dataField fieldName="Item_Active" columns="15">
+          <headerText>Item_Active</headerText>
+        </dataField>
+        <dataField fieldName="Unit_Price" dataFormatString="c" columns="15">
+          <headerText>Unit_Price</headerText>
+        </dataField>
+        <dataField fieldName="BranchID" columns="15">
+          <headerText>BranchID</headerText>
+        </dataField>
+        <dataField fieldName="Unit_Cost" dataFormatString="N2" columns="15">
+          <headerText>Unit_Cost</headerText>
+        </dataField>
+        <dataField fieldName="IsServiceItem" columns="15">
+          <headerText>IsServiceItem</headerText>
+        </dataField>
+        <dataField fieldName="IsBatchControl" columns="15">
+          <headerText>IsBatchControl</headerText>
+        </dataField>
+        <dataField fieldName="IsItemSerialized" columns="15">
+          <headerText>IsItemSerialized</headerText>
+        </dataField>
+        <dataField fieldName="AutoGenLotSerialYN" columns="15">
+          <headerText>AutoGenLotSerialYN</headerText>
+        </dataField>
+        <dataField fieldName="Inventory_AC" columns="50" hidden="true">
+          <headerText>Inventory_AC</headerText>
+        </dataField>
+        <dataField fieldName="CostOfSales_AC" columns="50" hidden="true">
+          <headerText>CostOfSales_AC</headerText>
+        </dataField>
+        <dataField fieldName="Revenue_AC" columns="50" hidden="true">
+          <headerText>Revenue_AC</headerText>
+        </dataField>
+        <dataField fieldName="Misc_Issue_AC" columns="50" hidden="true">
+          <headerText>Misc_Issue_AC</headerText>
+        </dataField>
+        <dataField fieldName="Misc_Receipt_AC" columns="50" hidden="true">
+          <headerText>Misc_Receipt_AC</headerText>
+        </dataField>
+        <dataField fieldName="Expence_AC" columns="50" hidden="true">
+          <headerText>Expence_AC</headerText>
+        </dataField>
+        <dataField fieldName="Assets_Clearing_AC" columns="50" hidden="true">
+          <headerText>Assets_Clearing_AC</headerText>
+        </dataField>
+        <dataField fieldName="Job_Issuance_Intransit_AC" columns="50" hidden="true">
+          <headerText>Job_Issuance_Intransit_AC</headerText>
+        </dataField>
+        <dataField fieldName="BOQYN" columns="15" hidden="true">
+          <headerText>BOQYN</headerText>
+        </dataField>
+        <dataField fieldName="Point_Of_SaleYN" columns="15" hidden="true">
+          <headerText>Point_Of_SaleYN</headerText>
+        </dataField>
+        <dataField fieldName="IsAssets" columns="15" hidden="true">
+          <headerText>IsAssets</headerText>
+        </dataField>
+        <dataField fieldName="Company_Code" columns="15" hidden="true">
+          <headerText>Company_Code</headerText>
+        </dataField>
+      </dataFields>
+    </view>
+    <view id="grid1ar" commandId="command1" type="Grid" label="^IteMas^Item Master^IteMas^" showInSelector="false">
+      <dataFields>
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" />
+        <dataField fieldName="Item_Description" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="Part_No" columns="20" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="Item_Category" />
+        <dataField fieldName="Bin_Location" columns="50" hidden="true" />
+        <dataField fieldName="BudgetAccount" rows="5" />
+        <dataField fieldName="Re_Order_Qty" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="CountedQty" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Item_Active" columns="15" hidden="true" />
+        <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Inventory_AC" columns="50" />
+        <dataField fieldName="CostOfSales_AC" columns="50" hidden="true" />
+        <dataField fieldName="Revenue_AC" columns="50" />
+        <dataField fieldName="Misc_Issue_AC" columns="50" hidden="true" />
+        <dataField fieldName="Misc_Receipt_AC" columns="50" hidden="true" />
+        <dataField fieldName="Expence_AC" rows="5" />
+        <dataField fieldName="BranchID" columns="15" hidden="true" />
+        <dataField fieldName="Reserved_Qty" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="Item_Category_Major" hidden="true" />
+        <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Unit_Cost" dataFormatString="N2" columns="15" />
+        <dataField fieldName="IsServiceItem" columns="15" hidden="true" />
+        <dataField fieldName="Barcode" rows="5" hidden="true" />
+        <dataField fieldName="IsBatchControl" columns="15" />
+        <dataField fieldName="IsItemSerialized" columns="15" />
+        <dataField fieldName="AutoGenLotSerialYN" columns="15" />
+        <dataField fieldName="CreatedBy" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="10" hidden="true" />
+        <dataField fieldName="LastUpdatedBy" hidden="true" />
+        <dataField fieldName="LastUpdatedDate" columns="10" hidden="true" />
+        <dataField fieldName="ItemImage" columns="15" hidden="true" />
+        <dataField fieldName="Created_By" columns="15" hidden="true" />
+        <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+        <dataField fieldName="Updated_By" columns="15" hidden="true" />
+        <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="Image" commandId="command1" type="Grid" label="^Ima^Image^Ima^">
+      <dataFields>
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="15" />
+        <dataField fieldName="ItemImage" columns="15" />
+      </dataFields>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+      <action id="a2" commandName="Edit" commandArgument="editForm1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="^NewCreateItem^New Create Item^NewCreateItem^" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" cssClass="EditIcon" whenView="grid1" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a100" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="^PrintItemMaster^Print Item Master^PrintItemMaster^">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action commandName="SQL" headerText="^Refresh^Refresh^Refresh^" id="a100">
+        <data><![CDATA[DECLARE @A INT
+SET @A =0
+if IsNull(@RefreshITM,0)=0  SET @A =1
+
+UPDATE tbl_Item_Master
+SET RefreshITM=@A  WHERE Item_Code=@Item_Code]]></data>
+      </action>
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^RefreshCost^Refresh Cost^RefreshCost^" flat="true">
+      <action commandName="SQL" headerText="^RefreshCost^Refresh Cost^RefreshCost^" id="a100" cssClass="glyphicon-transfer">
+        <data><![CDATA[EXEC [dbo].[Update_Item_Cost]]]></data>
+      </action>
+      <action commandName="Custom" commandArgument="ItmBarcode" headerText="Print Barcode" id="a101" whenLastCommandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="^RefreshWHItems^Refresh WH Items^RefreshWHItems^" flat="true">
+      <action commandName="SQL" headerText="^RefreshWHItems^Refresh WH Items^RefreshWHItems^" id="a100" cssClass="glyphicon-refresh">
+        <data><![CDATA[EXEC [dbo].[UPDATE_ITEM_WAREHOUSE_SNAPSHOT] @Session_StoreID]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag102" scope="ActionBar" headerText="^AboutRecord^About Record^AboutRecord^" flat="true">
+      <action commandName="EditModal" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />
+    </actionGroup>
+    <actionGroup id="ag103" scope="ActionBar" headerText="^ImportFromExcel^Import From Excel^ImportFromExcel^" flat="true">
+      <action commandName="Import" id="a100" cssClass="glyphicon-list-alt" />
+    </actionGroup>
+    <actionGroup id="ag104" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[    SELECT 	@Inventory_AC=BR.Inventory_AC,
+            @CostOfSales_AC=BR.CostOfSales_AC,
+            @Revenue_AC=BR.Revenue_AC ,
+            @Misc_Issue_AC=BR.Misc_Issue_AC,
+            @Misc_Receipt_AC=BR.Misc_Receipt_AC,
+			@Assets_Clearing_AC=BR.Assets_Clearing_AC,
+			@Job_Issuance_Intransit_AC=BR.Job_Issuance_Intransit_AC,
+			@Expence_AC=BR.Expence_AC FROM dbo.tbl_BranchInfo BR WHERE BR.BranchID=@Session_OPU_Code
+			
+			SET @IsBatchControl=0
+			SET @AutoGenLotSerialYN=0
+			SET @IsItemSerialized=0
+			SET @IsServiceItem=0
+			SET @Point_Of_SaleYN=0
+			SET @BOQYN=0
+			SET @IsAssets=0
+			SET @ItemType='1'
+			SET @autoItem=@Session_ItemCodeAutoYN
+		IF @Session_ItemCodeAutoYN=1 SET @Item_Code='None'
+		IF @Session_ItemCodeAutoYN=1 SET @Item_Code_Ref_No='None' 
+			]]></rule>
+    <rule id="r103" commandName="Insert" type="Sql" phase="Before"><![CDATA[    SELECT  @ItemSequence=IsNull(MAX(ItemSequence),0)
+                 FROM [dbo].[tbl_Item_Master]
+                 WHERE [Item_Category] = @Item_Category
+                       AND [Item_Category_Major] = @Item_Category_Major
+				   AND  BranchID=@Session_OPU_Code
+SET @ItemSequence=IsNull(@ItemSequence,0)+1
+
+SET @Secondry_UOM=@UOM
+IF @Session_ItemCodeAutoYN=1 
+BEGIN
+    SET @Item_Code_Ref_No = [dbo].[GET_NEXT_ITEM_CODE](@Item_Category_Major, @Item_Category,@ItemSequence )
+END
+IF @Item_Code_Ref_No IS NULL SET @Item_Code_Ref_No= CAST(@ItemSequence AS NVARCHAR(20))
+SET @Item_Code= CAST(@Session_OPU_Code AS NVARCHAR(5)) +'.' +@Item_Code_Ref_No 
+
+]]></rule>
+    <rule id="r101" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[IF dbo.CHECK_VALID_OPU_STORE(@BusinessRules_UserId, @Session_OPU_Code, @Session_StoreID) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Re_Order_Qty,Invalid Store/Branch Selection Please select valid Organization from Change Organization Page.'
+END
+if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_Focus = 'Re_Order_Qty, You Are ReadOnly User ....You Cannot Change Record'
+end
+			SET @IsBatchControl=IsNull(@IsBatchControl,0)
+			SET @AutoGenLotSerialYN=IsNull(@AutoGenLotSerialYN,0)
+			SET @IsItemSerialized=IsNull(@IsItemSerialized,0)
+			SET @IsServiceItem=IsNull(@IsServiceItem,0)
+			SET @Point_Of_SaleYN=IsNull(@Point_Of_SaleYN,0)
+			SET @BOQYN=IsNull(@BOQYN,0)
+			SET @BranchID=@Session_OPU_Code
+			
+			SET @Company_Code=@Session_Company_Code
+			
+SET @Secondry_UOM=@UOM
+]]></rule>
+    <rule id="r102" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+    <rule id="r104" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+    <rule id="r105" commandName="Custom" commandArgument="ItmBarcode" type="JavaScript" phase="Execute"><![CDATA[window.open([Barcode], "_blank", "titlebar=no,location=no,toolbar=yes,scrollbars=no,resizable=yes,status=no,top=100,left=500,width=400,height=300");]]></rule>
+    <rule id="r106" type="Sql" commandName="Insert|Update" phase="Before" name="IsBatchControl_Validator"><![CDATA[if IsNull(@IsBatchControl,0)=1 and IsNull(@IsItemSerialized,0)=1
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'IsBatchControl,Item Cannot be Set Both Batch Control & Serial Control It Should be Either'
+end
+]]></rule>
+  </businessRules>
+  <blobAdapterConfig>Field: Photo 
+Storage-System: File 
+Path-Template: ~\App_Data\ItemMaster\{Item_Code}</blobAdapterConfig>
+</dataController>

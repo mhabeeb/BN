@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="GL_Budget_Master" conflictDetection="overwriteChanges" label="^GlBudMas^GL_Budget_Master^GlBudMas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="GL_Budget_Master" custom="true">
+      <text><![CDATA[SELECT * FROM GL_Budget_Master]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="BudgetCode" type="Decimal" allowNulls="false" label="^BudCod^Budget Code^BudCod^" isPrimaryKey="true" />
+    <field name="BudgetName" type="String" allowNulls="false" label="^BudNam^Budget Name^BudNam^" length="50" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" computed="true" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" showInSummary="true" />
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="Company_Code" type="Decimal" allowNulls="false" label="^ComCod^Company Code^ComCod^" />
+    <field name="EnabledYN" type="Int32" label="^EnaYn^Enabled YN^EnaYn^" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
+    <field name="ImportYN" type="Int32" label="^ImpYn^Import YN^ImpYn^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="ImportDate" type="DateTime" label="^ImpDat^Import Date^ImpDat^" />
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Code" dataValueField="Project_Code" copy="Currency_Code=Currency_Code" />
+    </field>
+    <field name="ForecastYN" type="Int32" allowNulls="false" label="^ForYn^Forecast YN^ForYn^" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" htmlEncode="false" hidden="false" length="4">
+      <items style="DropDownList" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Code" dataValueField="Currency_Code" />
+    </field>
+    <field name="ControlBudgetYN" type="Int64" label="^ConBudYn^ControlYN^ConBudYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="IsDefault" type="Int64" label="^IsDef^IsDefault^IsDef^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="BudgetTolerance" type="Decimal" label="^BudTol^Budget Tolerance^BudTol^" allowNulls="false" />
+    <field name="BudgetAdmin" type="Int32" label="^BudAdm^Budget Admin^BudAdm^">
+      <items style="Lookup" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Doc_No" type="Int64" label="^DocNo^Doc No^DocNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="DOC_TYPE_ID" type="Int16" label="^DocTypId^DOC TYPE ID^DocTypId^" />
+    <field name="App_Group_ID" type="Int64" label="^AppGroId^App Group ID^AppGroId^" contextFields="DocTypeID=DOC_TYPE_ID">
+      <items style="DropDownList" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="AppGroupID" dataValueField="AppGroupID" />
+    </field>
+    <field name="Approve_Ask" type="Int32" allowNulls="false" label="^AppAsk^Approve Ask^AppAsk^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="ActualAmount" type="Decimal" label="^ActAmo^Actual Amount^ActAmo^" />
+    <field name="BudgetAmount" type="Decimal" label="^BudAmo^Budget Amount^BudAmo^" />
+    <field name="BudgetObligation" type="Decimal" label="^BudObl^Obligation^BudObl^" />
+    <field name="BudgetComitment" type="Decimal" label="^BudCom^Comitment^BudCom^" />
+    <field name="BudgetBalance" type="Decimal" label="^BudBal^Balance^BudBal^" />
+    <field name="IsYearlyBudget" type="Int16" label="Is Yearly Budget">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^BudMas^Budget Master^BudMas^" filter="OPU_Code=@Session_OPU_Code " sortExpression="BudgetCode DESC" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="BudgetName" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Doc_No" columns="15" />
+        <dataField fieldName="BudgetCode" columns="10" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="ImportYN" columns="15" hidden="true" />
+        <dataField fieldName="ImportDate" columns="10" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="ForecastYN" columns="15" hidden="true" />
+        <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+        <dataField fieldName="ControlBudgetYN" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="BudgetTolerance" columns="15" hidden="true" />
+        <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
+        <dataField fieldName="App_Group_ID" columns="15" hidden="true" />
+        <dataField fieldName="BudgetAmount" columns="15" dataFormatString="N2" />
+        <dataField fieldName="ActualAmount" columns="15" dataFormatString="N2" />
+        <dataField fieldName="BudgetObligation" columns="15" dataFormatString="N2" />
+        <dataField fieldName="BudgetComitment" columns="15" dataFormatString="N2" />
+        <dataField fieldName="BudgetBalance" columns="15" dataFormatString="N2" />
+        <dataField fieldName="Approve_Ask" columns="15" />
+        <dataField fieldName="Rec_Status" columns="15" />
+        <dataField fieldName="EnabledYN" columns="15" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="IsYearlyBudget" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevBudMas^Review Budget Master^RevBudMas^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New GL Budget Master" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="BudgetName" columns="30" />
+            <dataField fieldName="ImportDate" columns="10" hidden="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="ImportYN" columns="15" hidden="true" />
+            <dataField fieldName="EnabledYN" columns="15" />
+            <dataField fieldName="ForecastYN" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+        <category headerText="Approval" id="c2">
+          <dataFields>
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+            <dataField fieldName="IsDefault" columns="15" />
+            <dataField fieldName="ControlBudgetYN" columns="15" />
+            <dataField fieldName="BudgetTolerance" columns="15" hidden="true" />
+            <dataField fieldName="BudgetAdmin" columns="15" hidden="true" />
+            <dataField fieldName="Doc_No" columns="15" hidden="true" />
+            <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
+            <dataField fieldName="App_Group_ID" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
+            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
+            <dataField fieldName="BudgetCode" columns="15" readOnly="true" />
+            <dataField fieldName="IsYearlyBudget" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewBudMas^New Budget Master^NewBudMas^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New GL Budget Master" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="BudgetCode" columns="15" hidden="true" />
+            <dataField fieldName="BudgetName" columns="30" />
+            <dataField fieldName="ImportDate" columns="10" hidden="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="EnabledYN" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="ImportYN" columns="15" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="ForecastYN" columns="15" hidden="true" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+            <dataField fieldName="IsDefault" columns="15" />
+            <dataField fieldName="ControlBudgetYN" columns="15" />
+            <dataField fieldName="BudgetTolerance" columns="15" hidden="true" />
+            <dataField fieldName="BudgetAdmin" columns="15" hidden="true" />
+            <dataField fieldName="Doc_No" columns="15" hidden="true" />
+            <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
+            <dataField fieldName="App_Group_ID" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
+            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
+            <dataField fieldName="IsYearlyBudget" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^CopyBudget^Copy Budget^CopyBudget^" flat="true">
+      <action commandName="SQL" headerText="^CopyBudget^Copy Budget^CopyBudget^" id="a100" confirmation="_controller=Param_Pick_Project_for_Budget&#xD;&#xA;_title=JV Budget Confirmation&#xD;&#xA;_width=500">
+        <data><![CDATA[EXEC [dbo].[Copy_Budget_With_Remarks] @BudgetCode,@BusinessRules_UserId, @Parameters_Project_Code,
+@Parameters_Dept_Code,@Parameters_SiteCode
+
+
+]]></data>
+      </action>
+      <action commandName="SQL" headerText="^CollectActual^Collect Actual^CollectActual^" id="a101" whenLastCommandName="Select">
+        <data><![CDATA[EXEC UPDATE_BUDGET @BudgetCode
+]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag102" scope="ActionBar" headerText="^BudgetEntry^Budget Entry^BudgetEntry^" flat="true">
+      <action commandName="SQL" whenLastCommandName="Select" id="a100" confirmation="_controller=Parameter_Account_Budget&#xD;&#xA;_title=Enter Budget Distribution Details&#xD;&#xA;_width=500" headerText="^BudgetEntry^Budget Entry^BudgetEntry^">
+        <data><![CDATA[EXEC XX_DISTRIBUTE_BUDGET_AMT
+     @BudgetCode,
+     @Parameters_AccountID,
+     @Parameters_PROJECT_CODE,
+     @Parameters_DEPT_CODE,
+     @Parameters_SiteCode,
+     @Parameters_Amount,
+     @Parameters_FromDate,
+     @OPU_Code,
+     @BusinessRules_UserId	
+]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="^AskApproval^Ask Approval^AskApproval^" flat="true">
+      <action commandName="SQL" headerText="^AskApproval^Ask Approval^AskApproval^" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
+        <data><![CDATA[EXEC XX_UPDATE_ASK_STATUS @BudgetCode, @DOC_TYPE_ID,1,@BusinessRules_UserId]]></data>
+      </action>
+      <action commandName="SQL" headerText="^Re-Open^Re-Open^Re-Open^" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1">
+        <data><![CDATA[EXECUTE [dbo].[REOPEN_DOCUMENT_STATUS] @BudgetCode, @DOC_TYPE_ID]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @ForecastYN=0
+SET @OPU_Code=@Session_OPU_Code
+SET @Company_Code=@Session_Company_Code
+SET @Project_Code='None'
+SET @ControlBudgetYN=0
+SET @IsDefault=0
+SET @Approve_Ask=0
+SET @Rec_Status=0
+SET @DOC_TYPE_ID=570
+SET @EnabledYN=0
+SET @ImportDate=GETDATE()
+SET @Currency_Code=@Session_DefaultCurrency]]></rule>
+    <rule id="r101" type="Sql" commandName="Insert" phase="Before" name="IsDefault_Validator"><![CDATA[IF dbo.CHECK_VALID_OPU_STORE(@BusinessRules_UserId, @Session_OPU_Code, @Session_StoreID) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'BudgetName,Invalid Store/Branch Selection Please select valid Organization from Change Organization Page.'
+END
+if exists ( SELECT TOP 1 IsDefault FROM GL_Budget_Master WHERE  IsDefault=1 AND OPU_Code=@Session_OPU_Code) and @IsDefault=1
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'IsDefault, Duplicate Default Budget.....'
+end
+]]></rule>
+    <rule id="r102" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER (@DOC_TYPE_ID,@Session_OPU_Code,@ImportDate)
+EXEC dbo.RESET_SEQUENCE @DOC_TYPE_ID,@Session_OPU_Code,@ImportDate
+
+
+	  
+	  ]]></rule>
+    <rule id="r103" type="Sql" commandName="Update" phase="Before" name="IsDefault_Validator"><![CDATA[if exists ( SELECT TOP 1 IsDefault FROM GL_Budget_Master 
+		   WHERE  IsDefault=1 AND OPU_Code=@Session_OPU_Code and BudgetCode <> @BudgetCode) and @IsDefault=1
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'IsDefault, Duplicate Default Budget.....'
+end
+
+
+if [dbo].[CHECK_APPROVAL_STATUS](@BudgetCode,@DOC_TYPE_ID)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='BudgetName, The Docuement Is InProcess/Approved, Can not be Update'
+end
+]]></rule>
+  </businessRules>
+</dataController>

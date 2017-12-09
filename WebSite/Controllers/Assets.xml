@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Assets" conflictDetection="overwriteChanges" label="Assets" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Assets"."AssetID" "AssetID"
+	,"Assets"."AssetNo" "AssetNo"
+	,"Assets"."AssetDescription" "AssetDescription"
+	,"Assets"."EmployeeID" "EmployeeID"
+	,"Employee"."Emp_Login" "EmployeeEmp_Login"
+	,"EmployeeShift_"."Description" "EmployeeShift_Description"
+	,"EmployeeSubDesignation_"."Description" "EmployeeSubDesignation_Description"
+	,"EmployeeSubDesignation_Designation_"."Description" "EmployeeSubDesignation_Designation_Description"
+	,"Assets"."AssetCategoryID" "AssetCategoryID"
+	,"AssetCategory"."AssetCategory" "AssetCategoryAssetCategory"
+	,"Assets"."AssetsStatus" "AssetsStatus"
+	,"Assets"."Dept_Code" "Dept_Code"
+	,"Dept_"."Dept_name" "Dept_Dept_name"
+	,"Assets"."Project_Code" "Project_Code"
+	,"Project_"."Project_Name" "Project_Project_Name"
+	,"Assets"."Sys_Number" "Sys_Number"
+	,"TheSys_Number"."Vendor_Name" "TheSys_NumberVendor_Name"
+	,"TheSys_NumberUnbilled_AC"."Account_Description" "TheSys_NumberUnbilled_ACAccount_Description"
+	,"TheSys_NumberUnbilled_ACAccount_Type"."Account_Type_Ar" "TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar"
+	,"TheSys_NumberBilled_AC"."Account_Description" "TheSys_NumberBilled_ACAccount_Description"
+	,"TheSys_NumberBilled_ACAccount_Type"."Account_Type_Ar" "TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar"
+	,"Assets"."Make" "Make"
+	,"Assets"."Model" "Model"
+	,"Assets"."ModelNumber" "ModelNumber"
+	,"Assets"."SerialNumber" "SerialNumber"
+	,"Assets"."BarcodeNumber" "BarcodeNumber"
+	,"Assets"."DateAcquired" "DateAcquired"
+	,"Assets"."DateSold" "DateSold"
+	,"Assets"."Customer_ID" "Customer_ID"
+	,"Assets"."InterfaceARYN" "InterfaceARYN"
+	,"Assets"."SalesRemarks" "SalesRemarks"
+	,"Assets"."SalesYN" "SalesYN"
+	,"Assets"."PurchasePrice" "PurchasePrice"
+	,"Assets"."DepreciationMethod" "DepreciationMethod"
+	,"Assets"."DepreciableLife" "DepreciableLife"
+	,"Assets"."SalvageValue" "SalvageValue"
+	,"Assets"."CurrentValue" "CurrentValue"
+	,"Assets"."Comments" "Comments"
+	,"Assets"."Description" "Description"
+	,"Assets"."NextSchedMaint" "NextSchedMaint"
+	,"Assets"."Created_By" "Created_By"
+	,"Assets"."Created_DateTime" "Created_DateTime"
+	,"Assets"."Updated_By" "Updated_By"
+	,"Assets"."Updated_DateTime" "Updated_DateTime"
+	,"Assets"."InActive" "InActive"
+	,"Assets"."StopDepr" "StopDepr"
+	,"Assets"."OPU_Code" "OPU_Code"
+	,"Assets"."Company_Code" "Company_Code"
+	,"Assets"."AccuDeprAmount" "AccuDeprAmount"
+	,"Assets"."FutureDeprAMount" "FutureDeprAMount"
+	,"Assets"."Item_Code" "Item_Code"
+	,"Item_"."Part_No" "Item_Part_No"
+	,"Item_Inventory_AC"."Account_Description" "Item_Inventory_ACAccount_Description"
+	,"Item_Inventory_ACAccount_Type"."Account_Type_Ar" "Item_Inventory_ACAccount_TypeAccount_Type_Ar"
+	,"Item_CostOfSales_AC"."Account_Description" "Item_CostOfSales_ACAccount_Description"
+	,"Item_CostOfSales_ACAccount_Type"."Account_Type_Ar" "Item_CostOfSales_ACAccount_TypeAccount_Type_Ar"
+	,"Item_Revenue_AC"."Account_Description" "Item_Revenue_ACAccount_Description"
+	,"Item_Revenue_ACAccount_Type"."Account_Type_Ar" "Item_Revenue_ACAccount_TypeAccount_Type_Ar"
+	,"Item_Misc_Issue_AC"."Account_Description" "Item_Misc_Issue_ACAccount_Description"
+	,"Item_Misc_Issue_ACAccount_Type"."Account_Type_Ar" "Item_Misc_Issue_ACAccount_TypeAccount_Type_Ar"
+	,"Item_Misc_Receipt_AC"."Account_Description" "Item_Misc_Receipt_ACAccount_Description"
+	,"Item_Misc_Receipt_ACAccount_Type"."Account_Type_Ar" "Item_Misc_Receipt_ACAccount_TypeAccount_Type_Ar"
+	,"Assets"."IsAssets" "IsAssets"
+	,"Assets"."Qty" "Qty"
+	,"Assets"."Line_ID" "Line_ID"
+	,"Assets"."Assets_Cost_Clearing_AC" "Assets_Cost_Clearing_AC"
+	,"Assets"."RetirmentYN" "RetirmentYN"
+	,"Assets"."RetirmentDate" "RetirmentDate"
+	,"Assets"."RetirmentRemarks" "RetirmentRemarks"
+	,"Assets"."ReturnToStore" "ReturnToStore"
+	,"Assets"."StoreID" "StoreID"
+	,"Assets"."Assets_Cost_Account" "Assets_Cost_Account"
+	,"Assets"."Assets_Accum_Depr_Account" "Assets_Accum_Depr_Account"
+	,"Assets"."Assets_Loss_And_Gain_Account" "Assets_Loss_And_Gain_Account"
+	,"Assets"."Assets_Sale_Account" "Assets_Sale_Account"
+from "dbo"."Assets" "Assets"
+	left join "dbo"."Employees" "Employee" on "Assets"."EmployeeID" = "Employee"."Emp_id"
+	left join "dbo"."HR_Shift_Information" "EmployeeShift_" on "Employee"."Shift_ID" = "EmployeeShift_"."Shift_ID"
+	left join "dbo"."HR_SubDesignation" "EmployeeSubDesignation_" on "Employee"."SubDesignation_ID" = "EmployeeSubDesignation_"."SubDesignation_ID"
+	left join "dbo"."HR_Designation" "EmployeeSubDesignation_Designation_" on "EmployeeSubDesignation_"."Designation_ID" = "EmployeeSubDesignation_Designation_"."Designation_ID"
+	left join "dbo"."AssetCategories" "AssetCategory" on "Assets"."AssetCategoryID" = "AssetCategory"."AssetCategoryID"
+	left join "dbo"."tbl_Department" "Dept_" on "Assets"."Dept_Code" = "Dept_"."Dept_Code"
+	left join "dbo"."tbl_Projects" "Project_" on "Assets"."Project_Code" = "Project_"."Project_Code"
+	left join "dbo"."tbl_Customer_Supplier" "TheSys_Number" on "Assets"."Sys_Number" = "TheSys_Number"."Sys_Number"
+	left join "dbo"."COA_Natural_Account" "TheSys_NumberUnbilled_AC" on "TheSys_Number"."Unbilled_AC" = "TheSys_NumberUnbilled_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "TheSys_NumberUnbilled_ACAccount_Type" on "TheSys_NumberUnbilled_AC"."Account_Type" = "TheSys_NumberUnbilled_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "TheSys_NumberBilled_AC" on "TheSys_Number"."Billed_AC" = "TheSys_NumberBilled_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "TheSys_NumberBilled_ACAccount_Type" on "TheSys_NumberBilled_AC"."Account_Type" = "TheSys_NumberBilled_ACAccount_Type"."Account_Type"
+	left join "dbo"."tbl_Item_Master" "Item_" on "Assets"."Item_Code" = "Item_"."Item_Code"
+	left join "dbo"."COA_Natural_Account" "Item_Inventory_AC" on "Item_"."Inventory_AC" = "Item_Inventory_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_Inventory_ACAccount_Type" on "Item_Inventory_AC"."Account_Type" = "Item_Inventory_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "Item_CostOfSales_AC" on "Item_"."CostOfSales_AC" = "Item_CostOfSales_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_CostOfSales_ACAccount_Type" on "Item_CostOfSales_AC"."Account_Type" = "Item_CostOfSales_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "Item_Revenue_AC" on "Item_"."Revenue_AC" = "Item_Revenue_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_Revenue_ACAccount_Type" on "Item_Revenue_AC"."Account_Type" = "Item_Revenue_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "Item_Misc_Issue_AC" on "Item_"."Misc_Issue_AC" = "Item_Misc_Issue_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_Misc_Issue_ACAccount_Type" on "Item_Misc_Issue_AC"."Account_Type" = "Item_Misc_Issue_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "Item_Misc_Receipt_AC" on "Item_"."Misc_Receipt_AC" = "Item_Misc_Receipt_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "Item_Misc_Receipt_ACAccount_Type" on "Item_Misc_Receipt_AC"."Account_Type" = "Item_Misc_Receipt_ACAccount_Type"."Account_Type"
+]]></text>
+    </command>
+    <command id="AssetIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="AssetID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="AssetID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Asset^Asset#^Asset^" readOnly="true" />
+    <field name="AssetNo" type="String" label="^AssetNo^Asset No^AssetNo^" length="20" showInSummary="true" />
+    <field name="AssetDescription" type="String" label="^AssetDescription^Asset Description^AssetDescription^" length="255" showInSummary="true" />
+    <field name="EmployeeID" type="Decimal" label="^Employee^Employee#^Employee^" showInSummary="true">
+      <items />
+    </field>
+    <field name="EmployeeEmp_Login" type="String" readOnly="true" label="^EmployeeEmpLogin^Employee Emp Login^EmployeeEmpLogin^" length="20" />
+    <field name="EmployeeShift_Description" type="String" readOnly="true" label="^EmployeeShiftDescription^Employee Shift Description^EmployeeShiftDescription^" length="50" />
+    <field name="EmployeeSubDesignation_Description" type="String" readOnly="true" label="^EmployeeSubDesignationDescription^Employee Sub Designation Description^EmployeeSubDesignationDescription^" length="50" />
+    <field name="EmployeeSubDesignation_Designation_Description" type="String" readOnly="true" label="^EmployeeSubDesignationDescription^Employee Sub Designation Description^EmployeeSubDesignationDescription^" length="50" />
+    <field name="AssetCategoryID" type="Int32" label="^AssetCategory^Asset Category#^AssetCategory^" showInSummary="true">
+      <items style="Lookup" dataController="AssetCategories" newDataView="createForm1" dataValueField="AssetCategoryID" />
+    </field>
+    <field name="AssetCategoryAssetCategory" type="String" readOnly="true" label="^AssetCategory^Asset Category^AssetCategory^" length="50" />
+    <field name="AssetsStatus" type="String" label="^AssetsStatus^Assets Status^AssetsStatus^" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50">
+      <items style="Lookup" dataController="tbl_Department" newDataView="createForm1" dataValueField="Dept_Code" />
+    </field>
+    <field name="Dept_Dept_name" type="String" readOnly="true" label="^Deptname^Dept name^Deptname^" length="50" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50">
+      <items style="Lookup" dataController="tbl_Projects" newDataView="createForm1" dataValueField="Project_Code" />
+    </field>
+    <field name="Project_Project_Name" type="String" readOnly="true" label="^ProjectName^Project Name^ProjectName^" length="250" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" />
+    <field name="TheSys_NumberVendor_Name" type="String" readOnly="true" label="^SysNumberVendorName^Sys Number Vendor Name^SysNumberVendorName^" length="150" />
+    <field name="TheSys_NumberUnbilled_ACAccount_Description" type="String" readOnly="true" label="^SysNumberUnbilledACAccountDescription^Sys Number Unbilled AC Account Description^SysNumberUnbilledACAccountDescription^" length="200" />
+    <field name="TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^SysNumberUnbilledACAccountTypeAr^Sys Number Unbilled AC Account Type Ar^SysNumberUnbilledACAccountTypeAr^" length="50" />
+    <field name="TheSys_NumberBilled_ACAccount_Description" type="String" readOnly="true" label="^SysNumberBilledACAccountDescription^Sys Number Billed AC Account Description^SysNumberBilledACAccountDescription^" length="200" />
+    <field name="TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^SysNumberBilledACAccountTypeAr^Sys Number Billed AC Account Type Ar^SysNumberBilledACAccountTypeAr^" length="50" />
+    <field name="Make" type="String" label="^Make^Make^Make^" length="50" />
+    <field name="Model" type="String" label="^Model^Model^Model^" length="50" />
+    <field name="ModelNumber" type="String" label="^ModelNumber^Model Number^ModelNumber^" length="50" />
+    <field name="SerialNumber" type="String" label="^SerialNumber^Serial Number^SerialNumber^" length="50" />
+    <field name="BarcodeNumber" type="String" label="^BarcodeNumber^Barcode Number^BarcodeNumber^" length="30" />
+    <field name="DateAcquired" type="DateTime" label="^DateAcquired^Date Acquired^DateAcquired^" />
+    <field name="DateSold" type="DateTime" label="^DateSold^Date Sold^DateSold^" />
+    <field name="Customer_ID" type="Decimal" label="^Customer^Customer#^Customer^" />
+    <field name="InterfaceARYN" type="Int32" label="^InterfaceARYN^Interface ARYN^InterfaceARYN^" />
+    <field name="SalesRemarks" type="String" allowQBE="false" allowSorting="false" label="^SalesRemarks^Sales Remarks^SalesRemarks^" length="4000" />
+    <field name="SalesYN" type="Int32" label="^SalesYN^Sales YN^SalesYN^" />
+    <field name="PurchasePrice" type="Decimal" label="^PurchasePrice^Purchase Price^PurchasePrice^" />
+    <field name="DepreciationMethod" type="String" label="^DepreciationMethod^Depreciation Method^DepreciationMethod^" length="50" />
+    <field name="DepreciableLife" type="Single" label="^DepreciableLife^Depreciable Life^DepreciableLife^" />
+    <field name="SalvageValue" type="Decimal" label="^SalvageValue^Salvage Value^SalvageValue^" />
+    <field name="CurrentValue" type="Decimal" label="^CurrentValue^Current Value^CurrentValue^" />
+    <field name="Comments" type="String" allowQBE="false" allowSorting="false" label="^Comments^Comments^Comments^" />
+    <field name="Description" type="String" label="^Description^Description^Description^" length="255" />
+    <field name="NextSchedMaint" type="DateTime" label="^NextSchedMaint^Next Sched Maint^NextSchedMaint^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="InActive" type="Int32" label="^InActive^In Active^InActive^" />
+    <field name="StopDepr" type="Int32" default="((0))" label="^StopDepr^Stop Depr^StopDepr^" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="AccuDeprAmount" type="Decimal" label="^AccuDeprAmount^Accu Depr Amount^AccuDeprAmount^" />
+    <field name="FutureDeprAMount" type="Decimal" label="^FutureDeprAMount^Future Depr A Mount^FutureDeprAMount^" />
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" />
+    <field name="Item_Part_No" type="String" readOnly="true" label="^ItemPartNo^Item Part No^ItemPartNo^" length="20" />
+    <field name="Item_Inventory_ACAccount_Description" type="String" readOnly="true" label="^ItemInventoryACAccountDescription^Item Inventory AC Account Description^ItemInventoryACAccountDescription^" length="200" />
+    <field name="Item_Inventory_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^ItemInventoryACAccountTypeAr^Item Inventory AC Account Type Ar^ItemInventoryACAccountTypeAr^" length="50" />
+    <field name="Item_CostOfSales_ACAccount_Description" type="String" readOnly="true" label="^ItemCostOfSalesACAccountDescription^Item Cost Of Sales AC Account Description^ItemCostOfSalesACAccountDescription^" length="200" />
+    <field name="Item_CostOfSales_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^ItemCostOfSalesACAccountTypeAr^Item Cost Of Sales AC Account Type Ar^ItemCostOfSalesACAccountTypeAr^" length="50" />
+    <field name="Item_Revenue_ACAccount_Description" type="String" readOnly="true" label="^ItemRevenueACAccountDescription^Item Revenue AC Account Description^ItemRevenueACAccountDescription^" length="200" />
+    <field name="Item_Revenue_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^ItemRevenueACAccountTypeAr^Item Revenue AC Account Type Ar^ItemRevenueACAccountTypeAr^" length="50" />
+    <field name="Item_Misc_Issue_ACAccount_Description" type="String" readOnly="true" label="^ItemMiscIssueACAccountDescription^Item Misc Issue AC Account Description^ItemMiscIssueACAccountDescription^" length="200" />
+    <field name="Item_Misc_Issue_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^ItemMiscIssueACAccountTypeAr^Item Misc Issue AC Account Type Ar^ItemMiscIssueACAccountTypeAr^" length="50" />
+    <field name="Item_Misc_Receipt_ACAccount_Description" type="String" readOnly="true" label="^ItemMiscReceiptACAccountDescription^Item Misc Receipt AC Account Description^ItemMiscReceiptACAccountDescription^" length="200" />
+    <field name="Item_Misc_Receipt_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^ItemMiscReceiptACAccountTypeAr^Item Misc Receipt AC Account Type Ar^ItemMiscReceiptACAccountTypeAr^" length="50" />
+    <field name="IsAssets" type="Int32" label="^IsAssets^Is Assets^IsAssets^" />
+    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" />
+    <field name="Line_ID" type="Decimal" label="^Line^Line#^Line^" />
+    <field name="Assets_Cost_Clearing_AC" type="String" label="^AssetsCostClearingAC^Assets Cost Clearing AC^AssetsCostClearingAC^" length="50" />
+    <field name="RetirmentYN" type="Int32" label="^RetirmentYN^Retirment YN^RetirmentYN^" />
+    <field name="RetirmentDate" type="DateTime" label="^RetirmentDate^Retirment Date^RetirmentDate^" />
+    <field name="RetirmentRemarks" type="String" allowQBE="false" allowSorting="false" label="^RetirmentRemarks^Retirment Remarks^RetirmentRemarks^" length="4000" />
+    <field name="ReturnToStore" type="Int32" label="^ReturnToStore^Return To Store^ReturnToStore^" />
+    <field name="StoreID" type="Int32" label="^Store^Store#^Store^" />
+    <field name="Assets_Cost_Account" type="String" label="^AssetsCostAccount^Assets Cost Account^AssetsCostAccount^" length="50" />
+    <field name="Assets_Accum_Depr_Account" type="String" label="^AssetsAccumDeprAccount^Assets Accum Depr Account^AssetsAccumDeprAccount^" length="50" />
+    <field name="Assets_Loss_And_Gain_Account" type="String" label="^AssetsLossAndGainAccount^Assets Loss And Gain Account^AssetsLossAndGainAccount^" length="50" />
+    <field name="Assets_Sale_Account" type="String" label="^AssetsSaleAccount^Assets Sale Account^AssetsSaleAccount^" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Assets">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AssetNo" columns="20" />
+        <dataField fieldName="AssetDescription" />
+        <dataField fieldName="EmployeeID" aliasFieldName="EmployeeEmp_Login" hyperlinkFormatString="~/Pages/Employees.aspx?Emp_id={EmployeeID}&amp;_controller=Employees&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="AssetCategoryID" aliasFieldName="AssetCategoryAssetCategory" hyperlinkFormatString="~/Pages/AssetCategories.aspx?AssetCategoryID={AssetCategoryID}&amp;_controller=AssetCategories&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="AssetsStatus" columns="50" />
+        <dataField fieldName="Dept_Code" aliasFieldName="Dept_Dept_name" hyperlinkFormatString="~/Pages/tbl_Department.aspx?Dept_Code={Dept_Code}&amp;_controller=tbl_Department&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="Project_Code" aliasFieldName="Project_Project_Name" hyperlinkFormatString="~/Pages/tbl_Projects.aspx?Project_Code={Project_Code}&amp;_controller=tbl_Projects&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" hyperlinkFormatString="~/Pages/tbl_Customer_Supplier.aspx?Sys_Number={Sys_Number}&amp;_controller=tbl_Customer_Supplier&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="Make" columns="50" />
+        <dataField fieldName="Model" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Assets">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Assets" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AssetNo" columns="20" />
+            <dataField fieldName="AssetDescription" />
+            <dataField fieldName="EmployeeID" aliasFieldName="EmployeeEmp_Login" hyperlinkFormatString="~/Pages/Employees.aspx?Emp_id={EmployeeID}&amp;_controller=Employees&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="AssetCategoryID" aliasFieldName="AssetCategoryAssetCategory" hyperlinkFormatString="~/Pages/AssetCategories.aspx?AssetCategoryID={AssetCategoryID}&amp;_controller=AssetCategories&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="AssetsStatus" columns="50" />
+            <dataField fieldName="Dept_Code" aliasFieldName="Dept_Dept_name" hyperlinkFormatString="~/Pages/tbl_Department.aspx?Dept_Code={Dept_Code}&amp;_controller=tbl_Department&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Project_Code" aliasFieldName="Project_Project_Name" hyperlinkFormatString="~/Pages/tbl_Projects.aspx?Project_Code={Project_Code}&amp;_controller=tbl_Projects&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" hyperlinkFormatString="~/Pages/tbl_Customer_Supplier.aspx?Sys_Number={Sys_Number}&amp;_controller=tbl_Customer_Supplier&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Make" columns="50" />
+            <dataField fieldName="Model" columns="50" />
+            <dataField fieldName="ModelNumber" columns="50" />
+            <dataField fieldName="SerialNumber" columns="50" />
+            <dataField fieldName="BarcodeNumber" columns="30" />
+            <dataField fieldName="DateAcquired" columns="10" />
+            <dataField fieldName="DateSold" columns="10" />
+            <dataField fieldName="Customer_ID" columns="15" />
+            <dataField fieldName="InterfaceARYN" columns="15" />
+            <dataField fieldName="SalesRemarks" rows="5" />
+            <dataField fieldName="SalesYN" columns="15" />
+            <dataField fieldName="PurchasePrice" dataFormatString="c" columns="15" />
+            <dataField fieldName="DepreciationMethod" columns="50" />
+            <dataField fieldName="DepreciableLife" columns="15" />
+            <dataField fieldName="SalvageValue" dataFormatString="c" columns="15" />
+            <dataField fieldName="CurrentValue" dataFormatString="c" columns="15" />
+            <dataField fieldName="Comments" rows="5" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="NextSchedMaint" columns="10" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="StopDepr" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="AccuDeprAmount" dataFormatString="c" columns="15" />
+            <dataField fieldName="FutureDeprAMount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Code" aliasFieldName="Item_Part_No" hyperlinkFormatString="~/Pages/tbl_Item_Master.aspx?Item_Code={Item_Code}&amp;_controller=tbl_Item_Master&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="IsAssets" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="Assets_Cost_Clearing_AC" columns="50" />
+            <dataField fieldName="RetirmentYN" columns="15" />
+            <dataField fieldName="RetirmentDate" columns="10" />
+            <dataField fieldName="RetirmentRemarks" rows="5" />
+            <dataField fieldName="ReturnToStore" columns="15" />
+            <dataField fieldName="StoreID" columns="15" />
+            <dataField fieldName="Assets_Cost_Account" columns="50" />
+            <dataField fieldName="Assets_Accum_Depr_Account" columns="50" />
+            <dataField fieldName="Assets_Loss_And_Gain_Account" columns="50" />
+            <dataField fieldName="Assets_Sale_Account" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Reference Information">
+          <description><![CDATA[$DefaultReferenceDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EmployeeShift_Description" columns="50" />
+            <dataField fieldName="EmployeeSubDesignation_Description" columns="50" />
+            <dataField fieldName="EmployeeSubDesignation_Designation_Description" columns="50" />
+            <dataField fieldName="TheSys_NumberUnbilled_ACAccount_Description" />
+            <dataField fieldName="TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="TheSys_NumberBilled_ACAccount_Description" />
+            <dataField fieldName="TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_Inventory_ACAccount_Description" />
+            <dataField fieldName="Item_Inventory_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_CostOfSales_ACAccount_Description" />
+            <dataField fieldName="Item_CostOfSales_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_Revenue_ACAccount_Description" />
+            <dataField fieldName="Item_Revenue_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_Misc_Issue_ACAccount_Description" />
+            <dataField fieldName="Item_Misc_Issue_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="Item_Misc_Receipt_ACAccount_Description" />
+            <dataField fieldName="Item_Misc_Receipt_ACAccount_TypeAccount_Type_Ar" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Assets">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Assets" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AssetNo" columns="20" />
+            <dataField fieldName="AssetDescription" />
+            <dataField fieldName="EmployeeID" aliasFieldName="EmployeeEmp_Login" />
+            <dataField fieldName="AssetCategoryID" aliasFieldName="AssetCategoryAssetCategory" />
+            <dataField fieldName="AssetsStatus" columns="50" />
+            <dataField fieldName="Dept_Code" aliasFieldName="Dept_Dept_name" />
+            <dataField fieldName="Project_Code" aliasFieldName="Project_Project_Name" />
+            <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" />
+            <dataField fieldName="Make" columns="50" />
+            <dataField fieldName="Model" columns="50" />
+            <dataField fieldName="ModelNumber" columns="50" />
+            <dataField fieldName="SerialNumber" columns="50" />
+            <dataField fieldName="BarcodeNumber" columns="30" />
+            <dataField fieldName="DateAcquired" columns="10" />
+            <dataField fieldName="DateSold" columns="10" />
+            <dataField fieldName="Customer_ID" columns="15" />
+            <dataField fieldName="InterfaceARYN" columns="15" />
+            <dataField fieldName="SalesRemarks" rows="5" />
+            <dataField fieldName="SalesYN" columns="15" />
+            <dataField fieldName="PurchasePrice" dataFormatString="c" columns="15" />
+            <dataField fieldName="DepreciationMethod" columns="50" />
+            <dataField fieldName="DepreciableLife" columns="15" />
+            <dataField fieldName="SalvageValue" dataFormatString="c" columns="15" />
+            <dataField fieldName="CurrentValue" dataFormatString="c" columns="15" />
+            <dataField fieldName="Comments" rows="5" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="NextSchedMaint" columns="10" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="StopDepr" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="AccuDeprAmount" dataFormatString="c" columns="15" />
+            <dataField fieldName="FutureDeprAMount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Code" aliasFieldName="Item_Part_No" />
+            <dataField fieldName="IsAssets" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="Assets_Cost_Clearing_AC" columns="50" />
+            <dataField fieldName="RetirmentYN" columns="15" />
+            <dataField fieldName="RetirmentDate" columns="10" />
+            <dataField fieldName="RetirmentRemarks" rows="5" />
+            <dataField fieldName="ReturnToStore" columns="15" />
+            <dataField fieldName="StoreID" columns="15" />
+            <dataField fieldName="Assets_Cost_Account" columns="50" />
+            <dataField fieldName="Assets_Accum_Depr_Account" columns="50" />
+            <dataField fieldName="Assets_Loss_And_Gain_Account" columns="50" />
+            <dataField fieldName="Assets_Sale_Account" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>

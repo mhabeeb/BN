@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="FA_Assets_MassAdditions" label="^FaAssMasAdd^FA_Assets_MassAdditions^FaAssMasAdd^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName=" dbo.Assets" custom="true">
+      <text><![CDATA[SELECT * FROM Assets WHERE IsNull(IsAssets,0)=0 AND InActive=1]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="AssetID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^AssId^Asset#^AssId^" readOnly="true" />
+    <field name="AssetNo" type="String" label="^AssNo^Asset No^AssNo^" length="20" allowNulls="false" />
+    <field name="AssetDescription" type="String" label="^AssDes^Asset Description^AssDes^" length="255" allowNulls="false" />
+    <field name="EmployeeID" type="Decimal" label="^EmpId^Employee#^EmpId^">
+      <items style="Lookup" dataController="Pick_Employees" dataView="grid1" dataTextField="Emp_Name" dataValueField="Emp_id" copy="Dept_Code=Dept_Code&#xD;&#xA;Project_Code=Project_Code" />
+    </field>
+    <field name="BookID" type="Int16" allowNulls="false" label="^BooId^Book ID^BooId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" contextFields="BookID=BookID">
+      <items style="DropDownList" dataController="AssetsValueSet" dataView="grid1" dataTextField="BookName" dataValueField="BookID" />
+    </field>
+    <field name="AssetCategoryID" type="Int32" label="^AssCatId^Asset Category#^AssCatId^" allowNulls="false" contextFields="BookID=BookID">
+      <items style="DropDownList" dataController="Pick_Asset_Category" dataView="grid1" dataTextField="AssetCategory" dataValueField="AssetCategoryID" />
+    </field>
+    <field name="AssetsStatus" type="String" label="^AssSta^Assets Status^AssSta^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50">
+      <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
+    </field>
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50">
+      <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    </field>
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Supplier #^SysNum^">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="Make" type="String" label="^Make^Make^Make^" length="50" />
+    <field name="Model" type="String" label="^Model^Model^Model^" length="50" />
+    <field name="ModelNumber" type="String" label="^ModNum^Model Number^ModNum^" length="50" />
+    <field name="SerialNumber" type="String" label="^SerNum^Serial Number^SerNum^" length="50" />
+    <field name="BarcodeNumber" type="String" label="^BarcodNum^Barcode Number^BarcodNum^" length="30" />
+    <field name="DateAcquired" type="DateTime" label="^DatAcq^Date Acquired^DatAcq^" allowNulls="false" />
+    <field name="DateSold" type="DateTime" label="^DatSol^Date Sold^DatSol^" />
+    <field name="PurchasePrice" type="Decimal" label="^PurPri^Pur. Price^PurPri^" />
+    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false" />
+    <field name="DepreciationMethod" type="String" label="^DepMet^Dep. Method^DepMet^" length="50" allowNulls="false">
+      <items style="DropDownList" dataController="Pick_Dep_Method" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="DepreciableLife" type="Single" label="^DepLif^Life^DepLif^" allowNulls="false" />
+    <field name="SalvageValue" type="Decimal" label="^SalVal^Salvage^SalVal^" allowNulls="false" />
+    <field name="CurrentValue" type="Decimal" label="^CurVal^Current Value^CurVal^" readOnly="true" />
+    <field name="Comments" type="String" allowQBE="false" allowSorting="false" label="^Com^Comments^Com^" />
+    <field name="Description" type="String" label="^Des^Description^Des^" length="255" />
+    <field name="NextSchedMaint" type="DateTime" label="^NetSchMai^Next Sched Maint^NexSchMai^" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpddBy^">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="StopDepr" type="Int32" label="^StoDep^Stop Depr^StoDep^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="Company_Code" type="Int32" label="^CompCod^Company Code^ComCod^" />
+    <field name="AccuDeprAmount" type="Decimal" label="^AccDepAmo^Accu Depr Amount^AccDepAmo^" readOnly="true" />
+    <field name="FutureDeprAMount" type="Decimal" label="^FutDepAmo^Future Depr A Mount^FutDepAmo^" readOnly="true" />
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20">
+      <items style="Lookup" dataController="Pick_Item_Master" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" />
+    </field>
+    <field name="IsAssets" type="Int32" label="^IsAss^Change to Assets (Y/N)^IsAss^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Assets_Cost_Account" type="String" allowNulls="false" label="^AssCosAcc^Assets Cost Account^AssCosAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
+    <field name="Assets_Accum_Depr_Account" type="String" allowNulls="false" label="^AssAccDepAcc^Assets Accum Depr Account^AssAccDepAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
+    <field name="Assets_Loss_And_Gain_Account" type="String" allowNulls="false" label="^AssLosAndGaiAcc^Assets Loss And Gain Account^AssLosAndGaiAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
+    <field name="Assets_Sale_Account" type="String" allowNulls="false" label="^AssSalAcc^Assets Sale Account^AssSalAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
+    <field name="LocationID" type="Decimal" allowNulls="false" label="^LocId^Location ID^LocId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="Lookup" dataController="FA_Location" dataView="grid1" dataTextField="Location_Name" dataValueField="LocationID" />
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^AssMasAdd^Assets Mass Addition^AssMasAdd^" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="AssetNo" columns="20" />
+        <dataField fieldName="AssetDescription" />
+        <dataField fieldName="EmployeeID" columns="15" />
+        <dataField fieldName="AssetCategoryID" columns="15" />
+        <dataField fieldName="AssetsStatus" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Make" columns="50" hidden="true" />
+        <dataField fieldName="Model" columns="50" hidden="true" />
+        <dataField fieldName="ModelNumber" columns="50" hidden="true" />
+        <dataField fieldName="SerialNumber" columns="50" hidden="true" />
+        <dataField fieldName="BarcodeNumber" columns="30" hidden="true" />
+        <dataField fieldName="DateAcquired" columns="10" />
+        <dataField fieldName="DateSold" columns="10" hidden="true" />
+        <dataField fieldName="PurchasePrice" dataFormatString="N2" columns="15" />
+        <dataField fieldName="DepreciationMethod" columns="50" />
+        <dataField fieldName="DepreciableLife" columns="15" />
+        <dataField fieldName="SalvageValue" dataFormatString="c" columns="15" hidden="true" />
+        <dataField fieldName="CurrentValue" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Comments" rows="5" hidden="true" />
+        <dataField fieldName="Description" hidden="true" />
+        <dataField fieldName="NextSchedMaint" columns="10" hidden="true" />
+        <dataField fieldName="InActive" columns="15" hidden="true" />
+        <dataField fieldName="StopDepr" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="AccuDeprAmount" dataFormatString="N2" columns="15" />
+        <dataField fieldName="FutureDeprAMount" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="IsAssets" columns="15" hidden="true" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevAss^Review Assets^RevAss^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Assets Details" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="IsAssets" columns="15" />
+            <dataField fieldName="BookID" columns="15" />
+            <dataField fieldName="AssetNo" columns="20" />
+            <dataField fieldName="AssetDescription" />
+            <dataField fieldName="AssetsStatus" columns="50" hidden="true" readOnly="true" />
+            <dataField fieldName="DateAcquired" columns="10" />
+            <dataField fieldName="PurchasePrice" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Qty" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="SalvageValue" dataFormatString="N2" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Assignments" id="c2">
+          <dataFields>
+            <dataField fieldName="AssetCategoryID" columns="15" />
+            <dataField fieldName="EmployeeID" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="InActive" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Depreciation Information" id="c3">
+          <dataFields>
+            <dataField fieldName="DepreciationMethod" columns="50" />
+            <dataField fieldName="DepreciableLife" columns="15" />
+            <dataField fieldName="StopDepr" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Additional Information" id="c4">
+          <dataFields>
+            <dataField fieldName="Make" columns="50" />
+            <dataField fieldName="Model" columns="50" />
+            <dataField fieldName="ModelNumber" columns="50" />
+            <dataField fieldName="SerialNumber" columns="50" />
+            <dataField fieldName="BarcodeNumber" columns="30" />
+            <dataField fieldName="Comments" rows="5" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="NextSchedMaint" columns="10" />
+            <dataField fieldName="DateSold" columns="10" />
+            <dataField fieldName="Assets_Cost_Account" columns="50" hidden="true" />
+            <dataField fieldName="Assets_Accum_Depr_Account" columns="50" hidden="true" />
+            <dataField fieldName="Assets_Loss_And_Gain_Account" columns="50" hidden="true" />
+            <dataField fieldName="Assets_Sale_Account" columns="50" hidden="true" />
+            <dataField fieldName="LocationID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewAss^New Assets^NewAss^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Assets Details" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AssetNo" columns="20" />
+            <dataField fieldName="AssetDescription" />
+            <dataField fieldName="AssetsStatus" columns="50" />
+            <dataField fieldName="DateAcquired" columns="10" />
+            <dataField fieldName="PurchasePrice" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Qty" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="SalvageValue" dataFormatString="N2" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Assignments" id="c2">
+          <dataFields>
+            <dataField fieldName="AssetCategoryID" columns="15" />
+            <dataField fieldName="EmployeeID" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="IsAssets" columns="15" />
+            <dataField fieldName="InActive" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Depreciation Information" id="c3">
+          <dataFields>
+            <dataField fieldName="DepreciationMethod" columns="50" />
+            <dataField fieldName="DepreciableLife" columns="15" />
+            <dataField fieldName="StopDepr" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Additional Information" id="c4">
+          <dataFields>
+            <dataField fieldName="Make" columns="50" />
+            <dataField fieldName="Model" columns="50" />
+            <dataField fieldName="ModelNumber" columns="50" />
+            <dataField fieldName="SerialNumber" columns="50" />
+            <dataField fieldName="BarcodeNumber" columns="30" />
+            <dataField fieldName="Comments" rows="5" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="NextSchedMaint" columns="10" />
+            <dataField fieldName="DateSold" columns="10" />
+            <dataField fieldName="LocationID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
+      <categories>
+        <category id="c1" headerText="Asset Categories" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^ImportMassAdditions^Import Mass Additions^ImportMassAdditions^" flat="true">
+      <action commandName="SQL" headerText="^ImportMassAdditions^Import Mass Additions^ImportMassAdditions^" id="a100" cssClass="glyphicon-import" confirmation="_controller=Pick_Assets_Book&#xD;&#xA;_title=Select Book&#xD;&#xA;_width=500">
+        <data><![CDATA[DECLARE @A INT, @B INT
+
+
+SELECT @A=OPU_Code from Users Where UserID=@BusinessRules_UserId
+EXEC dbo.FA_IMPORT_MASS_ADDITIONS @A,@Parameters_BookID]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag102" scope="ActionBar" headerText="^AboutRecord^About Record^AboutRecord^" flat="true">
+      <action commandName="EditModal" commandArgument="About" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Update" type="Sql" phase="Before"><![CDATA[IF @IsAssets=1 
+BEGIN
+SET @InActive=0
+SELECT @Assets_Cost_Account=Assets_Cost_Account,
+@Assets_Accum_Depr_Account=Assets_Accum_Depr_Account,
+@Assets_Loss_And_Gain_Account=Assets_Loss_And_Gain_Account,
+@Assets_Sale_Account=Assets_Sale_Account
+FROM AssetCategories WHERE AssetCategoryID=@AssetCategoryID
+END ]]></rule>
+  </businessRules>
+</dataController>

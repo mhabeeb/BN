@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Open_PR_RFQ" conflictDetection="overwriteChanges" label="^OpePrRfq^Open_PR_RFQ^OpePrRfq^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName=" dbo.PR_Line_Items" custom="true">
+      <text><![CDATA[SELECT     dbo.PR_Line_Items.PR_NO, dbo.PR_Line_Items.SO_NO, dbo.PR_Line_Items.PR_Line_No, dbo.PR_Line_Items.Item_Code, dbo.PR_Line_Items.PR_Qty, 
+                      dbo.PR_Line_Items.Line_Remarks, dbo.PR_Line_Items.PO_Balance, dbo.PR_Line_Items.Item_Desc, dbo.PR_Line_Items.Item_Part, 
+                      dbo.PR_Line_Items.Updated_DateTime, dbo.PR_Line_Items.UOM, dbo.PR_Line_Items.Project_Code, dbo.PR_Line_Items.Dept_Code, dbo.PR_Line_Items.Job_ID, 
+                      dbo.PR_Line_Items.RFQ_NO, ISNULL(dbo.PR_Line_Items.RFQ_Qty, 0) AS RFQ_Qty, dbo.PR_Header.PR_Date, dbo.PR_Header.PR_Type, 
+                      dbo.PR_Header.Required_Date, dbo.PR_Line_Items.Updated_By, dbo.PR_Line_Items.Created_DateTime, dbo.PR_Line_Items.Created_By, 
+                      dbo.RFQ_Header.RFQ_NO AS RFQ_NO_H, dbo.RFQ_Header.RFQ_Status, dbo.PR_Line_Items.PR_OPU_Code
+FROM         dbo.PR_Line_Items INNER JOIN
+                      dbo.PR_Header ON dbo.PR_Line_Items.PR_NO = dbo.PR_Header.PR_NO CROSS JOIN
+                      dbo.RFQ_Header
+WHERE     (dbo.PR_Line_Items.PO_Balance > 0) AND (dbo.RFQ_Header.RFQ_Status = N'New') AND (ISNULL(dbo.PR_Line_Items.CloseYN, 0) = 0) AND 
+                      (ISNULL(dbo.PR_Line_Items.RFQ_Qty, 0) = 0)]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PR_NO" type="Decimal" allowNulls="false" label="^PrNo^Pr No^PrNo^" showInSummary="true" />
+    <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" showInSummary="true" />
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PrLinNo^PR Line No^PrLinNo^" readOnly="true" />
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
+    <field name="PR_Qty" type="Decimal" allowNulls="false" label="^PrQty^PR Qty^PrQty^" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" showInSummary="true" />
+    <field name="PO_Balance" type="Decimal" label="^PoBal^PO Balance^PoBal^" readOnly="true" />
+    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" readOnly="true" length="500" />
+    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" readOnly="true" length="20" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" readOnly="true" length="10" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="Job_ID" type="Decimal" label="^JobId^Job#^JobId^" />
+    <field name="RFQ_NO" type="Decimal" label="^RfqNo^Rfq No^RfqNo^" />
+    <field name="RFQ_Qty" type="Decimal" allowNulls="false" label="^RfqQty^RFQ Qty^RfqQty^" />
+    <field name="PR_Date" type="DateTime" allowNulls="false" label="^PrDat^PR Date^PrDat^" />
+    <field name="PR_Type" type="Int32" label="^PrTyp^PR Type^PrTyp^" />
+    <field name="Required_Date" type="DateTime" label="^ReqDat^Required Date^ReqDat^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="RFQ_NO_H" type="Decimal" allowNulls="false" label="^RfqNoH^Rfq No H^RfqNoH^" readOnly="true" />
+    <field name="RFQ_Status" type="String" label="^RfqSta^RFQ Status^RfqSta^" length="25" />
+    <field name="PR_OPU_Code" type="Int32" label="^PrOpuCod^PR OPU Code^PrOpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^PrLinIte^PR Line Items^PrLinIte^" filter="PR_OPU_Code=@Session_OPU_Code " showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="PR_NO" columns="15" readOnly="true" />
+        <dataField fieldName="SO_NO" columns="15" readOnly="true" />
+        <dataField fieldName="Item_Code" columns="20" readOnly="true" />
+        <dataField fieldName="PR_Qty" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Line_Remarks" readOnly="true" />
+        <dataField fieldName="PO_Balance" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Item_Desc" readOnly="true" />
+        <dataField fieldName="Item_Part" columns="20" readOnly="true" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" readOnly="true" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="Project_Code" columns="50" readOnly="true" />
+        <dataField fieldName="Dept_Code" columns="50" readOnly="true" />
+        <dataField fieldName="Job_ID" columns="15" readOnly="true" />
+        <dataField fieldName="RFQ_NO" columns="15" readOnly="true" />
+        <dataField fieldName="RFQ_Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="PR_Date" columns="10" readOnly="true" />
+        <dataField fieldName="PR_Type" columns="15" readOnly="true" />
+        <dataField fieldName="Required_Date" columns="10" readOnly="true" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" readOnly="true" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" readOnly="true" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" readOnly="true" />
+        <dataField fieldName="RFQ_NO_H" columns="15" hidden="true" />
+        <dataField fieldName="RFQ_Status" columns="25" hidden="true" />
+        <dataField fieldName="PR_OPU_Code" columns="15" readOnly="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevPrLinIte^Review PR Line Items^RevPrLinIte^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="dbo PR Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="PO_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Job_ID" columns="15" />
+            <dataField fieldName="RFQ_NO" columns="15" />
+            <dataField fieldName="RFQ_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="PR_Date" columns="10" />
+            <dataField fieldName="PR_Type" columns="15" />
+            <dataField fieldName="Required_Date" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="RFQ_NO_H" columns="15" />
+            <dataField fieldName="RFQ_Status" columns="25" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewPrLinIte^New PR Line Items^NewPrLinIte^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New dbo PR Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Job_ID" columns="15" />
+            <dataField fieldName="RFQ_NO" columns="15" />
+            <dataField fieldName="PR_Date" columns="10" />
+            <dataField fieldName="PR_Type" columns="15" />
+            <dataField fieldName="Required_Date" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="RFQ_Status" columns="25" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" headerText="^AddtoRFQ^Add to RFQ^AddtoRFQ^" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Update" type="Sql" phase="Before"><![CDATA[IF @RFQ_Qty > 0 SET @RFQ_NO=@RFQ_NO_H]]></rule>
+    <rule id="r101" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r102" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

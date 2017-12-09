@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DR_Lines" conflictDetection="overwriteChanges" label="^DrLin^DR_Lines^DrLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="dbo.DR_Lines" custom="true">
+      <text><![CDATA[SELECT     dbo.DR_Lines.DR_ID, dbo.DR_Lines.DR_Line_ID, dbo.DR_Lines.SO_Line_No, dbo.DR_Lines.Qty, dbo.DR_Lines.Item_Code, dbo.DR_Lines.Job_ID, 
+                      dbo.DR_Lines.Issue_Balalnce, dbo.DR_Lines.Sys_Number, dbo.tbl_Item_Master.Part_No, dbo.tbl_Item_Master.Item_Description, dbo.tbl_Item_Master.UOM, 
+                      dbo.tbl_Item_Master.Stock_On_Hand, dbo.DR_Lines.DR_OPU_Code,dbo.DR_Lines.Created_By,dbo.DR_Lines.Created_DateTime,dbo.DR_Lines.Updated_By,dbo.DR_Lines.Updated_DateTime
+FROM         dbo.DR_Lines INNER JOIN
+                      dbo.tbl_Item_Master ON dbo.DR_Lines.Item_Code = dbo.tbl_Item_Master.Item_Code]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="DR_ID" type="Decimal" allowNulls="false" label="^DrId^Dr#^DrId^" showInSummary="true" />
+    <field name="DR_Line_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DRLinId^DR Line#^DRLinId^" readOnly="true" />
+    <field name="SO_Line_No" type="Decimal" label="^SOLinNo^SO Line No^SOLinNo^" showInSummary="true" />
+    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" showInSummary="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true">
+      <items style="Lookup" dataController="Pick_SO_for_DR" copy="SO_Line_No=SO_Line_No&#xD;&#xA;Sys_Number=Sys_Number" dataView="grid1" dataTextField="Item_Desc" dataValueField="Item_Code" />
+    </field>
+    <field name="Job_ID" type="Decimal" label="^JobId^Job#^JobId^" showInSummary="true" />
+    <field name="Issue_Balalnce" type="Decimal" label="^IssBal^Issue Balalnce^IssBal^" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumb^Sys Number^SysNum^" />
+    <field name="Part_No" type="String" label="^ParNo^Part No^ParNo^" length="20" />
+    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" />
+    <field name="Stock_On_Hand" type="Decimal" label="^StoOnHan^Stock On Hand^StokOnHan^" />
+    <field name="DR_OPU_Code" type="Int32" label="^DROPUCod^DR OPU Code^DROPUCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CredBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="DR Lines" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="DR_ID" columns="15" />
+        <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+        <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="Job_ID" columns="15" hidden="true" />
+        <dataField fieldName="Issue_Balalnce" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Part_No" columns="20" readOnly="true" />
+        <dataField fieldName="Item_Description" readOnly="true" />
+        <dataField fieldName="UOM" columns="10" readOnly="true" />
+        <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="DR_OPU_Code" columns="15" readOnly="true" />
+        <dataField fieldName="Created_By" columns="15" hidden="true" />
+        <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+        <dataField fieldName="Updated_By" columns="15" hidden="true" />
+        <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^DrLin^DR Lines^DrLin^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="DR Lines" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DR_ID" columns="15" />
+            <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+            <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Job_ID" columns="15" hidden="true" />
+            <dataField fieldName="Issue_Balalnce" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+            <dataField fieldName="Part_No" columns="20" readOnly="true" />
+            <dataField fieldName="Item_Description" readOnly="true" />
+            <dataField fieldName="UOM" columns="10" readOnly="true" />
+            <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewDrLin^New DR Lines^NewDrLin^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New DR Lines" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DR_ID" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Job_ID" columns="15" hidden="true" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+            <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+            <dataField fieldName="DR_OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
+      <categories>
+        <category id="c1" headerText="DR Lines" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Print DR">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag102" scope="ActionBar" headerText="^AboutRecord^About Record^AboutRecord^" flat="true">
+      <action commandName="EditModal" commandArgument="About" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SELECT @DR_OPU_Code=IsNull(OPU_Code,1)
+   FROM dbo.Users
+      WHERE UserID=@BusinessRules_UserId]]></rule>
+    <rule id="r101" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    --SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+	SET @Result_Focus = 'DR_Line_ID,You Are ReadOnly User ....You Cannot Change Record'
+end
+
+
+
+if [dbo].[CHECK_APPROVAL_STATUS](@DR_ID,23)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, The Docuement Is InProcess/Approved, Can not be Update'
+end]]></rule>
+    <rule id="r102" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

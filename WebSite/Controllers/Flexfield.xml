@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Flexfield" conflictDetection="overwriteChanges" label="Flexfield" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Flexfield"."Flexfield_ID" "Flexfield_ID"
+	,"Flexfield"."Emp_ID" "Emp_ID"
+	,"Flexfield"."Flexfield_Type" "Flexfield_Type"
+	,"Flexfield"."Text1" "Text1"
+	,"Flexfield"."Text2" "Text2"
+	,"Flexfield"."Text3" "Text3"
+	,"Flexfield"."Text4" "Text4"
+	,"Flexfield"."Text5" "Text5"
+	,"Flexfield"."Text6" "Text6"
+	,"Flexfield"."Text7" "Text7"
+	,"Flexfield"."Date1" "Date1"
+	,"Flexfield"."Date2" "Date2"
+	,"Flexfield"."Date3" "Date3"
+	,"Flexfield"."Date4" "Date4"
+	,"Flexfield"."Number1" "Number1"
+	,"Flexfield"."Number2" "Number2"
+	,"Flexfield"."Number3" "Number3"
+	,"Flexfield"."Number4" "Number4"
+	,"Flexfield"."Bit1" "Bit1"
+	,"Flexfield"."Bit2" "Bit2"
+	,"Flexfield"."Bit3" "Bit3"
+	,"Flexfield"."Bit4" "Bit4"
+	,"Flexfield"."Textbox1" "Textbox1"
+	,"Flexfield"."Textbox2" "Textbox2"
+	,"Flexfield"."Inactive" "Inactive"
+	,"Flexfield"."Created_DateTime" "Created_DateTime"
+	,"Flexfield"."Updated_By" "Updated_By"
+	,"Flexfield"."Created_By" "Created_By"
+	,"Flexfield"."Updated_DateTime" "Updated_DateTime"
+from "dbo"."Flexfield" "Flexfield"
+]]></text>
+    </command>
+    <command id="Flexfield_IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Flexfield_ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Flexfield_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^Flexfield^Flexfield#^Flexfield^" readOnly="true" />
+    <field name="Emp_ID" type="Decimal" label="^Emp^Emp#^Emp^" showInSummary="true" />
+    <field name="Flexfield_Type" type="String" label="^FlexfieldType^Flexfield Type^FlexfieldType^" length="50" showInSummary="true" />
+    <field name="Text1" type="String" label="^Text1^Text1^Text1^" length="50" showInSummary="true" />
+    <field name="Text2" type="String" label="^Text2^Text2^Text2^" length="50" showInSummary="true" />
+    <field name="Text3" type="String" label="^Text3^Text3^Text3^" length="50" showInSummary="true" />
+    <field name="Text4" type="String" label="^Text4^Text4^Text4^" length="50" />
+    <field name="Text5" type="String" label="^Text5^Text5^Text5^" length="50" />
+    <field name="Text6" type="String" label="^Text6^Text6^Text6^" length="50" />
+    <field name="Text7" type="String" label="^Text7^Text7^Text7^" length="50" />
+    <field name="Date1" type="DateTime" label="^Date1^Date1^Date1^" />
+    <field name="Date2" type="DateTime" label="^Date2^Date2^Date2^" />
+    <field name="Date3" type="DateTime" label="^Date3^Date3^Date3^" />
+    <field name="Date4" type="DateTime" label="^Date4^Date4^Date4^" />
+    <field name="Number1" type="Decimal" label="^Number1^Number1^Number1^" />
+    <field name="Number2" type="Decimal" label="^Number2^Number2^Number2^" />
+    <field name="Number3" type="Decimal" label="^Number3^Number3^Number3^" />
+    <field name="Number4" type="Decimal" label="^Number4^Number4^Number4^" />
+    <field name="Bit1" type="Int32" label="^Bit1^Bit1^Bit1^" />
+    <field name="Bit2" type="Int32" label="^Bit2^Bit2^Bit2^" />
+    <field name="Bit3" type="Int32" label="^Bit3^Bit3^Bit3^" />
+    <field name="Bit4" type="Int32" label="^Bit4^Bit4^Bit4^" />
+    <field name="Textbox1" type="String" allowQBE="false" allowSorting="false" label="^Textbox1^Textbox1^Textbox1^" />
+    <field name="Textbox2" type="String" allowQBE="false" allowSorting="false" label="^Textbox2^Textbox2^Textbox2^" />
+    <field name="Inactive" type="Int32" label="^Inactive^Inactive^Inactive^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Flexfield">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Emp_ID" columns="15" />
+        <dataField fieldName="Flexfield_Type" columns="50" />
+        <dataField fieldName="Text1" columns="50" />
+        <dataField fieldName="Text2" columns="50" />
+        <dataField fieldName="Text3" columns="50" />
+        <dataField fieldName="Text4" columns="50" />
+        <dataField fieldName="Text5" columns="50" />
+        <dataField fieldName="Text6" columns="50" />
+        <dataField fieldName="Text7" columns="50" />
+        <dataField fieldName="Date1" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Flexfield">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Flexfield" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Emp_ID" columns="15" />
+            <dataField fieldName="Flexfield_Type" columns="50" />
+            <dataField fieldName="Text1" columns="50" />
+            <dataField fieldName="Text2" columns="50" />
+            <dataField fieldName="Text3" columns="50" />
+            <dataField fieldName="Text4" columns="50" />
+            <dataField fieldName="Text5" columns="50" />
+            <dataField fieldName="Text6" columns="50" />
+            <dataField fieldName="Text7" columns="50" />
+            <dataField fieldName="Date1" columns="10" />
+            <dataField fieldName="Date2" columns="10" />
+            <dataField fieldName="Date3" columns="10" />
+            <dataField fieldName="Date4" columns="10" />
+            <dataField fieldName="Number1" columns="15" />
+            <dataField fieldName="Number2" columns="15" />
+            <dataField fieldName="Number3" columns="15" />
+            <dataField fieldName="Number4" columns="15" />
+            <dataField fieldName="Bit1" columns="15" />
+            <dataField fieldName="Bit2" columns="15" />
+            <dataField fieldName="Bit3" columns="15" />
+            <dataField fieldName="Bit4" columns="15" />
+            <dataField fieldName="Textbox1" rows="5" />
+            <dataField fieldName="Textbox2" rows="5" />
+            <dataField fieldName="Inactive" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Flexfield">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Flexfield" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Emp_ID" columns="15" />
+            <dataField fieldName="Flexfield_Type" columns="50" />
+            <dataField fieldName="Text1" columns="50" />
+            <dataField fieldName="Text2" columns="50" />
+            <dataField fieldName="Text3" columns="50" />
+            <dataField fieldName="Text4" columns="50" />
+            <dataField fieldName="Text5" columns="50" />
+            <dataField fieldName="Text6" columns="50" />
+            <dataField fieldName="Text7" columns="50" />
+            <dataField fieldName="Date1" columns="10" />
+            <dataField fieldName="Date2" columns="10" />
+            <dataField fieldName="Date3" columns="10" />
+            <dataField fieldName="Date4" columns="10" />
+            <dataField fieldName="Number1" columns="15" />
+            <dataField fieldName="Number2" columns="15" />
+            <dataField fieldName="Number3" columns="15" />
+            <dataField fieldName="Number4" columns="15" />
+            <dataField fieldName="Bit1" columns="15" />
+            <dataField fieldName="Bit2" columns="15" />
+            <dataField fieldName="Bit3" columns="15" />
+            <dataField fieldName="Bit4" columns="15" />
+            <dataField fieldName="Textbox1" rows="5" />
+            <dataField fieldName="Textbox2" rows="5" />
+            <dataField fieldName="Inactive" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>

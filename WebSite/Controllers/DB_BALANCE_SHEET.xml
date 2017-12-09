@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DB_BALANCE_SHEET" conflictDetection="overwriteChanges" label="DB_BALANCE_SHEET" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="ROWNO" type="Int32" allowNulls="false" label="Rowno" readOnly="true" showInSummary="true" />
+    <field name="Ac_Description" type="String" label="Ac Description" readOnly="true" length="250" showInSummary="true" />
+    <field name="January" type="Decimal" label="January" readOnly="true" showInSummary="true" />
+    <field name="February" type="Decimal" label="February" readOnly="true" showInSummary="true" />
+    <field name="March" type="Decimal" label="March" readOnly="true" showInSummary="true" />
+    <field name="April" type="Decimal" label="April" readOnly="true" />
+    <field name="May" type="Decimal" label="May" readOnly="true" />
+    <field name="June" type="Decimal" label="June" readOnly="true" />
+    <field name="July" type="Decimal" label="July" readOnly="true" />
+    <field name="August" type="Decimal" label="August" readOnly="true" />
+    <field name="September" type="Decimal" label="September" readOnly="true" />
+    <field name="October" type="Decimal" label="October" readOnly="true" />
+    <field name="November" type="Decimal" label="November" readOnly="true" />
+    <field name="December" type="Decimal" label="December" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Db Balance Sheet">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ROWNO" columns="15" />
+        <dataField fieldName="Ac_Description" />
+        <dataField fieldName="January" dataFormatString="c" columns="15" />
+        <dataField fieldName="February" dataFormatString="c" columns="15" />
+        <dataField fieldName="March" dataFormatString="c" columns="15" />
+        <dataField fieldName="April" dataFormatString="c" columns="15" />
+        <dataField fieldName="May" dataFormatString="c" columns="15" />
+        <dataField fieldName="June" dataFormatString="c" columns="15" />
+        <dataField fieldName="July" dataFormatString="c" columns="15" />
+        <dataField fieldName="August" dataFormatString="c" columns="15" />
+        <dataField fieldName="September" dataFormatString="c" columns="15" />
+        <dataField fieldName="October" dataFormatString="c" columns="15" />
+        <dataField fieldName="November" dataFormatString="c" columns="15" />
+        <dataField fieldName="December" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Db Balance Sheet">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Db Balance Sheet" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ROWNO" columns="15" />
+            <dataField fieldName="Ac_Description" />
+            <dataField fieldName="January" dataFormatString="c" columns="15" />
+            <dataField fieldName="February" dataFormatString="c" columns="15" />
+            <dataField fieldName="March" dataFormatString="c" columns="15" />
+            <dataField fieldName="April" dataFormatString="c" columns="15" />
+            <dataField fieldName="May" dataFormatString="c" columns="15" />
+            <dataField fieldName="June" dataFormatString="c" columns="15" />
+            <dataField fieldName="July" dataFormatString="c" columns="15" />
+            <dataField fieldName="August" dataFormatString="c" columns="15" />
+            <dataField fieldName="September" dataFormatString="c" columns="15" />
+            <dataField fieldName="October" dataFormatString="c" columns="15" />
+            <dataField fieldName="November" dataFormatString="c" columns="15" />
+            <dataField fieldName="December" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Db Balance Sheet">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Db Balance Sheet" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields />
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Parameter" flat="true">
+      <action commandName="Search" whenLastCommandArgument="Parameter" confirmation="_controller=Param_Pick_DB_BALANCE_SHEET&#xD;&#xA;_title=Enter Year &amp; Project Code&#xD;&#xA;_width=500" id="a100" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 
+
+if (@Parameters_Year is not null)
+    set @Session_Year = @Parameters_Year
+
+if (@Parameters_Project_Code is not null)
+    set @Session_Project_Code = @Parameters_Project_Code]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[--DECLARE @Session_Year int, @Session_Project_Code nvarchar(50)
+
+if (@Session_Year is null)
+    set @Session_Year = Year(getdate())
+
+if (@Session_Project_Code is null)
+    set @Session_Project_Code = 'None'
+
+EXEC [dbo].[DB_BALANCE_SHEET]  @Session_Year, @Session_Project_Code]]></rule>
+  </businessRules>
+</dataController>

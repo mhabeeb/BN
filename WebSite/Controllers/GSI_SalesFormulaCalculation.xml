@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="GSI_SalesFormulaCalculation" conflictDetection="overwriteChanges" label="GSI_SalesFormulaCalculation" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="GSI_SalesFormulaCalculation" custom="true">
+      <text><![CDATA[SELECT * FROM GSI_SalesFormulaCalculation]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="GSI_PROJECT_CODE" type="String" allowNulls="false" label="Project Code" length="50" showInSummary="true" />
+    <field name="GSI_MONTH_YEAR" type="String" allowNulls="false" label="Month Year" length="15" showInSummary="true" />
+    <field name="GSI_G" type="Double" label="G" showInSummary="true" />
+    <field name="GSI_H" type="Double" label="H" showInSummary="true" />
+    <field name="GSI_I" type="Double" label="I" showInSummary="true" />
+    <field name="GSI_J" type="Double" label="J" />
+    <field name="GSI_K" type="Double" label="K" />
+    <field name="ERP_A" type="Double" label="A" />
+    <field name="ERP_B" type="Double" label="B" />
+    <field name="ERP_C" type="Double" label="C" />
+    <field name="ERP_D" type="Double" label="D" />
+    <field name="ERP_E" type="Double" label="E" />
+    <field name="ERP_F" type="Double" label="F" />
+    <field name="ERP_PROG_RATE" type="Double" label="Progress Rate" />
+    <field name="ERP_TURNOVER_RATE" type="Double" label="Turnover Rate" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="GSI Sales Formula Calculation">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="GSI_PROJECT_CODE" columns="50" />
+        <dataField fieldName="GSI_MONTH_YEAR" columns="15" />
+        <dataField fieldName="GSI_G" columns="15" />
+        <dataField fieldName="GSI_H" columns="15" />
+        <dataField fieldName="GSI_I" columns="15" />
+        <dataField fieldName="GSI_J" columns="15" />
+        <dataField fieldName="GSI_K" columns="15" />
+        <dataField fieldName="ERP_A" columns="15" />
+        <dataField fieldName="ERP_B" columns="15" />
+        <dataField fieldName="ERP_C" columns="15" />
+        <dataField fieldName="ERP_D" columns="15" />
+        <dataField fieldName="ERP_E" columns="15" />
+        <dataField fieldName="ERP_F" columns="15" />
+        <dataField fieldName="ERP_PROG_RATE" columns="15" dataFormatString="N3" />
+        <dataField fieldName="ERP_TURNOVER_RATE" columns="15" dataFormatString="N3" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review GSI Sales Formula Calculation">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="GSI Sales Formula Calculation" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GSI_PROJECT_CODE" columns="50" />
+            <dataField fieldName="GSI_MONTH_YEAR" columns="15" />
+            <dataField fieldName="GSI_G" columns="15" />
+            <dataField fieldName="GSI_H" columns="15" />
+            <dataField fieldName="GSI_I" columns="15" />
+            <dataField fieldName="GSI_J" columns="15" />
+            <dataField fieldName="GSI_K" columns="15" />
+            <dataField fieldName="ERP_A" columns="15" />
+            <dataField fieldName="ERP_B" columns="15" />
+            <dataField fieldName="ERP_C" columns="15" />
+            <dataField fieldName="ERP_D" columns="15" />
+            <dataField fieldName="ERP_E" columns="15" />
+            <dataField fieldName="ERP_F" columns="15" />
+            <dataField fieldName="ERP_PROG_RATE" columns="15" />
+            <dataField fieldName="ERP_TURNOVER_RATE" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New GSI Sales Formula Calculation">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New GSI Sales Formula Calculation" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GSI_PROJECT_CODE" columns="50" />
+            <dataField fieldName="GSI_MONTH_YEAR" columns="15" />
+            <dataField fieldName="GSI_G" columns="15" />
+            <dataField fieldName="GSI_H" columns="15" />
+            <dataField fieldName="GSI_I" columns="15" />
+            <dataField fieldName="GSI_J" columns="15" />
+            <dataField fieldName="GSI_K" columns="15" />
+            <dataField fieldName="ERP_A" columns="15" />
+            <dataField fieldName="ERP_B" columns="15" />
+            <dataField fieldName="ERP_C" columns="15" />
+            <dataField fieldName="ERP_D" columns="15" />
+            <dataField fieldName="ERP_E" columns="15" />
+            <dataField fieldName="ERP_F" columns="15" />
+            <dataField fieldName="ERP_PROG_RATE" columns="15" />
+            <dataField fieldName="ERP_TURNOVER_RATE" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Calculate" flat="true">
+      <action commandName="SQL" headerText="Calculate" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month End Date&#xD;&#xA;_width=500">
+        <data><![CDATA[EXEC dbo.XX_GSI_Sales_Calculations @Parameters_EndDate]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+</dataController>

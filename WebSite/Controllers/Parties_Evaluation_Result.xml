@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Parties_Evaluation_Result" conflictDetection="overwriteChanges" label="Parties_Evaluation_Result" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Parties_User_Rating" custom="true">
+      <text><![CDATA[SELECT a.EventID,
+       a.Evaluation_Type,
+       a.Sys_Number,
+       a.Vendor_Name,
+       a.Project_Code,
+       SUM(a.MaxRating) AS MaxRating,
+       SUM(a.ProjectManagement) AS ProjectManagement,
+       SUM(a.Commercial) AS Commercial,
+       SUM(a.Technical) AS Technical,
+       SUM(a.Financial) AS Financial,
+       SUM(a.None) AS None,
+       SUM(a.ProjectManagement + a.Commercial + a.Technical + a.Financial) AS TotalPoints,
+       SUM(a.ProjectManagement + a.Commercial + a.Technical + a.Financial + a.None) AS TotalBonus,
+       b.Approve
+FROM dbo.DB_Evaluation_Result_Summary AS a
+     LEFT OUTER JOIN dbo.Parties_to_Evaluate AS b ON a.Sys_Number = b.Sys_Number
+                                                     AND a.EventID = b.EventID
+GROUP BY a.EventID,
+         a.Evaluation_Type,
+         a.Sys_Number,
+         a.Vendor_Name,
+         a.Project_Code,
+         b.Approve]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="EventID" type="Decimal" allowNulls="false" label="Event#" showInSummary="true" isPrimaryKey="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="Sys Number" showInSummary="true" isPrimaryKey="true" />
+    <field name="Vendor_Name" type="String" allowNulls="false" label="Vendor Name" length="150" showInSummary="true" />
+    <field name="Project_Code" type="String" label="Project Name" length="50" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    </field>
+    <field name="MaxRating" type="Int32" label="Max Rating" readOnly="true" showInSummary="true" />
+    <field name="ProjectManagement" type="Int32" label="Project Management" readOnly="true" />
+    <field name="Commercial" type="Int32" label="Commercial" readOnly="true" />
+    <field name="Technical" type="Int32" label="Technical" readOnly="true" />
+    <field name="Financial" type="Int32" label="Financial" readOnly="true" />
+    <field name="None" type="Int32" label="None" readOnly="true" />
+    <field name="TotalPoints" type="Int32" label="Total Points" readOnly="true" />
+    <field name="TotalBonus" type="Int32" label="Total Bonus" readOnly="true" />
+    <field name="Approve" type="Int32" label="Approve" htmlEncode="false" hidden="false">
+      <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Evaluation_Type" type="Int16" label="Evaluation Type" htmlEncode="false" hidden="false">
+      <items style="DropDownList" dataController="Parties_Evaluation_Type" dataView="grid1" dataTextField="Evaluation_Name" dataValueField="Evaluation_Type_ID" />
+    </field>
+    <field name="Status" type="String" allowNulls="false" label="Status" computed="true" htmlEncode="false" hidden="false" length="15">
+      <formula>dbo.EVA_STATUS (TotalBonus)</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Parties User Rating" sortExpression="EventID DESC">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="EventID" columns="15" />
+        <dataField fieldName="Evaluation_Type" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" hidden="true" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="MaxRating" columns="15" hidden="true" />
+        <dataField fieldName="ProjectManagement" columns="15" />
+        <dataField fieldName="Commercial" columns="15" />
+        <dataField fieldName="Technical" columns="15" />
+        <dataField fieldName="Financial" columns="15" />
+        <dataField fieldName="None" columns="15" hidden="true" />
+        <dataField fieldName="TotalPoints" columns="15" />
+        <dataField fieldName="TotalBonus" columns="15" hidden="true" />
+        <dataField fieldName="Approve" columns="15" readOnly="true" />
+        <dataField fieldName="Status" columns="15" />
+      </dataFields>
+      <styles>
+        <expression type="ClientScript" result="HighPoints" test="[TotalBonus] &lt; 75" />
+      </styles>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Parties User Rating">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Parties User Rating" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EventID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="MaxRating" columns="15" />
+            <dataField fieldName="ProjectManagement" columns="15" />
+            <dataField fieldName="Commercial" columns="15" />
+            <dataField fieldName="Technical" columns="15" />
+            <dataField fieldName="Financial" columns="15" />
+            <dataField fieldName="None" columns="15" />
+            <dataField fieldName="TotalPoints" columns="15" />
+            <dataField fieldName="TotalBonus" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Parties User Rating">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Parties User Rating" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EventID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Project_Code" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionColumn" headerText="Action">
+      <action commandName="SQL" id="a100" headerText="Change" whenClientScript="[Approve] != 1">
+        <data><![CDATA[EXEC DB_EVALUATION_CHANGE_RESULT @EventID ,  @Sys_Number , @TotalPoints,  @Vendor_Name,@TotalBonus]]></data>
+      </action>
+      <action commandName="SQL" headerText="Approve" id="a101" whenClientScript="[Approve] != 1">
+        <data><![CDATA[DECLARE @A INT
+
+UPDATE Parties_to_Evaluate
+SET Approve=1
+WHERE Sys_Number=@Sys_Number and EventID=@EventID
+
+SET @A=1
+
+IF @TotalBonus < 75 SET @A=2
+
+UPDATE tbl_Customer_Supplier
+SET EvalationStatus=@A
+WHERE Sys_Number=@Sys_Number ]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+</dataController>

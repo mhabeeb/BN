@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="UPLOAD_INVOICES_ADV" label="^UplInvAdv^UPLOAD_INVOICES_ADV^UplInvAdv^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="UPLOAD_INVOICES" custom="true">
+      <text><![CDATA[SELECT * FROM UPLOAD_INVOICES]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="UploadID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^UplId^Upload#^UplId^" readOnly="true" />
+    <field name="InvoiceTypes" type="String" allowNulls="false" label="^InvTyp^InvoiceTypes^InvTyp^" length="50" showInSummary="true" />
+    <field name="Invoice_Date" type="DateTime" allowNulls="false" label="^InvDat^Invoice_Date^InvDat^" showInSummary="true" />
+    <field name="Invoice_NO" type="Decimal" allowNulls="false" label="^InvNo^Invoice_NO^InvNo^" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Sys_Number^SysNum^" showInSummary="true">
+      <items style="Lookup" dataController="tbl_Customer_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" showInSummary="true" />
+    <field name="LineID" type="Int64" allowNulls="false" label="^LinId^Line#^LinId^" />
+    <field name="Emp_id" type="Decimal" label="^EmpId^Emp_id^EmpId^" />
+    <field name="Project_Code" type="String" label="^ProCod^Project_Code^ProCod^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept_Code^DepCod^" length="50" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item_Code^IteCod^" length="50">
+      <items style="Lookup" dataController="Pick_Item_Master" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" />
+    </field>
+    <field name="Currency_Code" type="String" label="^CurCod^Currency_Code^CurCod^" length="4" />
+    <field name="Distribution_AccountID" type="String" label="^DisAccId^Distribution_AccountID^DisAccId^" length="50" />
+    <field name="Created_By" type="Int32" allowNulls="false" label="^CreBy^Created_By^CreBy^" />
+    <field name="Payment_Terms" type="Int32" label="^PayTer^Payment_Terms^PayTer^" />
+    <field name="PostedYN" type="Int32" label="^PosYn^PostedYN^PosYn^" />
+    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="150" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU_Code^OpuCod^" />
+    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" />
+    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit_Price^UniPri^" />
+    <field name="Line_Disc_Percent" type="Decimal" label="^LinDisPer^Line_Disc_Percent^LinDisPer^" />
+    <field name="Line_Disc_Amount" type="Decimal" label="^LinDisAmo^Line_Disc_Amount^LinDisAmo^" />
+    <field name="IsAssets" type="Int32" label="^IsAss^IsAssets^IsAss^" />
+    <field name="S1" type="String" label="^S1^S1^S1^" length="50" />
+    <field name="S2" type="String" label="^S2^S2^S2^" length="50" />
+    <field name="S3" type="String" label="^S3^S3^S3^" length="50" />
+    <field name="S4" type="String" label="^S4^S4^S4^" length="50" />
+    <field name="ImportAction" type="Int32" label="^ImpAct^ImportAction^ImpAct^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^UplInv^Upload Invoices^UplInv^" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="InvoiceTypes" columns="50" />
+        <dataField fieldName="Invoice_Date" columns="10" />
+        <dataField fieldName="Invoice_NO" columns="15" />
+        <dataField fieldName="Item_Code" columns="50" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="LineID" columns="15" />
+        <dataField fieldName="Emp_id" columns="15" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Currency_Code" columns="4" />
+        <dataField fieldName="Distribution_AccountID" columns="50" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Payment_Terms" columns="15" />
+        <dataField fieldName="Remarks" />
+        <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Line_Disc_Percent" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Line_Disc_Amount" dataFormatString="N2" columns="15" />
+        <dataField fieldName="IsAssets" columns="15" />
+        <dataField fieldName="S1" columns="50" />
+        <dataField fieldName="S2" columns="50" />
+        <dataField fieldName="S3" columns="50" />
+        <dataField fieldName="S4" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevUplInv^Review Upload Invoices^RevUplInv^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Upload Invoices" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="InvoiceTypes" columns="50" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="LineID" columns="15" />
+            <dataField fieldName="Emp_id" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Item_Code" columns="50" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Distribution_AccountID" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Payment_Terms" columns="15" />
+            <dataField fieldName="PostedYN" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="IsAssets" columns="15" />
+            <dataField fieldName="S1" columns="50" />
+            <dataField fieldName="S2" columns="50" />
+            <dataField fieldName="S3" columns="50" />
+            <dataField fieldName="S4" columns="50" />
+            <dataField fieldName="ImportAction" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewUplInv^New Upload Invoices^NewUplInv^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Upload Invoices" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="InvoiceTypes" columns="50" />
+            <dataField fieldName="Invoice_Date" columns="10" />
+            <dataField fieldName="Invoice_NO" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="LineID" columns="15" />
+            <dataField fieldName="Emp_id" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Item_Code" columns="50" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="Distribution_AccountID" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Payment_Terms" columns="15" />
+            <dataField fieldName="PostedYN" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="IsAssets" columns="15" />
+            <dataField fieldName="S1" columns="50" />
+            <dataField fieldName="S2" columns="50" />
+            <dataField fieldName="S3" columns="50" />
+            <dataField fieldName="S4" columns="50" />
+            <dataField fieldName="ImportAction" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="gridMini" type="Grid" commandId="command1" label="^UplInv^Upload Invoices^UplInv^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="InvoiceTypes" columns="50" />
+        <dataField fieldName="Invoice_Date" columns="10" />
+        <dataField fieldName="Invoice_NO" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="LineID" columns="15" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Item_Code" columns="50" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Payment_Terms" columns="15" />
+        <dataField fieldName="Remarks" />
+        <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+      </dataFields>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Import Actions" flat="true">
+      <action commandName="SQL" confirmation="User Details Name : [@BusinessRules_UserName] and&#xD;&#xA;[@BusinessRules_UserId] and Branch Id [@Session_OPU_Code]" id="a100" headerText="My User Details" />
+      <action commandName="Import" id="a101" headerText="Import ExcelSheet" />
+      <action commandName="SQL" headerText="Validate The Data" id="a102">
+        <data><![CDATA[EXEC [dbo].[CREATE_APAR_INVOICE] @BusinessRules_UserId,1]]></data>
+      </action>
+      <action commandName="SQL" headerText="Process the Data" id="a103">
+        <data><![CDATA[EXEC [dbo].[CREATE_APAR_INVOICE] @BusinessRules_UserId,3]]></data>
+      </action>
+      <action commandName="SQL" headerText="Flush The Interface" id="a104">
+        <data><![CDATA[EXEC [dbo].[CREATE_APAR_INVOICE] @BusinessRules_UserId,2]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+</dataController>

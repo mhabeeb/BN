@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Inter_Org_Intransit" conflictDetection="overwriteChanges" label="^IntOrgInt^Inter_Org_Intransit^IntOrgInt^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Transactions_Header" custom="true">
+      <text><![CDATA[SELECT        dbo.tbl_Store.Store_Name, dbo.tbl_Store.Store_Address, dbo.tbl_Store.OPU_Code, dbo.tbl_Store.Store_ID, dbo.tbl_Transactions_Header.Transaction_ID, 
+                         dbo.tbl_Transactions_Header.Remarks, ISNULL(dbo.tbl_Transactions_Header.IsInterOrg, 0) AS IsInterOrg, dbo.tbl_Transactions_Header.To_StoreID, 
+                         ISNULL(dbo.tbl_Transactions_Header.ImportYN, 0) AS ImportYN, dbo.tbl_Transactions_Header.ImportDate, dbo.tbl_Transactions_Header.Transaction_Date, 
+                         dbo.tbl_Transactions_Header.Transaction_No
+FROM            dbo.tbl_Store INNER JOIN
+                         dbo.tbl_Transactions_Header ON dbo.tbl_Store.Store_ID = dbo.tbl_Transactions_Header.StoreID
+WHERE        (ISNULL(dbo.tbl_Transactions_Header.IsInterOrg, 0) = 1) AND (ISNULL(dbo.tbl_Transactions_Header.ImportYN, 0) = 0)]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Store_Name" type="String" label="^StorNam^Store Name^StorNam^" length="255" showInSummary="true" />
+    <field name="Store_Address" type="String" label="^StoAdd^Store Address^StoAdd^" length="255" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
+    <field name="Store_ID" type="Int32" allowNulls="false" label="^StoId^Store#^StoId^" showInSummary="true" readOnly="true" />
+    <field name="Transaction_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TraId^Transaction#^TraId^" readOnly="true" showInSummary="true" />
+    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="50" showInSummary="true" />
+    <field name="IsInterOrg" type="Int32" allowNulls="false" label="^IsIntOrg^Is Inter Org^IsIntOrg^" readOnly="true" />
+    <field name="To_StoreID" type="Int32" label="^ToStoId^To Store#^ToStoId^" />
+    <field name="ImportYN" type="Int32" allowNulls="false" label="^ImpYn^Import YN^ImpYn^" readOnly="true" />
+    <field name="ImportDate" type="DateTime" label="^ImpDat^Import Date^ImpDat^" />
+    <field name="Transaction_Date" type="DateTime" label="^TraDat^Transaction Date^TraDat^" />
+    <field name="Transaction_No" type="Decimal" label="^TraNo^Ref No^TraNo^" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^CompanyName^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" computed="true" sourceFields="OPU_Code" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^IntOrgInt^Inter Org. Intransit^IntOrgInt^" reportTemplate="true" showInSelector="false" sortExpression="Transaction_ID DESC" filter="To_StoreID=@Session_StoreID">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Transaction_ID" columns="15" />
+        <dataField fieldName="Transaction_No" columns="15" />
+        <dataField fieldName="Store_ID" columns="15" />
+        <dataField fieldName="Store_Name" hidden="true" />
+        <dataField fieldName="Store_Address" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Remarks" columns="50" />
+        <dataField fieldName="IsInterOrg" columns="15" />
+        <dataField fieldName="To_StoreID" columns="15" />
+        <dataField fieldName="ImportYN" columns="15" />
+        <dataField fieldName="ImportDate" columns="10" />
+        <dataField fieldName="Transaction_Date" columns="10" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevIntOrgInt^Review Inter Org. Intransit^RevIntOrgInt^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Transactions Header" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Store_Name" />
+            <dataField fieldName="Store_Address" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Store_ID" columns="15" />
+            <dataField fieldName="Remarks" columns="50" />
+            <dataField fieldName="IsInterOrg" columns="15" />
+            <dataField fieldName="To_StoreID" columns="15" />
+            <dataField fieldName="ImportYN" columns="15" />
+            <dataField fieldName="ImportDate" columns="10" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Transaction_No" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewTraHea^New Transactions Header^NewTraHea^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New tbl Transactions Header" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Store_Name" />
+            <dataField fieldName="Store_Address" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Store_ID" columns="15" />
+            <dataField fieldName="Remarks" columns="50" />
+            <dataField fieldName="To_StoreID" columns="15" />
+            <dataField fieldName="ImportDate" columns="10" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Transaction_No" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Import Inter Org Receipt" flat="true">
+      <action commandName="SQL" headerText="Import Inter Org Receipt" id="a100">
+        <data><![CDATA[exec [dbo].[Inter_Org_TRX_Header]  @Transaction_ID ,@BusinessRules_UserId]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if [dbo].[GET_INV_TRX_STATUS](@Transaction_ID)= 1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_Focus='Transaction_Date, The Docuement Is InProcess/Approved, Can not be Update'
+end]]></rule>
+  </businessRules>
+</dataController>

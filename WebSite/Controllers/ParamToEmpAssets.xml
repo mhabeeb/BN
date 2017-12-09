@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ParamToEmpAssets" label="^ParToEmpAss^ParamToEmpAssets^ParToEmpAss^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="EmployeeID" type="Int64" label="^EmpId^Employee ID^EmpId^" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Employees" dataView="grid1" dataTextField="Emp_Name" dataValueField="Emp_id" copy="Dept_Code=Dept_Code&#xD;&#xA;Project_Code=Project_Code&#xD;&#xA;" />
+    </field>
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    </field>
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
+    </field>
+    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50" contextFields="Project_Code=Project_Code">
+      <items style="Lookup" dataController="ProjectsSites" dataView="grid1" dataTextField="SiteName" dataValueField="SiteCode" />
+    </field>
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20">
+      <items style="Lookup" dataController="SOBOQ_Line_Items_Child" dataView="grid1" dataTextField="Item_Code" dataValueField="Item_Code" />
+    </field>
+    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" allowNulls="false" />
+  </fields>
+</dataController>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TBL_Document_Approvals_Detail" conflictDetection="overwriteChanges" label="^DocAppDet^Document Approvals Detail^DocAppDet^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"TBL_Document_Approvals_Detail"."DocumentID" "DocumentID"
+	,"Document"."DocDescription" "DocumentDocDescription"
+	,"TBL_Document_Approvals_Detail"."UserID" "UserID"
+	,"TBL_Document_Approvals_Detail"."Remarks" "Remarks"
+	,"TBL_Document_Approvals_Detail"."Hirarchy" "Hirarchy"
+	,"TBL_Document_Approvals_Detail"."ApprovalStatus" "ApprovalStatus"
+	,"TBL_Document_Approvals_Detail"."CurrentApp" "CurrentApp"
+	,"TBL_Document_Approvals_Detail"."Created_By" "Created_By"
+	,"TBL_Document_Approvals_Detail"."Created_DateTime" "Created_DateTime"
+	,"TBL_Document_Approvals_Detail"."Updated_By" "Updated_By"
+	,"TBL_Document_Approvals_Detail"."Updated_DateTime" "Updated_DateTime"
+	,"TBL_Document_Approvals_Detail"."DocAPP_SNO" "DocAPP_SNO"
+from "dbo"."TBL_Document_Approvals_Detail" "TBL_Document_Approvals_Detail"
+	left join "dbo"."TBL_Document_Header" "Document" on "TBL_Document_Approvals_Detail"."DocumentID" = "Document"."DocumentID"
+]]></text>
+    </command>
+    <command id="DocAPP_SNOIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="DocAPP_SNO" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="DocumentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DocId^Document#^DocId^" showInSummary="true">
+      <items style="Lookup" dataController="TBL_Document_Header" newDataView="createForm1" dataValueField="DocumentID" />
+    </field>
+    <field name="DocumentDocDescription" type="String" readOnly="true" allowQBE="false" allowSorting="false" label="^DocDocDes^Document Doc Description^DocDocDes^" />
+    <field name="UserID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^UserId^User#^UserId^" />
+    <field name="Remarks" type="String" allowQBE="false" allowSorting="false" label="^Rem^Remarks^Rem^" showInSummary="true" />
+    <field name="Hirarchy" type="Int32" label="^Hir^Hirarchy^Hir^" showInSummary="true" />
+    <field name="ApprovalStatus" type="Int32" default="((0))" label="^AppSta^Approval Status^AppSta^" showInSummary="true" />
+    <field name="CurrentApp" type="Int32" default="((0))" label="^CurApp^Current App^CurApp^" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDat^Updated Date Time^UpdDatTim^" />
+    <field name="DocAPP_SNO" type="Decimal" allowNulls="false" label="^DocAppSNo^Doc APP SNO^DocAppSNo^" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^DocAppDet^Document Approvals Detail^DocAppDet^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="DocumentID" aliasFieldName="DocumentDocDescription" />
+        <dataField fieldName="Remarks" rows="5" />
+        <dataField fieldName="Hirarchy" columns="15" />
+        <dataField fieldName="ApprovalStatus" columns="15" />
+        <dataField fieldName="CurrentApp" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="DocAPP_SNO" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevDocAppDet^Review Document Approvals Detail^RevDocAppDet^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="TBL Document Approvals Detail" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DocumentID" aliasFieldName="DocumentDocDescription" hyperlinkFormatString="~/Pages/TBL_Document_Header.aspx?DocumentID={DocumentID}&amp;_controller=TBL_Document_Header&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Remarks" rows="5" />
+            <dataField fieldName="Hirarchy" columns="15" />
+            <dataField fieldName="ApprovalStatus" columns="15" />
+            <dataField fieldName="CurrentApp" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="DocAPP_SNO" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewDocAppDet^New Document Approvals Detail^NewDocAppDet^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>1
+          <category id="c1" headerText="New TBL Document Approvals Detail" flow="NewColumn"><description><![CDATA[$DefaultNewDescription]]></description><dataFields><dataField fieldName="DocumentID" aliasFieldName="DocumentDocDescription" /><dataField fieldName="UserID" columns="15" /><dataField fieldName="Remarks" rows="5" /><dataField fieldName="Hirarchy" columns="15" /><dataField fieldName="ApprovalStatus" columns="15" /><dataField fieldName="CurrentApp" columns="15" /><dataField fieldName="Created_By" hidden="true" columns="15" /><dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" /><dataField fieldName="Updated_By" hidden="true" columns="15" /><dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" /></dataFields></category></categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>

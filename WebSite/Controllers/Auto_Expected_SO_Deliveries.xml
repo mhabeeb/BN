@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Auto_Expected_SO_Deliveries" conflictDetection="overwriteChanges" label="^AutExpSoDel^Auto_Expected_SO_Deliveries^AutExpSoDel^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName=" dbo.SO_Header" custom="true">
+      <text><![CDATA[SELECT        SO_NO, Date_Ordered, Delivery_Date, Header_Net, Vendor_Name, Doc_Status, Project_Code, Dept_Code, YourRefrence,
+OPU_Code, Company_Code, Doc_No
+FROM            dbo.SO_Header
+WHERE        (SO_NO IN
+                             (SELECT        SO_NO
+                               FROM            dbo.SO_Line_Items
+                               WHERE        (DV_Balance > 0))) AND (Rec_Status = 1)
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="SO_NO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^SoNoSeq^SoNoSeq^SoNoSeq^" readOnly="true" showInSummary="true" />
+    <field name="Doc_No" type="Int64" label="^SoNo^SONO^SoNo^" />
+    <field name="Date_Ordered" type="DateTime" allowNulls="false" label="^DatOrd^Date Ordered^DatOrd^" />
+    <field name="Delivery_Date" type="DateTime" label="^DelDat^Delivery Date^DelDat^" />
+    <field name="Header_Net" type="Decimal" label="^HeaNet^Header Net^HeaNet^" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="250" />
+    <field name="Doc_Status" type="String" label="^DocSta^Doc Status^DocSta^" length="50" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="YourRefrence" type="String" label="^RefNo^Ref No^RefNo^" length="15" />
+    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" />
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^SoHea^SO Header^SoHea^" filter="OPU_Code=@Session_OPU_Code" sortExpression="SO_NO DESC" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+      <headerText>&lt;font color="red"&gt;Note : SO With Manual Serial OR Batch Items Will not Taken for Full Delivery &lt;/font&gt;</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Date_Ordered" columns="10" />
+        <dataField fieldName="Delivery_Date" columns="10" />
+        <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Doc_Status" columns="50" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="YourRefrence" columns="15" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevSoHea^Review SO Header^RevSoHea^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="dbo SO Header" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Date_Ordered" columns="10" />
+            <dataField fieldName="Delivery_Date" columns="10" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Doc_Status" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="YourRefrence" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^SoHea^New SO Header^SoHea^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New dbo SO Header" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Date_Ordered" columns="10" />
+            <dataField fieldName="Delivery_Date" columns="10" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Doc_Status" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="YourRefrence" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="^PrintFullSODeliveries^Print Full SO Deliveries^PrintFullSODeliveries^">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="SQL" headerText="^FullDeliveries^Full Deliveries^FullDeliveries^">
+        <data><![CDATA[IF ISNULL(@Session_StoreID, 0) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1;
+        SET @Result_Focus = 'Transaction_Date, Inventory Organization Access Is Invlid..Please select Inventory Org from Change Organization';
+    END;
+
+IF ISNULL(@Session_StoreID, 0) > 0
+    BEGIN
+exec [dbo].[MASS_SO_TO_DV_TRX]  @SO_NO,@BusinessRules_UserId
+
+UPDATE dbo.SO_Header
+SET Doc_Status=([dbo].[GET_HEADER_STATUS_SO]([SO_NO],(2)))
+WHERE SO_NO=@SO_NO
+END]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[IF dbo.CHECK_VALID_OPU_STORE(@BusinessRules_UserId, @Session_OPU_Code, @Session_StoreID) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Date_Ordered,Invalid Store/Branch Selection Please select valid Organization from Change Organization Page.'
+END
+if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+
+if [dbo].[Check_Open_Date_SubLedger](@SO_NO,@BusinessRules_UserId,1)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, The Transaction Date Is Not In An Open Period'
+end
+
+if [dbo].[CHECK_APPROVAL_STATUS](@SO_NO,3)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, The Docuement Is InProcess/Approved, Can not be Update'
+end]]></rule>
+    <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

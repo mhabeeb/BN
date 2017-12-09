@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SCM_Cross_Tab" conflictDetection="overwriteChanges" label="SCM Cross Tab" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"SCM_Cross_Tab"."RptID" "RptID"
+	,"SCM_Cross_Tab"."UserID" "UserID"
+	,"SCM_Cross_Tab"."ReportID" "ReportID"
+	,"SCM_Cross_Tab"."Total" "Total"
+	,"SCM_Cross_Tab"."Trx_Type" "Trx_Type"
+	,"SCM_Cross_Tab"."YEAR" "YEAR"
+	,"SCM_Cross_Tab"."Number" "Number"
+	,"SCM_Cross_Tab"."Description" "Description"
+	,"SCM_Cross_Tab"."January" "January"
+	,"SCM_Cross_Tab"."February" "February"
+	,"SCM_Cross_Tab"."March" "March"
+	,"SCM_Cross_Tab"."April" "April"
+	,"SCM_Cross_Tab"."May" "May"
+	,"SCM_Cross_Tab"."June" "June"
+	,"SCM_Cross_Tab"."July" "July"
+	,"SCM_Cross_Tab"."August" "August"
+	,"SCM_Cross_Tab"."September" "September"
+	,"SCM_Cross_Tab"."October" "October"
+	,"SCM_Cross_Tab"."November" "November"
+	,"SCM_Cross_Tab"."December" "December"
+from "dbo"."SCM_Cross_Tab" "SCM_Cross_Tab"
+]]></text>
+    </command>
+    <command id="RptIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="RptID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="RptID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Rpt#" readOnly="true" />
+    <field name="UserID" type="Int32" label="User#" showInSummary="true" />
+    <field name="ReportID" type="Int32" label="Report#" showInSummary="true" />
+    <field name="Total" type="Decimal" default="((0))" label="Total" showInSummary="true" />
+    <field name="Trx_Type" type="String" label="Trx Type" length="20" showInSummary="true" />
+    <field name="YEAR" type="Int32" label="Year" showInSummary="true" />
+    <field name="Number" type="String" label="Number" length="255" />
+    <field name="Description" type="String" label="Description" length="255" />
+    <field name="January" type="Decimal" default="((0))" label="January" />
+    <field name="February" type="Decimal" default="((0))" label="February" />
+    <field name="March" type="Decimal" default="((0))" label="March" />
+    <field name="April" type="Decimal" default="((0))" label="April" />
+    <field name="May" type="Decimal" default="((0))" label="May" />
+    <field name="June" type="Decimal" default="((0))" label="June" />
+    <field name="July" type="Decimal" default="((0))" label="July" />
+    <field name="August" type="Decimal" default="((0))" label="August" />
+    <field name="September" type="Decimal" default="((0))" label="September" />
+    <field name="October" type="Decimal" default="((0))" label="October" />
+    <field name="November" type="Decimal" default="((0))" label="November" />
+    <field name="December" type="Decimal" default="((0))" label="December" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="SCM Cross Tab">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="ReportID" columns="15" />
+        <dataField fieldName="Total" dataFormatString="c" columns="15" />
+        <dataField fieldName="Trx_Type" columns="20" />
+        <dataField fieldName="YEAR" columns="15" />
+        <dataField fieldName="Number" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="January" dataFormatString="c" columns="15" />
+        <dataField fieldName="February" dataFormatString="c" columns="15" />
+        <dataField fieldName="March" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review SCM Cross Tab">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="SCM Cross Tab" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="ReportID" columns="15" />
+            <dataField fieldName="Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="Trx_Type" columns="20" />
+            <dataField fieldName="YEAR" columns="15" />
+            <dataField fieldName="Number" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="January" dataFormatString="c" columns="15" />
+            <dataField fieldName="February" dataFormatString="c" columns="15" />
+            <dataField fieldName="March" dataFormatString="c" columns="15" />
+            <dataField fieldName="April" dataFormatString="c" columns="15" />
+            <dataField fieldName="May" dataFormatString="c" columns="15" />
+            <dataField fieldName="June" dataFormatString="c" columns="15" />
+            <dataField fieldName="July" dataFormatString="c" columns="15" />
+            <dataField fieldName="August" dataFormatString="c" columns="15" />
+            <dataField fieldName="September" dataFormatString="c" columns="15" />
+            <dataField fieldName="October" dataFormatString="c" columns="15" />
+            <dataField fieldName="November" dataFormatString="c" columns="15" />
+            <dataField fieldName="December" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New SCM Cross Tab">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New SCM Cross Tab" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="ReportID" columns="15" />
+            <dataField fieldName="Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="Trx_Type" columns="20" />
+            <dataField fieldName="YEAR" columns="15" />
+            <dataField fieldName="Number" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="January" dataFormatString="c" columns="15" />
+            <dataField fieldName="February" dataFormatString="c" columns="15" />
+            <dataField fieldName="March" dataFormatString="c" columns="15" />
+            <dataField fieldName="April" dataFormatString="c" columns="15" />
+            <dataField fieldName="May" dataFormatString="c" columns="15" />
+            <dataField fieldName="June" dataFormatString="c" columns="15" />
+            <dataField fieldName="July" dataFormatString="c" columns="15" />
+            <dataField fieldName="August" dataFormatString="c" columns="15" />
+            <dataField fieldName="September" dataFormatString="c" columns="15" />
+            <dataField fieldName="October" dataFormatString="c" columns="15" />
+            <dataField fieldName="November" dataFormatString="c" columns="15" />
+            <dataField fieldName="December" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

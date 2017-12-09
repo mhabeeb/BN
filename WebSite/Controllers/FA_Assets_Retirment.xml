@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="FA_Assets_Retirment" conflictDetection="overwriteChanges" label="^FaAssRet^FA_Assets_Retirment^FaAssRet^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Assets_Retirment" custom="true">
+      <text><![CDATA[SELECT * FROM Assets_Retirment]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="RetirmentID" type="Int64" allowNulls="false" isPrimaryKey="true" label="^RetId^Retirment#^RetId^" readOnly="true" />
+    <field name="AssignmentID" type="Int64" allowNulls="false" label="^AssId^Assignment#^AssId^" showInSummary="true" />
+    <field name="AssetID" type="Decimal" allowNulls="false" label="^AssId^Asset#^AssId^" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="EmployeeID" type="Decimal" label="^EmpId^Employee#^EmpId^" />
+    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
+    <field name="Retirment_Date" type="DateTime" label="^RetDat^Retirment Date^RetDat^" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50" />
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" />
+    <field name="RetirmentRemarks" type="String" label="^RetRem^Retirment Remarks^RetRem^" length="4000" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
+    <field name="Retirement_Cost" type="Decimal" label="Retirement Cost" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^AssRet^Assets Retirment^AssRet^" reportTemplate="true" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="AssignmentID" columns="15" />
+        <dataField fieldName="AssetID" columns="15" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="EmployeeID" columns="15" />
+        <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="Retirment_Date" columns="10" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="SiteCode" columns="50" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="RetirmentRemarks" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="Retirement_Cost" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevAssRet^Review Assets Retirment^RevAssRet^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Assets Retirment" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AssignmentID" columns="15" hidden="true" />
+            <dataField fieldName="AssetID" columns="15" hidden="true" />
+            <dataField fieldName="Dept_Code" columns="50" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50" hidden="true" />
+            <dataField fieldName="EmployeeID" columns="15" hidden="true" />
+            <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Retirment_Date" columns="10" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="SiteCode" columns="50" hidden="true" />
+            <dataField fieldName="Item_Code" columns="20" hidden="true" />
+            <dataField fieldName="RetirmentRemarks" />
+            <dataField fieldName="Retirement_Cost" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewAssRet^New Assets Retirment^NewAssRet^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Assets Retirment" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AssignmentID" columns="15" hidden="true" />
+            <dataField fieldName="AssetID" columns="15" hidden="true" />
+            <dataField fieldName="Dept_Code" columns="50" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50" hidden="true" />
+            <dataField fieldName="EmployeeID" columns="15" hidden="true" />
+            <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Retirment_Date" columns="10" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="SiteCode" columns="50" hidden="true" />
+            <dataField fieldName="Item_Code" columns="20" hidden="true" />
+            <dataField fieldName="RetirmentRemarks" />
+            <dataField fieldName="Retirement_Cost" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Retirment_Date=GETDATE()
+SELECT @AssetID = AssetID,
+       @Dept_Code = Dept_Code,
+       @Project_Code = Project_Code,
+       @EmployeeID = EmployeeID,
+       @SiteCode = SiteCode,
+       @Item_Code = Item_Code
+FROM Assets_Assignments
+WHERE AssignmentID = @AssignmentID
+
+
+SET @Retirement_Cost = [dbo].[GET_FA_Current_cost_Unit] (@AssetID) * @Qty]]></rule>
+    <rule id="r100" commandName="Insert|Update" type="Sql" phase="Before"><![CDATA[SELECT @AssetID = AssetID,
+       @Dept_Code = Dept_Code,
+       @Project_Code = Project_Code,
+       @EmployeeID = EmployeeID,
+       @SiteCode = SiteCode,
+       @Item_Code = Item_Code
+FROM Assets_Assignments
+WHERE AssignmentID = @AssignmentID
+
+
+SET @Retirement_Cost = [dbo].[GET_FA_Current_cost_Unit] (@AssetID) * @Qty]]></rule>
+    <rule id="r102" type="Sql" commandName="Insert|Update" phase="Before" name="Qty_Validator"><![CDATA[DECLARE @Retir_Balance_Qty MONEY
+SELECT @Retir_Balance_Qty = Retir_Balance_Qty
+FROM Assets_Assignments
+WHERE AssignmentID = @AssignmentID
+IF @Qty > @Retir_Balance_Qty
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Qty,More then Retired Qty .'
+END
+IF @Qty = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Qty,Retired Qty Connot be Zero .'
+END]]></rule>
+  </businessRules>
+</dataController>

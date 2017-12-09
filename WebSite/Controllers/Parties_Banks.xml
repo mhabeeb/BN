@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Parties_Banks" conflictDetection="overwriteChanges" label="^ParBan^Parties Banks^ParBan^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Parties_Banks"."PartyBankID" "PartyBankID"
+	,"Parties_Banks"."Sys_Number" "Sys_Number"
+	,"TheSys_Number"."Vendor_Name" "TheSys_NumberVendor_Name"
+	,"TheSys_NumberUnbilled_AC"."Account_Description" "TheSys_NumberUnbilled_ACAccount_Description"
+	,"TheSys_NumberUnbilled_ACAccount_Type"."Account_Type_Ar" "TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar"
+	,"TheSys_NumberBilled_AC"."Account_Description" "TheSys_NumberBilled_ACAccount_Description"
+	,"TheSys_NumberBilled_ACAccount_Type"."Account_Type_Ar" "TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar"
+	,"TheSys_NumberBranch"."AP_Unbilled_AC" "TheSys_NumberBranchAP_Unbilled_AC"
+	,"TheSys_NumberBranchCompany"."CompanyName" "TheSys_NumberBranchCompanyCompanyName"
+	,"Parties_Banks"."BankName" "BankName"
+	,"Parties_Banks"."AccountNumber" "AccountNumber"
+	,"Parties_Banks"."AccountName" "AccountName"
+	,"Parties_Banks"."BranchName" "BranchName"
+	,"Parties_Banks"."IBAN" "IBAN"
+	,"Parties_Banks"."SwiftCode" "SwiftCode"
+	,"Parties_Banks"."CBIDCode" "CBIDCode"
+	,"Parties_Banks"."Created_By" "Created_By"
+	,"Parties_Banks"."Created_DateTime" "Created_DateTime"
+	,"Parties_Banks"."Updated_By" "Updated_By"
+	,"Parties_Banks"."Updated_DateTime" "Updated_DateTime"
+	,"Parties_Banks"."Rec_Status" "Rec_Status"
+	,"Parties_Banks"."Approve_Ask" "Approve_Ask"
+	,"Parties_Banks"."Approve" "Approve"
+	,"Parties_Banks"."Emp_id" "Emp_id"
+from "dbo"."Parties_Banks" "Parties_Banks"
+	left join "dbo"."tbl_Customer_Supplier" "TheSys_Number" on "Parties_Banks"."Sys_Number" = "TheSys_Number"."Sys_Number"
+	left join "dbo"."COA_Natural_Account" "TheSys_NumberUnbilled_AC" on "TheSys_Number"."Unbilled_AC" = "TheSys_NumberUnbilled_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "TheSys_NumberUnbilled_ACAccount_Type" on "TheSys_NumberUnbilled_AC"."Account_Type" = "TheSys_NumberUnbilled_ACAccount_Type"."Account_Type"
+	left join "dbo"."COA_Natural_Account" "TheSys_NumberBilled_AC" on "TheSys_Number"."Billed_AC" = "TheSys_NumberBilled_AC"."AccountID"
+	left join "dbo"."COA_Natural_Account_Type" "TheSys_NumberBilled_ACAccount_Type" on "TheSys_NumberBilled_AC"."Account_Type" = "TheSys_NumberBilled_ACAccount_Type"."Account_Type"
+	left join "dbo"."tbl_BranchInfo" "TheSys_NumberBranch" on "TheSys_Number"."BranchID" = "TheSys_NumberBranch"."BranchID"
+	left join "dbo"."tbl_CompanyInformation" "TheSys_NumberBranchCompany" on "TheSys_NumberBranch"."CompanyID" = "TheSys_NumberBranchCompany"."CompanyID"
+]]></text>
+    </command>
+    <command id="PartyBankIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PartyBankID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PartyBankID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^ParBanId^Party Bank#^ParBanId^" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" showInSummary="true">
+      <items />
+    </field>
+    <field name="TheSys_NumberVendor_Name" type="String" readOnly="true" label="^SysNumVenNam^Sys Number Vendor Name^SysNumVenNam^" length="150" />
+    <field name="TheSys_NumberUnbilled_ACAccount_Description" type="String" readOnly="true" label="^SysNumUnbAcDes^Sys Number Unbilled AC Account Description^SysNumUnbAcDes^" length="200" />
+    <field name="TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^SysNumAcTypAr^Sys Number Unbilled AC Account Type Ar^SysNumAcTypAr^" length="50" />
+    <field name="TheSys_NumberBilled_ACAccount_Description" type="String" readOnly="true" label="^SysAccBilDes^Sys Number Billed AC Account Description^SysAccBilDes^" length="200" />
+    <field name="TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar" type="String" readOnly="true" label="^SysNumACTpAr^Sys Number Billed AC Account Type Ar^SysNumACTpAr^" length="50" />
+    <field name="TheSys_NumberBranchAP_Unbilled_AC" type="String" readOnly="true" label="^SysNumBraUnAc^Sys Number Branch AP Unbilled AC^SysNumBraUnAc^" length="50" />
+    <field name="TheSys_NumberBranchCompanyCompanyName" type="String" readOnly="true" label="^SysNumBraComNam^Sys Number Branch Company Name^SysNumBraComNam^" length="255" />
+    <field name="BankName" type="String" label="^BanNam^Bank Name^BanNam^" length="250" showInSummary="true" />
+    <field name="AccountNumber" type="String" label="^Accum^Account Number^Accum^" length="50" showInSummary="true" />
+    <field name="AccountName" type="String" label="^AccNam^Account Name^AccNam^" length="50" showInSummary="true" />
+    <field name="BranchName" type="String" label="^BraNam^Branch Name^BraNam^" length="50" showInSummary="true" />
+    <field name="IBAN" type="String" label="^Iba^Iban^Iba^" length="50" />
+    <field name="SwiftCode" type="String" label="^SwiCod^Swift Code^SwiCod^" length="50" />
+    <field name="CBIDCode" type="String" label="^CbiCod^CBID Code^CbiCod^" length="50" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^" />
+    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^" />
+    <field name="Approve" type="Int32" label="^App^Approve^App^" />
+    <field name="Emp_id" type="Decimal" label="^EmpId^Emp#^EmpId^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^ParBan^Parties Banks^ParBan^" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" />
+        <dataField fieldName="BankName" />
+        <dataField fieldName="AccountNumber" columns="50" />
+        <dataField fieldName="AccountName" columns="50" />
+        <dataField fieldName="BranchName" columns="50" />
+        <dataField fieldName="IBAN" columns="50" />
+        <dataField fieldName="SwiftCode" columns="50" />
+        <dataField fieldName="CBIDCode" columns="50" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevParBan^Review Parties Banks^RevParBan^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Parties Banks" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" hyperlinkFormatString="~/Pages/tbl_Customer_Supplier.aspx?Sys_Number={Sys_Number}&amp;_controller=tbl_Customer_Supplier&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="BankName" />
+            <dataField fieldName="AccountNumber" columns="50" />
+            <dataField fieldName="AccountName" columns="50" />
+            <dataField fieldName="BranchName" columns="50" />
+            <dataField fieldName="IBAN" columns="50" />
+            <dataField fieldName="SwiftCode" columns="50" />
+            <dataField fieldName="CBIDCode" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Approve" columns="15" />
+            <dataField fieldName="Emp_id" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Reference Information">
+          <description><![CDATA[$DefaultReferenceDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TheSys_NumberUnbilled_ACAccount_Description" />
+            <dataField fieldName="TheSys_NumberUnbilled_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="TheSys_NumberBilled_ACAccount_Description" />
+            <dataField fieldName="TheSys_NumberBilled_ACAccount_TypeAccount_Type_Ar" columns="50" />
+            <dataField fieldName="TheSys_NumberBranchAP_Unbilled_AC" columns="50" />
+            <dataField fieldName="TheSys_NumberBranchCompanyCompanyName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewParBan^New Parties Banks^NewParBan^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Parties Banks" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Sys_Number" aliasFieldName="TheSys_NumberVendor_Name" />
+            <dataField fieldName="BankName" />
+            <dataField fieldName="AccountNumber" columns="50" />
+            <dataField fieldName="AccountName" columns="50" />
+            <dataField fieldName="BranchName" columns="50" />
+            <dataField fieldName="IBAN" columns="50" />
+            <dataField fieldName="SwiftCode" columns="50" />
+            <dataField fieldName="CBIDCode" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Approve" columns="15" />
+            <dataField fieldName="Emp_id" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

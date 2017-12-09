@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Profit_and_Loss_Project" conflictDetection="overwriteChanges" label="^ProAndLosPro^Profit_and_Loss_Project^ProAndLosPro^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="GL_Transaction_Line" custom="true">
+      <text><![CDATA[SELECT OPU_Code_Ln,
+       TrxYear,
+       IsNull(Project_Code,'None') [Project_Code],
+       IsNull([January], 0) [January],
+       IsNull([February], 0) [February],
+       IsNull([March], 0) [March],
+       IsNull([April], 0) [April],
+       IsNull([May], 0) [May],
+       IsNull([June], 0) [June],
+       IsNull([July], 0) [July],
+       IsNull([August], 0) [August],
+       IsNull([September], 0) [September],
+       IsNull([October], 0) [October],
+       IsNull([November], 0) [November],
+       IsNull([December], 0) [December]
+FROM
+(
+    SELECT OPU_Code_Ln,
+           [TrxYear],
+           Project_Code,
+           DATENAME(month, DATEADD(month, TrxMonths, 0) - 1) AS [MONTH],
+           (IsNull(Debit_Amount, 0) - IsNull(Credit_Amount, 0)) Amount
+    FROM dbo.GL_Transaction_Line
+    WHERE Account_Type IN('Expense', 'Cogs', 'Revenue')
+--AND Transaction_Date BETWEEN @Cal_fr_date AND @Cal_to_Date
+) AS s PIVOT(SUM(Amount) FOR [MONTH] IN([January],
+                                        [February],
+                                        [March],
+                                        [April],
+                                        [May],
+                                        [June],
+                                        [July],
+                                        [August],
+                                        [September],
+                                        [October],
+                                        [November],
+                                        [December])) AS p]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="OPU_Code_Ln" type="Int32" label="^OPUCodeLn^OPU Code Ln^OPUCodeLn^" showInSummary="true" />
+    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" allowNulls="false" isPrimaryKey="true" />
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" readOnly="true" length="50" isPrimaryKey="true" />
+    <field name="January" type="Decimal" allowNulls="false" label="^Jan^January^Jan^" readOnly="true" />
+    <field name="February" type="Decimal" allowNulls="false" label="^Feb^February^Feb^" readOnly="true" />
+    <field name="March" type="Decimal" allowNulls="false" label="^March^March^March^" readOnly="true" />
+    <field name="April" type="Decimal" allowNulls="false" label="^April^April^April^" readOnly="true" />
+    <field name="May" type="Decimal" allowNulls="false" label="^May^May^May^" readOnly="true" />
+    <field name="June" type="Decimal" allowNulls="false" label="^June^June^June^" readOnly="true" />
+    <field name="July" type="Decimal" allowNulls="false" label="^July^July^July^" readOnly="true" />
+    <field name="August" type="Decimal" allowNulls="false" label="^Aug^August^Aug^" readOnly="true" />
+    <field name="September" type="Decimal" allowNulls="false" label="^Sep^September^Sep^" readOnly="true" />
+    <field name="October" type="Decimal" allowNulls="false" label="^Oct^October^Oct^" readOnly="true" />
+    <field name="November" type="Decimal" allowNulls="false" label="^Nov^November^Nov^" readOnly="true" />
+    <field name="December" type="Decimal" allowNulls="false" label="^Dec^December^Dec^" readOnly="true" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABraAr^Branch Name^ABraAr^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABrAr^ABranch AR^ABrAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^GlTraLin^GL Transaction Line^GlTraLin^" filter="OPU_Code_Ln=@Session_OPU_Code " reportTemplate="true" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
+        <dataField fieldName="TrxYear" columns="15" />
+        <dataField fieldName="January" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="February" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="March" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="April" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="May" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="June" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="July" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="August" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="September" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="October" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="November" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="December" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevGlTraLin^Review GL Transaction Line^RevGlTraLin^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="GL Transaction Line" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="OPU_Code_Ln" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="January" dataFormatString="c" columns="15" />
+            <dataField fieldName="February" dataFormatString="c" columns="15" />
+            <dataField fieldName="March" dataFormatString="c" columns="15" />
+            <dataField fieldName="April" dataFormatString="c" columns="15" />
+            <dataField fieldName="May" dataFormatString="c" columns="15" />
+            <dataField fieldName="June" dataFormatString="c" columns="15" />
+            <dataField fieldName="July" dataFormatString="c" columns="15" />
+            <dataField fieldName="August" dataFormatString="c" columns="15" />
+            <dataField fieldName="September" dataFormatString="c" columns="15" />
+            <dataField fieldName="October" dataFormatString="c" columns="15" />
+            <dataField fieldName="November" dataFormatString="c" columns="15" />
+            <dataField fieldName="December" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewGlTraLin^New GL Transaction Line^NewGlTraLin^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New GL Transaction Line" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="OPU_Code_Ln" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

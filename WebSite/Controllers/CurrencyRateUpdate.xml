@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CurrencyRateUpdate" conflictDetection="overwriteChanges" label="^CurRatUpd^CurrencyRateUpdate^CurRatUpd^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Run_Utility" custom="true">
+      <text><![CDATA[SELECT * FROM tbl_Run_Utility WHERE UtilityID=4]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="RunID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^RunId^Run#^RunId^" readOnly="true" />
+    <field name="From_Date" type="DateTime" label="^FroDat^From Date^FroDat^" showInSummary="true" />
+    <field name="To_Date" type="DateTime" label="^ToDat^To Date^ToDat^" showInSummary="true" />
+    <field name="UtilityID" type="Int32" label="^UtiId^Utility#^UtiId^" showInSummary="true" />
+    <field name="Doc_Number" type="Decimal" label="^DocNum^Doc Number^DocNum^" showInSummary="true" />
+    <field name="UtilityMessage" type="String" label="^UtiMes^Utility Message^UtiMes^" length="100" showInSummary="true" />
+    <field name="NewDocNo" type="Decimal" label="^NewDocNo^New Doc No^NewDocNo^" />
+    <field name="CurRate" type="Decimal" label="^CurRat^Conversion Rate^CurRat^" />
+    <field name="Currency_Code" type="String" label="^CurCod^Currency To^CurCod^" length="4" showInSummary="true">
+      <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" letters="true" />
+    </field>
+    <field name="UserName" type="String" label="^UseNam^From Cur.^UseNam^" length="20" />
+    <field name="CreatedDateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="ReportID" type="Int32" label="^RepId^Report#^RepId^" />
+    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" />
+    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" readOnly="true" />
+    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" />
+    <field name="Item_Code" type="String" label="^IteCod^Currency From^IteCod^" length="20">
+      <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" />
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+  </fields>
+  <views>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewCurRat^New Currency Rate^NewCurRat^" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Currency Rate" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="From_Date" columns="10" />
+            <dataField fieldName="To_Date" columns="10" />
+            <dataField fieldName="Item_Code" columns="20" hidden="true" />
+            <dataField fieldName="UserName" columns="20" hidden="true" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="CurRate" dataFormatString="N5" columns="15" />
+            <dataField fieldName="UtilityID" columns="15" hidden="true" />
+            <dataField fieldName="Doc_Number" columns="15" hidden="true" />
+            <dataField fieldName="UtilityMessage" hidden="true" />
+            <dataField fieldName="NewDocNo" columns="15" hidden="true" />
+            <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" hidden="true" />
+            <dataField fieldName="ReportID" columns="15" hidden="true" />
+            <dataField fieldName="UserID" columns="15" hidden="true" />
+            <dataField fieldName="AccountID" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+      <action id="a6" />
+      <action id="a7" commandName="New" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="^UpdateCurrencyRate^Update Currency Rate^UpdateCurrencyRate^" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @UserID=@BusinessRules_UserId
+SET @CreatedDateTime=GETDATE()
+SET @UtilityID=4
+
+
+]]></rule>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @From_Date= getdate()
+SET @UserName=@Session_DefaultCurrency
+]]></rule>
+    <rule id="r102" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r103" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

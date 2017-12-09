@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TBL_DocumetTypes_Bankdoc" conflictDetection="overwriteChanges" label="^DocTypBan^DocumetTypes_Bankdoc^DocTypBan^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName=" TBL_DocumetTypes" custom="true">
+      <text><![CDATA[SELECT * FROM TBL_DocumetTypes WHERE DocTypeID IN (4,8,9)]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
+    <field name="Application_ID" type="Int32" allowNulls="false" label="^AppId^Application#^AppId^" showInSummary="true" />
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" />
+    <field name="DocDescrition" type="String" label="^DocDes^Doc Descrition^DocDes^" length="50" showInSummary="true" />
+    <field name="DocShortName" type="String" label="^DocShoNam^Doc Short Name^DocShoNam^" length="10" />
+    <field name="ApprovalType" type="Int32" allowNulls="false" label="^AppTyp^Approval Type^AppTyp^" />
+    <field name="BaseTableName" type="String" label="^BasTabNam^Base Table Name^BasTabNam^" length="1000" />
+    <field name="KeyField" type="String" label="^KeyFie^Key Field^KeyFie^" length="100" />
+    <field name="InActive" type="Int32" label="In Active" />
+    <field name="EditableURL" type="String" label="^EdiTabUrl^Editable URL^EdiTabUrl^" length="1000" />
+    <field name="InfoURL" type="String" label="^InfUrl^Info URL^InfUrl^" length="1000" />
+    <field name="CRKeyFields" type="String" label="^CrKeyFie^CR Key Fields^CrKeyFie^" length="100" />
+    <field name="IsASP" type="Int32" label="^IsAsp^Is ASP^IsAsp^" />
+    <field name="IsSSHR" type="Int32" label="^IsSSH^Is SSHR^IsSSH^" />
+    <field name="ControllerName" type="String" label="^ConNam^Controller Name^ConNam^" length="50" />
+    <field name="Required" type="Int32" label="^Req^Required^Req^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^DocTyp^Documet Types^DocTyp^">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Application_ID" columns="15" hidden="true" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="DocTypeID" columns="15" hidden="true" />
+        <dataField fieldName="DocDescrition" columns="50" />
+        <dataField fieldName="DocShortName" columns="10" />
+        <dataField fieldName="ApprovalType" columns="15" hidden="true" />
+        <dataField fieldName="BaseTableName" hidden="true" />
+        <dataField fieldName="KeyField" />
+        <dataField fieldName="InActive" columns="15" hidden="true" />
+        <dataField fieldName="EditableURL" hidden="true" />
+        <dataField fieldName="InfoURL" hidden="true" />
+        <dataField fieldName="CRKeyFields" hidden="true" />
+        <dataField fieldName="IsASP" columns="15" hidden="true" />
+        <dataField fieldName="IsSSHR" columns="15" hidden="true" />
+        <dataField fieldName="ControllerName" columns="50" hidden="true" />
+        <dataField fieldName="Required" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevDocTyp^Review Documet Types^RevDocTyp^">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="TBL Documet Types" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Application_ID" columns="15" />
+            <dataField fieldName="DocTypeID" columns="15" />
+            <dataField fieldName="DocDescrition" columns="50" />
+            <dataField fieldName="DocShortName" columns="10" />
+            <dataField fieldName="ApprovalType" columns="15" />
+            <dataField fieldName="BaseTableName" />
+            <dataField fieldName="KeyField" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="EditableURL" />
+            <dataField fieldName="InfoURL" />
+            <dataField fieldName="CRKeyFields" />
+            <dataField fieldName="IsASP" columns="15" />
+            <dataField fieldName="IsSSHR" columns="15" />
+            <dataField fieldName="ControllerName" columns="50" />
+            <dataField fieldName="Required" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewDocTyp^New Documet Types^NewDocTyp^">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New TBL Documet Types" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Application_ID" columns="15" />
+            <dataField fieldName="DocTypeID" columns="15" />
+            <dataField fieldName="DocDescrition" columns="50" />
+            <dataField fieldName="DocShortName" columns="10" />
+            <dataField fieldName="ApprovalType" columns="15" />
+            <dataField fieldName="BaseTableName" />
+            <dataField fieldName="KeyField" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="EditableURL" />
+            <dataField fieldName="InfoURL" />
+            <dataField fieldName="CRKeyFields" />
+            <dataField fieldName="IsASP" columns="15" />
+            <dataField fieldName="IsSSHR" columns="15" />
+            <dataField fieldName="ControllerName" columns="50" />
+            <dataField fieldName="Required" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

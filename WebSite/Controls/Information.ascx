@@ -1,0 +1,1 @@
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="Information.ascx.vb" Inherits="Controls_Information"  %> <H1>Journals Can be seen from Multipayment Screen <H1>

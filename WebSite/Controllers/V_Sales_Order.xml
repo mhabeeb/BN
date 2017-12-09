@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="V_Sales_Order" conflictDetection="overwriteChanges" label="V Sales Order" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"V_Sales_Order"."UserFullName" "UserFullName"
+	,"V_Sales_Order"."SO_NO" "SO_NO"
+	,"V_Sales_Order"."Sys_Number" "Sys_Number"
+	,"V_Sales_Order"."Date_Ordered" "Date_Ordered"
+	,"V_Sales_Order"."Customer_PO_No" "Customer_PO_No"
+	,"V_Sales_Order"."Customer_PO_Date" "Customer_PO_Date"
+	,"V_Sales_Order"."Delivery_Date" "Delivery_Date"
+	,"V_Sales_Order"."Vendor_Name" "Vendor_Name"
+	,"V_Sales_Order"."SalesMan_Name" "SalesMan_Name"
+	,"V_Sales_Order"."Header_Net" "Header_Net"
+	,"V_Sales_Order"."Header_Amount" "Header_Amount"
+	,"V_Sales_Order"."Remarks" "Remarks"
+	,"V_Sales_Order"."ProjectName" "ProjectName"
+	,"V_Sales_Order"."INV_Bal" "INV_Bal"
+	,"V_Sales_Order"."Ship_Balance" "Ship_Balance"
+	,"V_Sales_Order"."Cost" "Cost"
+	,"V_Sales_Order"."Revenue" "Revenue"
+	,"V_Sales_Order"."PandL" "PandL"
+	,"V_Sales_Order"."Doc_Status" "Doc_Status"
+from "dbo"."V_Sales_Order" "V_Sales_Order"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="UserFullName" type="String" label="User Full Name" length="150" showInSummary="true" />
+    <field name="SO_NO" type="Decimal" allowNulls="false" label="So No" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" showInSummary="true" />
+    <field name="Date_Ordered" type="DateTime" allowNulls="false" label="Date Ordered" showInSummary="true" />
+    <field name="Customer_PO_No" type="String" label="Customer PO No" length="50" showInSummary="true" />
+    <field name="Customer_PO_Date" type="DateTime" label="Customer PO Date" />
+    <field name="Delivery_Date" type="DateTime" label="Delivery Date" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" length="250" />
+    <field name="SalesMan_Name" type="String" label="Sales Man Name" length="250" />
+    <field name="Header_Net" type="Decimal" label="Header Net" />
+    <field name="Header_Amount" type="Decimal" label="Header Amount" />
+    <field name="Remarks" type="String" label="Remarks" length="100" />
+    <field name="ProjectName" type="String" label="Project Name" length="100" />
+    <field name="INV_Bal" type="Decimal" allowNulls="false" label="INV Bal" readOnly="true" />
+    <field name="Ship_Balance" type="Decimal" allowNulls="false" label="Ship Balance" readOnly="true" />
+    <field name="Cost" type="Decimal" allowNulls="false" label="Cost" readOnly="true" />
+    <field name="Revenue" type="Decimal" allowNulls="false" label="Revenue" readOnly="true" />
+    <field name="PandL" type="Decimal" allowNulls="false" label="Pand L" readOnly="true" />
+    <field name="Doc_Status" type="String" label="Doc Status" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="V Sales Order">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="UserFullName" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Date_Ordered" columns="10" />
+        <dataField fieldName="Customer_PO_No" columns="50" />
+        <dataField fieldName="Customer_PO_Date" columns="10" />
+        <dataField fieldName="Delivery_Date" columns="10" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="SalesMan_Name" />
+        <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review V Sales Order">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="V Sales Order" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="UserFullName" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Date_Ordered" columns="10" />
+            <dataField fieldName="Customer_PO_No" columns="50" />
+            <dataField fieldName="Customer_PO_Date" columns="10" />
+            <dataField fieldName="Delivery_Date" columns="10" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="SalesMan_Name" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Header_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="ProjectName" />
+            <dataField fieldName="INV_Bal" dataFormatString="c" columns="15" />
+            <dataField fieldName="Ship_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Cost" dataFormatString="c" columns="15" />
+            <dataField fieldName="Revenue" dataFormatString="c" columns="15" />
+            <dataField fieldName="PandL" dataFormatString="c" columns="15" />
+            <dataField fieldName="Doc_Status" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New V Sales Order">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New V Sales Order" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="UserFullName" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Date_Ordered" columns="10" />
+            <dataField fieldName="Customer_PO_No" columns="50" />
+            <dataField fieldName="Customer_PO_Date" columns="10" />
+            <dataField fieldName="Delivery_Date" columns="10" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="SalesMan_Name" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Header_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="ProjectName" />
+            <dataField fieldName="Doc_Status" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

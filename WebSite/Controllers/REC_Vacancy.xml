@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="REC_Vacancy" conflictDetection="overwriteChanges" label="REC Vacancy" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"REC_Vacancy"."Vacancy_ID" "Vacancy_ID"
+	,"REC_Vacancy"."Budget_ID" "Budget_ID"
+	,"Budget_"."Dept_Code" "Budget_Dept_Code"
+	,"REC_Vacancy"."Dept_Code" "Dept_Code"
+	,"REC_Vacancy"."Project_Code" "Project_Code"
+	,"REC_Vacancy"."Designation" "Designation"
+	,"REC_Vacancy"."Vacancy_Status" "Vacancy_Status"
+	,"REC_Vacancy"."Vacancy_Creator" "Vacancy_Creator"
+	,"REC_Vacancy"."Qty" "Qty"
+	,"REC_Vacancy"."Filled_Qty" "Filled_Qty"
+	,"REC_Vacancy"."Gender" "Gender"
+	,"REC_Vacancy"."Requirement_Date" "Requirement_Date"
+	,"REC_Vacancy"."Contract_duration" "Contract_duration"
+	,"REC_Vacancy"."Reason" "Reason"
+	,"REC_Vacancy"."Saudiazation_requirement" "Saudiazation_requirement"
+	,"REC_Vacancy"."Expected_Package" "Expected_Package"
+	,"REC_Vacancy"."Inactive" "Inactive"
+	,"REC_Vacancy"."Created_DateTime" "Created_DateTime"
+	,"REC_Vacancy"."Updated_By" "Updated_By"
+	,"REC_Vacancy"."Created_By" "Created_By"
+	,"REC_Vacancy"."Updated_DateTime" "Updated_DateTime"
+	,"REC_Vacancy"."Emp_id" "Emp_id"
+	,"REC_Vacancy"."Dept_Code1" "Dept_Code1"
+	,"REC_Vacancy"."UserID" "UserID"
+	,"REC_Vacancy"."Approve_Ask" "Approve_Ask"
+	,"REC_Vacancy"."Rec_Status" "Rec_Status"
+	,"REC_Vacancy"."Approve" "Approve"
+from "dbo"."REC_Vacancy" "REC_Vacancy"
+	left join "dbo"."REC_Budget" "Budget_" on "REC_Vacancy"."Budget_ID" = "Budget_"."Budjet_ID"
+]]></text>
+    </command>
+    <command id="Vacancy_IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Vacancy_ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Vacancy_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Vacancy^Vacancy#^Vacancy^" readOnly="true" />
+    <field name="Budget_ID" type="Decimal" label="^Budget^Budget#^Budget^" showInSummary="true">
+      <items style="Lookup" dataController="REC_Budget" newDataView="createForm1" dataValueField="Budjet_ID" />
+    </field>
+    <field name="Budget_Dept_Code" type="String" readOnly="true" label="^BudgetDeptCode^Budget Dept Code^BudgetDeptCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" showInSummary="true" />
+    <field name="Designation" type="String" label="^Designation^Designation^Designation^" length="50" showInSummary="true" />
+    <field name="Vacancy_Status" type="String" label="^VacancyStatus^Vacancy Status^VacancyStatus^" length="50" showInSummary="true" />
+    <field name="Vacancy_Creator" type="Decimal" label="^VacancyCreator^Vacancy Creator^VacancyCreator^" />
+    <field name="Qty" type="Int32" label="^Qty^Qty^Qty^" />
+    <field name="Filled_Qty" type="Int32" label="^FilledQty^Filled Qty^FilledQty^" />
+    <field name="Gender" type="Int32" label="^Gender^Gender^Gender^" />
+    <field name="Requirement_Date" type="DateTime" label="^RequirementDate^Requirement Date^RequirementDate^" />
+    <field name="Contract_duration" type="Double" label="^Contractduration^Contract duration^Contractduration^" />
+    <field name="Reason" type="String" label="^Reason^Reason^Reason^" length="100" />
+    <field name="Saudiazation_requirement" type="Int32" label="^Saudiazationrequirement^Saudiazation requirement^Saudiazationrequirement^" />
+    <field name="Expected_Package" type="Decimal" label="^ExpectedPackage^Expected Package^ExpectedPackage^" />
+    <field name="Inactive" type="Int32" label="^Inactive^Inactive^Inactive^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="Emp_id" type="Decimal" label="^Emp^Emp#^Emp^" />
+    <field name="Dept_Code1" type="String" label="^DeptCode1^Dept Code1^DeptCode1^" length="50" />
+    <field name="UserID" type="Int32" label="^User^User#^User^" />
+    <field name="Approve_Ask" type="Int32" label="^ApproveAsk^Approve Ask^ApproveAsk^" />
+    <field name="Rec_Status" type="Int32" label="^RecStatus^Rec Status^RecStatus^" />
+    <field name="Approve" type="Int32" label="^Approve^Approve^Approve^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="REC Vacancy">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Budget_ID" aliasFieldName="Budget_Dept_Code" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Designation" columns="50" />
+        <dataField fieldName="Vacancy_Status" columns="50" />
+        <dataField fieldName="Vacancy_Creator" columns="15" />
+        <dataField fieldName="Qty" columns="15" />
+        <dataField fieldName="Filled_Qty" columns="15" />
+        <dataField fieldName="Gender" columns="15" />
+        <dataField fieldName="Requirement_Date" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review REC Vacancy">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="REC Vacancy" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Budget_ID" aliasFieldName="Budget_Dept_Code" hyperlinkFormatString="~/Pages/REC_Budget.aspx?Budjet_ID={Budget_ID}&amp;_controller=REC_Budget&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Designation" columns="50" />
+            <dataField fieldName="Vacancy_Status" columns="50" />
+            <dataField fieldName="Vacancy_Creator" columns="15" />
+            <dataField fieldName="Qty" columns="15" />
+            <dataField fieldName="Filled_Qty" columns="15" />
+            <dataField fieldName="Gender" columns="15" />
+            <dataField fieldName="Requirement_Date" columns="10" />
+            <dataField fieldName="Contract_duration" columns="15" />
+            <dataField fieldName="Reason" />
+            <dataField fieldName="Saudiazation_requirement" columns="15" />
+            <dataField fieldName="Expected_Package" dataFormatString="c" columns="15" />
+            <dataField fieldName="Inactive" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Emp_id" columns="15" />
+            <dataField fieldName="Dept_Code1" columns="50" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="Approve" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New REC Vacancy">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New REC Vacancy" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Budget_ID" aliasFieldName="Budget_Dept_Code" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Designation" columns="50" />
+            <dataField fieldName="Vacancy_Status" columns="50" />
+            <dataField fieldName="Vacancy_Creator" columns="15" />
+            <dataField fieldName="Qty" columns="15" />
+            <dataField fieldName="Filled_Qty" columns="15" />
+            <dataField fieldName="Gender" columns="15" />
+            <dataField fieldName="Requirement_Date" columns="10" />
+            <dataField fieldName="Contract_duration" columns="15" />
+            <dataField fieldName="Reason" />
+            <dataField fieldName="Saudiazation_requirement" columns="15" />
+            <dataField fieldName="Expected_Package" dataFormatString="c" columns="15" />
+            <dataField fieldName="Inactive" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Emp_id" columns="15" />
+            <dataField fieldName="Dept_Code1" columns="50" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="Approve" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

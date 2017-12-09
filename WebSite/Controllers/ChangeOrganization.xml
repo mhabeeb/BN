@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ChangeOrganization" conflictDetection="overwriteChanges" label="^ChaOrg^ChangeOrganization^ChaOrg^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Users" custom="true">
+      <text><![CDATA[SELECT UserID,OPU_Code,Company_Code,Store_ID FROM Users]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="UserID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^UseId^User#^UseId^" readOnly="true" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^Branch^OpuCod^" showInSummary="true" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Organization" dataView="grid1" dataTextField="BranchName" dataValueField="BranchID" />
+    </field>
+    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
+    <field name="Store_ID" type="Int64" label="^StoId^Store^StoId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false" contextFields="OPU_Code=OPU_Code">
+      <items style="Lookup" dataController="Pick_Store_for_Users" dataView="grid1" dataTextField="Store_Name" dataValueField="Store_ID" />
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevUse^Review Users^RevUse^" filter="UserID=@BusinessRules_UserId" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Current Profile" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ACompanyName" rows="5" readOnly="true">
+              <headerText />
+            </dataField>
+            <dataField fieldName="ABranch" rows="5" readOnly="true">
+              <headerText />
+            </dataField>
+            <dataField fieldName="AStoreName" rows="5" readOnly="true">
+              <headerText />
+            </dataField>
+            <dataField fieldName="UserID" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+        <category headerText="Change To...." id="c2">
+          <dataFields>
+            <dataField fieldName="OPU_Code" columns="15">
+              <headerText>Branch Name</headerText>
+            </dataField>
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Store_ID" columns="15">
+              <headerText>Store</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" headerText="Change" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Update" type="Sql" phase="Before"><![CDATA[SET @Session_OPU_Code=@OPU_Code
+SELECT @Session_DefaultCurrency = DefaultCurrency,
+       @Session_ProjectEnabled = ISNULL(ProjectEnabled, 0),
+       @Session_SiteCodeEnabled = ISNULL(SiteCodeEnabled, 0),
+	   @Session_Country=Country,
+	   @Session_Expence_AC=Expence_AC,
+	   @Company_Code=CompanyID
+FROM tbl_BranchInfo
+WHERE BranchID = @OPU_Code
+
+Update Users
+Set OPU_Code=@OPU_Code,
+Company_Code=@Company_Code,
+Store_ID=@Store_ID
+WHERE UserID=@BusinessRules_UserId
+]]></rule>
+    <rule id="r101" commandName="Update" type="Sql" phase="After"><![CDATA[SET @Result_NavigateUrl='Home.aspx']]></rule>
+  </businessRules>
+</dataController>

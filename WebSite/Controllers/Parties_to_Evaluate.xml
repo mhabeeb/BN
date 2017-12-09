@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Parties_to_Evaluate" conflictDetection="overwriteChanges" label="Parties_to_Evaluate" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Parties_to_Evaluate" custom="true">
+      <text><![CDATA[SELECT * FROM Parties_to_Evaluate]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="EventID" type="Decimal" allowNulls="false" label="Event#" showInSummary="true" isPrimaryKey="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="Vendor #" showInSummary="true" isPrimaryKey="true">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" copy="Vendor_Name=Vendor_Name" />
+    </field>
+    <field name="Vendor_Name" type="String" allowNulls="false" label="Vendor Name" length="150" showInSummary="true" />
+    <field name="Approve" type="Int32" label="Approve" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Project_Code" type="String" allowNulls="false" label="Project Code" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
+    <field name="Project_Name" type="String" allowNulls="false" label="Project Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="250" />
+    <field name="Period_Name" type="String" allowNulls="false" label="Period Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="12" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Add Suppliers to Evaluate">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EventID" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Approve" columns="15" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" hidden="true" />
+        <dataField fieldName="Project_Name" rows="5" hidden="true" />
+        <dataField fieldName="Period_Name" columns="12" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Parties to Evaluate">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Parties to Evaluate" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EventID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" readOnly="true" />
+            <dataField fieldName="Approve" columns="15" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50" hidden="true" />
+            <dataField fieldName="Project_Name" rows="5" hidden="true" />
+            <dataField fieldName="Period_Name" columns="12" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="Add Suppliers to Evaluate">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Add Suppliers to Evaluate" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EventID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50" hidden="true" />
+            <dataField fieldName="Period_Name" columns="12" hidden="true" />
+            <dataField fieldName="Project_Name" rows="5" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" type="Sql" commandName="Insert|Update|Delete" phase="Before" name="EventID_Validator"><![CDATA[DECLARE @PublishYN INT
+
+select @PublishYN=IsNull(PublishYN,0) from Parties_Evaluation_Master
+where  EventID=@EventID
+
+if @PublishYN=1
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+	/*set @Result_Focus = 'Rating,Cannot be more than Max Rating '*/
+    /*set @Result_Focus = 'This Event has been published,You cannot Add or Edit Vendor.'*/
+	set @Result_ShowViewMessage = 'This Event has been published,You cannot Add or Edit Vendor.'
+end
+]]></rule>
+  </businessRules>
+</dataController>

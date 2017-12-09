@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CashFlowYearlySummary" conflictDetection="overwriteChanges" label="^CasFloYeaSum^CashFlowYearlySummary^CasFloYeaSum^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="CashFlowStatments" custom="true">
+      <text><![CDATA[  SELECT *
+FROM (
+    SELECT LineNumber,
+         UserID,
+        [TrxYear],
+        DateName( month , DateAdd( month , TrxMonths , 0 ) - 1 ) as [MONTH],
+        AccountDesription, AccountDesription1,
+		IsNull(Amount,0) Amount
+    FROM CashFlowStatments 
+    --WHERE TrxYear=year(getdate())
+) as s
+PIVOT
+(
+    SUM(Amount)
+    FOR [MONTH] IN ([January],[February],[March],[April],[May],[June],[July],[August],[September],[October],[November],[December])
+)AS p]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" showInSummary="true" />
+    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" showInSummary="true" />
+    <field name="AccountDesription" type="String" label="^AccDes^Account Desription^AccDes^" length="2000" showInSummary="true" htmlEncode="false" />
+    <field name="AccountDesription1" type="String" label="^AccDes1^Account Desription1^AccDes1^" length="2000" showInSummary="true" />
+    <field name="January" type="Decimal" label="^Jan^January^Jan^" readOnly="true" showInSummary="true" dataFormatString="N2" />
+    <field name="February" type="Decimal" label="^Feb^February^Feb^" readOnly="true" dataFormatString="N2" />
+    <field name="March" type="Decimal" label="^March^March^March^" readOnly="true" dataFormatString="N2" />
+    <field name="April" type="Decimal" label="^April^April^April^" readOnly="true" dataFormatString="N2" />
+    <field name="May" type="Decimal" label="^May^May^May^" readOnly="true" dataFormatString="N2" />
+    <field name="June" type="Decimal" label="^June^June^June^" readOnly="true" dataFormatString="N2" />
+    <field name="July" type="Decimal" label="^July^July^July^" readOnly="true" dataFormatString="N2" />
+    <field name="August" type="Decimal" label="^August^August^August^" readOnly="true" dataFormatString="N2" />
+    <field name="September" type="Decimal" label="^Sep^September^Sep^" readOnly="true" dataFormatString="N2" />
+    <field name="October" type="Decimal" label="^Oct^October^Oct^" readOnly="true" dataFormatString="N2" />
+    <field name="November" type="Decimal" label="^Nov^November^Nov^" readOnly="true" dataFormatString="N2" />
+    <field name="December" type="Decimal" label="^Dec^December^Dec^" readOnly="true" dataFormatString="N2" />
+    <field name="LineNumber" type="Int32" label="^LinNum^Line Number^LinNum^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^CasFloYeaSum^Cash Flow yearly Summary^CasFloYeaSum^" filter="UserID=@BusinessRules_UserId" sortExpression="LineNumber asc" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="TrxYear" columns="15" />
+        <dataField fieldName="AccountDesription" />
+        <dataField fieldName="AccountDesription1" hidden="true" />
+        <dataField fieldName="January" dataFormatString="N2" columns="15" />
+        <dataField fieldName="February" dataFormatString="c" columns="15" />
+        <dataField fieldName="March" dataFormatString="c" columns="15" />
+        <dataField fieldName="April" dataFormatString="c" columns="15" />
+        <dataField fieldName="May" dataFormatString="c" columns="15" />
+        <dataField fieldName="June" dataFormatString="c" columns="15" />
+        <dataField fieldName="July" dataFormatString="c" columns="15" />
+        <dataField fieldName="August" dataFormatString="c" columns="15" />
+        <dataField fieldName="September" dataFormatString="c" columns="15" />
+        <dataField fieldName="October" dataFormatString="c" columns="15" />
+        <dataField fieldName="November" dataFormatString="c" columns="15" />
+        <dataField fieldName="December" dataFormatString="c" columns="15" />
+        <dataField fieldName="LineNumber" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevCasFloSta^Review Cash Flow Statments^RevCasFloSta^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Cash Flow Statments" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="AccountDesription" />
+            <dataField fieldName="AccountDesription1" />
+            <dataField fieldName="January" dataFormatString="c" columns="15" />
+            <dataField fieldName="February" dataFormatString="c" columns="15" />
+            <dataField fieldName="March" dataFormatString="c" columns="15" />
+            <dataField fieldName="April" dataFormatString="c" columns="15" />
+            <dataField fieldName="May" dataFormatString="c" columns="15" />
+            <dataField fieldName="June" dataFormatString="c" columns="15" />
+            <dataField fieldName="July" dataFormatString="c" columns="15" />
+            <dataField fieldName="August" dataFormatString="c" columns="15" />
+            <dataField fieldName="September" dataFormatString="c" columns="15" />
+            <dataField fieldName="October" dataFormatString="c" columns="15" />
+            <dataField fieldName="November" dataFormatString="c" columns="15" />
+            <dataField fieldName="December" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewCasFloSta^New Cash Flow Statments^NewCasFloSta^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Cash Flow Statments" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="AccountDesription" />
+            <dataField fieldName="AccountDesription1" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="Graph" commandId="command1" type="Chart" label="^Gra^Graph^Gra^" filter="LineNumber IN (1,30,31,60,70)">
+      <dataFields>
+        <dataField fieldName="AccountDesription1" hidden="true" chart="XValue" />
+        <dataField fieldName="TrxYear" columns="15" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="January" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="February" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="March" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="April" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="May" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="June" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="July" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="August" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="September" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="October" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="November" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="December" dataFormatString="N2" columns="15" aggregate="Sum" chart="Bar" />
+        <dataField fieldName="LineNumber" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^RunCashFlow^Run Cash Flow^RunCashFlow^" flat="true">
+      <action commandName="SQL" headerText="^RunCashFlow^Run Cash Flow^RunCashFlow^" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Last Date Of The Month&#xD;&#xA;_width=500" cssClass="glyphicon-tasks">
+        <data><![CDATA[EXEC [dbo].[GENERATE_CASH_FLOW_STATMENTS]  @Parameters_EndDate,1,@BusinessRules_UserId]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>

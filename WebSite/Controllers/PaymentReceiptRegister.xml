@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PaymentReceiptRegister" conflictDetection="overwriteChanges" label="Payment Receipt Register" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PaymentReceiptRegister"."PayNumber" "PayNumber"
+	,"PaymentReceiptRegister"."Payment_Date" "Payment_Date"
+	,"PaymentReceiptRegister"."Amount_Paid" "Amount_Paid"
+	,"PaymentReceiptRegister"."Remarks" "Remarks"
+	,"PaymentReceiptRegister"."CashBankID" "CashBankID"
+	,"PaymentReceiptRegister"."GL_PostedYN" "GL_PostedYN"
+	,"PaymentReceiptRegister"."Currency_Code" "Currency_Code"
+	,"PaymentReceiptRegister"."CheckNo" "CheckNo"
+	,"PaymentReceiptRegister"."Expense_AccountID" "Expense_AccountID"
+	,"PaymentReceiptRegister"."Account_Description" "Account_Description"
+	,"PaymentReceiptRegister"."CheckPayTo" "CheckPayTo"
+	,"PaymentReceiptRegister"."Sys_Number" "Sys_Number"
+	,"PaymentReceiptRegister"."Vendor_Name" "Vendor_Name"
+	,"PaymentReceiptRegister"."PMT_APPLY_BAL" "PMT_APPLY_BAL"
+	,"PaymentReceiptRegister"."WireYN" "WireYN"
+	,"PaymentReceiptRegister"."Account_ID_Cash" "Account_ID_Cash"
+	,"PaymentReceiptRegister"."BankCashName" "BankCashName"
+	,"PaymentReceiptRegister"."Billed_AC" "Billed_AC"
+	,"PaymentReceiptRegister"."PaymentType" "PaymentType"
+	,"PaymentReceiptRegister"."EntryType" "EntryType"
+	,"PaymentReceiptRegister"."Amount_Paid_SAR" "Amount_Paid_SAR"
+	,"PaymentReceiptRegister"."PaymentID" "PaymentID"
+from "dbo"."Payment Receipt Register" "PaymentReceiptRegister"
+]]></text>
+    </command>
+    <command id="CashBankIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="CashBankID" />
+      </output>
+    </command>
+    <command id="Sys_NumberIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Sys_Number" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PayNumber" type="Decimal" label="Pay Number" showInSummary="true" />
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="Payment Date" showInSummary="true" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="Amount Paid" showInSummary="true" />
+    <field name="Remarks" type="String" label="Remarks" length="200" showInSummary="true" />
+    <field name="CashBankID" type="Decimal" label="Cash Bank#" readOnly="true" showInSummary="true" />
+    <field name="GL_PostedYN" type="String" label="GL Posted YN" readOnly="true" length="1" />
+    <field name="Currency_Code" type="String" label="Currency Code" length="4" />
+    <field name="CheckNo" type="Decimal" label="Check No" />
+    <field name="Expense_AccountID" type="String" label="Expense Account#" length="50" />
+    <field name="Account_Description" type="String" label="Account Description" length="200" />
+    <field name="CheckPayTo" type="String" label="Check Pay To" length="200" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="Sys Number" readOnly="true" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" readOnly="true" length="150" />
+    <field name="PMT_APPLY_BAL" type="Decimal" label="Pmt Apply Bal" readOnly="true" />
+    <field name="WireYN" type="String" label="Wire YN" readOnly="true" length="1" />
+    <field name="Account_ID_Cash" type="String" allowNulls="false" label="Account ID Cash" length="50" />
+    <field name="BankCashName" type="String" label="Bank Cash Name" length="50" />
+    <field name="Billed_AC" type="String" label="Billed AC" length="50" />
+    <field name="PaymentType" type="String" label="Payment Type" length="20" />
+    <field name="EntryType" type="String" allowNulls="false" label="Entry Type" readOnly="true" length="8" />
+    <field name="Amount_Paid_SAR" type="Decimal" label="Amount Paid SAR" readOnly="true" />
+    <field name="PaymentID" type="Decimal" allowNulls="false" label="Payment#" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Payment Receipt Register">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Payment_Date" columns="10" />
+        <dataField fieldName="PayNumber" dataFormatString="c" columns="15" />
+        <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+        <dataField fieldName="Remarks" />
+        <dataField fieldName="CashBankID" columns="15" />
+        <dataField fieldName="GL_PostedYN" columns="1" />
+        <dataField fieldName="Currency_Code" columns="4" />
+        <dataField fieldName="CheckNo" dataFormatString="c" columns="15" />
+        <dataField fieldName="Expense_AccountID" columns="50" />
+        <dataField fieldName="Account_Description" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Payment Receipt Register">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Payment Receipt Register" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PayNumber" dataFormatString="c" columns="15" />
+            <dataField fieldName="Payment_Date" columns="10" />
+            <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="CashBankID" columns="15" />
+            <dataField fieldName="GL_PostedYN" columns="1" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="CheckNo" dataFormatString="c" columns="15" />
+            <dataField fieldName="Expense_AccountID" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="CheckPayTo" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="PMT_APPLY_BAL" dataFormatString="c" columns="15" />
+            <dataField fieldName="WireYN" columns="1" />
+            <dataField fieldName="Account_ID_Cash" columns="50" />
+            <dataField fieldName="BankCashName" columns="50" />
+            <dataField fieldName="Billed_AC" columns="50" />
+            <dataField fieldName="PaymentType" columns="20" />
+            <dataField fieldName="EntryType" columns="8" />
+            <dataField fieldName="Amount_Paid_SAR" dataFormatString="c" columns="15" />
+            <dataField fieldName="PaymentID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Payment Receipt Register">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Payment Receipt Register" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PayNumber" dataFormatString="c" columns="15" />
+            <dataField fieldName="Payment_Date" columns="10" />
+            <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="CheckNo" dataFormatString="c" columns="15" />
+            <dataField fieldName="Expense_AccountID" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="CheckPayTo" />
+            <dataField fieldName="Account_ID_Cash" columns="50" />
+            <dataField fieldName="BankCashName" columns="50" />
+            <dataField fieldName="Billed_AC" columns="50" />
+            <dataField fieldName="PaymentType" columns="20" />
+            <dataField fieldName="PaymentID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

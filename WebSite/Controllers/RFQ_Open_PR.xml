@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="RFQ_Open_PR" conflictDetection="overwriteChanges" label="^RfqOpePr^RFQ_Open_PR^RfqOpePr^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="PR_Line_Items" custom="true">
+      <text><![CDATA[SELECT  dbo.PR_Line_Items.PR_NO, dbo.PR_Line_Items.SO_NO, dbo.PR_Line_Items.PR_Line_No, dbo.PR_Line_Items.Item_Code, dbo.PR_Line_Items.PR_Qty, dbo.PR_Line_Items.Unit_Price, dbo.PR_Line_Items.Line_Remarks, dbo.PR_Line_Items.Line_Total, 
+                   dbo.PR_Line_Items.Line_Net, dbo.PR_Line_Items.PO_Balance, dbo.PR_Line_Items.Item_Desc, dbo.PR_Line_Items.Item_Part, dbo.PR_Line_Items.Updated_By, dbo.PR_Line_Items.Updated_DateTime, dbo.PR_Line_Items.UOM, 
+                   dbo.PR_Line_Items.Project_Code, dbo.PR_Line_Items.Dept_Code, dbo.PR_Line_Items.RFQ_Qty, dbo.PR_Line_Items.PR_OPU_Code AS OPU_Code, dbo.PR_Line_Items.RFQ_Balalnce, dbo.RFQ_Header.RFQ_Status, dbo.RFQ_Header.RFQ_NO, 
+                   dbo.RFQ_Header.RFQ_Date, dbo.PR_Line_Items.P_Doc_No,dbo.PR_Line_Items.P_SO_No
+FROM      dbo.PR_Line_Items INNER JOIN
+                   dbo.RFQ_Header ON dbo.PR_Line_Items.PR_OPU_Code = dbo.RFQ_Header.OPU_Code
+WHERE   (dbo.PR_Line_Items.RFQ_Balalnce > 0) AND (dbo.PR_Line_Items.PO_Balance > 0) AND (dbo.RFQ_Header.RFQ_Status = N'New')
+AND IsNull(dbo.PR_Line_Items.lRec_Status,0)=1]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" showInSummary="true" />
+    <field name="PR_NO" type="Decimal" allowNulls="false" label="^PrNo^Pr No^PrNo^" showInSummary="true" />
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PrLinNo^PR Line No^PrLinNo^" readOnly="true" />
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
+    <field name="PR_Qty" type="Decimal" allowNulls="false" label="^PrQty^PR Qty^PrQty^" showInSummary="true" dataFormatString="N2" />
+    <field name="Unit_Price" type="Decimal" allowNulls="false" label="^UniPri^Unit Price^UniPri^" showInSummary="true" dataFormatString="N2" />
+    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" />
+    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" dataFormatString="N2" />
+    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" readOnly="true" dataFormatString="N2" />
+    <field name="PO_Balance" type="Decimal" label="^Pobal^PO Balance^Pobal^" readOnly="true" dataFormatString="N2" />
+    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="50" />
+    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="50" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="RFQ_Qty" type="Decimal" label="^RfqQty^RFQ Qty^RfqQty^" dataFormatString="N2" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" sourceFields="OPU_Code" />
+    <field name="RFQ_Balalnce" type="Decimal" label="^RfqBal^RFQ Balalnce^RfqBal^" readOnly="true" dataFormatString="N2" />
+    <field name="RFQ_Status" type="String" label="^RfqSta^RFQ Status^RfqSta^" length="25" />
+    <field name="RFQ_NO" type="Decimal" allowNulls="false" label="^RfqNo^RFQ No.^RfqNo^" readOnly="true" />
+    <field name="RFQ_Date" type="DateTime" label="^RfqDat^RFQ Date^RfqDat^" />
+    <field name="RFQ_NO_H" type="Decimal" label="^RfqNoH^RFQ NO H^RfqNoH^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="P_Doc_No" type="Int64" label="^PDocNo^PR NO^PDocNo^" />
+    <field name="P_SO_No" type="Int64" label="^PSoNo^SO No^PSoNo^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^PrLinIte^PR Line Items^PrLinIte^" reportTemplate="true" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="RFQ_Date" columns="10" readOnly="true" />
+        <dataField fieldName="RFQ_NO" columns="15" />
+        <dataField fieldName="RFQ_Status" columns="25" readOnly="true" />
+        <dataField fieldName="PR_NO" columns="15" readOnly="true" hidden="true" />
+        <dataField fieldName="P_Doc_No" columns="15" readOnly="true" />
+        <dataField fieldName="P_SO_No" columns="15" readOnly="true" />
+        <dataField fieldName="SO_NO" columns="15" readOnly="true" hidden="true" />
+        <dataField fieldName="Item_Code" columns="20" readOnly="true" />
+        <dataField fieldName="Item_Desc" columns="50" readOnly="true" />
+        <dataField fieldName="Item_Part" columns="50" readOnly="true" />
+        <dataField fieldName="UOM" columns="10" readOnly="true" />
+        <dataField fieldName="PR_Qty" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="RFQ_Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="RFQ_Balalnce" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Line_Remarks" readOnly="true" />
+        <dataField fieldName="Line_Total" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Line_Net" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="PO_Balance" dataFormatString="N2" columns="15" readOnly="true" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Project_Code" columns="50" readOnly="true" />
+        <dataField fieldName="Dept_Code" columns="50" readOnly="true" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" readOnly="true" />
+        <dataField fieldName="PR_Line_No" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevPrLinIte^Review PR Line Items^RevPrLinIte^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="PR Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RFQ_NO" columns="15" />
+            <dataField fieldName="RFQ_Status" columns="25" readOnly="true" />
+            <dataField fieldName="RFQ_Date" columns="10" readOnly="true" />
+            <dataField fieldName="PR_NO" columns="15" readOnly="true" />
+            <dataField fieldName="SO_NO" columns="15" readOnly="true" />
+            <dataField fieldName="Item_Code" columns="20" readOnly="true" />
+            <dataField fieldName="Item_Desc" columns="50" readOnly="true" />
+            <dataField fieldName="Item_Part" columns="50" />
+            <dataField fieldName="UOM" columns="10" readOnly="true" />
+            <dataField fieldName="PR_Qty" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="RFQ_Qty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="RFQ_Balalnce" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Line_Remarks" readOnly="true" />
+            <dataField fieldName="Line_Total" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Line_Net" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="PO_Balance" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" readOnly="true" />
+            <dataField fieldName="Dept_Code" columns="50" readOnly="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" readOnly="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewPrLinIte^New PR Line Items^NewPrLinIte^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New PR Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Item_Desc" columns="50" />
+            <dataField fieldName="Item_Part" columns="50" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="RFQ_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="RFQ_Status" columns="25" />
+            <dataField fieldName="RFQ_Date" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true" />
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" cssClass="EditIcon" whenView="grid1" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" headerText="Add To RFQ" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Split" flat="true">
+      <action commandName="SQL" headerText="Split RFQ" id="a100" whenLastCommandName="Select" confirmation="_controller=RFQ_Split_Qty&#xD;&#xA;_title=Enter Old &amp; New Account with Effective Dates&#xD;&#xA;_width=500">
+        <data><![CDATA[EXEC dbo.SPLIT_RFQ @PR_Line_No, @Parameters_Qty]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Update" type="Sql" phase="Before"><![CDATA[IF @RFQ_Qty > 0 
+
+BEGIN
+UPDATE PR_Line_Items
+SET RFQ_NO = @RFQ_NO
+WHERE PR_Line_No=@PR_Line_No
+END
+]]></rule>
+    <rule id="r101" type="Sql" commandName="Update" phase="Before" name="RFQ_Qty_Validator"><![CDATA[if @RFQ_Qty > @RFQ_Balalnce
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'RFQ_Qty,Qty Exceded to PR Qty.....'
+end
+]]></rule>
+  </businessRules>
+</dataController>

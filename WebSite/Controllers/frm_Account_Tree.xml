@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="frm_Account_Tree" conflictDetection="overwriteChanges" label="frm_Account_Tree" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="COA_Natural_Account" custom="true">
+      <text><![CDATA[select * from V_Account_Tree]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="AccountID" type="String" allowNulls="false" label="Account#" length="50" showInSummary="true" />
+    <field name="Account_Description_lvl" type="String" label="Account Description lvl" readOnly="true" length="4000" showInSummary="true" />
+    <field name="Account_Level" type="Byte" label="Account Level" showInSummary="true" />
+    <field name="Lineage" type="String" label="Lineage" length="255" showInSummary="true" />
+    <field name="PostableYN" type="String" label="Postable YN" readOnly="true" length="1" showInSummary="true" />
+    <field name="BugdetingYN" type="String" label="Bugdeting YN" readOnly="true" length="1" />
+    <field name="ParantYN" type="String" label="Parant YN" readOnly="true" length="1" />
+    <field name="ParentType" type="String" label="Parent Type" length="50" />
+    <field name="Account_Type" type="String" allowNulls="false" label="Account Type" length="50" />
+    <field name="Account_Description" type="String" allowNulls="false" label="Account Description" length="200" />
+    <field name="DeptYN" type="String" label="Dept YN" readOnly="true" length="1" />
+    <field name="EmpYN" type="String" label="Emp YN" readOnly="true" length="1" />
+    <field name="Account_DescriptionAr" type="String" label="Account Description Ar" length="500" />
+    <field name="Natural_AccountID_Parent" type="String" label="Natural Account ID Parent" length="50" />
+    <field name="Account_Desc_Html" type="String" label="Account Desc Html" readOnly="true" length="4000" htmlEncode="false" />
+    <field name="Account_Desc_CR" type="String" label="Account Desc CR" readOnly="true" length="4000" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="COA Natural Account" reportTemplate="true">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Account_Desc_Html" />
+        <dataField fieldName="Lineage" />
+        <dataField fieldName="PostableYN" columns="1" />
+        <dataField fieldName="BugdetingYN" columns="1" />
+        <dataField fieldName="ParantYN" columns="1" />
+        <dataField fieldName="ParentType" columns="50" />
+        <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="Account_DescriptionAr" />
+        <dataField fieldName="Natural_AccountID_Parent" columns="50" />
+        <dataField fieldName="Account_Desc_CR" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review COA Natural Account">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="COA Natural Account" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Account_Description_lvl" />
+            <dataField fieldName="Account_Level" columns="15" />
+            <dataField fieldName="Lineage" />
+            <dataField fieldName="PostableYN" columns="1" />
+            <dataField fieldName="BugdetingYN" columns="1" />
+            <dataField fieldName="ParantYN" columns="1" />
+            <dataField fieldName="ParentType" columns="50" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="DeptYN" columns="1" />
+            <dataField fieldName="EmpYN" columns="1" />
+            <dataField fieldName="Account_DescriptionAr" />
+            <dataField fieldName="Natural_AccountID_Parent" columns="50" />
+            <dataField fieldName="Account_Desc_Html" />
+            <dataField fieldName="Account_Desc_CR" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New COA Natural Account">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New COA Natural Account" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Account_Level" columns="15" />
+            <dataField fieldName="Lineage" />
+            <dataField fieldName="ParentType" columns="50" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="Account_DescriptionAr" />
+            <dataField fieldName="Natural_AccountID_Parent" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

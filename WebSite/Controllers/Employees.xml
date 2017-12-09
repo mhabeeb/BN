@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Employees" conflictDetection="overwriteChanges" label="Employees" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Employees"."Emp_id" "Emp_id"
+	,"Employees"."Emp_Login" "Emp_Login"
+	,"Employees"."Emp_Password" "Emp_Password"
+	,"Employees"."Emp_Name" "Emp_Name"
+	,"Employees"."Title" "Title"
+	,"Employees"."Gender_ID" "Gender_ID"
+	,"Employees"."Designation_ID" "Designation_ID"
+	,"Employees"."SubDesignation_ID" "SubDesignation_ID"
+	,"SubDesignation_"."Description" "SubDesignation_Description"
+	,"SubDesignation_Designation_"."Description" "SubDesignation_Designation_Description"
+	,"Employees"."Group_id" "Group_id"
+	,"Employees"."Dept_Code" "Dept_Code"
+	,"Employees"."Email" "Email"
+	,"Employees"."Picture" "Picture"
+	,"Employees"."Phone_Home" "Phone_Home"
+	,"Employees"."Phone_Work" "Phone_Work"
+	,"Employees"."Phone_Cell" "Phone_Cell"
+	,"Employees"."Fax" "Fax"
+	,"Employees"."City" "City"
+	,"Employees"."ZIP" "ZIP"
+	,"Employees"."Address" "Address"
+	,"Employees"."Employee_Is_Active" "Employee_Is_Active"
+	,"Employees"."Project_Code" "Project_Code"
+	,"Employees"."DateOfBirth" "DateOfBirth"
+	,"Employees"."DateOfJoining" "DateOfJoining"
+	,"Employees"."Notice_Period_Start_Date" "Notice_Period_Start_Date"
+	,"Employees"."FamilyStatus" "FamilyStatus"
+	,"Employees"."Marital_Status" "Marital_Status"
+	,"Employees"."Sponsor" "Sponsor"
+	,"Employees"."ContractType" "ContractType"
+	,"Employees"."Basic_Salary" "Basic_Salary"
+	,"Employees"."Basic_Salary_Account" "Basic_Salary_Account"
+	,"Employees"."Basic_Salary_Credit_Account" "Basic_Salary_Credit_Account"
+	,"Employees"."GOSIFLAG" "GOSIFLAG"
+	,"Employees"."GOSISALARY" "GOSISALARY"
+	,"Employees"."Nationality" "Nationality"
+	,"Employees"."GosiBasic" "GosiBasic"
+	,"Employees"."TerminationDate" "TerminationDate"
+	,"Employees"."InActive" "InActive"
+	,"Employees"."Designation" "Designation"
+	,"Employees"."PRRequestYN" "PRRequestYN"
+	,"Employees"."Employee_Num" "Employee_Num"
+	,"Employees"."Employee_Grp_Num" "Employee_Grp_Num"
+	,"Employees"."Employee_Iqama_Num" "Employee_Iqama_Num"
+	,"Employees"."Open_Loan_Balance" "Open_Loan_Balance"
+	,"Employees"."Created_DateTime" "Created_DateTime"
+	,"Employees"."Updated_By" "Updated_By"
+	,"Employees"."Created_By" "Created_By"
+	,"Employees"."Updated_DateTime" "Updated_DateTime"
+	,"Employees"."Gosi_Credit_Account" "Gosi_Credit_Account"
+	,"Employees"."Gosi_Debit_Account" "Gosi_Debit_Account"
+	,"Employees"."UserName" "UserName"
+	,"Employees"."Password" "Password"
+	,"Employees"."EmployeePhoto" "EmployeePhoto"
+	,"Employees"."UserID" "UserID"
+	,"Employees"."ImportYN" "ImportYN"
+	,"Employees"."ImportDate" "ImportDate"
+	,"Employees"."HourlyRate" "HourlyRate"
+	,"Employees"."DailyRate" "DailyRate"
+	,"Employees"."CashBankID" "CashBankID"
+	,"Employees"."Shift_ID" "Shift_ID"
+	,"Shift_"."Description" "Shift_Description"
+	,"Employees"."Termination_Type" "Termination_Type"
+	,"Employees"."Termination_Reason" "Termination_Reason"
+	,"Employees"."Termination_Date" "Termination_Date"
+	,"Employees"."Notice_Period_Start_Date1" "Notice_Period_Start_Date1"
+	,"Employees"."Last_working_Day" "Last_working_Day"
+	,"Employees"."EOS_Amount" "EOS_Amount"
+	,"Employees"."Vaacation_Balance" "Vaacation_Balance"
+	,"Employees"."Loan_Settlement" "Loan_Settlement"
+	,"Employees"."Salary" "Salary"
+	,"Employees"."Tickets_Eligivility_Year" "Tickets_Eligivility_Year"
+	,"Employees"."Adults_Tickets" "Adults_Tickets"
+	,"Employees"."Child_Tickets" "Child_Tickets"
+	,"Employees"."Home_Town" "Home_Town"
+	,"Employees"."Ticket_Accruals_Amount" "Ticket_Accruals_Amount"
+	,"Employees"."Ticket_Accruals_Account" "Ticket_Accruals_Account"
+	,"Employees"."Employee_Type" "Employee_Type"
+from "dbo"."Employees" "Employees"
+	left join "dbo"."HR_SubDesignation" "SubDesignation_" on "Employees"."SubDesignation_ID" = "SubDesignation_"."SubDesignation_ID"
+	left join "dbo"."HR_Designation" "SubDesignation_Designation_" on "SubDesignation_"."Designation_ID" = "SubDesignation_Designation_"."Designation_ID"
+	left join "dbo"."HR_Shift_Information" "Shift_" on "Employees"."Shift_ID" = "Shift_"."Shift_ID"
+]]></text>
+    </command>
+    <command id="Emp_idIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Emp_id" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Emp_id" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Emp^Emp#^Emp^" readOnly="true" />
+    <field name="Emp_Login" type="String" label="^EmpLogin^Emp Login^EmpLogin^" length="20" showInSummary="true" />
+    <field name="Emp_Password" type="String" label="^EmpPassword^Emp Password^EmpPassword^" length="20" />
+    <field name="Emp_Name" type="String" label="^EmpName^Emp Name^EmpName^" length="50" showInSummary="true" />
+    <field name="Title" type="String" label="^Title^Title^Title^" length="50" showInSummary="true" />
+    <field name="Gender_ID" type="Int32" label="^Gender^Gender#^Gender^" showInSummary="true" />
+    <field name="Designation_ID" type="Int32" label="^Designation^Designation#^Designation^" showInSummary="true" />
+    <field name="SubDesignation_ID" type="Int32" label="^SubDesignation^Sub Designation#^SubDesignation^">
+      <items style="Lookup" dataController="HR_SubDesignation" newDataView="createForm1" dataValueField="SubDesignation_ID" />
+    </field>
+    <field name="SubDesignation_Description" type="String" readOnly="true" label="^SubDesignationDescription^Sub Designation Description^SubDesignationDescription^" length="50" />
+    <field name="SubDesignation_Designation_Description" type="String" readOnly="true" label="^SubDesignationDescription^Sub Designation Description^SubDesignationDescription^" length="50" />
+    <field name="Group_id" type="Int32" label="^Group^Group#^Group^" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Email" type="String" label="^Email^Email^Email^" length="50" />
+    <field name="Picture" type="String" label="^Picture^Picture^Picture^" length="50" />
+    <field name="Phone_Home" type="String" label="^PhoneHome^Phone Home^PhoneHome^" length="50" />
+    <field name="Phone_Work" type="String" label="^PhoneWork^Phone Work^PhoneWork^" length="50" />
+    <field name="Phone_Cell" type="String" label="^PhoneCell^Phone Cell^PhoneCell^" length="50" />
+    <field name="Fax" type="String" label="^Fax^Fax^Fax^" length="50" />
+    <field name="City" type="String" label="^City^City^City^" length="50" />
+    <field name="ZIP" type="String" label="^Zip^Zip^Zip^" length="20" />
+    <field name="Address" type="String" label="^Address^Address^Address^" length="50" />
+    <field name="Employee_Is_Active" type="Int32" default="((0))" label="^EmployeeIsActive^Employee Is Active^EmployeeIsActive^" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="DateOfBirth" type="DateTime" label="^DateOfBirth^Date Of Birth^DateOfBirth^" />
+    <field name="DateOfJoining" type="DateTime" label="^DateOfJoining^Date Of Joining^DateOfJoining^" />
+    <field name="Notice_Period_Start_Date" type="DateTime" label="^NoticePeriodStartDate^Notice Period Start Date^NoticePeriodStartDate^" />
+    <field name="FamilyStatus" type="String" label="^FamilyStatus^Family Status^FamilyStatus^" length="50" />
+    <field name="Marital_Status" type="String" label="^MaritalStatus^Marital Status^MaritalStatus^" length="50" />
+    <field name="Sponsor" type="String" label="^Sponsor^Sponsor^Sponsor^" length="50" />
+    <field name="ContractType" type="Int32" default="((0))" label="^ContractType^Contract Type^ContractType^" />
+    <field name="Basic_Salary" type="Decimal" label="^BasicSalary^Basic Salary^BasicSalary^" />
+    <field name="Basic_Salary_Account" type="Decimal" label="^BasicSalaryAccount^Basic Salary Account^BasicSalaryAccount^" />
+    <field name="Basic_Salary_Credit_Account" type="Decimal" label="^BasicSalaryCreditAccount^Basic Salary Credit Account^BasicSalaryCreditAccount^" />
+    <field name="GOSIFLAG" type="Int32" default="((0))" label="^Gosiflag^Gosiflag^Gosiflag^" />
+    <field name="GOSISALARY" type="Int32" label="^Gosisalary^Gosisalary^Gosisalary^" />
+    <field name="Nationality" type="String" label="^Nationality^Nationality^Nationality^" length="50" />
+    <field name="GosiBasic" type="Decimal" default="((0))" label="^GosiBasic^Gosi Basic^GosiBasic^" />
+    <field name="TerminationDate" type="DateTime" label="^TerminationDate^Termination Date^TerminationDate^" />
+    <field name="InActive" type="Int32" default="((0))" label="^InActive^In Active^InActive^" />
+    <field name="Designation" type="String" label="^Designation^Designation^Designation^" length="50" />
+    <field name="PRRequestYN" type="Int32" label="^PRRequestYN^PR Request YN^PRRequestYN^" />
+    <field name="Employee_Num" type="String" label="^EmployeeNum^Employee Num^EmployeeNum^" length="50" />
+    <field name="Employee_Grp_Num" type="Decimal" label="^EmployeeGrpNum^Employee Grp Num^EmployeeGrpNum^" />
+    <field name="Employee_Iqama_Num" type="Decimal" label="^EmployeeIqamaNum^Employee Iqama Num^EmployeeIqamaNum^" />
+    <field name="Open_Loan_Balance" type="Decimal" default="((0))" label="^OpenLoanBalance^Open Loan Balance^OpenLoanBalance^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="Gosi_Credit_Account" type="Decimal" label="^GosiCreditAccount^Gosi Credit Account^GosiCreditAccount^" />
+    <field name="Gosi_Debit_Account" type="Decimal" label="^GosiDebitAccount^Gosi Debit Account^GosiDebitAccount^" />
+    <field name="UserName" type="String" label="^UserName^User Name^UserName^" length="150" />
+    <field name="Password" type="String" label="^Password^Password^Password^" length="150" />
+    <field name="EmployeePhoto" type="Byte[]" onDemand="true" sourceFields="Emp_id" onDemandHandler="EmployeesEmployeePhoto" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^EmployeePhoto^Employee Photo^EmployeePhoto^" />
+    <field name="UserID" type="Int32" label="^User^User#^User^" />
+    <field name="ImportYN" type="Int32" label="^ImportYN^Import YN^ImportYN^" />
+    <field name="ImportDate" type="DateTime" label="^ImportDate^Import Date^ImportDate^" />
+    <field name="HourlyRate" type="Decimal" label="^HourlyRate^Hourly Rate^HourlyRate^" />
+    <field name="DailyRate" type="Decimal" label="^DailyRate^Daily Rate^DailyRate^" />
+    <field name="CashBankID" type="Decimal" label="^CashBank^Cash Bank#^CashBank^" />
+    <field name="Shift_ID" type="Int32" label="^Shift^Shift#^Shift^">
+      <items style="Lookup" dataController="HR_Shift_Information" newDataView="createForm1" dataValueField="Shift_ID" />
+    </field>
+    <field name="Shift_Description" type="String" readOnly="true" label="^ShiftDescription^Shift Description^ShiftDescription^" length="50" />
+    <field name="Termination_Type" type="String" label="^TerminationType^Termination Type^TerminationType^" length="50" />
+    <field name="Termination_Reason" type="String" allowQBE="false" allowSorting="false" label="^TerminationReason^Termination Reason^TerminationReason^" />
+    <field name="Termination_Date" type="DateTime" label="^TerminationDate^Termination Date^TerminationDate^" />
+    <field name="Notice_Period_Start_Date1" type="DateTime" label="^NoticePeriodStartDate1^Notice Period Start Date1^NoticePeriodStartDate1^" />
+    <field name="Last_working_Day" type="DateTime" label="^LastworkingDay^Last working Day^LastworkingDay^" />
+    <field name="EOS_Amount" type="Decimal" label="^EOSAmount^EOS Amount^EOSAmount^" readOnly="true" />
+    <field name="Vaacation_Balance" type="Decimal" label="^VaacationBalance^Vaacation Balance^VaacationBalance^" />
+    <field name="Loan_Settlement" type="Decimal" label="^LoanSettlement^Loan Settlement^LoanSettlement^" readOnly="true" />
+    <field name="Salary" type="Decimal" label="^Salary^Salary^Salary^" readOnly="true" />
+    <field name="Tickets_Eligivility_Year" type="Int32" label="^TicketsEligivilityYear^Tickets Eligivility Year^TicketsEligivilityYear^" />
+    <field name="Adults_Tickets" type="Int32" label="^AdultsTickets^Adults Tickets^AdultsTickets^" />
+    <field name="Child_Tickets" type="Int32" label="^ChildTickets^Child Tickets^ChildTickets^" />
+    <field name="Home_Town" type="String" label="^HomeTown^Home Town^HomeTown^" length="50" />
+    <field name="Ticket_Accruals_Amount" type="Decimal" label="^TicketAccrualsAmount^Ticket Accruals Amount^TicketAccrualsAmount^" />
+    <field name="Ticket_Accruals_Account" type="String" label="^TicketAccrualsAccount^Ticket Accruals Account^TicketAccrualsAccount^" length="50" />
+    <field name="Employee_Type" type="String" label="^EmployeeType^Employee Type^EmployeeType^" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Employees">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Emp_Login" columns="20" />
+        <dataField fieldName="Emp_Name" columns="50" />
+        <dataField fieldName="Title" columns="50" />
+        <dataField fieldName="Gender_ID" columns="15" />
+        <dataField fieldName="Designation_ID" columns="15" />
+        <dataField fieldName="SubDesignation_ID" aliasFieldName="SubDesignation_Description" hyperlinkFormatString="~/Pages/HR_SubDesignation.aspx?SubDesignation_ID={SubDesignation_ID}&amp;_controller=HR_SubDesignation&amp;_command=Select&amp;_argument=editForm1" />
+        <dataField fieldName="Group_id" columns="15" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Email" columns="50" />
+        <dataField fieldName="Picture" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Employees">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Employees" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Emp_Login" columns="20" />
+            <dataField fieldName="Emp_Password" columns="20" />
+            <dataField fieldName="Emp_Name" columns="50" />
+            <dataField fieldName="Title" columns="50" />
+            <dataField fieldName="Gender_ID" columns="15" />
+            <dataField fieldName="Designation_ID" columns="15" />
+            <dataField fieldName="SubDesignation_ID" aliasFieldName="SubDesignation_Description" hyperlinkFormatString="~/Pages/HR_SubDesignation.aspx?SubDesignation_ID={SubDesignation_ID}&amp;_controller=HR_SubDesignation&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Group_id" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="Picture" columns="50" />
+            <dataField fieldName="Phone_Home" columns="50" />
+            <dataField fieldName="Phone_Work" columns="50" />
+            <dataField fieldName="Phone_Cell" columns="50" />
+            <dataField fieldName="Fax" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="ZIP" columns="20" />
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="Employee_Is_Active" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="DateOfBirth" columns="10" />
+            <dataField fieldName="DateOfJoining" columns="10" />
+            <dataField fieldName="Notice_Period_Start_Date" columns="10" />
+            <dataField fieldName="FamilyStatus" columns="50" />
+            <dataField fieldName="Marital_Status" columns="50" />
+            <dataField fieldName="Sponsor" columns="50" />
+            <dataField fieldName="ContractType" columns="15" />
+            <dataField fieldName="Basic_Salary" dataFormatString="c" columns="15" />
+            <dataField fieldName="Basic_Salary_Account" columns="15" />
+            <dataField fieldName="Basic_Salary_Credit_Account" columns="15" />
+            <dataField fieldName="GOSIFLAG" columns="15" />
+            <dataField fieldName="GOSISALARY" columns="15" />
+            <dataField fieldName="Nationality" columns="50" />
+            <dataField fieldName="GosiBasic" dataFormatString="c" columns="15" />
+            <dataField fieldName="TerminationDate" columns="10" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="Designation" columns="50" />
+            <dataField fieldName="PRRequestYN" columns="15" />
+            <dataField fieldName="Employee_Num" columns="50" />
+            <dataField fieldName="Employee_Grp_Num" columns="15" />
+            <dataField fieldName="Employee_Iqama_Num" columns="15" />
+            <dataField fieldName="Open_Loan_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Gosi_Credit_Account" columns="15" />
+            <dataField fieldName="Gosi_Debit_Account" columns="15" />
+            <dataField fieldName="UserName" />
+            <dataField fieldName="Password" />
+            <dataField fieldName="EmployeePhoto" columns="15" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="ImportYN" columns="15" />
+            <dataField fieldName="ImportDate" columns="10" />
+            <dataField fieldName="HourlyRate" dataFormatString="c" columns="15" />
+            <dataField fieldName="DailyRate" dataFormatString="c" columns="15" />
+            <dataField fieldName="CashBankID" columns="15" />
+            <dataField fieldName="Shift_ID" aliasFieldName="Shift_Description" hyperlinkFormatString="~/Pages/HR_Shift_Information.aspx?Shift_ID={Shift_ID}&amp;_controller=HR_Shift_Information&amp;_command=Select&amp;_argument=editForm1" />
+            <dataField fieldName="Termination_Type" columns="50" />
+            <dataField fieldName="Termination_Reason" rows="5" />
+            <dataField fieldName="Termination_Date" columns="10" />
+            <dataField fieldName="Notice_Period_Start_Date1" columns="10" />
+            <dataField fieldName="Last_working_Day" columns="10" />
+            <dataField fieldName="EOS_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vaacation_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Loan_Settlement" dataFormatString="c" columns="15" />
+            <dataField fieldName="Salary" dataFormatString="c" columns="15" />
+            <dataField fieldName="Tickets_Eligivility_Year" columns="15" />
+            <dataField fieldName="Adults_Tickets" columns="15" />
+            <dataField fieldName="Child_Tickets" columns="15" />
+            <dataField fieldName="Home_Town" columns="50" />
+            <dataField fieldName="Ticket_Accruals_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Ticket_Accruals_Account" columns="50" />
+            <dataField fieldName="Employee_Type" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Reference Information">
+          <description><![CDATA[$DefaultReferenceDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SubDesignation_Designation_Description" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Employees">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Employees" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Emp_Login" columns="20" />
+            <dataField fieldName="Emp_Password" columns="20" />
+            <dataField fieldName="Emp_Name" columns="50" />
+            <dataField fieldName="Title" columns="50" />
+            <dataField fieldName="Gender_ID" columns="15" />
+            <dataField fieldName="Designation_ID" columns="15" />
+            <dataField fieldName="SubDesignation_ID" aliasFieldName="SubDesignation_Description" />
+            <dataField fieldName="Group_id" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="Picture" columns="50" />
+            <dataField fieldName="Phone_Home" columns="50" />
+            <dataField fieldName="Phone_Work" columns="50" />
+            <dataField fieldName="Phone_Cell" columns="50" />
+            <dataField fieldName="Fax" columns="50" />
+            <dataField fieldName="City" columns="50" />
+            <dataField fieldName="ZIP" columns="20" />
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="Employee_Is_Active" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="DateOfBirth" columns="10" />
+            <dataField fieldName="DateOfJoining" columns="10" />
+            <dataField fieldName="Notice_Period_Start_Date" columns="10" />
+            <dataField fieldName="FamilyStatus" columns="50" />
+            <dataField fieldName="Marital_Status" columns="50" />
+            <dataField fieldName="Sponsor" columns="50" />
+            <dataField fieldName="ContractType" columns="15" />
+            <dataField fieldName="Basic_Salary" dataFormatString="c" columns="15" />
+            <dataField fieldName="Basic_Salary_Account" columns="15" />
+            <dataField fieldName="Basic_Salary_Credit_Account" columns="15" />
+            <dataField fieldName="GOSIFLAG" columns="15" />
+            <dataField fieldName="GOSISALARY" columns="15" />
+            <dataField fieldName="Nationality" columns="50" />
+            <dataField fieldName="GosiBasic" dataFormatString="c" columns="15" />
+            <dataField fieldName="TerminationDate" columns="10" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="Designation" columns="50" />
+            <dataField fieldName="PRRequestYN" columns="15" />
+            <dataField fieldName="Employee_Num" columns="50" />
+            <dataField fieldName="Employee_Grp_Num" columns="15" />
+            <dataField fieldName="Employee_Iqama_Num" columns="15" />
+            <dataField fieldName="Open_Loan_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Gosi_Credit_Account" columns="15" />
+            <dataField fieldName="Gosi_Debit_Account" columns="15" />
+            <dataField fieldName="UserName" />
+            <dataField fieldName="Password" />
+            <dataField fieldName="EmployeePhoto" columns="15" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="ImportYN" columns="15" />
+            <dataField fieldName="ImportDate" columns="10" />
+            <dataField fieldName="HourlyRate" dataFormatString="c" columns="15" />
+            <dataField fieldName="DailyRate" dataFormatString="c" columns="15" />
+            <dataField fieldName="CashBankID" columns="15" />
+            <dataField fieldName="Shift_ID" aliasFieldName="Shift_Description" />
+            <dataField fieldName="Termination_Type" columns="50" />
+            <dataField fieldName="Termination_Reason" rows="5" />
+            <dataField fieldName="Termination_Date" columns="10" />
+            <dataField fieldName="Notice_Period_Start_Date1" columns="10" />
+            <dataField fieldName="Last_working_Day" columns="10" />
+            <dataField fieldName="Vaacation_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Tickets_Eligivility_Year" columns="15" />
+            <dataField fieldName="Adults_Tickets" columns="15" />
+            <dataField fieldName="Child_Tickets" columns="15" />
+            <dataField fieldName="Home_Town" columns="50" />
+            <dataField fieldName="Ticket_Accruals_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Ticket_Accruals_Account" columns="50" />
+            <dataField fieldName="Employee_Type" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

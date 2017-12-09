@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DB_EVALUATION_DATA" conflictDetection="overwriteChanges" label="Db Evaluation Data" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"DB_EVALUATION_DATA"."EventID" "EventID"
+	,"DB_EVALUATION_DATA"."Sys_Number" "Sys_Number"
+	,"DB_EVALUATION_DATA"."Vendor_Name" "Vendor_Name"
+	,"DB_EVALUATION_DATA"."Dept_Code" "Dept_Code"
+	,"DB_EVALUATION_DATA"."Evaluation_Type" "Evaluation_Type"
+	,"DB_EVALUATION_DATA"."Topics" "Topics"
+	,"DB_EVALUATION_DATA"."MaxRating" "MaxRating"
+	,"DB_EVALUATION_DATA"."Dept_Name" "Dept_Name"
+	,"DB_EVALUATION_DATA"."DeptMaxRating" "DeptMaxRating"
+from "dbo"."DB_EVALUATION_DATA" "DB_EVALUATION_DATA"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="EventID" type="Decimal" allowNulls="false" label="Event#" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="Sys Number" showInSummary="true" />
+    <field name="Vendor_Name" type="String" allowNulls="false" label="Vendor Name" length="150" showInSummary="true" />
+    <field name="Dept_Code" type="String" allowNulls="false" label="Dept Code" length="50" showInSummary="true" />
+    <field name="Evaluation_Type" type="Int32" allowNulls="false" label="Evaluation Type" showInSummary="true" />
+    <field name="Topics" type="String" allowNulls="false" label="Topics" length="150" />
+    <field name="MaxRating" type="Int32" label="Max Rating" />
+    <field name="Dept_Name" type="String" label="Dept Name" length="250" />
+    <field name="DeptMaxRating" type="Int32" label="Dept Max Rating" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Db Evaluation Data">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EventID" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Evaluation_Type" columns="15" />
+        <dataField fieldName="Topics" />
+        <dataField fieldName="MaxRating" columns="15" />
+        <dataField fieldName="Dept_Name" />
+        <dataField fieldName="DeptMaxRating" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Db Evaluation Data">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Db Evaluation Data" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EventID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Evaluation_Type" columns="15" />
+            <dataField fieldName="Topics" />
+            <dataField fieldName="MaxRating" columns="15" />
+            <dataField fieldName="Dept_Name" />
+            <dataField fieldName="DeptMaxRating" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Db Evaluation Data">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Db Evaluation Data" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EventID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Evaluation_Type" columns="15" />
+            <dataField fieldName="Topics" />
+            <dataField fieldName="MaxRating" columns="15" />
+            <dataField fieldName="Dept_Name" />
+            <dataField fieldName="DeptMaxRating" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="V_GL_Import_Data" conflictDetection="overwriteChanges" label="V GL Import Data" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"V_GL_Import_Data"."Transaction_Desc" "Transaction_Desc"
+	,"V_GL_Import_Data"."Transaction_ID" "Transaction_ID"
+	,"V_GL_Import_Data"."Transaction_Date" "Transaction_Date"
+	,"V_GL_Import_Data"."PostYN" "PostYN"
+	,"V_GL_Import_Data"."APAR_Flag" "APAR_Flag"
+	,"V_GL_Import_Data"."Dr_AC" "Dr_AC"
+	,"V_GL_Import_Data"."Cr_AC" "Cr_AC"
+	,"V_GL_Import_Data"."Avg_Cost" "Avg_Cost"
+	,"V_GL_Import_Data"."Qty" "Qty"
+	,"V_GL_Import_Data"."OPU_Code" "OPU_Code"
+	,"V_GL_Import_Data"."Company_Code" "Company_Code"
+	,"V_GL_Import_Data"."InvoicedYN" "InvoicedYN"
+	,"V_GL_Import_Data"."Unit_Price" "Unit_Price"
+	,"V_GL_Import_Data"."Unit_Cost" "Unit_Cost"
+	,"V_GL_Import_Data"."Sys_Number" "Sys_Number"
+	,"V_GL_Import_Data"."Amount" "Amount"
+	,"V_GL_Import_Data"."Revenue_AC" "Revenue_AC"
+	,"V_GL_Import_Data"."Unbilled_AC" "Unbilled_AC"
+	,"V_GL_Import_Data"."Sales_Amt" "Sales_Amt"
+	,"V_GL_Import_Data"."Line_ID" "Line_ID"
+from "dbo"."V_GL_Import_Data" "V_GL_Import_Data"
+]]></text>
+    </command>
+    <command id="Sys_NumberIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Sys_Number" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Transaction_Desc" type="String" label="Transaction Desc" length="25" showInSummary="true" />
+    <field name="Transaction_ID" type="Decimal" allowNulls="false" label="Transaction#" showInSummary="true" />
+    <field name="Transaction_Date" type="DateTime" label="Transaction Date" showInSummary="true" />
+    <field name="PostYN" type="Int32" label="Post YN" showInSummary="true" />
+    <field name="APAR_Flag" type="Int32" label="APAR Flag" showInSummary="true" />
+    <field name="Dr_AC" type="String" label="Dr AC" length="50" />
+    <field name="Cr_AC" type="String" label="Cr AC" length="50" />
+    <field name="Avg_Cost" type="Decimal" label="Avg Cost" />
+    <field name="Qty" type="Decimal" label="Qty" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
+    <field name="InvoicedYN" type="Int32" label="Invoiced YN" />
+    <field name="Unit_Price" type="Decimal" label="Unit Price" />
+    <field name="Unit_Cost" type="Decimal" label="Unit Cost" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" readOnly="true" />
+    <field name="Amount" type="Decimal" label="Amount" readOnly="true" />
+    <field name="Revenue_AC" type="String" label="Revenue AC" length="50" />
+    <field name="Unbilled_AC" type="String" label="Unbilled AC" length="50" />
+    <field name="Sales_Amt" type="Decimal" label="Sales Amt" readOnly="true" />
+    <field name="Line_ID" type="Decimal" allowNulls="false" label="Line#" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="V GL Import Data">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Transaction_ID" columns="15" />
+        <dataField fieldName="Transaction_Desc" columns="25" />
+        <dataField fieldName="Transaction_Date" columns="10" />
+        <dataField fieldName="PostYN" columns="15" />
+        <dataField fieldName="APAR_Flag" columns="15" />
+        <dataField fieldName="Dr_AC" columns="50" />
+        <dataField fieldName="Cr_AC" columns="50" />
+        <dataField fieldName="Avg_Cost" dataFormatString="c" columns="15" />
+        <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+        <dataField fieldName="OPU_Code" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review V GL Import Data">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="V GL Import Data" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Transaction_Desc" columns="25" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="Dr_AC" columns="50" />
+            <dataField fieldName="Cr_AC" columns="50" />
+            <dataField fieldName="Avg_Cost" dataFormatString="c" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="OPU_Code" columns="15" />
+            <dataField fieldName="Company_Code" columns="15" />
+            <dataField fieldName="InvoicedYN" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Cost" dataFormatString="c" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Revenue_AC" columns="50" />
+            <dataField fieldName="Unbilled_AC" columns="50" />
+            <dataField fieldName="Sales_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_ID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New V GL Import Data">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New V GL Import Data" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Transaction_Desc" columns="25" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="Dr_AC" columns="50" />
+            <dataField fieldName="Cr_AC" columns="50" />
+            <dataField fieldName="Avg_Cost" dataFormatString="c" columns="15" />
+            <dataField fieldName="Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="OPU_Code" columns="15" />
+            <dataField fieldName="Company_Code" columns="15" />
+            <dataField fieldName="InvoicedYN" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Cost" dataFormatString="c" columns="15" />
+            <dataField fieldName="Revenue_AC" columns="50" />
+            <dataField fieldName="Unbilled_AC" columns="50" />
+            <dataField fieldName="Line_ID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

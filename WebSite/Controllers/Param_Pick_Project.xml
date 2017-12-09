@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Param_Pick_Project" label="^ParPicPro^Param_Pick_Project^ParPicPro^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="AreYouSure" type="Int32" label="^AreYouSur^Are You Sure^AreYouSur^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="DropDownList" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    </field>
+  </fields>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @AreYouSure=0]]></rule>
+  </businessRules>
+</dataController>

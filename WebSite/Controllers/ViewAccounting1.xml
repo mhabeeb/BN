@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ViewAccounting1" label="ViewAccounting1" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="COA_Natural_Account" custom="true">
+      <text><![CDATA[SELECT     dbo.GL_Transaction_Header.GL_NO, dbo.GL_Transaction_Header.Transaction_Date, dbo.GL_Transaction_Line.Remark, dbo.GL_Transaction_Header.Tran_Type, 
+                      dbo.GL_Transaction_Line.Debit_Amount, dbo.GL_Transaction_Line.Credit_Amount, dbo.GL_Transaction_Line.Dept_Code, dbo.GL_Transaction_Line.Ac_Description, 
+                      dbo.GL_Transaction_Line.Project_Code, dbo.GL_Transaction_Line.Created_By, dbo.GL_Transaction_Line.Created_DateTime, dbo.GL_Transaction_Line.Line_NO, 
+                      dbo.GL_Transaction_Line.TrxYear, dbo.GL_Transaction_Line.TrxMonths, dbo.GL_Transaction_Line.CalcDate, dbo.GL_Transaction_Line.Transaction_ID, 
+                      dbo.GL_Transaction_Line.Trx_ID, dbo.GL_Transaction_Line.PaymentID, dbo.GL_Transaction_Line.Account_Type, dbo.GL_Transaction_Line.Lineage, 
+                      dbo.GL_Transaction_Line.Line_ID, dbo.GL_Transaction_Line.AccountID, dbo.COA_Natural_Account.Ref_Account_No, dbo.GL_Transaction_Line.Item_Code, 
+                      dbo.GL_Transaction_Line.AssetID, dbo.GL_Transaction_Line.ApplicationID, dbo.GL_Transaction_Header.GL_Serial_No, dbo.GL_Transaction_Line.OPU_Code_Ln
+FROM         dbo.GL_Transaction_Header INNER JOIN
+                      dbo.GL_Transaction_Line ON dbo.GL_Transaction_Header.GL_Serial_No = dbo.GL_Transaction_Line.GL_Serial_No INNER JOIN
+                      dbo.COA_Natural_Account ON dbo.GL_Transaction_Line.AccountID = dbo.COA_Natural_Account.AccountID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="GL_NO" type="Decimal" allowNulls="false" label="^GlNo^Gl No^GlNo^" showInSummary="true" />
+    <field name="Transaction_Date" type="DateTime" allowNulls="false" label="^TransactionDate^Transaction Date^TransactionDate^" showInSummary="true" />
+    <field name="Remark" type="String" label="^Remark^Remark^Remark^" length="150" showInSummary="true" />
+    <field name="Tran_Type" type="String" allowNulls="false" label="^TranType^Tran Type^TranType^" length="50" showInSummary="true" />
+    <field name="Debit_Amount" type="Decimal" allowNulls="false" label="^DebitAmount^Debit Amount^DebitAmount^" showInSummary="true" />
+    <field name="Credit_Amount" type="Decimal" allowNulls="false" label="^CreditAmount^Credit Amount^CreditAmount^" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Ac_Description" type="String" label="^AcDescription^Ac Description^AcDescription^" length="250" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Line_NO" type="Decimal" label="^LineNO^Line NO^LineNO^" />
+    <field name="TrxYear" type="Int32" label="^TrxYear^Trx Year^TrxYear^" />
+    <field name="TrxMonths" type="Int32" label="^TrxMonths^Trx Months^TrxMonths^" />
+    <field name="CalcDate" type="Int32" label="^CalcDate^Calc Date^CalcDate^" />
+    <field name="Transaction_ID" type="Decimal" label="^Transaction^Transaction#^Transaction^" />
+    <field name="Trx_ID" type="Decimal" label="^Trx^Trx#^Trx^" />
+    <field name="PaymentID" type="Decimal" label="^Payment^Payment#^Payment^" />
+    <field name="Account_Type" type="String" label="^AccountType^Account Type^AccountType^" length="50" />
+    <field name="Lineage" type="String" label="^Lineage^Lineage^Lineage^" length="255" />
+    <field name="Line_ID" type="Decimal" label="^Line^Line#^Line^" />
+    <field name="AccountID" type="String" allowNulls="false" label="^Account^Account#^Account^" length="50" />
+    <field name="Ref_Account_No" type="String" label="^RefAccountNo^Ref Account No^RefAccountNo^" length="50" />
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" />
+    <field name="AssetID" type="Decimal" label="^Asse^Asset#^Asset^" />
+    <field name="ApplicationID" type="Decimal" label="^Application^Application#^Application^" />
+    <field name="GL_Serial_No" type="Decimal" allowNulls="false" label="^GLSerialNo^GL Serial No^GLSerialNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="OPU_Code_Ln" type="Decimal" allowNulls="false" label="OPU Code Ln" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="View Accouting" sortExpression="GL_Serial_No DESC" filter="OPU_Code_Ln=@Session_OPU_Code">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="GL_NO" columns="15" />
+        <dataField fieldName="Transaction_Date" columns="10" />
+        <dataField fieldName="Tran_Type" columns="50" />
+        <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Ac_Description" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Line_NO" columns="15" hidden="true" />
+        <dataField fieldName="TrxYear" columns="15" hidden="true" />
+        <dataField fieldName="TrxMonths" columns="15" hidden="true" />
+        <dataField fieldName="CalcDate" columns="15" hidden="true" />
+        <dataField fieldName="Transaction_ID" columns="15" hidden="true" />
+        <dataField fieldName="Trx_ID" columns="15" hidden="true" />
+        <dataField fieldName="PaymentID" columns="15" hidden="true" />
+        <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="Lineage" hidden="true" />
+        <dataField fieldName="Line_ID" columns="15" hidden="true" />
+        <dataField fieldName="Ref_Account_No" columns="50" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="AssetID" columns="15" hidden="true" />
+        <dataField fieldName="ApplicationID" columns="15" hidden="true" />
+        <dataField fieldName="GL_Serial_No" columns="15" />
+        <dataField fieldName="Remark" />
+        <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review View Accouting">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="COA Natural Account" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GL_NO" columns="15" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="Tran_Type" columns="50" />
+            <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Ac_Description" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Line_NO" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="PaymentID" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Lineage" />
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Ref_Account_No" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="AssetID" columns="15" />
+            <dataField fieldName="ApplicationID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New View Accouting">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New COA Natural Account" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="GL_NO" columns="15" />
+            <dataField fieldName="Transaction_Date" columns="10" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="Tran_Type" columns="50" />
+            <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Ac_Description" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Line_NO" columns="15" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="TrxMonths" columns="15" />
+            <dataField fieldName="CalcDate" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="PaymentID" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Lineage" />
+            <dataField fieldName="Line_ID" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Ref_Account_No" columns="50" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="AssetID" columns="15" />
+            <dataField fieldName="ApplicationID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

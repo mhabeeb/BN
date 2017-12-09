@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Pick_COA_Parent" conflictDetection="overwriteChanges" label="Pick_COA_Parent" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="COA_Natural_Account" custom="true">
+      <text><![CDATA[SELECT  *
+  FROM [COA_Natural_Account] where [InActive]=0 and ParantYN =1]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="AccountID" type="String" allowNulls="false" label="Account#" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Company_Code" type="Int32" allowNulls="false" label="Company Code" showInSummary="true" />
+    <field name="Account_Description" type="String" allowNulls="false" label="Account Description" length="200" showInSummary="true" />
+    <field name="Account_DescriptionAr" type="String" label="Account Description Ar" length="500" showInSummary="true" />
+    <field name="PostableYN" type="Int32" allowNulls="false" label="Postable YN" showInSummary="true">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Account_Type" type="String" allowNulls="false" label="Account Type" length="50" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="InActive" type="Int32" label="In Active" />
+    <field name="Natural_AccountID_Parent" type="String" label="Natural Account ID Parent" length="50" />
+    <field name="ParentType" type="String" label="Parent Type" length="50" />
+    <field name="Ac_Level" type="Int32" label="Ac Level" readOnly="true" />
+    <field name="Accounts_Int_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Accounts Int#" readOnly="true" />
+    <field name="RequiredYN" type="Int32" label="Required YN" />
+    <field name="DeptYN" type="Int32" label="Dept YN" />
+    <field name="Ac_Path" type="String" label="Ac Path" readOnly="true" length="50" />
+    <field name="Ref_Account_No" type="String" label="Ref Account No" length="50" />
+    <field name="ImportYN" type="Int32" label="Import YN" />
+    <field name="ImportDate" type="DateTime" label="Import Date" />
+    <field name="LegacyAccount" type="String" label="Legacy Account" length="15" />
+    <field name="SubAccount" type="String" label="Sub Account" length="15" />
+    <field name="BudgetCode" type="String" label="Budget Code" length="15" />
+    <field name="BudgetCode_Description" type="String" label="Budget Code Description" length="200" />
+    <field name="Account_Description_Search" type="String" label="Account Description Search" length="200" />
+    <field name="Approve_Ask" type="Int32" label="Approve Ask" />
+    <field name="Rec_Status" type="Int32" label="Rec Status" />
+    <field name="App_Group_ID" type="Int64" label="App Group#" />
+    <field name="DOC_TYPE_ID" type="Int32" label="Doc Type#" />
+    <field name="SUB_DOC_TYPE_ID" type="Int32" label="Sub Doc Type#" />
+    <field name="SUB_DOC_TYPE_NAME" type="String" label="Sub Doc Type Name" length="100" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Parent Accounts" filter="Company_Code=@Session_Company_Code">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="Account_Description" />
+        <dataField fieldName="Account_DescriptionAr" />
+        <dataField fieldName="PostableYN" columns="15" />
+        <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Natural_AccountID_Parent" columns="50" />
+        <dataField fieldName="Ac_Level" columns="15" />
+        <dataField fieldName="Ac_Path" columns="50" />
+        <dataField fieldName="Ref_Account_No" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review COA Natural Account">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="COA Natural Account" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="Account_DescriptionAr" />
+            <dataField fieldName="PostableYN" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="Natural_AccountID_Parent" columns="50" />
+            <dataField fieldName="ParentType" columns="50" />
+            <dataField fieldName="Ac_Level" columns="15" />
+            <dataField fieldName="RequiredYN" columns="15" />
+            <dataField fieldName="DeptYN" columns="15" />
+            <dataField fieldName="Ac_Path" columns="50" />
+            <dataField fieldName="Ref_Account_No" columns="50" />
+            <dataField fieldName="ImportYN" columns="15" />
+            <dataField fieldName="ImportDate" columns="10" />
+            <dataField fieldName="LegacyAccount" columns="15" />
+            <dataField fieldName="SubAccount" columns="15" />
+            <dataField fieldName="BudgetCode" columns="15" />
+            <dataField fieldName="BudgetCode_Description" />
+            <dataField fieldName="Account_Description_Search" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="App_Group_ID" columns="15" />
+            <dataField fieldName="DOC_TYPE_ID" columns="15" />
+            <dataField fieldName="SUB_DOC_TYPE_ID" columns="15" />
+            <dataField fieldName="SUB_DOC_TYPE_NAME" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New COA Natural Account">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New COA Natural Account" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="Account_DescriptionAr" />
+            <dataField fieldName="PostableYN" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="Natural_AccountID_Parent" columns="50" />
+            <dataField fieldName="ParentType" columns="50" />
+            <dataField fieldName="RequiredYN" columns="15" />
+            <dataField fieldName="DeptYN" columns="15" />
+            <dataField fieldName="Ref_Account_No" columns="50" />
+            <dataField fieldName="ImportYN" columns="15" />
+            <dataField fieldName="ImportDate" columns="10" />
+            <dataField fieldName="LegacyAccount" columns="15" />
+            <dataField fieldName="SubAccount" columns="15" />
+            <dataField fieldName="BudgetCode" columns="15" />
+            <dataField fieldName="BudgetCode_Description" />
+            <dataField fieldName="Account_Description_Search" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="App_Group_ID" columns="15" />
+            <dataField fieldName="DOC_TYPE_ID" columns="15" />
+            <dataField fieldName="SUB_DOC_TYPE_ID" columns="15" />
+            <dataField fieldName="SUB_DOC_TYPE_NAME" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

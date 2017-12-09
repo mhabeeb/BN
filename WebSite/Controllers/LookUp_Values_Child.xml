@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="LookUp_Values_Child" conflictDetection="overwriteChanges" label="^LooValChi^LookUp_Values_Child^LooValChi^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="dbo.tbl_LookUp_Values" custom="true">
+      <text><![CDATA[SELECT * FROM dbo.tbl_LookUp_Values WHERE LookUpType <> 1]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="LookUpType" type="Int32" allowNulls="false" label="^LooUpTyp^Look Up Type^LooUpTyp^" showInSummary="true" />
+    <field name="Descriptions" type="String" label="^Des^Descriptions^Des^" length="150" showInSummary="true" />
+    <field name="LID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^LId^Code^LId^" readOnly="true" />
+    <field name="InActive" type="Boolean" label="^InAct^In Active^InAct^" showInSummary="true" allowNulls="false">
+      <items style="CheckBox" />
+    </field>
+    <field name="NoDays" type="Int32" label="^NoDay^No Days^NoDay^" showInSummary="true" hidden="true" />
+    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="100" showInSummary="true" hidden="true" />
+    <field name="SEGMENT1" type="Decimal" label="^Seg1^Segment1^Seg1^" hidden="true" />
+    <field name="SEGMENT2" type="Decimal" label="^Seg2^Segment2^Seg2^" hidden="true" />
+    <field name="SEGMENT3" type="String" label="^Seg3^Segment3^Seg3^" length="100" hidden="true" />
+    <field name="SEGMENT4" type="String" label="^Seg4^Segment4^Seg4^" length="100" hidden="true" />
+    <field name="SEGMENT5" type="DateTime" label="^Seg5^Segment5^Seg5^" hidden="true" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="ReturnValueInt" type="Int32" allowNulls="false" label="^RetValInt^Return Value Int^RetValInt^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ReturnVarchar" type="String" allowNulls="false" label="^RetVar^Return Varchar^RetVar^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^LooUpVal^Look Up Values^LooUpVal^" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="LID" columns="15" hidden="true" />
+        <dataField fieldName="LookUpType" columns="15" />
+        <dataField fieldName="Descriptions" />
+        <dataField fieldName="ReturnValueInt" columns="15" />
+        <dataField fieldName="ReturnVarchar" rows="5" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevLooUpVal^Review Look Up Values^RevLooUpVal^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="dbo tbl Look Up Values" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="LookUpType" columns="15" />
+            <dataField fieldName="Descriptions" />
+            <dataField fieldName="ReturnValueInt" columns="15" />
+            <dataField fieldName="ReturnVarchar" rows="5" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="NoDays" columns="15" hidden="true" />
+            <dataField fieldName="SEGMENT1" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="SEGMENT2" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="SEGMENT3" hidden="true" />
+            <dataField fieldName="SEGMENT4" hidden="true" />
+            <dataField fieldName="SEGMENT5" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewLooUpVal^New Look Up Values^NewLooUpVal^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New dbo tbl Look Up Values" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="LookUpType" columns="15" />
+            <dataField fieldName="Descriptions" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="NoDays" columns="15" hidden="true" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="SEGMENT1" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="SEGMENT2" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="SEGMENT3" hidden="true" />
+            <dataField fieldName="SEGMENT4" hidden="true" />
+            <dataField fieldName="SEGMENT5" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="ReturnValueInt" columns="15" />
+            <dataField fieldName="ReturnVarchar" rows="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SELECT @ReturnValueInt=MAX(ReturnValueInt)+1 FROM tbl_LookUp_Values WHERE LookUpType=@LookUpType]]></rule>
+  </businessRules>
+</dataController>

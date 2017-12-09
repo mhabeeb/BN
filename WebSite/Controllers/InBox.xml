@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="InBox" conflictDetection="overwriteChanges" label="^InBox^InBox^InBox^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="[TBL_EmailInBox] " custom="true">
+      <text><![CDATA[SELECT *
+  FROM [TBL_EmailInBox]]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Mail_From" type="String" label="^MaiFro^Mail From^MaiFro^" length="2000" showInSummary="true" causesCalculate="true" />
+    <field name="CreatedDateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" dataFormatString="g" />
+    <field name="Subject" type="String" label="^Sub^Subject^Sub^" length="2000" showInSummary="true" />
+    <field name="Mail_To" type="String" label="^MaiTo^Mail To^MaiTo^" length="2000" showInSummary="true" />
+    <field name="Mail_Message" type="String" allowQBE="false" allowSorting="false" label="^MaiMes^Mail Message^MaiMes^" showInSummary="true" htmlEncode="false" />
+    <field name="EmailInID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^EmaiInId^Email In#^EmaiInId^" readOnly="true" />
+    <field name="ReadUnread" type="Int32" label="^ReaUnr^Read Unread^ReaUnr^" />
+    <field name="SeenDate" type="DateTime" label="^SeeDat^Seen Date^SeeDat^" dataFormatString="g" />
+    <field name="URL" type="String" label="^Url^Url^Url^" length="150" />
+    <field name="DocumentID" type="Decimal" label="^DocId^Document#^DocId^" />
+    <field name="ActionTakenYN" type="Int16" label="^ActTakYn^Action Taken YN^ActTakYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="OwnerUser" type="String" label="^OwnUse^Owner User^OwnUse^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="2000" />
+    <field name="Doc_No" type="Int64" label="^DocNo^Doc No^DocNo^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^EmaiInBox^Email In Box^EmaiInBox^" sortExpression="EmailInID DESC" filter="Mail_To=@BusinessRules_UserName" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="Mail_From" readOnly="true" />
+        <dataField fieldName="CreatedDateTime" dataFormatString="g" columns="10" readOnly="true" />
+        <dataField fieldName="Subject" readOnly="true" />
+        <dataField fieldName="Mail_To" hidden="true" readOnly="true" />
+        <dataField fieldName="Mail_Message" rows="5" readOnly="true" hidden="true" />
+        <dataField fieldName="ReadUnread" columns="15" hidden="true" />
+        <dataField fieldName="SeenDate" columns="10" readOnly="true" dataFormatString="g" />
+        <dataField fieldName="URL" hidden="true" />
+        <dataField fieldName="DocumentID" columns="15" hidden="true" />
+        <dataField fieldName="EmailInID" columns="15" hidden="true" />
+        <dataField fieldName="ActionTakenYN" columns="15" hidden="true" />
+        <dataField fieldName="OwnerUser" rows="5" hidden="true" />
+        <dataField fieldName="Doc_No" columns="15" />
+      </dataFields>
+      <styles>
+        <expression type="ClientScript" result="ReadUnread" test="[ReadUnread]==0" />
+      </styles>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevEmaiInBox^Review  Email In Box^RevEmaiInBox^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="TBL Email In Box" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Mail_From" />
+            <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Subject" />
+            <dataField fieldName="Mail_To" />
+            <dataField fieldName="Mail_Message" rows="5" />
+            <dataField fieldName="ReadUnread" columns="15" />
+            <dataField fieldName="SeenDate" columns="10" />
+            <dataField fieldName="URL" />
+            <dataField fieldName="DocumentID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewEmaiInBox^New  Email In Box^NewEmaiInBox^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New TBL Email In Box" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Mail_From" />
+            <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Subject" />
+            <dataField fieldName="Mail_To" />
+            <dataField fieldName="Mail_Message" rows="5" />
+            <dataField fieldName="ReadUnread" columns="15" />
+            <dataField fieldName="SeenDate" columns="10" />
+            <dataField fieldName="URL" />
+            <dataField fieldName="DocumentID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action commandName="SQL" id="a100" whenKeySelected="true">
+        <data><![CDATA[IF @SeenDate IS NULL Update TBL_EmailInBox SET SeenDate=getdate() , ReadUnread=1 
+Where EmailInID=@EmailInID]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" flat="true">
+      <action commandName="SQL" headerText="^Approve^Approve^Approve^" id="a100" cssClass="glyphicon glyphicon-ok" whenClientScript="[ActionTakenYN] != 1&#xD;&#xA;[OwnerUser] != [Mail_To]" whenLastCommandName="Select" confirmation="_controller=ApprovalRemarks&#xD;&#xA;_title=Enter Remarks (Optional) - Click on OK Button to Continue.&#xD;&#xA;_width=500">
+        <data><![CDATA[UPDATE [dbo].[TBL_Document_Approvals_Detail]
+SET [ApprovalStatus] = 1, CurrentApp= 0,
+Updated_DateTime=getdate(),
+Comments=IsNull(@Parameters_RemarksLine1,'') + IsNull(@Parameters_RemarksLine2,'') + IsNull(@Parameters_RemarksLine3,'')
+WHERE DocumentID=@DocumentID and UserID=@BusinessRules_UserId
+
+UPDATE [dbo].[TBL_EmailInBox]
+SET [ReadUnread]=1,[ActionTakenYN] = 1, SeenDate=getdate()
+WHERE EmailInID=@EmailInID]]></data>
+      </action>
+      <action commandName="SQL" headerText="^Reject^Reject^Reject^" cssClass="glyphicon glyphicon-remove" whenClientScript="[ActionTakenYN] != 1&#xD;&#xA;[OwnerUser] != [Mail_To]" id="a101" whenLastCommandName="Select" confirmation="_controller=ApprovalRemarks_Reject&#xD;&#xA;_title=Enter Rejection Reason&#xD;&#xA;_width=500">
+        <data><![CDATA[UPDATE [dbo].[TBL_Document_Approvals_Detail]
+  SET
+      [ApprovalStatus] = 2,
+      Updated_DateTime = GETDATE(),
+RejectedYN=1,
+      Comments = IsNull(@Parameters_RemarksLine1, '')+IsNull(@Parameters_RemarksLine2, '')+IsNull(@Parameters_RemarksLine3, '')
+WHERE DocumentID = @DocumentID
+      AND UserID = @BusinessRules_UserId
+UPDATE [dbo].[TBL_EmailInBox]
+  SET
+      [ReadUnread] = 1,
+      [ActionTakenYN] = 2,
+      SeenDate = GETDATE()
+WHERE EmailInID = @EmailInID]]></data>
+      </action>
+      <action commandName="SQL" headerText="Request Information" id="a102">
+        <data><![CDATA[DECLARE @a int
+SET @a=1]]></data>
+      </action>
+      <action commandArgument="_blank" headerText="Adhoc Reportings" id="a103" commandName="SQL">
+        <data><![CDATA[SET @Result_NavigateUrl=@Session_AdhocReportUrl +Cast(@BusinessRules_UserId as nvarchar(15))]]></data>
+      </action>
+      <action commandName="SQL" headerText="Forward" id="a104" confirmation="_controller=Param_Doc_Forward&#xD;&#xA;_title=Document Forward Information&#xD;&#xA;_width=500">
+        <data><![CDATA[EXEC dbo.APPROVAL_DOCUMENT_FWD @DocumentID,@BusinessRules_UserId, @Parameters_FwdTo, @Parameters_FwdRemarks]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if [dbo].[IsUserReadOnly](@BusinessRules_UserId)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if [dbo].[IsUserWriteOnly](@BusinessRules_UserId)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+    <rule id="r102" commandName="Select" type="Sql" phase="Execute" name="GlobalDefination"><![CDATA[SELECT @Session_OPU_Code = ISNULL(OPU_Code, 1),
+       @Session_Company_Code = ISNULL(Company_Code, 1),
+       @Session_StoreID = ISNULL(Store_ID, 0),
+       @Session_Price_List_Name = Price_List_Name,
+       @Session_IsReadOnly = ISNULL(IsReadOnly, 0),
+       @Session_IsWriteOnly = ISNULL(IsWriteOnly, 0),
+       @Session_CashBankID = CashBankID,
+       @Session_DefaultProject = DefaultProject,
+       @Session_Emp_id = Emp_id,
+       @Session_UserID = UserID,
+       @Session_Rpt_Group_ID = IsNull(Rpt_Group_ID, 0)
+FROM dbo.Users
+WHERE UserID = @BusinessRules_UserId
+
+
+SELECT @Session_DefaultCurrency = DefaultCurrency,
+       @Session_ProjectEnabled = ISNULL(ProjectEnabled, 0),
+       @Session_SiteCodeEnabled = ISNULL(SiteCodeEnabled, 0),
+	   @Session_BudgetEnabled= ISNULL(BudgetEnabled, 0),
+       @Session_Country = Country,
+       @Session_Expence_AC = Expence_AC,
+       @Session_BranchName = BranchName,
+       @Session_BranchName_Ar = BranchName_Ar,
+       @Session_Address_English = Address_English,
+       @Session_Address_Arabic = Address_Arabic,
+       @Session_ItemCodeAutoYN = IsNull(ItemCodeAutoYN, 0)
+FROM dbo.tbl_BranchInfo
+WHERE BranchID = @Session_OPU_Code
+
+SELECT @Session_Dimension1 = Dimension1,
+       @Session_D1Caption = D1Caption,
+       @Session_Dimension2 = Dimension2,
+       @Session_D2Caption = D2Caption,
+       @Session_Dimension3 = Dimension3,
+       @Session_D3Caption = D3Caption,
+       @Session_Dimension4 = Dimension4,
+       @Session_D4Caption = D4Caption,
+       @Session_Dimension5 = Dimension5,
+       @Session_D5Caption = D5Caption
+   FROM Accounting_Dimensions
+WHERE Company_Code = @Session_Company_Code
+
+
+SELECT @Session_CompanyName = CompanyName,
+       @Session_AdhocReportUrl = AdhocReportUrl
+FROM tbl_CompanyInformation
+WHERE CompanyID = @Session_Company_Code
+
+SELECT @Session_StoreName = Store_Name , @Session_NegativeAllowedYN=IsNull(NegativeAllowedYN,0)
+FROM tbl_Store
+WHERE Store_ID = @Session_StoreID
+
+SET @Session_CompanyName= '<font Color=DarkGoldenRod>' + @Session_CompanyName + '</Font>'
+SET @Session_BranchName= '<font Color=DarkGoldenRod>' + @Session_BranchName + '</Font>'
+
+SELECT TOP 1 @Session_BudgetCode = BudgetCode
+FROM GL_Budget_Master
+WHERE OPU_Code = @Session_OPU_Code
+      AND IsDefault = 1
+     -- AND ControlBudgetYN = 1
+
+
+
+EXEC dbo.GLOBAL_UPDATE_DATA @Session_OPU_Code
+]]></rule>
+  </businessRules>
+</dataController>

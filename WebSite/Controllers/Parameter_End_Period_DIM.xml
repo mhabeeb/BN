@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Parameter_End_Period_DIM" label="^ParEndPerDim^Parameter_End_Period_DIM^ParEndPerDim^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="D1Caption" type="String" readOnly="true" label="^D1Cap^D1Caption^D1Cap^" length="50" roles="xxxx" />
+    <field name="D2Caption" type="String" readOnly="true" label="^D2Cap^D2Caption^D2Cap^" length="50" roles="xxxxxx" />
+    <field name="D3Caption" type="String" label="^D3Cap^D3Caption^D3Cap^" length="50" readOnly="true" roles="xxxxxx" />
+    <field name="D4Caption" type="String" label="^D4Cap^D4Caption^D4Cap^" length="50" readOnly="true" roles="XXXxx" />
+    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDate^End Date^EndDate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50">
+      <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Code" dataValueField="Project_Code" />
+    </field>
+    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50" contextFields="Project_Code=Project_Code">
+      <items style="Lookup" dataController="ProjectsSites" dataView="grid1" dataTextField="SiteCode" dataValueField="SiteCode" />
+    </field>
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50">
+      <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_Code" dataValueField="Dept_Code" />
+    </field>
+    <field name="S1" type="String" label="^S1^S1^S1^" length="50" contextFields="SEGMENT6='D1'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D1Caption</configuration>
+    </field>
+    <field name="S2" type="String" label="^S2^S2^S2^" length="50" contextFields="SEGMENT6='D2'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D2Caption</configuration>
+    </field>
+    <field name="S3" type="String" label="^S3^S3^S3^" length="50" contextFields="SEGMENT6='D3'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D3Caption</configuration>
+    </field>
+    <field name="S4" type="String" label="^S4^S4^S4^" length="50" contextFields="SEGMENT6='D4'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D4Caption</configuration>
+    </field>
+  </fields>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Project_Code='None'
+SET @SiteCode='None'
+SET @Dept_Code='None'
+SET @S1='None'
+SET @S2='None'
+SET @S3='None'
+SET @S4='None'
+
+SELECT @D1Caption=D1Caption, @D2Caption=D2Caption,@D3Caption=D3Caption,@D4Caption=D4Caption 
+from Accounting_Dimensions WHERE Company_Code=@Session_Company_Code]]></rule>
+  </businessRules>
+</dataController>

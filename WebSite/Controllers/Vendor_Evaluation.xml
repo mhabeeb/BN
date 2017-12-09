@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Vendor_Evaluation" conflictDetection="overwriteChanges" label="Vendor_Evaluation" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="Parties_to_Evaluate" custom="true">
+      <text><![CDATA[SELECT dbo.Parties_Evaluation_Master.EventID,
+       dbo.Parties_Evaluation_Type.Evaluation_Name,
+       dbo.Parties_Evaluation_Master.StartDate,
+       dbo.Parties_Evaluation_Master.EndtDate,
+       dbo.Parties_to_Evaluate.Vendor_Name,
+       dbo.tbl_Customer_Supplier.Partner_Type,
+       dbo.Parties_Evaluation_Master.Project_Name,
+       CASE
+           WHEN dbo.Parties_Evaluation_Master.EventStatus = 1
+           THEN 'Approved'
+           WHEN IsNull(dbo.Parties_Evaluation_Master.EventStatus,2) = 2
+           THEN 'Under Review'
+       END AS EventStatus
+FROM dbo.Parties_Evaluation_Master
+     INNER JOIN dbo.Parties_to_Evaluate ON dbo.Parties_Evaluation_Master.EventID = dbo.Parties_to_Evaluate.EventID
+     INNER JOIN dbo.tbl_Customer_Supplier ON dbo.Parties_to_Evaluate.Sys_Number = dbo.tbl_Customer_Supplier.Sys_Number
+     INNER JOIN dbo.Parties_Evaluation_Type ON dbo.Parties_Evaluation_Master.Evaluation_Type = dbo.Parties_Evaluation_Type.Evaluation_Type_ID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="EventID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Survey Event ID" readOnly="true" />
+    <field name="Evaluation_Name" type="String" label="Event Type" length="150" showInSummary="true" />
+    <field name="StartDate" type="DateTime" label="Event Start" showInSummary="true" />
+    <field name="EndtDate" type="DateTime" label="Event End" showInSummary="true" />
+    <field name="Vendor_Name" type="String" allowNulls="false" label="Vendor Name" length="150" showInSummary="true" />
+    <field name="Partner_Type" type="String" label="Vendor Type" length="50" showInSummary="true" />
+    <field name="Project_Name" type="String" label="Project Name" length="250" />
+    <field name="EventStatus" type="String" label="Status" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Parties to Evaluate">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EventID" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Evaluation_Name" />
+        <dataField fieldName="StartDate" columns="10" />
+        <dataField fieldName="EndtDate" columns="10" />
+        <dataField fieldName="Partner_Type" columns="50" />
+        <dataField fieldName="Project_Name" />
+        <dataField fieldName="EventStatus" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Parties to Evaluate">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Parties to Evaluate" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Evaluation_Name" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndtDate" columns="10" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Partner_Type" columns="50" />
+            <dataField fieldName="Project_Name" />
+            <dataField fieldName="EventStatus" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Parties to Evaluate">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Parties to Evaluate" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Evaluation_Name" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndtDate" columns="10" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Partner_Type" columns="50" />
+            <dataField fieldName="Project_Name" />
+            <dataField fieldName="EventStatus" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

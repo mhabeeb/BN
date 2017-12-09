@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SupplierStatement" conflictDetection="overwriteChanges" label="^SupSta^SupplierStatement^SupSta^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="V_VENDOR_STATMENT" custom="true">
+      <text><![CDATA[SELECT * FROM [V_VENDOR_STATMENT] WHERE APAR_Flag=2]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Ven_RefNo" type="String" label="^VenRefNo^Ven Ref No^VenRefNo^" length="25" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" />
+    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" showInSummary="true" />
+    <field name="DOC_Type" type="String" allowNulls="false" label="^DocTyp^DOC Type^DocTyp^" length="7" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Party #^SysNum^" />
+    <field name="TRX_Date" type="DateTime" label="^TrxDat^TRX Date^TrxDat^" showInSummary="true" />
+    <field name="DOC_NO" type="Decimal" label="^DocNo^Doc No^DocNo^" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" showInSummary="true" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" showInSummary="true" />
+    <field name="Invoice_Amt" type="Decimal" label="^InvAmt^Invoice Amt^InvAmt^" showInSummary="true" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount Paid^AmoPai^" showInSummary="true" />
+    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Apply Bal^AppBal^" showInSummary="true" />
+    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="500" />
+    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="Trx_Type" type="String" label="^TrxTyp^Trx Type^TrxTyp^" length="50" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^VenSta^Vendor Statement^VenSta^" filter="OPU_Code=@Session_OPU_Code" sortExpression="TRX_Date desc" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Trx_ID" columns="15" />
+        <dataField fieldName="TRX_Date" columns="10" />
+        <dataField fieldName="Trx_Type" columns="50" />
+        <dataField fieldName="DOC_NO" columns="15" />
+        <dataField fieldName="DOC_Type" columns="7" />
+        <dataField fieldName="Ven_RefNo" columns="25" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" hidden="true" />
+        <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Invoice_Amt" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Remarks" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevVenSta^Review Vendor Statement^RevVenSta^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="V Vendor Statment" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Ven_RefNo" columns="25" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="DOC_Type" columns="7" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="TRX_Date" columns="10" />
+            <dataField fieldName="DOC_NO" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Invoice_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Trx_Type" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewVenSta^New Vendor Statement^NewVenSta^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New V Vendor Statment" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Ven_RefNo" columns="25" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="APAR_Flag" columns="15" />
+            <dataField fieldName="DOC_Type" columns="7" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="TRX_Date" columns="10" />
+            <dataField fieldName="DOC_NO" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="Invoice_Amt" dataFormatString="c" columns="15" />
+            <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
+            <dataField fieldName="APPLY_BAL" dataFormatString="c" columns="15" />
+            <dataField fieldName="Remarks" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Trx_Type" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid" />
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

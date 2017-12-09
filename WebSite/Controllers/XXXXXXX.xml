@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="XXXXXXX" conflictDetection="overwriteChanges" label="XXXXXXX" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="PR_Line_Items" custom="true">
+      <text><![CDATA[SELECT     dbo.PR_Line_Items.PR_NO, dbo.PR_Line_Items.SO_NO, dbo.PR_Line_Items.PR_Line_No, dbo.PR_Line_Items.Item_Code, dbo.PR_Line_Items.PR_Qty, 
+                      dbo.PR_Line_Items.Unit_Price, dbo.PR_Line_Items.Line_Remarks, dbo.PR_Line_Items.Pick, dbo.PR_Line_Items.Pick_Qty, dbo.PR_Line_Items.Line_Total, 
+                      dbo.PR_Line_Items.Line_Disc_Percent, dbo.PR_Line_Items.Line_Disc_Amount, dbo.PR_Line_Items.Source_LineID, dbo.PR_Line_Items.Pick_Doc, 
+                      dbo.PR_Line_Items.CloseYN, dbo.PR_Line_Items.Line_Net, dbo.PR_Line_Items.PO_Balance, dbo.PR_Line_Items.Item_Desc, dbo.PR_Line_Items.Item_Part, 
+                      dbo.PR_Line_Items.Created_By, dbo.PR_Line_Items.Created_DateTime, dbo.PR_Line_Items.Updated_By, dbo.PR_Line_Items.Updated_DateTime, 
+                      dbo.PR_Line_Items.UOM, dbo.PR_Line_Items.Project_Code, dbo.PR_Line_Items.Dept_Code, dbo.PR_Line_Items.DR_Line_ID, dbo.PR_Line_Items.Job_ID, 
+                      dbo.PR_Line_Items.RFQ_NO, dbo.PR_Line_Items.RFQ_Qty, dbo.PR_Line_Items.PR_OPU_Code, dbo.PR_Header.PR_Date, dbo.PR_Header.PR_Type, 
+                      dbo.PR_Header.Sys_Number, dbo.PR_Header.Required_Date, dbo.PR_Header.TermsANDConditions, dbo.PR_Header.Header_Net, dbo.PR_Header.Vendor_Name, 
+                      dbo.PR_Header.ADDRESS_ALL, dbo.PR_Header.Doc_Status, dbo.tbl_BranchInfo.BranchName, dbo.tbl_BranchInfo.BuisnessSlogan, 
+                      dbo.tbl_BranchInfo.Address_English, dbo.tbl_BranchInfo.Address_Arabic, dbo.tbl_BranchInfo.BranchLogo, dbo.tbl_BranchInfo.BranchID, 
+                      dbo.tbl_BranchInfo.LogoURL
+FROM         dbo.PR_Line_Items INNER JOIN
+                      dbo.PR_Header ON dbo.PR_Line_Items.PR_NO = dbo.PR_Header.PR_NO INNER JOIN
+                      dbo.tbl_BranchInfo ON dbo.PR_Header.OPU_Code = dbo.tbl_BranchInfo.BranchID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PR_NO" type="Decimal" allowNulls="false" label="Pr No" showInSummary="true" />
+    <field name="SO_NO" type="Decimal" label="So No" showInSummary="true" />
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="PR Line No" readOnly="true" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" showInSummary="true" />
+    <field name="PR_Qty" type="Decimal" allowNulls="false" label="PR Qty" showInSummary="true" />
+    <field name="Unit_Price" type="Decimal" allowNulls="false" label="Unit Price" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="Line Remarks" length="255" />
+    <field name="Pick" type="Int16" label="Pick" />
+    <field name="Pick_Qty" type="Decimal" label="Pick Qty" />
+    <field name="Line_Total" type="Decimal" label="Line Total" readOnly="true" />
+    <field name="Line_Disc_Percent" type="Decimal" label="Line Disc Percent" />
+    <field name="Line_Disc_Amount" type="Decimal" label="Line Disc Amount" />
+    <field name="Source_LineID" type="Decimal" label="Source Line#" />
+    <field name="Pick_Doc" type="Decimal" label="Pick Doc" />
+    <field name="CloseYN" type="Int32" label="Close YN" />
+    <field name="Line_Net" type="Decimal" label="Line Net" readOnly="true" />
+    <field name="PO_Balance" type="Decimal" label="PO Balance" readOnly="true" />
+    <field name="Item_Desc" type="String" label="Item Desc" readOnly="true" length="500" />
+    <field name="Item_Part" type="String" label="Item Part" readOnly="true" length="20" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="UOM" type="String" label="Uom" readOnly="true" length="10" />
+    <field name="Project_Code" type="String" label="Project Code" length="50" />
+    <field name="Dept_Code" type="String" label="Dept Code" length="50" />
+    <field name="DR_Line_ID" type="Decimal" label="DR Line#" />
+    <field name="Job_ID" type="Decimal" label="Job#" />
+    <field name="RFQ_NO" type="Decimal" label="Rfq No" />
+    <field name="RFQ_Qty" type="Decimal" label="RFQ Qty" />
+    <field name="PR_OPU_Code" type="Int32" label="PR OPU Code" />
+    <field name="PR_Date" type="DateTime" allowNulls="false" label="PR Date" />
+    <field name="PR_Type" type="Int32" label="PR Type" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="Required_Date" type="DateTime" label="Required Date" />
+    <field name="TermsANDConditions" type="String" label="Terms AND Conditions" length="4000" />
+    <field name="Header_Net" type="Decimal" label="Header Net" readOnly="true" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" readOnly="true" length="150" />
+    <field name="ADDRESS_ALL" type="String" label="Address All" readOnly="true" length="4000" />
+    <field name="Doc_Status" type="String" label="Doc Status" readOnly="true" length="15" />
+    <field name="BranchName" type="String" label="Branch Name" length="255" />
+    <field name="BuisnessSlogan" type="String" label="Buisness Slogan" length="255" />
+    <field name="Address_English" type="String" label="Address English" length="4000" />
+    <field name="Address_Arabic" type="String" label="Address Arabic" length="4000" />
+    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="PR_Line_No" onDemandHandler="PR_Line_ItemsBranchLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Branch Logo" />
+    <field name="BranchID" type="Int32" allowNulls="false" label="Branch#" />
+    <field name="LogoURL" type="String" label="Logo URL" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="PR Line Items" reportTemplate="true">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PR_NO" columns="15" />
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Remarks" />
+        <dataField fieldName="Pick" columns="15" />
+        <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Disc_Percent" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Disc_Amount" dataFormatString="c" columns="15" />
+        <dataField fieldName="Source_LineID" columns="15" />
+        <dataField fieldName="Pick_Doc" columns="15" />
+        <dataField fieldName="CloseYN" columns="15" />
+        <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+        <dataField fieldName="PO_Balance" dataFormatString="c" columns="15" />
+        <dataField fieldName="Item_Desc" />
+        <dataField fieldName="Item_Part" columns="20" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="DR_Line_ID" columns="15" />
+        <dataField fieldName="Job_ID" columns="15" />
+        <dataField fieldName="RFQ_NO" columns="15" />
+        <dataField fieldName="RFQ_Qty" dataFormatString="c" columns="15" />
+        <dataField fieldName="PR_OPU_Code" columns="15" />
+        <dataField fieldName="PR_Date" columns="10" />
+        <dataField fieldName="PR_Type" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Required_Date" columns="10" />
+        <dataField fieldName="TermsANDConditions" />
+        <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="ADDRESS_ALL" />
+        <dataField fieldName="Doc_Status" columns="15" />
+        <dataField fieldName="BranchName" />
+        <dataField fieldName="BuisnessSlogan" />
+        <dataField fieldName="Address_English" />
+        <dataField fieldName="Address_Arabic" />
+        <dataField fieldName="BranchLogo" columns="15" />
+        <dataField fieldName="BranchID" columns="15" />
+        <dataField fieldName="LogoURL" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review PR Line Items">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="PR Line Items" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Source_LineID" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="CloseYN" columns="15" />
+            <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="PO_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="DR_Line_ID" columns="15" />
+            <dataField fieldName="Job_ID" columns="15" />
+            <dataField fieldName="RFQ_NO" columns="15" />
+            <dataField fieldName="RFQ_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="PR_OPU_Code" columns="15" />
+            <dataField fieldName="PR_Date" columns="10" />
+            <dataField fieldName="PR_Type" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Required_Date" columns="10" />
+            <dataField fieldName="TermsANDConditions" />
+            <dataField fieldName="Header_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="ADDRESS_ALL" />
+            <dataField fieldName="Doc_Status" columns="15" />
+            <dataField fieldName="BranchName" />
+            <dataField fieldName="BuisnessSlogan" />
+            <dataField fieldName="Address_English" />
+            <dataField fieldName="Address_Arabic" />
+            <dataField fieldName="BranchLogo" columns="15" />
+            <dataField fieldName="BranchID" columns="15" />
+            <dataField fieldName="LogoURL" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New PR Line Items">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New PR Line Items" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Source_LineID" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="CloseYN" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="DR_Line_ID" columns="15" />
+            <dataField fieldName="Job_ID" columns="15" />
+            <dataField fieldName="RFQ_NO" columns="15" />
+            <dataField fieldName="RFQ_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="PR_OPU_Code" columns="15" />
+            <dataField fieldName="PR_Date" columns="10" />
+            <dataField fieldName="PR_Type" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Required_Date" columns="10" />
+            <dataField fieldName="TermsANDConditions" />
+            <dataField fieldName="BranchName" />
+            <dataField fieldName="BuisnessSlogan" />
+            <dataField fieldName="Address_English" />
+            <dataField fieldName="Address_Arabic" />
+            <dataField fieldName="BranchLogo" columns="15" />
+            <dataField fieldName="BranchID" columns="15" />
+            <dataField fieldName="LogoURL" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Delete" />
+    </actionGroup>
+  </actions>
+</dataController>

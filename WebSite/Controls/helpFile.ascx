@@ -1,0 +1,1 @@
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="helpFile.ascx.vb" Inherits="Controls_helpFile"  %> <a href="http://localhost/UPK/">Visit our HTML tutorial</a>

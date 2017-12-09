@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="View_PR_Lines" conflictDetection="overwriteChanges" label="^ViePrLin^View_PR_Lines^ViePrLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="PR_Line_Items" custom="true">
+      <text><![CDATA[SELECT     PR_NO, SO_NO, PR_Line_No, Item_Code, PR_Qty, Unit_Price, Line_Remarks, Line_Total, CloseYN, Line_Net, PO_Balance, Item_Desc, Item_Part, UOM, PR_OPU_Code,
+                      Project_Code, Dept_Code, Source_LineID AS SO_Line_No,Item_Code_Ref_No,BudgetAccount,BudgetCode,Created_DateTime,P_Doc_No
+FROM         dbo.PR_Line_Items]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PR_NO" type="Decimal" allowNulls="false" label="^PrNo^Pr No^PrNo^" />
+    <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" />
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PRLinNo^PR Line No^PRLinNo^" readOnly="true" />
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" />
+    <field name="PR_Qty" type="Decimal" allowNulls="false" label="^PRQty^PR Qty^PRQty^" />
+    <field name="Unit_Price" type="Decimal" allowNulls="false" label="^UniPric^Unit Price^UniPric^" />
+    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" />
+    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" />
+    <field name="CloseYN" type="Int32" label="^CloYN^Close YN^CloYN^" />
+    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" readOnly="true" />
+    <field name="PO_Balance" type="Decimal" label="^POBal^PO Balance^POBal^" readOnly="true" />
+    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" readOnly="true" length="500" />
+    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" readOnly="true" length="20" />
+    <field name="UOM" type="String" label="^Uom^Uom^Uom^" readOnly="true" length="10" />
+    <field name="PR_OPU_Code" type="Int32" label="^PROPUCod^PR OPU Code^PROPUCod^" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="SO_Line_No" type="Decimal" label="^SOLinNo^SO Line No^SOLinNo^" />
+    <field name="Item_Code_Ref_No" type="String" label="^IteRefNo^Item Code Ref No^IteRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" allowNulls="false" />
+    <field name="BudgetAccount" type="String" label="^BudAcc^Budget Account^BudAcc^" length="50" />
+    <field name="BudgetCode" type="Int64" label="^BudCod^Budget Code^BudCod^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="P_Doc_No" type="Int64" label="^PrNo^PRNO^PrNo^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^PrLinIte^PR Line Items^PrLinIte^" filter="PR_OPU_Code=@Session_OPU_Code " reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" />
+        <dataField fieldName="PR_NO" columns="15" hidden="true" />
+        <dataField fieldName="P_Doc_No" columns="15" />
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="PR_Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Line_Remarks" />
+        <dataField fieldName="Line_Total" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="CloseYN" columns="15" hidden="true" />
+        <dataField fieldName="Line_Net" dataFormatString="N2" columns="15" />
+        <dataField fieldName="PO_Balance" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Item_Desc" />
+        <dataField fieldName="Item_Part" columns="20" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" hidden="true" />
+        <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+        <dataField fieldName="PR_OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="BudgetAccount" columns="50" />
+        <dataField fieldName="BudgetCode" columns="15" />
+        <dataField fieldName="Created_DateTime" columns="10" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevPrLinIte^Review PR Line Items^RevPrLinIte^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="PR Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="CloseYN" columns="15" />
+            <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="PO_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="UOM" columns="10" />
+            <dataField fieldName="PR_OPU_Code" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="SO_Line_No" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewPrLinIte^New PR Line Items^NewPrLinIte^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New PR Line Items" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="CloseYN" columns="15" />
+            <dataField fieldName="PR_OPU_Code" columns="15" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="SO_Line_No" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

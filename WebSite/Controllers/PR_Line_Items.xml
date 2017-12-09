@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PR_Line_Items" conflictDetection="overwriteChanges" label="PR Line Items" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PR_Line_Items"."PR_NO" "PR_NO"
+	,"PR_"."TermsANDConditions" "PR_TermsANDConditions"
+	,"PR_Line_Items"."SO_NO" "SO_NO"
+	,"PR_Line_Items"."PR_Line_No" "PR_Line_No"
+	,"PR_Line_Items"."Item_Code" "Item_Code"
+	,"Item_"."Part_No" "Item_Part_No"
+	,"PR_Line_Items"."PR_Qty" "PR_Qty"
+	,"PR_Line_Items"."Unit_Price" "Unit_Price"
+	,"PR_Line_Items"."Line_Remarks" "Line_Remarks"
+	,"PR_Line_Items"."Pick" "Pick"
+	,"PR_Line_Items"."Pick_Qty" "Pick_Qty"
+	,"PR_Line_Items"."Line_Total" "Line_Total"
+	,"PR_Line_Items"."Line_Disc_Percent" "Line_Disc_Percent"
+	,"PR_Line_Items"."Line_Disc_Amount" "Line_Disc_Amount"
+	,"PR_Line_Items"."Source_LineID" "Source_LineID"
+	,"PR_Line_Items"."Pick_Doc" "Pick_Doc"
+	,"PR_Line_Items"."CloseYN" "CloseYN"
+	,"PR_Line_Items"."Line_Net" "Line_Net"
+	,"PR_Line_Items"."PO_Balance" "PO_Balance"
+	,"PR_Line_Items"."Item_Desc" "Item_Desc"
+	,"PR_Line_Items"."Item_Part" "Item_Part"
+	,"PR_Line_Items"."Created_By" "Created_By"
+	,"PR_Line_Items"."Created_DateTime" "Created_DateTime"
+	,"PR_Line_Items"."Updated_By" "Updated_By"
+	,"PR_Line_Items"."Updated_DateTime" "Updated_DateTime"
+	,"PR_Line_Items"."UOM" "UOM"
+from "dbo"."PR_Line_Items" "PR_Line_Items"
+	left join "dbo"."PR_Header" "PR_" on "PR_Line_Items"."PR_NO" = "PR_"."PR_NO"
+	left join "dbo"."tbl_Item_Master" "Item_" on "PR_Line_Items"."Item_Code" = "Item_"."Item_Code"
+]]></text>
+    </command>
+    <command id="PR_Line_NoIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PR_Line_No" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PR_NO" type="Decimal" allowNulls="false" label="Pr No" showInSummary="true">
+      <items style="Lookup" dataController="PR_Header" newDataView="createForm1" />
+    </field>
+    <field name="PR_TermsANDConditions" type="String" readOnly="true" allowQBE="false" allowSorting="false" label="PR Terms AND Conditions" length="4000" />
+    <field name="SO_NO" type="Decimal" label="So No" showInSummary="true" />
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="PR Line No" readOnly="true" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" showInSummary="true">
+      <items style="Lookup" dataController="tbl_Item_Master" newDataView="createForm1" />
+    </field>
+    <field name="Item_Part_No" type="String" readOnly="true" label="Item Part No" length="20" />
+    <field name="PR_Qty" type="Decimal" allowNulls="false" label="PR Qty" showInSummary="true" />
+    <field name="Unit_Price" type="Decimal" allowNulls="false" label="Unit Price" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="Line Remarks" length="255" />
+    <field name="Pick" type="Int16" label="Pick" />
+    <field name="Pick_Qty" type="Decimal" label="Pick Qty" />
+    <field name="Line_Total" type="Decimal" label="Line Total" readOnly="true" />
+    <field name="Line_Disc_Percent" type="Decimal" label="Line Disc Percent" />
+    <field name="Line_Disc_Amount" type="Decimal" label="Line Disc Amount" />
+    <field name="Source_LineID" type="Decimal" label="Source Line#" />
+    <field name="Pick_Doc" type="Decimal" label="Pick Doc" />
+    <field name="CloseYN" type="Int32" default="((0))" label="Close YN" />
+    <field name="Line_Net" type="Decimal" label="Line Net" readOnly="true" />
+    <field name="PO_Balance" type="Decimal" label="PO Balance" readOnly="true" />
+    <field name="Item_Desc" type="String" label="Item Desc" readOnly="true" length="500" />
+    <field name="Item_Part" type="String" label="Item Part" readOnly="true" length="20" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="UOM" type="String" label="Uom" readOnly="true" length="10" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="PR Line Items">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PR_NO" aliasFieldName="PR_TermsANDConditions" />
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="Item_Code" aliasFieldName="Item_Part_No" />
+        <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Remarks" />
+        <dataField fieldName="Pick" columns="15" />
+        <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+        <dataField fieldName="Line_Disc_Percent" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review PR Line Items">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="PR Line Items" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" aliasFieldName="PR_TermsANDConditions" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" aliasFieldName="Item_Part_No" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Total" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Source_LineID" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="CloseYN" columns="15" />
+            <dataField fieldName="Line_Net" dataFormatString="c" columns="15" />
+            <dataField fieldName="PO_Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="Item_Desc" />
+            <dataField fieldName="Item_Part" columns="20" />
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="UOM" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New PR Line Items">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New PR Line Items" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PR_NO" aliasFieldName="PR_TermsANDConditions" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="Item_Code" aliasFieldName="Item_Part_No" />
+            <dataField fieldName="PR_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Remarks" />
+            <dataField fieldName="Pick" columns="15" />
+            <dataField fieldName="Pick_Qty" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Percent" dataFormatString="c" columns="15" />
+            <dataField fieldName="Line_Disc_Amount" dataFormatString="c" columns="15" />
+            <dataField fieldName="Source_LineID" columns="15" />
+            <dataField fieldName="Pick_Doc" columns="15" />
+            <dataField fieldName="CloseYN" columns="15" />
+            <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

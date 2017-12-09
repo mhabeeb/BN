@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Role_Based_Accounting" conflictDetection="overwriteChanges" label="^RolBasAcc^Role_Based_Accounting^RolBasAcc^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Role_Based_Accounting" custom="true">
+      <text><![CDATA[
+SELECT dbo.tbl_Role_Based_Accounting.OPU_Code,
+       dbo.tbl_Role_Based_Accounting.Company_Code,
+       dbo.tbl_Role_Based_Accounting.RoleName,
+       dbo.tbl_Role_Based_Accounting.AccountID,
+       dbo.tbl_Role_Based_Accounting.S1,
+       dbo.tbl_Role_Based_Accounting.S2,
+       dbo.tbl_Role_Based_Accounting.S3,
+       dbo.tbl_Role_Based_Accounting.S4,
+       dbo.tbl_Role_Based_Accounting.Transaction_Type,
+       dbo.tbl_Role_Based_Accounting.Created_By,
+       dbo.tbl_Role_Based_Accounting.Created_DateTime,
+       dbo.tbl_Role_Based_Accounting.Updated_By,
+       dbo.tbl_Role_Based_Accounting.Updated_DateTime,
+       dbo.Accounting_Dimensions.Dimension1,
+       dbo.Accounting_Dimensions.D1Caption,
+       dbo.Accounting_Dimensions.Dimension2,
+       dbo.Accounting_Dimensions.D2Caption,
+       dbo.Accounting_Dimensions.Dimension3,
+       dbo.Accounting_Dimensions.D3Caption,
+       dbo.Accounting_Dimensions.Dimension4,
+       dbo.Accounting_Dimensions.D4Caption
+FROM [dbo].[tbl_Role_Based_Accounting]
+     JOIN dbo.Accounting_Dimensions ON dbo.tbl_Role_Based_Accounting.Company_Code = dbo.Accounting_Dimensions.Company_Code]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" isPrimaryKey="true" />
+    <field name="Company_Code" type="Int32" allowNulls="false" label="^ComCod^Company Code^ComCod^" showInSummary="true" isPrimaryKey="true" />
+    <field name="RoleName" type="String" allowNulls="false" label="^RolNam^Role Name^RolNam^" length="50" showInSummary="true" isPrimaryKey="true">
+      <items style="Lookup" dataController="Role_Active" dataView="grid1" dataTextField="RoleName" dataValueField="RoleName" />
+    </field>
+    <field name="Transaction_Type" type="String" label="^TraTyp^Transaction Type^TraTyp^" allowNulls="false" length="50">
+      <items style="DropDownList">
+        <item value="Misc. Issue" text="Misc. Issue" />
+        <item value="Job. Issue" text="Job. Issue" />
+        <item value="InterOrg-Shipment" text="InterOrg-Shipment" />
+        <item value="Job Fin. Receiving" text="Job Fin. Receiving" />
+        <item value="Misc. Receipt" text="Misc. Receipt" />
+        <item value="InterOrg-Receipt" text="InterOrg-Receipt" />
+      </items>
+    </field>
+    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" showInSummary="true" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Dimension1" type="Int32" label="^Dim1^Dimension1^Dim1^" />
+    <field name="D1Caption" type="String" label="^D1Cap^D1 Caption^D1Cap^" length="50" />
+    <field name="Dimension2" type="Int32" label="^Dim2^Dimension2^Dim2^" />
+    <field name="D2Caption" type="String" label="^D2Cap^D2 Caption^D2Cap^" length="50" />
+    <field name="Dimension3" type="Int32" label="^Dim3^Dimension3^Dim3^" />
+    <field name="D3Caption" type="String" label="^D3Cap^D3 Caption^D3Cap^" length="50" />
+    <field name="Dimension4" type="Int32" label="^Dim4^Dimension4^Dim4^" />
+    <field name="D4Caption" type="String" label="^D4Cap^D4 Caption^D4Cap^" length="50" />
+    <field name="S1" type="String" label="^S1^S1^S1^" length="50" showInSummary="true" contextFields="SEGMENT6='D1'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D1Caption</configuration>
+    </field>
+    <field name="S2" type="String" label="^S2^S2^S2^" length="50" contextFields="SEGMENT6='D2'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D2Caption</configuration>
+    </field>
+    <field name="S3" type="String" label="^S3^S3^S3^" length="50" contextFields="SEGMENT6='D3'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D3Caption</configuration>
+    </field>
+    <field name="S4" type="String" label="^S4^S4^S4^" length="50" contextFields="SEGMENT6='D4'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D4Caption</configuration>
+    </field>
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^RolBasAcc^Role Based Accounting^RolBasAcc^" filter="OPU_Code=@Session_OPU_Code">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="RoleName" columns="50" />
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="S1" columns="50" />
+        <dataField fieldName="S2" columns="50" />
+        <dataField fieldName="S3" columns="50" />
+        <dataField fieldName="S4" columns="50" />
+        <dataField fieldName="Transaction_Type" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Dimension1" columns="15" />
+        <dataField fieldName="D1Caption" columns="50" />
+        <dataField fieldName="Dimension2" columns="15" />
+        <dataField fieldName="D2Caption" columns="50" />
+        <dataField fieldName="Dimension3" columns="15" />
+        <dataField fieldName="D3Caption" columns="50" />
+        <dataField fieldName="Dimension4" columns="15" />
+        <dataField fieldName="D4Caption" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevRolBasAcc^Review Role Based Accounting^RevRolBasAcc^">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Role Based Accounting" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="RoleName" columns="50" />
+            <dataField fieldName="Transaction_Type" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="S1" columns="50" />
+            <dataField fieldName="S2" columns="50" />
+            <dataField fieldName="S3" columns="50" />
+            <dataField fieldName="S4" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Dimension1" columns="15" hidden="true" />
+            <dataField fieldName="D1Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension2" columns="15" hidden="true" />
+            <dataField fieldName="D2Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension3" columns="15" hidden="true" />
+            <dataField fieldName="D3Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension4" columns="15" hidden="true" />
+            <dataField fieldName="D4Caption" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewRolBasAcc^New Role Based Accounting^NewRolBasAcc^">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New tbl Role Based Accounting" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="RoleName" columns="50" />
+            <dataField fieldName="Transaction_Type" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="S1" columns="50" />
+            <dataField fieldName="S2" columns="50" />
+            <dataField fieldName="S3" columns="50" />
+            <dataField fieldName="S4" columns="50" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Dimension1" columns="15" hidden="true" />
+            <dataField fieldName="D1Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension2" columns="15" hidden="true" />
+            <dataField fieldName="D2Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension3" columns="15" hidden="true" />
+            <dataField fieldName="D3Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension4" columns="15" hidden="true" />
+            <dataField fieldName="D4Caption" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r101" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @OPU_Code=@Session_OPU_Code
+SET @Company_Code=@Session_Company_Code]]></rule>
+    <rule id="r100" commandName="New" type="Sql" phase="Before"><![CDATA[SELECT @Dimension1=Dimension1,@D1Caption=D1Caption,
+@Dimension2=Dimension2,@D2Caption=D2Caption,
+@Dimension3=Dimension3,@D3Caption=D3Caption,
+@Dimension4=Dimension4,@D4Caption=D4Caption
+
+FROM Accounting_Dimensions WHERE Company_Code=@Session_Company_Code]]></rule>
+  </businessRules>
+</dataController>

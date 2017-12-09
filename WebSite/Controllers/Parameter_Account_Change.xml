@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Parameter_Account_Change" label="^ParAccCha^Parameter_Account_Change^ParAccCha^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="FromDate" type="DateTime" allowNulls="false" label="^FroDat^From Date^FroDte^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowLEV="true" />
+    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDat^End Date^EndDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowLEV="true" />
+    <field name="OldAccount" type="String" allowNulls="false" label="^OldAcc^Old Account^OldAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_COA" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="AccountID" type="String" allowNulls="false" label="^AccID^Account ID^AccID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" allowLEV="true">
+      <items style="Lookup" dataController="Pick_COA" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+  </fields>
+</dataController>

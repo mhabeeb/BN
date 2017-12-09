@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Budget_Verification" conflictDetection="overwriteChanges" label="^BudVer^Budget_Verification^BudVer^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="TrxType" type="String" allowNulls="false" label="^TrxTyp^Trx Type^TrxTyp^" readOnly="true" length="6" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" readOnly="true" />
+    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" readOnly="true" length="50" />
+    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" readOnly="true" length="50" />
+    <field name="Account_Description" type="String" label="^AccDes^Account Description^AccDes^" readOnly="true" length="250" />
+    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" readOnly="true" length="50">
+      <items style="DropDownList" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    </field>
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" readOnly="true" length="50">
+      <items style="DropDownList" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
+    </field>
+    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" readOnly="true" />
+    <field name="January" type="Decimal" label="^Jan^January^Jan^" readOnly="true" dataFormatString="N2" />
+    <field name="February" type="Decimal" label="^Feb^February^Feb^" readOnly="true" dataFormatString="N2" />
+    <field name="March" type="Decimal" label="^March^March^March^" readOnly="true" dataFormatString="N2" />
+    <field name="April" type="Decimal" label="^April^April^April^" readOnly="true" dataFormatString="N2" />
+    <field name="May" type="Decimal" label="^May^May^May^" readOnly="true" dataFormatString="N2" />
+    <field name="June" type="Decimal" label="^June^June^June^" readOnly="true" dataFormatString="N2" />
+    <field name="July" type="Decimal" label="^July^July^July^" readOnly="true" dataFormatString="N2" />
+    <field name="August" type="Decimal" label="^Augus^August^Augus^" readOnly="true" dataFormatString="N2" />
+    <field name="September" type="Decimal" label="^Sep^September^Sep^" readOnly="true" dataFormatString="N2" />
+    <field name="October" type="Decimal" label="^Oct^October^Oct^" readOnly="true" dataFormatString="N2" />
+    <field name="November" type="Decimal" label="^Nov^November^Nov^" readOnly="true" dataFormatString="N2" />
+    <field name="December" type="Decimal" label="^Dec^December^Dec^" readOnly="true" dataFormatString="N2" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^BudVie^Budget View^BudVie^" filter="OPU_Code=@Session_OPU_Code AND Project_Code IN (SELECT Project_Code  FROM UserProjectAccess where UserID=@BusinessRules_UserId) AND Tran_Type &lt;&gt; 'P&amp;L'&#xD;&#xA;" reportTemplate="true" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="TrxType" columns="6" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Account_Description" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="TrxYear" columns="15" />
+        <dataField fieldName="January" dataFormatString="N" columns="15" />
+        <dataField fieldName="February" dataFormatString="N" columns="15" />
+        <dataField fieldName="March" dataFormatString="N2" columns="15" />
+        <dataField fieldName="April" dataFormatString="N2" columns="15" />
+        <dataField fieldName="May" dataFormatString="N2" columns="15" />
+        <dataField fieldName="June" dataFormatString="N2" columns="15" />
+        <dataField fieldName="July" dataFormatString="N2" columns="15" />
+        <dataField fieldName="August" dataFormatString="N2" columns="15" />
+        <dataField fieldName="September" dataFormatString="N2" columns="15" />
+        <dataField fieldName="October" dataFormatString="N2" columns="15" />
+        <dataField fieldName="November" dataFormatString="N2" columns="15" />
+        <dataField fieldName="December" dataFormatString="N2" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevBudVie^Review Budget View^RevBudVie^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Budget View" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TrxType" columns="6" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Account_Type" columns="50" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="Account_Description" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="TrxYear" columns="15" />
+            <dataField fieldName="January" dataFormatString="c" columns="15" />
+            <dataField fieldName="February" dataFormatString="c" columns="15" />
+            <dataField fieldName="March" dataFormatString="c" columns="15" />
+            <dataField fieldName="April" dataFormatString="c" columns="15" />
+            <dataField fieldName="May" dataFormatString="c" columns="15" />
+            <dataField fieldName="June" dataFormatString="c" columns="15" />
+            <dataField fieldName="July" dataFormatString="c" columns="15" />
+            <dataField fieldName="August" dataFormatString="c" columns="15" />
+            <dataField fieldName="September" dataFormatString="c" columns="15" />
+            <dataField fieldName="October" dataFormatString="c" columns="15" />
+            <dataField fieldName="November" dataFormatString="c" columns="15" />
+            <dataField fieldName="December" dataFormatString="c" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewBudVie^New Budget View^NewBudVie^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Budget View" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields />
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" />
+      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[SELECT *
+FROM
+(
+    SELECT 'Actual' AS TrxType,
+           OPU_Code_Ln AS OPU_Code,
+           Account_Type,
+           AccountID,
+           Ac_Description AS Account_Description,
+           Project_Code,
+           Dept_Code,
+           [TrxYear],
+           DATENAME(month, DATEADD(month, TrxMonths, 0) - 1) AS [MONTH],
+           abs(ISNULL(Debit_Amount - Credit_Amount, 0)) * -1 AS Amount
+    FROM dbo.GL_Transaction_Line
+  --  WHERE Account_Type IN('Expense', 'Revenue', 'Cogs')
+) AS s PIVOT(SUM(Amount) FOR [MONTH] IN([January],
+                                        [February],
+                                        [March],
+                                        [April],
+                                        [May],
+                                        [June],
+                                        [July],
+                                        [August],
+                                        [September],
+                                        [October],
+                                        [November],
+                                        [December])) AS p
+UNION
+SELECT *
+FROM
+(
+    SELECT 'Budget' AS TrxType,
+           OPU_Code,
+           Account_Type,
+           AccountID,
+           Account_Description,
+           Project_Code,
+           Dept_Code,
+           [BudgetYear] AS TrxYear,
+           DATENAME(month, DATEADD(month, BudgetMonth, 0) - 1) AS [MONTH],
+           ISNULL(BudgetAmount, 0) Amount
+    FROM dbo.GL_Budgeting
+--  WHERE Account_Type IN('Expense', 'Revenue', 'Cogs')
+--WHERE BudgetCode IN (SELECT BudgetCode FROM GL_Budget_Master WHERE IsNull(InActive,0)=0)
+) AS s PIVOT(SUM(Amount) FOR [MONTH] IN([January],
+                                        [February],
+                                        [March],
+                                        [April],
+                                        [May],
+                                        [June],
+                                        [July],
+                                        [August],
+                                        [September],
+                                        [October],
+                                        [November],
+                                        [December])) AS p;]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

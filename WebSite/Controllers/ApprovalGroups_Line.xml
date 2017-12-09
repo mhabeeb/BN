@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ApprovalGroups_Line" conflictDetection="overwriteChanges" label="^AppGroLin^ApprovalGroups_Line^AppGroLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="TBL_ApprovalGroups" custom="true">
+      <text><![CDATA[SELECT        dbo.TBL_ApprovalGroups.AppGroupID, dbo.TBL_ApprovalGroups.DocTypeID, dbo.TBL_ApprovalGroups.UserID, dbo.TBL_ApprovalGroups.UserName, dbo.TBL_ApprovalGroups.Hirarchy, dbo.TBL_ApprovalGroups.DocAPPGrpID, 
+                         dbo.TBL_ApprovalGroups.ApprovalLimit, dbo.TBL_ApprovalGroups.Emp_id, dbo.TBL_ApprovalGroups.Emp_Name, dbo.TBL_ApprovalGroups.Employee_Num, dbo.TBL_ApprovalGroups.Created_DateTime, 
+                         dbo.TBL_ApprovalGroups.Updated_By, dbo.TBL_ApprovalGroups.Created_By, dbo.TBL_ApprovalGroups.Updated_DateTime, dbo.TBL_ApprovalGroups.OPU_Code, dbo.TBL_ApprovalGroups.Positions, dbo.Users.Email, 
+                         dbo.Users.UserFullName, dbo.Users.UserName AS App_UserName
+FROM            dbo.TBL_ApprovalGroups LEFT OUTER JOIN
+                         dbo.Users ON dbo.TBL_ApprovalGroups.UserID = dbo.Users.UserID]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" />
+    <field name="UserName" type="String" label="^HirBas^Hirarchy Based^HirBas^" length="50" showInSummary="true" allowNulls="false">
+      <items style="DropDownList">
+        <item value="Direct Manager" text="Direct Manager" />
+        <item value="Position Hierarchy" text="Position Hierarchy" />
+        <item value="User Based" text="User Based" />
+      </items>
+    </field>
+    <field name="Positions" type="String" label="^Posi^Positions^Posi^" length="200">
+      <items style="Lookup" dataController="Pick_Employee_Postion" dataView="grid1" dataTextField="Positions" dataValueField="Positions" copy="UserID=UserID&#xD;&#xA;Emp_id=Emp_id&#xD;&#xA;Emp_Name=Emp_Name" />
+    </field>
+    <field name="UserID" type="Decimal" label="^UseId^User#^UseId^" showInSummary="true">
+      <items style="Lookup" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" copy="Emp_Name=UserName" />
+    </field>
+    <field name="Hirarchy" type="Int32" allowNulls="false" label="^Hir^Hirarchy^Hir^" showInSummary="true" />
+    <field name="DocAPPGrpID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^DocAppGroId^Doc APP Grp^DocAppGroId^#" readOnly="true" />
+    <field name="ApprovalLimit" type="Decimal" label="^AppLim^Approval Limit^AppLim^" length="10" />
+    <field name="Emp_id" type="Decimal" label="^EmpId^Emp#^EmpId^" />
+    <field name="Emp_Name" type="String" label="^EmpNam^Emp Name^EmpNam^" length="50" />
+    <field name="Employee_Num" type="Decimal" label="^EmpNum^Employee Num^EmpNum^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="AppGroupID" type="Int32" label="^AppGroId^App Group ID^AppGroId^" />
+    <field name="App_UserName" type="String" label="^AppUseNam^App User Name^AppUseNam^" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^AppGro^Approval Groups^AppGro^" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="AppGroupID" columns="15" />
+        <dataField fieldName="DocTypeID" columns="15" hidden="true" />
+        <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="UserName" columns="50" />
+        <dataField fieldName="Emp_Name" columns="50" />
+        <dataField fieldName="Hirarchy" columns="15" />
+        <dataField fieldName="ApprovalLimit" columns="10" hidden="true" />
+        <dataField fieldName="Emp_id" columns="15" hidden="true" />
+        <dataField fieldName="Employee_Num" columns="15" hidden="true" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Positions" columns="20" />
+        <dataField fieldName="App_UserName" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevAppGro^Review Approval Groups^RevAppGro^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Edit Approval Groups" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DocTypeID" columns="15" hidden="true" />
+            <dataField fieldName="UserName" columns="50" />
+            <dataField fieldName="Positions" columns="20">
+              <visibility>
+                <expression test="[UserName]=='Position Hierarchy' " type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="UserID" columns="15">
+              <visibility>
+                <expression test="[UserName]=='User Based'" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Hirarchy" columns="15" hidden="true" />
+            <dataField fieldName="DocAPPGrpID" columns="15" hidden="true" />
+            <dataField fieldName="ApprovalLimit" columns="10" />
+            <dataField fieldName="Emp_id" columns="15" hidden="true" />
+            <dataField fieldName="Emp_Name" columns="50" hidden="true" />
+            <dataField fieldName="Employee_Num" columns="15" hidden="true" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="AppGroupID" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewAppGro^New Approval Groups^NewAppGro^" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="New Approval Groups" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DocTypeID" columns="15" hidden="true" />
+            <dataField fieldName="UserName" columns="50" />
+            <dataField fieldName="Positions" columns="20">
+              <visibility>
+                <expression test="[UserName]=='Position Hierarchy' " type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="UserID" columns="15">
+              <visibility>
+                <expression test="[UserName]=='User Based'" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Hirarchy" columns="15" hidden="true" />
+            <dataField fieldName="DocAPPGrpID" columns="15" hidden="true" />
+            <dataField fieldName="ApprovalLimit" columns="10" />
+            <dataField fieldName="Emp_id" columns="15" hidden="true" />
+            <dataField fieldName="Emp_Name" columns="50" hidden="true" />
+            <dataField fieldName="Employee_Num" columns="15" hidden="true" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="AppGroupID" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+      <action id="a2" commandName="Edit" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" commandName="Select" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" cssClass="NewIcon" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" cssClass="EditIcon" commandArgument="editForm1" />
+      <action commandName="Delete" id="a100" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Update Position Hirarchy" flat="true">
+      <action commandName="SQL" headerText="Update Position Hirarchy" id="a100" whenLastCommandName="Select" whenClientScript="[UserName]== 'Position Hierarchy'">
+        <data><![CDATA[                 EXEC [dbo].[Update_Approval_Hirarchy_Position]
+                      @Positions,
+                      @OPU_Code,
+                     @AppGroupID]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r105" commandName="New" type="Sql" phase="Execute"><![CDATA[SELECT @DocTypeID = DocTypeID
+FROM TBL_ApprovalGroups_Header
+WHERE AppGroupID = @AppGroupID
+
+
+SET @OPU_Code=@Session_OPU_Code]]></rule>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SELECT @Hirarchy = IsNull(MAX(Hirarchy), 0) + 1
+FROM TBL_ApprovalGroups
+WHERE DocTypeID = @DocTypeID
+      AND OPU_Code = @Session_OPU_Code
+	  AND AppGroupID=@AppGroupID
+	  
+IF @UserName = 'Direct Manager'
+    SET @UserID = NULL
+	
+	
+SET @OPU_Code = @Session_OPU_Code;
+
+]]></rule>
+    <rule id="r103" type="Sql" commandName="Insert" phase="Before" name="UserName_Validator"><![CDATA[IF EXISTS
+(
+    SELECT TOP 1 Positions
+    FROM TBL_ApprovalGroups
+    WHERE DocTypeID = @DocTypeID
+          AND OPU_Code = @OPU_Code
+          AND Positions = @Positions
+          AND AppGroupID=@AppGroupID
+)
+   AND @UserName = 'Position Hierarchy'
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'UserName,This Position Already Exists in this Hirarchy'
+end
+IF @UserName <> 'Direct Manager' AND IsNull(@UserID,0)=0
+begin
+ /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'UserName,Please select The All Values'
+end
+]]></rule>
+    <rule id="r106" type="Sql" commandName="Update" phase="Before" name="UserName_Validator"><![CDATA[IF EXISTS
+(
+    SELECT TOP 1 Positions
+    FROM TBL_ApprovalGroups
+    WHERE DocTypeID = @DocTypeID
+          AND OPU_Code = @OPU_Code
+          AND Positions = @Positions_NewValue
+  AND AppGroupID=@AppGroupID
+)
+   AND @UserName = 'Position Hierarchy'
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'UserName,This Position Already Exists in this Hirarchy'
+end
+]]></rule>
+  </businessRules>
+</dataController>

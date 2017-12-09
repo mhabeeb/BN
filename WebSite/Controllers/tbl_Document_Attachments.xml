@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="tbl_Document_Attachments" conflictDetection="overwriteChanges" label="tbl Document Attachments" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"tbl_Document_Attachments"."PaymentID" "PaymentID"
+	,"tbl_Document_Attachments"."Trx_ID" "Trx_ID"
+	,"tbl_Document_Attachments"."Transaction_ID" "Transaction_ID"
+	,"tbl_Document_Attachments"."QT_NO" "QT_NO"
+	,"tbl_Document_Attachments"."SO_NO" "SO_NO"
+	,"tbl_Document_Attachments"."PR_NO" "PR_NO"
+	,"tbl_Document_Attachments"."PO_NO" "PO_NO"
+	,"tbl_Document_Attachments"."OverHeadID" "OverHeadID"
+	,"tbl_Document_Attachments"."FileName" "FileName"
+	,"tbl_Document_Attachments"."FilePath" "FilePath"
+	,"tbl_Document_Attachments"."FileDescriptions" "FileDescriptions"
+	,"tbl_Document_Attachments"."Remarks" "Remarks"
+	,"tbl_Document_Attachments"."AttachmentID" "AttachmentID"
+	,"tbl_Document_Attachments"."GL_Serial_No" "GL_Serial_No"
+	,"tbl_Document_Attachments"."Item_Code" "Item_Code"
+	,"tbl_Document_Attachments"."Sys_Number" "Sys_Number"
+	,"tbl_Document_Attachments"."DocType" "DocType"
+from "dbo"."tbl_Document_Attachments" "tbl_Document_Attachments"
+]]></text>
+    </command>
+    <command id="AttachmentIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="AttachmentID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PaymentID" type="Decimal" label="Payment#" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" label="Trx#" showInSummary="true" />
+    <field name="Transaction_ID" type="Decimal" label="Transaction#" showInSummary="true" />
+    <field name="QT_NO" type="Decimal" label="Qt No" showInSummary="true" />
+    <field name="SO_NO" type="Decimal" label="So No" showInSummary="true" />
+    <field name="PR_NO" type="Decimal" label="Pr No" />
+    <field name="PO_NO" type="Decimal" label="Po No" />
+    <field name="OverHeadID" type="Decimal" label="Over Head#" />
+    <field name="FileName" type="String" label="File Name" length="500" />
+    <field name="FilePath" type="String" label="File Path" readOnly="true" length="504" />
+    <field name="FileDescriptions" type="String" label="File Descriptions" length="50" />
+    <field name="Remarks" type="String" label="Remarks" length="50" />
+    <field name="AttachmentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Attachment#" readOnly="true" />
+    <field name="GL_Serial_No" type="Decimal" label="GL Serial No" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="DocType" type="String" label="Doc Type" length="5" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="tbl Document Attachments">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PaymentID" columns="15" />
+        <dataField fieldName="Trx_ID" columns="15" />
+        <dataField fieldName="Transaction_ID" columns="15" />
+        <dataField fieldName="QT_NO" columns="15" />
+        <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="PR_NO" columns="15" />
+        <dataField fieldName="PO_NO" columns="15" />
+        <dataField fieldName="OverHeadID" columns="15" />
+        <dataField fieldName="FileName" />
+        <dataField fieldName="FilePath" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Document Attachments">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="tbl Document Attachments" newColumn="true">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PaymentID" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="QT_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="OverHeadID" columns="15" />
+            <dataField fieldName="FileName" />
+            <dataField fieldName="FilePath" />
+            <dataField fieldName="FileDescriptions" columns="50" />
+            <dataField fieldName="Remarks" columns="50" />
+            <dataField fieldName="GL_Serial_No" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="DocType" columns="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Document Attachments">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New tbl Document Attachments" newColumn="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PaymentID" columns="15" />
+            <dataField fieldName="Trx_ID" columns="15" />
+            <dataField fieldName="Transaction_ID" columns="15" />
+            <dataField fieldName="QT_NO" columns="15" />
+            <dataField fieldName="SO_NO" columns="15" />
+            <dataField fieldName="PR_NO" columns="15" />
+            <dataField fieldName="PO_NO" columns="15" />
+            <dataField fieldName="OverHeadID" columns="15" />
+            <dataField fieldName="FileName" />
+            <dataField fieldName="FileDescriptions" columns="50" />
+            <dataField fieldName="Remarks" columns="50" />
+            <dataField fieldName="GL_Serial_No" columns="15" />
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="DocType" columns="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="tbl_Item_Reservations" conflictDetection="overwriteChanges" label="^IteRes^Item_Reservations^IteRes^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="tbl_Item_Reservations" custom="true">
+      <text><![CDATA[SELECT * FROM tbl_Item_Reservations]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Item_Master" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" copy="Item_Desc=Item_Description&#xD;&#xA;Item_Part=Part_No&#xD;&#xA;UOM=UOM&#xD;&#xA;Item_Code_Ref_No=Item_Code_Ref_No" />
+    </field>
+    <field name="ReservationID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^ResId^Seq No^ResId^" readOnly="true" showInSummary="true" />
+    <field name="Doc_No" type="Int64" label="^DocNo^Reservation No^DocNo^" />
+    <field name="ReservedQty" type="Decimal" label="^ResQty^Reserved Qty^ResQty^" allowNulls="false" />
+    <field name="Reservation_Balance" type="Decimal" label="^ResBal^Reservation Balance^ResBal^" />
+    <field name="Res_Released_Qty" type="Decimal" label="^ResRelQty^Res Released Qty^ResRelQty^" />
+    <field name="DocumentType" type="String" label="^DocTyp^Document Type^DocTyp^" length="50" />
+    <field name="DocumentNo" type="Decimal" label="^DocNo^Source Doc NO^DocNo^" />
+    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="50" allowNulls="false" />
+    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="50" />
+    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="50" />
+    <field name="UOM" type="String" label="^Uom^UOM^Uom^" length="10" />
+    <field name="SO_Line_No" type="Decimal" label="^SoLinNo^SO Line No^SoLinNo^" />
+    <field name="LineID" type="Decimal" label="^LinId^Line#^LinId^" />
+    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="Item_Code_Ref_No" type="String" label="^IteCodRefNo^Item Code Ref No^IteCodRefNo^" length="20" />
+    <field name="ExpiryON" type="DateTime" label="^ExpOn^Expiry ON^ExpOn^" />
+    <field name="Approve" type="Int32" label="^App^Approve^App^" />
+    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^" htmlEncode="false">
+      <items style="RadioButtonList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="Store_ID" type="Int32" label="^StoId^Store ID^StoId^">
+      <items style="DropDownList" dataController="tbl_Store" dataView="grid1" dataTextField="Store_Name" dataValueField="Store_ID" />
+    </field>
+    <field name="App_Group_ID" type="Int32" allowNulls="false" label="^AppGroId^App Group ID^AppGroId^" contextFields="DocTypeID=DOC_TYPE_ID">
+      <items style="Lookup" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="DocTypeID" dataValueField="DocTypeID" />
+    </field>
+    <field name="DOC_TYPE_ID" type="Int32" label="^DocTypId^DOC TYPE ID^DocTypId^" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^CompanyName^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" computed="true" sourceFields="OPU_Code" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^IteRes^Item Reservations^IteRes^" sortExpression="ReservationID DESC" reportTemplate="true" showInSelector="false" filter="OPU_Code=@Session_OPU_Code">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="DocumentNo" columns="15" />
+        <dataField fieldName="Doc_No" columns="15" />
+        <dataField fieldName="ReservationID" columns="15" hidden="true" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" />
+        <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="Item_Desc" columns="50" />
+        <dataField fieldName="Item_Part" columns="50" />
+        <dataField fieldName="ReservedQty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Reservation_Balance" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Res_Released_Qty" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="UOM" columns="10" />
+        <dataField fieldName="DocumentType" columns="50" />
+        <dataField fieldName="Remarks" columns="50" />
+        <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+        <dataField fieldName="LineID" columns="15" hidden="true" />
+        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="ExpiryON" columns="10" />
+        <dataField fieldName="Approve" columns="15" hidden="true" />
+        <dataField fieldName="Approve_Ask" columns="15" />
+        <dataField fieldName="Rec_Status" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Store_ID" columns="15" hidden="true" />
+        <dataField fieldName="App_Group_ID" columns="15" hidden="true" />
+        <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="^RevIteRes^Review Item Reservations^RevIteRes^" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Item Reservations" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="ReservedQty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Reservation_Balance" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Res_Released_Qty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="DocumentType" columns="50" />
+            <dataField fieldName="DocumentNo" columns="15" />
+            <dataField fieldName="Remarks" columns="50" />
+            <dataField fieldName="Item_Desc" columns="50" />
+            <dataField fieldName="Item_Part" columns="50" />
+            <dataField fieldName="SO_Line_No" columns="15" />
+            <dataField fieldName="LineID" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Item_Code_Ref_No" columns="20" />
+            <dataField fieldName="ExpiryON" columns="10" />
+            <dataField fieldName="Approve" columns="15" />
+            <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
+            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewIteRes^New Item Reservations^NewIteRes^" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Item Reservations" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Item_Code" columns="20" />
+            <dataField fieldName="Item_Code_Ref_No" columns="20" hidden="true" />
+            <dataField fieldName="Item_Desc" columns="50" />
+            <dataField fieldName="Item_Part" columns="50" />
+            <dataField fieldName="ReservedQty" dataFormatString="n2" columns="15" />
+            <dataField fieldName="Reservation_Balance" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="Res_Released_Qty" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="DocumentType" columns="50" hidden="true" />
+            <dataField fieldName="DocumentNo" columns="15" hidden="true" />
+            <dataField fieldName="Remarks" columns="50" />
+            <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+            <dataField fieldName="LineID" columns="15" hidden="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="ExpiryON" columns="10" />
+            <dataField fieldName="Approve" columns="15" hidden="true" />
+            <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
+            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Store_ID" columns="15" hidden="true" />
+            <dataField fieldName="App_Group_ID" columns="15" hidden="true" />
+            <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
+            <dataField fieldName="Doc_No" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a6" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Ask Approval" flat="true">
+      <action commandName="SQL" headerText="Ask Approval" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
+        <data><![CDATA[EXEC XX_UPDATE_ASK_STATUS @ReservationID, @DOC_TYPE_ID,1,@BusinessRules_UserId]]></data>
+      </action>
+      <action commandName="SQL" headerText="Re-Open" id="a102" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1 &amp;&amp; [Doc_Status]!='Closed'">
+        <data><![CDATA[EXECUTE [dbo].[REOPEN_DOCUMENT_STATUS]@ReservationID, @DOC_TYPE_ID]]></data>
+      </action>
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @ExpiryON= DATEADD(DAY,7,GETDATE())
+SET @DocumentType='Manual'
+
+SELECT @DocumentNo=MAX(DocumentNo) FROM tbl_Item_Reservations
+WHERE @DocumentType='Manual' AND OPU_Code=@Session_OPU_Code
+SET @DocumentNo=IsNull(@DocumentNo,0)+1
+SET @OPU_Code=@Session_OPU_Code
+SET @Store_ID=@Session_StoreID
+]]></rule>
+    <rule id="r101" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @Reservation_Balance=@ReservedQty
+SET @Res_Released_Qty=0
+SET @Approve_Ask=0
+SET @Rec_Status=0
+SET @DOC_TYPE_ID=555
+
+SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER (@DOC_TYPE_ID,@Session_OPU_Code,@Created_DateTime)
+EXEC dbo.RESET_SEQUENCE @DOC_TYPE_ID,@Session_OPU_Code,@Created_DateTime
+
+SET @OPU_Code=@Session_OPU_Code
+SET @Store_ID=@Session_StoreID]]></rule>
+    <rule id="r102" type="Sql" commandName="Insert" phase="Before" name="ReservedQty_Validator"><![CDATA[DECLARE @Bal_Qty money
+
+SET @Bal_Qty=[dbo].[Get_Item_BAL_Store](@Item_Code,@Store_ID)
+
+if @Bal_Qty <= 0
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'ReservedQty,Not Enough Qty to Reserve'
+end
+
+if @Bal_Qty < @ReservedQty
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'ReservedQty,Not Enough Qty to Reserve'
+end]]></rule>
+  </businessRules>
+</dataController>

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="GL_DataWareHouse_BalanceSheet" label="GL_DataWareHouse_BalanceSheet" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName=" [dbo].[GL_DataWareHouse]" custom="true">
+      <text><![CDATA[SELECT * FROM [dbo].[GL_DataWareHouse]]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="FY_Code" type="Int32" allowNulls="false" label="^FisYea^Fiscal Year^FisYea^" htmlEncode="false" hidden="false" />
+    <field name="TrxYear" type="Int32" allowNulls="false" label="^TrxYea^Trx Year^TrxYea^" isPrimaryKey="true" />
+    <field name="TrxMonths" type="Int32" allowNulls="false" label="^TrxMon^Trx Months^TrxMon^" isPrimaryKey="true" maskType="Date" />
+    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" isPrimaryKey="true" />
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" length="50" isPrimaryKey="true" />
+    <field name="Dept_Code" type="String" allowNulls="false" label="^DepCod^Dept Code^DepCod^" length="50" isPrimaryKey="true" />
+    <field name="Account_Type" type="String" allowNulls="false" label="^AccTyp^Account Type^AccTyp^" length="50" />
+    <field name="Ac_Description" type="String" label="^AcDes^Ac Description^AcDes^" length="50" htmlEncode="false" />
+    <field name="Opening" type="Decimal" label="^Ope^Opening^Ope^" />
+    <field name="Debit_Amount" type="Decimal" label="^DebAmo^Debit Amount^DebAmo^" />
+    <field name="Credit_Amount" type="Decimal" label="^CreAmo^Credit Amount^CreAmo^" />
+    <field name="Closing" type="Decimal" label="^Clo^Closing^Clo^" />
+    <field name="ClosingValues" type="Decimal" allowNulls="false" label="^CloVal^Closing Values^CloVal^" allowQBE="false" allowSorting="false" htmlEncode="false" dataFormatString="N2" hidden="false" />
+    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDat^End Date^EndDat^" htmlEncode="false" hidden="false" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddAr^Address En^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+      <formula>SELECT @Session_OPU_Code</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="^BalSheByPro^Balance Sheet By Project^BalSheByPro^" group="Account_Type" filter="Account_Type Not In ('Expense','Revenue') OR AccountID='999999999'" reportTemplate="true" showInSelector="false">
+      <headerText />
+      <dataFields>
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="FY_Code" columns="15" />
+        <dataField fieldName="TrxYear" columns="15" hidden="true" />
+        <dataField fieldName="TrxMonths" columns="15" hidden="true" />
+        <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Ac_Description" columns="50" />
+        <dataField fieldName="Opening" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="Closing" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="ClosingValues" columns="15" hidden="true" />
+        <dataField fieldName="EndDate" columns="10" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="AccountInformation" commandId="command1" type="Chart" label="Account Information" legend="true">
+      <dataFields>
+        <dataField fieldName="Account_Type" columns="50" chart="XValue" />
+        <dataField fieldName="ClosingValues" columns="15" aggregate="Sum" chart="Line" />
+        <dataField fieldName="EndDate" columns="10" />
+      </dataFields>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" commandName="Select" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="^PrintBalanceSheet^Print Balance Sheet^PrintBalanceSheet^">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end
+]]></rule>
+    <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+  </businessRules>
+</dataController>
