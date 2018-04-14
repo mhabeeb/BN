@@ -11,13 +11,13 @@ FROM            dbo.Depreciation INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="AssetNo" type="String" label="^AssNo^Asset No^AssNo^" length="20" />
-    <field name="AssetID" type="Decimal" label="^Ass^Asset#^Ass^" />
-    <field name="AssetDescription" type="String" label="^AssDes^Asset Description^AssDes^" length="255" />
+    <field name="AssetNo" type="String" label="^AssNo^Asset #^AssNo^" length="20" />
+    <field name="AssetID" type="Decimal" label="^Ass^Asset #^Ass^" />
+    <field name="AssetDescription" type="String" label="^AssDes^Asset Desc^AssDes^" length="255" />
     <field name="PurchasePrice" type="Decimal" label="^PurPri^Pur. Price^PurPri^" />
     <field name="DepreciationMethod" type="String" label="^DepMet^Dep. Method^DepMet^" length="50" />
     <field name="DepreciableLife" type="Single" label="^Lif^Life^Lif^" />
-    <field name="SalvageValue" type="Decimal" label="^Sal^Salvage^Sal^" />
+    <field name="SalvageValue" type="Decimal" label="^Sal^Salvage Value^Sal^" />
     <field name="CurrentValue" type="Decimal" label="^CurVal^Current Value^CurValu^" readOnly="true" />
     <field name="DepreciationDate" type="DateTime" label="^DepDat^Depreciation Date^DepDat^" />
     <field name="DepreciationAmount" type="Decimal" label="^DepAmo^Depreciation Amount^DepAmo^" />
@@ -27,10 +27,10 @@ FROM            dbo.Depreciation INNER JOIN
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
     <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^">
+    <field name="Updated_By" type="Decimal" label="^UpdatBy^Updated By^UpdatBy^">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatDatTim^Updated Date Time^UpdatDatTim^" showInSummary="true" />
     <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
     <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" />
     <field name="Depr_Year" type="Int32" label="^DepYea^Depr Year^DepYea^" />
@@ -54,16 +54,16 @@ FROM            dbo.Depreciation INNER JOIN
     <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+    <field name="ABranchAR" type="String" label="^ABra^Branch Name^ABra^" computed="true" readOnly="true">
       <formula>SELECT @Session_BranchName_Ar</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address English^AddEn^" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Arabic^AddAr^" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^Branch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="^Dep^Depreciation^Dep^" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">

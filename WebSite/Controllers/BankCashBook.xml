@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="BankCashBook" conflictDetection="overwriteChanges" label="^BanCasBoo^BankCashBook^BanCasBoo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="BankCashBook" conflictDetection="overwriteChanges" label="BankCashBook" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="XX_BANK_CASH_BOOK" custom="true">
       <text><![CDATA[SELECT     dbo.XX_BANK_CASH_BOOK.PaymentID, dbo.XX_BANK_CASH_BOOK.Sys_Number, dbo.XX_BANK_CASH_BOOK.Payment_Date, 
@@ -14,55 +14,55 @@ FROM         dbo.XX_BANK_CASH_BOOK INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="PaymentID" type="Decimal" allowNulls="false" label="^PayID^PaymentID^PayID^" isPrimaryKey="true" />
-    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Sys Number^SysNum^" />
-    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" />
-    <field name="Amount_Paid" type="Decimal" label="^AmoPai^Amount Paid^AmoPai^" />
+    <field name="PaymentID" type="Decimal" allowNulls="false" label="^PaymentID^PaymentID^PaymentID^" isPrimaryKey="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNumber^Sys Number^SysNumber^" />
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PaymentDate^Payment Date^PaymentDate^" />
+    <field name="Amount_Paid" type="Decimal" label="^AmountPaid^Amount Paid^AmountPaid^" />
     <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="200" />
-    <field name="BankCashName" type="String" label="^BanCasNam^Bank Cash Name^BanCasNam^" length="50" />
-    <field name="APAR_Flag" type="Int32" label="^APARFla^APAR Flag^APARFla^" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
-    <field name="CheckNo" type="Decimal" label="^CheNo^Check No^CheNo^" />
-    <field name="PayNumber" type="Decimal" label="^PayNum^Pay Number^PayNum^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="50" />
-    <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtAppBal^Pmt Apply Bal^PmtAppBal^" />
-    <field name="Amount_Receipt_SAR" type="Decimal" label="^AmoRecSAR^Amount Receipt SAR^AmoRecSAR^" />
-    <field name="Amount_Paid_SAR" type="Decimal" label="^AmoPaiSAR^Amount Paid SAR^AmoPaiSAR^" />
-    <field name="PaymentType" type="String" label="^PayTyp^Payment Type^PayTyp^" length="20" />
+    <field name="BankCashName" type="String" label="^BankCashName^Bank Cash Name^BankCashName^" length="50" />
+    <field name="APAR_Flag" type="Int32" label="^APARFlag^APAR Flag^APARFlag^" />
+    <field name="Currency_Code" type="String" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" />
+    <field name="CheckNo" type="Decimal" label="^CheckNo^Check No^CheckNo^" />
+    <field name="PayNumber" type="Decimal" label="^PayNumber^Pay Number^PayNumber^" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" length="50" />
+    <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtApplyBal^Pmt Apply Bal^PmtApplyBal^" />
+    <field name="Amount_Receipt_SAR" type="Decimal" label="^AmountReceiptSAR^Amount Receipt SAR^AmountReceiptSAR^" />
+    <field name="Amount_Paid_SAR" type="Decimal" label="^AmountPaidSAR^Amount Paid SAR^AmountPaidSAR^" />
+    <field name="PaymentType" type="String" label="^PaymentType^Payment Type^PaymentType^" length="20" />
     <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCode^" />
-    <field name="BranchName" type="String" label="^BrahNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
-    <field name="BuisnessSlogan" type="String" label="^BuiSlo^Buisness Slogan^BuiSlo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
-    <field name="Address_English" type="String" label="^AddEng^Address English^AddEng^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
-    <field name="Address_Arabic" type="String" label="^AddAra^Address Arabic^AddAra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="Company_Code" type="Decimal" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="BranchName" type="String" label="^BranchName^Branch Name^BranchName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
+    <field name="BuisnessSlogan" type="String" label="^BuisnessSlogan^Buisness Slogan^BuisnessSlogan^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
+    <field name="Address_English" type="String" label="^AddressEnglish^Address English^AddressEnglish^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
+    <field name="Address_Arabic" type="String" label="^AddressArabic^Address Arabic^AddressArabic^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^BaNCasBoo^Bank Cash Book^BaNCasBoo^" filter="OPU_Code=@Session_OPU_Code " sortExpression="PaymentID DESC" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Bank Cash Book" filter="OPU_Code=@Session_OPU_Code " sortExpression="PaymentID DESC" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Vendor_Name" columns="50" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="BankCashName" columns="50" />
         <dataField fieldName="PaymentID" columns="15" />
         <dataField fieldName="Sys_Number" columns="15" hidden="true" />
@@ -79,21 +79,21 @@ FROM         dbo.XX_BANK_CASH_BOOK INNER JOIN
         <dataField fieldName="PaymentType" columns="20" />
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
-        <dataField fieldName="BranchName" rows="5" hidden="true" />
-        <dataField fieldName="BuisnessSlogan" rows="5" hidden="true" />
         <dataField fieldName="Address_English" rows="5" hidden="true" />
         <dataField fieldName="Address_Arabic" rows="5" hidden="true" />
+        <dataField fieldName="BranchName" rows="5" hidden="true" />
+        <dataField fieldName="BuisnessSlogan" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBanCasBoo^Review Bank Cash Book^RevBanCasBoo^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Bank Cash Book" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Xx Bank Cash Book" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^XxBanCasBoo^Xx Bank Cash Book^XxBanCasBoo^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="PaymentID" columns="15" />
             <dataField fieldName="Sys_Number" columns="15" />
@@ -116,11 +116,11 @@ FROM         dbo.XX_BANK_CASH_BOOK INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBanCasBoo^New Bank Cash Book^NewBanCasBoo^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Bank Cash Book" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Xx Bank Cash Book" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewXxBanCasBoo^New Xx Bank Cash Book^NewXxBanCasBoo^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="PaymentID" columns="15" />
             <dataField fieldName="Sys_Number" columns="15" />

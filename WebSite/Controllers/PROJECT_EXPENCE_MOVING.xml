@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="PROJECT_EXPENCE_MOVING" conflictDetection="overwriteChanges" label="^ProExpMov^PROJECT_EXPENCE_MOVING^ProExpMov^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="PROJECT_EXPENCE_MOVING" conflictDetection="overwriteChanges" label="PROJECT_EXPENCE_MOVING" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="GL_Transaction_Line" custom="true">
       <text><![CDATA[  SELECT *
@@ -20,46 +20,46 @@ PIVOT
     </command>
   </commands>
   <fields>
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="January" type="Decimal" label="^Jan^January^Jan^" readOnly="true" dataFormatString="N2" />
-    <field name="February" type="Decimal" label="^Feb^February^Feb^" readOnly="true" dataFormatString="N2" />
-    <field name="March" type="Decimal" label="^Mar^March^Mar^" readOnly="true" dataFormatString="N2" />
-    <field name="April" type="Decimal" label="^Apr^April^Apr^" readOnly="true" dataFormatString="N2" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="January" type="Decimal" label="^January^January^January^" readOnly="true" dataFormatString="N2" />
+    <field name="February" type="Decimal" label="^February^February^February^" readOnly="true" dataFormatString="N2" />
+    <field name="March" type="Decimal" label="^March^March^March^" readOnly="true" dataFormatString="N2" />
+    <field name="April" type="Decimal" label="^April^April^April^" readOnly="true" dataFormatString="N2" />
     <field name="May" type="Decimal" label="^May^May^May^" readOnly="true" dataFormatString="N2" />
-    <field name="June" type="Decimal" label="^Jun^June^Jun^" readOnly="true" dataFormatString="N2" />
-    <field name="July" type="Decimal" label="^Jul^July^Jul^" readOnly="true" dataFormatString="N2" />
-    <field name="August" type="Decimal" label="^Aug^August^Aug^" readOnly="true" dataFormatString="N2" />
-    <field name="September" type="Decimal" label="^Sep^September^Sep^" readOnly="true" dataFormatString="N2" />
-    <field name="October" type="Decimal" label="^Oct^October^Oct^" readOnly="true" dataFormatString="N2" />
-    <field name="November" type="Decimal" label="^Nov^November^Nov^" readOnly="true" dataFormatString="N2" />
-    <field name="December" type="Decimal" label="^Dec^December^Dec^" readOnly="true" dataFormatString="N2" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
+    <field name="June" type="Decimal" label="^June^June^June^" readOnly="true" dataFormatString="N2" />
+    <field name="July" type="Decimal" label="^July^July^July^" readOnly="true" dataFormatString="N2" />
+    <field name="August" type="Decimal" label="^August^August^August^" readOnly="true" dataFormatString="N2" />
+    <field name="September" type="Decimal" label="^September^September^September^" readOnly="true" dataFormatString="N2" />
+    <field name="October" type="Decimal" label="^October^October^October^" readOnly="true" dataFormatString="N2" />
+    <field name="November" type="Decimal" label="^November^November^November^" readOnly="true" dataFormatString="N2" />
+    <field name="December" type="Decimal" label="^December^December^December^" readOnly="true" dataFormatString="N2" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ProCosMov^Project Cost Moving^ProCosMov^" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Project Cost Moving" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="January" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="February" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="March" dataFormatString="N2" columns="15" aggregate="Sum" />
@@ -72,12 +72,12 @@ PIVOT
         <dataField fieldName="October" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="November" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="December" dataFormatString="N2" columns="15" aggregate="Sum" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevProCos^Review Project Cost Moving^RevProCos^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Project Cost Moving" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="GL Transaction Line" flow="NewColumn">
@@ -100,7 +100,7 @@ PIVOT
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewProCosMov^New Project Cost Moving^NewProCosMov^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Project Cost Moving" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New GL Transaction Line" flow="NewColumn">
@@ -137,10 +137,10 @@ PIVOT
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="Status" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -169,7 +169,7 @@ PIVOT
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" headerText="Move" flat="true">
-      <action commandName="SQL" headerText="Move" id="a100" whenLastCommandName="Select" confirmation="_controller=Parameter_Ven_Ledger &#xD;&#xA;_title=Enter to Project&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="Move" id="a100" whenLastCommandName="Select" confirmation="_controller=Parameter_Ven_Ledger &#xD;&#xA;_title=Enter to Project&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-check">
         <data><![CDATA[EXEC [dbo].[Mass_Changes_Project]  @Project_Code, @Parameters_ToProject, 
 @Parameters_FromDate,@Parameters_EndDate, @BusinessRules_UserId]]></data>
       </action>

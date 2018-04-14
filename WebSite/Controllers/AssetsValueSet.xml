@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="AssetsValueSet" conflictDetection="overwriteChanges" label="^AssValSet^AssetsValueSet^AssValSet^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="AssetsValueSet" conflictDetection="overwriteChanges" label="AssetsValueSet" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="UserAssetsBookAccess" custom="true">
       <text><![CDATA[SELECT        dbo.UserAssetsBookAccess.UserID, dbo.AssetsBook.BookID, dbo.AssetsBook.BookName, dbo.AssetsBook.OPU_Code, dbo.AssetsBook.Company_Code
@@ -8,23 +8,23 @@ FROM            dbo.UserAssetsBookAccess INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="UserID" type="Int32" allowNulls="false" label="^UseId^User#^UseId^" showInSummary="true" />
-    <field name="BookID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^BookId^Book#^BookId^" readOnly="true" />
-    <field name="BookName" type="String" label="^BooNam^Book Name^BooNam^" length="250" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="UserID" type="Int32" allowNulls="false" label="User#" showInSummary="true" />
+    <field name="BookID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Book#" readOnly="true" />
+    <field name="BookName" type="String" label="Book Name" length="250" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Company_Code" type="Int32" label="Company Code" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^UseAssBooAcc^User Assets Book Access^UseAssBooAcc^" filter="UserID=@BusinessRules_UserId" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="User Assets Book Access" filter="UserID=@BusinessRules_UserId" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="UserID" columns="15" />
         <dataField fieldName="BookName" />
-        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="Company_Code" columns="15" hidden="true" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevUseAssBooAcc^Review User Assets Book Access^RevUseAssBooAcc^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review User Assets Book Access" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="User Assets Book Access" flow="NewColumn">
@@ -32,13 +32,13 @@ FROM            dbo.UserAssetsBookAccess INNER JOIN
           <dataFields>
             <dataField fieldName="UserID" columns="15" />
             <dataField fieldName="BookName" />
-            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="Company_Code" columns="15" hidden="true" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewUserAssBooAcc^New User Assets Book Access^NewUserAssBooAcc^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New User Assets Book Access" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New User Assets Book Access" flow="NewColumn">
@@ -81,7 +81,7 @@ FROM            dbo.UserAssetsBookAccess INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

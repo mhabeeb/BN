@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Open_PR_RFQ" conflictDetection="overwriteChanges" label="^OpePrRfq^Open_PR_RFQ^OpePrRfq^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Open_PR_RFQ" conflictDetection="overwriteChanges" label="Open_PR_RFQ" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName=" dbo.PR_Line_Items" custom="true">
       <text><![CDATA[SELECT     dbo.PR_Line_Items.PR_NO, dbo.PR_Line_Items.SO_NO, dbo.PR_Line_Items.PR_Line_No, dbo.PR_Line_Items.Item_Code, dbo.PR_Line_Items.PR_Qty, 
@@ -18,32 +18,32 @@ WHERE     (dbo.PR_Line_Items.PO_Balance > 0) AND (dbo.RFQ_Header.RFQ_Status = N'
   <fields>
     <field name="PR_NO" type="Decimal" allowNulls="false" label="^PrNo^Pr No^PrNo^" showInSummary="true" />
     <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" showInSummary="true" />
-    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PrLinNo^PR Line No^PrLinNo^" readOnly="true" />
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
-    <field name="PR_Qty" type="Decimal" allowNulls="false" label="^PrQty^PR Qty^PrQty^" showInSummary="true" />
-    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" showInSummary="true" />
-    <field name="PO_Balance" type="Decimal" label="^PoBal^PO Balance^PoBal^" readOnly="true" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" readOnly="true" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" readOnly="true" length="20" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PRLineNo^PR Line No^PRLineNo^" readOnly="true" />
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" showInSummary="true" />
+    <field name="PR_Qty" type="Decimal" allowNulls="false" label="^PRQty^PR Qty^PRQty^" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="^LineRemarks^Line Remarks^LineRemarks^" length="255" showInSummary="true" />
+    <field name="PO_Balance" type="Decimal" label="^POBalance^PO Balance^POBalance^" readOnly="true" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" readOnly="true" length="500" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" readOnly="true" length="20" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" readOnly="true" length="10" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="Job_ID" type="Decimal" label="^JobId^Job#^JobId^" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Job_ID" type="Decimal" label="^Job^Job#^Job^" />
     <field name="RFQ_NO" type="Decimal" label="^RfqNo^Rfq No^RfqNo^" />
-    <field name="RFQ_Qty" type="Decimal" allowNulls="false" label="^RfqQty^RFQ Qty^RfqQty^" />
-    <field name="PR_Date" type="DateTime" allowNulls="false" label="^PrDat^PR Date^PrDat^" />
-    <field name="PR_Type" type="Int32" label="^PrTyp^PR Type^PrTyp^" />
-    <field name="Required_Date" type="DateTime" label="^ReqDat^Required Date^ReqDat^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
+    <field name="RFQ_Qty" type="Decimal" allowNulls="false" label="^RFQQty^RFQ Qty^RFQQty^" />
+    <field name="PR_Date" type="DateTime" allowNulls="false" label="^PRDate^PR Date^PRDate^" />
+    <field name="PR_Type" type="Int32" label="^PRType^PR Type^PRType^" />
+    <field name="Required_Date" type="DateTime" label="^RequiredDate^Required Date^RequiredDate^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
     <field name="RFQ_NO_H" type="Decimal" allowNulls="false" label="^RfqNoH^Rfq No H^RfqNoH^" readOnly="true" />
-    <field name="RFQ_Status" type="String" label="^RfqSta^RFQ Status^RfqSta^" length="25" />
-    <field name="PR_OPU_Code" type="Int32" label="^PrOpuCod^PR OPU Code^PrOpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="RFQ_Status" type="String" label="^RFQStatus^RFQ Status^RFQStatus^" length="25" />
+    <field name="PR_OPU_Code" type="Int32" label="^PROPUCode^PR OPU Code^PROPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^PrLinIte^PR Line Items^PrLinIte^" filter="PR_OPU_Code=@Session_OPU_Code " showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="PR Line Items" filter="PR_OPU_Code=@Session_OPU_Code " showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="PR_NO" columns="15" readOnly="true" />
@@ -72,7 +72,7 @@ WHERE     (dbo.PR_Line_Items.PO_Balance > 0) AND (dbo.RFQ_Header.RFQ_Status = N'
         <dataField fieldName="PR_OPU_Code" columns="15" readOnly="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPrLinIte^Review PR Line Items^RevPrLinIte^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review PR Line Items" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="dbo PR Line Items" flow="NewColumn">
@@ -105,7 +105,7 @@ WHERE     (dbo.PR_Line_Items.PO_Balance > 0) AND (dbo.RFQ_Header.RFQ_Status = N'
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPrLinIte^New PR Line Items^NewPrLinIte^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New PR Line Items" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New dbo PR Line Items" flow="NewColumn">

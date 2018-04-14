@@ -453,7 +453,8 @@
                 },
                 'Update': {
                     HeaderText: 'Save',
-                    Description: 'Save changes to the database.'
+                    Description: 'Save changes to the database.',
+                    Notify: 'Saved - {0}'
                 },
                 'Insert': {
                     HeaderText: 'Save',
@@ -669,9 +670,10 @@
         ResetSearchConfirm: 'Reset search conditions?',
         FilterCleared: 'Cleared all filters.',
         AdvancedSearchInstruction: 'Enter conditions that must be matched and press search button.',
+        Refreshed: 'Refreshed',
         Group: 'Group',
         Grouped: 'Grouped',
-        GroupedDefault: 'Grouping has been removed',
+        UnGrouped: 'Grouping has been removed',
         GroupedBy: 'Grouped by',
         GroupByField: 'Select a field to group \u003cb\u003e{0}\u003c/b\u003e.',
         Show: 'Show',

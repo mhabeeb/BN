@@ -11,7 +11,7 @@ Partial Public Class Pages_SupplyChain
     
     Public ReadOnly Property CssClass() As String
         Get
-            Return ""
+            Return "Wide"
         End Get
     End Property
     

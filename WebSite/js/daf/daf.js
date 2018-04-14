@@ -925,12 +925,12 @@
             return dataView._survey;
         },
         changed: function () {
-            var that = this, i,
+            var that = this, i, odp = that.odp,
                 unchangedRow = that._unchangedRow,
                 editRow = that._editRow,
                 result;
             if (arguments.length > 0 && arguments[0] == 'ignore') {
-                result = that.changed();
+                result = that.changed() || odp && odp.root(that) && odp.is(':dirty');
                 if (arguments.length == 1)
                     return !result || (that.tagged('discard-changes-prompt-none') || that._ignoreUnsavedChanges);
                 else
@@ -2455,10 +2455,10 @@
                 searchBarValue.value = filter ? filter : '';
                 this._searchBarFuncChanged(this._searchBarVisibleIndex);
             }
-                //        else {
-                //            this.set_pageIndex(-2);
-                //            this._loadPage();
-                //        }
+            //        else {
+            //            this.set_pageIndex(-2);
+            //            this._loadPage();
+            //        }
             else {
                 this._forceSync();
                 this.refreshData();
@@ -3357,9 +3357,9 @@
                     this.changeViewType('Grid');
                     this.refreshAndResize();
                     break;
-                    /*            case 'Open':
-                    this.drillIn();
-                    break;*/
+                /*            case 'Open':
+                this.drillIn();
+                break;*/
                 case 'Status':
                     this._changeStatus(args);
                     break;
@@ -9201,19 +9201,20 @@
                 this._filter = result.Filter;
                 this._sortExpression = result.SortExpression;
                 this._groupExpression = result.GroupExpression;
-                //this._totalRowCount = result.TotalRowCount;
-                //if (this._position && this._position.count == -1)
-                //    this._position.count = result.TotalRowCount;
-                //this._pageIndex = result.PageIndex;
-                //if (!positionChanged) {
-                //    this._pageSize = result.PageSize;
-                //    this._pageCount = Math.floor(result.TotalRowCount / result.PageSize);
-                //    if (result.TotalRowCount % result.PageSize != 0)
-                //        this._pageCount++;
-                //}
                 this._updatePageCount(result, positionChanged);
                 var pagerButtonCount = this.get_pagerButtonCount(true);
                 this._firstPageButtonIndex = Math.floor(result.PageIndex / pagerButtonCount) * pagerButtonCount;
+                if (that.odp && that.odp.root(that) && that.odp.enabled == 'auto') {
+                    var hasDataViewFields;
+                    $(that._fields).each(function () {
+                        if (this.Type == 'DataView') {
+                            hasDataViewFields = true;
+                            return false;
+                        }
+                    });
+                    if (!hasDataViewFields)
+                        that.odp = null;
+                }
             }
             else if (this._requiresRowCount) {
                 this._requiresRowCount = false;
@@ -10605,8 +10606,8 @@
                 if ($app.touch)
                     //if (that.get_view().Layout)
                     $app.input.execute({ dataView: that, values: resultValues, raiseCalculate: false });
-                    //else
-                    //    extension.afterCalculate(resultValues);
+                //else
+                //    extension.afterCalculate(resultValues);
                 else
                     that._updateCalculatedFields(result);
                 if (result.ClientScript)
@@ -10632,6 +10633,10 @@
             var ev = { 'result': result, 'context': context, 'handled': false }
             that.raiseExecuted(ev);
             if (ev.handled) return;
+            if (result.ClearSelection) {
+                that._clearSelectedKey();
+                that._selectedKeyList = [];
+            }
             var existingRow = !lastCommandName.match(/Insert/);
             if (lastCommandName.match(/Delete/i) && result.RowsAffected > 0) {
                 extension = that.get_parentDataView(that).extension();
@@ -10647,8 +10652,8 @@
                         if ($app.touch)
                             //if (that.get_view().Layout)
                             $app.input.execute({ dataView: that, values: resultValues });
-                            //else
-                            //    extension.afterCalculate(resultValues);
+                        //else
+                        //    extension.afterCalculate(resultValues);
                         else
                             that.refresh(true, resultValues)
                         if (isCustom && !result.ClientScript)
@@ -10701,8 +10706,12 @@
                 that._requestedSortExpression = result.SortExpression;
                 that._autoRefresh();
                 if (that.multiSelect()) {
-                    that._selectedKeyList = [];
-                    that.set_selectedValue('');
+                    if (result.KeepSelection)
+                        that._keepKeyList = true;
+                    else {
+                        that._selectedKeyList = [];
+                        that.set_selectedValue('');
+                    }
                 }
                 that._recordLEVs();
                 that.updateSummary();
@@ -11306,14 +11315,14 @@
                                 that._raisePopulateDynamicLookups();
                                 done = true;
                             }
-                                //else if (f.Calculated && m[1] == /*field.Name*/fieldName) {
-                                //    if (!that.editing()) {
-                                //        that.refresh();
-                                //        return true;
-                                //    }
-                                //    that._raiseCalculate(f, field);
-                                //    done = true;
-                                //}
+                            //else if (f.Calculated && m[1] == /*field.Name*/fieldName) {
+                            //    if (!that.editing()) {
+                            //        that.refresh();
+                            //        return true;
+                            //    }
+                            //    that._raiseCalculate(f, field);
+                            //    done = true;
+                            //}
                             else if ((f.Calculated || f.CausesCalculate) && m[1] == /*field.Name*/fieldName || m[1] == field || 'controller:' + m[1] == field) {
                                 if ($app.touch) {
                                     that.extension().notify(field);
@@ -12068,7 +12077,7 @@
 
     _app.hideMessage = function () { _app.showMessage() }
 
-    _app.formatMessage = function (type, message) { return _app.touch && false? message : String.format('<table cellpadding="0" cellspacing="0" ><tr><td class="{0}" valign="top">&nbsp;</td><td class="Message">{1}</td></tr></table>', type, message) }
+    _app.formatMessage = function (type, message) { return _app.touch && false ? message : String.format('<table cellpadding="0" cellspacing="0" ><tr><td class="{0}" valign="top">&nbsp;</td><td class="Message">{1}</td></tr></table>', type, message) }
 
     _app.showMessage = function (message) {
         if (_app.touch)
@@ -12374,14 +12383,14 @@
             if (!batchMode)
                 done();
             var r = result ?
-                    {
-                        rowsAffected: result.RowsAffected,
-                        canceled: result.Canceled,
-                        clientScript: result.ClientScript,
-                        navigateUrl: result.NavigateUrl,
-                        errors: result.Errors
-                    } :
-                    {},
+                {
+                    rowsAffected: result.RowsAffected,
+                    canceled: result.Canceled,
+                    clientScript: result.ClientScript,
+                    navigateUrl: result.NavigateUrl,
+                    errors: result.Errors
+                } :
+                {},
                 obj = r[args.controller] = {};
 
             $(args.values).each(function () {
@@ -14668,8 +14677,8 @@
                 if ($app.mobile)
                     //if (dataView.get_view().Layout)
                     $app.input.execute({ dataView: dataView, values: that._newValues, raiseCalculate: commandName != 'Calculate' });
-                    //else
-                    //    dataView.extension().afterCalculate(that._newValues);
+                //else
+                //    dataView.extension().afterCalculate(that._newValues);
                 else
                     dataView._updateCalculatedFields({ 'Errors': [], 'Values': that._newValues });
                 that._newValues = null;
@@ -15576,9 +15585,9 @@
 
         function createRule(list, funcName, func, commandName, commandArgument, phase, argument) {
             var s = 'function(){var r=this,dv=r.dataView(),s=dv.survey(),e=$.Event("' + (typeof func === 'string' ? func : funcName) +
-                    '",{rules:r,dataView:dv,survey:s' + (argument != null ? (',argument:' + JSON.stringify(argument)) : '') + '});' +
-                    (typeof func === 'string' ? '$(document).trigger(e);' : ('s.' + funcName + '(e);')) +
-                    (commandName == 'Calculate' ? '' : 'if(e.isDefaultPrevented())') + 'r.preventDefault();}',
+                '",{rules:r,dataView:dv,survey:s' + (argument != null ? (',argument:' + JSON.stringify(argument)) : '') + '});' +
+                (typeof func === 'string' ? '$(document).trigger(e);' : ('s.' + funcName + '(e);')) +
+                (commandName == 'Calculate' ? '' : 'if(e.isDefaultPrevented())') + 'r.preventDefault();}',
                 m = s.match(/^function\s*\(\)\s*\{([\s\S]+?)\}\s*$/);
             if (!commandArgument)
                 commandArgument = '';

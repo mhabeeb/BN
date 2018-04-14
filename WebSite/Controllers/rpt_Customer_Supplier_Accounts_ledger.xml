@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="rpt_Customer_Supplier_Accounts_ledger" conflictDetection="overwriteChanges" label="^RptCusSupAccled^rpt_Customer_Supplier_Accounts_ledger^RptCusSupAccled^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="rpt_Customer_Supplier_Accounts_ledger" conflictDetection="overwriteChanges" label="rpt_Customer_Supplier_Accounts_ledger" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="Sys_Number" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^ParNum^Party Number^ParNum^" readOnly="true" />
-    <field name="RefNo" type="String" label="^RefNo^Ref No^RefNo^" length="25" showInSummary="true" />
-    <field name="Vendor_Name" type="String" allowNulls="false" label="^ParNam^Party Name^ParNam^" length="150" showInSummary="true" />
-    <field name="City" type="String" label="^City^City^City^" length="50" showInSummary="true" />
-    <field name="ContactName" type="String" label="^ConNam^Contact Name^ConNam^" length="30" showInSummary="true" />
-    <field name="Phone" type="String" label="^Phone^Phone^Phone^" length="50" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" />
-    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" readOnly="true" />
-    <field name="Period_Debit" type="Decimal" label="^PerDeb^Period Debit^PerDeb^P" readOnly="true" />
-    <field name="Period_Credit" type="Decimal" label="^PerCre^Period Credit^PerCre^" readOnly="true" />
-    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" readOnly="true" />
-    <field name="PartyType" type="String" label="^ParTyp^Party Type^ParTyp^" length="15" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Party Number" readOnly="true" />
+    <field name="RefNo" type="String" label="Ref No" length="25" />
+    <field name="Vendor_Name" type="String" allowNulls="false" label="Party Name" length="150" />
+    <field name="City" type="String" label="City" length="50" />
+    <field name="ContactName" type="String" label="Contact Name" length="30" />
+    <field name="Phone" type="String" label="Phone" length="50" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="CalcDate" type="Int32" label="Calc Date" />
+    <field name="OpeningBalance" type="Decimal" label="Opening Balance" readOnly="true" />
+    <field name="Period_Debit" type="Decimal" label="Period Debit" readOnly="true" />
+    <field name="Period_Credit" type="Decimal" label="Period Credit" readOnly="true" />
+    <field name="Closing_Amount" type="Decimal" label="Closing Amount" readOnly="true" />
+    <field name="PartyType" type="String" label="Party Type" length="15" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RptCusSupAccLed^rpt Customer Supplier Accounts ledger^RptCusSupAccLed^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="rpt Customer Supplier Accounts ledger" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="PartyType" columns="15" />
         <dataField fieldName="Sys_Number" columns="15" />
@@ -35,8 +35,8 @@
         <dataField fieldName="Closing_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRptSupAccLed^Review rpt Customer Supplier Accounts ledger^RevRptSupAccLed^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review rpt Customer Supplier Accounts ledger" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="rpt Customer Supplier Accounts ledger" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -56,8 +56,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRptCusSupAccLed^New rpt Customer Supplier Accounts ledger^NewRptCusSupAccLed^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New rpt Customer Supplier Accounts ledger" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New rpt Customer Supplier Accounts ledger" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -115,18 +115,18 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Parameter" flat="true">
-      <action commandName="SQL" headerText="Parameter" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^Par^Parameter^Par^" flat="true">
+      <action commandName="SQL" headerText="^Par^Parameter^Par^" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500" cssClass="&#x9;glyphicon glyphicon-align-right">
         <data><![CDATA[SET @Session_LedDate=@Parameters_EndDate
-SET @Result_NavigateUrl = 'BankAccountLedger.aspx']]></data>
+SET @Result_NavigateUrl = 'PartyAccountLedger.aspx']]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag101" scope="ActionBar" headerText="Party Type" flat="true">
-      <action commandName="SQL" headerText="Customer " id="a100">
+      <action commandName="SQL" headerText="^Cus^Customer ^Cus^" id="a100" cssClass="&#x9;glyphicon glyphicon-user">
         <data><![CDATA[SET @Session_RecordType=1
 SET @Result_NavigateUrl = 'PartyAccountLedger.aspx']]></data>
       </action>
-      <action commandName="SQL" headerText="Supplier" id="a101">
+      <action commandName="SQL" headerText="^Sup^Supplier^Sup^" id="a101" cssClass="glyphicon glyphicon-equalizer">
         <data><![CDATA[SET @Session_RecordType=2
 SET @Result_NavigateUrl = 'PartyAccountLedger.aspx']]></data>
       </action>
@@ -164,7 +164,7 @@ SELECT A.[Sys_Number],
                                ELSE 0
                            END)
                 AND O.Sys_Number = A.[Sys_Number]
-			    AND O.PostType IN (10,11)
+			    AND O.PostType IN (10,11,14)
                 AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
             ) AS MONEY)) OpeningBalance,
        (CAST(
@@ -173,7 +173,7 @@ SELECT A.[Sys_Number],
                 FROM GL_Transaction_Line O
                 WHERE O.CalcDate = c.rdate
                       AND O.Sys_Number = A.[Sys_Number]
-			          AND O.PostType IN (10,11)
+			          AND O.PostType IN (10,11,14)
                       AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
             ) AS MONEY)) Period_Debit,
        (CAST(
@@ -182,7 +182,7 @@ SELECT A.[Sys_Number],
                 FROM GL_Transaction_Line O
                 WHERE O.CalcDate = c.rdate
                       AND O.Sys_Number = A.[Sys_Number]
-			          AND O.PostType IN (10,11)
+			          AND O.PostType IN (10,11,14)
                       AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
             ) AS MONEY)) Period_Credit,
        (CAST(
@@ -200,11 +200,11 @@ SELECT A.[Sys_Number],
                                ELSE 0
                            END)
                 AND O.Sys_Number = A.[Sys_Number]
-			    AND O.PostType IN (10,11)
+			    AND O.PostType IN (10,11,14)
                 AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
             ) AS MONEY)) Closing_Amount
 FROM [dbo].[tbl_Customer_Supplier] A,
-     [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE](@Session_LedDate) c
+     [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE_V1](@Session_LedDate,@Session_CalenderID) c
 WHERE A.[BranchID] = @Session_OPU_Code
 AND A.RecordType=@Session_RecordType]]></rule>
     <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1

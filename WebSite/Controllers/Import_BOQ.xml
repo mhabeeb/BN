@@ -1,31 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Import_BOQ" conflictDetection="overwriteChanges" label="^ImpBoq^Import_BOQ^ImpBoq^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Import_BOQ" conflictDetection="overwriteChanges" label="Import_BOQ" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Import_BOQ" custom="true">
       <text><![CDATA[SELECT * FROM Import_BOQ]]></text>
     </command>
   </commands>
   <fields>
-    <field name="SO_NO" type="Decimal" allowNulls="false" label="^SoNo^So No^SoNo^" showInSummary="true" />
-    <field name="SO_Qty" type="Decimal" label="^SoQty^SO Qty^SoQty^" showInSummary="true" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" showInSummary="true" />
-    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="DeliveryDate" type="DateTime" label="^DelDat^Delivery Date^DelDat^" />
-    <field name="BudgetAccount" type="String" label="^BugAcc^Budget Account^BugAcc^" length="50" />
-    <field name="BudgetCode" type="Decimal" label="^BudCod^Budget Code^BudCod^" />
-    <field name="Item_Code_Ref_No" type="String" label="^IteCodRefNo^Item Code Ref No^IteCodRefNo^" length="20" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" />
-    <field name="Line_ID" type="Decimal" label="^LinId^Line#^LinId^" />
-    <field name="Line_Parent_ID" type="Decimal" label="^LinPar^Line Parent#^LinPar^" />
-    <field name="BOQ_Index" type="Int32" label="^BoqInd^BOQ Index^BoqInd^" />
+    <field name="SO_NO" type="Decimal" allowNulls="false" label="So No" showInSummary="true" />
+    <field name="SO_Qty" type="Decimal" label="SO Qty" showInSummary="true" />
+    <field name="Unit_Price" type="Decimal" label="Unit Price" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="Line Remarks" length="255" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="DeliveryDate" type="DateTime" label="Delivery Date" />
+    <field name="BudgetAccount" type="String" label="Budget Account" length="50" />
+    <field name="BudgetCode" type="Decimal" label="Budget Code" />
+    <field name="Item_Code_Ref_No" type="String" label="Item Code Ref No" length="20" />
+    <field name="Item_Code" type="String" allowNulls="false" label="Item Code" length="20" />
+    <field name="Line_ID" type="Decimal" label="Line#" />
+    <field name="Line_Parent_ID" type="Decimal" label="Line Parent#" />
+    <field name="BOQ_Index" type="Int32" label="BOQ Index" />
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABranchAR^ABranch AR^ABranchAR^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ImpBoq^Import BOQ^ImpBoq^">
+    <view id="grid1" type="Grid" commandId="command1" label="Import BOQ">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="SO_NO" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="SO_Qty" dataFormatString="c" columns="15" />
         <dataField fieldName="Unit_Price" dataFormatString="c" columns="15" />
         <dataField fieldName="Line_Remarks" />
@@ -41,7 +65,7 @@
         <dataField fieldName="BOQ_Index" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevImpBoq^Review Import BOQ^RevImpBoq^">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Import BOQ">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Import BOQ" flow="NewColumn">
@@ -65,7 +89,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewImpBoq^New Import BOQ^NewImpBoq^">
+    <view id="createForm1" type="Form" commandId="command1" label="New Import BOQ">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Import BOQ" flow="NewColumn">
@@ -115,11 +139,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="&#x9;glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="&#x9;glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -150,7 +174,7 @@
       <action id="a2" commandName="Delete" />
     </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" headerText="Import" flat="true">
-      <action commandName="Import" id="a100" />
+      <action commandName="Import" id="a100" cssClass="&#x9;glyphicon glyphicon-import" />
     </actionGroup>
   </actions>
 </dataController>

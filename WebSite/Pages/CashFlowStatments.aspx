@@ -1,5 +1,5 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/Main.Master" AutoEventWireup="false" CodeFile="CashFlowStatments.aspx.vb" Inherits="Pages_CashFlowStatments"  Title="^CashFlowStatments^Cash Flow Statments^CashFlowStatments^" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContentPlaceHolder" runat="Server">^CashFlowStatments^Cash Flow Statments^CashFlowStatments^</asp:Content>
+﻿<%@ Page Language="VB" MasterPageFile="~/Main.Master" AutoEventWireup="false" CodeFile="CashFlowStatments.aspx.vb" Inherits="Pages_CashFlowStatments"  Title="^CashFlowStatments^Cash Flow Statements^CashFlowStatments^" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContentPlaceHolder" runat="Server">^CashFlowStatments^Cash Flow Statements^CashFlowStatments^</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div data-flow="row">
     <div data-activator="Tab|">
@@ -7,7 +7,7 @@
     </div>
   </div>
   <div data-flow="row" style="padding-top:8px">
-    <div data-activator="Tab|Cash Flow Statement">
+    <div data-activator="Tab|^CasFloSta^Cash Flow Statement^CasFloSta^">
       <div id="view2" data-controller="CashFlowStatments" data-show-in-summary="true" data-page-size="25" data-show-view-selector="false" data-search-by-first-letter="true" data-show-row-number="true"></div>
     </div>
     <div data-activator="Tab|^CashFlowyearlySummary^Cash Flow yearly Summary^CashFlowyearlySummary^">

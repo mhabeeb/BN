@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="tbl_Branch_Default_Approvals" conflictDetection="overwriteChanges" label="^BraDefApp^Branch_Default_Approvals^BraDefApp^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="tbl_Branch_Default_Approvals" conflictDetection="overwriteChanges" label="tbl_Branch_Default_Approvals" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Branch_Default_Approvals" custom="true">
       <text><![CDATA[SELECT        dbo.tbl_Branch_Default_Approvals.BranchID, dbo.tbl_Branch_Default_Approvals.DocTypeID, dbo.tbl_Branch_Default_Approvals.App_Group_ID, dbo.TBL_ApprovalGroups_Header.DocDescrition, 
@@ -9,19 +9,19 @@ FROM            dbo.tbl_Branch_Default_Approvals LEFT OUTER JOIN
     </command>
   </commands>
   <fields>
-    <field name="BranchID" type="Int32" allowNulls="false" label="^BraId^Branch#^BraId^" showInSummary="true" isPrimaryKey="true" />
-    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypID^Doc Type#^DocTypID^" showInSummary="true" isPrimaryKey="true">
+    <field name="BranchID" type="Int32" allowNulls="false" label="Branch#" showInSummary="true" isPrimaryKey="true" />
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="Doc Type#" showInSummary="true" isPrimaryKey="true">
       <items style="Lookup" dataController="Approval_Group_Header" dataView="grid1" dataTextField="DocDescrition" dataValueField="DocTypeID" />
     </field>
-    <field name="App_Group_ID" type="Int64" label="^AppGroId^App Group#^AppGroId^" showInSummary="true">
+    <field name="App_Group_ID" type="Int64" label="App Group#" showInSummary="true">
       <items style="Lookup" dataController="TBL_ApprovalGroups_Header" />
     </field>
-    <field name="ApprovalGroupName" type="String" label="^AppGroNam^Approval Group Nam^AppGroNam^" length="50" />
-    <field name="DocDescrition" type="String" label="^DocDes^Doc Descrition^DocDes^" length="50" />
+    <field name="ApprovalGroupName" type="String" label="Approval Group Nam" length="50" />
+    <field name="DocDescrition" type="String" label="Doc Descrition" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^BraDefApp^Branch Default Approvals^BraDefApp^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="tbl Branch Default Approvals" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="BranchID" columns="15" />
         <dataField fieldName="DocTypeID" columns="15" />
@@ -30,11 +30,11 @@ FROM            dbo.tbl_Branch_Default_Approvals LEFT OUTER JOIN
         <dataField fieldName="DocDescrition" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBraDefApp^Review Branch Default Approvals^RevBraDefApp^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Branch Default Approvals" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="tbl Branch Default Approvals" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevBraDefApp^Review Branch Default Approvals^RevBraDefApp^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="BranchID" columns="15" />
             <dataField fieldName="DocTypeID" columns="15" />
@@ -43,11 +43,11 @@ FROM            dbo.tbl_Branch_Default_Approvals LEFT OUTER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBraDefApp^New Branch Default Approvals^NewBraDefApp^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Branch Default Approvals" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Branch Default Approvals" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewBraDefApp^New Branch Default Approvals^NewBraDefApp^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="BranchID" columns="15" />
             <dataField fieldName="DocTypeID" columns="15" />
@@ -76,11 +76,11 @@ FROM            dbo.tbl_Branch_Default_Approvals LEFT OUTER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

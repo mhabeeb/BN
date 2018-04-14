@@ -1,5 +1,5 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/Main.Master" AutoEventWireup="false" CodeFile="JournalBatch.aspx.vb" Inherits="Pages_JournalBatch"  Title="^JournalBatch^JournalBatch^JournalBatch^" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContentPlaceHolder" runat="Server">^JournalBatch^JournalBatch^JournalBatch^</asp:Content>
+﻿<%@ Page Language="VB" MasterPageFile="~/Main.Master" AutoEventWireup="false" CodeFile="JournalBatch.aspx.vb" Inherits="Pages_JournalBatch"  Title="^JournalBatch^Journal Batch^JournalBatch^" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContentPlaceHolder" runat="Server">^JournalBatch^Journal Batch^JournalBatch^</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div data-flow="row">
     <div id="view1" data-controller="V_General_Ledger_Batch" data-show-in-summary="true" data-show-view-selector="false"></div>

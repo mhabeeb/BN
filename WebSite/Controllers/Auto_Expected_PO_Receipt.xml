@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Auto_Expected_PO_Receipt" conflictDetection="overwriteChanges" label="^AutExpPoRec^Auto_Expected_PO_Receipt^AutExpPoRec^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Auto_Expected_PO_Receipt" conflictDetection="overwriteChanges" label="Auto_Expected_PO_Receipt" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="PO_Header" custom="true">
       <text><![CDATA[SELECT PO_Type,
@@ -22,56 +22,63 @@ WHERE(PO_NO IN
      (
          SELECT PO_NO
          FROM dbo.PO_Line_Items
-         WHERE(RV_Balance > 0)
+         WHERE(RV_Balance > 0) AND IsNull([CloseYN],0)=0
      ))
-	and Rec_Status=1]]></text>
+	and Rec_Status=1  ]]></text>
     </command>
   </commands>
   <fields>
-    <field name="PO_Type" type="String" label="^PoTyp^PO Type^PoTyp^" length="30" />
-    <field name="PO_Date" type="DateTime" allowNulls="false" label="^PoDat^PO Date^PoDat^" />
-    <field name="Doc_No" type="Int64" label="^DocNo^PONo^DocNo^" />
-    <field name="PO_NO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PoNo^PoNOSeq^PoNo^" readOnly="true" />
-    <field name="Supplier_QT_No" type="String" label="^SupQtNo^Supplier QT No^SupQtNo^" length="15" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Supplier Number^SysNum^" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" />
-    <field name="Header_Net" type="Decimal" label="^HeaNet^Header Net^HeaNet^" readOnly="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Doc_Status" type="String" label="^DocSta^Doc Status^DocSta^" readOnly="true" length="15" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="OPU_Code" type="Int64" label="^OpuCode^OPU Code^OpuCode^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+    <field name="PO_Type" type="String" label="^POType^PO Type^POType^" length="30" />
+    <field name="PO_Date" type="DateTime" allowNulls="false" label="^PODate^PO Date^PODate^" />
+    <field name="Doc_No" type="Int64" label="PONo" />
+    <field name="PO_NO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PoNoSeq^PoNOSeq^PoNoSeq^" readOnly="true" />
+    <field name="Supplier_QT_No" type="String" label="^SupplierQTNo^Supplier QT No^SupplierQTNo^" length="15" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Supplier Number^SysNumber^" />
+    <field name="Currency_Code" type="String" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" readOnly="true" length="150" />
+    <field name="Header_Net" type="Decimal" label="^HeaderNet^Header Net^HeaderNet^" readOnly="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Doc_Status" type="String" label="^DocStatus^Doc Status^DocStatus^" readOnly="true" length="15" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="OPU_Code" type="Int64" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="ABranch" type="String" allowNulls="false" label="^BranchName^Branch Name^BranchName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
       <formula>SELECT @Session_BranchName </formula>
     </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompanyName^Company Name^CompanyName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" computed="true" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" computed="true" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" />
-    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^" />
+    <field name="Approve_Ask" type="Int32" label="Approve Ask" />
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ExpPoRec^Expected PO Receipt^ExpPoRec^" sortExpression="PO_NO DESC" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Expected PO Receipt" sortExpression="PO_NO DESC" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
       <headerText>&lt;font color="red"&gt;Note : PO With Manual Serial OR Batch Items Will not Taken for Full Receipt
 &lt;/font&gt;</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="PO_NO" columns="15" />
+        <dataField fieldName="PO_NO" columns="15" hidden="true" />
+        <dataField fieldName="Doc_No" columns="15" />
         <dataField fieldName="PO_Date" columns="10" />
         <dataField fieldName="PO_Type" columns="30" />
         <dataField fieldName="Supplier_QT_No" columns="15" hidden="true" />
@@ -84,13 +91,13 @@ WHERE(PO_NO IN
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="Currency_Code" columns="4" />
         <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPoHea^Review PO Header^RevPoHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review PO Header" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="PO Header" flow="NewColumn">
@@ -112,7 +119,7 @@ WHERE(PO_NO IN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPoHea^New PO Header^NewPoHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New PO Header" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New PO Header" flow="NewColumn">
@@ -131,28 +138,28 @@ WHERE(PO_NO IN
         </category>
       </categories>
     </view>
-    <view id="grid1ar" commandId="command1" type="Grid" label="^AutExpPoRec^Auto Expected PO Receipt^AutExpPoRec^" showInSelector="false">
+    <view id="grid1ar" commandId="command1" type="Grid" label="Auto Expected PO Receipt" showInSelector="false">
       <dataFields>
-        <dataField fieldName="PO_NO" columns="15" />
-        <dataField fieldName="PO_Date" columns="10" />
-        <dataField fieldName="PO_Type" columns="30" />
-        <dataField fieldName="Supplier_QT_No" columns="15" />
-        <dataField fieldName="Sys_Number" columns="15" />
-        <dataField fieldName="Vendor_Name" />
-        <dataField fieldName="Project_Code" columns="50" />
-        <dataField fieldName="Doc_Status" columns="15" />
-        <dataField fieldName="Dept_Code" columns="50" />
-        <dataField fieldName="Company_Code" hidden="true" columns="15" />
-        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
-        <dataField fieldName="Currency_Code" columns="4" />
-        <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
         <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="Currency_Code" columns="4" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="PO_Type" columns="30" />
+        <dataField fieldName="Supplier_QT_No" columns="15" />
+        <dataField fieldName="PO_NO" columns="15" />
+        <dataField fieldName="PO_Date" columns="10" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Doc_Status" columns="15" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="Project_Code" columns="50" />
       </dataFields>
     </view>
   </views>
@@ -196,7 +203,7 @@ WHERE(PO_NO IN
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag9" scope="ActionColumn" headerText="Full Receipt">
-      <action commandName="SQL" headerText="Full Receipt" id="a100">
+      <action commandName="SQL" headerText="^FulRec^Full Receipt^FulRec^" id="a100" cssClass="glyphicon glyphicon-credit-card">
         <data><![CDATA[IF ISNULL(@Session_StoreID, 0) = 0
     BEGIN
         SET @BusinessRules_PreventDefault = 1
@@ -213,7 +220,7 @@ IF ISNULL(@Session_StoreID, 0) > 0
 ]]></data>
       </action>
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Action" flat="false">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^Action^Action^Action^" flat="false">
       <action id="a1" commandName="ReportAsPdf">
         <data><![CDATA[_controller=Auto_Expected_PO_Receipt
 _view=grid1ar ]]></data>
@@ -231,7 +238,7 @@ _view=grid1ar ]]></data>
 _view=grid1ar ]]></data>
       </action>
     </actionGroup>
-    <actionGroup id="ag101" scope="ActionBar" headerText="Reports" flat="false">
+    <actionGroup id="ag101" scope="ActionBar" headerText="^Reports^Reports^Reports^" flat="false">
       <action id="a1" commandName="ReportAsPdf">
         <data />
       </action>

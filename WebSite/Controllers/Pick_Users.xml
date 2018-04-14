@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Users" conflictDetection="overwriteChanges" label="^PicUse^Pick_Users^PicUse^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Users" conflictDetection="overwriteChanges" label="Pick_Users" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Users" custom="true">
       <text><![CDATA[SELECT * FROM Users]]></text>
     </command>
   </commands>
   <fields>
-    <field name="UserID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^UseId^User#^UseId^" readOnly="true" />
-    <field name="UserName" type="String" allowNulls="false" label="^UseNam^User Name^UseNam^" length="128" showInSummary="true" />
-    <field name="Password" type="String" allowNulls="false" label="^Pas^Password^Pas^" length="128" />
-    <field name="Email" type="String" label="^Ema^Email^Ema^" length="128" showInSummary="true" />
-    <field name="Comment" type="String" allowQBE="false" allowSorting="false" label="^Com^Comment^Com^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="Store_ID" type="Int32" label="^StoId^Store#^StoId^" />
-    <field name="UserFullName" type="String" label="^UseFulNam^User Full Name^UseFulNam^" length="150" />
-    <field name="IsSalesTeamYN" type="Int32" label="^IsSalTeaYn^Is Sales Team YN^IsSalTeaYn^" />
-    <field name="Price_List_Name" type="String" label="^PriLisNam^Price List Name^PriLisNam^" length="50" />
-    <field name="PasswordH" type="String" label="^PasH^Password H^PasH^" length="128" />
-    <field name="Report_To" type="Int32" label="^RepTo^Report To^RepTo^" />
-    <field name="UserType" type="String" label="^UseTyp^User Type^UseTyp^" length="50" />
-    <field name="PasswordC" type="String" label="^PasC^Password C^PasC^" length="128" />
-    <field name="PasswordS" type="String" label="^PasS^Password S^PasS^" length="128" />
+    <field name="UserID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^User^User#^User^" readOnly="true" />
+    <field name="UserName" type="String" allowNulls="false" label="^UserName^User Name^UserName^" length="128" showInSummary="true" />
+    <field name="Password" type="String" allowNulls="false" label="^Password^Password^Password^" length="128" />
+    <field name="Email" type="String" label="^Email^Email^Email^" length="128" showInSummary="true" />
+    <field name="Comment" type="String" allowQBE="false" allowSorting="false" label="^Comment^Comment^Comment^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="Store_ID" type="Int32" label="^Store^Store#^Store^" />
+    <field name="UserFullName" type="String" label="^UserFullName^User Full Name^UserFullName^" length="150" />
+    <field name="IsSalesTeamYN" type="Int32" label="^IsSalesTeamYN^Is Sales Team YN^IsSalesTeamYN^" />
+    <field name="Price_List_Name" type="String" label="^PriceListName^Price List Name^PriceListName^" length="50" />
+    <field name="PasswordH" type="String" label="^PasswordH^Password H^PasswordH^" length="128" />
+    <field name="Report_To" type="Int32" label="^ReportTo^Report To^ReportTo^" />
+    <field name="UserType" type="String" label="^UserType^User Type^UserType^" length="50" />
+    <field name="PasswordC" type="String" label="^PasswordC^Password C^PasswordC^" length="128" />
+    <field name="PasswordS" type="String" label="^PasswordS^Password S^PasswordS^" length="128" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Use^Users^Use^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Users" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="UserName" />
@@ -40,7 +40,7 @@
         <dataField fieldName="UserType" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevUse^Review Users^RevUse^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Users" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Users" flow="NewColumn">
@@ -65,7 +65,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewUse^New Users^NewUse^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Users" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Users" flow="NewColumn">
@@ -116,7 +116,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -151,4 +151,10 @@
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
   </actions>
+  <restConfig>Uri: .
+Method: GET
+Users: *
+Roles: Administrators,Power Users
+Xml: False
+JSON: True</restConfig>
 </dataController>

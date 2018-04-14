@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="BankTransfer" conflictDetection="overwriteChanges" label="^BanTra^BankTransfer^BanTra^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="BankTransfer" label="BankTransfer" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Bank_transfer" custom="true">
       <text><![CDATA[SELECT     dbo.tbl_Bank_transfer.CashBankID_Fr, dbo.tbl_Bank_transfer.CashBankID_To, dbo.tbl_Bank_transfer.Trx_Date, dbo.tbl_Bank_transfer.Amount, dbo.tbl_Bank_transfer.Remarks, 
-                      dbo.tbl_Bank_transfer.XferID, dbo.BankCashInformation.BankCashName AS From_BankCashName,s BankCashInformation_1.BankCashName AS To_BankCashName, 
+                      dbo.tbl_Bank_transfer.XferID, dbo.BankCashInformation.BankCashName AS From_BankCashName,BankCashInformation_1.BankCashName AS To_BankCashName, 
                       dbo.tbl_Bank_transfer.OPU_Code, dbo.tbl_Bank_transfer.ClearedBy, dbo.tbl_Bank_transfer.ClearedDateTime
 FROM         dbo.BankCashInformation INNER JOIN
                       dbo.tbl_Bank_transfer ON dbo.BankCashInformation.CashBankID = dbo.tbl_Bank_transfer.CashBankID_Fr INNER JOIN
@@ -11,70 +11,70 @@ FROM         dbo.BankCashInformation INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="CashBankID_Fr" type="Decimal" label="^CasBanIdTo^From Bank/Cash^CasBanIdTo^" allowNulls="false">
+    <field name="CashBankID_Fr" type="Decimal" label="^FromBankCash^From Bank/Cash^FromBankCash^" allowNulls="false">
       <items style="DropDownList" dataController="Pick_Bank" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" />
     </field>
-    <field name="CashBankID_To" type="Decimal" label="^CasBanIdTo^To Bank/Cash^CasBanIdTo^" allowNulls="false">
+    <field name="CashBankID_To" type="Decimal" label="^ToBankCash^To Bank/Cash^ToBankCash^" allowNulls="false">
       <items style="DropDownList" dataController="Pick_Bank" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" copy="CashBankID &lt;&gt; @CashBankID_Fr" letters="true" />
     </field>
-    <field name="Trx_Date" type="DateTime" label="^TrxDat^Trx Date^TrxDat^" allowNulls="false" />
-    <field name="Amount" type="Decimal" label="^Amo^Amount^Amo^" allowNulls="false" dataFormatString="N2" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="50" />
-    <field name="XferID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^XfeId^Xfer#^XfeId^" readOnly="true" />
-    <field name="From_BankCashName" type="String" label="^FroBanCasNam^From Bank Cash Name^FroBanCasNam^" length="50" />
-    <field name="To_BankCashName" type="String" label="^ToBanCasNam^To Bank Cash Name^ToBanCasNam^" length="50" />
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="ClearedBy" type="Decimal" label="^CleBy^Cleared By^CleBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="ClearedDateTime" type="DateTime" label="^CleDatTim^Cleared Date Time^CleDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Trx_Date" type="DateTime" label="^TrxDate^Trx Date^TrxDate^" allowNulls="false" />
+    <field name="Amount" type="Decimal" label="^Amount^Amount^Amount^" allowNulls="false" dataFormatString="N2" />
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="50" />
+    <field name="XferID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Xfer^Xfer#^Xfer^" readOnly="true" />
+    <field name="From_BankCashName" type="String" label="^FromBankCashName^From Bank Cash Name^FromBankCashName^" length="50" />
+    <field name="To_BankCashName" type="String" label="^ToBankCashName^To Bank Cash Name^ToBankCashName^" length="50" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ClearedBy" type="Decimal" label="^ClearedBy^Cleared By^ClearedBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ClearedDateTime" type="DateTime" label="^ClearedDateTime^Cleared Date Time^ClearedDateTime^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
     <field name="ACompanyName" type="String" allowNulls="false" label="^CompanyName^Company Name^CompanyName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
       <formula>SELECT @Session_CompanyName</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
+    <field name="ABranch" type="String" allowNulls="false" label="^BranchName^Branch Name^BranchName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^BanTra^Bank transfer^BanTra^" reportTemplate="true" sortExpression="XferID DESC" filter="OPU_Code=@Session_OPU_Code " showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Bank transfer" reportTemplate="true" sortExpression="XferID DESC" filter="OPU_Code=@Session_OPU_Code " showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="XferID" columns="15" />
-        <dataField fieldName="CashBankID_Fr" columns="15" />
-        <dataField fieldName="CashBankID_To" columns="15" />
-        <dataField fieldName="Trx_Date" columns="10" />
-        <dataField fieldName="Amount" columns="15" aggregate="Sum" />
-        <dataField fieldName="Remarks" columns="50" />
-        <dataField fieldName="From_BankCashName" columns="50" readOnly="true" />
-        <dataField fieldName="To_BankCashName" columns="50" readOnly="true" />
         <dataField fieldName="ClearedBy" columns="15" />
         <dataField fieldName="ClearedDateTime" columns="10" />
+        <dataField fieldName="From_BankCashName" columns="50" readOnly="true" />
+        <dataField fieldName="To_BankCashName" columns="50" readOnly="true" />
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="XferID" columns="15" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="CashBankID_Fr" columns="15" />
+        <dataField fieldName="Amount" columns="15" aggregate="Sum" />
+        <dataField fieldName="Remarks" columns="50" />
+        <dataField fieldName="CashBankID_To" columns="15" />
+        <dataField fieldName="Trx_Date" columns="10" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBanTra^Review Bank transfer^RevBanTra^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Bank transfer" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Bank transfer" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevBanTra^Review Bank transfer^RevBanTra^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CashBankID_Fr" columns="15" />
             <dataField fieldName="CashBankID_To" columns="15" />
@@ -83,18 +83,18 @@ FROM         dbo.BankCashInformation INNER JOIN
             <dataField fieldName="Remarks" columns="50" />
             <dataField fieldName="From_BankCashName" columns="50" readOnly="true" hidden="true" />
             <dataField fieldName="To_BankCashName" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="ClearedBy" columns="15" hidden="true" />
             <dataField fieldName="ClearedDateTime" columns="10" hidden="true" />
+            <dataField fieldName="ClearedBy" columns="15" hidden="true" />
             <dataField fieldName="OPU_Code" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBanTra^New Bank transfer^NewBanTra^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Bank transfer" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Bank transfer" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewBanTra^New Bank transfer^NewBanTra^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CashBankID_Fr" columns="15" />
             <dataField fieldName="CashBankID_To" columns="15" />
@@ -103,9 +103,9 @@ FROM         dbo.BankCashInformation INNER JOIN
             <dataField fieldName="Remarks" columns="30" />
             <dataField fieldName="From_BankCashName" columns="50" readOnly="true" hidden="true" />
             <dataField fieldName="To_BankCashName" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="ClearedBy" columns="15" hidden="true" />
-            <dataField fieldName="ClearedDateTime" columns="10" hidden="true" />
             <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="ClearedDateTime" columns="10" hidden="true" />
+            <dataField fieldName="ClearedBy" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -121,7 +121,7 @@ FROM         dbo.BankCashInformation INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -158,8 +158,8 @@ FROM         dbo.BankCashInformation INNER JOIN
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
     </actionGroup>
-    <actionGroup id="ag105" scope="ActionBar" headerText="Post GL" flat="true">
-      <action commandName="SQL" headerText="Post Gl" id="a100" whenLastCommandName="Select" whenClientScript="[GL_PostedYN]==0">
+    <actionGroup id="ag105" scope="ActionBar" headerText="^PosGl^Post GL^PosGl^" flat="true">
+      <action commandName="SQL" headerText="^PosGl^Post GL^PosGl^" id="a100" whenLastCommandName="Select" whenClientScript="[GL_PostedYN]==0" cssClass="&#x9;glyphicon glyphicon-book">
         <data><![CDATA[EXEC  dbo.DOC_POST_TO_GL @PaymentID,2]]></data>
       </action>
     </actionGroup>

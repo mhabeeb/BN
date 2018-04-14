@@ -1,85 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Delivery_Note_from_SO" conflictDetection="overwriteChanges" label="^DelNotFroSo^Delivery_Note_from_SO^DelNotFroSo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Delivery_Note_from_SO" conflictDetection="overwriteChanges" label="Delivery_Note_from_SO" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="SO_Line_Items" custom="true">
-      <text><![CDATA[SELECT  dbo.tbl_Transactions_Header.Transaction_ID, dbo.SO_Line_Items.SO_NO, dbo.SO_Line_Items.SO_Line_No, dbo.SO_Line_Items.Item_Code, dbo.SO_Line_Items.Item_Desc, dbo.SO_Line_Items.Item_Part, dbo.SO_Line_Items.SO_Qty, 
-                   dbo.SO_Line_Items.UOM, dbo.SO_Line_Items.Pick_Qty, dbo.SO_Line_Items.DV_Balance, dbo.SO_Line_Items.Line_Remarks, dbo.SO_Line_Items.Pick, dbo.SO_Line_Items.DeliveryDate, dbo.SO_Line_Items.Pick_Doc, dbo.SO_Line_Items.Sys_Number, 
-                   dbo.SO_Line_Items.IsServiceItem, dbo.SO_Line_Items.YourRefrence, dbo.SO_Line_Items.SO_OPU_Code, dbo.SO_Line_Items.Updated_By, dbo.SO_Line_Items.Updated_DateTime, dbo.SO_Line_Items.BatchNo, dbo.SO_Line_Items.BatchExpiry, 
-                   dbo.SO_Line_Items.Item_Serial_No, dbo.SO_Line_Items.BatchLine_ID, dbo.SO_Line_Items.ShippingStoreID, dbo.SO_Line_Items.IsBatchControl, dbo.SO_Line_Items.IsItemSerialized, dbo.SO_Line_Items.Item_Code_Ref_No, 
-                   dbo.tbl_Transactions_Header.Rec_Status, dbo.tbl_Transactions_Header.Approve_Ask, dbo.SO_Line_Items.P_Doc_No, dbo.SO_Line_Items.Source_Doc_No, dbo.SO_Line_Items.Source_Doc_Type, dbo.SO_Line_Items.lRec_Status, 
-                   dbo.SO_Line_Items.INV_Balance, dbo.SO_Line_Items.Pick_UOM, dbo.tbl_Transactions_Header.LocationID, dbo.tbl_Transactions_Header.Location_Name
-FROM      dbo.SO_Line_Items INNER JOIN
-                   dbo.tbl_Transactions_Header ON dbo.SO_Line_Items.Sys_Number = dbo.tbl_Transactions_Header.Sys_Number AND dbo.SO_Line_Items.SO_OPU_Code = dbo.tbl_Transactions_Header.OPU_Code AND 
-                   dbo.SO_Line_Items.LocationID = dbo.tbl_Transactions_Header.LocationID
-WHERE   (ISNULL(dbo.SO_Line_Items.CloseYN, 0) = 0) AND (dbo.SO_Line_Items.DV_Balance > 0)]]></text>
+      <text><![CDATA[SELECT * FROM C_Delivery_Note_from_SO]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Transaction_ID" type="Decimal" allowNulls="false" label="^TransactionId^Transaction#^TransactionId^" readOnly="true" />
-    <field name="SO_NO" type="Decimal" allowNulls="false" label="^SoNoBoq^So No / BOQ^SoNoBoq^" showInSummary="true" />
-    <field name="SO_Line_No" type="Decimal" allowNulls="false" label="^SOLinNo^SO Line No^SOLinNo^" readOnly="true" showInSummary="true" isPrimaryKey="true" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" showInSummary="true" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="20" showInSummary="true" />
+    <field name="Transaction_ID" type="Decimal" allowNulls="false" label="^Transaction^Transaction#^Transaction^" readOnly="true" />
+    <field name="SO_NO" type="Decimal" allowNulls="false" label="So No / BOQ" showInSummary="true" />
+    <field name="SO_Line_No" type="Decimal" allowNulls="false" label="^SOLineNo^SO Line No^SOLineNo^" readOnly="true" showInSummary="true" isPrimaryKey="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^ItemCode^Item Code^ItemCode^" length="20" showInSummary="true" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" showInSummary="true" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" length="20" showInSummary="true" />
     <field name="SO_Qty" type="Decimal" label="^SOQty^SO Qty^SOQty^" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="50" />
-    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
-    <field name="DV_Balance" type="Decimal" label="^DVBal^DV Balance^DVBal^" />
+    <field name="Pick_Qty" type="Decimal" label="^PickQty^Pick Qty^PickQty^" />
+    <field name="DV_Balance" type="Decimal" label="^DVBalance^DV Balance^DVBalance^" />
     <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" />
-    <field name="Pick" type="Int32" label="^Pic^Pick^Pic^" />
-    <field name="DeliveryDate" type="DateTime" label="^DelDat^Delivery Date^DelDat^" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
-    <field name="IsServiceItem" type="Int32" label="^IsSerIte^Is Service Item^IsSerIte^" />
-    <field name="YourRefrence" type="String" label="^YouRef^Your Refrence^YouRef^" length="15" />
-    <field name="SO_OPU_Code" type="Int32" label="^SoOPUCod^SO OPU Code^SoOPUCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Updated_By" type="Decimal" allowNulls="false" label="^UpdBy^Updated By^UpdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Updated_DateTime" type="DateTime" allowNulls="false" label="^UpdDatTim^Updated Date Time^UpdaDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="BatchLine_ID" type="Decimal" label="^BatID^Batch/SN ID^BatID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" contextFields="Item_Code=Item_Code">
+    <field name="Pick" type="Int32" label="^Pick^Pick^Pick^" />
+    <field name="DeliveryDate" type="DateTime" label="^DeliveryDate^Delivery Date^DeliveryDate^" />
+    <field name="Pick_Doc" type="Decimal" label="^PickDoc^Pick Doc^PickDoc^" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" />
+    <field name="IsServiceItem" type="Int32" label="^IsServiceItem^Is Service Item^IsServiceItem^" />
+    <field name="YourRefrence" type="String" label="^YourRefrence^Your Refrence^YourRefrence^" length="15" />
+    <field name="SO_OPU_Code" type="Int32" label="^SOOPUCode^SO OPU Code^SOOPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_By" type="Decimal" allowNulls="false" label="^UpdatedBy^Updated By^UpdatedBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_DateTime" type="DateTime" allowNulls="false" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="BatchLine_ID" type="Decimal" label="^BatchID^Batch/SN ID^BatchID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" contextFields="Item_Code=Item_Code">
       <items style="Lookup" dataController="Pick_SerialBatchExpiry" dataView="grid1" dataTextField="Line_ID" dataValueField="Line_ID" copy="BatchNo=BatchNo&#xD;&#xA;BatchExpiry=BatchExpiry&#xD;&#xA;Item_Serial_No=Item_Serial_No&#xD;&#xA;" />
     </field>
-    <field name="BatchNo" type="String" label="^BatNo^Batch No^BatNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
-    <field name="BatchExpiry" type="DateTime" label="^BatExp^Batch Expiry^BatExp^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Item_Serial_No" type="String" label="^IteSerNo^Item Serial No^IteSerNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="IsBatchControl" type="Int32" label="^IsBatCon^Is Batch Control^IsBatCon^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="IsItemSerialized" type="Int32" label="^IsIteSer^Is Item Serialized^IsIteSer^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="StockOnHand" type="Decimal" allowNulls="false" label="^StoOnHan^Stock On Hand^StoOnHan^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" readOnly="true">
+    <field name="BatchNo" type="String" label="^BatchNo^Batch No^BatchNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
+    <field name="BatchExpiry" type="DateTime" label="^BatchExpiry^Batch Expiry^BatchExpiry^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Item_Serial_No" type="String" label="^ItemSerialNo^Item Serial No^ItemSerialNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
+    <field name="IsBatchControl" type="Int32" label="^IsBatchControl^Is Batch Control^IsBatchControl^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="IsItemSerialized" type="Int32" label="^IsItemSerialized^Is Item Serialized^IsItemSerialized^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="StockOnHand" type="Decimal" allowNulls="false" label="^StockOnHand^Stock On Hand^StockOnHand^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" readOnly="true">
       <formula>[dbo].[Get_Item_BAL] (Item_Code,@BusinessRules_UserId)</formula>
     </field>
-    <field name="Item_Code_Ref_No" type="String" label="^IteCodRefNo^Item Code Ref No^IteCodRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
-    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="Item_Code_Ref_No" type="String" label="^ItemCodeRefNo^Item Code Ref No^ItemCodeRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
+    <field name="Rec_Status" type="Int32" label="Rec Status" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
-    <field name="P_Doc_No" type="Int64" label="^SoNo^SONO^SoNo^" />
-    <field name="Source_Doc_No" type="Int64" label="^SouDocNo^Source Doc No^SouDocNo^" />
-    <field name="Source_Doc_Type" type="String" label="^SouDocTyp^Source Doc Type^SouDocTyp^" length="25" />
-    <field name="Pick_UOM" type="String" label="^PicUom^Pick UOM^PicUom^" length="10" contextFields="Item_Code=Item_Code">
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="P_Doc_No" type="Int64" label="SONO" />
+    <field name="Source_Doc_No" type="Int64" label="Source Doc No" />
+    <field name="Source_Doc_Type" type="String" label="Source Doc Type" length="25" />
+    <field name="Pick_UOM" type="String" label="Pick UOM" length="10" contextFields="Item_Code=Item_Code">
       <items style="Lookup" dataController="UOM_Item_Pick" dataView="grid1" dataTextField="UOM" dataValueField="UOM" />
     </field>
     <field name="Location_Name" type="String" label="Location Name" length="150" />
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
+    <field name="Project_Code" type="String" label="Project Code" length="50" />
+    <field name="SiteCode" type="String" label="Site Code" length="50" />
+    <field name="Task_Path" type="String" label="Task Path" length="10" />
+    <field name="MSProjTasksID" type="Int64" label="Tasks ID" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^SoLinIte^SO Line Items^SoLinIte^" sortExpression="SO_NO desc" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="SO Line Items" sortExpression="SO_NO desc" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="SO_NO" columns="15" readOnly="true" hidden="true" />
@@ -106,26 +107,30 @@ WHERE   (ISNULL(dbo.SO_Line_Items.CloseYN, 0) = 0) AND (dbo.SO_Line_Items.DV_Bal
         <dataField fieldName="Updated_By" columns="15" hidden="true" />
         <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
         <dataField fieldName="BatchLine_ID" columns="15" hidden="true" />
-        <dataField fieldName="BatchNo" columns="20" hidden="true" />
         <dataField fieldName="BatchExpiry" columns="10" hidden="true" />
         <dataField fieldName="Item_Serial_No" columns="50" hidden="true" />
-        <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
+        <dataField fieldName="BatchNo" columns="20" hidden="true" />
         <dataField fieldName="IsItemSerialized" columns="15" hidden="true" />
+        <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
         <dataField fieldName="StockOnHand" columns="15" readOnly="true" />
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
-        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Source_Doc_No" columns="15" readOnly="true" />
         <dataField fieldName="Source_Doc_Type" columns="25" readOnly="true" />
         <dataField fieldName="Location_Name" rows="1" hidden="true" readOnly="true" />
+        <dataField fieldName="Project_Code" columns="50" readOnly="true" />
+        <dataField fieldName="SiteCode" columns="50" readOnly="true" />
+        <dataField fieldName="Task_Path" columns="10" readOnly="true" />
+        <dataField fieldName="MSProjTasksID" columns="15" readOnly="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIteBatSerInf^Review Item Batch/Serial # Information^RevIteBatSerInf^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Item Batch/Serial # Information" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Item Batch/Serial # Information" flow="NewColumn">
@@ -134,6 +139,13 @@ WHERE   (ISNULL(dbo.SO_Line_Items.CloseYN, 0) = 0) AND (dbo.SO_Line_Items.DV_Bal
             <dataField fieldName="Pick_Qty" dataFormatString="N2" columns="15" />
             <dataField fieldName="Pick" columns="15" hidden="true" />
             <dataField fieldName="BatchLine_ID" columns="15" />
+            <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
+            <dataField fieldName="IsItemSerialized" columns="15" hidden="true" />
+            <dataField fieldName="Item_Serial_No" columns="25">
+              <visibility>
+                <expression test="[IsItemSerialized] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
             <dataField fieldName="BatchNo" columns="20">
               <visibility>
                 <expression test="[IsBatchControl] == 1" type="ClientScript" />
@@ -144,39 +156,32 @@ WHERE   (ISNULL(dbo.SO_Line_Items.CloseYN, 0) = 0) AND (dbo.SO_Line_Items.DV_Bal
                 <expression test="[IsBatchControl] == 1" type="ClientScript" />
               </visibility>
             </dataField>
-            <dataField fieldName="Item_Serial_No" columns="25">
-              <visibility>
-                <expression test="[IsItemSerialized] == 1" type="ClientScript" />
-              </visibility>
-            </dataField>
-            <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
-            <dataField fieldName="IsItemSerialized" columns="15" hidden="true" />
             <dataField fieldName="StockOnHand" columns="15" readOnly="true" />
           </dataFields>
         </category>
         <category headerText="Item Information" id="c2" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="SO_NO" columns="15" hidden="true" />
-            <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+            <dataField fieldName="DeliveryDate" columns="10" hidden="true" />
+            <dataField fieldName="Line_Remarks" hidden="true" />
+            <dataField fieldName="DV_Balance" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
+            <dataField fieldName="YourRefrence" columns="15" hidden="true" />
+            <dataField fieldName="IsServiceItem" columns="15" hidden="true" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
             <dataField fieldName="Item_Code" columns="20" readOnly="true" />
+            <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
+            <dataField fieldName="SO_NO" columns="15" hidden="true" />
             <dataField fieldName="Item_Desc" readOnly="true" />
-            <dataField fieldName="Item_Part" columns="20" hidden="true" />
-            <dataField fieldName="SO_Qty" dataFormatString="N2" columns="15" readOnly="true" />
             <dataField fieldName="Pick_UOM" columns="10" />
             <dataField fieldName="UOM" columns="50" hidden="true" />
-            <dataField fieldName="DV_Balance" dataFormatString="N2" columns="15" readOnly="true" />
-            <dataField fieldName="Line_Remarks" hidden="true" />
-            <dataField fieldName="DeliveryDate" columns="10" hidden="true" />
-            <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
-            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
-            <dataField fieldName="IsServiceItem" columns="15" hidden="true" />
-            <dataField fieldName="YourRefrence" columns="15" hidden="true" />
+            <dataField fieldName="SO_Qty" dataFormatString="N2" columns="15" readOnly="true" />
+            <dataField fieldName="Item_Part" columns="20" hidden="true" />
             <dataField fieldName="Item_Code_Ref_No" columns="20" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewSoLinIte^New SO Line Items^NewSoLinIte^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New SO Line Items" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New SO Line Items" flow="NewColumn">
@@ -271,12 +276,12 @@ SET @m_Qty = dbo.GET_CONVERTED_UOM_QTY(@Item_Code, @Pick_UOM, @Pick_Qty);
 declare @stk int 
 SET @stk=[dbo].[ITEM_STOCK_CHECK] (@Item_Code,@BusinessRules_UserId,@BatchLine_ID,@m_Qty)
 
-If @stk=1 and IsNull(@Session_NegativeAllowedYN,0)=0
+If @stk=1 and IsNull(@Session_NegativeAllowedYN,0)=0 AND IsNull(@IsServiceItem,0)=0
 begin
     set @BusinessRules_PreventDefault = 1
     set @Result_Focus = 'Pick_Qty,Entered Qty Should not be Greater Then Warehouse Available Qty'
 end
-If @stk=2 
+If @stk=2 AND IsNull(@IsServiceItem,0)=0
 begin
     set @BusinessRules_PreventDefault = 1
     set @Result_Focus = 'Pick_Qty,Cannot be More then Batch/Serail Available Qty'
@@ -286,12 +291,12 @@ begin
     set @BusinessRules_PreventDefault = 1
     set @Result_Focus = 'Pick_Qty,Entered Qty Should not be Greater Then DV Qty'
 end
-If @IsBatchControl=1 AND (@BatchExpiry is null OR @BatchNo is null)
+If @IsBatchControl=1 AND (@BatchExpiry is null OR @BatchNo is null) AND IsNull(@IsServiceItem,0)=0
 begin
     set @BusinessRules_PreventDefault = 1
     set @Result_Focus = 'BatchNo,Cannot be Empty BatchExpiry and BatchNo'
 end
-If @IsItemSerialized=1 and (@Item_Serial_No is null OR @Pick_Qty > 1)
+If @IsItemSerialized=1 and (@Item_Serial_No is null OR @Pick_Qty > 1) AND IsNull(@IsServiceItem,0)=0
 begin
     set @BusinessRules_PreventDefault = 1
     set @Result_Focus = 'Item_Serial_No,Cannot be Empty Serial No and Qty Should be 1'

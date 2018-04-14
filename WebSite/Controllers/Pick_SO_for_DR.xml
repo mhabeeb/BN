@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_SO_for_DR" conflictDetection="overwriteChanges" label="^PicSoForDr^Pick_SO_for_DR^PicSoForDr^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_SO_for_DR" conflictDetection="overwriteChanges" label="Pick_SO_for_DR" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName=" dbo.SO_Line_Items" custom="true">
       <text><![CDATA[SELECT     dbo.SO_Line_Items.SO_NO, dbo.SO_Line_Items.SO_Line_No, dbo.SO_Line_Items.Item_Code, dbo.SO_Header.Order_Type, dbo.SO_Line_Items.SO_Qty, 
@@ -12,22 +12,22 @@ WHERE     (dbo.SO_Line_Items.DV_Balance > 0) AND (dbo.SO_Line_Items.DR_Balance >
   </commands>
   <fields>
     <field name="SO_NO" type="Decimal" allowNulls="false" label="^SoNo^So No^SoNo^" showInSummary="true" />
-    <field name="SO_Line_No" type="Decimal" allowNulls="false" label="^SOLinNo^SO Line No^SOLinNo^" readOnly="true" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
-    <field name="Order_Type" type="Int16" allowNulls="false" label="^OrdeTyp^Order Type^OrdTyp^" showInSummary="true" />
-    <field name="SO_Qty" type="Decimal" label="^SoQty^SO Qty^SoQty^" showInSummary="true" />
-    <field name="DV_Balance" type="Decimal" label="^DVBal^DV Balance^DVBal^" showInSummary="true" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="20" />
+    <field name="SO_Line_No" type="Decimal" allowNulls="false" label="^SOLineNo^SO Line No^SOLineNo^" readOnly="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^ItemCode^Item Code^ItemCode^" length="20" showInSummary="true" />
+    <field name="Order_Type" type="Int16" allowNulls="false" label="^OrderType^Order Type^OrderType^" showInSummary="true" />
+    <field name="SO_Qty" type="Decimal" label="^SOQty^SO Qty^SOQty^" showInSummary="true" />
+    <field name="DV_Balance" type="Decimal" label="^DVBalance^DV Balance^DVBalance^" showInSummary="true" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" length="20" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="50" />
-    <field name="DR_Balance" type="Decimal" label="^DRBal^DR Balance^DRBal^" readOnly="true" />
-    <field name="Vendor_Name" type="String" allowNulls="false" label="^VenNam^Vendor Name^VenNam^" htmlEncode="false" hidden="false" length="150" />
-    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" htmlEncode="false" hidden="false" length="50" />
-    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Sys Number^SysNum^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="SO_OPU_Code" type="Int32" label="^SoOPUCod^SO OPU Code^SoOPUCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="DR_Balance" type="Decimal" label="^DRBalance^DR Balance^DRBalance^" readOnly="true" />
+    <field name="Vendor_Name" type="String" allowNulls="false" label="^VendorName^Vendor Name^VendorName^" htmlEncode="false" hidden="false" length="150" />
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProjectCode^Project Code^ProjectCode^" htmlEncode="false" hidden="false" length="50" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNumber^Sys Number^SysNumber^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="SO_OPU_Code" type="Int32" label="^SOOPUCode^SO OPU Code^SOOPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^SoLinIte^SO Line Items^SoLinIte^" filter="SO_OPU_Code IN (SELECT [OPU_Code] FROM [UserBranchAccess] where [UserID]=@BusinessRules_UserId)" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="dbo SO Line Items" filter="SO_OPU_Code IN (SELECT [OPU_Code] FROM [UserBranchAccess] where [UserID]=@BusinessRules_UserId)" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="SO_NO" columns="15" />
@@ -46,7 +46,7 @@ WHERE     (dbo.SO_Line_Items.DV_Balance > 0) AND (dbo.SO_Line_Items.DR_Balance >
         <dataField fieldName="SO_OPU_Code" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevSoLinIte^Review dbo SO Line Items^RevSoLinIte^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review dbo SO Line Items" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="dbo SO Line Items" flow="NewColumn">
@@ -65,7 +65,7 @@ WHERE     (dbo.SO_Line_Items.DV_Balance > 0) AND (dbo.SO_Line_Items.DR_Balance >
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewSoLinIte^New dbo SO Line Items^NewSoLinIte^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New dbo SO Line Items" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New dbo SO Line Items" flow="NewColumn">
@@ -110,7 +110,7 @@ WHERE     (dbo.SO_Line_Items.DV_Balance > 0) AND (dbo.SO_Line_Items.DR_Balance >
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

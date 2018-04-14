@@ -1,31 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="LookUp_PaymentTerms" conflictDetection="overwriteChanges" label="^LooPay^LookUp_PaymentTerms^LooPay^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="LookUp_PaymentTerms" conflictDetection="overwriteChanges" label="LookUp_PaymentTerms" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.LookUp_PaymentTermsBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="LookUp_PaymentTerms" custom="true">
-      <text><![CDATA[SELECT * FROM LookUp_PaymentTerms]]></text>
+      <text><![CDATA[SELECT  LookUp_PaymentTerms.*,CAST(LookUp_PaymentTerms.Pay_Terms_ID as varchar(50)) 
+"ZZ_Filter_Value" FROM LookUp_PaymentTerms
+
+
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="PaymentTerms_Name" type="String" label="^PayTerNam^Payment Terms Name^PayTerNam^" length="255" showInSummary="true" />
-    <field name="PaymentTerms_Description" type="String" label="^PayTerDes^Payment Terms Description^PayTerDes^" length="255" showInSummary="true" />
-    <field name="Pay_Terms_ID" type="Int32" allowNulls="false" label="^PayTerId^Pay Terms#^PayTerId^" showInSummary="true" isPrimaryKey="true" />
-    <field name="No_Days" type="Int32" label="^NoDay^No Days^NoDay^" showInSummary="true" />
+    <field name="PaymentTerms_Name" type="String" label="^PayTermsName^Payment Terms Name^PayTermsName^" length="255" showInSummary="true" />
+    <field name="PaymentTerms_Description" type="String" label="Payment Terms Description" length="255" showInSummary="true" />
+    <field name="Pay_Terms_ID" type="Int32" allowNulls="false" label="^PayTerms^Pay Terms#^PayTerms^" showInSummary="true" isPrimaryKey="true" />
+    <field name="No_Days" type="Int32" label="^NoDays^No Days^NoDays^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="ZZ_Controller" type="String" label="Controller" computed="true">
+      <formula>'LookUp_PaymentTerms'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'LookUp_PaymentTerms_grid1'</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^LooUpPayTer^Look Up Payment Terms^LooUpPayTer^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="^LooUpPayTer^Payment Terms^LooUpPayTer^" showInSelector="false" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true">
       <headerText />
       <dataFields>
         <dataField fieldName="Pay_Terms_ID" columns="15" />
         <dataField fieldName="PaymentTerms_Name" />
         <dataField fieldName="PaymentTerms_Description" />
         <dataField fieldName="No_Days" columns="15" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevLooUpPayTer^Review Look Up Payment Terms^RevLooUpPayTer^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="^RevLooUpPayTer^Review Payment Terms^RevLooUpPayTer^" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Look Up Payment Terms" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevLooUpPayTer^Review Payment Terms^RevLooUpPayTer^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="PaymentTerms_Name" />
             <dataField fieldName="PaymentTerms_Description" />
@@ -35,16 +51,16 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewLooUpPayTer^New Look Up Payment Terms^NewLooUpPayTer^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="^NewLooUpPayTer^New Payment Terms^NewLooUpPayTer^" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Look Up Payment Terms" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewLooUpPayTer^New Payment Terms^NewLooUpPayTer^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="PaymentTerms_Name" />
             <dataField fieldName="PaymentTerms_Description" />
-            <dataField fieldName="Pay_Terms_ID" columns="15" />
             <dataField fieldName="No_Days" columns="15" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -69,10 +85,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -103,5 +119,12 @@
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintLookUpPaymentTerms" headerText="^PriPayTer^Print Payment Terms^PriPayTer^" id="a100" cssClass="glyphicon glyphicon-print" />
+    </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @OPU_Code=@Session_OPU_Code]]></rule>
+    <rule id="r101" commandName="Custom" commandArgument="PrintLookUpPaymentTerms" type="Code" phase="Execute" />
+  </businessRules>
 </dataController>

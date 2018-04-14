@@ -1,50 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="AssetsBook" conflictDetection="overwriteChanges" label="^AssBoo^AssetsBook^AssBoo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="AssetsBook" conflictDetection="overwriteChanges" label="AssetsBook" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.AssetsBookBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="AssetsBook" custom="true">
-      <text><![CDATA[SELECT * FROM AssetsBook]]></text>
+      <text><![CDATA[SELECT AssetsBook.*,CAST(AssetsBook.BookID as varchar(50)) 
+"ZZ_Filter_Value" FROM AssetsBook
+
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="BookID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^BooId^Book#^BooId^" readOnly="true" />
-    <field name="BookName" type="String" label="^BooNam^Book Name^BooNam^" length="250" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^">
+    <field name="BookID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Book^Book#^Book^" readOnly="true" />
+    <field name="BookName" type="String" label="^BookName^Book Name^BookName^" length="250" />
+    <field name="InActive" type="Int32" label="In Active">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CrtDatTim^Created Date Time^CrtDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdtDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="^CrtdDtTm^Created Date Time^CrtdDtTm^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdtdDtTm^Updated Date Time^UpdtdDtTm^" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Int32" label="^CompCode^Company Code^CompCode^" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="FirstPeriod" type="Date" label="^FirPer^First Period^FirPer^" allowNulls="false" />
+    <field name="ZZ_Controller" type="String" label="Controller" computed="true">
+      <formula>'AssetsBook'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'AssetsBook_grid1'</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
+    <field name="FirstPeriodText" type="String" label="^FirPer^First Period^FirPer^" length="50" />
+    <field name="AssetsOpenPeriod" type="String" label="^OpePer^Open Period^OpePer^" readOnly="true" computed="true" showInSummary="true">
+      <formula>dbo.GET_FA_OPEN_PERIOD_NAME ( BookID )</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DefAssBoo^Define Asset Book^DefAssBoo^" reportTemplate="true" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Define Asset Book" reportTemplate="true" showInSelector="false" filter="OPU_Code=@Session_OPU_Code" sortExpression="BookID desc">
+      <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="BookName" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="BookID" columns="15" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="FirstPeriodText" columns="50" />
         <dataField fieldName="InActive" columns="15" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
@@ -52,17 +69,22 @@
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="FirstPeriod" columns="15" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
+        <dataField fieldName="AssetsOpenPeriod" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevAssBoo^Review Asset Book^RevAssBoo^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Asset Book" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Review Asset Book" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevAssBoo^Review Asset Book^RevAssBoo^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="BookName" />
             <dataField fieldName="InActive" columns="15" />
@@ -76,11 +98,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewAssBoo^New Asset Book^NewAssBoo^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Asset Book" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Asset Book" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewAssBoo^New Asset Book^NewAssBoo^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="BookName" />
             <dataField fieldName="InActive" columns="15" />
@@ -90,6 +112,7 @@
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="FirstPeriod" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -114,10 +137,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="&#x9;glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -145,8 +168,8 @@
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    <actionGroup id="ag100" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintAssetBook" headerText="^PriAssBoo^Print Asset Book^PriAssBoo^" id="a100" cssClass="&#x9;glyphicon glyphicon-print" />
     </actionGroup>
   </actions>
   <businessRules>
@@ -154,9 +177,11 @@
 SET @Created_DateTime=GETDATE()
 SET @OPU_Code=@Session_OPU_Code
 SET @Company_Code=@Session_Company_Code
+SET @InActive = 0
 ]]></rule>
     <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @OPU_Code=@Session_OPU_Code
 SET @Company_Code=@Session_Company_Code
 ]]></rule>
+    <rule id="r102" commandName="Custom" commandArgument="PrintAssetBook" type="Code" phase="Execute" />
   </businessRules>
 </dataController>

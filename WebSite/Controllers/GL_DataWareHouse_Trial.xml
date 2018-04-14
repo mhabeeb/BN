@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="GL_DataWareHouse_Trial" label="^GldatWarhouTri^GL_DataWareHouse_Trial" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="GL_DataWareHouse_Trial" label="GL_DataWareHouse_Trial" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName=" [dbo].[GL_DataWareHouse]" custom="true">
       <text><![CDATA[SELECT * FROM [dbo].[GL_DataWareHouse]]]></text>
     </command>
   </commands>
   <fields>
-    <field name="FY_Code" type="Int32" allowNulls="false" label="^FisYea^Fiscal Year^FisYea^" htmlEncode="false" hidden="false" />
-    <field name="TrxYear" type="Int32" allowNulls="false" label="^TrxYea^Trx Year^TrxYea^" showInSummary="true" isPrimaryKey="true" />
-    <field name="TrxMonths" type="Int32" allowNulls="false" label="^TrxMon^Trx Months^TrxMon^" showInSummary="true" isPrimaryKey="true" maskType="Date" />
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="Dept_Code" type="String" allowNulls="false" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="Account_Type" type="String" allowNulls="false" label="^AccTyp^Account Type^AccTyp^" length="50" />
-    <field name="Ac_Description" type="String" label="^AcDes^Ac Description^AcDes^" length="50" htmlEncode="false" />
-    <field name="Opening" type="Decimal" label="^Ope^Opening^Ope^" />
-    <field name="Debit_Amount" type="Decimal" label="^DebAmo^Debit Amount^DebAmo^" />
-    <field name="Credit_Amount" type="Decimal" label="^CreAmo^Credit Amount^CreAmo^" />
-    <field name="Closing" type="Decimal" label="^Clo^Closing^Clo^" />
-    <field name="ClosingValues" type="Decimal" allowNulls="false" label="^CloVal^Closing Values^CloVal^" allowQBE="false" allowSorting="false" htmlEncode="false" dataFormatString="N2" hidden="false" />
-    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDat^End Date^EndDat^" htmlEncode="false" hidden="false" showInSummary="true" />
+    <field name="FY_Code" type="Int32" allowNulls="false" label="^FiscalYear^Fiscal Year^FiscalYear^" htmlEncode="false" hidden="false" />
+    <field name="TrxYear" type="Int32" allowNulls="false" label="^TrxYear^Trx Year^TrxYear^" showInSummary="true" isPrimaryKey="true" />
+    <field name="TrxMonths" type="Int32" allowNulls="false" label="^TrxMonths^Trx Months^TrxMonths^" showInSummary="true" isPrimaryKey="true" maskType="Date" />
+    <field name="AccountID" type="String" allowNulls="false" label="^Account^Account#^Account^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProjectCode^Project Code^ProjectCode^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Dept_Code" type="String" allowNulls="false" label="^DeptCode^Dept Code^DeptCode^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Account_Type" type="String" allowNulls="false" label="^AccountType^Account Type^AccountType^" length="50" />
+    <field name="Ac_Description" type="String" label="^AcDescription^Ac Description^AcDescription^" length="50" htmlEncode="false" />
+    <field name="Opening" type="Decimal" label="^Opening^Opening^Opening^" />
+    <field name="Debit_Amount" type="Decimal" label="^DebitAmount^Debit Amount^DebitAmount^" />
+    <field name="Credit_Amount" type="Decimal" label="^CreditAmount^Credit Amount^CreditAmount^" />
+    <field name="Closing" type="Decimal" label="^Closing^Closing^Closing^" />
+    <field name="ClosingValues" type="Decimal" allowNulls="false" label="^ClosingValues^Closing Values^ClosingValues^" allowQBE="false" allowSorting="false" htmlEncode="false" dataFormatString="N2" hidden="false" />
+    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDate^End Date^EndDate^" htmlEncode="false" hidden="false" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^TriBalByPro^Trial Balance By Project^TriBalByPro^" group="Account_Type" filter="AccountID&lt;&gt; '999999999'" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Trial Balance By Project" group="Account_Type" filter="AccountID&lt;&gt; '999999999'" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="FY_Code" columns="15" />

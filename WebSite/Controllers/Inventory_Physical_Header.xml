@@ -1,75 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Inventory_Physical_Header" conflictDetection="overwriteChanges" label="^InvPhyHea^Inventory_Physical_Header^InvPhyHea^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Inventory_Physical_Header" conflictDetection="overwriteChanges" label="Inventory_Physical_Header" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Inventory_Physical_Header" custom="true">
       <text><![CDATA[SELECT * FROM Inventory_Physical_Header]]></text>
     </command>
   </commands>
   <fields>
-    <field name="PhysicalCountID" type="Int64" allowNulls="false" isPrimaryKey="true" label="^PhyCouId^Physical Count#^PhyCouId^" readOnly="true" />
-    <field name="Transaction_Date" type="DateTime" label="^TraDat^Transaction Date^TraDat^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="Store_ID" type="Int32" allowNulls="false" label="^StoId^Store#^StoId^" />
-    <field name="DOC_TYPE_ID" type="Int32" label="^DocTypId^Doc Type#^DocTypId^" />
-    <field name="Doc_No" type="Int64" label="^DocNo^Doc No^DocNo^" />
-    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^">
+    <field name="PhysicalCountID" type="Int64" allowNulls="false" isPrimaryKey="true" label="Physical Count#" readOnly="true" />
+    <field name="Transaction_Date" type="DateTime" label="Transaction Date" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
+    <field name="Store_ID" type="Int32" allowNulls="false" label="Store#" />
+    <field name="DOC_TYPE_ID" type="Int32" label="Doc Type#" />
+    <field name="Doc_No" type="Int64" label="Doc No" />
+    <field name="Rec_Status" type="Int32" label="Rec Status">
       <items style="DropDownList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="App_Group_ID" type="Int64" label="^AppGroId^App Group#^AppGroId^" contextFields="DocTypeID=DOC_TYPE_ID">
+    <field name="App_Group_ID" type="Int64" label="App Group#" contextFields="DocTypeID=DOC_TYPE_ID">
       <items style="Lookup" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="DocTypeID" dataValueField="DocTypeID" />
     </field>
-    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^">
+    <field name="Approve_Ask" type="Int32" label="Approve Ask">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="CountStatus" type="Int32" label="^CouSta^Count Status^CouSta^" />
-    <field name="TotalValue" type="Decimal" label="^TotVal^Total Value^TotVal^" />
-    <field name="TotalDescrepancy" type="Decimal" label="^TotDes^Total Descrepancy^TotDes^" />
-    <field name="MiscIssueID" type="Decimal" label="^MisIssId^Misc Issue#^MisIssId^" />
-    <field name="MiscIReceiptID" type="Decimal" label="^MisRecId^Misc I Receipt#^MisRecId^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="CountStatus" type="Int32" label="Count Status" />
+    <field name="TotalValue" type="Decimal" label="Total Value" />
+    <field name="TotalDescrepancy" type="Decimal" label="Total Descrepancy" />
+    <field name="MiscIssueID" type="Decimal" label="Misc Issue#" />
+    <field name="MiscIReceiptID" type="Decimal" label="Misc I Receipt#" />
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="Updated By" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch ^ARABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" showInSummary="true" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="Freeze" type="Boolean" label="^Fre^Freeze^Fre^" allowNulls="false">
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="Freeze" type="Boolean" label="Freeze" allowNulls="false">
       <items style="CheckBox" />
     </field>
-    <field name="Posted" type="Boolean" label="^Pos^Posted^Pos^" allowNulls="false">
+    <field name="Posted" type="Boolean" label="Posted" allowNulls="false">
       <items style="CheckBox" />
     </field>
-    <field name="Status" type="String" label="^Sta^Status^Sta^" length="50" />
+    <field name="Status" type="String" label="Status" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^InvPhyHea^Inventory Physical Header^InvPhyHea^" sortExpression="PhysicalCountID desc" filter="OPU_Code=@Session_OPU_Code">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Inventory Physical Header" sortExpression="PhysicalCountID desc" filter="Store_ID = @Session_StoreID">
+      <headerText />
       <dataFields>
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Store_ID" columns="15" hidden="true" />
         <dataField fieldName="PhysicalCountID" columns="15" />
         <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="Store_ID" columns="15" hidden="true" />
         <dataField fieldName="Doc_No" columns="15" />
         <dataField fieldName="Transaction_Date" columns="10" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -87,19 +87,19 @@
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Approve_Ask" columns="15" />
         <dataField fieldName="Rec_Status" columns="15" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="Freeze" />
-        <dataField fieldName="Posted" />
         <dataField fieldName="Status" columns="50" />
+        <dataField fieldName="Posted" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPhyHea^Review Inventory Physical Header^RevPhyHea^">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Inventory Physical Header">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Inventory Physical Header" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiInvPhyHea^Edit Inventory Physical Header^EdiInvPhyHea^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Transaction_Date" columns="10" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -119,18 +119,18 @@
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Freeze" />
             <dataField fieldName="Posted" />
-            <dataField fieldName="Status" columns="50" />
+            <dataField fieldName="Status" columns="20" />
+            <dataField fieldName="Freeze" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Inventory Physical Header">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewInvPhyHea^New Inventory Physical Header^NewInvPhyHea^">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Inventory Physical Header" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^CreNewInvPhyHea^Create New Inventory Physical Header^CreNewInvPhyHea^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Transaction_Date" columns="10" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -151,8 +151,8 @@
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Freeze" hidden="true" />
-            <dataField fieldName="Posted" hidden="true" />
             <dataField fieldName="Status" columns="50" hidden="true" />
+            <dataField fieldName="Posted" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -161,7 +161,6 @@
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
@@ -179,10 +178,10 @@
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="&#x9;glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -208,22 +207,19 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
-    </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Snap Shot" flat="true">
-      <action commandName="SQL" headerText="1-SnapShot" id="a100" whenLastCommandName="Select">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^SnaSho^Snap Shot^SnaSho^" flat="true">
+      <action commandName="SQL" headerText="^1SnaSho^1-SnapShot^1SnaSho^" id="a100" whenLastCommandName="Select" cssClass="glyphicon glyphicon-screenshot">
         <data><![CDATA[EXEC [PHYSICAL_INVENTORY] @Session_StoreID,@PhysicalCountID,1]]></data>
       </action>
-      <action commandName="SQL" headerText="2-Freez" id="a103" whenLastCommandName="Select">
+      <action commandName="SQL" headerText="^Fre^2-Freez^Fre^" id="a103" whenLastCommandName="Select" cssClass="glyphicon glyphicon-send">
         <data><![CDATA[EXEC [PHYSICAL_INVENTORY] @Session_StoreID,@PhysicalCountID,2]]></data>
       </action>
-      <action commandName="SQL" headerText="3-Adjustment" id="a102" whenLastCommandName="Select">
+      <action commandName="SQL" headerText="^Adj^3-Adjustment^Adj^" id="a102" whenLastCommandName="Select" cssClass="glyphicon glyphicon-sort">
         <data><![CDATA[EXEC [PHYSICAL_INVENTORY] @Session_StoreID,@PhysicalCountID,3]]></data>
       </action>
     </actionGroup>
-    <actionGroup id="ag101" scope="ActionBar" headerText="Ask Approval" flat="true">
-      <action commandName="SQL" headerText="Ask Approval" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
+    <actionGroup id="ag101" scope="ActionBar" headerText="^AskApp^Ask Approval^AskApp^" flat="true">
+      <action commandName="SQL" headerText="^AskApp^Ask Approval^AskApp^" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0" cssClass="glyphicon glyphicon-question-sign">
         <data><![CDATA[IF EXISTS
 (
     SELECT TOP 1 PhysicalCountID
@@ -238,12 +234,17 @@
              @BusinessRules_UserId;
 END]]></data>
       </action>
-      <action commandName="SQL" headerText="Re-Open" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1 ">
+      <action commandName="SQL" headerText="^ReOpe^Re-Open^ReOpe^" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1 ">
         <data><![CDATA[EXECUTE [dbo].[REOPEN_DOCUMENT_STATUS] @PhysicalCountID, @DOC_TYPE_ID]]></data>
       </action>
     </actionGroup>
   </actions>
   <businessRules>
+    <rule id="r103" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Approve_Ask=0
 SET @Store_ID =@Session_StoreID
 SET @OPU_Code=@Session_OPU_Code
@@ -279,11 +280,6 @@ if [dbo].[CHECK_APPROVAL_STATUS](@PhysicalCountID,@DOC_TYPE_ID)=1
 begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='PhysicalCountID, The Docuement Is InProcess/Approved, Can not be Update'
-end]]></rule>
-    <rule id="r103" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
-begin
-    SET @BusinessRules_PreventDefault = 1
-    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
   </businessRules>
 </dataController>

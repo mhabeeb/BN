@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DiscountDialog_ar" label="DiscountDialog_ar" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="BankName" type="Int32" allowNulls="false" label="^BankName^Bank Name^BankName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="Lookup" dataController="Pick_Bank" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" />
+    </field>
+    <field name="PayNumber" type="Decimal" label="^PayDoc^Pay Doc^PayDoc^" dataFormatString="N2" contextFields="CashBankID=BankName" causesCalculate="true" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Pay_Doc_Ar" dataView="grid1" dataTextField="Document_Descriptions" dataValueField="PayNumber" />
+    </field>
+  </fields>
+  <actions />
+  <views />
+</dataController>

@@ -1,43 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="tbl_Countries" conflictDetection="overwriteChanges" label="^Cou^Countries^Cou^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="tbl_Countries" conflictDetection="overwriteChanges" label="tbl_Countries" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Countries" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Countries]]></text>
     </command>
   </commands>
   <fields>
-    <field name="CountryName" type="String" allowNulls="false" label="^CouNam^Country Name^CouNam^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="CountryName" type="String" allowNulls="false" label="^CountryName^Country Name^CountryName^" length="50" showInSummary="true" isPrimaryKey="true" />
     <field name="CountryCode" type="String" allowNulls="false" label="^CouCod^Country Code^CouCod^" length="2" showInSummary="true" />
-    <field name="IsActive" type="Int32" label="^IsAct^Is Active^IsAct^" showInSummary="true">
+    <field name="IsActive" type="Int32" label="^IsActive^Is Active^IsActive^" showInSummary="true">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
       <formula>SELECT @Session_BranchName </formula>
     </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Cou^Countries^Cou^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Countries" showInSelector="false">
+      <headerText />
       <dataFields>
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="CountryName" columns="50" />
         <dataField fieldName="CountryCode" columns="2" />
-        <dataField fieldName="IsActive" columns="15" hidden="true" />
+        <dataField fieldName="IsActive" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevCou^Review Countries^RevCou^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Countries" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Countries" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiCou^Edit Countries^EdiCou^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CountryName" columns="50" />
             <dataField fieldName="CountryCode" columns="2" />
@@ -46,11 +46,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCou^New Countries^NewCou^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Countries" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Countries" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewCou^New Countries^NewCou^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CountryName" columns="50" />
             <dataField fieldName="CountryCode" columns="2" />
@@ -76,7 +76,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

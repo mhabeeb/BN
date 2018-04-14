@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="TBL_Document_Header" conflictDetection="overwriteChanges" label="^DocHea^Document Header^DocHea^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="TBL_Document_Header" conflictDetection="overwriteChanges" label="TBL Document Header" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -30,24 +30,24 @@ from "dbo"."TBL_Document_Header" "TBL_Document_Header"
     </command>
   </commands>
   <fields>
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="DocVersion" type="Int32" label="^DocVer^Doc Version^DocVer^" showInSummary="true" />
-    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" />
-    <field name="DocumentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DocId^Document#^DocId^" readOnly="true" />
+    <field name="Company_Code" type="Decimal" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="DocVersion" type="Int32" label="^DocVersion^Doc Version^DocVersion^" showInSummary="true" />
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocType^Doc Type#^DocType^" showInSummary="true" />
+    <field name="DocumentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Document^Document#^Document^" readOnly="true" />
     <field name="DocRefNo" type="Decimal" label="^DocRefNo^Doc Ref No^DocRefNo^" showInSummary="true" />
-    <field name="DocumentDate" type="DateTime" label="^DocDat^Document Date^DocDat^" />
-    <field name="DocDescription" type="String" allowQBE="false" allowSorting="false" label="^DocDes^Doc Description^DocDes^" />
-    <field name="ApprovalType" type="Int32" default="((0))" label="^AppTyp^Approval Type^AppTyp^" />
-    <field name="DocumentStatus" type="Int32" default="((0))" label="^DocSta^Document Status^DocSta^" />
+    <field name="DocumentDate" type="DateTime" label="^DocumentDate^Document Date^DocumentDate^" />
+    <field name="DocDescription" type="String" allowQBE="false" allowSorting="false" label="^DocDescription^Doc Description^DocDescription^" />
+    <field name="ApprovalType" type="Int32" default="((0))" label="^ApprovalType^Approval Type^ApprovalType^" />
+    <field name="DocumentStatus" type="Int32" default="((0))" label="^DocumentStatus^Document Status^DocumentStatus^" />
     <field name="URL" type="String" label="^Url^Url^Url^" length="100" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CredBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DocHea^Document Header^DocHea^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="TBL Document Header" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="DocTypeID" columns="15" />
@@ -59,7 +59,7 @@ from "dbo"."TBL_Document_Header" "TBL_Document_Header"
         <dataField fieldName="URL" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDocHea^Review Document Header^RevDocHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review TBL Document Header" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="TBL Document Header" flow="NewColumn">
@@ -83,7 +83,7 @@ from "dbo"."TBL_Document_Header" "TBL_Document_Header"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDocHea^New Document Header^NewDocHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New TBL Document Header" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New TBL Document Header" flow="NewColumn">
@@ -133,7 +133,7 @@ from "dbo"."TBL_Document_Header" "TBL_Document_Header"
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

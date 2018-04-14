@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="V_GL_CODE_COMBINATION" conflictDetection="overwriteChanges" label="^VGlCodCom^V Gl Code Combination^VGlCodCom^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="V_GL_CODE_COMBINATION" conflictDetection="overwriteChanges" label="V Gl Code Combination" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -16,16 +16,16 @@ from "dbo"."V_GL_CODE_COMBINATION" "V_GL_CODE_COMBINATION"
     </command>
   </commands>
   <fields>
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" showInSummary="true" />
-    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
-    <field name="Dept_Code" type="String" allowNulls="false" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" />
-    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50" showInSummary="true" />
-    <field name="Lineage" type="String" label="^Lin^Lineage^Lin^" length="255" showInSummary="true" />
-    <field name="Company_Code" type="Decimal" allowNulls="false" label="^ComCod^Company Code^CompCod^" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="AccountID" type="String" allowNulls="false" label="^Account^Account#^Account^" length="50" showInSummary="true" />
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProjectCode^Project Code^ProjectCode^" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" allowNulls="false" label="^DeptCode^Dept Code^DeptCode^" length="50" showInSummary="true" />
+    <field name="Account_Type" type="String" label="^AccountType^Account Type^AccountType^" length="50" showInSummary="true" />
+    <field name="Lineage" type="String" label="^Lineage^Lineage^Lineage^" length="255" showInSummary="true" />
+    <field name="Company_Code" type="Decimal" allowNulls="false" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OPUCode^OPU Code^OPUCode^" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^VGlCodCom^V Gl Code Combination^VGlCodCom^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="V Gl Code Combination" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="AccountID" columns="50" />
@@ -37,7 +37,7 @@ from "dbo"."V_GL_CODE_COMBINATION" "V_GL_CODE_COMBINATION"
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevVGlCodCom^Review V Gl Code Combination^RevVGlCodCom^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review V Gl Code Combination" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="V Gl Code Combination" flow="NewColumn">
@@ -54,7 +54,7 @@ from "dbo"."V_GL_CODE_COMBINATION" "V_GL_CODE_COMBINATION"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewVGlCodCom^New V Gl Code Combination^NewVGlCodCom^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New V Gl Code Combination" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New V Gl Code Combination" flow="NewColumn">
@@ -97,7 +97,7 @@ from "dbo"."V_GL_CODE_COMBINATION" "V_GL_CODE_COMBINATION"
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

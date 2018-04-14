@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="QuoteAnalysis" conflictDetection="overwriteChanges" label="^QuoAna^QuoteAnalysis^QuoAna^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="QuoteAnalysis" conflictDetection="overwriteChanges" label="QuoteAnalysis" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.RFQ_Quotation" custom="true">
       <text><![CDATA[SELECT        dbo.RFQ_Quotation.RFQ_NO, dbo.RFQ_Quotation.Item_Code, dbo.RFQ_Quotation.UOM, dbo.RFQ_Quotation.RFQ_Qty, dbo.RFQ_Quotation.Unit_Price, 
@@ -12,57 +12,57 @@ FROM            dbo.RFQ_Quotation INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
       <formula>SELECT @Session_BranchName_Ar</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="RFQ_NO" type="Decimal" allowNulls="false" label="^RfqNo^Rfq No^RfqNo^" showInSummary="true" isPrimaryKey="true" />
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" />
-    <field name="UOM" type="String" label="^Uom^Uom^Uom^" readOnly="true" length="10" />
-    <field name="RFQ_Qty" type="Decimal" label="^RfqQty^RFQ Qty^RfqQty^" showInSummary="true" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" />
-    <field name="Notes" type="String" allowQBE="false" allowSorting="false" label="^Notes^Notes^Notes^" />
-    <field name="Terms" type="String" allowQBE="false" allowSorting="false" label="^Terms^Terms^Terms^" />
-    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^SupplierNo^SysNum^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
-    <field name="Promised_Date" type="DateTime" label="^ProDat^Promised Date^ProDat^" />
-    <field name="ConvertToPO" type="Int32" label="^ConToPo^Convert To PO^ConToPo^" />
-    <field name="Part_No" type="String" label="^ParNo^Part No^ParNo^" length="20" />
-    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" />
-    <field name="RFQ_Date" type="DateTime" label="^RfqDat^RFQ Date^RfqDat^" />
-    <field name="Last_Submission_Date" type="DateTime" label="^LasSubDat^Last Submission Date^LasSubDat^" />
-    <field name="RFQ_Status" type="String" label="^RfqSta^RFQ Status^RfqSta^" length="25" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="PR_Line_No" type="Decimal" allowNulls="false" label="^PrLinNo^PR Line No^PrLinNo^" />
-    <field name="ClosedYN" type="Int32" label="^CloYn^Closed YN^CloYn^">
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="RFQ_NO" type="Decimal" allowNulls="false" label="Rfq No" showInSummary="true" isPrimaryKey="true" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" />
+    <field name="UOM" type="String" label="Uom" readOnly="true" length="10" />
+    <field name="RFQ_Qty" type="Decimal" label="RFQ Qty" />
+    <field name="Unit_Price" type="Decimal" label="Unit Price" />
+    <field name="Notes" type="String" allowQBE="false" allowSorting="false" label="Notes" />
+    <field name="Terms" type="String" allowQBE="false" allowSorting="false" label="Terms" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="SupplierNo" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" length="150" />
+    <field name="Promised_Date" type="DateTime" label="Promised Date" />
+    <field name="ConvertToPO" type="Int32" label="Convert To PO" />
+    <field name="Part_No" type="String" label="Part No" length="20" />
+    <field name="Item_Description" type="String" label="Item Description" length="500" />
+    <field name="RFQ_Date" type="DateTime" label="RFQ Date" />
+    <field name="Last_Submission_Date" type="DateTime" label="Last Submission Date" />
+    <field name="RFQ_Status" type="String" label="^RFQSta^RFQ Status^RFQSta^" length="25" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" label="PR Line No" />
+    <field name="ClosedYN" type="Int32" label="Closed YN">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" computed="true" onDemand="true" onDemandHandler="AABranch_LogoBLogo12" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" isVirtual="true" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" computed="true" onDemand="true" onDemandHandler="AABranch_LogoBLogo12" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" isVirtual="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RfqQuo^RFQ Quotation^RfqQuo^" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="dbo RFQ Quotation" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="Vendor_Name" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Sys_Number" columns="15" />
-        <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="RFQ_NO" columns="15" />
         <dataField fieldName="Item_Code" columns="20" />
         <dataField fieldName="Part_No" columns="20" />
@@ -81,17 +81,17 @@ FROM            dbo.RFQ_Quotation INNER JOIN
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="PR_Line_No" columns="15" />
         <dataField fieldName="ClosedYN" columns="15" />
-        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRfqQuo^Review RFQ Quotation^RevRfqQuo^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review dbo RFQ Quotation" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="dbo RFQ Quotation" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiRfqQuo^Edit RFQ Quotation^EdiRfqQuo^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="RFQ_NO" columns="15" />
             <dataField fieldName="Item_Code" columns="20" />
@@ -117,11 +117,11 @@ FROM            dbo.RFQ_Quotation INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRfqQuo^New RFQ Quotation^NewRfqQuo^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New dbo RFQ Quotation" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New dbo RFQ Quotation" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewRfqQuo^New RFQ Quotation^NewRfqQuo^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="RFQ_NO" columns="15" />
             <dataField fieldName="Item_Code" columns="20" />

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Parameter_Cust_Ledger" label="^ParCusLed^Parameter_Cust_Ledger^ParCusLed^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Parameter_Cust_Ledger" label="Parameter_Cust_Ledger" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <fields>
-    <field name="FromDate" type="DateTime" allowNulls="false" label="^FroDat^From Date^FroDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowLEV="true" />
-    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDat^End Date^EndDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowLEV="true" />
-    <field name="PartyName" type="Decimal" allowNulls="false" label="^ParNam^Party Name^ParNam^">
+    <field name="FromDate" type="DateTime" allowNulls="false" label="^FromDate^From Date^FromDate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowLEV="true" />
+    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDate^End Date^EndDate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowLEV="true" />
+    <field name="PartyName" type="Decimal" allowNulls="false" label="Party Name">
       <items style="Lookup" dataController="Pick_Customer" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
     <field name="LocationID" type="Decimal" allowNulls="false" label="Location ID" contextFields="Sys_Number=PartyName">
-      <items style="DropDownList" dataController="tbl_Locations" dataView="grid1" dataTextField="Location_Name" dataValueField="LocationID" />
+      <items style="DropDownList" dataController="tbl_Locations" dataTextField="Location_Name" dataValueField="LocationID" />
     </field>
   </fields>
   <actions />

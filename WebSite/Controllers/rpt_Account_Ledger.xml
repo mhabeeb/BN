@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="rpt_Account_Ledger" conflictDetection="overwriteChanges" label="^RptAccLed^rpt_Account_Ledger^RptAccLed^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="rpt_Account_Ledger" conflictDetection="overwriteChanges" label="rpt_Account_Ledger" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="CalcDate" type="Int32" label="^CalDat^YYYYMM^CalDat^" />
-    <field name="Account_Description" type="String" allowNulls="false" label="^AccDes^Account Description^AccDes^" length="200" showInSummary="true" />
-    <field name="Account_Type" type="String" allowNulls="false" label="^AccTyp^Account Type^AccTyp^" length="50" showInSummary="true" />
-    <field name="Ref_Account_No" type="String" label="^RefAccNo^Ref Account No^RefAccNo^" length="50" showInSummary="true" />
-    <field name="PostableYN" type="Int32" allowNulls="false" label="^PosYn^Postable YN^PosYn^" showInSummary="true">
+    <field name="AccountID" type="String" allowNulls="false" label="Account#" length="50" isPrimaryKey="true" />
+    <field name="CalcDate" type="Int32" label="YYYYMM" />
+    <field name="Account_Description" type="String" allowNulls="false" label="Account Description" length="200" />
+    <field name="Account_Type" type="String" allowNulls="false" label="Account Type" length="50" />
+    <field name="Ref_Account_No" type="String" label="Ref Account No" length="50" />
+    <field name="PostableYN" type="Int32" allowNulls="false" label="Postable YN">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Account_Desc_Html" type="String" label="^AmoAccDes^Account Desc^AmoAccDes^" readOnly="true" length="4000" htmlEncode="false" />
-    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" readOnly="true" />
-    <field name="Period_Debit" type="Decimal" label="^perDeb^Period Debit^perDeb^" readOnly="true" />
-    <field name="Period_Credit" type="Decimal" label="^PerCre^Period Credit^PerCre^" readOnly="true" />
-    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" readOnly="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Account_Desc_Html" type="String" label="Account Desc" readOnly="true" length="4000" htmlEncode="false" />
+    <field name="OpeningBalance" type="Decimal" label="Opening Balance" readOnly="true" />
+    <field name="Period_Debit" type="Decimal" label="Period Debit" readOnly="true" />
+    <field name="Period_Credit" type="Decimal" label="Period Credit" readOnly="true" />
+    <field name="Closing_Amount" type="Decimal" label="Closing Amount" readOnly="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RptAccLed^rpt Account Ledger^RptAccLed^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="rpt Account Ledger" showInSelector="false">
       <headerText>[Account_Type]</headerText>
       <dataFields>
         <dataField fieldName="CalcDate" columns="15" />
@@ -35,7 +35,7 @@
         <dataField fieldName="Closing_Amount" dataFormatString="n2" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRptAccLed^Review rpt Account Ledger^RevRptAccLed^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review rpt Account Ledger" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="rpt Account Ledger" flow="NewColumn">
@@ -57,7 +57,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewAccLed^New rpt Account Ledger^NewAccLed^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New rpt Account Ledger" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New rpt Account Ledger" flow="NewColumn">
@@ -123,8 +123,8 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Parameter" flat="true">
-      <action commandName="SQL" headerText="Parameter" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^Par^Parameter^Par^" flat="true">
+      <action commandName="SQL" headerText="^Par^Parameter^Par^" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500" cssClass="&#x9;glyphicon glyphicon-align-right">
         <data><![CDATA[SET @Session_LedDate=@Parameters_EndDate
 SET @Result_NavigateUrl = 'AccountLedgers.aspx']]></data>
       </action>
@@ -135,14 +135,16 @@ SET @Result_NavigateUrl = 'AccountLedgers.aspx']]></data>
 -- Enable caching of the result set. Duration is specified in seconds.
 -- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
     <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[IF @Session_LedDate IS NULL SET @Session_LedDate=GETDATE()
-
 SELECT A.[AccountID],
        A.[Account_Description],
        A.[Account_Type],
        A.[Ref_Account_No],
        A.[PostableYN],
        B.OPU_Code OPU_Code,
-        c.rdate CalcDate,
+       c.rdate CalcDate,
+       B.Project_Code Project_Code,
+       B.Dept_Code Dept_Code,
+       B.SiteCode SiteCode,
        CASE A.[PostableYN]
            WHEN 0
            THEN '<font Color=BLUE ,size='+CAST(4 - A.Ac_Level AS VARCHAR(2))+'>'+REPLICATE('&nbsp;', A.Ac_Level*2)+A.AccountID+'-'+A.Account_Description+'</Font>'
@@ -151,7 +153,7 @@ SELECT A.[AccountID],
        (CAST(
             (
                 SELECT CAST(SUM(O.Debit_Amount - O.Credit_Amount) AS MONEY)
-                FROM GL_Transaction_Line O
+                FROM GL_Balances O
                 WHERE 1 = (CASE
                                WHEN(O.Account_Type NOT IN('Expense', 'Revenue', 'Cogs')
                       AND O.CalcDate < c.rdate)
@@ -163,28 +165,91 @@ SELECT A.[AccountID],
                                ELSE 0
                            END)
                 AND O.Lineage LIKE '%/'+A.[AccountID]+'/%'
-                AND ISNULL(O.OPU_Code_Ln, 0) = B.OPU_Code FOR XML PATH('')
+                AND ISNULL(O.OPU_Code, 0) = B.OPU_Code
+                AND 1 = (CASE
+                             WHEN B.Project_Code = 'None'
+                             THEN 1
+                             WHEN O.Project_Code = B.Project_Code
+                             THEN 1
+                             ELSE 0
+                         END)
+                AND 1 = (CASE
+                             WHEN B.SiteCode = 'None'
+                             THEN 1
+                             WHEN O.SiteCode = B.SiteCode
+                             THEN 1
+                             ELSE 0
+                         END)
+                AND 1 = (CASE
+                             WHEN B.Dept_Code = 'None'
+                             THEN 1
+                             WHEN O.Dept_Code = B.Dept_Code
+                             THEN 1
+                             ELSE 0
+                         END) FOR XML PATH('')
             ) AS MONEY)) OpeningBalance,
        (CAST(
             (
                 SELECT SUM(O.Debit_Amount)
-                FROM GL_Transaction_Line O
+                FROM GL_Balances O
                 WHERE O.CalcDate = c.rdate
                       AND O.Lineage LIKE '%/'+A.[AccountID]+'/%'
-                      AND ISNULL(O.OPU_Code_Ln, 0) = B.OPU_Code FOR XML PATH('')
+                      AND ISNULL(O.OPU_Code, 0) = B.OPU_Code
+                      AND 1 = (CASE
+                                   WHEN B.Project_Code = 'None'
+                                   THEN 1
+                                   WHEN O.Project_Code = B.Project_Code
+                                   THEN 1
+                                   ELSE 0
+                               END)
+                      AND 1 = (CASE
+                                   WHEN B.SiteCode = 'None'
+                                   THEN 1
+                                   WHEN O.SiteCode = B.SiteCode
+                                   THEN 1
+                                   ELSE 0
+                               END)
+                      AND 1 = (CASE
+                                   WHEN B.Dept_Code = 'None'
+                                   THEN 1
+                                   WHEN O.Dept_Code = B.Dept_Code
+                                   THEN 1
+                                   ELSE 0
+                               END) FOR XML PATH('')
             ) AS MONEY)) Period_Debit,
        (CAST(
             (
                 SELECT CAST(SUM(O.Credit_Amount) AS MONEY)
-                FROM GL_Transaction_Line O
+                FROM GL_Balances O
                 WHERE O.CalcDate = c.rdate
                       AND O.Lineage LIKE '%/'+A.[AccountID]+'/%'
-                      AND ISNULL(O.OPU_Code_Ln, 0) = B.OPU_Code FOR XML PATH('')
+                      AND ISNULL(O.OPU_Code, 0) = B.OPU_Code
+                      AND 1 = (CASE
+                                   WHEN B.Project_Code = 'None'
+                                   THEN 1
+                                   WHEN O.Project_Code = B.Project_Code
+                                   THEN 1
+                                   ELSE 0
+                               END)
+                      AND 1 = (CASE
+                                   WHEN B.SiteCode = 'None'
+                                   THEN 1
+                                   WHEN O.SiteCode = B.SiteCode
+                                   THEN 1
+                                   ELSE 0
+                               END)
+                      AND 1 = (CASE
+                                   WHEN B.Dept_Code = 'None'
+                                   THEN 1
+                                   WHEN O.Dept_Code = B.Dept_Code
+                                   THEN 1
+                                   ELSE 0
+                               END) FOR XML PATH('')
             ) AS MONEY)) Period_Credit,
        (CAST(
             (
                 SELECT SUM(O.Debit_Amount - O.Credit_Amount)
-                FROM GL_Transaction_Line O
+                FROM GL_Balances O
                 WHERE 1 = (CASE
                                WHEN(O.Account_Type NOT IN('Expense', 'Revenue', 'Cogs')
                       AND O.CalcDate <= c.rdate)
@@ -196,12 +261,33 @@ SELECT A.[AccountID],
                                ELSE 0
                            END)
                 AND O.Lineage LIKE '%/'+A.[AccountID]+'/%'
-                AND ISNULL(O.OPU_Code_Ln, 0) = B.OPU_Code FOR XML PATH('')
+                AND ISNULL(O.OPU_Code, 0) = B.OPU_Code
+                AND 1 = (CASE
+                             WHEN B.Project_Code = 'None'
+                             THEN 1
+                             WHEN O.Project_Code = B.Project_Code
+                             THEN 1
+                             ELSE 0
+                         END)
+                AND 1 = (CASE
+                             WHEN B.SiteCode = 'None'
+                             THEN 1
+                             WHEN O.SiteCode = B.SiteCode
+                             THEN 1
+                             ELSE 0
+                         END)
+                AND 1 = (CASE
+                             WHEN B.Dept_Code = 'None'
+                             THEN 1
+                             WHEN O.Dept_Code = B.Dept_Code
+                             THEN 1
+                             ELSE 0
+                         END) FOR XML PATH('')
             ) AS MONEY)) Closing_Amount
 FROM [dbo].[COA_Natural_Account] A,
      [dbo].[Users] B,
-     [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE](@Session_LedDate) c
-WHERE UserID = @BusinessRules_UserId;]]></rule>
+     [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE_V1](@Session_LedDate,@Session_CalenderID) c
+WHERE UserID = @BusinessRules_UserId AND B.Company_Code=A.Company_Code]]></rule>
     <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
 -- implement insert here]]></rule>
     <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1

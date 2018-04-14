@@ -11,7 +11,7 @@ Partial Public Class Pages_DefineSupplier
     
     Public ReadOnly Property CssClass() As String
         Get
-            Return "SolutionsPage glyphicon-th"
+            Return "SolutionsPage"
         End Get
     End Property
     

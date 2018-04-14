@@ -1,113 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="ProjectTasks" conflictDetection="overwriteChanges" label="^ProTas^ProjectTasks^ProTas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ProjectTasks" conflictDetection="overwriteChanges" label="ProjectTasks" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="ProjectTasks" custom="true">
       <text><![CDATA[SELECT * FROM ProjectTasks]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
-    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50" showInSummary="true" />
     <field name="TaskID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TasId^Task#^TasId^" readOnly="true" />
-    <field name="TaskName" type="String" label="^TasNam^Task Name^TasNam^" length="500" showInSummary="true" />
-    <field name="TaskParent" type="Decimal" label="^TasPar^Task Parent^TasPar^" showInSummary="true">
-      <items style="Lookup" dataController="ProjectTasks" dataView="grid1" dataTextField="TaskName" dataValueField="TaskID" description="SiteCode=SiteCode" />
+    <field name="Project_Code" type="String" label="^ProCode^Project Code^ProCode^" length="50" showInSummary="true" allowNulls="false" isPrimaryKey="true">
+      <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
     </field>
-    <field name="Priority" type="String" label="^Pri^Priority^Pri^" length="50" showInSummary="true" contextFields="LookUpType=135" allowNulls="false">
-      <items style="RadioButtonList" dataController="LookUp_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50" showInSummary="true" contextFields="Project_Code=Project_Code" allowNulls="false" isPrimaryKey="true">
+      <items style="Lookup" dataController="ProjectsSites" dataView="grid1" dataTextField="SiteName" dataValueField="SiteCode" />
     </field>
-    <field name="Status" type="String" label="^Sta^Status^Sta^" length="50" showInSummary="true" allowNulls="false">
-      <items style="DropDownList">
-        <item value="New" text="New" />
-        <item value="In-Process" text="In-Process" />
-        <item value="Closed" text="Closed" />
-      </items>
+    <field name="TaskName" type="String" label="^TasNam^Task Name^TasNam^" length="500" showInSummary="true" allowNulls="false" />
+    <field name="TaskParent" type="Decimal" label="^TasPar^Task Parent^TasPar^" showInSummary="true" contextFields="SiteCode=SiteCode" htmlEncode="false">
+      <items style="Lookup" dataController="Pick_Task_Parent" dataView="grid1" />
+    </field>
+    <field name="Priority" type="String" label="^TasPri^Task Priority^TasPri^" length="50" showInSummary="true" contextFields="LookUpType=135" allowNulls="false">
+      <items style="Lookup" dataController="LookUp_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="Status" type="String" label="^TasSta^Task Status^TasSta^" length="50" htmlEncode="false">
+      <items style="Lookup" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
     </field>
     <field name="TaskCost" type="Decimal" label="^TasCos^Task Cost^TasCos^" />
-    <field name="CompletePer" type="Decimal" label="^ComPer^Complete Per^ComPer^" />
-    <field name="StartDate" type="DateTime" label="^StaDat^Start Date^StaDat^" />
-    <field name="EndDate" type="DateTime" label="^EndDat^End Date^EndDat^" />
-    <field name="AssignedTo" type="Decimal" label="^AssTo^Assigned To^AssTo^">
-      <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserFullName" dataValueField="UserID" />
+    <field name="CompletePer" type="Decimal" label="^Com^Complete(%)^Com^" />
+    <field name="AssignedTo" type="Decimal" label="^AssTo^Assigned To^AssTo^" />
+    <field name="StartDate" type="DateTime" label="^StaDat^Start Date^StaDat^" allowNulls="false" />
+    <field name="EndDate" type="DateTime" label="^EndDat^End Date^EndDat^" allowNulls="false" />
+    <field name="Revenue_Budget" type="Decimal" label="^RevBud^Revenue Budget^RevBud^" allowNulls="false" />
+    <field name="Cost_Budget" type="Decimal" label="^CosBud^Est. Cost Budget^CosBud^" allowNulls="false" />
+    <field name="Task_Path" type="String" label="^TasPat^Task Path^TasPat^" length="15" />
+    <field name="ParentYN" type="Int16" label="^ParYn^Parent YN^ParYn^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
+    <field name="RolloverYN" type="Int16" label="^RolYN^Rollover Y/N^RolYN^" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
+    <field name="TaskNo" type="Int32" label="^TasNo^Task No^TasNo^" />
+    <field name="Task_ClosedYN" type="Int16" label="^CloYn^ClosedYN^CloYn^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
+    <field name="Task_Index" type="Int32" label="^TasInd^Task Index^TasInd^" />
+    <field name="OPU_Code_Ln" type="Int32" label="^OpuCodLn^OPU Code Ln^OpuCodLn^" />
+    <field name="Task_Depth" type="Int16" label="^TasDep^Task Depth^TasDep^" />
+    <field name="TaskName_HTML" type="String" label="^TasNamHtml^Task Name HTML^TasNamHtml^" length="600" readOnly="true" htmlEncode="false" />
+    <field name="InvoiceableYN" type="Int16" label="^InvYN^Invoiceable Y/N^InvYN^" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
+    <field name="RevenueRule" type="Int16" allowNulls="false" label="^RevRul^Revenue Rule^RevRul^">
+      <items style="DropDownList" dataController="tbl_RevenueRule" dataView="grid1" dataTextField="RevenueRuleName" dataValueField="RevenueRule" />
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAra^Address Ar^AddAra" computed="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
+    <field name="IsMileStone" type="Int16" label="^MilEna^Milestone Enabled^MilEna^" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ProTas^Project Tasks^ProTas^" reportTemplate="true" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="^ProTas^Project Tasks^ProTas^" sortExpression="Task_Path ASC" filter="OPU_Code_Ln=@Session_OPU_Code AND Project_Code IN (SELECT&#xD;&#xA;       [Project_Code]&#xD;&#xA;       FROM [dbo].[UserProjectAccess]&#xD;&#xA;       WHERE [UserID] = @BusinessRules_UserId)" showInSelector="false">
+      <headerText />
       <dataFields>
+        <dataField fieldName="TaskID" columns="15" hidden="true" />
+        <dataField fieldName="TaskNo" columns="15" hidden="true" />
+        <dataField fieldName="Task_Path" columns="50" />
         <dataField fieldName="Project_Code" columns="50" />
         <dataField fieldName="SiteCode" columns="50" />
-        <dataField fieldName="TaskName" />
+        <dataField fieldName="TaskName_HTML" rows="5" />
+        <dataField fieldName="TaskName" hidden="true" />
         <dataField fieldName="TaskParent" columns="15" />
-        <dataField fieldName="Priority" columns="50" />
+        <dataField fieldName="Priority" columns="50" hidden="true" />
+        <dataField fieldName="Status" columns="50" />
         <dataField fieldName="TaskCost" dataFormatString="N2" columns="15" hidden="true" />
-        <dataField fieldName="CompletePer" dataFormatString="N2" columns="15" />
+        <dataField fieldName="CompletePer" dataFormatString="N" columns="15" />
+        <dataField fieldName="AssignedTo" columns="15" hidden="true" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
-        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="Cost_Budget" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Revenue_Budget" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="ParentYN" columns="15" />
+        <dataField fieldName="RolloverYN" columns="15" />
+        <dataField fieldName="Task_ClosedYN" columns="15" />
+        <dataField fieldName="Task_Index" columns="15" hidden="true" />
+        <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
+        <dataField fieldName="Task_Depth" columns="15" hidden="true" />
+        <dataField fieldName="InvoiceableYN" columns="15" />
+        <dataField fieldName="IsMileStone" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="^RevProTas^Review Project Tasks^RevProTas^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText />
       <categories>
-        <category id="c1" headerText="Project Tasks" flow="NewColumn">
+        <category id="c1" headerText="^RevProTas^Review Project Tasks^RevProTas^" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="CompletePer" dataFormatString="N2" columns="20" />
+            <dataField fieldName="AssignedTo" columns="20" />
+            <dataField fieldName="RevenueRule" columns="15" />
+            <dataField fieldName="Cost_Budget" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Revenue_Budget" dataFormatString="N2" columns="20" />
+            <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
+            <dataField fieldName="InvoiceableYN" columns="15" />
+            <dataField fieldName="Task_ClosedYN" columns="15" />
+            <dataField fieldName="RolloverYN" columns="15" />
+            <dataField fieldName="IsMileStone" columns="15" />
+            <dataField fieldName="Task_Path" columns="50" hidden="true" />
+            <dataField fieldName="EndDate" columns="20" />
+            <dataField fieldName="ParentYN" columns="15" hidden="true" />
+            <dataField fieldName="TaskName" columns="20" />
             <dataField fieldName="SiteCode" columns="50" />
-            <dataField fieldName="TaskName" />
+            <dataField fieldName="TaskNo" columns="15" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="TaskCost" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="StartDate" columns="20" />
+            <dataField fieldName="Status" columns="50" />
             <dataField fieldName="TaskParent" columns="15" />
             <dataField fieldName="Priority" columns="50" />
-            <dataField fieldName="TaskCost" dataFormatString="N2" columns="15" hidden="true" />
-            <dataField fieldName="CompletePer" dataFormatString="N2" columns="15" />
-            <dataField fieldName="StartDate" columns="10" />
-            <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="Status" columns="50" />
-            <dataField fieldName="AssignedTo" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="^NewProTas^New Project Tasks^NewProTas^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Project Tasks" flow="NewColumn">
+        <category id="c1" headerText="^NewProTas^New Project Tasks^NewProTas^" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
+            <dataField fieldName="TaskNo" columns="15" hidden="true" />
             <dataField fieldName="Project_Code" columns="50" />
             <dataField fieldName="SiteCode" columns="50" />
-            <dataField fieldName="TaskName" />
+            <dataField fieldName="ParentYN" columns="15" hidden="true" />
+            <dataField fieldName="TaskName" columns="20" />
             <dataField fieldName="TaskParent" columns="15" />
             <dataField fieldName="Priority" columns="50" />
-            <dataField fieldName="TaskCost" dataFormatString="n2" columns="15" hidden="true" />
-            <dataField fieldName="CompletePer" dataFormatString="n2" columns="15" />
-            <dataField fieldName="StartDate" columns="10" />
-            <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="Status" columns="50" />
-            <dataField fieldName="AssignedTo" columns="15" hidden="true" />
+            <dataField fieldName="TaskCost" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="StartDate" columns="20" />
+            <dataField fieldName="EndDate" columns="20" />
+            <dataField fieldName="Cost_Budget" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Revenue_Budget" dataFormatString="N2" columns="20" />
+            <dataField fieldName="RevenueRule" columns="15" />
+            <dataField fieldName="AssignedTo" columns="20" />
+            <dataField fieldName="CompletePer" dataFormatString="N2" columns="20" />
+            <dataField fieldName="IsMileStone" columns="15" />
+            <dataField fieldName="Task_Path" columns="50" hidden="true" />
+            <dataField fieldName="RolloverYN" columns="15" />
+            <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
+            <dataField fieldName="InvoiceableYN" columns="15" />
+            <dataField fieldName="Task_ClosedYN" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -116,7 +154,12 @@
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -127,13 +170,13 @@
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
-      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
-    <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -159,8 +202,34 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    <actionGroup id="ag100" scope="ActionBar" headerText="^CloTas^Close Task^CloTas^" flat="true">
+      <action commandName="SQL" headerText="^CloTas^Close Task^CloTas^" whenLastCommandName="Select" id="a100" whenClientScript="[Task_ClosedYN]==0" cssClass="&#x9;glyphicon glyphicon-tasks">
+        <data><![CDATA[UPDATE ProjectTasks
+       SET
+           Task_ClosedYN = 1
+       WHERE
+             TaskID = @TaskID
+
+UPDATE [dbo].[ProjectTasks]
+       SET
+           [Task_ClosedYN] = 1
+       WHERE
+             SiteCode = @SiteCode
+             AND
+             Project_Code = @Project_Code
+             AND
+             [Task_Path] LIKE @Task_Path+'%';]]></data>
+      </action>
+      <action commandName="SQL" headerText="^ReOpeTas^ReOpen Task^ReOpeTas^" whenLastCommandName="Select" id="a101" whenClientScript="[Task_ClosedYN]==1" cssClass="glyphicon glyphicon-menu-hamburger">
+        <data><![CDATA[IF (IsNull(@InvoiceableYN,0)+IsNull(@IsMileStone,0)) =0
+BEGIN
+UPDATE ProjectTasks
+       SET
+           Task_ClosedYN = 0
+       WHERE
+             TaskID = @TaskID
+END]]></data>
+      </action>
     </actionGroup>
   </actions>
   <businessRules>
@@ -169,12 +238,68 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
 end]]></rule>
-    <rule id="r102" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Priority='High'
-SET @Status='New']]></rule>
     <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
 begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
+    <rule id="r102" commandName="New" type="Sql" phase="Execute"><![CDATA[DECLARE @m_TaskNo Int
+
+SET @Priority='High'
+SET @Status='New'
+SET @RolloverYN=0
+SET @InvoiceableYN=0
+SET @IsMileStone=0
+SET @RevenueRule=1
+
+SET @OPU_Code_Ln=@Session_OPU_Code
+
+SELECT @m_TaskNo=MAX(TaskNo)  FROM [dbo].[ProjectTasks]
+                  WHERE  Project_Code=@Project_Code and SiteCode=@SiteCode
+				  
+				  SET @TaskNo=IsNull(@m_TaskNo,0)+1]]></rule>
+    <rule id="r103" type="Sql" commandName="Insert|Update" phase="Before" name="Task_ClosedYN_Validator"><![CDATA[if @Task_ClosedYN_OldValue=1 and @Task_ClosedYN_NewValue = 1
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Task_ClosedYN,Task Cannot be Modified as it is closed'
+end
+]]></rule>
+    <rule id="r104" type="Sql" commandName="Insert|Update" phase="Before" name="StartDate_Validator"><![CDATA[DECLARE @IIsRollover         INT ,
+        @Site_Start_Date DATETIME ,
+        @Site_End_Date   DATETIME
+
+SELECT
+       @IIsRollover = IsNull(IsRollover , 0) ,
+       @Site_Start_Date = Site_Start_Date ,
+       @Site_End_Date = Site_End_Date
+       FROM ProjectsSites
+       WHERE Project_Code = @Project_Code
+	   and SiteCode=@SiteCode
+
+
+IF @StartDate < @Site_Start_Date
+   AND
+   IsNull(@IIsRollover , 0) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'StartDate,Task Start date Cannot be Before Site Start Date '+CAST(@Site_Start_Date AS NVARCHAR(12))
+    END
+
+IF @EndDate > @Site_End_Date
+   AND
+   IsNull(@IIsRollover , 0) = 0
+    BEGIN
+       SET @BusinessRules_PreventDefault = 1
+       SET @Result_Focus = 'EndDate,Task End date Cannot be after Site End Date '+CAST(@Site_End_Date AS NVARCHAR(12))
+    END
+		IF @EndDate < @StartDate
+      BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'StartDate,Task... Start date Cannot be Before Task Start Date '+CAST(@Site_Start_Date AS NVARCHAR(12))
+    END
+
+]]></rule>
   </businessRules>
 </dataController>

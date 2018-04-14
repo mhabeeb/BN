@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="CurrencyCode" conflictDetection="overwriteChanges" label="^CurCod^CurrencyCode^CurCod^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="CurrencyCode" conflictDetection="overwriteChanges" label="CurrencyCode" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Currency_Code" custom="true">
       <text><![CDATA[select * from tbl_Currency_Code]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Currency_Code" type="String" allowNulls="false" label="^CurCod^Currency Code^CurCod^" length="4" showInSummary="true" isPrimaryKey="true" />
-    <field name="Currency_Desc" type="String" label="^CurDes^Currency Desc^CurDes^" length="255" showInSummary="true" />
-    <field name="CurrencyUsedBy" type="String" label="^CurUseBy^Currency Used By^CurUseBy^" length="255" showInSummary="true" />
-    <field name="Rate" type="Decimal" label="^Rate^Rate^Rate^" showInSummary="true" />
-    <field name="Enabled" type="Int16" label="^Ena^Enabled^Ena^" showInSummary="true" allowNulls="false">
+    <field name="Currency_Code" type="String" allowNulls="false" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" showInSummary="true" isPrimaryKey="true" />
+    <field name="Currency_Desc" type="String" label="^CurrencyDesc^Currency Desc^CurrencyDesc^" length="255" />
+    <field name="CurrencyUsedBy" type="String" label="^CurrencyUsedBy^Currency Used By^CurrencyUsedBy^" length="255" />
+    <field name="Rate" type="Decimal" label="^Rate^Rate^Rate^" />
+    <field name="Enabled" type="Int16" label="^Enabled^Enabled^Enabled^" showInSummary="true" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^CurCod^Currency Code^CurCod^" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Currency Code" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="Currency_Code" columns="4" readOnly="true" />
         <dataField fieldName="Currency_Desc" />
         <dataField fieldName="CurrencyUsedBy" />
         <dataField fieldName="Rate" dataFormatString="N5" columns="15" hidden="true" />
-        <dataField fieldName="Enabled" columns="15" />
+        <dataField fieldName="Enabled" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevCurCod^Review Currency Code^RevCurCod^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Currency Code" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="tbl Currency Code" flow="NewColumn">
+        <category id="c1" headerText="^RevCurCod^Review Currency Code^RevCurCod^" flow="NewColumn">
           <description />
           <dataFields>
             <dataField fieldName="Currency_Code" columns="4" readOnly="true" />
@@ -40,11 +40,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^DefCurCod^Define Currency Code^DefCurCod^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="Define Currency Code" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Define Currency Code" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^DefCurCod^Define Currency Code^DefCurCod^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Currency_Code" columns="4" />
             <dataField fieldName="Currency_Desc" />
@@ -73,11 +73,8 @@
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
-    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="^DefineCurrencyCode^Define Currency Code^DefineCurrencyCode^" />
-    </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -107,7 +104,7 @@
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag101" scope="ActionBar" headerText="^ImportFromExcel^Import From Excel^ImportFromExcel^" flat="true">
-      <action commandName="Import" id="a100" cssClass="glyphicon-list-alt" />
+      <action commandName="Import" id="a100" cssClass="glyphicon glyphicon-import" />
     </actionGroup>
   </actions>
   <businessRules>

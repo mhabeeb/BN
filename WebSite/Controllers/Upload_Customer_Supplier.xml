@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Upload_Customer_Supplier" conflictDetection="overwriteChanges" label="^UplCusSup^Upload_Customer_Supplier^UplCusSup^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Upload_Customer_Supplier" conflictDetection="overwriteChanges" label="Upload_Customer_Supplier" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Customer_Supplier" custom="true">
       <text><![CDATA[SELECT        RefNo, Vendor_Name, ContactName, ContactTitle, Street, PostalCode, City, RecordType,
@@ -9,17 +9,17 @@ FROM            dbo.tbl_Customer_Supplier]]></text>
   </commands>
   <fields>
     <field name="RefNo" type="String" label="^RefNo^Ref No^RefNo^" length="25" showInSummary="true" />
-    <field name="Vendor_Name" type="String" allowNulls="false" label="^VenNam^Vendor Name^VenNam^" length="150" showInSummary="true" />
-    <field name="ContactName" type="String" label="^ConNam^Contact Name^ConNam^" length="30" showInSummary="true" />
-    <field name="ContactTitle" type="String" label="^ConTit^Contact Title^ConTit^" length="30" showInSummary="true" />
+    <field name="Vendor_Name" type="String" allowNulls="false" label="^VendorName^Vendor Name^VendorName^" length="150" showInSummary="true" />
+    <field name="ContactName" type="String" label="^ContactName^Contact Name^ContactName^" length="30" showInSummary="true" />
+    <field name="ContactTitle" type="String" label="^ContactTitle^Contact Title^ContactTitle^" length="30" showInSummary="true" />
     <field name="Street" type="String" label="^Street^Street^Street^" length="230" showInSummary="true" />
-    <field name="PostalCode" type="String" label="^PosCod^Postal Code^PosCod^" length="50" />
+    <field name="PostalCode" type="String" label="^PostalCode^Postal Code^PostalCode^" length="50" />
     <field name="City" type="String" label="^City^City^City^" length="50" />
-    <field name="RecordType" type="Int32" label="^RecTyp^Record Type^RecTyp^" />
-    <field name="BranchID" type="Int32" label="^BraId^Branch#^BraId^" />
+    <field name="RecordType" type="Int32" label="^RecordType^Record Type^RecordType^" />
+    <field name="BranchID" type="Int32" label="^Branch^Branch#^Branch^" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^CusSup^Customer Supplier^CusSup^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="tbl Customer Supplier" showInSelector="false" filter="BranchID=@Session_OPU_Code">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Vendor_Name" />
@@ -33,7 +33,7 @@ FROM            dbo.tbl_Customer_Supplier]]></text>
         <dataField fieldName="BranchID" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevCusSup^Review tbl Customer Supplier^RevCusSup^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Customer Supplier" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Customer Supplier" flow="NewColumn">
@@ -52,7 +52,7 @@ FROM            dbo.tbl_Customer_Supplier]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCusSup^New Customer Supplier^NewCusSup^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Customer Supplier" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Customer Supplier" flow="NewColumn">
@@ -119,7 +119,7 @@ FROM            dbo.tbl_Customer_Supplier]]></text>
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" headerText="Import" flat="true">
-      <action commandName="Import" headerText="Customer Supplier Import" id="a100" />
+      <action commandName="Import" headerText="^CusSupImp^Customer Supplier Import^CusSupImp^" id="a100" cssClass="glyphicon glyphicon-import" />
     </actionGroup>
   </actions>
 </dataController>

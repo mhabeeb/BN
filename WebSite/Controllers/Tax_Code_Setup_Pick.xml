@@ -6,8 +6,8 @@
     </command>
   </commands>
   <fields>
-    <field name="Tax_Code" type="Int32" allowNulls="false" isPrimaryKey="true" label="^TaxCod^Tax Code^TaxCod^" readOnly="true" />
-    <field name="Tax_Desc" type="String" label="^TaxDes^Tax Desc^TaxDes^" length="255" showInSummary="true" />
+    <field name="Tax_Code" type="Int32" allowNulls="false" isPrimaryKey="true" label="^TaxCode^Tax Code^TaxCode^" readOnly="true" />
+    <field name="Tax_Desc" type="String" label="^TaxDesc^Tax Desc^TaxDesc^" length="255" showInSummary="true" />
     <field name="Tax_Payable_AC" type="String" label="^TaxPayAC^Tax Payable AC^TaxPayAC^" length="50" showInSummary="true">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
@@ -20,15 +20,15 @@
     <field name="TaxOutPutYN" type="Int32" label="^TOPYN^Tax Out Put YN^TOPYN^" showInSummary="true" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="BranchID" type="Int32" label="^BraId^Branch#^BraId^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CrtDatTim^Created Date Time^CrtDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" allowNulls="false">
+    <field name="BranchID" type="Int32" label="^Branch^Branch#^Branch^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CrtdDtTm^Created Date Time^CrtdDtTm^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdtdDtTm^Updated Date Time^UpdtdDtTm^" />
+    <field name="InActive" type="Int32" label="^InActive^In Active^InActive^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Tax_Type" type="String" allowNulls="false" label="^TaxTyp^Tax Type^TaxTyp^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+    <field name="Tax_Type" type="String" allowNulls="false" label="^TaxType^Tax Type^TaxType^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="RadioButtonList" dataController="Pick_Tax_Type" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
     </field>
     <field name="IsIntegratedYN" type="Int32" allowNulls="false" label="^IsIYN^Is Integrated YN^IsIYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
@@ -36,7 +36,7 @@
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^TaxCodSet^Tax Code Setup^TaxCodSet^" filter="BranchID=@Session_OPU_Code" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Tax Code Setup" filter="BranchID=@Session_OPU_Code" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Tax_Desc" />
@@ -52,7 +52,7 @@
         <dataField fieldName="InActive" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevTaxCodSet^Review Tax Code Setup^RevTaxCodSet^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Tax Code Setup" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Tax Code Setup" flow="NewColumn">
@@ -75,7 +75,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTaxCodSet^New Tax Code Setup^NewTaxCodSet^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Tax Code Setup" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Tax Code Setup" flow="NewColumn">
@@ -120,7 +120,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

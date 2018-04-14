@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Currency_Code" conflictDetection="overwriteChanges" label="^PicCurCod^Pick_Currency_Code^PicCurCod^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Currency_Code" conflictDetection="overwriteChanges" label="Pick_Currency_Code" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Currency_Code" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Currency_Code]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Currency_Code" type="String" allowNulls="false" label="^CurCod^Currency Code^CurCod^" length="4" showInSummary="true" />
-    <field name="Currency_Desc" type="String" label="^CurDes^Currency Desc^CurDes^" length="255" showInSummary="true" />
-    <field name="CurrencyUsedBy" type="String" label="^CurUseBy^Currency Used By^CurUseBy^" length="255" showInSummary="true" />
+    <field name="Currency_Code" type="String" allowNulls="false" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" showInSummary="true" />
+    <field name="Currency_Desc" type="String" label="^CurrencyDesc^Currency Desc^CurrencyDesc^" length="255" showInSummary="true" />
+    <field name="CurrencyUsedBy" type="String" label="^CurrencyUsedBy^Currency Used By^CurrencyUsedBy^" length="255" showInSummary="true" />
     <field name="Rate" type="Decimal" label="^Rate^Rate^Rate^" showInSummary="true" />
-    <field name="Enabled" type="Int32" label="^Ena^Enabled^Ena^" showInSummary="true" />
+    <field name="Enabled" type="Int32" label="^Enabled^Enabled^Enabled^" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^PicCurCod^Pick Currency Code^PicCurCod^" filter="Enabled=1" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Pick Currency Code" filter="Enabled=1" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="Currency_Code" columns="4" />
         <dataField fieldName="Currency_Desc" />
@@ -23,8 +23,8 @@
         <dataField fieldName="Enabled" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevCurCod^Review Currency Code^RevCurCod^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Currency Code" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="tbl Currency Code" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -38,8 +38,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCurCod^New Currency Code^NewCurCod^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Currency Code" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New tbl Currency Code" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -74,7 +74,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

@@ -173,6 +173,37 @@ Namespace MyCompany.Rules
         
         <ControllerAction("MyProfile", "Select", ActionPhase.Before)>  _
         Public Overridable Sub AccessControlValidation()
+            If (((Request.View = "loginForm") AndAlso Not (IsTagged("show-login-check"))) AndAlso ApplicationServices.IsSiteContentEnabled) Then
+                AddTag("show-login-check")
+                Dim list As SiteContentFileList = ApplicationServices.Current.ReadSiteContent("sys/saas", "%")
+                If (list.Count > 0) Then
+                    For Each file As SiteContentFile in list
+                        If (file.Name = "dnn") Then
+                            AddTag("show-dnn-login")
+                        Else
+                            If (file.Name = "facebook") Then
+                                AddTag("show-facebook-login")
+                            Else
+                                If (file.Name = "google") Then
+                                    AddTag("show-google-login")
+                                Else
+                                    If (file.Name = "windowslive") Then
+                                        AddTag("show-windows-live-login")
+                                    Else
+                                        If (file.Name = "sharepoint") Then
+                                            AddTag("show-sharepoint-login")
+                                        Else
+                                            If (file.Name = "msgraph") Then
+                                                AddTag("show-msgraph-login")
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
+            End If
             If Context.User.Identity.IsAuthenticated Then
                 Return
             End If

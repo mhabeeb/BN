@@ -1,104 +1,113 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="ProjectTasks1" label="^ProTas1^ProjectTasks1^ProTas1^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ProjectTasks1" label="ProjectTasks1" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="ProjectTasks" custom="true">
       <text><![CDATA[SELECT * FROM ProjectTasks]]></text>
     </command>
   </commands>
   <fields>
-    <field name="TaskID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TasId^Task#^TasId^" readOnly="true" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
+    <field name="Project_Code" type="String" label="Project Code" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="SiteCode" type="String" label="Site Code" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="TaskID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Task#" readOnly="true" />
+    <field name="TaskName" type="String" label="Task Name" length="500" showInSummary="true" />
+    <field name="TaskParent" type="Decimal" label="Task Parent" showInSummary="true" contextFields="SiteCode=SiteCode">
+      <items dataView="grid1" description="SiteCode=SiteCode" style="Lookup" dataController="Pick_Task_Parent" dataTextField="TaskID" dataValueField="TaskID" />
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" allowNulls="false" />
-    <field name="SiteCode" type="String" allowNulls="false" label="^SitCod^Site Code^SitCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="TaskName" type="String" label="^TasNam^Task Name^TasNam^" length="500" showInSummary="true" />
-    <field name="TaskParent" type="Decimal" label="^TasPar^Task Parent^TasPar^" showInSummary="true" contextFields="Project_Code=Project_Code, SiteCode=SiteCode">
-      <items style="DropDownList" dataController="ProjectTasks" dataView="grid1" dataTextField="TaskName" dataValueField="TaskID" />
-    </field>
-    <field name="Priority" type="String" label="^Pri^Priority^Pri^" length="50" showInSummary="true" contextFields="LookUpType=135" allowNulls="false">
+    <field name="Priority" type="String" label="Priority" length="50" showInSummary="true" contextFields="LookUpType=135" allowNulls="false">
       <items style="RadioButtonList" dataController="LookUp_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
     </field>
-    <field name="Status" type="String" label="^Sta^Status^Sta^" length="50" showInSummary="true" allowNulls="false">
+    <field name="Status" type="String" label="^Status^Status^Status^" length="50" showInSummary="true" allowNulls="false">
       <items style="DropDownList">
         <item value="New" text="New" />
         <item value="In-Process" text="In-Process" />
         <item value="Closed" text="Closed" />
       </items>
     </field>
-    <field name="TaskCost" type="Decimal" label="^TasCos^Task Cost^TasCos^" />
-    <field name="CompletePer" type="Decimal" label="^ComPer^Complete (%)^ComPer^" />
-    <field name="AssignedTo" type="Decimal" label="^AssTo^Assigned To^AssTo^">
+    <field name="TaskCost" type="Decimal" label="Task Cost" />
+    <field name="CompletePer" type="Decimal" label="Complete Per" />
+    <field name="StartDate" type="DateTime" label="Start Date" />
+    <field name="EndDate" type="DateTime" label="End Date" />
+    <field name="AssignedTo" type="Decimal" label="^AssignedTo^Assigned To^AssignedTo^">
       <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserFullName" dataValueField="UserID" />
     </field>
-    <field name="StartDate" type="DateTime" label="^StaDat^Start Date^StaDat^" />
-    <field name="EndDate" type="DateTime" label="^EndDat^End Date^EndDat^" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="DataSheet" commandId="command1" label="^ProTas^Project Tasks^ProTas^" showInSelector="false">
-      <headerText />
+    <view id="grid1" type="Grid" commandId="command1" label="Project Tasks" reportTemplate="true" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="TaskID" columns="15" />
-        <dataField fieldName="TaskParent" columns="15" tag="hierarchy-parent" />
         <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="SiteCode" columns="50" />
         <dataField fieldName="TaskName" />
+        <dataField fieldName="TaskParent" columns="15" />
         <dataField fieldName="Priority" columns="50" />
-        <dataField fieldName="Status" columns="50" />
-        <dataField fieldName="TaskCost" dataFormatString="N2" columns="15" />
+        <dataField fieldName="TaskCost" dataFormatString="N2" columns="15" hidden="true" />
         <dataField fieldName="CompletePer" dataFormatString="N2" columns="15" />
-        <dataField fieldName="AssignedTo" columns="15" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="SiteCode" rows="5" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevProTas^Review Project Tasks^RevProTas^" showInSelector="false">
-      <headerText />
+    <view id="editForm1" type="Form" commandId="command1" label="Review Project Tasks" showInSelector="false">
+      <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Project Tasks" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiProTas^Edit Project Tasks^EdiProTas^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Project_Code" columns="50" />
+            <dataField fieldName="SiteCode" columns="50" />
             <dataField fieldName="TaskName" />
             <dataField fieldName="TaskParent" columns="15" />
             <dataField fieldName="Priority" columns="50" />
-            <dataField fieldName="Status" columns="50" />
-            <dataField fieldName="TaskCost" dataFormatString="N2" columns="15" />
+            <dataField fieldName="TaskCost" dataFormatString="N2" columns="15" hidden="true" />
             <dataField fieldName="CompletePer" dataFormatString="N2" columns="15" />
-            <dataField fieldName="AssignedTo" columns="15" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="SiteCode" rows="5" hidden="true" />
+            <dataField fieldName="Status" columns="50" />
+            <dataField fieldName="AssignedTo" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewProTas^New Project Tasks^NewProTas^" showInSelector="false">
-      <headerText />
+    <view id="createForm1" type="Form" commandId="command1" label="New Project Tasks" showInSelector="false">
+      <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="New Project Tasks" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewProTas^New Project Tasks^NewProTas^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Project_Code" columns="50" />
             <dataField fieldName="TaskName" />
+            <dataField fieldName="SiteCode" columns="50" />
             <dataField fieldName="TaskParent" columns="15" />
             <dataField fieldName="Priority" columns="50" />
-            <dataField fieldName="Status" columns="50" />
-            <dataField fieldName="TaskCost" dataFormatString="N2" columns="15" />
-            <dataField fieldName="CompletePer" dataFormatString="N2" columns="15" />
-            <dataField fieldName="AssignedTo" columns="15" />
+            <dataField fieldName="TaskCost" dataFormatString="n2" columns="15" hidden="true" />
+            <dataField fieldName="CompletePer" dataFormatString="n2" columns="15" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="SiteCode" rows="5" hidden="true" />
+            <dataField fieldName="Status" columns="50" />
+            <dataField fieldName="AssignedTo" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -108,12 +117,6 @@
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
-      <action id="a6" />
-      <action id="a7" commandName="New" commandArgument="grid1" />
-      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
-      <action id="a9" />
-      <action id="a10" commandName="BatchEdit" />
-      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -124,14 +127,12 @@
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
-      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
-      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
-    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
@@ -157,14 +158,14 @@
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
-      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
   </actions>
   <businessRules>
+    <rule id="r102" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Priority='High'
+SET @Status='New']]></rule>
     <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
 begin
     SET @BusinessRules_PreventDefault = 1
@@ -175,7 +176,5 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
-    <rule id="r102" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Priority='High'
-SET @Status='New']]></rule>
   </businessRules>
 </dataController>

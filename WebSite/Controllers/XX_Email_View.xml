@@ -1,31 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="XX_Email_View" conflictDetection="overwriteChanges" label="^XxEmaiVie^XX_Email_View^XxEmaiVie^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="XX_Email_View" conflictDetection="overwriteChanges" label="XX_Email_View" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="XX_Email_View" custom="true">
       <text><![CDATA[SELECT * FROM XX_Email_View]]></text>
     </command>
   </commands>
   <fields>
-    <field name="DocAPP_SNO" type="Decimal" allowNulls="false" label="^DocAppSno^Doc APP SNO^DocAppSno^" showInSummary="true" />
-    <field name="DocTypeID" type="Int32" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" />
+    <field name="DocAPP_SNO" type="Decimal" allowNulls="false" label="^DocAPPSNO^Doc APP SNO^DocAPPSNO^" showInSummary="true" />
+    <field name="DocTypeID" type="Int32" label="^DocType^Doc Type#^DocType^" showInSummary="true" />
     <field name="Pre_Doc_No" type="Decimal" label="^PreDocNo^Pre Doc No^PreDocNo^" showInSummary="true" />
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" showInSummary="true" />
     <field name="Qty" type="Decimal" allowNulls="false" label="^Qty^Qty^Qty^" showInSummary="true" />
-    <field name="Unit_Price" type="Decimal" allowNulls="false" label="^UniPri^Unit Price^UniPri^" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="255" />
+    <field name="Unit_Price" type="Decimal" allowNulls="false" label="^UnitPrice^Unit Price^UnitPrice^" />
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="255" />
     <field name="Net_Amt" type="Decimal" label="^NetAmt^Net Amt^NetAmt^" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="20" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" length="20" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="Long_Desc" type="String" label="^LonDes^Long Desc^LonDes^" length="4000" />
-    <field name="Doc_View_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DocVieId^Doc View#^DocVieId^" readOnly="true" />
-    <field name="DocumentID" type="Decimal" label="^DocId^Document#^DocId^" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Long_Desc" type="String" label="^LongDesc^Long Desc^LongDesc^" length="4000" />
+    <field name="Doc_View_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DocView^Doc View#^DocView^" readOnly="true" />
+    <field name="DocumentID" type="Decimal" label="^Document^Document#^Document^" />
+    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50" />
+    <field name="MSProjTasksID" type="Int64" label="MSProj Tasks ID" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="^VieLinDet^View Line Details^VieLinDet^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+      <headerText />
       <dataFields>
         <dataField fieldName="DocAPP_SNO" columns="15" hidden="true" />
         <dataField fieldName="DocTypeID" columns="15" hidden="true" />
@@ -38,13 +40,15 @@
         <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
         <dataField fieldName="Net_Amt" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="Remarks" />
-        <dataField fieldName="Project_Code" columns="50" />
         <dataField fieldName="Dept_Code" columns="50" />
         <dataField fieldName="Long_Desc" hidden="true" />
         <dataField fieldName="DocumentID" columns="15" hidden="true" />
+        <dataField fieldName="MSProjTasksID" columns="15" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="SiteCode" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevXxEmaiVie^Review XX Email View^RevXxEmaiVie^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review XX Email View" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="XX Email View" flow="NewColumn">
@@ -69,7 +73,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewXxEmaiVie^New XX Email View^NewXxEmaiVie^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New XX Email View" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New XX Email View" flow="NewColumn">

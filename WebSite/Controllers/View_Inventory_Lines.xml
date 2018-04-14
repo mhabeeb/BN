@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="View_Inventory_Lines" conflictDetection="overwriteChanges" label="^VieInvLin^View_Inventory_Lines^VieInvLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="View_Inventory_Lines" conflictDetection="overwriteChanges" label="View_Inventory_Lines" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.tbl_Transactions_Line" custom="true">
       <text><![CDATA[SELECT  dbo.tbl_Transactions_Line.Item_Code, dbo.tbl_Transactions_Line.Transaction_ID, dbo.tbl_Transactions_Line.Line_Remarks, dbo.tbl_Transactions_Line.Unit_Price, dbo.tbl_Transactions_Line.Trx_OPU_Code, dbo.tbl_Transactions_Line.StoreID, 
@@ -7,71 +7,73 @@
                    dbo.tbl_Transactions_Line.UOM, dbo.tbl_Transactions_Line.Invoice_Balance_Qty, dbo.tbl_Transactions_Line.QtyEnter, dbo.tbl_Transactions_Header.Transaction_Type, dbo.tbl_Transactions_Header.Transaction_Date, 
                    dbo.tbl_Transactions_Header.Transaction_No, dbo.tbl_Transactions_Line.Project_Code, dbo.tbl_Transactions_Line.Dept_Code, dbo.tbl_Transactions_Line.Source_LineID AS SO_Line_No, dbo.tbl_Transactions_Line.Source_LineID AS PO_Line_No, 
                    dbo.tbl_Transactions_Header.OPU_Code, dbo.tbl_Transactions_Line.Item_Code_Ref_No, dbo.tbl_Transactions_Line.Qty, dbo.tbl_Transactions_Line.P_Doc_No, dbo.tbl_Transactions_Line.P_PO_No, dbo.tbl_Transactions_Line.P_SO_No, 
-                   dbo.tbl_Transactions_Line.Line_ID
+                   dbo.tbl_Transactions_Line.Line_ID,dbo.tbl_Transactions_Line.ProjTasksID , tbl_Transactions_Line.SiteCode
 FROM      dbo.tbl_Transactions_Line INNER JOIN
                    dbo.tbl_Transactions_Header ON dbo.tbl_Transactions_Line.Transaction_ID = dbo.tbl_Transactions_Header.Transaction_ID]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Line_ID" type="Decimal" label="^LinId^Line ID^LinId^" allowNulls="false" isPrimaryKey="true" />
-    <field name="StoreID" type="Int32" label="^StoId^Store ID^StoId^" showInSummary="true">
+    <field name="Line_ID" type="Decimal" label="Line ID" allowNulls="false" isPrimaryKey="true" />
+    <field name="StoreID" type="Int32" label="^StoId^Store^StoId^">
       <items style="DropDownList" dataController="tbl_Store" dataView="grid1" dataTextField="Store_Name" dataValueField="Store_ID" />
     </field>
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
-    <field name="Transaction_ID" type="Decimal" label="^TraSeq^TrxSeq^TraSeq^" showInSummary="true" />
-    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" showInSummary="true" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" showInSummary="true" />
-    <field name="Trx_OPU_Code" type="Int32" label="^TrxOpuCod^Trx OPU Code^TrxOpuCod^" showInSummary="true" />
-    <field name="PO_NO" type="Decimal" label="^PoNo^Po NoSeq^PoNo^" showInSummary="true" />
-    <field name="SO_NO" type="Decimal" label="^SoNo^So NoSeq^SoNo^" showInSummary="true" />
-    <field name="Dr_AC" type="String" label="^DrAc^Dr AC^DrAc^" length="50" />
-    <field name="Cr_AC" type="String" label="^CrAc^Cr AC^CrAc^" length="50" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="50" />
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" />
+    <field name="Transaction_ID" type="Decimal" label="^TransactionSeq^TrxSeq^TransactionSeq^" />
+    <field name="Line_Remarks" type="String" label="^LineRemarks^Line Remarks^LineRemarks^" length="255" />
+    <field name="Unit_Price" type="Decimal" label="^UnitPrice^Unit Price^UnitPrice^" />
+    <field name="Trx_OPU_Code" type="Int32" label="^TrxOPUCode^Trx OPU Code^TrxOPUCode^" />
+    <field name="PO_NO" type="Decimal" label="^PoNoSeq^Po NoSeq^PoNoSeq^" />
+    <field name="SO_NO" type="Decimal" label="^SoNo^SONO^SoNo^" />
+    <field name="Dr_AC" type="String" label="^DrAC^Dr AC^DrAC^" length="50" />
+    <field name="Cr_AC" type="String" label="^CrAC^Cr AC^CrAC^" length="50" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" length="50" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" />
-    <field name="Invoice_Balance_Qty" type="Decimal" label="^InvBalQty^Invoice Balance Qty^InvBalQty^" />
-    <field name="QtyEnter" type="Decimal" label="^QtyEnt^Qty Enter^QtyEnt^" />
-    <field name="Transaction_Type" type="String" label="^TraTyp^Transaction Type^TraTyp^" length="25" />
-    <field name="Transaction_Date" type="DateTime" label="^TraDat^Transaction Date^TraDat^" />
-    <field name="Transaction_No" type="Decimal" label="^TraNo^Transaction No^TraNo^" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="SO_Line_No" type="Decimal" label="^SoLinNo^SO Line No^SoLinNo^" />
-    <field name="PO_Line_No" type="Decimal" label="^PoLinNo^PO Line No^PoLinNo^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Item_Code_Ref_No" type="String" label="^IteRefNo^Item Code Ref No^IteRefNo^" length="20" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+    <field name="Invoice_Balance_Qty" type="Decimal" label="^InvoiceBalanceQty^Invoice Balance Qty^InvoiceBalanceQty^" />
+    <field name="QtyEnter" type="Decimal" label="^QtyEnter^Qty Enter^QtyEnter^" />
+    <field name="Transaction_Type" type="String" label="^TransactionType^Transaction Type^TransactionType^" length="25" />
+    <field name="Transaction_Date" type="DateTime" label="^TransactionDate^Transaction Date^TransactionDate^" />
+    <field name="Transaction_No" type="Decimal" label="^TransactionNo^Transaction No^TransactionNo^" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="SO_Line_No" type="Decimal" label="^SOLineNo^SO Line No^SOLineNo^" />
+    <field name="PO_Line_No" type="Decimal" label="^POLineNo^PO Line No^POLineNo^" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Item_Code_Ref_No" type="String" label="^ItemRefNo^Item Code Ref No^ItemRefNo^" length="20" />
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
       <formula>SELECT @Session_BranchName_Ar</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" sourceFields="OPU_Code" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" />
-    <field name="Qty" type="Double" label="^Qty^Qty^Qty^" />
-    <field name="P_Doc_No" type="Int64" label="^PDocNo^InvTrxNo^PDocNo^" />
-    <field name="P_PO_No" type="Int64" label="^PPoNo^PO No^PPoNo^" />
-    <field name="P_SO_No" type="Int64" label="^PSoNo^SONO^PSoNo^" />
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" sourceFields="OPU_Code" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" />
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="Qty" type="Double" label="Qty" />
+    <field name="P_Doc_No" type="Int64" label="InvTrxNo" />
+    <field name="P_PO_No" type="Int64" label="PO No" />
+    <field name="P_SO_No" type="Int64" label="SONO" />
+    <field name="ProjTasksID" type="Decimal" label="^ProTasId^Proj Tasks ID^ProTasId^" />
+    <field name="SiteCode" type="String" label="Site Code" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^TraLin^Transactions Line^TraLin^" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Transactions Line" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+      <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="StoreID" columns="15" />
         <dataField fieldName="Item_Code" columns="20" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Item_Code_Ref_No" columns="20" />
         <dataField fieldName="Item_Part" columns="50" />
         <dataField fieldName="Item_Desc" />
@@ -98,14 +100,16 @@ FROM      dbo.tbl_Transactions_Line INNER JOIN
         <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
         <dataField fieldName="PO_Line_No" columns="15" hidden="true" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ProjTasksID" columns="15" />
+        <dataField fieldName="SiteCode" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevTraLin^Review Transactions Line^RevTraLin^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review dbo tbl Transactions Line" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="dbo tbl Transactions Line" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -135,8 +139,8 @@ FROM      dbo.tbl_Transactions_Line INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTraLin^New Transactions Line^NewTraLin^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New dbo tbl Transactions Line" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New dbo tbl Transactions Line" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -210,6 +214,11 @@ FROM      dbo.tbl_Transactions_Line INNER JOIN
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="Cancel" flat="true">
+      <action commandName="SQL" id="a100" headerText="Cancel Line" whenLastCommandName="Select">
+        <data><![CDATA[EXEC [dbo].[Cancel_Doc_Line] @Line_ID,1]]></data>
+      </action>
     </actionGroup>
   </actions>
 </dataController>

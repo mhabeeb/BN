@@ -1,252 +1,276 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="AP_Supplier_Payments" conflictDetection="overwriteChanges" label="^ApSupPay^AP_Supplier_Payments^ApSupPay^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="AP_Supplier_Payments" conflictDetection="overwriteChanges" label="AP_Supplier_Payments" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.AP_Supplier_PaymentsBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="APAR_Payments" custom="true">
-      <text><![CDATA[SELECT     *
-FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay' and IsNull(CMDMYN,0)=0]]></text>
+      <text><![CDATA[SELECT APAR_Payments .*,CAST(APAR_Payments.PaymentID as varchar(50)) 
+"ZZ_Filter_Value" FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay' and IsNull(CMDMYN,0)=0
+
+
+
+
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="PaymentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PayId^Sequence #^PayId^" readOnly="true" showInSummary="true" />
-    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Supplier NO.^SysNum^">
-      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" copy="Currency_Code=DefaultCurrency&#xD;&#xA;InterCompanyYN=InterCompanyYN" />
-    </field>
-    <field name="LocationID" type="Decimal" label="^Loc^Location ^Loc^" contextFields="Sys_Number=Sys_Number" allowNulls="false">
-      <items style="DropDownList" dataController="tbl_Locations" dataView="grid1" dataTextField="Location_Name" dataValueField="LocationID" copy="Location_Name=Location_Name" />
+    <field name="PaymentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PayId^Sequence ^PayId^" readOnly="true" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SupNum^Supplier ^SupNum^">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" copy="Currency_Code=DefaultCurrency&#xD;&#xA;InterCompanyYN=InterCompanyYN&#xD;&#xA;Vendor_Name=Vendor_Name" />
     </field>
     <field name="Location_Name" type="String" label="Location Name" length="150" />
-    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" />
-    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount Paid^AmoPai^" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" allowNulls="false" allowLEV="true">
+    <field name="LocationID" type="Decimal" label="^Location^Location ^Location^" contextFields="Sys_Number=Sys_Number" allowNulls="false">
+      <items style="Lookup" dataController="tbl_Locations" dataTextField="Location_Name" dataValueField="LocationID" copy="Location_Name=Location_Name" />
+    </field>
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PaymentDate^Payment Date^PaymentDate^" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmountPaid^Amount Paid^AmountPaid^" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" allowNulls="false" allowLEV="true" showInSummary="true" htmlEncode="false">
       <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
     </field>
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" allowNulls="false" allowLEV="true">
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" allowNulls="false" allowLEV="true">
       <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
     </field>
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="200" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
-    <field name="CashBankID" type="Decimal" label="^CasBanId^Cash Bank#^CasBanId^" allowNulls="false">
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="200" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Decimal" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="CashBankID" type="Decimal" label="^CashBank^Cash Bank#^CashBank^" allowNulls="false" causesCalculate="true">
       <items style="Lookup" dataController="Pick_Bank" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" copy="BankCashName_PMT=BankCashName" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="Clearing_Flag" type="Int32" label="^CleFla^Req. Clearing^CleFla^">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" showInSummary="true" />
+    <field name="Clearing_Flag" type="Int32" label="^ReqClearing^Req. Clearing^ReqClearing^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="GL_PostedYN" type="Int32" label="^GlPosYn^GL Posted YN^GlPosYn^" allowNulls="false">
-      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    <field name="GL_PostedYN" type="Int32" label="^GLPostedYN^GL Posted YN^GLPostedYN^" allowNulls="false">
+      <items style="RadioButtonList" dataController="PostYesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" />
-    <field name="Currency_Code" type="String" label="^CurCod^Curr^CurCod^" length="4" allowNulls="false" showInSummary="true">
-      <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Code" dataValueField="Currency_Code" />
-    </field>
-    <field name="CheckNo" type="Decimal" label="^CheNo^Check No^CheNo^" dataFormatString="N2" />
-    <field name="Expense_AccountID" type="String" label="^ExpAccId^Expense Account#^ExpAccId^" length="50" />
-    <field name="PaymentType" type="String" label="^PayTyp^Payment Type^PayTyp^" length="20" />
-    <field name="CheckPayTo" type="String" label="^ChePayTo^Payment By^ChePayTo^" length="200" />
-    <field name="PayNumber" type="Decimal" label="^PayDoc^Pay Doc^PayDoc^" dataFormatString="N2" contextFields="CashBankID=CashBankID">
+    <field name="APAR_Flag" type="Int32" label="^APARFlag^APAR Flag^APARFlag^" />
+    <field name="CheckNo" type="Decimal" label="^CheckNo^Check No^CheckNo^" dataFormatString="N2" />
+    <field name="Expense_AccountID" type="String" label="^ExpenseAccount^Expense Account#^ExpenseAccount^" length="50" />
+    <field name="PaymentType" type="String" label="^PaymentType^Payment Type^PaymentType^" length="20" />
+    <field name="CheckPayTo" type="String" label="^CheckPayTo^Payment By^CheckPayTo^" length="200" />
+    <field name="PayNumber" type="Decimal" label="^PayDoc^Pay Doc^PayDoc^" dataFormatString="N2" contextFields="CashBankID=CashBankID" causesCalculate="true" allowNulls="false">
       <items style="Lookup" dataController="Pick_Pay_Doc" dataView="grid1" dataTextField="PayNumber" dataValueField="PayNumber" />
     </field>
-    <field name="Vendor_Name" type="String" label="^SupNam^Supplier Name^SupNam^" readOnly="true" length="150" />
-    <field name="WireYN" type="Int32" label="^WirYn^Wire YN^WirYn^">
+    <field name="Vendor_Name" type="String" label="^SupplierName^Supplier Name^SupplierName^" length="150" />
+    <field name="WireYN" type="Int32" label="^WireYN^Wire YN^WireYN^">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtAppBal^Pmt Apply Bal^PmtAppBal^" readOnly="true" />
-    <field name="Cur_Rate" type="Decimal" label="^CurRat^Cur Rate^CurRat^" />
-    <field name="XferID" type="Decimal" label="^XferId^Xfer#^XferId^" />
-    <field name="RefreshPMT" type="Int32" label="^RefPmt^Refresh PMT^RefPmt^" />
+    <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtApplyBal^Pmt Apply Bal^PmtApplyBal^" readOnly="true" />
+    <field name="XferID" type="Decimal" label="^Xfer^Xfer#^Xfer^" />
+    <field name="RefreshPMT" type="Int32" label="^RefreshPMT^Refresh PMT^RefreshPMT^" />
     <field name="Ven_RefNo" type="String" allowNulls="false" label="^VenRefNo^Ven Ref No^VenRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="25" />
-    <field name="Amount_Variance" type="Currency" label="^AmoVar^Amount Variance^AmoVar^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" dataFormatString="N2" />
-    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Amount_Variance" type="Currency" label="^AmountVariance^Amount Variance^AmountVariance^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" dataFormatString="N2" />
+    <field name="Approve_Ask" type="Int32" label="^ApproveAsk^Approve Ask^ApproveAsk^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Rec_Status" type="Int32" label="^RecStatus^Rec Status^RecStatus^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="PartyBank" type="Decimal" label="^ParBan^Party Bank^ParBan^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" contextFields="Sys_Number=Sys_Number" allowNulls="false">
-      <items style="Lookup" dataController="Pick_Supplier_BNK" dataView="grid1" dataTextField="AccountNumber" dataValueField="PartyBankID" />
+    <field name="PartyBank" type="Decimal" label="^ParBnk^Party Bank Name^ParBnk^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" contextFields="Sys_Number=Sys_Number" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Supplier_BNK" dataView="grid1" dataTextField="AccountNumber" dataValueField="PartyBankID" newDataView="createForm1" />
     </field>
-    <field name="S1" type="String" label="^S1^S1^S1^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="S2" type="String" label="^S2^S2^S2^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="S3" type="String" label="^S3^S3^S3^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="S4" type="String" label="^S4^S4^S4^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="S5" type="String" label="^S5^S5^S5^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="S6" type="String" label="^S6^S6^S6^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="S7" type="String" label="^S7^S7^S7^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="InterCompanyYN" type="Int32" label="^IntComYn^Inter Company YN^IntComYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
+    <field name="D3Caption" type="String" label="^D3Caption^D3 Caption^D3Caption^" length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D3Caption</formula>
+    </field>
+    <field name="D2Caption" type="String" label="^D2Caption^D2 Caption^D2Caption^" length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D2Caption</formula>
+    </field>
+    <field name="D4Caption" type="String" label="^D4Caption^D4 Caption^D4Caption^" length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D4Caption</formula>
+    </field>
+    <field name="D5Caption" type="String" label="^D5Caption^D5 Caption^D5Caption^" length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D5Caption</formula>
+    </field>
+    <field name="S5" type="String" label="^S5^S5^S5^" length="50" contextFields="SEGMENT6='D5'">
+      <configuration>HeaderText=D5Caption</configuration>
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="S1" type="String" label="^S1^S1^S1^" length="50" contextFields="AccountID=Expense_AccountID">
+      <configuration>HeaderText=D1Caption</configuration>
+      <items style="Lookup" dataController="COA_Sub_Account_child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID_Sub" />
+    </field>
+    <field name="S4" type="String" label="^S4^S4^S4^" length="50" contextFields="SEGMENT6='D4'">
+      <configuration>HeaderText=D4Caption</configuration>
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="S2" type="String" label="^S2^S2^S2^" length="50" contextFields="SEGMENT6='D2'">
+      <configuration>HeaderText=D2Caption</configuration>
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="S3" type="String" label="^S3^S3^S3^" length="50" contextFields="SEGMENT6='D3'">
+      <configuration>HeaderText=D3Caption</configuration>
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="Dimension3" type="Int16" readOnly="true" label="Dimension 3" computed="true">
+      <formula>SELECT @Session_Dimension3</formula>
+    </field>
+    <field name="Dimension2" type="Int16" readOnly="true" label="Dimension 2" computed="true">
+      <formula>SELECT @Session_Dimension2</formula>
+    </field>
+    <field name="Dimension1" type="Int16" readOnly="true" label="Dimension 1" computed="true">
+      <formula>SELECT @Session_Dimension1</formula>
+    </field>
+    <field name="Dimension4" type="Int16" readOnly="true" label="Dimension 4" computed="true">
+      <formula>SELECT @Session_Dimension4</formula>
+    </field>
+    <field name="D1Caption" type="String" label="^D1Caption^D1 Caption^D1Caption^" length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D1Caption</formula>
+    </field>
+    <field name="Dimension5" type="Int16" readOnly="true" label="Dimension 5" computed="true">
+      <formula>SELECT @Session_Dimension5</formula>
+    </field>
+    <field name="InterCompanyYN" type="Int32" label="^InterCompanyYN^Inter Company YN^InterCompanyYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Int_OPU_Code" type="Int32" label="^IntComOpu^InterCompany OPU^IntComOpu^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Int_OPU_Code" type="Int32" label="^InterCompanyOPU^InterCompany OPU^InterCompanyOPU^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="Lookup" dataController="Pick_Organization" dataView="grid1" dataTextField="BranchName" dataValueField="BranchID" />
     </field>
-    <field name="Doc_No" type="Int64" label="^DocNo^Doc No^DocNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="Doc_No" type="Int64" label="^DocNo^Doc #^DocNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="OPU_Code" onDemandHandler="dbotbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BraLog^Branch Logo^BraLog^" readOnly="true" computed="true" />
-    <field name="DOC_TYPE_ID" type="Int32" label="^DocTypId^DOC TYPE ID^DocTypId^" />
-    <field name="App_Group_ID" type="Int64" label="^AppGroId^App Group ID^AppGroId^" contextFields="DocTypeID=DOC_TYPE_ID">
+    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="OPU_Code" onDemandHandler="dbotbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BranchLogo^Branch Logo^BranchLogo^" readOnly="true" computed="true" />
+    <field name="DOC_TYPE_ID" type="Int32" label="DOC TYPE ID" />
+    <field name="App_Group_ID" type="Int64" label="App Group ID" contextFields="DocTypeID=DOC_TYPE_ID">
       <items style="Lookup" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="AppGroupID" dataValueField="AppGroupID" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
       <formula>SELECT @Session_BranchName_Ar</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="BankCashName_PMT" type="String" label="^BanCasNamPmt^Bank Name^BanCasNamPmt^" length="50" />
+    <field name="BankCashName_PMT" type="String" label="^BankName^Bank Name^BankName^" length="50" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="SUB_DOC_TYPE_NAME" type="String" label="Sub Doc Type" length="100" />
+    <field name="SUB_DOC_TYPE_ID" type="Int32" label="Sub Doc Type" contextFields="DocTypeID_Parent=DOC_TYPE_ID">
+      <items style="Lookup" dataController="Pick_Sub_Document" dataView="grid1" dataTextField="DocDescrition" dataValueField="DocTypeID" copy="SUB_DOC_TYPE_NAME=DocDescrition" />
+    </field>
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
+    <field name="ZZ_Controller" type="String" label=" Controller" computed="true">
+      <formula>'AP_Supplier_Payments'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'AP_Supplier_Payments_grid1'
+</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
+    <field name="Cur_Rate" type="Decimal" label="^CurRate^Cur Rate^CurRate^" showInSummary="true" />
+    <field name="Currency_Code" type="String" label="^Curr^Curr^Curr^" length="4" allowNulls="false" showInSummary="true">
+      <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Code" dataValueField="Currency_Code" />
+    </field>
+    <field name="RefundYN" type="Int16" label="Refund YN">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Pay^Payments^Pay^" sortExpression="PaymentID desc" filter="OPU_Code=@Session_OPU_Code">
+    <view id="grid1" type="Grid" commandId="command1" label="Payments" sortExpression="PaymentID desc" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="Payment_Date" columns="10" />
+        <dataField fieldName="SUB_DOC_TYPE_NAME" rows="5" />
         <dataField fieldName="Doc_No" columns="15" />
         <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Ven_RefNo" columns="25" />
         <dataField fieldName="PaymentID" columns="15" hidden="true" />
         <dataField fieldName="Vendor_Name" />
-        <dataField fieldName="Project_Code" columns="50" />
-        <dataField fieldName="Payment_Date" columns="10" />
-        <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" />
-        <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Location_Name" rows="1" readOnly="true" />
+        <dataField fieldName="SUB_DOC_TYPE_ID" columns="15" hidden="true" />
         <dataField fieldName="Remarks" hidden="true" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="Clearing_Flag" columns="15" hidden="true" />
         <dataField fieldName="InterCompanyYN" columns="15" hidden="true" />
         <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
-        <dataField fieldName="Currency_Code" columns="4" hidden="true" />
-        <dataField fieldName="CheckNo" dataFormatString="N" columns="15" />
         <dataField fieldName="Expense_AccountID" columns="50" hidden="true" />
         <dataField fieldName="PaymentType" columns="20" hidden="true" />
         <dataField fieldName="CheckPayTo" hidden="true" />
         <dataField fieldName="PayNumber" dataFormatString="N2" columns="15" hidden="true" />
         <dataField fieldName="WireYN" columns="15" hidden="true" />
-        <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Currency_Code" columns="4" hidden="true" />
         <dataField fieldName="XferID" columns="15" hidden="true" />
         <dataField fieldName="RefreshPMT" columns="15" hidden="true" />
-        <dataField fieldName="Ven_RefNo" columns="25" />
         <dataField fieldName="CashBankID" columns="15" hidden="true" />
         <dataField fieldName="BankCashName_PMT" columns="50" />
+        <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" />
+        <dataField fieldName="CheckNo" dataFormatString="N" columns="15" />
+        <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" />
         <dataField fieldName="Dept_Code" columns="50" hidden="true" />
-        <dataField fieldName="S1" columns="50" hidden="true" />
-        <dataField fieldName="S2" columns="50" hidden="true" />
-        <dataField fieldName="S3" columns="50" hidden="true" />
-        <dataField fieldName="S4" columns="50" hidden="true" />
-        <dataField fieldName="S5" columns="50" hidden="true" />
-        <dataField fieldName="S6" columns="50" hidden="true" />
-        <dataField fieldName="S7" columns="50" hidden="true" />
-        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="Project_Code" columns="50" hidden="true" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="GL_PostedYN" columns="15" />
-        <dataField fieldName="Approve_Ask" columns="15" />
         <dataField fieldName="Rec_Status" columns="15" />
+        <dataField fieldName="Approve_Ask" columns="15" />
         <dataField fieldName="BranchLogo" columns="15" hidden="true" />
         <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
         <dataField fieldName="App_Group_ID" columns="15" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="PartyBank" columns="15" hidden="true" />
-        <dataField fieldName="Location_Name" rows="1" readOnly="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
+        <dataField fieldName="S3" columns="50" hidden="true" />
+        <dataField fieldName="S4" columns="50" hidden="true" />
+        <dataField fieldName="S5" columns="50" hidden="true" />
+        <dataField fieldName="S1" columns="50" hidden="true" />
+        <dataField fieldName="S2" columns="50" hidden="true" />
+        <dataField fieldName="D3Caption" columns="50" hidden="true" />
+        <dataField fieldName="D2Caption" columns="50" hidden="true" />
+        <dataField fieldName="D4Caption" columns="50" hidden="true" />
+        <dataField fieldName="Dimension1" columns="15" hidden="true" />
+        <dataField fieldName="D5Caption" columns="50" hidden="true" />
+        <dataField fieldName="Dimension3" columns="15" hidden="true" />
+        <dataField fieldName="Dimension5" columns="15" hidden="true" />
+        <dataField fieldName="Dimension2" columns="15" hidden="true" />
+        <dataField fieldName="D1Caption" columns="50" hidden="true" />
+        <dataField fieldName="Dimension4" columns="15" hidden="true" />
+        <dataField fieldName="RefundYN" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPay^Review Payments^RevPay^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Payments" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Payments" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^NewPay^New Payments^NewPay^" flow="NewColumn">
+          <description />
           <dataFields>
-            <dataField fieldName="Sys_Number" columns="15" />
-            <dataField fieldName="Vendor_Name" />
+            <dataField fieldName="RefundYN" columns="15" />
             <dataField fieldName="Payment_Date" columns="10" />
-            <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" />
-            <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" />
-            <dataField fieldName="CashBankID" columns="15" />
-            <dataField fieldName="Remarks" columns="30" />
-            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-            <dataField fieldName="Company_Code" hidden="true" columns="15" />
-            <dataField fieldName="Created_By" hidden="true" columns="15" />
-            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Updated_By" hidden="true" columns="15" />
-            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Clearing_Flag" columns="15" hidden="true" />
-            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
-            <dataField fieldName="Currency_Code" columns="4" hidden="true" readOnly="true" />
-            <dataField fieldName="CheckNo" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Expense_AccountID" columns="50" hidden="true" />
-            <dataField fieldName="PaymentType" columns="20" hidden="true" />
-            <dataField fieldName="CheckPayTo" hidden="true" />
-            <dataField fieldName="PayNumber" dataFormatString="N2" columns="15" hidden="true" />
-            <dataField fieldName="WireYN" columns="15" />
-            <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" hidden="true" />
-            <dataField fieldName="XferID" columns="15" hidden="true" />
-            <dataField fieldName="RefreshPMT" columns="15" hidden="true" />
-            <dataField fieldName="Amount_Variance" columns="15" dataFormatString="N2" />
-            <dataField fieldName="Project_Code" columns="50" />
-            <dataField fieldName="Dept_Code" columns="50" />
-            <dataField fieldName="Doc_No" columns="15" readOnly="true" />
-            <dataField fieldName="LocationID" columns="15" />
-            <dataField fieldName="Location_Name" rows="1" />
-          </dataFields>
-        </category>
-        <category headerText="Posting" id="c2">
-          <dataFields>
-            <dataField fieldName="GL_PostedYN" columns="15" />
-            <dataField fieldName="InterCompanyYN" columns="15" readOnly="true" />
-            <dataField fieldName="Int_OPU_Code" columns="15" readOnly="true" />
-            <dataField fieldName="S1" columns="50" hidden="true" />
-            <dataField fieldName="S2" columns="50" hidden="true" />
-            <dataField fieldName="S3" columns="50" hidden="true" />
-            <dataField fieldName="S4" columns="50" hidden="true" />
-            <dataField fieldName="S5" columns="50" hidden="true" />
-            <dataField fieldName="S6" columns="50" hidden="true" />
-            <dataField fieldName="S7" columns="50" hidden="true" />
-            <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
-            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
-            <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
-            <dataField fieldName="App_Group_ID" columns="15" />
-            <dataField fieldName="BankCashName_PMT" columns="50" hidden="true" />
-            <dataField fieldName="PartyBank" columns="15" />
-          </dataFields>
-        </category>
-      </categories>
-    </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPay^New Payments^NewPay^" showInSelector="false">
-      <headerText />
-      <categories>
-        <category id="c1" headerText="New Payments" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
-          <dataFields>
+            <dataField fieldName="SUB_DOC_TYPE_ID" columns="15" />
             <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Vendor_Name" rows="1" columns="30" />
+            <dataField fieldName="Location_Name" rows="1" columns="30" />
             <dataField fieldName="LocationID" columns="15" />
-            <dataField fieldName="Location_Name" rows="1" />
-            <dataField fieldName="Payment_Date" columns="10" />
             <dataField fieldName="CashBankID" columns="15" />
+            <dataField fieldName="PayNumber" dataFormatString="D" columns="15" />
+            <dataField fieldName="CheckNo" dataFormatString="D" columns="15" />
             <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Remarks" columns="30" />
-            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-            <dataField fieldName="Company_Code" hidden="true" columns="15" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
@@ -254,39 +278,160 @@ FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay' and IsN
             <dataField fieldName="Clearing_Flag" columns="15" hidden="true" />
             <dataField fieldName="GL_PostedYN" columns="15" hidden="true" />
             <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
-            <dataField fieldName="Currency_Code" columns="4" />
-            <dataField fieldName="CheckNo" dataFormatString="N2" columns="15" />
             <dataField fieldName="Expense_AccountID" columns="50" hidden="true" />
             <dataField fieldName="PaymentType" columns="20" hidden="true" />
             <dataField fieldName="CheckPayTo" hidden="true" />
-            <dataField fieldName="PayNumber" dataFormatString="N2" columns="15" />
-            <dataField fieldName="WireYN" columns="15" />
+            <dataField fieldName="WireYN" columns="15" hidden="true" />
             <dataField fieldName="XferID" columns="15" hidden="true" />
             <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" hidden="true" />
             <dataField fieldName="RefreshPMT" columns="15" hidden="true" />
-            <dataField fieldName="Amount_Variance" columns="15" />
-            <dataField fieldName="Project_Code" columns="50" />
-            <dataField fieldName="Dept_Code" columns="50" />
-            <dataField fieldName="InterCompanyYN" columns="15" />
+            <dataField fieldName="Doc_No" columns="15" hidden="true" />
+            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
+            <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
+            <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
+            <dataField fieldName="Amount_Variance" columns="15" dataFormatString="N2" />
+            <dataField fieldName="Currency_Code" columns="4" />
+          </dataFields>
+        </category>
+        <category headerText="^AddInf^Additional Information^AddInf^" id="c3" flow="NewColumn">
+          <dataFields>
             <dataField fieldName="Int_OPU_Code" columns="15">
               <visibility>
                 <expression test="[InterCompanyYN]==1" type="ClientScript" />
               </visibility>
             </dataField>
-            <dataField fieldName="S1" columns="50" hidden="true" />
-            <dataField fieldName="S2" columns="50" hidden="true" />
-            <dataField fieldName="S3" columns="50" hidden="true" />
-            <dataField fieldName="S4" columns="50" hidden="true" />
-            <dataField fieldName="S5" columns="50" hidden="true" />
-            <dataField fieldName="S6" columns="50" hidden="true" />
-            <dataField fieldName="S7" columns="50" hidden="true" />
-            <dataField fieldName="Doc_No" columns="15" hidden="true" />
-            <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
+            <dataField fieldName="Remarks" columns="50" rows="4" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="SUB_DOC_TYPE_NAME" rows="5" hidden="true" />
+            <dataField fieldName="App_Group_ID" columns="15" />
+            <dataField fieldName="AProjectEnabled" columns="15" hidden="true" />
+            <dataField fieldName="BankCashName_PMT" columns="50" hidden="true" />
+            <dataField fieldName="ASiteCodeEnabled" columns="15" hidden="true" />
+            <dataField fieldName="InterCompanyYN" columns="15" />
+            <dataField fieldName="Project_Code" columns="50">
+              <visibility>
+                <expression test="[AProjectEnabled]==1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="PartyBank" columns="15" />
+            <dataField fieldName="Dimension4" columns="15" hidden="true" />
+            <dataField fieldName="Dimension5" columns="15" hidden="true" />
+            <dataField fieldName="D5Caption" columns="50" hidden="true" />
+            <dataField fieldName="S4" columns="50">
+              <visibility>
+                <expression test="[Dimension4] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S5" columns="50">
+              <visibility>
+                <expression test="[Dimension5] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S3" columns="50">
+              <visibility>
+                <expression test="[Dimension3] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S2" columns="50">
+              <visibility>
+                <expression test="[Dimension2] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S1" columns="50">
+              <visibility>
+                <expression test="[Dimension1] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Dimension2" columns="15" hidden="true" />
+            <dataField fieldName="Dimension3" columns="15" hidden="true" />
+            <dataField fieldName="D1Caption" columns="50" hidden="true" />
+            <dataField fieldName="D4Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension1" columns="15" hidden="true" />
+            <dataField fieldName="D2Caption" columns="50" hidden="true" />
+            <dataField fieldName="D3Caption" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Payments" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="^Pay^Payments^Pay^" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Vendor_Name" readOnly="true" />
+            <dataField fieldName="Location_Name" columns="30" />
+            <dataField fieldName="LocationID" columns="15" />
+            <dataField fieldName="SUB_DOC_TYPE_NAME" hidden="true" columns="25" />
+            <dataField fieldName="Doc_No" columns="15" readOnly="true" />
+            <dataField fieldName="Payment_Date" columns="10" />
+            <dataField fieldName="SUB_DOC_TYPE_ID" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="CashBankID" columns="15" />
+            <dataField fieldName="PayNumber" dataFormatString="D" columns="15" hidden="true" />
+            <dataField fieldName="CheckNo" dataFormatString="D" columns="15" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" readOnly="true" />
+            <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" />
+            <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Clearing_Flag" columns="15" hidden="true" />
+            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+            <dataField fieldName="Expense_AccountID" columns="50" hidden="true" />
+            <dataField fieldName="PaymentType" columns="20" hidden="true" />
+            <dataField fieldName="CheckPayTo" hidden="true" />
+            <dataField fieldName="WireYN" columns="15" />
+            <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="XferID" columns="15" hidden="true" />
+            <dataField fieldName="RefreshPMT" columns="15" hidden="true" />
+            <dataField fieldName="Amount_Variance" columns="15" dataFormatString="N2" />
+          </dataFields>
+        </category>
+        <category headerText="^Posting^Posting^Posting^" id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="GL_PostedYN" columns="15" />
             <dataField fieldName="Rec_Status" columns="15" hidden="true" />
+            <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
             <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
             <dataField fieldName="App_Group_ID" columns="15" />
             <dataField fieldName="BankCashName_PMT" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+        <category headerText="^AddInf^Additional Information^AddInf^" id="c3" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="AProjectEnabled" columns="15" hidden="true" />
+            <dataField fieldName="ASiteCodeEnabled" columns="15" hidden="true" />
+            <dataField fieldName="InterCompanyYN" columns="15" readOnly="true" />
+            <dataField fieldName="Int_OPU_Code" columns="15" readOnly="true" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="Project_Code" columns="50">
+              <visibility>
+                <expression test="[AProjectEnabled]==1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Remarks" columns="50" rows="4" />
             <dataField fieldName="PartyBank" columns="15" />
+            <dataField fieldName="S2" columns="50" hidden="true" />
+            <dataField fieldName="S1" columns="50" hidden="true" />
+            <dataField fieldName="S4" columns="50" hidden="true" />
+            <dataField fieldName="S5" columns="50" hidden="true" />
+            <dataField fieldName="S3" columns="50" hidden="true" />
+            <dataField fieldName="Dimension2" columns="15" hidden="true" />
+            <dataField fieldName="D1Caption" columns="50" hidden="true" />
+            <dataField fieldName="D2Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension4" columns="15" hidden="true" />
+            <dataField fieldName="Dimension5" columns="15" hidden="true" />
+            <dataField fieldName="D5Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension3" columns="15" hidden="true" />
+            <dataField fieldName="D3Caption" columns="50" hidden="true" />
+            <dataField fieldName="D4Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension1" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -311,13 +456,10 @@ FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay' and IsN
       <action commandName="Cancel" commandArgument="createForm1" whenLastCommandName="Insert" id="a100" whenView="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
-      <action commandName="SQL" headerText="Re-Open" id="a100" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1 &amp;&amp; [GL_PostedYN]==0">
-        <data><![CDATA[EXECUTE [dbo].[REOPEN_DOCUMENT_STATUS] @PaymentID,2]]></data>
-      </action>
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -331,7 +473,7 @@ FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay' and IsN
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Print Supplier Payment">
+    <actionGroup id="ag7" scope="ActionBar" headerText="^PriSupPay^Print Supplier Payment^PriSupPay^" flat="false">
       <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
       <action id="a3" commandName="ReportAsExcel" />
@@ -356,18 +498,59 @@ SET RefreshPMT=@A  WHERE PaymentID=@PaymentID]]></data>
       </action>
       <action id="a1" commandName="Select" commandArgument="editForm1" headerText="^Edit^Edit^Edit^" />
     </actionGroup>
-    <actionGroup id="ag105" scope="ActionBar" headerText="Post GL" flat="true">
-      <action commandName="SQL" headerText="Post Gl" id="a100" whenLastCommandName="Select" whenClientScript="[GL_PostedYN]==0 &amp;&amp; [Approve_Ask]==1">
+    <actionGroup id="ag105" scope="ActionBar" headerText="^PosGl^Post GL^PosGl^" flat="true">
+      <action commandName="SQL" headerText="^PosGl^Post GL^PosGl^" id="a100" whenLastCommandName="Select" whenClientScript="[GL_PostedYN]!=1 &amp;&amp; [Approve_Ask]==1" cssClass="glyphicon glyphicon-book">
         <data><![CDATA[EXEC  dbo.DOC_POST_TO_GL @PaymentID,2]]></data>
       </action>
-    </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Ask Approval" flat="true">
-      <action commandName="SQL" headerText="Ask Approval" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
-        <data><![CDATA[EXEC XX_UPDATE_ASK_STATUS @PaymentID,@DOC_TYPE_ID,1,@BusinessRules_UserId]]></data>
+      <action commandName="SQL" headerText="^DraAcc^Draft Account^DraAcc^" id="a102" whenLastCommandName="Select" whenClientScript="[GL_PostedYN]!=1" cssClass="glyphicon glyphicon-modal-window">
+        <data><![CDATA[EXEC  dbo.DOC_POST_TO_GL_DRAF @PaymentID,2]]></data>
       </action>
-      <action commandName="SQL" headerText="Re-Open" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1 &amp;&amp; [GL_PostedYN]==0 ">
+      <action commandName="SQL" headerText="Cancel Payment" id="a101" confirmation="_controller=ParamAreYouSure&#xD;&#xA;_title= Are You Sure You Want to Cancel Invoice&#xD;&#xA;_width=500">
+        <data><![CDATA[DECLARE @s_Error INT;
+SET @s_Error = 0;
+IF @PMT_APPLY_BAL <> @Amount_Paid
+    BEGIN
+        SET @s_Error = 1;
+    END;
+IF @s_Error = 1
+    BEGIN
+        SET @Result_ShowAlert = 'Payment Has Application you cannot Cancel';
+    END;
+IF @Parameters_AreYouSure = 1
+   AND
+   @s_Error = 0
+    BEGIN
+        EXEC [dbo].[PAYMENT_TO_GL_REVERSE]
+             @PaymentID ,
+             @BusinessRules_UserId ,
+             @Parameters_CRemarks,
+             @Parameters_JVDate
+    END;]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^AskApp^Ask Approval^AskApp^" flat="true">
+      <action commandName="SQL" headerText="^AskApp^Ask Approval^AskApp^" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0" cssClass="glyphicon glyphicon-question-sign">
+        <data><![CDATA[DECLARE @s_Error INT;
+SET @s_Error = 0;
+IF [dbo].[GET_PMT_APPLY_BAL_AMT] ( @PaymentID) <> 0
+    BEGIN
+        SET @s_Error = 1;
+    END;
+IF @s_Error = 1
+    BEGIN
+        SET @Result_ShowAlert = 'Application Is Mis Matching, Cannot be Approved';
+    END;
+IF @s_Error = 0
+BEGIN
+EXEC XX_UPDATE_ASK_STATUS @PaymentID,@DOC_TYPE_ID,1,@BusinessRules_UserId
+END]]></data>
+      </action>
+      <action commandName="SQL" headerText="^ReOpe^Re-Open^ReOpe^" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1 &amp;&amp; [GL_PostedYN]==0 ">
         <data><![CDATA[EXECUTE [dbo].[REOPEN_DOCUMENT_STATUS] @PaymentID, @DOC_TYPE_ID]]></data>
       </action>
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintSupplierPayment" headerText="^PriPay^Print Payment^PriPay^" id="a100" cssClass="glyphicon glyphicon-print" />
     </actionGroup>
   </actions>
   <businessRules>
@@ -383,20 +566,64 @@ END;
 
 
 SET @Cur_Rate = [dbo].[Get_Curr_Rate_v1](@Currency_Code, @Payment_Date, @Session_OPU_Code)
+If IsNull(@RefundYN,0)=1 and @Amount_Paid > 0
+  BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Payment_Date,Refund Should Have -ve Amount'
+    END
+
+
+IF IsNull(@Cur_Rate , 0) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Payment_Date,Invalid Currency Rate ....Currency Rate Need to Define'
+    END
+
 SET @OPU_Code = @Session_OPU_Code
 SET @Company_Code = @Session_Company_Code
 
+SET @SUB_DOC_TYPE_ID=IsNull(@SUB_DOC_TYPE_ID,@DOC_TYPE_ID)
 
-SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER(@DOC_TYPE_ID, @Session_OPU_Code, @Payment_Date);
+SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER(@SUB_DOC_TYPE_ID, @Session_OPU_Code, @Payment_Date);
 EXEC dbo.RESET_SEQUENCE
-     @DOC_TYPE_ID,
+     @SUB_DOC_TYPE_ID,
      @Session_OPU_Code,
-     @Payment_Date]]></rule>
+     @Payment_Date
+	 
+if IsNull(@Doc_No,0) < 0
+begin
+    SET @BusinessRules_PreventDefault = 1
+ 	SET @Result_Focus = 'Payment_Date,Invalid Document Sequence ....You Must Define The Sequence'
+end
+
+SET @CheckNo = [dbo].[GET_NEXT_DOC_NUMBER_BANK] (@PayNumber , @Session_OPU_Code , @Payment_Date)
+
+EXEC [dbo].[RESET_SEQUENCE_BANK]
+                          @PayNumber ,
+                          @Session_OPU_Code ,
+                          @Payment_Date
+						  
+SET @Clearing_Flag = dbo.GET_PAYMENT_DOC_CLEARYN (@PayNumber)
+
+if IsNull(@CheckNo,0) < 0
+begin
+    SET @BusinessRules_PreventDefault = 1
+ 	SET @Result_Focus = 'Payment_Date,Invalid Payment Documents ....You Must Define The Sequence'
+end]]></rule>
     <rule id="r102" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Payment_Date= getdate()
 SET @Clearing_Flag=0
-set @Currency_Code='SAR'
-SET @Project_Code='None'
-SET @Dept_Code='None'
+set @Currency_Code=@Session_DefaultCurrency
+
+SET @Project_Code=@Session_DefProject_Code
+--SET @SiteCode=@Session_DefSiteCode
+SET @Dept_Code=@Session_DefDept_Code
+
+SET @S1=@Session_DefS1
+SET @S2=@Session_DefS2
+SET @S3=@Session_DefS3
+SET @S4=@Session_DefS4
+SET @S5=@Session_DefS4
+
 SET @GL_PostedYN=0
 SET @Approve_Ask=0
 SET @Rec_Status=0
@@ -404,9 +631,18 @@ SET @WireYN=0
 SET @Int_OPU_Code=@Session_OPU_Code
 SET @InterCompanyYN=0
 
+SET @AProjectEnabled=@Session_ProjectEnabled
+SET @ASiteCodeEnabled=@Session_SiteCodeEnabled
+
 SET @DOC_TYPE_ID=1579
 
---SET @Cur_Rate
+
+SELECT @Dimension1=Dimension1,@D1Caption=D1Caption,
+@Dimension2=Dimension2,@D2Caption=D2Caption,
+@Dimension3=Dimension3,@D3Caption=D3Caption,
+@Dimension4=Dimension4,@D4Caption=D4Caption
+FROM Accounting_Dimensions WHERE Company_Code=@Session_Company_Code
+
 ]]></rule>
     <rule id="r103" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[IF dbo.CHECK_VALID_OPU_STORE(@BusinessRules_UserId, @Session_OPU_Code, @Session_StoreID) = 0
     BEGIN
@@ -438,5 +674,9 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
+    <rule id="r101" type="Sql" commandName="Calculate" phase="Before" name="PayNumber_Converter"><![CDATA[SET @CheckNo = [dbo].[GET_NEXT_DOC_NUMBER_BANK] (@PayNumber , @Session_OPU_Code , @Payment_Date)
+
+]]></rule>
+    <rule id="r105" commandName="Custom" commandArgument="PrintSupplierPayment" type="Code" phase="Execute" />
   </businessRules>
 </dataController>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="AP_FullPay" label="^ApFullPay^AP_FullPayApFullPay^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.AP_FullPayBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="AP_FullPay" label="AP_FullPay" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.AP_FullPayBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="APAR_Payments" custom="true">
       <text><![CDATA[SELECT     *
@@ -7,49 +7,49 @@ FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay']]></tex
     </command>
   </commands>
   <fields>
-    <field name="PaymentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PayId^Sequence #^PayId^" readOnly="true" />
-    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Supplier NO.^SysNum^" showInSummary="true">
+    <field name="PaymentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Sequence^Sequence #^Sequence^" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SupplierNO^Supplier NO.^SupplierNO^" showInSummary="true">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" showInSummary="true" />
-    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount Paid^AmoPai^" showInSummary="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true">
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PaymentDate^Payment Date^PaymentDate^" showInSummary="true" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmountPaid^Amount Paid^AmountPaid^" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" showInSummary="true">
       <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
     </field>
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true">
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" showInSummary="true">
       <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
     </field>
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="200" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
-    <field name="CashBankID" type="Decimal" label="^CasBanId^Cash Bank#^CasBanId^">
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="200" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Decimal" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="CashBankID" type="Decimal" label="^CashBank^Cash Bank#^CashBank^">
       <items style="Lookup" dataController="Pick_Bank" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="Clearing_Flag" type="Int32" label="^CleFla^Clearing Flag^CleFla^" />
-    <field name="GL_PostedYN" type="Boolean" label="^GlPosYn^GL Posted YN^GlPosYn^" allowNulls="false">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="Clearing_Flag" type="Int32" label="^ClearingFlag^Clearing Flag^ClearingFlag^" />
+    <field name="GL_PostedYN" type="Boolean" label="^GLPostedYN^GL Posted YN^GLPostedYN^" allowNulls="false">
       <items style="CheckBox" />
     </field>
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
-    <field name="CheckNo" type="Decimal" label="^CheNo^Check No^CheNo^" />
-    <field name="Expense_AccountID" type="String" label="^ExpAccId^Expense Account#^ExpAccId^" length="50" />
-    <field name="PaymentType" type="String" label="^PayTyp^Payment Type^PayTyp^" length="20" />
-    <field name="CheckPayTo" type="String" label="^ChePayTo^Check Pay To^ChePayTo^" length="200" />
-    <field name="PayNumber" type="Decimal" label="^PayNum^Pay Number^PayNum^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Supplier Name^VenNam^" readOnly="true" length="150" />
-    <field name="WireYN" type="Int32" label="^WirYn^Wire YN^WirYn^" />
-    <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtAppBal^Pmt Apply Bal^PmtAppBal^" readOnly="true" />
-    <field name="Cur_Rate" type="Decimal" label="^CurRat^Cur Rate^CurRat^" />
-    <field name="XferID" type="Decimal" label="^XferId^Xfer#^XferId^" />
-    <field name="RefreshPMT" type="Int32" label="^RefPmt^Refresh PMT^RefPmt^" />
-    <field name="Discount" type="Double" allowNulls="false" label="^Dis^Discount^Dis^" allowQBE="false" allowSorting="false" htmlEncode="false" dataFormatString="P" hidden="false" />
+    <field name="APAR_Flag" type="Int32" label="^APARFlag^APAR Flag^APARFlag^" />
+    <field name="Currency_Code" type="String" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" />
+    <field name="CheckNo" type="Decimal" label="^CheckNo^Check No^CheckNo^" />
+    <field name="Expense_AccountID" type="String" label="^ExpenseAccount^Expense Account#^ExpenseAccount^" length="50" />
+    <field name="PaymentType" type="String" label="^PaymentType^Payment Type^PaymentType^" length="20" />
+    <field name="CheckPayTo" type="String" label="^CheckPayTo^Check Pay To^CheckPayTo^" length="200" />
+    <field name="PayNumber" type="Decimal" label="^PayNumber^Pay Number^PayNumber^" />
+    <field name="Vendor_Name" type="String" label="^SupplierName^Supplier Name^SupplierName^" readOnly="true" length="150" />
+    <field name="WireYN" type="Int32" label="^WireYN^Wire YN^WireYN^" />
+    <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtApplyBal^Pmt Apply Bal^PmtApplyBal^" readOnly="true" />
+    <field name="Cur_Rate" type="Decimal" label="^CurRate^Cur Rate^CurRate^" />
+    <field name="XferID" type="Decimal" label="^Xfer^Xfer#^Xfer^" />
+    <field name="RefreshPMT" type="Int32" label="^RefreshPMT^Refresh PMT^RefreshPMT^" />
+    <field name="Discount" type="Double" allowNulls="false" label="^Discount^Discount^Discount^" allowQBE="false" allowSorting="false" htmlEncode="false" dataFormatString="P" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Pay^Payments^Pay^" sortExpression="PaymentID desc" filter="OPU_Code IN (SELECT [OPU_Code] FROM [UserBranchAccess] where [UserID]=@BusinessRules_UserId)" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Payments" sortExpression="PaymentID desc" filter="OPU_Code IN (SELECT [OPU_Code] FROM [UserBranchAccess] where [UserID]=@BusinessRules_UserId)" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Sys_Number" columns="15" />
@@ -83,7 +83,7 @@ FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay']]></tex
         <dataField fieldName="RefreshPMT" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPay^Review Payments^RevPay^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Payments" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Payments" flow="NewColumn">
@@ -121,7 +121,7 @@ FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay']]></tex
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPay^New Payments^NewPay^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Payments" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Payments" flow="NewColumn">
@@ -180,7 +180,7 @@ FROM        APAR_Payments WHERE APAR_Flag=2 AND PaymentType='Vendor Pay']]></tex
       <action commandName="Cancel" commandArgument="createForm1" whenLastCommandName="Insert" id="a100" whenView="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -233,7 +233,7 @@ SET @PaymentType='Vendor Pay'
 SET @APAR_Flag=2
 SET @Company_Code=1
 SET @OPU_Code=1
-SET @Currency_Code=IsNull(@Currency_Code,'SAR')
+SET @Currency_Code=@Session_DefaultCurrency
 
 
 SELECT @OPU_Code=IsNull(OPU_Code,1), 

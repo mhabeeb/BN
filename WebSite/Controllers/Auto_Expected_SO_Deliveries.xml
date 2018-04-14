@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Auto_Expected_SO_Deliveries" conflictDetection="overwriteChanges" label="^AutExpSoDel^Auto_Expected_SO_Deliveries^AutExpSoDel^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Auto_Expected_SO_Deliveries" conflictDetection="overwriteChanges" label="Auto_Expected_SO_Deliveries" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName=" dbo.SO_Header" custom="true">
       <text><![CDATA[SELECT        SO_NO, Date_Ordered, Delivery_Date, Header_Net, Vendor_Name, Doc_Status, Project_Code, Dept_Code, YourRefrence,
@@ -13,46 +13,52 @@ WHERE        (SO_NO IN
     </command>
   </commands>
   <fields>
-    <field name="SO_NO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^SoNoSeq^SoNoSeq^SoNoSeq^" readOnly="true" showInSummary="true" />
-    <field name="Doc_No" type="Int64" label="^SoNo^SONO^SoNo^" />
-    <field name="Date_Ordered" type="DateTime" allowNulls="false" label="^DatOrd^Date Ordered^DatOrd^" />
-    <field name="Delivery_Date" type="DateTime" label="^DelDat^Delivery Date^DelDat^" />
-    <field name="Header_Net" type="Decimal" label="^HeaNet^Header Net^HeaNet^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="250" />
-    <field name="Doc_Status" type="String" label="^DocSta^Doc Status^DocSta^" length="50" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="SO_NO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^SoNoSeq^SoNoSeq^SoNoSeq^" readOnly="true" />
+    <field name="Doc_No" type="Int64" label="SONO" />
+    <field name="Date_Ordered" type="DateTime" allowNulls="false" label="^DateOrdered^Date Ordered^DateOrdered^" />
+    <field name="Delivery_Date" type="DateTime" label="^DeliveryDate^Delivery Date^DeliveryDate^" />
+    <field name="Header_Net" type="Decimal" label="^HeaderNet^Header Net^HeaderNet^" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" length="250" />
+    <field name="Doc_Status" type="String" label="^DocStatus^Doc Status^DocStatus^" length="50" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
     <field name="YourRefrence" type="String" label="^RefNo^Ref No^RefNo^" length="15" />
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^SoHea^SO Header^SoHea^" filter="OPU_Code=@Session_OPU_Code" sortExpression="SO_NO DESC" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="SO Header" filter="OPU_Code=@Session_OPU_Code" sortExpression="SO_NO DESC" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
       <headerText>&lt;font color="red"&gt;Note : SO With Manual Serial OR Batch Items Will not Taken for Full Delivery &lt;/font&gt;</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Vendor_Name" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Date_Ordered" columns="10" />
         <dataField fieldName="Delivery_Date" columns="10" />
         <dataField fieldName="Header_Net" dataFormatString="N2" columns="15" />
@@ -63,13 +69,13 @@ WHERE        (SO_NO IN
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="SO_NO" columns="15" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevSoHea^Review SO Header^RevSoHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review dbo SO Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="dbo SO Header" flow="NewColumn">
@@ -89,7 +95,7 @@ WHERE        (SO_NO IN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^SoHea^New SO Header^SoHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New dbo SO Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New dbo SO Header" flow="NewColumn">
@@ -168,12 +174,6 @@ SET Doc_Status=([dbo].[GET_HEADER_STATUS_SO]([SO_NO],(2)))
 WHERE SO_NO=@SO_NO
 END]]></data>
       </action>
-    </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
-      <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
   </actions>
   <businessRules>

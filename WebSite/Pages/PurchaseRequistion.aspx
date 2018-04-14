@@ -12,7 +12,7 @@
     <div data-activator="Tab|^AddfromDR^Add from DR^AddfromDR^">
       <div id="view4" data-controller="Pick_for_PR_From_DR" data-view="grid1" data-filter-source="view1" data-filter-fields="PR_NO" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
-    <div data-activator="Tab|^RFQRequest^RFQ - Request^RFQRequest^">
+    <div data-activator="Tab|^RFQRequest^RFQ Request^RFQRequest^">
       <div id="view5" data-controller="RFQ_Open_PR" data-filter-source="view1" data-filter-fields="PR_NO" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
   </div>

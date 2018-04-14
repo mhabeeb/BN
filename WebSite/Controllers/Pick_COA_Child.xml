@@ -1,20 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_COA_Child" conflictDetection="overwriteChanges" label="^PicCoaChi^Pick_COA_Child^PicCoaChi^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
-  <commands />
+<dataController name="Pick_COA_Child" conflictDetection="overwriteChanges" label="Pick_COA_Child" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="COA_Natural_Account" custom="true">
+      <text><![CDATA[SELECT     AccountID, Account_Description, Account_DescriptionAr, PostableYN, Account_Type, ParentType, 
+Accounts_Int_ID, Ref_Account_No, InActive,BudgetCode_Description,Company_Code
+FROM         dbo.COA_Natural_Account
+WHERE     (ParentType = N'Child') AND (ISNULL(InActive, 0) = 0) AND (PostableYN = 1)]]></text>
+    </command>
+  </commands>
   <fields>
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" showInSummary="true" />
-    <field name="Account_Description" type="String" allowNulls="false" label="^AccDes^Account Description^AccDes^" length="200" showInSummary="true" />
-    <field name="Account_DescriptionAr" type="String" label="^AccDesAr^Account Description Ar^AccDesAr^" length="500" showInSummary="true" />
-    <field name="PostableYN" type="Int32" allowNulls="false" label="^PosYn^Postable YN^PosYn^" showInSummary="true" />
-    <field name="Account_Type" type="String" allowNulls="false" label="^AccTyp^Account Type^AccTyp^" length="50" showInSummary="true" />
+    <field name="AccountID" type="String" allowNulls="false" label="Account#" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Company_Code" type="Int32" allowNulls="false" label="^ComCod^Company Code^ComCod^" isPrimaryKey="true" />
+    <field name="Account_Description" type="String" allowNulls="false" label="Account Description" length="200" showInSummary="true" />
+    <field name="Account_DescriptionAr" type="String" label="Account Description Ar" length="500" showInSummary="true" />
+    <field name="PostableYN" type="Int32" allowNulls="false" label="^PosYN^Postable YN^PosYN^" showInSummary="true" />
+    <field name="Account_Type" type="String" allowNulls="false" label="Account Type" length="50" showInSummary="true" />
     <field name="ParentType" type="String" label="^ParTyp^Parent Type^ParTyp^" length="50" />
-    <field name="Accounts_Int_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^AccIntId^Accounts Int#^AccIntId^" readOnly="true" />
+    <field name="Accounts_Int_ID" type="Int32" allowNulls="false" label="Accounts Int#" readOnly="true" />
     <field name="Ref_Account_No" type="String" label="^RefAccNo^Ref Account No^RefAccNo^" length="50" />
     <field name="InActive" type="Int32" label="In Active" />
-    <field name="BudgetCode_Description" type="String" label="^BudCodDes^Budget Code Description^BudCodDes^" length="200" />
+    <field name="BudgetCode_Description" type="String" label="Budget Code Description" length="200" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^PicCoaChi^Pick COA Child^PicCoaChi^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="COA Natural Account" filter="Company_Code=@Session_Company_Code">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="AccountID" columns="50" />
@@ -26,12 +34,13 @@
         <dataField fieldName="Ref_Account_No" columns="50" />
         <dataField fieldName="InActive" columns="15" />
         <dataField fieldName="BudgetCode_Description" />
+        <dataField fieldName="Company_Code" hidden="true" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPicCoaChi^Review Pick COA Child^RevPicCoaChi^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review COA Natural Account">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Pick COA Child" flow="NewColumn">
+        <category id="c1" headerText="COA Natural Account" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="AccountID" columns="50" />
@@ -43,14 +52,15 @@
             <dataField fieldName="Ref_Account_No" columns="50" />
             <dataField fieldName="InActive" columns="15" />
             <dataField fieldName="BudgetCode_Description" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPicCoaChi^New Pick COA Child^NewPicCoaChi" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New COA Natural Account">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="New Pick COA Child" flow="NewColumn">
+        <category id="c1" headerText="New COA Natural Account" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="AccountID" columns="50" />
@@ -62,6 +72,7 @@
             <dataField fieldName="Ref_Account_No" columns="50" />
             <dataField fieldName="InActive" columns="15" />
             <dataField fieldName="BudgetCode_Description" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -69,33 +80,20 @@
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
-      <action id="a6" />
-      <action id="a7" commandName="New" commandArgument="grid1" />
-      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
-      <action id="a9" />
-      <action id="a10" commandName="BatchEdit" />
-      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+      <action id="a1" commandName="Select" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
-      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
-      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
-    </actionGroup>
-    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
-    </actionGroup>
-    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -120,26 +118,6 @@
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
-      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
--- Enable caching of the result set. Duration is specified in seconds.
--- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
-    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[SELECT     AccountID, Account_Description, Account_DescriptionAr, PostableYN, Account_Type, ParentType, 
-Accounts_Int_ID, Ref_Account_No, InActive,BudgetCode_Description
-FROM         dbo.COA_Natural_Account
-WHERE     (ParentType = N'Child') AND (ISNULL(InActive, 0) = 0) AND (PostableYN = 1)]]></rule>
-    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
--- implement insert here]]></rule>
-    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
--- implement update here]]></rule>
-    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
--- implement delete here]]></rule>
-  </businessRules>
 </dataController>

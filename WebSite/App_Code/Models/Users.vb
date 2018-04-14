@@ -112,13 +112,22 @@ Namespace MyCompany.Models
         Private m_DefaultProject As String
         
         <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
-        Private m_ACompanyName As String
-        
-        <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
         Private m_ABranch As String
         
         <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
         Private m_AStoreName As String
+        
+        <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
+        Private m_ACompanyName As String
+        
+        <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
+        Private m_ABranchAR As String
+        
+        <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
+        Private m_AddressAr As String
+        
+        <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
+        Private m_AddressEn As String
         
         Public Sub New()
             MyBase.New
@@ -468,16 +477,6 @@ Namespace MyCompany.Models
             End Set
         End Property
         
-        Public Property ACompanyName() As String
-            Get
-                Return m_ACompanyName
-            End Get
-            Set
-                m_ACompanyName = value
-                UpdateFieldValue("ACompanyName", value)
-            End Set
-        End Property
-        
         Public Property ABranch() As String
             Get
                 Return m_ABranch
@@ -495,6 +494,46 @@ Namespace MyCompany.Models
             Set
                 m_AStoreName = value
                 UpdateFieldValue("AStoreName", value)
+            End Set
+        End Property
+        
+        Public Property ACompanyName() As String
+            Get
+                Return m_ACompanyName
+            End Get
+            Set
+                m_ACompanyName = value
+                UpdateFieldValue("ACompanyName", value)
+            End Set
+        End Property
+        
+        Public Property ABranchAR() As String
+            Get
+                Return m_ABranchAR
+            End Get
+            Set
+                m_ABranchAR = value
+                UpdateFieldValue("ABranchAR", value)
+            End Set
+        End Property
+        
+        Public Property AddressAr() As String
+            Get
+                Return m_AddressAr
+            End Get
+            Set
+                m_AddressAr = value
+                UpdateFieldValue("AddressAr", value)
+            End Set
+        End Property
+        
+        Public Property AddressEn() As String
+            Get
+                Return m_AddressEn
+            End Get
+            Set
+                m_AddressEn = value
+                UpdateFieldValue("AddressEn", value)
             End Set
         End Property
     End Class

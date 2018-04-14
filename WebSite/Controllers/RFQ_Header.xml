@@ -1,134 +1,144 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="RFQ_Header" conflictDetection="overwriteChanges" label="^RFQHea^RFQ_Header^RFQHea^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="RFQ_Header" conflictDetection="overwriteChanges" label="RFQ_Header" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="RFQ_Header" custom="true">
       <text><![CDATA[SELECT * FROM RFQ_Header]]></text>
     </command>
   </commands>
   <fields>
-    <field name="RFQ_NO" type="Int64" allowNulls="false" label="^SeqNo^Seq No^SeqNo^" isPrimaryKey="true" showInSummary="true" htmlEncode="false" />
-    <field name="Doc_No" type="Int64" label="^RfqNo^RFQ NO^RfqNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="RFQ_Date" type="DateTime" label="^RFQDat^RFQ Date^RFQDat^" allowNulls="false" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="RFQ_NO" type="Int64" allowNulls="false" label="^SeqId^Sequence^SeqId^" isPrimaryKey="true" showInSummary="true" htmlEncode="false" />
+    <field name="Doc_No" type="Int64" label="RFQ NO" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="RFQ_Date" type="DateTime" label="^RFQDate^RFQ Date^RFQDate^" allowNulls="false" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="Last_Submission_Date" type="DateTime" label="^LasSubDat^Last Submission Date^LasSubDat^" allowNulls="false" />
-    <field name="Notes" type="String" allowQBE="false" allowSorting="false" label="^Not^Notes^Not^" />
-    <field name="RFQ_Status" type="String" label="^RFQSta^RFQ Status^RFQSta^" length="25" allowNulls="false">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" showInSummary="true" />
+    <field name="Last_Submission_Date" type="DateTime" label="^LastSubmissionDate^Last Submission Date^LastSubmissionDate^" allowNulls="false" />
+    <field name="Notes" type="String" allowQBE="false" allowSorting="false" label="^Notes^Notes^Notes^" />
+    <field name="RFQ_Status" type="String" label="^RFQStatus^RFQ Status^RFQStatus^" length="25" allowNulls="false">
       <items style="DropDownList">
         <item value="New" text="New" />
         <item value="Published" text="Published" />
         <item value="Closed" text="Closed" />
       </items>
     </field>
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Company_Code" type="Int16" label="^ComCod^Company Code^ComCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^">
-      <items style="RadioButtonList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
-    </field>
-    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^">
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Company_Code" type="Int16" label="^CompanyCode^Company Code^CompanyCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Approve_Ask" type="Int32" label="^ApprAsk^Approve Ask^ApprAsk^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="DOC_TYPE_ID" type="Int32" label="^DocTypId^DOC TYPE ID^DocTypId^" />
-    <field name="App_Group_ID" type="Int64" label="^AppGroId^App Group ID^AppGroId^" contextFields="DOC_TYPE_ID=DOC_TYPE_ID">
-      <items style="DropDownList" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="ApprovalGroupName" dataValueField="AppGroupID" />
+    <field name="DOC_TYPE_ID" type="Int32" label="DOC TYPE ID" />
+    <field name="Rec_Status" type="Int32" label="^RecStatus^Rec Status^RecStatus^">
+      <items style="RadioButtonList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+    <field name="App_Group_ID" type="Int64" label="App Group ID" contextFields="DocTypeID=DOC_TYPE_ID">
+      <items style="Lookup" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="AppGroupID" dataValueField="AppGroupID" />
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
       <formula>SELECT @Session_CompanyName</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="SUB_DOC_TYPE_NAME" type="String" label="Sub Doc Type" length="100" />
+    <field name="SUB_DOC_TYPE_ID" type="Int32" label="Sub Doc Type" contextFields="DocTypeID_Parent=DOC_TYPE_ID">
+      <items style="Lookup" dataController="Pick_Sub_Document" dataView="grid1" dataTextField="DocDescrition" dataValueField="DocTypeID" copy="SUB_DOC_TYPE_NAME=DocDescrition" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RFQHea^RFQ Header^RFQHea^" sortExpression="RFQ_NO desc" reportTemplate="true" filter="OPU_Code=@Session_OPU_Code " showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="RFQ Header" sortExpression="RFQ_NO desc" reportTemplate="true" filter="OPU_Code=@Session_OPU_Code " showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Doc_No" columns="15" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="RFQ_NO" columns="15" hidden="true" />
         <dataField fieldName="RFQ_Date" columns="10" />
+        <dataField fieldName="SUB_DOC_TYPE_NAME" rows="5" />
+        <dataField fieldName="SUB_DOC_TYPE_ID" columns="15" hidden="true" />
         <dataField fieldName="Last_Submission_Date" columns="10" />
         <dataField fieldName="Notes" rows="5" />
         <dataField fieldName="OPU_Code" columns="15" />
         <dataField fieldName="RFQ_Status" columns="25" />
         <dataField fieldName="Company_Code" columns="15" hidden="true" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
-        <dataField fieldName="Updated_By" hidden="true" columns="15" />
-        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Approve_Ask" columns="15" />
         <dataField fieldName="Rec_Status" columns="15" />
         <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
         <dataField fieldName="App_Group_ID" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRFQHea^Review RFQ Header^RevRFQHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review RFQ Header" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="RFQ Header" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiRfqHea^Edit RFQ Header^EdiRfqHea^" flow="NewColumn">
+          <description />
           <dataFields>
-            <dataField fieldName="RFQ_NO" columns="15" readOnly="true" />
-            <dataField fieldName="RFQ_Date" columns="10" />
+            <dataField fieldName="SUB_DOC_TYPE_NAME" rows="1" hidden="true" columns="35" />
+            <dataField fieldName="Doc_No" columns="15" readOnly="true" />
+            <dataField fieldName="RFQ_NO" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="RFQ_Date" columns="20" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Last_Submission_Date" columns="10" />
-            <dataField fieldName="Notes" rows="5" />
-            <dataField fieldName="RFQ_Status" columns="25" />
-            <dataField fieldName="Doc_No" columns="15" readOnly="true" />
-            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
+            <dataField fieldName="Last_Submission_Date" columns="20" />
+            <dataField fieldName="Notes" rows="6" columns="20" />
+            <dataField fieldName="RFQ_Status" columns="25" hidden="true" />
             <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
             <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
+            <dataField fieldName="SUB_DOC_TYPE_ID" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
             <dataField fieldName="App_Group_ID" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRFQHea^New RFQ Header^NewRFQHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New RFQ Header" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New RFQ Header" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewRFQHea^New RFQ Header^NewRFQHea^" flow="NewColumn">
+          <description />
           <dataFields>
-            <dataField fieldName="RFQ_Date" columns="10" />
+            <dataField fieldName="SUB_DOC_TYPE_NAME" rows="1" hidden="true" columns="35" />
+            <dataField fieldName="RFQ_Date" columns="20" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Last_Submission_Date" columns="10" />
-            <dataField fieldName="Notes" rows="5" />
+            <dataField fieldName="Last_Submission_Date" columns="20" />
+            <dataField fieldName="Notes" rows="6" columns="20" />
             <dataField fieldName="RFQ_Status" columns="25" hidden="true" />
-            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="Company_Code" columns="15" hidden="true" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="Doc_No" columns="15" hidden="true" />
-            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
             <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
+            <dataField fieldName="Rec_Status" columns="15" hidden="true" />
             <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
+            <dataField fieldName="SUB_DOC_TYPE_ID" columns="15" />
             <dataField fieldName="App_Group_ID" columns="15" />
           </dataFields>
         </category>
@@ -138,7 +148,6 @@
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -153,10 +162,10 @@
       <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" headerText="^NewRfqHea^New RFQ Header^NewRfqHea^" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -184,14 +193,28 @@
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
-    </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Ask Approval" flat="true">
-      <action commandName="SQL" headerText="Ask Approval" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
-        <data><![CDATA[EXEC XX_UPDATE_ASK_STATUS @RFQ_NO,@DOC_TYPE_ID,1,@BusinessRules_UserId]]></data>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^AskApp^Ask Approval^AskApp^" flat="true">
+      <action commandName="SQL" headerText="^AskApp^Ask Approval^AskApp^" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
+        <data><![CDATA[IF EXISTS ( SELECT TOP 1
+                   RFQ_NO
+                   FROM PR_Line_Items
+                   WHERE RFQ_NO = @RFQ_NO
+                                         )
+   AND
+   EXISTS ( SELECT TOP 1
+                   RFQ_NO
+                   FROM RFQ_Quotation
+                   WHERE RFQ_NO = @RFQ_NO
+                                         )
+    BEGIN
+        EXEC XX_UPDATE_ASK_STATUS
+             @RFQ_NO ,
+             @DOC_TYPE_ID ,
+             1 ,
+             @BusinessRules_UserId;
+    END;]]></data>
       </action>
-      <action commandName="SQL" headerText="Re-Open" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1">
+      <action commandName="SQL" headerText="^ReOpe^Re-Open^ReOpe^" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1">
         <data><![CDATA[EXECUTE [dbo].[REOPEN_DOCUMENT_STATUS] @RFQ_NO,@DOC_TYPE_ID]]></data>
       </action>
     </actionGroup>
@@ -207,8 +230,17 @@ SET @DOC_TYPE_ID=22]]></rule>
     <rule id="r101" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @OPU_Code=@Session_OPU_Code
 SET @Company_Code=@Session_Company_Code
 
-SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER (@DOC_TYPE_ID,@Session_OPU_Code,@RFQ_Date)
-EXEC dbo.RESET_SEQUENCE @DOC_TYPE_ID,@Session_OPU_Code,@RFQ_Date]]></rule>
+
+SET @SUB_DOC_TYPE_ID=IsNull(@SUB_DOC_TYPE_ID,@DOC_TYPE_ID)
+
+SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER (@SUB_DOC_TYPE_ID,@Session_OPU_Code,@RFQ_Date)
+EXEC dbo.RESET_SEQUENCE @SUB_DOC_TYPE_ID,@Session_OPU_Code,@RFQ_Date
+
+if IsNull(@Doc_No,0) < 0
+begin
+    SET @BusinessRules_PreventDefault = 1
+ 	SET @Result_Focus = 'RFQ_Date,Invalid Document Sequence ....You Must Define The Sequence'
+end]]></rule>
     <rule id="r102" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[IF dbo.CHECK_VALID_OPU_STORE(@BusinessRules_UserId, @Session_OPU_Code, @Session_StoreID) = 0
     BEGIN
         SET @BusinessRules_PreventDefault = 1

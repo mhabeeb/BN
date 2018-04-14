@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Ledger_Consolidations_Pick" label="^LedConPic^Ledger_Consolidations_Pick^LedConPic^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Ledger_Consolidations_Pick" label="Ledger_Consolidations_Pick" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Ledger_Consolidations" custom="true">
       <text><![CDATA[SELECT * FROM Ledger_Consolidations]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Cons_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^ConId^Cons#^ConId^" readOnly="true" />
-    <field name="Description" type="String" label="^Des^Description^Des^" length="50" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^">
+    <field name="Cons_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Cons#" readOnly="true" />
+    <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="Updated By" showInSummary="true" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" showInSummary="true" />
+    <field name="InActive" type="Int32" label="In Active">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^LedCon^Ledger Consolidations^LedCon^" filter="Cons_ID IN (SELECT Cons_ID FROM UserConsolidationAccess&#xD;&#xA;WHERE UserID=@BusinessRules_UserId)" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Ledger Consolidations" filter="Cons_ID IN (SELECT Cons_ID FROM UserConsolidationAccess&#xD;&#xA;WHERE UserID=@BusinessRules_UserId)" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" columns="50" />
@@ -29,7 +29,7 @@
         <dataField fieldName="Cons_ID" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevLedCon^Review Ledger Consolidations^RevLedCon^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Ledger Consolidations" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Edit Ledger Consolidations" flow="NewColumn">
@@ -45,7 +45,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewLedCon^New Ledger Consolidations^NewLedCon^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Ledger Consolidations" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Ledger Consolidations" flow="NewColumn">
@@ -87,7 +87,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

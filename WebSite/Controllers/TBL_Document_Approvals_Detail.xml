@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="TBL_Document_Approvals_Detail" conflictDetection="overwriteChanges" label="^DocAppDet^Document Approvals Detail^DocAppDet^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="TBL_Document_Approvals_Detail" conflictDetection="overwriteChanges" label="TBL Document Approvals Detail" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -28,23 +28,23 @@ from "dbo"."TBL_Document_Approvals_Detail" "TBL_Document_Approvals_Detail"
     </command>
   </commands>
   <fields>
-    <field name="DocumentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DocId^Document#^DocId^" showInSummary="true">
+    <field name="DocumentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Document^Document#^Document^" showInSummary="true">
       <items style="Lookup" dataController="TBL_Document_Header" newDataView="createForm1" dataValueField="DocumentID" />
     </field>
-    <field name="DocumentDocDescription" type="String" readOnly="true" allowQBE="false" allowSorting="false" label="^DocDocDes^Document Doc Description^DocDocDes^" />
-    <field name="UserID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^UserId^User#^UserId^" />
-    <field name="Remarks" type="String" allowQBE="false" allowSorting="false" label="^Rem^Remarks^Rem^" showInSummary="true" />
-    <field name="Hirarchy" type="Int32" label="^Hir^Hirarchy^Hir^" showInSummary="true" />
-    <field name="ApprovalStatus" type="Int32" default="((0))" label="^AppSta^Approval Status^AppSta^" showInSummary="true" />
-    <field name="CurrentApp" type="Int32" default="((0))" label="^CurApp^Current App^CurApp^" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDat^Updated Date Time^UpdDatTim^" />
-    <field name="DocAPP_SNO" type="Decimal" allowNulls="false" label="^DocAppSNo^Doc APP SNO^DocAppSNo^" readOnly="true" />
+    <field name="DocumentDocDescription" type="String" readOnly="true" allowQBE="false" allowSorting="false" label="^DocumentDocDescription^Document Doc Description^DocumentDocDescription^" />
+    <field name="UserID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^User^User#^User^" />
+    <field name="Remarks" type="String" allowQBE="false" allowSorting="false" label="^Remarks^Remarks^Remarks^" showInSummary="true" />
+    <field name="Hirarchy" type="Int32" label="^Hirarchy^Hirarchy^Hirarchy^" showInSummary="true" />
+    <field name="ApprovalStatus" type="Int32" default="((0))" label="^ApprovalStatus^Approval Status^ApprovalStatus^" showInSummary="true" />
+    <field name="CurrentApp" type="Int32" default="((0))" label="^CurrentApp^Current App^CurrentApp^" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="DocAPP_SNO" type="Decimal" allowNulls="false" label="^DocAPPSNO^Doc APP SNO^DocAPPSNO^" readOnly="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DocAppDet^Document Approvals Detail^DocAppDet^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="TBL Document Approvals Detail" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="DocumentID" aliasFieldName="DocumentDocDescription" />
@@ -59,7 +59,7 @@ from "dbo"."TBL_Document_Approvals_Detail" "TBL_Document_Approvals_Detail"
         <dataField fieldName="DocAPP_SNO" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDocAppDet^Review Document Approvals Detail^RevDocAppDet^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review TBL Document Approvals Detail" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="TBL Document Approvals Detail" flow="NewColumn">
@@ -79,10 +79,25 @@ from "dbo"."TBL_Document_Approvals_Detail" "TBL_Document_Approvals_Detail"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDocAppDet^New Document Approvals Detail^NewDocAppDet^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New TBL Document Approvals Detail" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
-      <categories>1
-          <category id="c1" headerText="New TBL Document Approvals Detail" flow="NewColumn"><description><![CDATA[$DefaultNewDescription]]></description><dataFields><dataField fieldName="DocumentID" aliasFieldName="DocumentDocDescription" /><dataField fieldName="UserID" columns="15" /><dataField fieldName="Remarks" rows="5" /><dataField fieldName="Hirarchy" columns="15" /><dataField fieldName="ApprovalStatus" columns="15" /><dataField fieldName="CurrentApp" columns="15" /><dataField fieldName="Created_By" hidden="true" columns="15" /><dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" /><dataField fieldName="Updated_By" hidden="true" columns="15" /><dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" /></dataFields></category></categories>
+      <categories>
+        <category id="c1" headerText="New TBL Document Approvals Detail" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DocumentID" aliasFieldName="DocumentDocDescription" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="Remarks" rows="5" />
+            <dataField fieldName="Hirarchy" columns="15" />
+            <dataField fieldName="ApprovalStatus" columns="15" />
+            <dataField fieldName="CurrentApp" columns="15" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
     </view>
   </views>
   <actions>
@@ -110,7 +125,7 @@ from "dbo"."TBL_Document_Approvals_Detail" "TBL_Document_Approvals_Detail"
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

@@ -1,99 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Project_Cost_Allocation" label="^ProCosAll^Project_Cost_Allocation^ProCosAll^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Project_Cost_Allocation" label="Project_Cost_Allocation" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Recurring_Trx_Header" custom="true">
       <text><![CDATA[SELECT * FROM Recurring_Trx_Header where RecurringType =2]]></text>
     </command>
   </commands>
   <fields>
-    <field name="RecurringID" type="Int64" allowNulls="false" isPrimaryKey="true" label="^RecID^Recurring#^RecID^" readOnly="true" />
-    <field name="Doc_No" type="SByte" label="^DocNo^Doc No^DocNo^" />
-    <field name="StartDate" type="DateTime" label="^StaDat^Start Date^StaDat^" />
-    <field name="EndDate" type="DateTime" label="^EndDat^End Date^EndDat^" allowNulls="false" />
-    <field name="Frequency" type="Int32" label="^Fre^Frequency^Fre^" />
-    <field name="Sys_Number" type="Decimal" label="^SupNo^Supplier No^SupNo^">
+    <field name="RecurringID" type="Int64" allowNulls="false" isPrimaryKey="true" label="Recurring#" readOnly="true" />
+    <field name="Doc_No" type="SByte" label="Doc No" />
+    <field name="StartDate" type="DateTime" label="Start Date" />
+    <field name="EndDate" type="DateTime" label="End Date" allowNulls="false" />
+    <field name="Frequency" type="Int32" label="Frequency" />
+    <field name="Sys_Number" type="Decimal" label="Supplier No">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="TotalAmount" type="Decimal" label="^TotAmo^Total Amount^TotAmo^" allowNulls="false" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="CashBankID" type="Decimal" label="^CasBanId^Cash Bank#^CasBanId^">
+    <field name="TotalAmount" type="Decimal" label="Total Amount" allowNulls="false" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="CashBankID" type="Decimal" label="Cash Bank#">
       <items style="Lookup" dataController="CustomerSupplierBanks" dataView="grid1" dataTextField="BankName" dataValueField="PartyBankID" />
     </field>
-    <field name="DOC_TYPE_ID" type="Int32" label="^DocTypId^Doc Type#^DocTypId^" />
-    <field name="Approve" type="Int32" label="^App^Approve^App^" />
-    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^">
+    <field name="DOC_TYPE_ID" type="Int32" label="Doc Type#" />
+    <field name="Approve" type="Int32" label="Approve" />
+    <field name="Approve_Ask" type="Int32" label="Approve Ask">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^">
+    <field name="Rec_Status" type="Int32" label="Rec Status">
       <items style="RadioButtonList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="App_Group_ID" type="Int64" label="^AppGro^App Group#^AppGro^" contextFields="DocTypeID=DOC_TYPE_ID">
+    <field name="App_Group_ID" type="Int64" label="App Group#" contextFields="DocTypeID=DOC_TYPE_ID">
       <items style="Lookup" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="AppGroupID" dataValueField="AppGroupID" />
     </field>
-    <field name="BudgetAccount" type="String" label="^BudAcc^Budget Account^BudAcc^" length="50" allowNulls="false">
+    <field name="BudgetAccount" type="String" label="Budget Account" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="BudgetCode" type="Int64" label="^BudCod^Budget Code^BudCod^" allowNulls="false">
+    <field name="BudgetCode" type="Int64" label="Budget Code" allowNulls="false">
       <items style="Lookup" dataController="Pick_Budget_Master" dataView="grid1" dataTextField="BudgetName" dataValueField="BudgetCode" />
     </field>
-    <field name="InActive" type="SByte" label="^InAct^In Active^InAct^">
+    <field name="InActive" type="SByte" label="In Active">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BrNam^Branch Name^BrNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrNam^Store Name^StrNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" htmlEncode="false">
+    <field name="Updated_By" type="Decimal" label="Updated By" showInSummary="true" htmlEncode="false">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" htmlEncode="false" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true" htmlEncode="false">
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" showInSummary="true" htmlEncode="false" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" showInSummary="true" htmlEncode="false" />
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true" htmlEncode="false">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" htmlEncode="false" />
-    <field name="RecurringType" type="Int16" label="^RecTyp^Recurring Type^RecTyp^">
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompanyName^Company Name^CompanyName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="RecurringType" type="Int16" label="Recurring Type">
       <items style="DropDownList">
         <item value="1" text="Recurring Voucher" />
         <item value="2" text="Project Cost Allocation" />
       </items>
     </field>
-    <field name="TakeCurrentBalance" type="Int16" label="^TakCurBal^Take Current Balance^TakCurBal^">
+    <field name="TakeCurrentBalance" type="Int16" label="Take Current Balance">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="WeightedAvgDist" type="Int16" label="^WeiAvgDis^Weighted Avg Dist^WeiAvgDis^">
+    <field name="WeightedAvgDist" type="Int16" label="Weighted Avg Dist">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="LastCreatedDate" type="DateTime" label="^LasCreDat^Last Created Date^LasCreDat^" />
-    <field name="LastCreatedID" type="Int64" label="^LasCreId^Last Created ID^LasCreId^" />
-    <field name="CreditAccount" type="String" label="^CreAcc^Credit Account^CreAcc^" length="50" allowNulls="false">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    <field name="LastCreatedDate" type="DateTime" label="Last Created Date" />
+    <field name="LastCreatedID" type="Int64" label="Last Created ID" />
+    <field name="CreditAccount" type="String" label="Credit Account" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="AllocationStatus" type="Int16" label="^AllSta^Allocation Status^AllSta^">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RecTrxHed^Recurring Trx Header^RecTrxHed^" showInSelector="false" reportTemplate="true" sortExpression="RecurringID DESC">
+    <view id="grid1" type="Grid" commandId="command1" label="Recurring Trx Header" showInSelector="false" reportTemplate="true" sortExpression="RecurringID DESC">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="Doc_No" columns="15" />
+        <dataField fieldName="RecurringType" columns="15" />
         <dataField fieldName="StartDate" columns="10" hidden="true" />
-        <dataField fieldName="EndDate" columns="10" />
         <dataField fieldName="Frequency" columns="15" hidden="true" />
         <dataField fieldName="Sys_Number" columns="15" hidden="true" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
@@ -102,28 +105,29 @@
         <dataField fieldName="DOC_TYPE_ID" columns="15" hidden="true" />
         <dataField fieldName="Approve" columns="15" hidden="true" />
         <dataField fieldName="TotalAmount" dataFormatString="N2" columns="15" />
-        <dataField fieldName="Approve_Ask" columns="15" hidden="true" />
-        <dataField fieldName="Rec_Status" columns="15" />
+        <dataField fieldName="EndDate" columns="10" />
         <dataField fieldName="App_Group_ID" columns="15" hidden="true" />
         <dataField fieldName="BudgetAccount" columns="50" hidden="true" />
         <dataField fieldName="BudgetCode" columns="15" hidden="true" />
         <dataField fieldName="InActive" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
-        <dataField fieldName="Created_By" hidden="true" columns="15" />
-        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="RecurringID" columns="15" hidden="true" />
-        <dataField fieldName="RecurringType" columns="15" />
+        <dataField fieldName="AllocationStatus" columns="15" />
+        <dataField fieldName="Approve_Ask" columns="15" />
+        <dataField fieldName="Rec_Status" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRecTrxHea^Review Recurring Trx Header^RevRecTrxHea^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Recurring Trx Header" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Recurring Trx Header" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RecTrxHea^Recurring Trx Header^RecTrxHea^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Doc_No" columns="15" />
             <dataField fieldName="StartDate" columns="10" />
@@ -147,20 +151,20 @@
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="LastCreatedID" columns="15" />
             <dataField fieldName="RecurringType" columns="15" hidden="true" />
+            <dataField fieldName="LastCreatedDate" columns="10" hidden="true" />
             <dataField fieldName="TakeCurrentBalance" columns="15" hidden="true" />
             <dataField fieldName="WeightedAvgDist" columns="15" hidden="true" />
-            <dataField fieldName="LastCreatedDate" columns="10" hidden="true" />
-            <dataField fieldName="LastCreatedID" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRecTrxHea^New Recurring Trx Header^NewRecTrxHea^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Recurring Trx Header" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Recurring Trx Header" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewRecTrxHea^New Recurring Trx Header^NewRecTrxHea^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Doc_No" columns="15" hidden="true" />
             <dataField fieldName="StartDate" columns="10" hidden="true" />
@@ -184,11 +188,11 @@
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="RecurringType" columns="15" hidden="true" />
-            <dataField fieldName="TakeCurrentBalance" columns="15" hidden="true" />
-            <dataField fieldName="WeightedAvgDist" columns="15" hidden="true" />
-            <dataField fieldName="LastCreatedDate" columns="10" hidden="true" />
             <dataField fieldName="LastCreatedID" columns="15" hidden="true" />
+            <dataField fieldName="TakeCurrentBalance" columns="15" hidden="true" />
+            <dataField fieldName="LastCreatedDate" columns="10" hidden="true" />
+            <dataField fieldName="RecurringType" columns="15" hidden="true" />
+            <dataField fieldName="WeightedAvgDist" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -210,10 +214,10 @@
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -242,8 +246,8 @@
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Ask Approval" flat="true">
-      <action commandName="SQL" headerText="Ask Approval" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^AskApp^Ask Approval^AskApp^" flat="true">
+      <action commandName="SQL" headerText="^AskApp^Ask Approval^AskApp^" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0" cssClass="glyphicon glyphicon-question-sign">
         <data><![CDATA[IF EXISTS
 (
     SELECT TOP 1 RecurringID
@@ -257,25 +261,35 @@
              @BusinessRules_UserId;
 END]]></data>
       </action>
-      <action commandName="SQL" headerText="Re-Open" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1 ">
+      <action commandName="SQL" headerText="^ReOpe^Re-Open^ReOpe^" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1 ">
         <data><![CDATA[EXECUTE [dbo].[REOPEN_DOCUMENT_STATUS] @RecurringID, @DOC_TYPE_ID]]></data>
       </action>
     </actionGroup>
-    <actionGroup id="ag101" scope="ActionBar" headerText="Mass Allocation" flat="false">
-      <action commandName="SQL" id="a100" whenLastCommandName="Select" whenClientScript="[RecurringType]==2" headerText="Mass Allocation">
-        <data><![CDATA[EXEC [dbo].[MASS_ALLOCATION] @RecurringID, 1]]></data>
+    <actionGroup id="ag101" scope="ActionBar" headerText="^MasAllo^Mass Allocation^MasAllo^" flat="true">
+      <action commandName="SQL" id="a100" whenLastCommandName="Select" whenClientScript="[RecurringType]==2" headerText="^MasAllo^Mass Allocation^MasAllo^" cssClass="glyphicon glyphicon-th-list">
+        <data><![CDATA[/*DECLARE @Validation MONEY
+
+SELECT
+       @Validation = SUM([DistributionPercentage])
+       FROM [dbo].[Recurring_Trx_Lines]
+       WHERE RecurringID = @RecurringID
+
+IF IsNull(@Validation,0) <> 100
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_ShowAlert = ' Distribution(%) is Less Then 100%'
+    END */
+
+--IF @Validation = 100
+    BEGIN
+        EXEC [dbo].[MASS_ALLOCATION]
+             @RecurringID ,
+             @BusinessRules_UserId
+    END]]></data>
       </action>
     </actionGroup>
   </actions>
   <businessRules>
-    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Created_By=@BusinessRules_UserId
-SET @StartDate= getdate()
-SET @Approve_Ask=0
-
-
-
-
-]]></rule>
     <rule id="r101" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @OPU_Code=@Session_OPU_Code
 SET @Company_Code=@Session_Company_Code
 SET @Rec_Status=0
@@ -285,5 +299,13 @@ SET @RecurringType=2
 SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER (@DOC_TYPE_ID,@Session_OPU_Code,@StartDate)
 EXEC dbo.RESET_SEQUENCE @DOC_TYPE_ID,@Session_OPU_Code,@StartDate	  
 	  ]]></rule>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Created_By=@BusinessRules_UserId
+SET @StartDate= getdate()
+SET @Approve_Ask=0
+
+
+
+
+]]></rule>
   </businessRules>
 </dataController>

@@ -1,124 +1,124 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="tbl_BranchInfo" label="^BraInf^BranchInfo^BraInf^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="tbl_BranchInfo" label="tbl_BranchInfo" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.tbl_BranchInfo" custom="true">
       <text><![CDATA[SELECT * FROM tbl_BranchInfo]]></text>
     </command>
   </commands>
   <fields>
-    <field name="BranchID" type="Int32" allowNulls="false" label="^BraId^Branch#^BraId^" isPrimaryKey="true" />
-    <field name="CompanyID" type="Int32" label="^ComId^Company#^ComId^" allowNulls="false">
+    <field name="BranchID" type="Int32" allowNulls="false" label="^Branch^Branch#^Branch^" isPrimaryKey="true" />
+    <field name="CompanyID" type="Int32" label="^Company^Company#^Company^" allowNulls="false">
       <items style="Lookup" dataController="tbl_CompanyInformation" dataView="grid1" dataTextField="CompanyName" dataValueField="CompanyID" copy="Country=Country" />
     </field>
-    <field name="BranchName" type="String" label="^BraNam^Branch Name^BraNam^" length="255" allowNulls="false" />
-    <field name="Street" type="String" label="^Str^Street^Str^" length="50" />
-    <field name="PostalCode" type="String" label="^PosCod^Postal Code^PosCod^" length="50" />
-    <field name="City" type="String" label="^Cit^City^Cit^" length="50" />
-    <field name="Country" type="String" label="^Cou^Country^Cou^" length="50" showInSummary="true" allowNulls="false">
+    <field name="BranchName" type="String" label="^BranchName^Branch Name^BranchName^" length="255" allowNulls="false" />
+    <field name="Street" type="String" label="^Street^Street^Street^" length="50" />
+    <field name="PostalCode" type="String" label="^PostalCode^Postal Code^PostalCode^" length="50" />
+    <field name="City" type="String" label="^City^City^City^" length="50" />
+    <field name="Country" type="String" label="^Country^Country^Country^" length="50" showInSummary="true" allowNulls="false">
       <items style="Lookup" dataController="Pick_Countries" dataView="grid1" dataTextField="CountryName" dataValueField="CountryName" />
     </field>
-    <field name="Phone" type="String" label="^Pho^Phone^Pho^" length="50" showInSummary="true" />
+    <field name="Phone" type="String" label="^Phone^Phone^Phone^" length="50" showInSummary="true" />
     <field name="Fax" type="String" label="^Fax^Fax^Fax^" length="50" showInSummary="true" />
-    <field name="eMailID" type="String" label="^eMaiId^e Mail#^eMaiId^" length="50" showInSummary="true" />
-    <field name="BuisnessSlogan" type="String" label="^BuiSlo^Buisness Slogan^BuiSlo^" length="255" />
-    <field name="DefaultCurrency" type="String" allowNulls="false" label="^DefCur^Default Currency^DefCur^" length="4" showInSummary="true">
+    <field name="eMailID" type="String" label="^eMail^e Mail#^eMail^" length="50" showInSummary="true" />
+    <field name="BuisnessSlogan" type="String" label="^BuisnessSlogan^Buisness Slogan^BuisnessSlogan^" length="255" />
+    <field name="DefaultCurrency" type="String" allowNulls="false" label="^DefaultCurrency^Default Currency^DefaultCurrency^" length="4" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" />
     </field>
-    <field name="AP_Unbilled_AC" type="String" label="^ApUnbAc^AP Unbilled AC^ApUnbAc^" length="50" allowNulls="false">
+    <field name="AP_Unbilled_AC" type="String" label="^APUnbilledAC^AP Unbilled AC^APUnbilledAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="AP_Billed_AC" type="String" label="^ApBilAc^AP Billed AC^ApBilAc^" length="50" allowNulls="false">
+    <field name="AP_Billed_AC" type="String" label="^APBilledAC^AP Billed AC^APBilledAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="AP_PrePayment_AC" type="String" allowNulls="false" label="^ApPrePayAc^AP Pre Payment AC^ApPrePayAc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+    <field name="AP_PrePayment_AC" type="String" allowNulls="false" label="^APPrePaymentAC^AP Pre Payment AC^APPrePaymentAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Inventory_AC" type="String" label="^InvAc^Inventory AC^InvAc^" length="50" allowNulls="false">
+    <field name="Inventory_AC" type="String" label="^InventoryAC^Inventory AC^InventoryAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="CostOfSales_AC" type="String" label="^CosOfSalAc^Cost Of Sales AC^CosOfSalAc^" length="50" allowNulls="false">
+    <field name="CostOfSales_AC" type="String" label="^CostOfSalesAC^Cost Of Sales AC^CostOfSalesAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Revenue_AC" type="String" label="^RevAc^Revenue AC^RevAc^" length="50" allowNulls="false">
+    <field name="Revenue_AC" type="String" label="^RevenueAC^Revenue AC^RevenueAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Misc_Issue_AC" type="String" label="^MisIssAc^Misc Issue AC^MisIssAc^" length="50" allowNulls="false">
+    <field name="Misc_Issue_AC" type="String" label="^MiscIssueAC^Misc Issue AC^MiscIssueAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Misc_Receipt_AC" type="String" label="^MisRecAc^Misc Receipt AC^MisRecAc^" length="50" allowNulls="false">
+    <field name="Misc_Receipt_AC" type="String" label="^MiscReceiptAC^Misc Receipt AC^MiscReceiptAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="AR_Unbilled_AC" type="String" label="^ArUnbAc^AR Unbilled AC^ArUnbAc^" length="50" allowNulls="false">
+    <field name="AR_Unbilled_AC" type="String" label="^ARUnbilledAC^AR Unbilled AC^ARUnbilledAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="AR_Billed_AC" type="String" label="^ArBilAc^AR Billed AC^ArBilAc^" length="50" allowNulls="false">
+    <field name="AR_Billed_AC" type="String" label="^ARBilledAC^AR Billed AC^ARBilledAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="AR_PrePayment_AC" type="String" allowNulls="false" label="^ArPrePayAc^AR Pre Payment AC^ArPrePayAc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20">
+    <field name="AR_PrePayment_AC" type="String" allowNulls="false" label="^ARPrePaymentAC^AR Pre Payment AC^ARPrePaymentAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="OverHeads_AC" type="String" label="^OveHeaAc^Over Heads AC^OveHeaAc^" length="50" allowNulls="false">
+    <field name="OverHeads_AC" type="String" label="^OverHeadsAC^Over Heads AC^OverHeadsAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Cash_Purch_AC" type="String" label="^CasPurAc^Cash Purch AC^CasPurAc^" length="50" allowNulls="false">
+    <field name="Cash_Purch_AC" type="String" label="^CashPurchAC^Cash Purch AC^CashPurchAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Cash_Sale_AC" type="String" label="^CasSalAc^Cash Sale AC^CasSalAc^" length="50" allowNulls="false">
+    <field name="Cash_Sale_AC" type="String" label="^CashSaleAC^Cash Sale AC^CashSaleAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Curr_Variance_AC" type="String" allowNulls="false" label="^CurVarAc^Curr Variance AC^CurVarAc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+    <field name="Curr_Variance_AC" type="String" allowNulls="false" label="^CurrVarianceAC^Curr Variance AC^CurrVarianceAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Expence_AC" type="String" label="^ExpAc^Expence AC^ExpAc^" length="50" allowNulls="false">
+    <field name="Expence_AC" type="String" label="^ExpenceAC^Expence AC^ExpenceAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Assets_Clearing_AC" type="String" allowNulls="false" label="^AssCleAc^Assets Clearing AC^AssCleAc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+    <field name="Assets_Clearing_AC" type="String" allowNulls="false" label="^AssetsClearingAC^Assets Clearing AC^AssetsClearingAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Job_Issuance_Intransit_AC" type="String" label="^JobIssIntAc^Job Issuance Intransit AC^JobIssIntAc^" length="50" allowNulls="false">
+    <field name="Job_Issuance_Intransit_AC" type="String" label="^JobIssuanceIntransitAC^Job Issuance Intransit AC^JobIssuanceIntransitAC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
     <field name="Cost_Allocation_Dr_AC" type="String" allowNulls="false" label="^CosAllDrAc^Cost Allocation Dr AC^CosAllDrAc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
-      <items style="Lookup" dataController="Pick_COA" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
-    </field>
-    <field name="Cost_Allocation_Cr_AC" type="String" allowNulls="false" label="^CosAllCrAc^Cost Allocation Cr AC^CosAllCrAc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
-      <items style="Lookup" dataController="Pick_COA" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
-    </field>
-    <field name="InterCompanyPayable" type="String" label="^IntComPay^Inter Company Payable^IntComPay^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="InterCompanyReceivables" type="String" label="^IntComRec^Inter Company Receivables^IntComRec^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+    <field name="Cost_Allocation_Cr_AC" type="String" allowNulls="false" label="^CACrAC^Cost Allocation Cr AC^CACrAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Address_English" type="String" label="^AddEng^Address English^AddEng^" length="4000" />
-    <field name="Address_Arabic" type="String" label="^AddAra^Address Arabic^AddAra^" length="4000" />
-    <field name="ProjectEnabled" type="Int32" label="^ProEna^Project Enabled^ProEna^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
+    <field name="InterCompanyPayable" type="String" label="^ICP^Inter Company Payable^ICP^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="InterCompanyReceivables" type="String" label="^ICR^Inter Company Receivables^ICR^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Address_English" type="String" label="^AddressEnglish^Address English^AddressEnglish^" length="4000" />
+    <field name="Address_Arabic" type="String" label="^AddressArabic^Address Arabic^AddressArabic^" length="4000" />
+    <field name="ProjectEnabled" type="Int32" label="^PE^Project Enabled^PE^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="SiteCodeEnabled" type="Int32" label="^SitCodEna^Site Code Enabled^SitCodEna^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
+    <field name="SiteCodeEnabled" type="Int32" label="^SCE^Site Code Enabled^SCE^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="CashSalesPurAutoPayYN" type="Int16" label="^CasSalPurAutPayYn^CashTrxAutoPayYN^CasSalPurAutPayYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
+    <field name="CashSalesPurAutoPayYN" type="Int16" label="^CTAPayYN^CashTrxAutoPayYN^CTAPayYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="StateName" type="String" label="^StaNam^State Name^StaNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" contextFields="CountryName=Country" allowNulls="false">
+    <field name="StateName" type="String" label="^StateName^State Name^StateName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" contextFields="CountryName=Country" allowNulls="false">
       <items style="DropDownList" dataController="tbl_States" dataView="grid1" dataTextField="StateName" dataValueField="StateName" />
     </field>
-    <field name="Branch_Ref_No" type="String" allowNulls="false" label="^BraRefNo^Branch Ref No^BraRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="15" />
-    <field name="IsHisEnabled" type="Int32" label="^IsHisEna^Is His Enabled^IsHisEna^" allowNulls="false">
+    <field name="Branch_Ref_No" type="String" allowNulls="false" label="^BranchRefNo^Branch Ref No^BranchRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="15" />
+    <field name="IsHisEnabled" type="Int32" label="^IHE^Is His Enabled^IHE^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ProfitandLossSummaryClosing" type="String" label="^ProLosSumClo^Profitand Loss Summary Closing^ProLosSumClo^" length="50" allowNulls="false">
+    <field name="ProfitandLossSummaryClosing" type="String" label="^PLSC^Profitand Loss Summary Closing^PLSC^" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="ProfitandLossAccount" type="String" allowNulls="false" label="^ProLosAcc^Profitand Loss Account^ProLosAcc^" length="50">
+    <field name="ProfitandLossAccount" type="String" allowNulls="false" label="^ProfitandLossAccount^Profitand Loss Account^ProfitandLossAccount^" length="50">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="BranchName_Ar" type="String" label="^BraNamAr^Branch Name Ar^BraNamAr^" length="255" />
+    <field name="BranchName_Ar" type="String" label="^BrNAr^Branch Name Ar^BrNAr^" length="255" />
     <field name="ItemCodeAutoYN" type="Int32" allowNulls="false" label="^IteCodAutYn^Item Code Auto YN^IteCodAutYn^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="BudgetEnabled" type="Int16" allowNulls="false" label="^BudEna^Budget Enabled^BudEna^">
+    <field name="BudgetEnabled" type="Int16" allowNulls="false" label="Budget Enabled">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
     <field name="AutoCreate_DN_CN" type="Int32" label="Auto Create DN CN">
@@ -127,9 +127,33 @@
     <field name="APARSiteBasedAccounting" type="Int16" label="Location Based Accounting">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
+      <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="Tax_Slab_ID" type="Int64" label="^TaxSlaID^Tax Slab ID^TaxSlaID^" contextFields="Tax_Code=Tax_Code">
+      <items style="Lookup" dataController="Tax_Slabs_Pick" dataView="grid1" dataTextField="Tax_Description" dataValueField="Tax_Slab_ID" copy="Tax_Rate=Tax_Percentage" />
+    </field>
+    <field name="Tax_Code" type="Int32" label="^TaxCod^Tax Code^TaxCod^">
+      <items style="DropDownList" dataController="Tax_Code_Setup_Pick" dataView="grid1" dataTextField="Tax_Desc" dataValueField="Tax_Code" />
+    </field>
+    <field name="Tax_Rate" type="Int64" label="Tax Rate" />
+    <field name="AR_Unearned_AC" type="String" label="AR Unearned AC" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="AccountID" dataValueField="AccountID" />
+    </field>
+    <field name="Item_Budget_AC" type="String" label="Item Budget AC" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="DefaultProjectValue" type="String" label="Default Project Value" length="50" allowNulls="false" />
+    <field name="DefaultDeptValue" type="String" label="Default Dept Value" length="50" allowNulls="false" />
+    <field name="DefaultSitesValue" type="String" label="Default Sites Value" length="50" allowNulls="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DefBra^Define Branch^DefBra^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Define Branch" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="Branch_Ref_No" columns="15" />
@@ -165,13 +189,75 @@
         <dataField fieldName="InterCompanyPayable" columns="50" hidden="true" />
         <dataField fieldName="InterCompanyReceivables" columns="50" hidden="true" />
         <dataField fieldName="AutoCreate_DN_CN" columns="15" hidden="true" />
+        <dataField fieldName="DefaultSitesValue" columns="50" hidden="true" />
+        <dataField fieldName="DefaultDeptValue" columns="50" hidden="true" />
+        <dataField fieldName="DefaultProjectValue" columns="50" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBra^Review Branch^RevBra^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Branch" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Branch Info" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category headerText="^AccRecDefAc^Account Receivable Default A/C^AccRecDefAc^" id="c4" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="AR_Billed_AC" columns="50" />
+            <dataField fieldName="AR_PrePayment_AC" columns="20" />
+            <dataField fieldName="AR_Unbilled_AC" columns="50" />
+            <dataField fieldName="Cash_Sale_AC" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="^InvDefAcc^Inventory Default Accounts^InvDefAcc^" id="c5">
+          <dataFields>
+            <dataField fieldName="Revenue_AC" columns="50" />
+            <dataField fieldName="CostOfSales_AC" columns="50" />
+            <dataField fieldName="Inventory_AC" columns="50" />
+            <dataField fieldName="OverHeads_AC" columns="50" />
+            <dataField fieldName="Misc_Receipt_AC" columns="50" />
+            <dataField fieldName="Misc_Issue_AC" columns="50" />
+            <dataField fieldName="Expence_AC" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="^OthDefAcc^Other Default Accounts^OthDefAcc^" id="c6">
+          <dataFields>
+            <dataField fieldName="Assets_Clearing_AC" columns="50" />
+            <dataField fieldName="Cost_Allocation_Cr_AC" columns="50" />
+            <dataField fieldName="Cost_Allocation_Dr_AC" columns="50" />
+            <dataField fieldName="Job_Issuance_Intransit_AC" columns="50" />
+            <dataField fieldName="InterCompanyPayable" columns="50" />
+            <dataField fieldName="InterCompanyReceivables" columns="50" />
+            <dataField fieldName="ProfitandLossAccount" columns="50" />
+            <dataField fieldName="ProfitandLossSummaryClosing" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="^FeaEna^Feature Enabling^FeaEna^" id="c7">
+          <dataFields>
+            <dataField fieldName="ItemCodeAutoYN" columns="15" />
+            <dataField fieldName="CashSalesPurAutoPayYN" columns="15" />
+            <dataField fieldName="ProjectEnabled" columns="15" />
+            <dataField fieldName="BudgetEnabled" columns="15" />
+            <dataField fieldName="IsHisEnabled" columns="15" />
+            <dataField fieldName="SiteCodeEnabled" columns="15" />
+            <dataField fieldName="AutoCreate_DN_CN" columns="15" />
+            <dataField fieldName="APARSiteBasedAccounting" columns="15" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Tax_Rate" columns="15" hidden="true" />
+            <dataField fieldName="Tax_Slab_ID" columns="15" />
+            <dataField fieldName="Tax_Code" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="^AccPayDefAc^Account Payable Default A/C^AccPayDefAc^" id="c3" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="AP_PrePayment_AC" columns="50" />
+            <dataField fieldName="AP_Billed_AC" columns="50" />
+            <dataField fieldName="AP_Unbilled_AC" columns="50" />
+            <dataField fieldName="Cash_Purch_AC" columns="50" />
+            <dataField fieldName="Curr_Variance_AC" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c1" headerText="^NewBraInf^New Branch Info^NewBraInf^">
+          <description />
           <dataFields>
             <dataField fieldName="CompanyID" columns="15" />
             <dataField fieldName="Branch_Ref_No" columns="15" readOnly="true" />
@@ -181,80 +267,33 @@
             <dataField fieldName="BuisnessSlogan" />
           </dataFields>
         </category>
-        <category id="c2" headerText="Address">
+        <category id="c2" headerText="^Address^Address^Address^">
           <dataFields>
             <dataField fieldName="DefaultCurrency" columns="4" hidden="true" />
-            <dataField fieldName="Street" columns="50" />
-            <dataField fieldName="PostalCode" columns="50" />
-            <dataField fieldName="Country" columns="50" hidden="true" />
             <dataField fieldName="StateName" columns="50" />
+            <dataField fieldName="Country" columns="50" hidden="true" />
+            <dataField fieldName="Fax" columns="50" />
             <dataField fieldName="City" columns="50" />
             <dataField fieldName="Phone" columns="50" />
-            <dataField fieldName="Fax" columns="50" />
+            <dataField fieldName="Street" columns="50" />
             <dataField fieldName="eMailID" columns="50" />
+            <dataField fieldName="PostalCode" columns="50" />
             <dataField fieldName="Address_English" columns="50" rows="4" />
             <dataField fieldName="Address_Arabic" columns="50" rows="4" />
-          </dataFields>
-        </category>
-        <category headerText="Account Payable Default A/C" id="c3" flow="NewColumn">
-          <dataFields>
-            <dataField fieldName="AP_Unbilled_AC" columns="50" />
-            <dataField fieldName="AP_Billed_AC" columns="50" />
-            <dataField fieldName="AP_PrePayment_AC" columns="50" />
-            <dataField fieldName="Cash_Purch_AC" columns="50" />
-            <dataField fieldName="Curr_Variance_AC" columns="50" />
-          </dataFields>
-        </category>
-        <category headerText="Account Receivable Default A/C" id="c4">
-          <dataFields>
-            <dataField fieldName="AR_Unbilled_AC" columns="50" />
-            <dataField fieldName="AR_PrePayment_AC" columns="20" />
-            <dataField fieldName="AR_Billed_AC" columns="50" />
-            <dataField fieldName="Cash_Sale_AC" columns="50" />
-          </dataFields>
-        </category>
-        <category headerText="Inventory Default Accounts" id="c5">
-          <dataFields>
-            <dataField fieldName="Inventory_AC" columns="50" />
-            <dataField fieldName="CostOfSales_AC" columns="50" />
-            <dataField fieldName="Revenue_AC" columns="50" />
-            <dataField fieldName="Misc_Issue_AC" columns="50" />
-            <dataField fieldName="Misc_Receipt_AC" columns="50" />
-            <dataField fieldName="OverHeads_AC" columns="50" />
-            <dataField fieldName="Expence_AC" columns="50" />
-          </dataFields>
-        </category>
-        <category headerText="Other Default Accounts" id="c6">
-          <dataFields>
-            <dataField fieldName="Assets_Clearing_AC" columns="50" />
-            <dataField fieldName="Cost_Allocation_Dr_AC" columns="50" />
-            <dataField fieldName="Cost_Allocation_Cr_AC" columns="50" />
-            <dataField fieldName="Job_Issuance_Intransit_AC" columns="50" />
-            <dataField fieldName="InterCompanyPayable" columns="50" />
-            <dataField fieldName="InterCompanyReceivables" columns="50" />
-            <dataField fieldName="ProfitandLossAccount" columns="50" />
-            <dataField fieldName="ProfitandLossSummaryClosing" columns="50" />
-          </dataFields>
-        </category>
-        <category headerText="FeatureEnabling" id="c7">
-          <dataFields>
-            <dataField fieldName="BudgetEnabled" columns="15" />
-            <dataField fieldName="IsHisEnabled" columns="15" />
-            <dataField fieldName="SiteCodeEnabled" columns="15" />
-            <dataField fieldName="ProjectEnabled" columns="15" />
-            <dataField fieldName="ItemCodeAutoYN" columns="15" />
-            <dataField fieldName="CashSalesPurAutoPayYN" columns="15" />
-            <dataField fieldName="AutoCreate_DN_CN" columns="15" />
-            <dataField fieldName="APARSiteBasedAccounting" columns="15" />
+            <dataField fieldName="AR_Unearned_AC" columns="50" />
+            <dataField fieldName="Item_Budget_AC" columns="50" />
+            <dataField fieldName="DefaultSitesValue" columns="30" />
+            <dataField fieldName="DefaultDeptValue" columns="30" />
+            <dataField fieldName="DefaultProjectValue" columns="30" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBra^New Branch^NewBra^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Branch" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Branch Info" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewBraInf^New Branch Info^NewBraInf^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CompanyID" columns="15" />
             <dataField fieldName="Branch_Ref_No" columns="15" />
@@ -264,71 +303,83 @@
             <dataField fieldName="BuisnessSlogan" />
           </dataFields>
         </category>
-        <category id="c2" headerText="Address">
+        <category id="c2" headerText="^Address^Address^Address^">
           <dataFields>
             <dataField fieldName="DefaultCurrency" columns="4" hidden="true" />
-            <dataField fieldName="Street" columns="50" />
-            <dataField fieldName="PostalCode" columns="50" />
-            <dataField fieldName="Country" columns="50" hidden="true" />
             <dataField fieldName="StateName" columns="50" />
+            <dataField fieldName="Country" columns="50" hidden="true" />
+            <dataField fieldName="Fax" columns="50" />
             <dataField fieldName="City" columns="50" />
             <dataField fieldName="Phone" columns="50" />
-            <dataField fieldName="Fax" columns="50" />
+            <dataField fieldName="Street" columns="50" />
             <dataField fieldName="eMailID" columns="50" />
+            <dataField fieldName="PostalCode" columns="50" />
             <dataField fieldName="Address_English" columns="50" rows="4" />
             <dataField fieldName="Address_Arabic" columns="50" rows="4" />
           </dataFields>
         </category>
-        <category headerText="Account Payable Default A/C" id="c3">
+        <category headerText="^FeaEna^Feature Enabling^FeaEna^" id="c7">
           <dataFields>
-            <dataField fieldName="AP_Unbilled_AC" columns="50" />
-            <dataField fieldName="AP_Billed_AC" columns="50" />
+            <dataField fieldName="BudgetEnabled" columns="15" />
+            <dataField fieldName="ProjectEnabled" columns="15" />
+            <dataField fieldName="IsHisEnabled" columns="15" />
+            <dataField fieldName="SiteCodeEnabled" columns="15" />
+            <dataField fieldName="ItemCodeAutoYN" columns="15" />
+            <dataField fieldName="CashSalesPurAutoPayYN" columns="15" />
+            <dataField fieldName="AutoCreate_DN_CN" columns="15" />
+            <dataField fieldName="APARSiteBasedAccounting" columns="15" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Tax_Rate" columns="15" hidden="true" />
+            <dataField fieldName="Tax_Slab_ID" columns="15" />
+            <dataField fieldName="Tax_Code" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="^AccPayDefAc^Account Payable Default A/C^AccPayDefAc^" id="c3" flow="NewColumn">
+          <dataFields>
             <dataField fieldName="AP_PrePayment_AC" columns="50" />
+            <dataField fieldName="AP_Billed_AC" columns="50" />
+            <dataField fieldName="AP_Unbilled_AC" columns="50" />
             <dataField fieldName="Cash_Purch_AC" columns="50" />
             <dataField fieldName="Curr_Variance_AC" columns="50" />
           </dataFields>
         </category>
-        <category headerText="Account Receivable Default A/C" id="c4" flow="NewColumn">
+        <category headerText="^AccRecDefAc^Account Receivable Default A/C^AccRecDefAc^" id="c4">
           <dataFields>
-            <dataField fieldName="AR_Unbilled_AC" columns="50" />
-            <dataField fieldName="AR_PrePayment_AC" columns="20" />
             <dataField fieldName="AR_Billed_AC" columns="50" />
+            <dataField fieldName="AR_PrePayment_AC" columns="20" />
+            <dataField fieldName="AR_Unbilled_AC" columns="50" />
             <dataField fieldName="Cash_Sale_AC" columns="50" />
           </dataFields>
         </category>
-        <category headerText="Inventory Default Accounts" id="c5">
+        <category headerText="^InvDefAcc^Inventory Default Accounts^InvDefAcc^" id="c5">
           <dataFields>
-            <dataField fieldName="Inventory_AC" columns="50" />
-            <dataField fieldName="CostOfSales_AC" columns="50" />
             <dataField fieldName="Revenue_AC" columns="50" />
-            <dataField fieldName="Misc_Issue_AC" columns="50" />
-            <dataField fieldName="Misc_Receipt_AC" columns="50" />
+            <dataField fieldName="CostOfSales_AC" columns="50" />
+            <dataField fieldName="Inventory_AC" columns="50" />
             <dataField fieldName="OverHeads_AC" columns="50" />
+            <dataField fieldName="Misc_Receipt_AC" columns="50" />
+            <dataField fieldName="Misc_Issue_AC" columns="50" />
             <dataField fieldName="Expence_AC" columns="50" />
           </dataFields>
         </category>
-        <category headerText="Other Default Accounts" id="c6">
+        <category headerText="^OthDefAcc^Other Default Accounts^OthDefAcc^" id="c6">
           <dataFields>
             <dataField fieldName="Assets_Clearing_AC" columns="50" />
-            <dataField fieldName="Cost_Allocation_Dr_AC" columns="50" />
             <dataField fieldName="Cost_Allocation_Cr_AC" columns="50" />
+            <dataField fieldName="Cost_Allocation_Dr_AC" columns="50" />
             <dataField fieldName="Job_Issuance_Intransit_AC" columns="50" />
             <dataField fieldName="InterCompanyPayable" columns="50" />
             <dataField fieldName="InterCompanyReceivables" columns="50" />
             <dataField fieldName="ProfitandLossAccount" columns="50" />
             <dataField fieldName="ProfitandLossSummaryClosing" columns="50" />
-          </dataFields>
-        </category>
-        <category headerText="FeatureEnabling" id="c7">
-          <dataFields>
-            <dataField fieldName="BudgetEnabled" columns="15" />
-            <dataField fieldName="IsHisEnabled" columns="15" />
-            <dataField fieldName="SiteCodeEnabled" columns="15" />
-            <dataField fieldName="ProjectEnabled" columns="15" />
-            <dataField fieldName="ItemCodeAutoYN" columns="15" />
-            <dataField fieldName="CashSalesPurAutoPayYN" columns="15" />
-            <dataField fieldName="AutoCreate_DN_CN" columns="15" />
-            <dataField fieldName="APARSiteBasedAccounting" columns="15" />
+            <dataField fieldName="AR_Unearned_AC" columns="50" />
+            <dataField fieldName="Item_Budget_AC" columns="50" />
+            <dataField fieldName="DefaultSitesValue" columns="50" />
+            <dataField fieldName="DefaultDeptValue" columns="50" />
+            <dataField fieldName="DefaultProjectValue" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -353,10 +404,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -409,7 +460,9 @@ SET @IsHisEnabled=0
 SET @ProjectEnabled=0
 SET @SiteCodeEnabled=0
 SET @CashSalesPurAutoPayYN=0
-SET @ItemCodeAutoYN=0]]></rule>
+SET @ItemCodeAutoYN=0
+
+SET @Created_By=@BusinessRules_UserId]]></rule>
     <rule id="r104" type="Sql" commandName="Insert" phase="Before" name="Branch_Ref_No_Validator"><![CDATA[IF EXISTS (SELECT Branch_Ref_No FROM tbl_BranchInfo WHERE Branch_Ref_No=@Branch_Ref_No)
 begin
     /* prevent the default action processing */
@@ -417,5 +470,13 @@ begin
     /* set the focus on the field and display an error */
     set @Result_Focus = 'Branch_Ref_No,Duplicate Branch No.'
 end]]></rule>
+    <rule id="r105" type="Sql" commandName="Insert|Update" phase="Before" name="DefaultProjectValue_Validator"><![CDATA[if @DefaultProjectValue is not null and @DefaultProjectValue_oldvalue is not null and @DefaultProjectValue_oldvalue <> @DefaultProjectValue_newvalue
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'DefaultProjectValue,Required field.'
+end
+]]></rule>
   </businessRules>
 </dataController>

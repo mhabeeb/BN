@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="rpt_Account_Bank_ledger" conflictDetection="overwriteChanges" label="^RepAccBanLed^rpt_Account_Bank_ledger^RepAccBanLed^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="rpt_Account_Bank_ledger" conflictDetection="overwriteChanges" label="rpt_Account_Bank_ledger" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="CashBankID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^CasBanId^Cash Bank#^CasBanId^" readOnly="true" />
-    <field name="BankCashName" type="String" label="^BanCasNam^Bank Cash Name^BanCasNam^" length="50" showInSummary="true" />
-    <field name="BankRefNo" type="String" label="^BanRefNo^Bank Ref No^BanRefNo^" length="50" showInSummary="true" />
-    <field name="Bank_Branch_Name" type="String" label="^BanBraNam^Bank Branch Name^BanBraNam^" length="100" showInSummary="true" />
-    <field name="Account_ID_Cash" type="String" label="^AccIdCas^Account ID Cash^AccIdCas^" length="50" showInSummary="true" />
-    <field name="Bank_AC_Number" type="String" label="^BanAccNum^Bank AC Number^BanAccNum^" length="50" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" />
-    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" readOnly="true" />
-    <field name="Period_Debit" type="Decimal" label="^PerDeb^Period Debit^PerDeb^" readOnly="true" />
-    <field name="Period_Credit" type="Decimal" label="^PerCre^Period Credit^PerCre^" readOnly="true" />
-    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" readOnly="true" />
+    <field name="CashBankID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Cash Bank#" readOnly="true" />
+    <field name="BankCashName" type="String" label="Bank Cash Name" length="50" />
+    <field name="BankRefNo" type="String" label="Bank Ref No" length="50" />
+    <field name="Bank_Branch_Name" type="String" label="Bank Branch Name" length="100" />
+    <field name="Account_ID_Cash" type="String" label="Account ID Cash" length="50" />
+    <field name="Bank_AC_Number" type="String" label="Bank AC Number" length="50" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="OPU Code" />
+    <field name="CalcDate" type="Int32" label="Calc Date" />
+    <field name="OpeningBalance" type="Decimal" label="Opening Balance" readOnly="true" />
+    <field name="Period_Debit" type="Decimal" label="Period Debit" readOnly="true" />
+    <field name="Period_Credit" type="Decimal" label="Period Credit" readOnly="true" />
+    <field name="Closing_Amount" type="Decimal" label="Closing Amount" readOnly="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RepAccBanLed^rpt Account Bank ledger^RepAccBanLed^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="rpt Account Bank ledger" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="BankCashName" columns="50" />
@@ -32,8 +32,8 @@
         <dataField fieldName="Closing_Amount" dataFormatString="N2" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRepAccBanLed^Review rpt Account Bank ledger^RevRepAccBanLed^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review rpt Account Bank ledger" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="rpt Account Bank ledger" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -53,8 +53,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRepAccBanLed^New rpt Account Bank ledger^NewRepAccBanLed^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New rpt Account Bank ledger" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New rpt Account Bank ledger" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -119,8 +119,8 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Parameter" flat="true">
-      <action commandName="SQL" headerText="Parameter" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^Par^Parameter^Par^" flat="true">
+      <action commandName="SQL" headerText="^Par^Parameter^Par^" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-align-right">
         <data><![CDATA[SET @Session_LedDate=@Parameters_EndDate
 SET @Result_NavigateUrl = 'BankAccountLedger.aspx']]></data>
       </action>
@@ -195,7 +195,7 @@ SELECT A.[CashBankID],
                 AND ISNULL(O.OPU_Code_Ln, 0) = A.[OPU_Code] FOR XML PATH('')
             ) AS MONEY)) Closing_Amount
 FROM [dbo].[BankCashInformation] A,
-     [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE](@Session_LedDate) c
+	 [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE_V1](@Session_LedDate,@Session_CalenderID) c
 WHERE A.[OPU_Code] = @Session_OPU_Code;]]></rule>
     <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
 -- implement insert here]]></rule>

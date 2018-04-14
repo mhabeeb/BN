@@ -1,5 +1,5 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/Main.Master" AutoEventWireup="false" CodeFile="BankCashBook.aspx.vb" Inherits="Pages_BankCashBook"  Title="^BankCashBook^Bank Cash Book^BankCashBook^" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContentPlaceHolder" runat="Server">^BankCashBook^Bank Cash Book^BankCashBook^</asp:Content>
+﻿<%@ Page Language="VB" MasterPageFile="~/Main.Master" AutoEventWireup="false" CodeFile="BankCashBook.aspx.vb" Inherits="Pages_BankCashBook"  Title="^BanCasBoo^Bank Cash Book^BanCasBoo^" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContentPlaceHolder" runat="Server">^BanCasBoo^Bank Cash Book^BanCasBoo^</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div data-flow="row">
     <div data-activator="SideBarTask|">

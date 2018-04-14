@@ -1,52 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="LookUp_Values_Child" conflictDetection="overwriteChanges" label="^LooValChi^LookUp_Values_Child^LooValChi^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="LookUp_Values_Child" conflictDetection="overwriteChanges" label="LookUp_Values_Child" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.tbl_LookUp_Values" custom="true">
       <text><![CDATA[SELECT * FROM dbo.tbl_LookUp_Values WHERE LookUpType <> 1]]></text>
     </command>
   </commands>
   <fields>
-    <field name="LookUpType" type="Int32" allowNulls="false" label="^LooUpTyp^Look Up Type^LooUpTyp^" showInSummary="true" />
-    <field name="Descriptions" type="String" label="^Des^Descriptions^Des^" length="150" showInSummary="true" />
-    <field name="LID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^LId^Code^LId^" readOnly="true" />
-    <field name="InActive" type="Boolean" label="^InAct^In Active^InAct^" showInSummary="true" allowNulls="false">
+    <field name="LookUpType" type="Int32" allowNulls="false" label="^LookUpType^Look Up Type^LookUpType^" showInSummary="true" />
+    <field name="Descriptions" type="String" label="^Descriptions^Descriptions^Descriptions^" length="150" showInSummary="true" />
+    <field name="LID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^Code^Code^Code^" readOnly="true" />
+    <field name="InActive" type="Boolean" label="^InActive^In Active^InActive^" showInSummary="true" allowNulls="false">
       <items style="CheckBox" />
     </field>
-    <field name="NoDays" type="Int32" label="^NoDay^No Days^NoDay^" showInSummary="true" hidden="true" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="100" showInSummary="true" hidden="true" />
-    <field name="SEGMENT1" type="Decimal" label="^Seg1^Segment1^Seg1^" hidden="true" />
-    <field name="SEGMENT2" type="Decimal" label="^Seg2^Segment2^Seg2^" hidden="true" />
-    <field name="SEGMENT3" type="String" label="^Seg3^Segment3^Seg3^" length="100" hidden="true" />
-    <field name="SEGMENT4" type="String" label="^Seg4^Segment4^Seg4^" length="100" hidden="true" />
-    <field name="SEGMENT5" type="DateTime" label="^Seg5^Segment5^Seg5^" hidden="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="ReturnValueInt" type="Int32" allowNulls="false" label="^RetValInt^Return Value Int^RetValInt^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="ReturnVarchar" type="String" allowNulls="false" label="^RetVar^Return Varchar^RetVar^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="NoDays" type="Int32" label="^NoDays^No Days^NoDays^" showInSummary="true" hidden="true" />
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="100" showInSummary="true" hidden="true" />
+    <field name="SEGMENT1" type="Decimal" label="^Segment1^Segment1^Segment1^" hidden="true" />
+    <field name="SEGMENT2" type="Decimal" label="^Segment2^Segment2^Segment2^" hidden="true" />
+    <field name="SEGMENT3" type="String" label="^Segment3^Segment3^Segment3^" length="100" hidden="true" />
+    <field name="SEGMENT4" type="String" label="^Segment4^Segment4^Segment4^" length="100" hidden="true" />
+    <field name="SEGMENT5" type="DateTime" label="^Segment5^Segment5^Segment5^" hidden="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="ReturnValueInt" type="Int32" allowNulls="false" label="^ReturnValueInt^Return Value Int^ReturnValueInt^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ReturnVarchar" type="String" allowNulls="false" label="^ReturnVarchar^Return Varchar^ReturnVarchar^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^LooUpVal^Look Up Values^LooUpVal^" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Look Up Values" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="LID" columns="15" hidden="true" />
         <dataField fieldName="LookUpType" columns="15" />
         <dataField fieldName="Descriptions" />
-        <dataField fieldName="ReturnValueInt" columns="15" />
         <dataField fieldName="ReturnVarchar" rows="5" />
+        <dataField fieldName="ReturnValueInt" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevLooUpVal^Review Look Up Values^RevLooUpVal^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Look Up Values" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="dbo tbl Look Up Values" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevLooUpVal^Review Look Up Values^RevLooUpVal^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="LookUpType" columns="15" />
             <dataField fieldName="Descriptions" />
+            <dataField fieldName="ReturnVarchar" rows="5" hidden="true" />
             <dataField fieldName="ReturnValueInt" columns="15" />
-            <dataField fieldName="ReturnVarchar" rows="5" />
             <dataField fieldName="Remarks" />
             <dataField fieldName="InActive" columns="15" />
             <dataField fieldName="NoDays" columns="15" hidden="true" />
@@ -63,17 +63,17 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewLooUpVal^New Look Up Values^NewLooUpVal^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Look Up Values" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New dbo tbl Look Up Values" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewLooUpVal^New Look Up Values^NewLooUpVal^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="LookUpType" columns="15" />
             <dataField fieldName="Descriptions" />
             <dataField fieldName="InActive" columns="15" />
             <dataField fieldName="NoDays" columns="15" hidden="true" />
-            <dataField fieldName="Remarks" />
+            <dataField fieldName="Remarks" hidden="true" />
             <dataField fieldName="SEGMENT1" dataFormatString="c" columns="15" hidden="true" />
             <dataField fieldName="SEGMENT2" dataFormatString="c" columns="15" hidden="true" />
             <dataField fieldName="SEGMENT3" hidden="true" />
@@ -83,8 +83,8 @@
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="ReturnVarchar" rows="5" hidden="true" />
             <dataField fieldName="ReturnValueInt" columns="15" />
-            <dataField fieldName="ReturnVarchar" rows="5" />
           </dataFields>
         </category>
       </categories>
@@ -109,10 +109,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -146,5 +146,7 @@
   </actions>
   <businessRules>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SELECT @ReturnValueInt=MAX(ReturnValueInt)+1 FROM tbl_LookUp_Values WHERE LookUpType=@LookUpType]]></rule>
+    <rule id="r101" commandName="Insert|Update" type="Sql" phase="Before"><![CDATA[SET @ReturnVarchar=@Descriptions
+SET @Remarks=@Descriptions]]></rule>
   </businessRules>
 </dataController>

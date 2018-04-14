@@ -158,6 +158,14 @@
           <DataField>P_Doc_No</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="SiteCode">
+          <DataField>SiteCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MSProjTasksID">
+          <DataField>MSProjTasksID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>Pick_SO_PRDataSource</DataSourceName>
@@ -210,55 +218,61 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4878048780487805in</Width>
+              <Width>0.46403712296983756in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.7317073170731707in</Width>
+              <Width>0.6960556844547564in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4878048780487805in</Width>
+              <Width>0.46403712296983756in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.2195121951219512in</Width>
+              <Width>0.8120649651972158in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.7317073170731707in</Width>
+              <Width>0.6960556844547564in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.2195121951219512in</Width>
+              <Width>0.8120649651972158in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.2195121951219512in</Width>
+              <Width>1.160092807424594in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.8120649651972158in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.3902439024390244in</Width>
+              <Width>0.37122969837587005in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.37122969837587005in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.37122969837587005in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -274,7 +288,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>^SONO^SO NO^SONO^</Value>
+                              <Value>^SoNo^Sales Order #^SoNo^</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -785,6 +799,43 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="SiteCodeHeaderTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Site Code</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Dept_CodeHeaderTextBox">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -866,7 +917,44 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>^SoOpuCod^SO OPU Code^SoOpuCod^</Value>
+                              <Value>^SoOpuCod^OPU Code^SoOpuCod^</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="MSProjTasksIDHeaderTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Tasks ID</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1433,6 +1521,44 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="SiteCodeDataTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!SiteCode.Value</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>0.5pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Dept_CodeDataTextBox">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -1545,12 +1671,52 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="MSProjTasksIDDataTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!MSProjTasksID.Value</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>0.5pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />

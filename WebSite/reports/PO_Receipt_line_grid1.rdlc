@@ -294,6 +294,26 @@
           <DataField>Transact_UOM</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LocatorYN">
+          <DataField>LocatorYN</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="AProjectEnabled">
+          <DataField>AProjectEnabled</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ASiteCodeEnabled">
+          <DataField>ASiteCodeEnabled</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SiteCode">
+          <DataField>SiteCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProjTasksID">
+          <DataField>ProjTasksID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>PO_Receipt_lineDataSource</DataSourceName>
@@ -346,52 +366,58 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.5555555555555556in</Width>
+              <Width>0.5050505050505051in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8333333333333334in</Width>
+              <Width>0.7575757575757576in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3888888888888888in</Width>
+              <Width>0.8838383838383839in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8333333333333334in</Width>
+              <Width>0.7575757575757576in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3888888888888888in</Width>
+              <Width>0.8838383838383839in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.5555555555555556in</Width>
+              <Width>0.5050505050505051in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4444444444444444in</Width>
+              <Width>0.40404040404040403in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.2626262626262625in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.40404040404040403in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -518,7 +544,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Transact UOM</Value>
+                              <Value>^TransUom^Transact UOM^TransUom^</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -592,7 +618,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>^Uom^Uom^Uom^</Value>
+                              <Value>^Uom^UOM^Uom^</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -962,7 +988,81 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Raject YN</Value>
+                              <Value>^RajectYN^Reject YN^RajectYN^</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="SiteCodeHeaderTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Site Code</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ProjTasksIDHeaderTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Proj Tasks ID</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1603,12 +1703,90 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="SiteCodeDataTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!SiteCode.Value</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>0.5pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ProjTasksIDDataTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ProjTasksID.Value</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>0.5pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />

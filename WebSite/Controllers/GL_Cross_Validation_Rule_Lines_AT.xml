@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="GL_Cross_Validation_Rule_Lines_AT" conflictDetection="overwriteChanges" label="^GlCroValRulLinAt^GL_Cross_Validation_Rule_Lines_AT^GlCroValRulLinAt^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="GL_Cross_Validation_Rule_Lines_AT" conflictDetection="overwriteChanges" label="GL_Cross_Validation_Rule_Lines_AT" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="GL_Cross_Validation_Rule_Lines" custom="true">
       <text><![CDATA[SELECT * FROM GL_Cross_Validation_Rule_Lines WHERE IsNull(CVRType,0)=1]]></text>
     </command>
   </commands>
   <fields>
-    <field name="RuleID" type="Int64" allowNulls="false" isPrimaryKey="true" label="^RulId^Rule#^RulId^" readOnly="true" />
-    <field name="CVRID" type="Int64" allowNulls="false" label="^Cvrid^Cvrid^Cvrid^" showInSummary="true" />
-    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" showInSummary="true" />
-    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50" showInSummary="true" allowNulls="false">
+    <field name="RuleID" type="Int64" allowNulls="false" isPrimaryKey="true" label="Rule#" readOnly="true" />
+    <field name="CVRID" type="Int64" allowNulls="false" label="Cvrid" showInSummary="true" />
+    <field name="AccountID" type="String" label="Account#" length="50" showInSummary="true" />
+    <field name="Account_Type" type="String" label="Account Type" length="50" showInSummary="true" allowNulls="false">
       <items style="DropDownList" dataController="Pick_Account_type" dataView="grid1" dataTextField="Account_Type" dataValueField="Account_Type" />
     </field>
-    <field name="IncludeYN" type="Int32" allowNulls="false" label="^IncYn^Include YN^IncYn^" showInSummary="true">
+    <field name="IncludeYN" type="Int32" allowNulls="false" label="Include YN" showInSummary="true">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="InActive" type="Int32" label="^inAct^In Active^inAct^" allowNulls="false">
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="InActive" type="Int32" label="In Active" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="CVRType" type="Int32" label="^CvrTyp^CVR Type^CvrTyp^" />
+    <field name="CVRType" type="Int32" label="CVR Type" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^GlCroValRulLin^GL Cross Validation Rule Lines^GlCroValRulLin^" reportTemplate="true" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="GL Cross Validation Rule Lines" reportTemplate="true" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="CVRID" columns="15" />
         <dataField fieldName="AccountID" columns="50" hidden="true" />
@@ -40,11 +40,11 @@
         <dataField fieldName="CVRType" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevGlCroValRulLin^Review GL Cross Validation Rule Lines^RevGlCroValRulLin^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review GL Cross Validation Rule Lines" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="GL Cross Validation Rule Lines" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^GlCroValRulLin^GL Cross Validation Rule Lines^GlCroValRulLin^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CVRID" columns="15" />
             <dataField fieldName="AccountID" columns="50" hidden="true" />
@@ -60,11 +60,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewGlCroValRulLin^New GL Cross Validation Rule Lines^NewGlCroValRulLin^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New GL Cross Validation Rule Lines" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New GL Cross Validation Rule Lines" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewGlCroValRulLin^New GL Cross Validation Rule Lines^NewGlCroValRulLin^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CVRID" columns="15" />
             <dataField fieldName="AccountID" columns="50" hidden="true" />
@@ -106,11 +106,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

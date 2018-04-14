@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="tbl_States" conflictDetection="overwriteChanges" label="^Sta^States^Sta^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="tbl_States" conflictDetection="overwriteChanges" label="tbl_States" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_States" custom="true">
       <text><![CDATA[SELECT * FROM tbl_States]]></text>
     </command>
   </commands>
   <fields>
-    <field name="CountryName" type="String" allowNulls="false" label="^CouNam^Country Name^CouNam^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="StateName" type="String" allowNulls="false" label="^StaNam^State Name^StaNam^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="StateTypes" type="String" allowNulls="false" label="^StaTyp^State Types^StaTyp^" length="50" showInSummary="true" />
-    <field name="CountryCode" type="String" label="^CouCod^Country Code^CouCod^" length="2" showInSummary="true" />
-    <field name="StateCode" type="String" label="^StaCod^State Code^StaCod^" length="50" showInSummary="true" />
+    <field name="CountryName" type="String" allowNulls="false" label="^CountryName^Country Name^CountryName^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="StateName" type="String" allowNulls="false" label="^StateName^State Name^StateName^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="StateTypes" type="String" allowNulls="false" label="^StateTypes^State Types^StateTypes^" length="50" showInSummary="true" />
+    <field name="CountryCode" type="String" label="^CountryCode^Country Code^CountryCode^" length="2" showInSummary="true" />
+    <field name="StateCode" type="String" label="^StateCode^State Code^StateCode^" length="50" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Sta^States^Sta^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="States" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="CountryName" columns="50" />
         <dataField fieldName="StateName" columns="50" />
@@ -23,11 +23,11 @@
         <dataField fieldName="StateCode" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevSta^Review States^RevSta^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl States" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="tbl States" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiSta^Edit States^EdiSta^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CountryName" columns="50" />
             <dataField fieldName="StateName" columns="50" />
@@ -38,11 +38,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewSta^New States^NewSta^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl States" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New tbl States" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewSta^New States^NewSta^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CountryName" columns="50" />
             <dataField fieldName="StateName" columns="50" />
@@ -75,11 +75,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

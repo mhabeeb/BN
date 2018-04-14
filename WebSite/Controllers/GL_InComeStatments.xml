@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="GL_InComeStatments" conflictDetection="overwriteChanges" label="^GlInc^GL_InComeStatments^GlInc^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="GL_InComeStatments" conflictDetection="overwriteChanges" label="GL_InComeStatments" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.GL_Transaction_Line" custom="true">
       <text><![CDATA[SELECT OPU_Code_Ln,
@@ -63,62 +63,60 @@
     </command>
   </commands>
   <fields>
-    <field name="OPU_Code_Ln" type="Int32" label="^OpuCodLn^OPU Code Ln^OpuCodLn^" showInSummary="true" />
-    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50" showInSummary="true" />
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" showInSummary="true" />
-    <field name="Ac_Description" type="String" label="^AcDes^Ac Description^AcDes^" length="250" showInSummary="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" />
-    <field name="January" type="Decimal" allowNulls="false" label="^Jan^January^Jan^" readOnly="true" />
-    <field name="February" type="Decimal" allowNulls="false" label="^Feb^February^Feb^" readOnly="true" />
-    <field name="March" type="Decimal" allowNulls="false" label="^Mar^March^Mar^" readOnly="true" />
-    <field name="April" type="Decimal" allowNulls="false" label="^Apr^April^Apr^" readOnly="true" />
+    <field name="OPU_Code_Ln" type="Int32" label="^OPUCodeLn^OPU Code Ln^OPUCodeLn^" showInSummary="true" />
+    <field name="Account_Type" type="String" label="^AccountType^Account Type^AccountType^" length="50" showInSummary="true" />
+    <field name="AccountID" type="String" allowNulls="false" label="^Account^Account#^Account^" length="50" showInSummary="true" />
+    <field name="Ac_Description" type="String" label="^AcDescription^Ac Description^AcDescription^" length="250" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="TrxYear" type="Int32" label="^TrxYear^Trx Year^TrxYear^" />
+    <field name="January" type="Decimal" allowNulls="false" label="^January^January^January^" readOnly="true" />
+    <field name="February" type="Decimal" allowNulls="false" label="^February^February^February^" readOnly="true" />
+    <field name="March" type="Decimal" allowNulls="false" label="^March^March^March^" readOnly="true" />
+    <field name="April" type="Decimal" allowNulls="false" label="^April^April^April^" readOnly="true" />
     <field name="May" type="Decimal" allowNulls="false" label="^May^May^May^" readOnly="true" />
-    <field name="June" type="Decimal" allowNulls="false" label="^Jun^June^Jun^" readOnly="true" />
-    <field name="July" type="Decimal" allowNulls="false" label="^Jul^July^Jul^" readOnly="true" />
-    <field name="August" type="Decimal" allowNulls="false" label="^Aug^August^Aug^" readOnly="true" />
-    <field name="September" type="Decimal" allowNulls="false" label="^Sep^September^Sep^" readOnly="true" />
-    <field name="October" type="Decimal" allowNulls="false" label="^Oct^October^Oct^" readOnly="true" />
-    <field name="November" type="Decimal" allowNulls="false" label="^Nov^November^Nov^" readOnly="true" />
-    <field name="December" type="Decimal" allowNulls="false" label="^Dec^December^Dec^" readOnly="true" />
-    <field name="Total" type="Decimal" label="^Tot^Total^Tot^" readOnly="true" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="June" type="Decimal" allowNulls="false" label="^June^June^June^" readOnly="true" />
+    <field name="July" type="Decimal" allowNulls="false" label="^July^July^July^" readOnly="true" />
+    <field name="August" type="Decimal" allowNulls="false" label="^August^August^August^" readOnly="true" />
+    <field name="September" type="Decimal" allowNulls="false" label="^September^September^September^" readOnly="true" />
+    <field name="October" type="Decimal" allowNulls="false" label="^October^October^October^" readOnly="true" />
+    <field name="November" type="Decimal" allowNulls="false" label="^November^November^November^" readOnly="true" />
+    <field name="December" type="Decimal" allowNulls="false" label="^December^December^December^" readOnly="true" />
+    <field name="Total" type="Decimal" label="^Total^Total^Total^" readOnly="true" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABrCod^ABranch Code^ABrCod^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^IncSta^Income Statment^IncSta^" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Income Statment" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
         <dataField fieldName="AccountID" columns="50" />
         <dataField fieldName="Account_Type" columns="50" />
         <dataField fieldName="Ac_Description" />
-        <dataField fieldName="Project_Code" columns="50" />
-        <dataField fieldName="Dept_Code" columns="50" />
         <dataField fieldName="TrxYear" columns="15" />
         <dataField fieldName="January" dataFormatString="N2" columns="15" />
         <dataField fieldName="February" dataFormatString="N2" columns="15" />
@@ -133,14 +131,16 @@
         <dataField fieldName="November" dataFormatString="N2" columns="15" />
         <dataField fieldName="December" dataFormatString="N2" columns="15" />
         <dataField fieldName="Total" dataFormatString="N2" columns="15" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
-        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^IncSta^Income Statment^IncSta^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Income Statment" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="dbo GL Transaction Line" flow="NewColumn">
@@ -174,7 +174,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^IncSta^Income Statment^IncSta^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="Income Statment" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New dbo GL Transaction Line" flow="NewColumn">

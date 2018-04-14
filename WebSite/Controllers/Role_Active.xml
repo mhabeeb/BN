@@ -6,13 +6,13 @@
     </command>
   </commands>
   <fields>
-    <field name="RoleID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^RolId^Role#^RolId^" readOnly="true" />
-    <field name="RoleName" type="String" label="^RolNam^Role Name^RolNam^" length="50" showInSummary="true" />
-    <field name="RoleDescription" type="String" label="^RolDes^Role Description^RolDes^" length="50" showInSummary="true" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" showInSummary="true" />
+    <field name="RoleID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Role#" readOnly="true" />
+    <field name="RoleName" type="String" label="Role Name" length="50" showInSummary="true" />
+    <field name="RoleDescription" type="String" label="Role Description" length="50" showInSummary="true" />
+    <field name="InActive" type="Int32" label="In Active" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Rol^Roles^Rol^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Roles" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="RoleName" columns="50" />
@@ -20,7 +20,7 @@
         <dataField fieldName="InActive" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRol^Review Roles^RevRol^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Roles" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Roles" flow="NewColumn">
@@ -33,7 +33,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRol^New Roles^NewRol^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Roles" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Roles" flow="NewColumn">
@@ -75,7 +75,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

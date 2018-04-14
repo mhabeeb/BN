@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="tbl_Invoice_Types" conflictDetection="overwriteChanges" label="^InvTyp^Invoice_Types^InvTyp^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="tbl_Invoice_Types" conflictDetection="overwriteChanges" label="tbl_Invoice_Types" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Invoice_Types" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Invoice_Types WHERE IsNull(IsReserved,0)=0]]></text>
     </command>
   </commands>
   <fields>
-    <field name="InvoiceTypes" type="String" allowNulls="false" label="^InvTyp^Invoice Types^InvTyp^" length="100" showInSummary="true" />
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" showInSummary="true" />
-    <field name="StartInvoiceNumber" type="Decimal" label="^StaInvNum^Start Invoice Number^StaInvNum^" showInSummary="true" />
-    <field name="IsReserved" type="Int32" label="^IsRes^Is Reserved^IsRes^" showInSummary="true" />
-    <field name="StartYN" type="Int32" label="^StaYn^Start YN^StaYn^" showInSummary="true">
+    <field name="InvoiceTypes" type="String" allowNulls="false" label="Invoice Types" length="100" showInSummary="true" />
+    <field name="APAR_Flag" type="Int32" label="APAR Flag" showInSummary="true" />
+    <field name="StartInvoiceNumber" type="Decimal" label="Start Invoice Number" showInSummary="true" />
+    <field name="IsReserved" type="Int32" label="Is Reserved" showInSummary="true" />
+    <field name="StartYN" type="Int32" label="Start YN" showInSummary="true">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^InvTyp^Invoice Types^InvTyp^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="tbl Invoice Types" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="InvoiceTypes" />
@@ -25,7 +25,7 @@
         <dataField fieldName="StartYN" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevInvTyp^Review Invoice Types^RevInvTyp^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Invoice Types" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Invoice Types" flow="NewColumn">
@@ -40,7 +40,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewInvTyp^New Invoice Types^NewInvTyp^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Invoice Types" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Invoice Types" flow="NewColumn">
@@ -81,7 +81,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

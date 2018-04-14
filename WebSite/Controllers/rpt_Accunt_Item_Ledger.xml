@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="rpt_Accunt_Item_Ledger" conflictDetection="overwriteChanges" label="^RepAccIteLed^rpt_Accunt_Item_Ledger^RepAccIteLed^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="rpt_Accunt_Item_Ledger" conflictDetection="overwriteChanges" label="rpt_Accunt_Item_Ledger" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" isPrimaryKey="true" />
-    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" showInSummary="true" />
-    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" showInSummary="true" />
-    <field name="Part_No" type="String" label="^ParNo^Part No^ParNo^" length="20" showInSummary="true" />
-    <field name="Item_Category_Major" type="String" label="^IteCatMaj^Item Category Major^IteCatMaj^" length="255" showInSummary="true" />
-    <field name="Item_Category" type="String" label="^IteCat^Item CatItgory^IteCat^" length="255" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" />
-    <field name="Item_Code_Ref_No" type="String" label="^IteCodRefNo^Item Code Ref No^IteCodRefNo^" length="20" />
-    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" readOnly="true" />
-    <field name="Period_Debit" type="Decimal" label="^PerDeb^Period Debit^PerDeb^" readOnly="true" />
-    <field name="Period_Credit" type="Decimal" label="^PerCre^Period Credit^PerCre^" readOnly="true" />
-    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" readOnly="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="Item Code" length="20" isPrimaryKey="true" />
+    <field name="Item_Description" type="String" label="Item Description" length="500" />
+    <field name="UOM" type="String" label="Uom" length="10" />
+    <field name="Part_No" type="String" label="Part No" length="20" />
+    <field name="Item_Category_Major" type="String" label="Item Category Major" length="255" />
+    <field name="Item_Category" type="String" label="Item Category" length="255" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="CalcDate" type="Int32" label="Calc Date" />
+    <field name="Item_Code_Ref_No" type="String" label="Item Code Ref No" length="20" />
+    <field name="OpeningBalance" type="Decimal" label="Opening Balance" readOnly="true" />
+    <field name="Period_Debit" type="Decimal" label="Period Debit" readOnly="true" />
+    <field name="Period_Credit" type="Decimal" label="Period Credit" readOnly="true" />
+    <field name="Closing_Amount" type="Decimal" label="Closing Amount" readOnly="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RepAccIteLed^rpt Accunt Item Ledger^RepAccIteLed^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="rpt Accunt Item Ledger" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="Item_Code" columns="20" />
         <dataField fieldName="Item_Description" />
@@ -35,8 +35,8 @@
         <dataField fieldName="Closing_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRepAccIteLed^Review rpt Accunt Item Ledger^RevRepAccIteLed^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review rpt Accunt Item Ledger" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="rpt Accunt Item Ledger" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -58,8 +58,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRepAccIteLed^New rpt Accunt Item Ledger^NewRepAccIteLed^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New rpt Accunt Item Ledger" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New rpt Accunt Item Ledger" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -126,8 +126,8 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Parameter" flat="true">
-      <action commandName="SQL" headerText="Parameter" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^Par^Parameter^Par^" flat="true">
+      <action commandName="SQL" headerText="^Par^Parameter^Par^" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-align-right">
         <data><![CDATA[SET @Session_LedDate=@Parameters_EndDate
 SET @Result_NavigateUrl = 'ItemAccountLedger.aspx']]></data>
       </action>
@@ -203,7 +203,7 @@ SELECT A.[Item_Code],
                 AND ISNULL(O.OPU_Code_Ln, 0) = A.[BranchID] FOR XML PATH('')
             ) AS MONEY)) Closing_Amount
 FROM [dbo].[tbl_Item_Master] A,
-     [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE](@Session_LedDate) c
+	 [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE_V1](@Session_LedDate,@Session_CalenderID) c
 WHERE A.[BranchID] = @Session_OPU_Code and IsNull(A.OverHeadElements,0)=0
 ]]></rule>
     <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1

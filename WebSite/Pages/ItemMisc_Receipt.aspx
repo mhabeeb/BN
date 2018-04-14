@@ -10,7 +10,9 @@
       <div id="view3" data-controller="ViewAccounting" data-filter-source="view1" data-filter-fields="Transaction_ID" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
     <div data-activator="Tab|^ImportMiscReceipt^Import Misc.Receipt^ImportMiscReceipt^">
-      <div id="view4" data-controller="Import_Inventory_Balance" data-view="grid1" data-filter-source="view1" data-filter-fields="Transaction_ID" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
+      <div id="view4" data-controller="Import_Inventory_Balance" data-view="grid1" data-filter-source="view1" data-filter-fields="Transaction_ID" data-page-size="5" data-show-description="false" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
+    <div class="DataViewHeader">^Locator^Locator Control^Locator^</div>
+    <div id="view5" data-controller="tbl_Transactions_Locator" data-view="grid1" data-filter-source="view2" data-filter-fields="Trx_Line_ID,Item_Code" data-page-size="5" data-show-description="false" data-show-view-selector="false" data-show-modal-forms="true" data-auto-highlight-first-row="true" data-visible-when="[Master.LocatorYN] ==1"></div>
   </div>
 </asp:Content>

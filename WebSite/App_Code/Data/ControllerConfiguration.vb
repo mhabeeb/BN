@@ -4,6 +4,7 @@ Imports System
 Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports System.IO
+Imports System.Linq
 Imports System.Reflection
 Imports System.Text
 Imports System.Text.RegularExpressions
@@ -488,6 +489,22 @@ Namespace MyCompany.Data
                 Loop
             End If
         End Sub
+        
+        Public Function ToJson() As String
+            Dim config As ControllerConfiguration = Me.Virtualize(Me.ControllerName)
+            Dim exceptions() As String = New String() {"//comment()", "c:dataController/c:commands", "c:dataController/@handler", "//c:field/c:formula", "//c:businessRules/rule[type=""Code"" or type=""Sql"" or type=""Email""]"}
+            For Each ex As String in exceptions
+                Dim toDelete As List(Of XPathNavigator) = New List(Of XPathNavigator)()
+                Dim iterator As XPathNodeIterator = config.Select(ex)
+                Do While iterator.MoveNext()
+                    toDelete.Add(iterator.Current.Clone())
+                Loop
+                For Each node As XPathNavigator in toDelete
+                    node.DeleteSelf()
+                Next
+            Next
+            Return XmlConverter.ToJson(config.Navigator, "dataController", true, "commands", "output", "fields", "views", "categories", "dataFields", "actions", "actionGroup", "businessRules")
+        End Function
     End Class
     
     Public Class ControllerConfigurationUtility
@@ -565,5 +582,194 @@ Namespace MyCompany.Data
             End If
             Return Nothing
         End Function
+    End Class
+    
+    Public Class XmlConverter
+        
+        Private m_Navigator As XPathNavigator
+        
+        Private m_Arrays() As String = Nothing
+        
+        Private m_RenderMetadata As Boolean = false
+        
+        Private m_Root As String
+        
+        Private m_Sb As StringBuilder
+        
+        Public Sub New(ByVal navigator As XPathNavigator, ByVal root As String, ByVal metadata As Boolean, ByVal arrays() As String)
+            MyBase.New
+            m_Navigator = navigator
+            m_Root = root
+            m_RenderMetadata = metadata
+            m_Arrays = arrays
+        End Sub
+        
+        Public Overloads Shared Function ToJson(ByVal navigator As XPathNavigator, ByVal root As String, ByVal metadata As Boolean, ByVal ParamArray arrays() as System.[String]) As String
+            Dim xmlc As XmlConverter = New XmlConverter(navigator, root, metadata, arrays)
+            Return xmlc.ToJson()
+        End Function
+        
+        Public Overloads Function ToJson() As String
+            Dim nav As XPathNavigator = m_Navigator
+            m_Sb = New StringBuilder("{"&Global.Microsoft.VisualBasic.ChrW(10))
+            Do While (Not ((nav.Name = m_Root)) AndAlso nav.MoveToFirstChild())
+            Loop
+            XmlToJson(nav, false, 1)
+            m_Sb.AppendLine(""&Global.Microsoft.VisualBasic.ChrW(10)&"}")
+            Return m_Sb.ToString()
+        End Function
+        
+        Private Sub WriteJsonValue(ByVal nav As XPathNavigator)
+            Dim v As String = nav.ToString()
+            Dim tempInt32 As Integer
+            If Integer.TryParse(v, tempInt32) Then
+                m_Sb.Append(tempInt32)
+            Else
+                Dim tempBool As Boolean
+                If Boolean.TryParse(v, tempBool) Then
+                    m_Sb.Append(tempBool.ToString().ToLower())
+                Else
+                    m_Sb.Append(HttpUtility.JavaScriptStringEncode(v, true))
+                End If
+            End If
+        End Sub
+        
+        Private Sub WriteMultilineValue(ByVal nav As XPathNavigator)
+            Dim type As String = Nothing
+            Dim props As XPathNavigator = nav.CreateNavigator()
+            Dim keepGoing As Boolean = true
+            Do While keepGoing
+                props.MoveToParent()
+                If props.MoveToFirstAttribute() Then
+                    keepGoing = false
+                End If
+            Loop
+            keepGoing = true
+            Do While keepGoing
+                If (props.Name = "type") Then
+                    type = props.Value
+                End If
+                If Not (props.MoveToNextAttribute()) Then
+                    keepGoing = false
+                End If
+            Loop
+            If String.IsNullOrEmpty(type) Then
+                WriteJsonValue(nav)
+            Else
+                props.MoveToRoot()
+                props.MoveToFirstChild()
+                WriteJsonValue(nav)
+            End If
+        End Sub
+        
+        Private Sub XmlToJson(ByVal nav As XPathNavigator, ByVal isArrayMember As Boolean, ByVal depth As Integer)
+            Dim padding As String = New String(Global.Microsoft.VisualBasic.ChrW(32), (depth * 2))
+            Dim isArray As Boolean = m_Arrays.Contains(nav.Name)
+            Dim isComplexArray As Boolean = (isArray AndAlso nav.HasAttributes)
+            Dim closingBracket As Boolean = true
+            If Not (isComplexArray) Then
+                If Not (isArrayMember) Then
+                    m_Sb.AppendFormat((padding + """{0}"": "), nav.Name)
+                    If nav.MoveToFirstChild() Then
+                        If (nav.NodeType = XPathNodeType.Text) Then
+                            closingBracket = false
+                        End If
+                        nav.MoveToParent()
+                    End If
+                End If
+                If closingBracket Then
+                    If isArray Then
+                        m_Sb.AppendLine("[")
+                    Else
+                        If Not (isArrayMember) Then
+                            m_Sb.AppendLine("{")
+                        Else
+                            m_Sb.AppendLine((padding + "{"))
+                        End If
+                    End If
+                End If
+            End If
+            Dim firstProp As Boolean = true
+            Dim childPadding As String = (padding + "  ")
+            Dim keepGoing As Boolean
+            If (isComplexArray AndAlso isArrayMember) Then
+                m_Sb.AppendLine((padding + "{"))
+            End If
+            If nav.MoveToFirstAttribute() Then
+                keepGoing = true
+                Do While keepGoing
+                    If firstProp Then
+                        firstProp = false
+                    Else
+                        m_Sb.AppendLine(",")
+                    End If
+                    m_Sb.AppendFormat((childPadding + """{0}"": "), nav.Name)
+                    WriteJsonValue(nav)
+                    If Not (nav.MoveToNextAttribute()) Then
+                        keepGoing = false
+                    End If
+                Loop
+                nav.MoveToParent()
+                If isComplexArray Then
+                    m_Sb.AppendLine(",")
+                    m_Sb.AppendFormat((childPadding + """{0}"": ["&Global.Microsoft.VisualBasic.ChrW(10)), nav.Name)
+                    firstProp = true
+                End If
+            End If
+            If nav.MoveToFirstChild() Then
+                If (nav.NodeType = XPathNodeType.Text) Then
+                    If isArrayMember Then
+                        m_Sb.AppendLine(",")
+                        m_Sb.Append((childPadding + """@text"": "))
+                    Else
+                        m_Sb.AppendLine(" {")
+                        m_Sb.Append((childPadding + """@value"": "))
+                    End If
+                    If nav.Value.Contains(""&Global.Microsoft.VisualBasic.ChrW(10)) Then
+                        WriteMultilineValue(nav)
+                    Else
+                        WriteJsonValue(nav)
+                    End If
+                    If Not (isArrayMember) Then
+                        m_Sb.Append((""&Global.Microsoft.VisualBasic.ChrW(10)  _
+                                        + (padding + "}")))
+                    End If
+                Else
+                    keepGoing = true
+                    Do While keepGoing
+                        If firstProp Then
+                            firstProp = false
+                        Else
+                            m_Sb.AppendLine(",")
+                        End If
+                        XmlToJson(nav, isArray, (depth + 1))
+                        If Not (nav.MoveToNext()) Then
+                            keepGoing = false
+                        End If
+                    Loop
+                End If
+                nav.MoveToParent()
+            End If
+            If closingBracket Then
+                m_Sb.AppendLine()
+                If isComplexArray Then
+                    m_Sb.Append((padding + "  ]"))
+                Else
+                    If isArray Then
+                        m_Sb.Append((padding + "]"))
+                    Else
+                        m_Sb.Append((padding + "}"))
+                    End If
+                End If
+            End If
+            If (isComplexArray AndAlso isArrayMember) Then
+                m_Sb.Append((""&Global.Microsoft.VisualBasic.ChrW(10)  _
+                                + (padding + "}")))
+            End If
+            If nav.MoveToNext() Then
+                m_Sb.AppendLine(",")
+                XmlToJson(nav, isArrayMember, depth)
+            End If
+        End Sub
     End Class
 End Namespace

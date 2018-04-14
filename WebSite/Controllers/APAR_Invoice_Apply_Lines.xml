@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="APAR_Invoice_Apply_Lines" conflictDetection="overwriteChanges" label="^ApaInvAppLin^APAR_Invoice_Apply_Lines^ApaInvAppLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="APAR_Invoice_Apply_Lines" conflictDetection="overwriteChanges" label="APAR_Invoice_Apply_Lines" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="APAR_Invoice_Apply_Lines" custom="true">
       <text><![CDATA[SELECT  dbo.APAR_Invoice_Apply_Lines.ApplicationID, dbo.APAR_Invoice_Apply_Lines.ApplicationDate, dbo.APAR_Invoice_Apply_Lines.Trx_ID, dbo.APAR_Invoice_Apply_Lines.PaymentID, dbo.APAR_Invoice_Apply_Lines.ApplicationAmount, 
@@ -9,123 +9,129 @@
                    dbo.APAR_Payments.Currency_Code, dbo.APAR_Payments.CheckNo, dbo.APAR_Payments.Expense_AccountID, dbo.APAR_Payments.PaymentType, dbo.APAR_Payments.PayNumber, dbo.APAR_Payments.Vendor_Name, 
                    dbo.APAR_Payments.PMT_APPLY_BAL, dbo.APAR_Payments.WireYN, dbo.APAR_Payments.Cur_Rate, dbo.APAR_Payments.XferID, dbo.tbl_BranchInfo.BranchName, dbo.tbl_BranchInfo.BuisnessSlogan, dbo.tbl_BranchInfo.Address_English, 
                    dbo.tbl_BranchInfo.Address_Arabic, dbo.tbl_BranchInfo.BranchLogo, dbo.APAR_Invoice_Apply_Lines.ApplicationAmount_BC, dbo.APAR_Invoice_Apply_Lines.Inv_Currency_Code, dbo.APAR_Invoice_Apply_Lines.Functional_Applied, 
-                   dbo.APAR_Invoice_Apply_Lines.PrePayYN, dbo.APAR_Invoice_Apply_Lines.Invoice_Date, dbo.APAR_Invoice_Apply_Lines.Source_Doc_No
+                   dbo.APAR_Invoice_Apply_Lines.PrePayYN, dbo.APAR_Invoice_Apply_Lines.Invoice_Date, dbo.APAR_Invoice_Apply_Lines.Source_Doc_No, dbo.APAR_Invoice_Apply_Lines.ReversalYN
 FROM      dbo.APAR_Invoice_Apply_Lines INNER JOIN
                    dbo.APAR_Payments ON dbo.APAR_Invoice_Apply_Lines.PaymentID = dbo.APAR_Payments.PaymentID INNER JOIN
                    dbo.tbl_BranchInfo ON dbo.APAR_Payments.OPU_Code = dbo.tbl_BranchInfo.BranchID]]></text>
     </command>
   </commands>
   <fields>
-    <field name="AProjectEnabled" type="Int16" label="^AProEna^AProject Enabled^AProEna^" computed="true" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_ProjectEnabled</formula>
-    </field>
-    <field name="ASiteCodeEnabled" type="Int16" label="^ASitCodEna^Site Code Enabled^ASitCodEna^" computed="true" readOnly="true" showInSummary="true">
+    <field name="ASiteCodeEnabled" type="Int16" label="Site Code Enabled" computed="true" readOnly="true" showInSummary="true">
       <formula>SELECT @Session_SiteCodeEnabled</formula>
     </field>
-    <field name="ABudgetEnabled" type="Int16" readOnly="true" label="^ABudEna^ABudget Enabled^ABudEna^" computed="true" showInSummary="true">
+    <field name="AProjectEnabled" type="Int16" label="AProject Enabled" computed="true" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
+    <field name="ABudgetEnabled" type="Int16" readOnly="true" label="ABudget Enabled" computed="true" showInSummary="true">
       <formula>SELECT @Session_BudgetEnabled</formula>
     </field>
-    <field name="ApplicationID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^AppId^Application#^ApplId^" readOnly="true" />
+    <field name="ApplicationID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^AppId^Application ^AppId^" readOnly="true" />
     <field name="ApplicationDate" type="DateTime" label="^AppDat^Application Date^AppDat^" showInSummary="true" />
-    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Sequence #^TrxId^" showInSummary="true" />
-    <field name="PaymentID" type="Decimal" label="^PayId^Payment#^PayId^" showInSummary="true" />
-    <field name="ApplicationAmount" type="Decimal" label="^AppAmo^Application Amount^AppAmo^" showInSummary="true" dataFormatString="N2" />
-    <field name="Remark" type="String" allowQBE="false" allowSorting="false" label="^Rem^Remark^Rem^" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^">
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^SeqId^Sequence ^SeqId^" />
+    <field name="PaymentID" type="Decimal" label="^PayId^Payment^PayId^" />
+    <field name="ApplicationAmount" type="Decimal" label="^ApplicationAmount^Application Amount^ApplicationAmount^" showInSummary="true" dataFormatString="N2" />
+    <field name="Remark" type="String" allowQBE="false" allowSorting="false" label="^Remark^Remark^Remark^" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="Invoice_NO" type="Decimal" label="^InvNo^Invoice #^InvNo^" />
-    <field name="Sys_Number" type="String" allowNulls="false" label="^SysNum^Sys Number^SysNum^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
-    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
-    <field name="Currency_Code" type="String" allowNulls="false" label="^CurCod^Curr^CurCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="Invoice_NO" type="Decimal" label="^DocNumber^Invoice #^DocNumber^" />
+    <field name="Sys_Number" type="String" allowNulls="false" label="^SysNum^Vendor^SysNum^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PaymentDate^Payment Date^PaymentDate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="Currency_Code" type="String" allowNulls="false" label="^Curr^Curr^Curr^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
     <field name="Vendor_Name" type="String" allowNulls="false" label="^VenNam^Vendor Name^VenNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
-    <field name="PayNumber" type="Decimal" allowNulls="false" label="^PayNum^Pay Number^PayNum^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount Paid^AmoPai^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="PMT_APPLY_BAL" type="Decimal" allowNulls="false" label="^PmtAppBal^PMT APPLY BAL^PmtAppBal^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Remarks" type="String" allowNulls="false" label="^Rem^Remarks^Rem^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="BranchName" type="String" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
-    <field name="BuisnessSlogan" type="String" label="^BuiSlo^Buisness Slogan^BuiSlo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
-    <field name="Address_English" type="String" label="^AddEng^Address English^AddEng^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
-    <field name="Address_Arabic" type="String" label="^AddAra^Address Arabic^AddAra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
-    <field name="PostYN" type="Int16" readOnly="true" label="^PosYn^Post YN^PosYn^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" causesCalculate="true" hidden="false" isVirtual="true">
+    <field name="PayNumber" type="Decimal" allowNulls="false" label="^PayNumber^Pay Number^PayNumber^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmountPaid^Amount Paid^AmountPaid^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="PMT_APPLY_BAL" type="Decimal" allowNulls="false" label="^PMTAPPLYBAL^PMT APPLY BAL^PMTAPPLYBAL^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Remarks" type="String" allowNulls="false" label="^Remarks^Remarks^Remarks^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="BranchName" type="String" label="^BranchName^Branch Name^BranchName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
+    <field name="BuisnessSlogan" type="String" label="^BuisnessSlogan^Buisness Slogan^BuisnessSlogan^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
+    <field name="Address_English" type="String" label="^AddressEnglish^Address English^AddressEnglish^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
+    <field name="Address_Arabic" type="String" label="^AddressArabic^Address Arabic^AddressArabic^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
+    <field name="PostYN" type="Int16" readOnly="true" label="^PostYN^Post YN^PostYN^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" causesCalculate="true" hidden="false" isVirtual="true">
       <formula>[dbo].[CHECK_GL_POST] (PaymentID,2)</formula>
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Invoice_Date" type="DateTime" label="^InvDat^Invoice Date^InvDat^" htmlEncode="false" hidden="false" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="Invoice_Date" type="DateTime" label="^InvoiceDate^Invoice Date^InvoiceDate^" htmlEncode="false" hidden="false" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="Source_Doc_No" type="Int64" label="^SouDocNo^InvoiceNo^SouDocNo^" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="Source_Doc_No" type="Int64" label="InvoiceNo" />
+    <field name="ReversalYN" type="Int16" label="Reversal YN">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^AppInv^Applied Invoice^AppInv^" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Applied Invoice" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="AProjectEnabled" columns="15" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Trx_ID" columns="15" readOnly="true" />
+        <dataField fieldName="Source_Doc_No" columns="15" />
+        <dataField fieldName="Invoice_NO" columns="15" readOnly="true" hidden="true" />
+        <dataField fieldName="Invoice_Date" columns="10" readOnly="true" />
+        <dataField fieldName="ApplicationAmount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="ASiteCodeEnabled" columns="15" hidden="true" />
         <dataField fieldName="ABudgetEnabled" columns="15" hidden="true" />
         <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="ApplicationAmount" dataFormatString="N2" columns="15" aggregate="Sum" />
+        <dataField fieldName="AProjectEnabled" columns="15" hidden="true" />
         <dataField fieldName="ApplicationDate" columns="10" readOnly="true" />
+        <dataField fieldName="PayNumber" columns="15" />
+        <dataField fieldName="Payment_Date" rows="5" />
+        <dataField fieldName="Amount_Paid" columns="15" />
         <dataField fieldName="PaymentID" columns="15" readOnly="true" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="PMT_APPLY_BAL" columns="15" hidden="true" />
-        <dataField fieldName="Currency_Code" rows="5" hidden="true" />
-        <dataField fieldName="Remarks" rows="5" />
-        <dataField fieldName="PayNumber" columns="15" />
+        <dataField fieldName="Currency_Code" rows="5" />
         <dataField fieldName="Sys_Number" rows="5" hidden="true" />
-        <dataField fieldName="Source_Doc_No" columns="15" />
-        <dataField fieldName="Invoice_NO" columns="15" readOnly="true" hidden="true" />
-        <dataField fieldName="Payment_Date" rows="5" />
         <dataField fieldName="Vendor_Name" rows="5" hidden="true" />
-        <dataField fieldName="Amount_Paid" columns="15" />
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
-        <dataField fieldName="BranchName" rows="5" hidden="true" />
-        <dataField fieldName="BuisnessSlogan" rows="5" hidden="true" />
         <dataField fieldName="Address_English" rows="5" hidden="true" />
         <dataField fieldName="Address_Arabic" rows="5" hidden="true" />
+        <dataField fieldName="BranchName" rows="5" hidden="true" />
+        <dataField fieldName="BuisnessSlogan" rows="5" hidden="true" />
         <dataField fieldName="Company_Code" columns="15" hidden="true" />
-        <dataField fieldName="Trx_ID" columns="15" readOnly="true" />
         <dataField fieldName="PostYN" columns="15" />
-        <dataField fieldName="Invoice_Date" columns="10" readOnly="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="Remarks" rows="5" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ApplicationID" columns="15" hidden="true" />
+        <dataField fieldName="ReversalYN" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^EdiAppInv^Edit Applied Invoices^EdiAppInv^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Edit Applied Invoices" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Edit Applied Invoices" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiAppInv^Edit Applied Invoices^EdiAppInv^" flow="NewColumn">
+          <description />
           <dataFields>
+            <dataField fieldName="Invoice_NO" columns="15" readOnly="true" />
             <dataField fieldName="ApplicationDate" columns="10" readOnly="true" />
             <dataField fieldName="Trx_ID" columns="15" hidden="true" />
             <dataField fieldName="PaymentID" columns="15" hidden="true" />
@@ -135,7 +141,6 @@ FROM      dbo.APAR_Invoice_Apply_Lines INNER JOIN
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Invoice_NO" columns="15" readOnly="true" />
             <dataField fieldName="OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="Company_Code" columns="15" hidden="true" />
             <dataField fieldName="PostYN" columns="15" hidden="true" />
@@ -143,16 +148,16 @@ FROM      dbo.APAR_Invoice_Apply_Lines INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewInvAppLin^New Invoice Apply Lines^NewInvAppLin^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Invoice Apply Lines" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New Invoice Apply Lines" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="AProjectEnabled" columns="15" />
             <dataField fieldName="ASiteCodeEnabled" columns="15" />
             <dataField fieldName="ABudgetEnabled" columns="15" />
             <dataField fieldName="ApplicationDate" columns="10" />
+            <dataField fieldName="AProjectEnabled" columns="15" />
             <dataField fieldName="Trx_ID" columns="15" />
             <dataField fieldName="PaymentID" columns="15" />
             <dataField fieldName="ApplicationAmount" dataFormatString="N2" columns="15" />
@@ -164,18 +169,6 @@ FROM      dbo.APAR_Invoice_Apply_Lines INNER JOIN
             <dataField fieldName="Invoice_NO" columns="15" />
             <dataField fieldName="OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="Company_Code" columns="15" hidden="true" />
-          </dataFields>
-        </category>
-      </categories>
-    </view>
-    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
-      <categories>
-        <category id="c1" headerText="Invoice Lines" flow="NewColumn">
-          <dataFields>
-            <dataField fieldName="Created_By" columns="15" />
-            <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
-            <dataField fieldName="Updated_By" columns="15" />
-            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
           </dataFields>
         </category>
       </categories>
@@ -198,7 +191,7 @@ FROM      dbo.APAR_Invoice_Apply_Lines INNER JOIN
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true" />
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" whenClientScript="[GL_PostedYN] != 1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" whenClientScript="[GL_PostedYN] != 1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -212,7 +205,7 @@ FROM      dbo.APAR_Invoice_Apply_Lines INNER JOIN
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="^PrintDMCMMemo^Print DM /CM Memo^PrintDMCMMemo^">
+    <actionGroup id="ag7" scope="ActionBar" headerText="^Rep^Reports^Rep^" flat="false">
       <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
       <action id="a3" commandName="ReportAsExcel" />
@@ -227,8 +220,15 @@ FROM      dbo.APAR_Invoice_Apply_Lines INNER JOIN
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Select" commandArgument="editForm1" headerText="^Edit^Edit^Edit^" />
     </actionGroup>
-    <actionGroup id="ag101" scope="ActionBar" headerText="^AboutRecord^About Record^AboutRecord^" flat="true">
-      <action commandName="EditModal" commandArgument="About" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />
+    <actionGroup id="ag101" scope="ActionBar" headerText="Cancel" flat="true">
+      <action commandName="SQL" id="a100" headerText="Cancel Line" whenLastCommandName="Select" whenClientScript="[Master.Rec_Status]==0 &amp;&amp; [ReversalYN]==0">
+        <data><![CDATA[EXEC [dbo].[CANCEL_LINE_FROM_PAYMENT] @ApplicationID]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Un Apply" flat="true">
+      <action commandName="SQL" headerText="Un Apply" id="a100" whenLastCommandName="Select" whenClientScript="[Master.GL_PostedYN]==1 &amp;&amp; [ReversalYN]==0">
+        <data><![CDATA[EXEC [dbo].[Invoice_UnApply] @ApplicationID]]></data>
+      </action>
     </actionGroup>
   </actions>
   <businessRules>

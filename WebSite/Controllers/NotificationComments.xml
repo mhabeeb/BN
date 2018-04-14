@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="NotificationComments" conflictDetection="overwriteChanges" label="^NotCom^NotificationComments^NotCom^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="NotificationComments" conflictDetection="overwriteChanges" label="NotificationComments" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.TBL_Document_Approvals_Detail" custom="true">
       <text><![CDATA[SELECT  dbo.TBL_DocumetTypes.DocShortName, dbo.TBL_DocumetTypes.DocDescrition, dbo.TBL_Document_Header.OPU_Code, dbo.TBL_Document_Header.Company_Code, dbo.TBL_Document_Header.DocRefNo, 
@@ -13,31 +13,31 @@ FROM      dbo.TBL_Document_Approvals_Detail INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="DocShortName" type="String" label="^ShoNam^ShortName^ShoNam^" length="10" showInSummary="true" />
-    <field name="DocDescrition" type="String" label="^DocDes^Desc.^DocDes^" length="50" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^Branch Name^OpuCod^" showInSummary="true" />
-    <field name="Company_Code" type="Decimal" label="^CompCod^Company Code^CompCod^" showInSummary="true" />
-    <field name="DocRefNo" type="Decimal" label="^DocRefNo^Ref.No #^DocRefNo^" showInSummary="true" />
-    <field name="DocumentDate" type="DateTime" label="^DocDat^Document Date^DocDat^" />
-    <field name="DocDescription" type="String" allowQBE="false" allowSorting="false" label="^DocDes^Doc Description^DocDes^" />
-    <field name="Hirarchy" type="Int32" label="^Hir^Approval Seq.^Hir^" />
-    <field name="CurrentApp" type="Int32" label="^CurApp^Current App^CurApp^">
+    <field name="DocShortName" type="String" label="ShortName" length="10" showInSummary="true" />
+    <field name="DocDescrition" type="String" label="Desc." length="50" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^Branch Name^OPUCode^" showInSummary="true" />
+    <field name="Company_Code" type="Decimal" label="Company Code" showInSummary="true" />
+    <field name="DocRefNo" type="Decimal" label="Ref.No #" showInSummary="true" />
+    <field name="DocumentDate" type="DateTime" label="Document Date" />
+    <field name="DocDescription" type="String" allowQBE="false" allowSorting="false" label="Doc Description" />
+    <field name="Hirarchy" type="Int32" label="Approval Seq." />
+    <field name="CurrentApp" type="Int32" label="Current App">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Comments" type="String" label="^Com^Comments^Com^" length="4000" />
-    <field name="DocAPP_SNO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DocAppSno^Doc APP SNO^DocAppSno^" readOnly="true" />
-    <field name="DocumentID" type="Decimal" allowNulls="false" label="^DocId^Document#^DocId^" readOnly="true" />
+    <field name="Comments" type="String" label="Comments" length="4000" />
+    <field name="DocAPP_SNO" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Doc APP SNO" readOnly="true" />
+    <field name="DocumentID" type="Decimal" allowNulls="false" label="Document#" readOnly="true" />
     <field name="Email" type="String" label="^Email^Email^Email^" length="128" />
-    <field name="UserFullName" type="String" label="^UseFulNam^Doc. With Whom^UseFulNam^" length="150" />
-    <field name="Mobile" type="String" label="^Mob^Mobile^Mob^" length="15" />
-    <field name="ApprovalStatus" type="Int16" allowNulls="false" label="^AppSta^Approval Status^AppSta^">
+    <field name="UserFullName" type="String" label="Doc. With Whom" length="150" />
+    <field name="Mobile" type="String" label="Mobile" length="15" />
+    <field name="ApprovalStatus" type="Int16" allowNulls="false" label="Approval Status">
       <items style="DropDownList">
         <item value="0" text="InProcess" />
         <item value="1" text="Approved" />
         <item value="2" text="Rejected" />
       </items>
     </field>
-    <field name="Updated_DateTime" type="^UpdDatTim^DateTime^UpdDatTim^" label="^ActDat^Action Date^ActDat^" />
+    <field name="Updated_DateTime" type="DateTime" label="Action Date" />
     <field name="Delegated_Flag" type="Int16" label="^DelegatedFlag^Delegated Flag^DelegatedFlag^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
@@ -47,8 +47,8 @@ FROM      dbo.TBL_Document_Approvals_Detail INNER JOIN
     <field name="ApprovalLimit" type="Decimal" label="Approval Limit" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^NotSum^Notification Summary^NotSum^">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Notification Summary" sortExpression="Hirarchy asc">
+      <headerText />
       <dataFields>
         <dataField fieldName="DocumentID" columns="15" />
         <dataField fieldName="DocShortName" columns="10" hidden="true" />
@@ -74,8 +74,8 @@ FROM      dbo.TBL_Document_Approvals_Detail INNER JOIN
     <view id="editForm1" type="Form" commandId="command1" label="Review Document Approvals Detail" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="^DocAppDet^Document Approvals Detail^DocAppDet^" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="dbo TBL Document Approvals Detail" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="DocShortName" columns="10" />
             <dataField fieldName="DocDescrition" columns="50" />
@@ -95,11 +95,11 @@ FROM      dbo.TBL_Document_Approvals_Detail INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDocAppDet^New Document Approvals Detail^NewDocAppDet^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New dbo TBL Document Approvals Detail" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Document Approvals Detail" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="New dbo TBL Document Approvals Detail" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="DocShortName" columns="10" />
             <dataField fieldName="DocDescrition" columns="50" />

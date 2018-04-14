@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="ApprovalGroups_Line" conflictDetection="overwriteChanges" label="^AppGroLin^ApprovalGroups_Line^AppGroLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ApprovalGroups_Line" conflictDetection="overwriteChanges" label="ApprovalGroups_Line" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="TBL_ApprovalGroups" custom="true">
       <text><![CDATA[SELECT        dbo.TBL_ApprovalGroups.AppGroupID, dbo.TBL_ApprovalGroups.DocTypeID, dbo.TBL_ApprovalGroups.UserID, dbo.TBL_ApprovalGroups.UserName, dbo.TBL_ApprovalGroups.Hirarchy, dbo.TBL_ApprovalGroups.DocAPPGrpID, 
@@ -11,36 +11,36 @@ FROM            dbo.TBL_ApprovalGroups LEFT OUTER JOIN
     </command>
   </commands>
   <fields>
-    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" />
-    <field name="UserName" type="String" label="^HirBas^Hirarchy Based^HirBas^" length="50" showInSummary="true" allowNulls="false">
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="Doc Type#" showInSummary="true" />
+    <field name="UserName" type="String" label="Hirarchy Based" length="50" showInSummary="true" allowNulls="false">
       <items style="DropDownList">
-        <item value="Direct Manager" text="Direct Manager" />
         <item value="Position Hierarchy" text="Position Hierarchy" />
+        <item value="Direct Manager" text="Direct Manager" />
         <item value="User Based" text="User Based" />
       </items>
     </field>
-    <field name="Positions" type="String" label="^Posi^Positions^Posi^" length="200">
+    <field name="Positions" type="String" label="Positions" length="200">
       <items style="Lookup" dataController="Pick_Employee_Postion" dataView="grid1" dataTextField="Positions" dataValueField="Positions" copy="UserID=UserID&#xD;&#xA;Emp_id=Emp_id&#xD;&#xA;Emp_Name=Emp_Name" />
     </field>
-    <field name="UserID" type="Decimal" label="^UseId^User#^UseId^" showInSummary="true">
+    <field name="UserID" type="Decimal" label="User#" showInSummary="true">
       <items style="Lookup" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" copy="Emp_Name=UserName" />
     </field>
-    <field name="Hirarchy" type="Int32" allowNulls="false" label="^Hir^Hirarchy^Hir^" showInSummary="true" />
-    <field name="DocAPPGrpID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^DocAppGroId^Doc APP Grp^DocAppGroId^#" readOnly="true" />
-    <field name="ApprovalLimit" type="Decimal" label="^AppLim^Approval Limit^AppLim^" length="10" />
-    <field name="Emp_id" type="Decimal" label="^EmpId^Emp#^EmpId^" />
-    <field name="Emp_Name" type="String" label="^EmpNam^Emp Name^EmpNam^" length="50" />
-    <field name="Employee_Num" type="Decimal" label="^EmpNum^Employee Num^EmpNum^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="AppGroupID" type="Int32" label="^AppGroId^App Group ID^AppGroId^" />
-    <field name="App_UserName" type="String" label="^AppUseNam^App User Name^AppUseNam^" length="50" />
+    <field name="Hirarchy" type="Int32" allowNulls="false" label="Hirarchy" showInSummary="true" />
+    <field name="DocAPPGrpID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Doc APP Grp#" readOnly="true" />
+    <field name="ApprovalLimit" type="Decimal" label="Approval Limit" length="10" />
+    <field name="Emp_id" type="Decimal" label="Emp#" />
+    <field name="Emp_Name" type="String" label="Emp Name" length="50" />
+    <field name="Employee_Num" type="Decimal" label="Employee Num" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="AppGroupID" type="Int32" label="App Group ID" />
+    <field name="App_UserName" type="String" label="App User Name" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^AppGro^Approval Groups^AppGro^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Approval Groups" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="AppGroupID" columns="15" />
@@ -61,14 +61,20 @@ FROM            dbo.TBL_ApprovalGroups LEFT OUTER JOIN
         <dataField fieldName="App_UserName" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevAppGro^Review Approval Groups^RevAppGro^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Approval Groups" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Edit Approval Groups" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^EdiAppGro^Edit Approval Groups^EdiAppGro^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="DocTypeID" columns="15" hidden="true" />
             <dataField fieldName="UserName" columns="50" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Emp_id" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="DocAPPGrpID" columns="15" hidden="true" />
             <dataField fieldName="Positions" columns="20">
               <visibility>
                 <expression test="[UserName]=='Position Hierarchy' " type="ClientScript" />
@@ -80,29 +86,29 @@ FROM            dbo.TBL_ApprovalGroups LEFT OUTER JOIN
               </visibility>
             </dataField>
             <dataField fieldName="Hirarchy" columns="15" hidden="true" />
-            <dataField fieldName="DocAPPGrpID" columns="15" hidden="true" />
             <dataField fieldName="ApprovalLimit" columns="10" />
-            <dataField fieldName="Emp_id" columns="15" hidden="true" />
-            <dataField fieldName="Emp_Name" columns="50" hidden="true" />
             <dataField fieldName="Employee_Num" columns="15" hidden="true" />
-            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
-            <dataField fieldName="Updated_By" columns="15" hidden="true" />
-            <dataField fieldName="Created_By" columns="15" hidden="true" />
-            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Emp_Name" columns="50" hidden="true" />
             <dataField fieldName="OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="AppGroupID" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewAppGro^New Approval Groups^NewAppGro^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Approval Groups" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Approval Groups" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewAppGro^New Approval Groups^NewAppGro^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="DocTypeID" columns="15" hidden="true" />
             <dataField fieldName="UserName" columns="50" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Emp_id" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="DocAPPGrpID" columns="15" hidden="true" />
             <dataField fieldName="Positions" columns="20">
               <visibility>
                 <expression test="[UserName]=='Position Hierarchy' " type="ClientScript" />
@@ -114,15 +120,9 @@ FROM            dbo.TBL_ApprovalGroups LEFT OUTER JOIN
               </visibility>
             </dataField>
             <dataField fieldName="Hirarchy" columns="15" hidden="true" />
-            <dataField fieldName="DocAPPGrpID" columns="15" hidden="true" />
             <dataField fieldName="ApprovalLimit" columns="10" />
-            <dataField fieldName="Emp_id" columns="15" hidden="true" />
-            <dataField fieldName="Emp_Name" columns="50" hidden="true" />
             <dataField fieldName="Employee_Num" columns="15" hidden="true" />
-            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
-            <dataField fieldName="Updated_By" columns="15" hidden="true" />
-            <dataField fieldName="Created_By" columns="15" hidden="true" />
-            <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Emp_Name" columns="50" hidden="true" />
             <dataField fieldName="OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="AppGroupID" columns="15" hidden="true" />
           </dataFields>
@@ -131,9 +131,42 @@ FROM            dbo.TBL_ApprovalGroups LEFT OUTER JOIN
     </view>
   </views>
   <actions>
-    <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Select" />
-      <action id="a2" commandName="Edit" />
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
+      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^UpdPosHie^Update Position Hierarchy^UpdPosHie^" flat="true">
+      <action commandName="SQL" headerText="^UpdPosHie^Update Position Hierarchy^UpdPosHie^" id="a100" whenLastCommandName="Select" whenClientScript="[UserName]== 'Position Hierarchy'" cssClass="glyphicon glyphicon-circle-arrow-up">
+        <data><![CDATA[                 EXEC [dbo].[Update_Approval_Hirarchy_Position]
+                      @Positions,
+                      @OPU_Code,
+                     @AppGroupID]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
@@ -148,58 +181,19 @@ FROM            dbo.TBL_ApprovalGroups LEFT OUTER JOIN
       <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
       <action id="a13" whenLastCommandName="Insert" commandName="Select" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
-    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" cssClass="NewIcon" commandArgument="createForm1" />
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" />
+      <action id="a2" commandName="Edit" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" cssClass="EditIcon" commandArgument="editForm1" />
-      <action commandName="Delete" id="a100" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" cssClass="glyphicon glyphicon-edit" commandArgument="editForm1" />
+      <action commandName="Delete" id="a100" cssClass="glyphicon glyphicon-trash" />
     </actionGroup>
-    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
-      <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
-    </actionGroup>
-    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
-      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
-      <action id="a3" whenLastCommandName="New" commandName="Insert" />
-      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
-      <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
-    </actionGroup>
-    <actionGroup id="ag8" scope="Row">
-      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
-      <action id="a6" whenLastCommandName="New" commandName="Insert" />
-      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
-      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
-    </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Update Position Hirarchy" flat="true">
-      <action commandName="SQL" headerText="Update Position Hirarchy" id="a100" whenLastCommandName="Select" whenClientScript="[UserName]== 'Position Hierarchy'">
-        <data><![CDATA[                 EXEC [dbo].[Update_Approval_Hirarchy_Position]
-                      @Positions,
-                      @OPU_Code,
-                     @AppGroupID]]></data>
-      </action>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" cssClass="glyphicon glyphicon-list" commandArgument="createForm1" />
     </actionGroup>
   </actions>
   <businessRules>
-    <rule id="r105" commandName="New" type="Sql" phase="Execute"><![CDATA[SELECT @DocTypeID = DocTypeID
-FROM TBL_ApprovalGroups_Header
-WHERE AppGroupID = @AppGroupID
-
-
-SET @OPU_Code=@Session_OPU_Code]]></rule>
     <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SELECT @Hirarchy = IsNull(MAX(Hirarchy), 0) + 1
 FROM TBL_ApprovalGroups
 WHERE DocTypeID = @DocTypeID
@@ -213,6 +207,12 @@ IF @UserName = 'Direct Manager'
 SET @OPU_Code = @Session_OPU_Code;
 
 ]]></rule>
+    <rule id="r105" commandName="New" type="Sql" phase="Execute"><![CDATA[SELECT @DocTypeID = DocTypeID
+FROM TBL_ApprovalGroups_Header
+WHERE AppGroupID = @AppGroupID
+
+
+SET @OPU_Code=@Session_OPU_Code]]></rule>
     <rule id="r103" type="Sql" commandName="Insert" phase="Before" name="UserName_Validator"><![CDATA[IF EXISTS
 (
     SELECT TOP 1 Positions

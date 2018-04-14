@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="View_Payments_AR" label="^ViePayAr^View_Payments_AR^ViePayAr^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="View_Payments_AR" label="View_Payments_AR" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.View_Payments_ARBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.APAR_Payments" custom="true">
       <text><![CDATA[SELECT PaymentID,
@@ -22,60 +22,74 @@
        Company_Code,
        Transaction_ID,
        Emp_id,
-	   PrePayYN,BankCashName_PMT
+	   PrePayYN,BankCashName_PMT,
+	   CAST(PaymentID as varchar(50))"ZZ_Filter_Value"      
 FROM dbo.APAR_Payments
 WHERE APAR_Flag = 1]]></text>
     </command>
   </commands>
   <fields>
-    <field name="PaymentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PayId^Payment#^PayId^" readOnly="true" />
-    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Sys Number^SysNum^" showInSummary="true" />
-    <field name="Vendor_Name" type="String" label="^VenNam^PartyName^VenNam^" length="150" showInSummary="true" />
-    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" showInSummary="true" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" showInSummary="true" />
-    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount^AmoPai^" showInSummary="true" />
-    <field name="Cur_Rate" type="Decimal" label="^CurRat^Cur Rate^CurRat^" />
-    <field name="Amount_Paid_BC" type="Decimal" label="^AmoPaiBC^Amount BC^AmoPaiBC^" readOnly="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Cod^OPUCod^" />
-    <field name="CashBankID" type="Decimal" label="^CasBan^Cash Bank#^CasBan^" />
-    <field name="CheckNo" type="Decimal" label="^CheNo^Check No^CheNo^" />
-    <field name="PaymentType" type="String" label="^PayTyp^Payment Type^PayTyp^" length="20" />
-    <field name="PayNumber" type="Decimal" label="^PayNum^Pay Number^PayNum^" />
-    <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtAppBal^Pmt Apply Bal^PmtAppBal^" readOnly="true" />
-    <field name="RefreshPMT" type="Int32" label="^RefPMT^Refresh PMT^RefPMT^" />
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
-    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction#^TraId^" />
-    <field name="Emp_id" type="Decimal" label="^EmpId^Emp#^EmpId^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="PaymentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PayId^Payment^PayId^" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNumber^Sys Number^SysNumber^" />
+    <field name="Vendor_Name" type="String" label="^VendorName^PartyName^VendorName^" length="150" />
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PaymentDate^Payment Date^PaymentDate^" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmountPaid^Amount^AmountPaid^" />
+    <field name="Amount_Paid_BC" type="Decimal" label="^AmountPaidBC^Amount BC^AmountPaidBC^" readOnly="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="CashBankID" type="Decimal" label="^CashBank^Cash Bank#^CashBank^" />
+    <field name="CheckNo" type="Decimal" label="^CheckNo^Check No^CheckNo^" />
+    <field name="PaymentType" type="String" label="^PayType^Payment Type^PayType^" length="20" />
+    <field name="PayNumber" type="Decimal" label="^PayNumber^Pay Number^PayNumber^" />
+    <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtApplyBal^Pmt Apply Bal^PmtApplyBal^" readOnly="true" />
+    <field name="RefreshPMT" type="Int32" label="^RefreshPMT^Refresh PMT^RefreshPMT^" />
+    <field name="Company_Code" type="Decimal" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction ^TraId^" />
+    <field name="Emp_id" type="Decimal" label="^Emp^Emp#^Emp^" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="PrePayYN" type="Int64" label="^PrePayYN^Pre Pay YN^PrePayYN^">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="PrePayYN" type="Int64" label="Pre Pay YN">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="BankCashName_PMT" type="String" label="^BanCasNamPmt^Bank Cash Name PMT^BanCasNamPmt^" length="50" />
+    <field name="BankCashName_PMT" type="String" label="Bank Cash Name PMT" length="50" />
+    <field name="ZZ_Controller" type="String" label="Controller" computed="true">
+      <formula>'View_Payments_AR'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'View_Payments_AR_grid1'</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
+    <field name="Cur_Rate" type="Decimal" label="^CurRate^Cur Rate^CurRate^" showInSummary="true" />
+    <field name="Currency_Code" type="String" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ViePay^View Payment^ViePay^" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="View Payment" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="PaymentID" columns="15" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="Sys_Number" columns="15" />
         <dataField fieldName="Vendor_Name" />
         <dataField fieldName="Payment_Date" columns="10" />
@@ -96,15 +110,12 @@ WHERE APAR_Flag = 1]]></text>
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="Transaction_ID" columns="15" />
         <dataField fieldName="Emp_id" columns="15" hidden="true" />
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
-        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevApArPay^Review APAR Payments^RevApArPay^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review APAR Payments" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="dbo APAR Payments" flow="NewColumn">
@@ -133,7 +144,7 @@ WHERE APAR_Flag = 1]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewApArPay^New APAR Payments^NewApArPay^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New APAR Payments" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New dbo APAR Payments" flow="NewColumn">
@@ -214,5 +225,11 @@ UPDATE APAR_Payments
 SET RefreshPMT=@A  WHERE PaymentID=@PaymentID]]></data>
       </action>
     </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintARPayments" headerText="^PriArPay^Print AR Payments^PriArPay^" id="a100" cssClass="glyphicon glyphicon-print" />
+    </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Custom" commandArgument="PrintARPayments" type="Code" phase="Execute" />
+  </businessRules>
 </dataController>

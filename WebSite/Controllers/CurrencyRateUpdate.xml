@@ -1,67 +1,72 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="CurrencyRateUpdate" conflictDetection="overwriteChanges" label="^CurRatUpd^CurrencyRateUpdate^CurRatUpd^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="CurrencyRateUpdate" conflictDetection="overwriteChanges" label="CurrencyRateUpdate" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Run_Utility" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Run_Utility WHERE UtilityID=4]]></text>
     </command>
   </commands>
   <fields>
-    <field name="RunID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^RunId^Run#^RunId^" readOnly="true" />
-    <field name="From_Date" type="DateTime" label="^FroDat^From Date^FroDat^" showInSummary="true" />
-    <field name="To_Date" type="DateTime" label="^ToDat^To Date^ToDat^" showInSummary="true" />
-    <field name="UtilityID" type="Int32" label="^UtiId^Utility#^UtiId^" showInSummary="true" />
-    <field name="Doc_Number" type="Decimal" label="^DocNum^Doc Number^DocNum^" showInSummary="true" />
-    <field name="UtilityMessage" type="String" label="^UtiMes^Utility Message^UtiMes^" length="100" showInSummary="true" />
+    <field name="RunID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Run^Run#^Run^" readOnly="true" />
+    <field name="From_Date" type="DateTime" label="^FromDate^From Date^FromDate^" showInSummary="true" allowNulls="false" />
+    <field name="To_Date" type="DateTime" label="^ToDate^To Date^ToDate^" showInSummary="true" allowNulls="false" />
+    <field name="UtilityID" type="Int32" label="^Utility^Utility#^Utility^" showInSummary="true" />
+    <field name="Doc_Number" type="Decimal" label="^DocNumber^Doc Number^DocNumber^" showInSummary="true" />
+    <field name="UtilityMessage" type="String" label="^UtilityMessage^Utility Message^UtilityMessage^" length="100" showInSummary="true" />
     <field name="NewDocNo" type="Decimal" label="^NewDocNo^New Doc No^NewDocNo^" />
-    <field name="CurRate" type="Decimal" label="^CurRat^Conversion Rate^CurRat^" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency To^CurCod^" length="4" showInSummary="true">
-      <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" letters="true" />
-    </field>
-    <field name="UserName" type="String" label="^UseNam^From Cur.^UseNam^" length="20" />
-    <field name="CreatedDateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="ReportID" type="Int32" label="^RepId^Report#^RepId^" />
-    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" />
-    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" readOnly="true" />
-    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" />
-    <field name="Item_Code" type="String" label="^IteCod^Currency From^IteCod^" length="20">
+    <field name="CurRate" type="Decimal" label="^ConversionRate^Conversion Rate^ConversionRate^" allowNulls="false" />
+    <field name="Currency_Code" type="String" label="^CurrencyCode^Currency To^CurrencyCode^" length="4" allowNulls="false">
       <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
+    <field name="UserName" type="String" label="^frCurCd^From Currency Code^frCurCd^" length="20" allowNulls="false">
+      <items style="Lookup" dataController="CurrencyCode" dataView="grid1" dataTextField="Currency_Code" dataValueField="Currency_Code" />
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
+    <field name="CreatedDateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="ReportID" type="Int32" label="^Report^Report#^Report^" />
+    <field name="UserID" type="Int32" label="^User^User#^User^" />
+    <field name="CalcDate" type="Int32" label="^CalcDate^Calc Date^CalcDate^" readOnly="true" />
+    <field name="AccountID" type="String" label="^Account^Account#^Account^" length="50" />
+    <field name="Item_Code" type="String" label="^CurrencyFrom^Currency From^CurrencyFrom^" length="20">
+      <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" />
     </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="OPU_Code" type="Int32" label="OPU Code" computed="true">
+      <formula>Select @Session_OPU_Code</formula>
+    </field>
   </fields>
   <views>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCurRat^New Currency Rate^NewCurRat^" reportTemplate="true" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Currency Rate" reportTemplate="true" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Currency Rate" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewCurRat^New Currency Rate^NewCurRat^" flow="NewColumn">
+          <description />
           <dataFields>
+            <dataField fieldName="UserName" columns="20" />
+            <dataField fieldName="Currency_Code" columns="4" />
+            <dataField fieldName="CurRate" dataFormatString="N5" columns="15" />
             <dataField fieldName="From_Date" columns="10" />
             <dataField fieldName="To_Date" columns="10" />
             <dataField fieldName="Item_Code" columns="20" hidden="true" />
-            <dataField fieldName="UserName" columns="20" hidden="true" />
-            <dataField fieldName="Currency_Code" columns="4" />
-            <dataField fieldName="CurRate" dataFormatString="N5" columns="15" />
             <dataField fieldName="UtilityID" columns="15" hidden="true" />
             <dataField fieldName="Doc_Number" columns="15" hidden="true" />
             <dataField fieldName="UtilityMessage" hidden="true" />
@@ -70,6 +75,7 @@
             <dataField fieldName="ReportID" columns="15" hidden="true" />
             <dataField fieldName="UserID" columns="15" hidden="true" />
             <dataField fieldName="AccountID" columns="50" hidden="true" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -93,7 +99,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="^UpdateCurrencyRate^Update Currency Rate^UpdateCurrencyRate^" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" headerText="^UpdateCurrencyRate^Update Currency Rate^UpdateCurrencyRate^" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -124,7 +130,7 @@
     <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @UserID=@BusinessRules_UserId
 SET @CreatedDateTime=GETDATE()
 SET @UtilityID=4
-
+--SET @UserName=@Session_DefaultCurrency
 
 ]]></rule>
     <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @From_Date= getdate()
@@ -141,5 +147,7 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
+    <rule id="r104" commandName="Update" type="Sql" phase="After"><![CDATA[SET @Result_NavigateUrl='Home.aspx']]></rule>
+    <rule id="r105" commandName="Insert" type="Sql" phase="After"><![CDATA[SET @Result_NavigateUrl='CurrencyRateView.aspx']]></rule>
   </businessRules>
 </dataController>

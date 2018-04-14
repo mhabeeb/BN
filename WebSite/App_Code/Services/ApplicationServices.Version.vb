@@ -9,7 +9,7 @@ Namespace MyCompany.Services
         ''' The number is automatically incremented when the application is published from the app generator.
         Public Shared ReadOnly Property Version() As String
             Get
-                Return "8.6.10.732"
+                Return "8.6.11.953"
             End Get
         End Property
         

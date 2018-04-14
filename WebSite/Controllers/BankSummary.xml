@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="BankSummary" conflictDetection="overwriteChanges" label="^BanSum^BankSummary^BanSum^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="BankSummary" conflictDetection="overwriteChanges" label="BankSummary" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="BankCashInformation" custom="true">
       <text><![CDATA[SELECT     CashBankID, Company_Code, OPU_Code, BankCashName, Account_ID_Cash, ClosingBalance, FutureDatePayments
@@ -8,16 +8,16 @@ WHERE     (CashBankID > 3)]]></text>
     </command>
   </commands>
   <fields>
-    <field name="CashBankID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^CasBanId^Cash Bank#^CasBanId^" readOnly="true" />
-    <field name="Company_Code" type="Decimal" allowNulls="false" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="BankCashName" type="String" label="^BanCasNam^Bank Cash Name^BanCasNam^" length="50" showInSummary="true" />
-    <field name="Account_ID_Cash" type="String" allowNulls="false" label="^AccIdCas^Account ID Cash^AccIdCas^" length="50" showInSummary="true" />
-    <field name="ClosingBalance" type="Decimal" label="^CloBal^Closing Balance^CloBal^" readOnly="true" showInSummary="true" />
-    <field name="FutureDatePayments" type="Decimal" label="^FutDatPay^Future Date Payments^FutDatPay^" readOnly="true" />
+    <field name="CashBankID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^CashBank^Cash Bank#^CashBank^" readOnly="true" />
+    <field name="Company_Code" type="Decimal" allowNulls="false" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="BankCashName" type="String" label="^BankCashName^Bank Cash Name^BankCashName^" length="50" showInSummary="true" />
+    <field name="Account_ID_Cash" type="String" allowNulls="false" label="^AccountIDCash^Account ID Cash^AccountIDCash^" length="50" showInSummary="true" />
+    <field name="ClosingBalance" type="Decimal" label="^ClosingBalance^Closing Balance^ClosingBalance^" readOnly="true" showInSummary="true" />
+    <field name="FutureDatePayments" type="Decimal" label="^FutureDatePayments^Future Date Payments^FutureDatePayments^" readOnly="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^BanCasInf^Bank Cash Information^BanCasInf^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Bank Cash Information" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
@@ -28,7 +28,7 @@ WHERE     (CashBankID > 3)]]></text>
         <dataField fieldName="FutureDatePayments" dataFormatString="N2" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBanCasInf^Review Bank Cash Information^RevBanCasInf^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Bank Cash Information" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Bank Cash Information" flow="NewColumn">
@@ -44,7 +44,7 @@ WHERE     (CashBankID > 3)]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBanCasInf^New Bank Cash Information^NewBanCasInf^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Bank Cash Information" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Bank Cash Information" flow="NewColumn">
@@ -75,7 +75,7 @@ WHERE     (CashBankID > 3)]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

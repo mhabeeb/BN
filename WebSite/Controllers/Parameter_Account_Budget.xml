@@ -1,20 +1,145 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Parameter_Account_Budget" label="^ParAccBud^Parameter_Account_Budget^ParAccBud^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Parameter_Account_Budget" label="Parameter_Account_Budget" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <fields>
-    <field name="FromDate" type="DateTime" allowNulls="false" label="^FroDat^From Date^FroDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowLEV="true" />
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account ID^AccId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" allowLEV="true">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="AccountID" dataValueField="AccountID" />
+    <field name="FromDate" type="DateTime" allowNulls="false" label="^FromDate^From Date^FromDate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowLEV="true" />
+    <field name="Amount" type="Decimal" allowNulls="false" label="Amount" />
+    <field name="AccountID" type="String" allowNulls="false" label="^AccountID^Account ID^AccountID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" allowLEV="true">
+      <items style="Lookup" dataController="Pick_COA_Child_Budget" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="DEPT_CODE" type="String" allowNulls="false" label="^DepCod^DEPT CODE^DepCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
-      <items style="DropDownList" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
+    <field name="DEPT_CODE" type="String" allowNulls="false" label="^DepCod^Dept^DepCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+      <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
     </field>
-    <field name="PROJECT_CODE" type="String" allowNulls="false" label="^ProCod^PROJECT CODE^ProCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
-      <items style="DropDownList" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
+    <field name="PROJECT_CODE" type="String" allowNulls="false" label="^ProCod^Project^ProCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+      <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
     </field>
-    <field name="Amount" type="Decimal" allowNulls="false" label="^Amount^Amount^Amount^" />
-    <field name="SiteCode" type="String" label="^SitCod^Site Code^SitCod^" length="50" contextFields="Project_Code=PROJECT_CODE">
-      <items style="DropDownList" dataController="ProjectsSites" dataView="grid1" dataTextField="SiteName" dataValueField="SiteCode" />
+    <field name="SiteCode" type="String" label="^SitCod^Site^SitCod^" length="50" contextFields="Project_Code=PROJECT_CODE">
+      <items style="Lookup" dataController="ProjectsSites" dataView="grid1" dataTextField="SiteName" dataValueField="SiteCode" />
+    </field>
+    <field name="Dimension2" type="Int16" readOnly="true" label="Dimension 2" computed="true">
+      <formula>SELECT @Session_Dimension2</formula>
+    </field>
+    <field name="Dimension3" type="Int16" readOnly="true" label="Dimension 3" computed="true">
+      <formula>SELECT @Session_Dimension3</formula>
+    </field>
+    <field name="D3Caption" type="String" label="." length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D3Caption</formula>
+    </field>
+    <field name="Dimension1" type="Int16" readOnly="true" label="Dimension 1" computed="true">
+      <formula>SELECT @Session_Dimension1</formula>
+    </field>
+    <field name="Dimension4" type="Int16" readOnly="true" label="Dimension 4" computed="true">
+      <formula>SELECT @Session_Dimension4</formula>
+    </field>
+    <field name="S2" type="String" label="^S2^S2^S2^" length="50" contextFields="SEGMENT6='D2'">
+      <configuration>HeaderText=D2Caption</configuration>
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="S1" type="String" label="^S1^S1^S1^" length="50" contextFields="AccountID=AccountID">
+      <configuration>HeaderText=D1Caption</configuration>
+      <items style="Lookup" dataController="COA_Sub_Account_child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID_Sub" />
+    </field>
+    <field name="S3" type="String" label="^S3^S3^S3^" length="50" contextFields="SEGMENT6='D3'">
+      <configuration>HeaderText=D3Caption</configuration>
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="S5" type="String" label="^S5^S5^S5^" length="50" contextFields="SEGMENT6='D5'">
+      <configuration>HeaderText=D5Caption</configuration>
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="S4" type="String" label="^S4^S4^S4^" length="50" contextFields="SEGMENT6='D4'">
+      <configuration>HeaderText=D4Caption</configuration>
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    </field>
+    <field name="D1Caption" type="String" label="." length="35" readOnly="true" computed="true">
+      <formula>SELECT @Session_D1Caption</formula>
+    </field>
+    <field name="Dimension5" type="Int16" readOnly="true" label="Dimension 5" computed="true">
+      <formula>SELECT @Session_Dimension5</formula>
+    </field>
+    <field name="D2Caption" type="String" label="." length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D2Caption</formula>
+    </field>
+    <field name="D5Caption" type="String" label="." length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D5Caption</formula>
+    </field>
+    <field name="D4Caption" type="String" label="." length="50" readOnly="true" computed="true">
+      <formula>SELECT @Session_D4Caption</formula>
     </field>
   </fields>
   <actions />
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Dimension1 = @Session_Dimension1
+SET @D1Caption = @Session_D1Caption
+SET @Dimension2 = @Session_Dimension2
+SET @D2Caption = @Session_D2Caption
+
+SET @Dimension3 = @Session_Dimension3
+SET @D3Caption = @Session_D3Caption
+SET @Dimension4 = @Session_Dimension4
+SET @D4Caption = @Session_D4Caption
+
+SET @Dimension5 = @Session_Dimension5
+SET @D5Caption = @Session_D5Caption
+
+SET @PROJECT_CODE=@Session_DefProject_Code
+SET @DEPT_CODE=@Session_DefDept_Code
+SET @SiteCode=@Session_DefSiteCode
+
+SET @S1=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,1)
+SET @S2=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,2)
+SET @S3=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,3)
+SET @S4=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,4)
+SET @S5=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,5)]]></rule>
+  </businessRules>
+  <views>
+    <view id="Param" type="Form" label="Parameter Form" showInSelector="false">
+      <categories>
+        <category id="c1" headerText="Parameter _Account _Budget" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="FromDate" columns="10" />
+            <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="S2" columns="50">
+              <visibility>
+                <expression test="[Dimension2]==1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S3" columns="50">
+              <visibility>
+                <expression test="[Dimension3]==1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S1" columns="50">
+              <visibility>
+                <expression test="[Dimension1]==1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S5" columns="50">
+              <visibility>
+                <expression test="[Dimension5]==1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="D1Caption" columns="35" hidden="true" />
+            <dataField fieldName="Dimension5" columns="15" hidden="true" />
+            <dataField fieldName="Dimension4" columns="15" hidden="true" />
+            <dataField fieldName="D4Caption" columns="50" hidden="true" />
+            <dataField fieldName="D3Caption" columns="50" hidden="true" />
+            <dataField fieldName="D2Caption" columns="50" hidden="true" />
+            <dataField fieldName="Dimension3" columns="15" hidden="true" />
+            <dataField fieldName="D5Caption" columns="50" hidden="true" />
+            <dataField fieldName="PROJECT_CODE" columns="50" />
+            <dataField fieldName="DEPT_CODE" rows="5" />
+            <dataField fieldName="Dimension2" columns="15" hidden="true" />
+            <dataField fieldName="Dimension1" columns="15" hidden="true" />
+            <dataField fieldName="SiteCode" columns="50" />
+            <dataField fieldName="S4" columns="50">
+              <visibility>
+                <expression test="[Dimension4]==1" type="ClientScript" />
+              </visibility>
+            </dataField>
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
 </dataController>

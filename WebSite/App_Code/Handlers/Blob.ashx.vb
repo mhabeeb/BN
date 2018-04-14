@@ -21,15 +21,23 @@ Namespace MyCompany.Handlers
         
         Shared Sub New()
             'register blob handlers
-            RegisterHandler("tbl_ProjectsProjectImage", """dbo"".""tbl_Projects""", """ProjectImage""", New String() {"""Project_Code"""}, "^ProMas^ProjectMaster^ProMas^ ^ProIma^Master Image^ProIma^", "ProjectMaster", "ProjectImage")
-            RegisterHandler("ItemPhotoHandler", """dbo"".""tbl_Item_Master""", """Photo""", New String() {"""Item_Code"""}, "^IteMas^ItemMaster^IteMas^ ^Pho^Photo^Pho^", "ItemMaster", "Photo")
-            RegisterHandler("tbl_Item_MasterItemImage", """dbo"".""tbl_Item_Master""", """ItemImage""", New String() {"""Item_Code"""}, "^IteMas^ItemMaster^IteMas^ ^ItemImage^Item Image^ItemImage^", "ItemMaster", "ItemImage")
-            RegisterHandler("EmployeesEmployeePhoto", """dbo"".""Employees """, """EmployeePhoto""", New String() {"""Emp_id"""}, "^PicEmp^Pick_emp^PicEmp^ ^EmpPho^Employee Photo^EmpPho^", "Pick_emp", "EmployeePhoto")
-            RegisterHandler("ODMOPMdboQA_QC_TransactionsImage1", """dbo"".""ODMOPM.dbo.QA_QC_Transactions""", """Image1""", New String() {"""QAQC_Trx_ID"""}, "^QaqRec^QAQC_Recording^QaqRec^ ^Ima1^Image1^Ima1^", "QAQC_Recording", "Image1")
-            RegisterHandler("ODMOPMdboQA_QC_TransactionsImage2", """dbo"".""ODMOPM.dbo.QA_QC_Transactions""", """Image2""", New String() {"""QAQC_Trx_ID"""}, "^QaqRec^QAQC_Recording^QaqRec^ ^Ima2^Image2^Ima2^", "QAQC_Recording", "Image2")
-            RegisterHandler("AABranch_LogoBranchLogo", """dbo"".""AABranch_Logo""", """BranchLogo""", New String() {"""BranchID"""}, "^AaBraLog^AABranch_Logo^AaBraLog^ ^BraLog^Branch Logo^BraLog^", "AABranch_Logo", "BranchLogo")
-            RegisterHandler("Image_Handler_PRItemImage", """dbo"".""Image_Handler_PR""", """ItemImage""", New String() {"""Item_ID"""}, "^ImaHanPr^Image_Handler_PR^ImaHanPr^ ^IteIma^Item Image^IteIma^", "Image_Handler_PR", "ItemImage")
-            RegisterHandler("dbotbl_Item_MasterItemImage", """dbo""."" dbo.tbl_Item_Master""", """ItemImage""", New String() {"""PR_Line_No"""}, "^PrLin1^PR_LINES1^PrLin1^ ^IteIma^Item Image^IteIma^", "PR_LINES1", "ItemImage")
+            RegisterHandler("C_AP_MiscCashExpenceBranchLogo", """dbo"".""C_AP_MiscCashExpence""", """BranchLogo""", New String(-1) {}, "C AP Misc Cash Expence Branch Logo", "C_AP_MiscCashExpence", "BranchLogo")
+            RegisterHandler("C_PR_LINESItemImage", """dbo"".""C_PR_LINES""", """ItemImage""", New String(-1) {}, "C Pr Lines Item Image", "C_PR_LINES", "ItemImage")
+            RegisterHandler("C_Sale_Return_LineBranchLogo", """dbo"".""C_Sale_Return_Line""", """BranchLogo""", New String(-1) {}, "C Sale Return Line Branch Logo", "C_Sale_Return_Line", "BranchLogo")
+            RegisterHandler("Image_Handler_POItemImage", """dbo"".""Image_Handler_PO""", """ItemImage""", New String(-1) {}, "Image Handler PO Item Image", "Image_Handler_PO", "ItemImage")
+            RegisterHandler("Image_Handler_PRItemImage", """dbo"".""Image_Handler_PR""", """ItemImage""", New String() {"""Item_ID"""}, "Image_Handler_PR Item Image", "Image_Handler_PR", "ItemImage")
+            RegisterHandler("Image_Handler_RFQItemImage", """dbo"".""Image_Handler_RFQ""", """ItemImage""", New String(-1) {}, "Image Handler RFQ Item Image", "Image_Handler_RFQ", "ItemImage")
+            RegisterHandler("Image_Handler_SOItemImage", """dbo"".""Image_Handler_SO""", """ItemImage""", New String(-1) {}, "Image Handler SO Item Image", "Image_Handler_SO", "ItemImage")
+            RegisterHandler("SiteContentxxxData", """dbo"".""SiteContentxxx""", """Data""", New String() {"""SiteContentID"""}, "Site Contentxxx Data", "SiteContentxxx", "Data")
+            RegisterHandler("UsersUserProfile", """dbo"".""Users""", """UserProfile""", New String() {"""UserID"""}, "Users ^UsePro^User Profile^UsePro^", "Users", "UserProfile")
+            RegisterHandler("tbl_CompanyInformationComp_Logo", """dbo"".""tbl_CompanyInformation""", """Comp_Logo""", New String() {"""CompanyID"""}, "tbl_CompanyInformation Comp Logo", "tbl_CompanyInformation", "Comp_Logo")
+            RegisterHandler("tbl_ProjectsProjectImage", """dbo"".""tbl_Projects""", """ProjectImage""", New String() {"""Project_Code""", """OPU_Code"""}, "ProjectMaster ^MasterImage^Master Image^MasterImage^", "ProjectMaster", "ProjectImage")
+            RegisterHandler("ItemPhotoHandler", """dbo"".""tbl_Item_Master""", """Photo""", New String() {"""Item_Code"""}, "ItemMaster ^Photo^Photo^Photo^", "ItemMaster", "Photo")
+            RegisterHandler("tbl_Item_MasterItemImage", """dbo"".""tbl_Item_Master""", """ItemImage""", New String() {"""Item_Code"""}, "ItemMaster ^ItemImage^Item Image^ItemImage^", "ItemMaster", "ItemImage")
+            RegisterHandler("EmployeesEmployeePhoto", """dbo"".""Employees """, """EmployeePhoto""", New String() {"""Emp_id"""}, "Pick_emp ^EmployeePhoto^Employee Photo^EmployeePhoto^", "Pick_emp", "EmployeePhoto")
+            RegisterHandler("ODMOPMdboQA_QC_TransactionsImage1", """dbo"".""ODMOPM.dbo.QA_QC_Transactions""", """Image1""", New String() {"""QAQC_Trx_ID"""}, "QAQC_Recording ^Image1^Image1^Image1^", "QAQC_Recording", "Image1")
+            RegisterHandler("ODMOPMdboQA_QC_TransactionsImage2", """dbo"".""ODMOPM.dbo.QA_QC_Transactions""", """Image2""", New String() {"""QAQC_Trx_ID"""}, "QAQC_Recording ^Image2^Image2^Image2^", "QAQC_Recording", "Image2")
+            RegisterHandler("AABranch_LogoBranchLogo", """dbo"".""AABranch_Logo""", """BranchLogo""", New String() {"""BranchID"""}, "AABranch_Logo Branch Logo", "AABranch_Logo", "BranchLogo")
         End Sub
     End Class
     

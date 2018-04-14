@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="InBox" conflictDetection="overwriteChanges" label="^InBox^InBox^InBox^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="InBox" conflictDetection="overwriteChanges" label="InBox" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="[TBL_EmailInBox] " custom="true">
       <text><![CDATA[SELECT *
@@ -7,24 +7,28 @@
     </command>
   </commands>
   <fields>
-    <field name="Mail_From" type="String" label="^MaiFro^Mail From^MaiFro^" length="2000" showInSummary="true" causesCalculate="true" />
-    <field name="CreatedDateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" dataFormatString="g" />
-    <field name="Subject" type="String" label="^Sub^Subject^Sub^" length="2000" showInSummary="true" />
-    <field name="Mail_To" type="String" label="^MaiTo^Mail To^MaiTo^" length="2000" showInSummary="true" />
-    <field name="Mail_Message" type="String" allowQBE="false" allowSorting="false" label="^MaiMes^Mail Message^MaiMes^" showInSummary="true" htmlEncode="false" />
-    <field name="EmailInID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^EmaiInId^Email In#^EmaiInId^" readOnly="true" />
-    <field name="ReadUnread" type="Int32" label="^ReaUnr^Read Unread^ReaUnr^" />
-    <field name="SeenDate" type="DateTime" label="^SeeDat^Seen Date^SeeDat^" dataFormatString="g" />
+    <field name="Mail_From" type="String" label="^MailFrom^Mail From^MailFrom^" length="2000" showInSummary="true" causesCalculate="true" />
+    <field name="CreatedDateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" dataFormatString="g" />
+    <field name="Subject" type="String" label="^Subject^Subject^Subject^" length="2000" showInSummary="true" />
+    <field name="Mail_To" type="String" label="^MailTo^Mail To^MailTo^" length="2000" showInSummary="true" />
+    <field name="Mail_Message" type="String" allowQBE="false" allowSorting="false" label="^MailMessage^Mail Message^MailMessage^" showInSummary="true" htmlEncode="false" />
+    <field name="EmailInID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^EmailIn^Email In#^EmailIn^" readOnly="true" />
+    <field name="ReadUnread" type="Int32" label="^ReadUnread^Read Unread^ReadUnread^" />
+    <field name="SeenDate" type="DateTime" label="^SeenDate^Seen Date^SeenDate^" dataFormatString="g" />
     <field name="URL" type="String" label="^Url^Url^Url^" length="150" />
-    <field name="DocumentID" type="Decimal" label="^DocId^Document#^DocId^" />
-    <field name="ActionTakenYN" type="Int16" label="^ActTakYn^Action Taken YN^ActTakYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="OwnerUser" type="String" label="^OwnUse^Owner User^OwnUse^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="2000" />
-    <field name="Doc_No" type="Int64" label="^DocNo^Doc No^DocNo^" />
+    <field name="DocumentID" type="Decimal" label="^Document^Document#^Document^" />
+    <field name="ActionTakenYN" type="Int16" label="Action Taken YN" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="OwnerUser" type="String" label="Owner User" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="2000" />
+    <field name="Doc_No" type="Int64" label="Doc No" />
+    <field name="Photo" type="String" readOnly="true" label="." computed="true" htmlEncode="false" dataFormatString="&lt;img src=&quot;../Images/{0}.png&quot; style=&quot;width: 14px;&quot;/&gt;" length="50">
+      <formula>ReadUnread</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^EmaiInBox^Email In Box^EmaiInBox^" sortExpression="EmailInID DESC" filter="Mail_To=@BusinessRules_UserName" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Email In Box" sortExpression="EmailInID DESC" filter="Mail_To=@BusinessRules_UserName" showInSelector="false">
       <headerText />
       <dataFields>
+        <dataField fieldName="Photo" columns="50" />
         <dataField fieldName="Mail_From" readOnly="true" />
         <dataField fieldName="CreatedDateTime" dataFormatString="g" columns="10" readOnly="true" />
         <dataField fieldName="Subject" readOnly="true" />
@@ -35,19 +39,19 @@
         <dataField fieldName="URL" hidden="true" />
         <dataField fieldName="DocumentID" columns="15" hidden="true" />
         <dataField fieldName="EmailInID" columns="15" hidden="true" />
-        <dataField fieldName="ActionTakenYN" columns="15" hidden="true" />
         <dataField fieldName="OwnerUser" rows="5" hidden="true" />
+        <dataField fieldName="ActionTakenYN" columns="15" hidden="true" />
         <dataField fieldName="Doc_No" columns="15" />
       </dataFields>
       <styles>
         <expression type="ClientScript" result="ReadUnread" test="[ReadUnread]==0" />
       </styles>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevEmaiInBox^Review  Email In Box^RevEmaiInBox^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review TBL Email In Box" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="TBL Email In Box" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+          <description />
           <dataFields>
             <dataField fieldName="Mail_From" />
             <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" />
@@ -62,11 +66,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewEmaiInBox^New  Email In Box^NewEmaiInBox^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New TBL Email In Box" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New TBL Email In Box" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+          <description />
           <dataFields>
             <dataField fieldName="Mail_From" />
             <dataField fieldName="CreatedDateTime" dataFormatString="t" columns="10" />
@@ -129,7 +133,7 @@ Where EmailInID=@EmailInID]]></data>
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" flat="true">
-      <action commandName="SQL" headerText="^Approve^Approve^Approve^" id="a100" cssClass="glyphicon glyphicon-ok" whenClientScript="[ActionTakenYN] != 1&#xD;&#xA;[OwnerUser] != [Mail_To]" whenLastCommandName="Select" confirmation="_controller=ApprovalRemarks&#xD;&#xA;_title=Enter Remarks (Optional) - Click on OK Button to Continue.&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^Approve^Approve^Approve^" id="a100" cssClass="glyphicon glyphicon-ok" whenClientScript="[ActionTakenYN] != 1 &amp;&amp; [Mail_From] != [Mail_To]" whenLastCommandName="Select" confirmation="_controller=ApprovalRemarks&#xD;&#xA;_title=Enter Remarks (Optional) - Click on OK Button to Continue.&#xD;&#xA;_width=500">
         <data><![CDATA[UPDATE [dbo].[TBL_Document_Approvals_Detail]
 SET [ApprovalStatus] = 1, CurrentApp= 0,
 Updated_DateTime=getdate(),
@@ -140,7 +144,7 @@ UPDATE [dbo].[TBL_EmailInBox]
 SET [ReadUnread]=1,[ActionTakenYN] = 1, SeenDate=getdate()
 WHERE EmailInID=@EmailInID]]></data>
       </action>
-      <action commandName="SQL" headerText="^Reject^Reject^Reject^" cssClass="glyphicon glyphicon-remove" whenClientScript="[ActionTakenYN] != 1&#xD;&#xA;[OwnerUser] != [Mail_To]" id="a101" whenLastCommandName="Select" confirmation="_controller=ApprovalRemarks_Reject&#xD;&#xA;_title=Enter Rejection Reason&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^Reject^Reject^Reject^" cssClass="glyphicon glyphicon-remove" whenClientScript="[ActionTakenYN] != 1 &amp;&amp; [Mail_From] != [Mail_To]" id="a101" whenLastCommandName="Select" confirmation="_controller=ApprovalRemarks_Reject&#xD;&#xA;_title=Enter Rejection Reason&#xD;&#xA;_width=500">
         <data><![CDATA[UPDATE [dbo].[TBL_Document_Approvals_Detail]
   SET
       [ApprovalStatus] = 2,
@@ -156,15 +160,17 @@ UPDATE [dbo].[TBL_EmailInBox]
       SeenDate = GETDATE()
 WHERE EmailInID = @EmailInID]]></data>
       </action>
-      <action commandName="SQL" headerText="Request Information" id="a102">
+      <action commandName="SQL" headerText="^ReqInf^Request Information^ReqInf^" id="a102" cssClass="glyphicon glyphicon-share-alt" whenLastCommandName="Select" whenClientScript="[ActionTakenYN] != 1 &amp;&amp; [Mail_From] != [Mail_To]" roles="XXXXXXXXXXXXX">
         <data><![CDATA[DECLARE @a int
 SET @a=1]]></data>
       </action>
-      <action commandArgument="_blank" headerText="Adhoc Reportings" id="a103" commandName="SQL">
-        <data><![CDATA[SET @Result_NavigateUrl=@Session_AdhocReportUrl +Cast(@BusinessRules_UserId as nvarchar(15))]]></data>
-      </action>
-      <action commandName="SQL" headerText="Forward" id="a104" confirmation="_controller=Param_Doc_Forward&#xD;&#xA;_title=Document Forward Information&#xD;&#xA;_width=500">
-        <data><![CDATA[EXEC dbo.APPROVAL_DOCUMENT_FWD @DocumentID,@BusinessRules_UserId, @Parameters_FwdTo, @Parameters_FwdRemarks]]></data>
+      <action commandName="SQL" headerText="^Forward^Forward^Forward^" id="a104" confirmation="_controller=Param_Doc_Forward&#xD;&#xA;_title=Document Forward Information&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-forward" whenLastCommandName="Select" whenClientScript="[ActionTakenYN] != 1 &amp;&amp; [Mail_From] != [Mail_To]">
+        <data><![CDATA[EXEC dbo.APPROVAL_DOCUMENT_FWD @DocumentID,@BusinessRules_UserId, @Parameters_FwdTo, @Parameters_FwdRemarks
+UPDATE [dbo].[TBL_EmailInBox]
+SET [ReadUnread]=1,[ActionTakenYN] = 1, SeenDate=getdate()
+WHERE EmailInID=@EmailInID
+
+]]></data>
       </action>
     </actionGroup>
   </actions>
@@ -190,7 +196,9 @@ end]]></rule>
        @Session_DefaultProject = DefaultProject,
        @Session_Emp_id = Emp_id,
        @Session_UserID = UserID,
-       @Session_Rpt_Group_ID = IsNull(Rpt_Group_ID, 0)
+       @Session_Rpt_Group_ID = IsNull(Rpt_Group_ID, 0),
+	   @Session_LocatorYN = IsNull(LocatorYN,0),
+	   @Session_TotLoc=IsNull(TotLoc,0)
 FROM dbo.Users
 WHERE UserID = @BusinessRules_UserId
 
@@ -205,7 +213,10 @@ SELECT @Session_DefaultCurrency = DefaultCurrency,
        @Session_BranchName_Ar = BranchName_Ar,
        @Session_Address_English = Address_English,
        @Session_Address_Arabic = Address_Arabic,
-       @Session_ItemCodeAutoYN = IsNull(ItemCodeAutoYN, 0)
+       @Session_ItemCodeAutoYN = IsNull(ItemCodeAutoYN, 0),
+	   @Session_Tax_Code=Tax_Code,
+	   @Session_Tax_Slab_ID=Tax_Slab_ID,
+	   @Session_Tax_Rate=Tax_Rate
 FROM dbo.tbl_BranchInfo
 WHERE BranchID = @Session_OPU_Code
 
@@ -224,16 +235,28 @@ WHERE Company_Code = @Session_Company_Code
 
 
 SELECT @Session_CompanyName = CompanyName,
-       @Session_AdhocReportUrl = AdhocReportUrl
+       @Session_AdhocReportUrl = AdhocReportUrl,
+	   @Session_CalenderID=CalenderID
 FROM tbl_CompanyInformation
 WHERE CompanyID = @Session_Company_Code
 
-SELECT @Session_StoreName = Store_Name , @Session_NegativeAllowedYN=IsNull(NegativeAllowedYN,0)
+SELECT @Session_StoreName = Store_Name , @Session_NegativeAllowedYN=IsNull(NegativeAllowedYN,0),
+@Session_LocatorYN = IsNull(LocatorYN,0)
 FROM tbl_Store
 WHERE Store_ID = @Session_StoreID
 
-SET @Session_CompanyName= '<font Color=DarkGoldenRod>' + @Session_CompanyName + '</Font>'
-SET @Session_BranchName= '<font Color=DarkGoldenRod>' + @Session_BranchName + '</Font>'
+SELECT @Session_TotLoc=COUNT(*) FROM Dimension_Lookups WHERE IsNull(IsParentYN,0)=1 and 
+Store_ID = @Session_StoreID
+
+SET @Session_D1=[dbo].[Get_Bin_Caption] ( @BusinessRules_UserId,@Session_TotLoc ,@Session_StoreID ,'SEGMENT1'  )							  
+SET @Session_D2=[dbo].[Get_Bin_Caption] ( @BusinessRules_UserId,@Session_TotLoc ,@Session_StoreID ,'SEGMENT2'  )							  
+SET @Session_D3=[dbo].[Get_Bin_Caption] ( @BusinessRules_UserId,@Session_TotLoc ,@Session_StoreID ,'SEGMENT3'  )							  
+SET @Session_D4=[dbo].[Get_Bin_Caption] ( @BusinessRules_UserId,@Session_TotLoc ,@Session_StoreID ,'SEGMENT4'  )							  
+SET @Session_D5=[dbo].[Get_Bin_Caption] ( @BusinessRules_UserId,@Session_TotLoc ,@Session_StoreID ,'SEGMENT5'  )							  
+
+SET @Session_CompanyName= '<font Color=darkred>' + @Session_CompanyName + '</Font>'
+SET @Session_BranchName= '<font Color=darkred>' + @Session_BranchName + '</Font>'
+SET @Session_StoreName= '<font Color=darkred>' + @Session_StoreName + '</Font>'
 
 SELECT TOP 1 @Session_BudgetCode = BudgetCode
 FROM GL_Budget_Master
@@ -241,9 +264,17 @@ WHERE OPU_Code = @Session_OPU_Code
       AND IsDefault = 1
      -- AND ControlBudgetYN = 1
 
+SET @Session_DefProject_Code=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,-1)
+SET @Session_DefSiteCode=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,-2)
+SET @Session_DefDept_Code=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,0)
+SET @Session_DefS1=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,1)
+SET @Session_DefS2=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,2)
+SET @Session_DefS3=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,3)
+SET @Session_DefS4=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,4)
+SET @Session_DefS5=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,5)
 
 
-EXEC dbo.GLOBAL_UPDATE_DATA @Session_OPU_Code
+--EXEC dbo.GLOBAL_UPDATE_DATA @Session_OPU_Code
 ]]></rule>
   </businessRules>
 </dataController>

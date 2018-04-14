@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Store_By_OPU" conflictDetection="overwriteChanges" label="^PicStoByOpu^Pick_Store_By_OPU^PicStoByOpu^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Store_By_OPU" conflictDetection="overwriteChanges" label="Pick_Store_By_OPU" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Store" custom="true">
       <text><![CDATA[SELECT        dbo.UserBranchAccess.UserID, dbo.UserBranchAccess.OPU_Code, dbo.tbl_Store.Store_ID, dbo.tbl_Store.Store_Name, dbo.tbl_Store.OrganizationType, 
@@ -9,15 +9,15 @@ FROM            dbo.UserBranchAccess INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="UserID" type="Int32" allowNulls="false" label="^UseId^User#^UseId^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Store_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^StoId^Store#^StoId^" readOnly="true" />
-    <field name="Store_Name" type="String" label="^StoNam^Store Name^StoNam^" length="255" showInSummary="true" />
-    <field name="OrganizationType" type="Int32" label="^OrgTyp^Organization Type^OrgTyp^" showInSummary="true" />
-    <field name="Store_Address" type="String" label="^StoAdd^Store Address^StoAdd^" length="255" showInSummary="true" />
+    <field name="UserID" type="Int32" allowNulls="false" label="User#" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="OPU Code" showInSummary="true" />
+    <field name="Store_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Store#" readOnly="true" />
+    <field name="Store_Name" type="String" label="Store Name" length="255" showInSummary="true" />
+    <field name="OrganizationType" type="Int32" label="Organization Type" showInSummary="true" />
+    <field name="Store_Address" type="String" label="Store Address" length="255" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Stores^Stores^Stores^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Stores" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Store_ID" columns="15" />
@@ -28,7 +28,7 @@ FROM            dbo.UserBranchAccess INNER JOIN
         <dataField fieldName="Store_Address" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevSto^Review Store^RevSto^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Store" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Store" flow="NewColumn">
@@ -43,7 +43,7 @@ FROM            dbo.UserBranchAccess INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewSto^New Store^NewSto^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Store" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Store" flow="NewColumn">
@@ -87,7 +87,7 @@ FROM            dbo.UserBranchAccess INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

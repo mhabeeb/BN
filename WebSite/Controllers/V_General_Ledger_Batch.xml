@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="V_General_Ledger_Batch" conflictDetection="overwriteChanges" label="^VGenLegBat^V General Ledger Batch^VGenLegBat^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="V_General_Ledger_Batch" conflictDetection="overwriteChanges" label="V General Ledger Batch" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.V_General_Ledger_BatchBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
-    <command id="command1" type="Text">
-      <text><![CDATA[
-select
+    <command id="command1" type="Text" custom="false">
+      <text><![CDATA[select
 	"V_General_Ledger_Batch"."OPU_Code" "OPU_Code"
 	,"V_General_Ledger_Batch"."Company_Code" "Company_Code"
 	,"V_General_Ledger_Batch"."Tran_Type" "Tran_Type"
 	,"V_General_Ledger_Batch"."Trx_YYYYMM" "Trx_YYYYMM"
 	,"V_General_Ledger_Batch"."Batch_Name" "Batch_Name"
+	,"V_General_Ledger_Batch"."Batch_Name" "ZZ_Filter_Value"
 	,"V_General_Ledger_Batch"."Tot_Debit_Amount" "Tot_Debit_Amount"
 	,"V_General_Ledger_Batch"."Tot_Credit_Amount" "Tot_Credit_Amount"
 from "dbo"."V_General_Ledger_Batch" "V_General_Ledger_Batch"
@@ -16,57 +16,67 @@ from "dbo"."V_General_Ledger_Batch" "V_General_Ledger_Batch"
     </command>
   </commands>
   <fields>
-    <field name="Batch_Name" type="String" label="^BatNam^Batch Name^BatNam^" readOnly="true" length="104" showInSummary="true" allowNulls="false" isPrimaryKey="true" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Company_Code" type="Decimal" allowNulls="false" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="Tran_Type" type="String" allowNulls="false" label="^TraTyp^Tran Type^TraTyp^" length="50" showInSummary="true" />
-    <field name="Trx_YYYYMM" type="Int32" label="^TrxYyMm^Trx YYYYMM^TrxYyMm^" showInSummary="true" />
-    <field name="Tot_Debit_Amount" type="Decimal" label="^TotDebAmo^Tot Debit Amount^TotDebAmo^" />
-    <field name="Tot_Credit_Amount" type="Decimal" label="^TotCreAmo^Tot Credit Amount^TotCreAmo^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+    <field name="Batch_Name" type="String" label="Batch Name" readOnly="true" length="104" allowNulls="false" isPrimaryKey="true" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="OPU Code" />
+    <field name="Company_Code" type="Decimal" allowNulls="false" label="Company Code" />
+    <field name="Tran_Type" type="String" allowNulls="false" label="Tran Type" length="50" />
+    <field name="Trx_YYYYMM" type="Int32" label="Trx YYYYMM" />
+    <field name="Tot_Debit_Amount" type="Decimal" label="Tot Debit Amount" />
+    <field name="Tot_Credit_Amount" type="Decimal" label="Tot Credit Amount" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
       <formula>SELECT @Session_CompanyName</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
     </field>
     <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'V_General_Ledger_Batch_grid1'</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
+    <field name="ZZ_Controller" type="String" label="Controller" computed="true">
+      <formula>'V_General_Ledger_Batch'</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
-    </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^GenLedBat^General Ledger Batch^GenLedBat^" filter="OPU_Code=@Session_OPU_Code  AND Tran_Type &lt;&gt; 'P&amp;L'" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="General Ledger Batch" filter="OPU_Code=@Session_OPU_Code  AND Tran_Type &lt;&gt; 'P&amp;L'" showInSelector="false">
+      <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="Tran_Type" columns="50" />
         <dataField fieldName="Trx_YYYYMM" columns="15" />
         <dataField fieldName="Batch_Name" />
         <dataField fieldName="Tot_Debit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="Tot_Credit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevVGenBatDet^Review V General Ledger Batch^RevVGenBatDet^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review V General Ledger Batch" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="V General Ledger Batch" flow="NewColumn">
+        <category id="c1" headerText="^VGenLedBat^ General Ledger Batch^VGenLedBat^" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -80,10 +90,10 @@ from "dbo"."V_General_Ledger_Batch" "V_General_Ledger_Batch"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewVGenLegBat^New V General Ledger Batch^NewVGenLegBat^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New V General Ledger Batch" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New V General Ledger Batch" flow="NewColumn">
+        <category id="c1" headerText="^NewVGenLedBat^New General Ledger Batch^NewVGenLedBat^" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -138,5 +148,11 @@ from "dbo"."V_General_Ledger_Batch" "V_General_Ledger_Batch"
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
+    <actionGroup id="ag106" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintGLBatch" headerText="Print GLBatch" id="a100" />
+    </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Custom" commandArgument="PrintGLBatch" type="Code" phase="Execute" name="Print GL" />
+  </businessRules>
 </dataController>

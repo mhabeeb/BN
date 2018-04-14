@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Rpt_Group_Reports_Set" conflictDetection="overwriteChanges" label="^RptGroRepSet^Rpt_Group_Reports_Set^RptGroRepSet^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Rpt_Group_Reports_Set" conflictDetection="overwriteChanges" label="Rpt_Group_Reports_Set" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Rpt_Group_Reports_Set" custom="true">
       <text><![CDATA[SELECT * FROM Rpt_Group_Reports_Set]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Rpt_Group_ID" type="Int32" allowNulls="false" label="^RptGroId^Rpt Group#^RptGroId^" showInSummary="true" isPrimaryKey="true">
+    <field name="Rpt_Group_ID" type="Int32" allowNulls="false" label="^RptGroup^Rpt Group#^RptGroup^" showInSummary="true" isPrimaryKey="true">
       <items style="DropDownList" dataController="Rpt_Group_Information" dataView="grid1" dataTextField="Rpt_Group_Name" dataValueField="Rpt_Group_ID" />
     </field>
-    <field name="Rpt_Report_ID" type="Decimal" allowNulls="false" label="^RptId^Rpt Report#^RptId^" showInSummary="true" isPrimaryKey="true">
+    <field name="Rpt_Report_ID" type="Decimal" allowNulls="false" label="^RptReport^Rpt Report#^RptReport^" showInSummary="true" isPrimaryKey="true">
       <items style="DropDownList" dataController="Rpt_Reports_List" dataView="grid1" dataTextField="Rpt_Report_Name" dataValueField="Rpt_Report_ID" copy="Rpt_Report_Name=Rpt_Report_Name&#xD;&#xA;Rpt_Report_TableView=Rpt_Report_TableView" />
     </field>
-    <field name="Rpt_Report_Name" type="String" label="^RptRepNam^Rpt Report Name^RptRepNam^" length="50" showInSummary="true" />
-    <field name="Rpt_Report_TableView" type="String" label="^RptRepTblVie^Rpt Report Table View^RptRepTblVie^" length="50" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CrtDatTim^Created Date Time^CrtDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^">
+    <field name="Rpt_Report_Name" type="String" label="^RptRepName^Rpt Report Name^RptRepName^" length="50" showInSummary="true" />
+    <field name="Rpt_Report_TableView" type="String" label="^RptRepTblView^Rpt Report Table View^RptRepTblView^" length="50" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="^CrtdDtTm^Created Date Time^CrtdDtTm^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdtdDtTm^Updated Date Time^UpdtdDtTm^" />
+    <field name="InActive" type="Int32" label="^InActive^In Active^InActive^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RptGroRepSet^Rpt Group Reports Set^RptGroRepSet^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Rpt Group Reports Set" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="Rpt_Group_ID" columns="15" />
         <dataField fieldName="Rpt_Report_ID" columns="15" />
@@ -37,11 +37,11 @@
         <dataField fieldName="InActive" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^ReVRptRepSet^Review Rpt Group Reports Set^ReVRptRepSet^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Rpt Group Reports Set" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Rpt Group Reports Set" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^ReVRptRepSet^Review Rpt Group Reports Set^ReVRptRepSet^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Rpt_Group_ID" columns="15" />
             <dataField fieldName="Rpt_Report_ID" columns="15" />
@@ -56,11 +56,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRptGroSet^New Rpt Group Reports Set^NewRptGroSet^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Rpt Group Reports Set" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Rpt Group Reports Set" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewRptGroSet^New Rpt Group Reports Set^NewRptGroSet^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Rpt_Group_ID" columns="15" />
             <dataField fieldName="Rpt_Report_ID" columns="15" />
@@ -97,11 +97,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

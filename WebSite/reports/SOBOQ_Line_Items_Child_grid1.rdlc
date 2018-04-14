@@ -262,6 +262,10 @@
           <DataField>ADDRESS_ALL</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SiteCode">
+          <DataField>SiteCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="MSProjTasksID">
           <DataField>MSProjTasksID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -286,10 +290,6 @@
           <DataField>Item_Code_Ref_No</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="SiteCode">
-          <DataField>SiteCode</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="Parent_SO_Line_No">
           <DataField>Parent_SO_Line_No</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
@@ -305,6 +305,18 @@
         <Field Name="P_Doc_No">
           <DataField>P_Doc_No</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="TaskName">
+          <DataField>TaskName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Location_Name">
+          <DataField>Location_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LocationID">
+          <DataField>LocationID</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <Query>
@@ -358,46 +370,52 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.44692737430167595in</Width>
+              <Width>0.42328042328042325in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44692737430167595in</Width>
+              <Width>0.42328042328042325in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44692737430167595in</Width>
+              <Width>0.42328042328042325in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.5586592178770949in</Width>
+              <Width>0.5291005291005291in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8379888268156425in</Width>
+              <Width>0.7936507936507936in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44692737430167595in</Width>
+              <Width>0.42328042328042325in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44692737430167595in</Width>
+              <Width>0.42328042328042325in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3966480446927374in</Width>
+              <Width>0.9259259259259259in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44692737430167595in</Width>
+              <Width>0.42328042328042325in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44692737430167595in</Width>
+              <Width>0.42328042328042325in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3966480446927374in</Width>
+              <Width>0.9259259259259259in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3966480446927374in</Width>
+              <Width>0.9259259259259259in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8379888268156425in</Width>
+              <Width>0.7936507936507936in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.44692737430167595in</Width>
+              <Width>0.42328042328042325in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.9259259259259259in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.7936507936507936in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -450,7 +468,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>^SoNo^So No^SoNo^</Value>
+                              <Value>^SoNo^Sales Order #^SoNo^</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -904,6 +922,80 @@
                           </TextRuns>
                           <Style>
                             <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="MSProjTasksIDHeaderTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>^MsProTasId^MSProj Tasks ID^MsProTasId^</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TaskNameHeaderTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Task Name</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -1459,12 +1551,91 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="MSProjTasksIDDataTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!MSProjTasksID.Value</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>0.5pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TaskNameDataTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!TaskName.Value</Value>
+                              <MarkupType>HTML</MarkupType>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>0.5pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />

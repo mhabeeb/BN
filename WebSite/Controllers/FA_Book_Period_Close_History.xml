@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="FA_Book_Period_Close_History" conflictDetection="overwriteChanges" label="^FaBooPerCloHis^FA Book Period Close History^FaBooPerCloHis^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="FA_Book_Period_Close_History" conflictDetection="overwriteChanges" label="FA Book Period Close History" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -14,21 +14,21 @@ from "dbo"."FA_Book_Period_Close_History" "FA_Book_Period_Close_History"
     </command>
   </commands>
   <fields>
-    <field name="BookID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^BooId^Book#^BooId^" />
-    <field name="Month_Code" type="Int32" allowNulls="false" isPrimaryKey="true" label="^MonCod^Month Code^MonCod^" />
-    <field name="Year_Code" type="Int32" allowNulls="false" isPrimaryKey="true" label="^YeaCod^Year Code^YeaCod^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
+    <field name="BookID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Book#" />
+    <field name="Month_Code" type="Int32" allowNulls="false" isPrimaryKey="true" label="Month Code" />
+    <field name="Year_Code" type="Int32" allowNulls="false" isPrimaryKey="true" label="Year Code" />
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^FaBooPeClHi^FA Book Period Close History^FaBooPeClHi^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="FA Book Period Close History" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^ReFaBoPeClHi^Review FA Book Period Close History^ReFaBoPeClHi^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review FA Book Period Close History" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="FA Book Period Close History" flow="NewColumn">
@@ -40,7 +40,7 @@ from "dbo"."FA_Book_Period_Close_History" "FA_Book_Period_Close_History"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewFaBoPeClHi^New FA Book Period Close History^NewFaBoPeClHi^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New FA Book Period Close History" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New FA Book Period Close History" flow="NewColumn">
@@ -82,7 +82,7 @@ from "dbo"."FA_Book_Period_Close_History" "FA_Book_Period_Close_History"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

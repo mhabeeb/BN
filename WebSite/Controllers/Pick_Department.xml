@@ -1,26 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Department" conflictDetection="overwriteChanges" label="^PicDep^Pick_Department^PicDep^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Department" conflictDetection="overwriteChanges" label="Pick_Department" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Department" custom="true">
-      <text><![CDATA[SELECT * FROM tbl_Department]]></text>
+      <text><![CDATA[SELECT * FROM tbl_Department  where ([Dept_Code_Parent] is not null OR [IsDefaultYN]=1)]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Dept_Code" type="String" allowNulls="false" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="Dept_name" type="String" label="^DepNam^Dept name^DepNam^" length="50" showInSummary="true" />
-    <field name="Dept_Manager_Id" type="Int32" label="^DepManId^Dept Manager#^DepManId^" showInSummary="true" />
-    <field name="IsActive" type="Int32" allowNulls="false" label="^IsAct^Is Active^IsAct^" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="BranchID" type="Int32" allowNulls="false" label="^BraId^Branch ID^BraId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="Dept_Code" type="String" allowNulls="false" label="^DeptCode^Dept Code^DeptCode^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Dept_Code_Ref_No" type="String" label="Dept Code Ref No" length="50" />
+    <field name="Dept_name" type="String" label="^Deptname^Dept name^Deptname^" length="50" showInSummary="true" />
+    <field name="Dept_Manager_Id" type="Int32" label="^DeptManager^Dept Manager#^DeptManager^" showInSummary="true" />
+    <field name="IsActive" type="Int32" allowNulls="false" label="^IsActive^Is Active^IsActive^" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="BranchID" type="Int32" allowNulls="false" label="Branch ID" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Dep^Department^Dep^" filter="BranchID=@Session_OPU_Code &#xD;&#xA;OR Dept_Code='None'" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Department" filter="BranchID=@Session_OPU_Code &#xD;&#xA;OR Dept_Code='None'" showInSelector="false">
+      <headerText />
       <dataFields>
-        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Dept_Code_Ref_No" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" hidden="true" />
         <dataField fieldName="Dept_name" columns="50" />
         <dataField fieldName="Dept_Manager_Id" columns="15" hidden="true" />
         <dataField fieldName="IsActive" columns="15" hidden="true" />
@@ -31,7 +33,7 @@
         <dataField fieldName="BranchID" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDep^Review Department^RevDep^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Department" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Department" flow="NewColumn">
@@ -49,7 +51,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDep^New Department^NewDep^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Department" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Department" flow="NewColumn">
@@ -93,7 +95,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

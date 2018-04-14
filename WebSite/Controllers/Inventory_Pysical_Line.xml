@@ -1,32 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Inventory_Pysical_Line" conflictDetection="overwriteChanges" label="^InvPhyLin^Inventory_Physical_Line^InvPhyLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Inventory_Pysical_Line" conflictDetection="overwriteChanges" label="Inventory_Pysical_Line" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Inventory_Pysical_Line" custom="true">
       <text><![CDATA[SELECT * FROM Inventory_Pysical_Line]]></text>
     </command>
   </commands>
   <fields>
-    <field name="PhysicalCountID" type="Int64" allowNulls="false" label="^PhyCouId^Physical Count#^PhyCouId^" showInSummary="true" />
-    <field name="PhysicalCount_LineID" type="Int64" allowNulls="false" isPrimaryKey="true" label="^PhyCouLinId^Physical Count Line ID^PhyCouLinId^" />
-    <field name="StoreID" type="Int32" allowNulls="false" label="^StoId^Store#^StoId^" showInSummary="true" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
-    <field name="Bin_Location" type="String" label="^BinLoc^Bin Location^BinLoc^" length="50" showInSummary="true" />
-    <field name="CountedQty" type="Decimal" label="^CouQty^Counted Qty^CouQty^" showInSummary="true" />
-    <field name="Stock_On_Hand" type="Decimal" label="^StoOnHan^Stock On Hand^StoOnHan^" />
-    <field name="BatchNo" type="String" label="^BatNo^Batch No^BatNo^" length="20" />
-    <field name="BatchExpiry" type="DateTime" label="^BatExp^Batch Expiry^BatExp^" />
-    <field name="Item_Serial_No" type="String" allowNulls="false" label="^IteSerNo^Item Serial No^IteSerNo^" length="50" />
-    <field name="UOM" type="String" label="^Uom^UOM^Uom^" length="10" />
-    <field name="NetQty" type="Decimal" readOnly="true" label="^NetQty^Net Qty^NetQty^" />
+    <field name="PhysicalCountID" type="Int64" allowNulls="false" label="Physical Count#" showInSummary="true" />
+    <field name="PhysicalCount_LineID" type="Int64" allowNulls="false" isPrimaryKey="true" label="Physical Count Line ID" />
+    <field name="StoreID" type="Int32" allowNulls="false" label="Store#" showInSummary="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="Item Code" length="20" showInSummary="true" />
+    <field name="Bin_Location" type="String" label="Bin Location" length="50" showInSummary="true" />
+    <field name="CountedQty" type="Decimal" label="Counted Qty" showInSummary="true" />
+    <field name="Stock_On_Hand" type="Decimal" label="Stock On Hand" />
+    <field name="BatchNo" type="String" label="Batch No" length="20" />
+    <field name="BatchExpiry" type="DateTime" label="Batch Expiry" />
+    <field name="Item_Serial_No" type="String" allowNulls="false" label="Item Serial No" length="50" />
+    <field name="UOM" type="String" label="UOM" length="10" />
+    <field name="NetQty" type="Decimal" readOnly="true" label="Net Qty" />
+    <field name="D1Value" type="String" label="^L1^L1^L1^">
+      <items style="Lookup" dataController="Pick_Locator_SEGMENT1" dataView="grid1" dataTextField="Dimension_Desc" dataValueField="Dimension_Value" />
+    </field>
+    <field name="D2Value" type="String" label="^L2^L2^L2^">
+      <items style="Lookup" dataController="Pick_Locator_SEGMENT2" dataView="grid1" dataTextField="Dimension_Desc" dataValueField="Dimension_Value" />
+    </field>
+    <field name="D3Value" type="String" label="^L3^L3^L3^">
+      <items style="Lookup" dataController="Pick_Locator_SEGMENT3" dataView="grid1" dataTextField="Dimension_Desc" dataValueField="Dimension_Value" />
+    </field>
+    <field name="D4Value" type="String" label="^L4^L4^L4^">
+      <items style="Lookup" dataController="Pick_Locator_SEGMENT4" dataView="grid1" dataTextField="Dimension_Desc" dataValueField="Dimension_Value" />
+    </field>
+    <field name="D5Value" type="String" label="^L5^L5^L5^">
+      <items style="Lookup" dataController="Pick_Locator_SEGMENT5" dataView="grid1" dataTextField="Dimension_Desc" dataValueField="Dimension_Value" />
+    </field>
+    <field name="Locator_Concatenated" type="String" label="^Loc^Locator^Loc^" length="300" />
   </fields>
   <views>
-    <view id="grid1" type="DataSheet" commandId="command1" label="^InvPhyLin^Inventory Pysical Line^InvPhyLin^">
+    <view id="grid1" type="DataSheet" commandId="command1" label="Inventory Pysical Line">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PhysicalCountID" columns="15" />
         <dataField fieldName="StoreID" columns="15" hidden="true" />
         <dataField fieldName="Item_Code" columns="20" readOnly="true" />
-        <dataField fieldName="Bin_Location" columns="50" />
+        <dataField fieldName="Locator_Concatenated" rows="5" />
+        <dataField fieldName="Bin_Location" columns="50" hidden="true" />
         <dataField fieldName="CountedQty" dataFormatString="N2" columns="15" />
         <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="15" readOnly="true" />
         <dataField fieldName="BatchNo" columns="20" />
@@ -36,40 +53,50 @@
         <dataField fieldName="UOM" columns="10" readOnly="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevInvPhyLin^Review Inventory Physical Line^RevInvPhyLin^">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Inventory Pysical Line">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Inventory Pysical Line" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevInvPhyLin^Review Inventory Physical Line^RevInvPhyLin^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="PhysicalCountID" columns="15" hidden="true" />
             <dataField fieldName="StoreID" columns="15" hidden="true" />
             <dataField fieldName="Item_Code" columns="20" hidden="true" />
             <dataField fieldName="Bin_Location" columns="50" hidden="true" />
-            <dataField fieldName="CountedQty" dataFormatString="N2" columns="15" />
+            <dataField fieldName="CountedQty" dataFormatString="N2" columns="20" />
             <dataField fieldName="Stock_On_Hand" dataFormatString="c" columns="15" hidden="true" />
             <dataField fieldName="BatchNo" columns="20" hidden="true" />
             <dataField fieldName="BatchExpiry" columns="10" hidden="true" />
             <dataField fieldName="Item_Serial_No" columns="50" hidden="true" />
+            <dataField fieldName="D3Value" rows="5" />
+            <dataField fieldName="D4Value" rows="5" />
+            <dataField fieldName="D5Value" rows="5" />
+            <dataField fieldName="D1Value" rows="5" />
+            <dataField fieldName="D2Value" rows="5" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewInvPhyLin^New Inventory Physical Line^NewInvPhyLin^">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Inventory Pysical Line">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Inventory Physical Line" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewInvPhyLin^New Inventory Physical Line^NewInvPhyLin^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="PhysicalCountID" columns="15" />
-            <dataField fieldName="StoreID" columns="15" />
+            <dataField fieldName="StoreID" columns="20" />
             <dataField fieldName="Item_Code" columns="20" />
-            <dataField fieldName="Bin_Location" columns="50" />
-            <dataField fieldName="CountedQty" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Bin_Location" columns="50" hidden="true" />
+            <dataField fieldName="CountedQty" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="20" />
             <dataField fieldName="BatchNo" columns="20" hidden="true" />
             <dataField fieldName="BatchExpiry" columns="10" hidden="true" />
-            <dataField fieldName="Item_Serial_No" columns="50" />
+            <dataField fieldName="Item_Serial_No" columns="20" />
+            <dataField fieldName="D4Value" rows="5" />
+            <dataField fieldName="D5Value" rows="5" />
+            <dataField fieldName="D2Value" rows="5" />
+            <dataField fieldName="D3Value" rows="5" />
+            <dataField fieldName="D1Value" rows="5" />
           </dataFields>
         </category>
       </categories>
@@ -78,7 +105,6 @@
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
@@ -91,7 +117,6 @@
       <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
@@ -100,11 +125,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -130,9 +155,15 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
-      <action id="a2" commandName="Delete" />
-    </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" type="Sql" commandName="Insert|Update" phase="Before" name="CountedQty_Validator"><![CDATA[if @CountedQty < 0
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'CountedQty,Counted Qty cannot be (-ve)'
+end
+]]></rule>
+  </businessRules>
 </dataController>

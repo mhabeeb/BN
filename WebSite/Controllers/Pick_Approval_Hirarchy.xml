@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Approval_Hirarchy" conflictDetection="overwriteChanges" label="^PicAppHir^Pick_Approval_Hirarchy^PicAppHir^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Approval_Hirarchy" conflictDetection="overwriteChanges" label="Pick_Approval_Hirarchy" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="UserApprovalGroupAccess" custom="true">
       <text><![CDATA[SELECT        dbo.UserApprovalGroupAccess.AppGroupID, dbo.UserApprovalGroupAccess.UserID, dbo.UserApprovalGroupAccess.DocTypeID, dbo.UserApprovalGroupAccess.OPU_Code, 
@@ -11,15 +11,15 @@ FROM            dbo.TBL_ApprovalGroups_Header INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="AppGroupID" type="Int64" allowNulls="false" label="^AppGroId^App Group#^AppGroId^" showInSummary="true" />
-    <field name="UserID" type="Int32" allowNulls="false" label="^UseId^User#^UseId^" showInSummary="true" />
-    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="ApprovalGroupName" type="String" label="^AppGroNam^Approval Group Name^AppGroNam^" length="50" showInSummary="true" />
-    <field name="DocDescrition" type="String" label="^DocDes^Doc Descrition^DocDes^" length="50" />
+    <field name="AppGroupID" type="Int64" allowNulls="false" label="App Group#" showInSummary="true" />
+    <field name="UserID" type="Int32" allowNulls="false" label="User#" showInSummary="true" />
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="Doc Type#" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="OPU Code" showInSummary="true" />
+    <field name="ApprovalGroupName" type="String" label="Approval Group Name" length="50" showInSummary="true" />
+    <field name="DocDescrition" type="String" label="Doc Descrition" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^UseAppGroAcc^User Approval Group Access^UseAppGroAcc^" filter="UserID=@BusinessRules_UserId" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="User Approval Group Access" filter="UserID=@BusinessRules_UserId" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="AppGroupID" columns="15" />
@@ -30,7 +30,7 @@ FROM            dbo.TBL_ApprovalGroups_Header INNER JOIN
         <dataField fieldName="DocDescrition" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevUseApp^Review User Approval Group Access^RevUseApp^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review User Approval Group Access" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="User Approval Group Access" flow="NewColumn">
@@ -46,7 +46,7 @@ FROM            dbo.TBL_ApprovalGroups_Header INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewUseAppGroAcc^New User Approval Group Access^NewUseAppGroAcc^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New User Approval Group Access" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New User Approval Group Access" flow="NewColumn">
@@ -88,7 +88,7 @@ FROM            dbo.TBL_ApprovalGroups_Header INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

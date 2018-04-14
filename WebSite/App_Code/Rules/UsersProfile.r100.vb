@@ -7,19 +7,26 @@ Imports System.Linq
 Imports System.Text.RegularExpressions
 Imports System.Web
 Imports System.Web.Security
+Imports MyCompany.Security
+
 
 Namespace MyCompany.Rules
     
     Partial Public Class UsersProfileBusinessRules
         Inherits MyCompany.Rules.SharedBusinessRules
-        
+
         ''' <summary>
         ''' This method will execute in any view before an action
         ''' with a command name that matches "Insert|Update".
         ''' </summary>
-        <Rule("r100")>  _
-        Public Sub r100Implementation(ByVal instance As UsersProfileModel)
-            'This is the placeholder for method implementation.
+        <Rule("r100")>
+        Public Sub r100Implementation(ByVal userID As Nullable(Of Integer),
+                                      ByVal userName As String, ByVal password As FieldValue)
+            If Not password Is Nothing And password.Modified Then
+                ApplicationMembershipProvider.ValidateUserPassword(userName, password.NewValue)
+                password.NewValue =
+                     ApplicationMembershipProvider.EncodeUserPassword(password.NewValue)
+            End If
         End Sub
     End Class
 End Namespace

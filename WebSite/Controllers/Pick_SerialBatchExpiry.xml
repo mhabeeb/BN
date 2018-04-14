@@ -1,59 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_SerialBatchExpiry" label="^PicSerBatExp^Pick_SerialBatchExpiry^PicSerBatExp^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_SerialBatchExpiry" label="Pick_SerialBatchExpiry" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Transactions_Batch_Expiry" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Transactions_Batch_Expiry]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Line_ID" type="Decimal" allowNulls="false" label="^LinId^Line#^LinId^" showInSummary="true" />
-    <field name="BatchNo" type="String" label="^BatNo^Batch No^BatNo^" length="20" showInSummary="true" />
-    <field name="BatchExpiry" type="DateTime" label="^BatExp^Batch Expiry^BatExp^" showInSummary="true" />
-    <field name="Item_Serial_No" type="String" label="^IteSerNo^Item Serial No^IteSerNo^" length="50" showInSummary="true" />
-    <field name="QtyBalance" type="Decimal" label="^QtyBal^Qty Balance^QtyBal^" showInSummary="true" />
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="50" />
-    <field name="PurchasePrice" type="Decimal" label="^PurPri^Purchase Price^PurPri^" />
-    <field name="IsBatch" type="Int32" label="^IsBat^Is Batch^IsBat^">
+    <field name="Line_ID" type="Decimal" allowNulls="false" label="^LinId^Line^LinId^" showInSummary="true" />
+    <field name="BatchNo" type="String" label="^BatchNo^Batch No^BatchNo^" length="20" showInSummary="true" />
+    <field name="BatchExpiry" type="DateTime" label="^BatchExpiry^Batch Expiry^BatchExpiry^" showInSummary="true" />
+    <field name="Item_Serial_No" type="String" label="^ItemSerialNo^Item Serial No^ItemSerialNo^" length="50" showInSummary="true" />
+    <field name="QtyBalance" type="Decimal" label="^QtyBalance^Qty Balance^QtyBalance^" showInSummary="true" />
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" length="50" />
+    <field name="PurchasePrice" type="Decimal" label="^PurchasePrice^Purchase Price^PurchasePrice^" />
+    <field name="IsBatch" type="Int32" label="^IsBatch^Is Batch^IsBatch^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="StoreID" type="Int32" label="^StoId^Store#^StoId^">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="StoreID" type="Int32" label="^Store^Store#^Store^">
       <items style="DropDownList" dataController="tbl_Store" dataView="grid1" dataTextField="Store_Name" dataValueField="Store_ID" />
     </field>
     <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true" showInSummary="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true" showInSummary="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
       <formula>SELECT @Session_CompanyName</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABrNam^Branch Name^ABrNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
       <formula>SELECT @Session_BranchName </formula>
     </field>
     <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true" showInSummary="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true" showInSummary="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
-    </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^SerBatExpSto^Serial/Batch Expiry Stock^SerBatExpSto^" filter="StoreID=@Session_StoreID and QtyBalance &gt; 0" reportTemplate="true" reportOrientation="Portrait" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Serial/Batch Expiry Stock" filter="StoreID=@Session_StoreID and QtyBalance &gt; 0" reportTemplate="true" reportOrientation="Portrait" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Line_ID" columns="15" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="BatchNo" columns="20" />
         <dataField fieldName="BatchExpiry" columns="10" />
         <dataField fieldName="Item_Serial_No" columns="50" />
@@ -69,14 +69,14 @@
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="StoreID" columns="15" hidden="true" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review tbl Transactions Batch Expiry" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText />
       <categories>
         <category id="c1" headerText="tbl Transactions Batch Expiry" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -101,8 +101,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTraBatExp^New  Transactions Batch Expiry^NewTraBatExp^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Transactions Batch Expiry" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New tbl Transactions Batch Expiry" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>

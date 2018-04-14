@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="UserBranchAccess" conflictDetection="overwriteChanges" label="^UseBraAcc^UserBranchAccess^UseBraAcc^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="UserBranchAccess" conflictDetection="overwriteChanges" label="UserBranchAccess" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="UserBranchAccess" custom="true">
       <text><![CDATA[SELECT a.UserID,a.OPU_Code,a.DefaultBranch,a.Created_By,a.Created_DateTime,a.Updated_By,a.Updated_DateTime,b.BranchID,b.BranchName,
@@ -9,26 +9,50 @@ WHERE a.OPU_Code=b.BranchID AND b.CompanyID=c.CompanyID]]></text>
     </command>
   </commands>
   <fields>
-    <field name="UserID" type="Int32" allowNulls="false" label="^UseId^User#^UseId^" showInSummary="true" isPrimaryKey="true">
+    <field name="UserID" type="Int32" allowNulls="false" label="^User^User#^User^" showInSummary="true" isPrimaryKey="true">
       <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserFullName" dataValueField="UserID" />
     </field>
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^Branch Name^OpuCod^" showInSummary="true" isPrimaryKey="true">
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="Branch Name" showInSummary="true" isPrimaryKey="true">
       <items style="Lookup" dataController="Pick_Company_Branch" dataView="grid1" dataTextField="BranchName" dataValueField="BranchID" />
     </field>
-    <field name="DefaultBranch" type="Int32" label="^DefBra^Default Branch^DefBra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="DefaultBranch" type="Int32" label="^DefaultBranch^Default Branch^DefaultBranch^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="CompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="255">
+    <field name="CompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="255">
       <items style="Lookup" dataController="Pick_Company_Branch" dataView="grid1" dataTextField="BranchName" dataValueField="BranchID" />
     </field>
-    <field name="DefaultCurrency" type="String" allowNulls="false" label="^DefCur^Default Currency^DefCur^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4" />
-    <field name="BranchName" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="DefaultCurrency" type="String" allowNulls="false" label="^DefaultCurr^Default Currency^DefaultCurr^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4" />
+    <field name="BranchName" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABranchAR^ABranch AR^ABranchAR^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^UseComAcc^User Company Access^UseComAcc^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="User Company Access" showInSelector="false" reportTemplate="true">
       <headerText />
       <dataFields>
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="CompanyName" rows="5" />
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="DefaultBranch" columns="15" />
@@ -36,11 +60,11 @@ WHERE a.OPU_Code=b.BranchID AND b.CompanyID=c.CompanyID]]></text>
         <dataField fieldName="BranchName" rows="5" readOnly="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevUseComAcc^Review User Company Access^RevUseComAcc^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review User Company Access" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Review User Company Access" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiUseComAcc^Edit User Company Access^EdiUseComAcc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="UserID" columns="15" />
             <dataField fieldName="OPU_Code" columns="15" />
@@ -49,11 +73,11 @@ WHERE a.OPU_Code=b.BranchID AND b.CompanyID=c.CompanyID]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewUseComAcc^New User Company Access^NewUseComAcc^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New User Company Access" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New User Company Access" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewUseComAcc^New User Company Access^NewUseComAcc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="UserID" columns="15" />
             <dataField fieldName="OPU_Code" columns="15" />
@@ -82,11 +106,11 @@ WHERE a.OPU_Code=b.BranchID AND b.CompanyID=c.CompanyID]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

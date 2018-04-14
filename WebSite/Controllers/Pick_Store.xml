@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Store" conflictDetection="overwriteChanges" label="^PicSto^Pick_Store^PicSto^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Store" conflictDetection="overwriteChanges" label="Pick_Store" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Store" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Store]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Store_ID" type="Int32" allowNulls="false" label="^StoId^Store#^StoId^" showInSummary="true" />
-    <field name="Store_Name" type="String" label="^StoNam^Store Name^StoNam^" length="255" showInSummary="true" />
-    <field name="Store_Address" type="String" label="^StoAdd^Store Address^StoAdd^" length="255" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="OrganizationType" type="Int32" label="^OrgTyp^Organization Type^OrgTyp^" showInSummary="true" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
+    <field name="Store_ID" type="Int32" allowNulls="false" label="Store#" showInSummary="true" />
+    <field name="Store_Name" type="String" label="Store Name" length="255" showInSummary="true" />
+    <field name="Store_Address" type="String" label="Store Address" length="255" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" showInSummary="true" />
+    <field name="OrganizationType" type="Int32" label="Organization Type" showInSummary="true" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Sto^Store^Sto^" filter="OPU_Code IN (SELECT OPU_Code FROM UserBranchAccess&#xD;&#xA;WHERE UserID=@ContextFields_UserID) &#xD;&#xA;" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Store" filter="OPU_Code IN (SELECT OPU_Code FROM UserBranchAccess&#xD;&#xA;WHERE UserID=@ContextFields_UserID) &#xD;&#xA;" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Store_ID" columns="15" />
@@ -25,7 +25,7 @@
         <dataField fieldName="Company_Code" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevSto^Review  Store^RevSto^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Store" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Store" flow="NewColumn">
@@ -40,7 +40,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewSto^New Store^NewSto^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Store" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Store" flow="NewColumn">
@@ -84,7 +84,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

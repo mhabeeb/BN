@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Dimension_ValueSet_Master" conflictDetection="overwriteChanges" label="^DimValSetMas^Dimension_ValueSet_Master^DimValSetMas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Dimension_ValueSet_Master" conflictDetection="overwriteChanges" label="Dimension_ValueSet_Master" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="LookUp_Type" custom="true">
       <text><![CDATA[SELECT LookUpType,Looup_Description , Company_Code,OPU_Code,Accounts
@@ -7,8 +7,8 @@
     </command>
   </commands>
   <fields>
-    <field name="LookUpType" type="Int32" allowNulls="false" isPrimaryKey="true" label="^LooUpTyp^Look Up Type^LooUpTyp^" readOnly="true" />
-    <field name="Looup_Description" type="String" label="^LooUpDes^LooKup Description^LooUpDes^" length="100" showInSummary="true">
+    <field name="LookUpType" type="Int32" allowNulls="false" isPrimaryKey="true" label="^LookUpType^Look Up Type^LookUpType^" readOnly="true" />
+    <field name="Looup_Description" type="String" label="^LooKupDescriptn^LooKup Description^LooKupDescriptn^" length="100" showInSummary="true">
       <items style="DropDownList">
         <item value="D1" text="Dimension-1" />
         <item value="D2" text="Dimension-2" />
@@ -21,24 +21,24 @@
         <item value="D9" text="Dimension-9" />
       </items>
     </field>
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Accounts" type="Int16" label="^Acc^Accounts^Acc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Company_Code" type="Decimal" label="^CompCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="Accounts" type="Int16" label="^Accounts^Accounts^Accounts^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^LooUpTyp^Look Up Type^LooUpTyp^" filter="Company_Code=@Session_Company_Code" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Look Up Type" filter="Company_Code=@Session_Company_Code" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="Looup_Description" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevLooUpTyp^Review Look Up Type^RevLooUpTyp^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Look Up Type" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Look Up Type" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiLooUpTyp^Edit Look Up Type^EdiLooUpTyp^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Looup_Description" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
@@ -47,11 +47,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewLooUpTyp^New Look Up Type^NewLooUpTyp^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Look Up Type" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Look Up Type" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewLooUpTyp^New Look Up Type^NewLooUpTyp^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Looup_Description" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
@@ -80,10 +80,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

@@ -21,9 +21,9 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
   </commands>
   <fields>
     <field name="PaymentID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PayId^Payment#^PayId^" readOnly="true" />
-    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Sys Number^SysNum^" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Vendor #^SysNum^" />
     <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" />
-    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount^AmoPai^" dataFormatString="N2" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^Amo^Amount^Amo^" dataFormatString="N2" />
     <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50">
       <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
     </field>
@@ -33,21 +33,21 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
     <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="200" />
     <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
     <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
-    <field name="CashBankID" type="Decimal" label="^CasBan^Cash Bank#^CasBan^" allowNulls="false">
+    <field name="CashBankID" type="Decimal" label="^CasBan^CasBanId^CasBan^" allowNulls="false">
       <items style="DropDownList" dataController="Pick_Bank" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" copy="BankCashName_PMT=BankCashName" />
     </field>
     <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created DateTime^CreDatTim^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatBy^Updated By^UpdatBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatDatTim^Updated DateTime^UpdatDatTim^" showInSummary="true" />
     <field name="Clearing_Flag" type="Int32" label="^CleFla^Clearing Flag^CleFla^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" />
+    <field name="APAR_Flag" type="Int32" label="^ApaFla^AP/AR Flag^ApaFla^" />
     <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4">
       <items style="Lookup" dataController="Pick_Currency_Code" dataView="grid1" dataTextField="Currency_Desc" dataValueField="Currency_Code" />
     </field>
@@ -57,34 +57,36 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
     </field>
     <field name="PaymentType" type="String" label="^PayTyp^Payment Type^PayTyp^" length="20" />
     <field name="CheckPayTo" type="String" label="^ChePayTo^Check Pay To^ChePayTo^" length="200" />
-    <field name="PayNumber" type="Decimal" label="^PayNum^Pay Number^PayNum^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
+    <field name="PayNumber" type="Decimal" label="^PayNum^Pay Number^PayNum^" contextFields="CashBankID=CashBankID">
+      <items style="Lookup" dataController="Pick_Pay_Doc_Ar" dataView="grid1" dataTextField="Document_Descriptions" dataValueField="PayNumber" />
+    </field>
+    <field name="Vendor_Name" type="String" label="^VenNam^Party Name^VenNam^" length="150" />
     <field name="WireYN" type="Int32" label="^WirYn^Wire YN^WirYn^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
     <field name="PMT_APPLY_BAL" type="Decimal" label="^PmtAppBal^Pmt Apply Bal^PmtAppBal^" readOnly="true" />
     <field name="Cur_Rate" type="Decimal" label="^CurRat^Cur Rate^CurRat^" />
-    <field name="XferID" type="Decimal" label="^XferId^Xfer#^XferId^" />
+    <field name="XferID" type="Decimal" label="^XferId^Transfer #^XferId^" />
     <field name="RefreshPMT" type="Int32" label="^RefPmt^Refresh PMT^RefPmt^" />
     <field name="MultiLine" type="Int32" label="^MulLin^Multi Line^MulLin^" />
-    <field name="Ven_RefNo" type="String" label="^VenRefNo^Ven Ref No^VenRefNo^" length="25" />
+    <field name="Ven_RefNo" type="String" label="^VenRefNo^Vendor Ref #^VenRefNo^" length="25" />
     <field name="Approve" type="Int32" label="^App^Approve^App^" />
-    <field name="Dimension1" type="Int32" label="^Dim1^Dimension1^Dim1^" hidden="true" />
+    <field name="Dimension1" type="Int32" label="^Dim1^Dimension 1^Dim1^" hidden="true" />
     <field name="D1Caption" type="String" label="^D1Cap^D1 Caption^D1Cap^" length="50" hidden="true" />
-    <field name="Dimension2" type="Int32" label="^Dim2^Dimension2^Dim2^" hidden="true" />
-    <field name="D2Caption" type="String" label="^D2Cap^2 Caption^D2Cap^" length="50" hidden="true" />
-    <field name="Dimension3" type="Int32" label="^Dim3^Dimension3^Dim3^" hidden="true" />
+    <field name="Dimension2" type="Int32" label="^Dim2^Dimension 2^Dim2^" hidden="true" />
+    <field name="D2Caption" type="String" label="^D2Cap^D2 Caption^D2Cap^" length="50" hidden="true" />
+    <field name="Dimension3" type="Int32" label="^Dim3^Dimension 3^Dim3^" hidden="true" />
     <field name="D3Caption" type="String" label="^D3Cap^D3 Caption^D3Cap^" length="50" hidden="true" />
-    <field name="Dimension4" type="Int32" label="^Dim4^Dimension4^Dim4^" hidden="true" />
+    <field name="Dimension4" type="Int32" label="^Dim4^Dimension 4^Dim4^" hidden="true" />
     <field name="D4Caption" type="String" label="^D4Cap^D4 Caption^D4Cap^" length="50" hidden="true" />
-    <field name="Dimension5" type="Int32" label="^Dim5^Dimension5^Dim5^" hidden="true" />
+    <field name="Dimension5" type="Int32" label="^Dim5^Dimension 5^Dim5^" hidden="true" />
     <field name="D5Caption" type="String" label="^D5Cap^D5 Caption^D5Cap^" length="50" hidden="true" />
     <field name="Dimension6" type="Int32" label="^Dim6^Dimension6^Dim6^" hidden="true" />
     <field name="D6Caption" type="String" label="^D6Cap^D6 Caption^D6Cap^" length="50" hidden="true" />
     <field name="Dimension7" type="Int32" label="^Dim7^Dimension7^Dim7^" hidden="true" />
     <field name="D7Caption" type="String" label="^D7Cap^D7 Caption^D7Cap^" length="50" hidden="true" />
     <field name="Dimension8" type="Int32" label="^Dim8^Dimension8^Dim8^" hidden="true" />
-    <field name="D8Caption" type="String" label="^D8Caption^D8 Caption^D8Caption^" length="50" hidden="true" />
+    <field name="D8Caption" type="String" label="^D8Cap^D8 Caption^D8Cap^" length="50" hidden="true" />
     <field name="Dimension9" type="Int32" label="^Dim9^Dimension9^Dim9^" hidden="true" />
     <field name="D9Caption" type="String" label="^D9Cap^D9 Caption^D9Cap^" length="50" hidden="true" />
     <field name="S2" type="String" label="^S2^S2^S2^" length="50" contextFields="SEGMENT6='D2'">
@@ -124,18 +126,18 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
       <configuration>HeaderText=D8Caption</configuration>
     </field>
     <field name="Int_OPU_Code" type="Int32" label="^IntOpuCod^Int OPU Code^IntOpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Doc_No" type="Int64" label="^DocNo^Doc No^DocNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Doc_No" type="Int64" label="^DocNo^Document #^DocNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
     <field name="GL_PostedYN" type="Int32" label="^GLPosYn^GL Posted YN^GLPosYn^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Approve_Ask" type="Int32" label="^AppAsk^Ask Approval^AppAsk^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
     <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
     <field name="DOC_TYPE_ID" type="Int32" label="^DocTypId^DOC TYPE ID^DocTypId^" />
-    <field name="App_Group_ID" type="Int64" label="^AppGroId^App Group ID^AppGroId^" contextFields="DocTypeID=DOC_TYPE_ID">
+    <field name="App_Group_ID" type="Int64" label="^AppGro^Approval Group^AppGro^" contextFields="DocTypeID=DOC_TYPE_ID">
       <items style="DropDownList" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="AppGroupID" dataValueField="AppGroupID" />
     </field>
     <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
@@ -144,19 +146,25 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
     <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
       <formula>SELECT @Session_BranchName </formula>
     </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStNam^Store Name^AStNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+    <field name="ABranchAR" type="String" label="^ABra^Branch Name^ABra^" computed="true" readOnly="true">
       <formula>SELECT @Session_BranchName_Ar</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address English^AddEn^" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Arabic^AddAr^" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
     <field name="BankCashName_PMT" type="String" label="^BanCasNamPmt^Bank Name^BanCasNamPmt^" length="50" />
+    <field name="AProjectEnabled" type="Int32" label="^AProEna^Project Enabled^AProEna^" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
+    <field name="ASiteCodeEnabled" type="Int32" label="^ASitCodEna^Site Code Enabled^ASitCodEna^" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="^MisRec^Misc. Receipt^MisRec^" reportTemplate="true" sortExpression="PaymentID Desc" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
@@ -222,8 +230,8 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
     <view id="editForm1" type="Form" commandId="command1" label="^EdiMisRec^Edit Misc. Receipt^EdiMisRec^" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Edit Misc. Receipt" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiMisRec^Edit Misc. Receipt^EdiMisRec^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Sys_Number" columns="15" hidden="true" />
             <dataField fieldName="Expense_AccountID" columns="50" />
@@ -299,7 +307,7 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
             <dataField fieldName="Doc_No" columns="15" readOnly="true" />
           </dataFields>
         </category>
-        <category headerText="Posting" id="c2">
+        <category headerText="^Posting^Posting^Posting^" id="c2">
           <dataFields>
             <dataField fieldName="GL_PostedYN" columns="15" />
             <dataField fieldName="Dimension1" columns="15" readOnly="true" hidden="true" />
@@ -332,8 +340,8 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
     <view id="createForm1" type="Form" commandId="command1" label="^NewMisRec^New Misc. Receipt^NewMisRec^" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Misc. Receipt" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewMisRec^New Misc. Receipt^NewMisRec^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Sys_Number" columns="15" hidden="true" />
             <dataField fieldName="Currency_Code" columns="4" />
@@ -344,7 +352,6 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
             <dataField fieldName="Amount_Paid" dataFormatString="c" columns="15" />
             <dataField fieldName="CashBankID" columns="15" />
             <dataField fieldName="CheckPayTo" hidden="true" />
-            <dataField fieldName="CheckNo" dataFormatString="c" columns="15" readOnly="true" hidden="true" />
             <dataField fieldName="Remarks" columns="30" />
             <dataField fieldName="GL_PostedYN" columns="15" hidden="true" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -356,7 +363,8 @@ WHERE        (dbo.APAR_Payments.APAR_Flag = 1) AND (dbo.APAR_Payments.PaymentTyp
             <dataField fieldName="Clearing_Flag" columns="15" hidden="true" />
             <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
             <dataField fieldName="PaymentType" columns="20" hidden="true" />
-            <dataField fieldName="PayNumber" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="PayNumber" dataFormatString="N" columns="15" />
+            <dataField fieldName="CheckNo" dataFormatString="N" columns="15" />
             <dataField fieldName="WireYN" columns="15" hidden="true" />
             <dataField fieldName="Cur_Rate" dataFormatString="c" columns="15" hidden="true" />
             <dataField fieldName="XferID" columns="15" hidden="true" />
@@ -495,41 +503,22 @@ SET RefreshPMT=@A  WHERE PaymentID=@PaymentID]]></data>
       </action>
       <action id="a1" commandName="Select" commandArgument="editForm1" headerText="^Edit^Edit^Edit^" />
     </actionGroup>
-    <actionGroup id="ag105" scope="ActionBar" headerText="Post GL" flat="true">
-      <action commandName="SQL" headerText="Post Gl" id="a100" whenLastCommandName="Select" whenClientScript="[GL_PostedYN]==0 &amp;&amp; [Approve_Ask]==1">
+    <actionGroup id="ag105" scope="ActionBar" headerText="^PosGl^Post GL^PosGl^" flat="true">
+      <action commandName="SQL" headerText="^PosGl^Post GL^PosGl^" id="a100" whenLastCommandName="Select" whenClientScript="[GL_PostedYN]==0 &amp;&amp; [Approve_Ask]==1">
         <data><![CDATA[EXEC  dbo.DOC_POST_TO_GL @PaymentID,2]]></data>
       </action>
     </actionGroup>
-    <actionGroup id="ag104" scope="ActionBar" headerText="Ask Approval" flat="true">
-      <action commandName="SQL" headerText="Ask Approval" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
+    <actionGroup id="ag104" scope="ActionBar" headerText="^AskApp^Ask Approval^AskApp^" flat="true">
+      <action commandName="SQL" headerText="^AskApp^Ask Approval^AskApp^" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
         <data><![CDATA[EXEC XX_UPDATE_ASK_STATUS @PaymentID,@DOC_TYPE_ID,1,@BusinessRules_UserId]]></data>
       </action>
     </actionGroup>
   </actions>
   <businessRules>
-    <rule id="r101" commandName="Update" type="Sql" phase="Before"><![CDATA[set @Updated_By=@BusinessRules_UserId
-set @Updated_DateTime=getdate()]]></rule>
-    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @Created_By=@BusinessRules_UserId
-SET @Created_DateTime=GETDATE()
-SET @PaymentType='Misc. Cash'
-SET @APAR_Flag=1
-SET @Sys_Number=0
-SET @Rec_Status=0
-
-SET @OPU_Code=@Session_OPU_Code
-SET @Company_Code=@Session_Company_Code
-
-	  
--- SET @Cur_Rate = [dbo].[Get_Curr_Rate] (@Currency_Code,@Payment_Date)
-SET @Cur_Rate = [dbo].[Get_Curr_Rate_v1] (@Currency_Code,@Payment_Date, @Session_OPU_Code)
-
-SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER (@DOC_TYPE_ID,@Session_OPU_Code,@Payment_Date)
-EXEC dbo.RESET_SEQUENCE @DOC_TYPE_ID,@Session_OPU_Code,@Payment_Date
-]]></rule>
     <rule id="r102" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Payment_Date= getdate()
 SET @Project_Code='None'
 SET @Dept_Code='None'
-SET @Currency_Code='SAR'
+SET @Currency_Code=@Session_DefaultCurrency
 SET @GL_PostedYN=0
 SET @Approve_Ask=0
 SET @Rec_Status=0
@@ -549,6 +538,26 @@ SELECT @Dimension1=Dimension1,@D1Caption=D1Caption,
 FROM Accounting_Dimensions WHERE Company_Code=@Session_Company_Code
 
 ]]></rule>
+    <rule id="r101" commandName="Update" type="Sql" phase="Before"><![CDATA[set @Updated_By=@BusinessRules_UserId
+set @Updated_DateTime=getdate()]]></rule>
+    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @Created_By=@BusinessRules_UserId
+SET @Created_DateTime=GETDATE()
+SET @PaymentType='Misc. Cash'
+SET @APAR_Flag=1
+SET @Sys_Number=0
+SET @Rec_Status=0
+
+SET @OPU_Code=@Session_OPU_Code
+SET @Company_Code=@Session_Company_Code
+
+	  
+-- SET @Cur_Rate = [dbo].[Get_Curr_Rate] (@Currency_Code,@Payment_Date)
+SET @Cur_Rate = [dbo].[Get_Curr_Rate_v1] (@Currency_Code,@Payment_Date, @Session_OPU_Code)
+
+SET @Doc_No = dbo.GET_NEXT_DOC_NUMBER (@DOC_TYPE_ID,@Session_OPU_Code,@Payment_Date)
+EXEC dbo.RESET_SEQUENCE @DOC_TYPE_ID,@Session_OPU_Code,@Payment_Date
+SET @Clearing_Flag = dbo.GET_PAYMENT_DOC_CLEARYN (@PayNumber)
+]]></rule>
     <rule id="r103" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[IF dbo.CHECK_VALID_OPU_STORE(@BusinessRules_UserId, @Session_OPU_Code, @Session_StoreID) = 0
     BEGIN
         SET @BusinessRules_PreventDefault = 1
@@ -558,14 +567,14 @@ END
 if IsNull(@Session_IsReadOnly,0)=1
 begin
     SET @BusinessRules_PreventDefault = 1
-    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+    SET @Result_ShowAlert=' You Are ReadOnly User ....You Cannot Change Record'
 end
 
 if [dbo].[Check_Open_Date_SubLedger](@Payment_Date,@BusinessRules_UserId,1)=1
 begin
 
     SET @BusinessRules_PreventDefault = 1
-    SET @Result_ShowViewMessage='Sorry!, The Transaction Date Is Not In An Open Period'
+    SET @Result_ShowAlert=' The Transaction Date Is Not In An Open Period'
 end
 
 declare @aError int
@@ -575,14 +584,14 @@ SET @aError=[dbo].[Cross_Validation_Accounts](@Expense_AccountID,@Dept_Code,@Pro
 IF @aError <> 0 
 BEGIN
     SET @BusinessRules_PreventDefault = 1
-    IF @aError=1 SET @Result_ShowViewMessage='Sorry!, Project Code Required ....Cross Validation Rule Faild!'
-    IF @aError=2 SET @Result_ShowViewMessage='Sorry!, Department Code Required ....Cross Validation Rule Faild!'
+    IF @aError=1 SET @Result_ShowAlert=' Project Code Required ....Cross Validation Rule Faild!'
+    IF @aError=2 SET @Result_ShowAlert=' Department Code Required ....Cross Validation Rule Faild!'
 END
 ]]></rule>
     <rule id="r104" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
 begin
     SET @BusinessRules_PreventDefault = 1
-    SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+    SET @Result_ShowAlert=' You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
   </businessRules>
 </dataController>

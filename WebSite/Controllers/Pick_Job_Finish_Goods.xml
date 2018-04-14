@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Job_Finish_Goods" conflictDetection="overwriteChanges" label="^PicJobFinGoo^Pick_Job_Finish_Goods^PicJobFinGoo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Job_Finish_Goods" conflictDetection="overwriteChanges" label="Pick_Job_Finish_Goods" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="[ODMOPM].[dbo].[Job_Final_Transactions] " custom="true">
       <text><![CDATA[SELECT * FROM [ODMOPM].[dbo].[Job_Final_Transactions] WHERE IsNull(DeliverYN,0)=1 AND IsNull(ReceivedYN,0)=0 and IsNull(Balance_Rec,0) > 0]]></text>
     </command>
   </commands>
   <fields>
-    <field name="TrxID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TrxId^Trx#^TrxId^" readOnly="true" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" />
-    <field name="JobScheduledID" type="Decimal" label="^JobSchId^Job Scheduled#^JobSchId^" showInSummary="true" />
-    <field name="Job_ID" type="Decimal" label="^JobId^Job#^JobId^" showInSummary="true" />
-    <field name="Qty_Accepted" type="Decimal" label="^QtyAcc^Qty Accepted^QtyAcc^" showInSummary="true" dataFormatString="N2" />
-    <field name="Qty_Rejected" type="Decimal" label="^QtyRej^Qty Rejected^QtyRej^" showInSummary="true" dataFormatString="N2" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="Remarks" type="String" allowQBE="false" allowSorting="false" label="^Rem^Remarks^Rem^" />
-    <field name="RawCost" type="Decimal" label="^RawCos^Raw Cost^RawCos^" dataFormatString="N2" />
-    <field name="DeliverYN" type="Int32" label="^DelYn^Deliver YN^DelYn^" />
-    <field name="ReceivedYN" type="Int32" label="^RecYn^Received YN^RecYn^" />
-    <field name="ResourcesCost" type="Decimal" label="^ResCos^Resources Cost^ResCos^" dataFormatString="N2" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" readOnly="true" dataFormatString="N2" />
-    <field name="Balance_Rec" type="Decimal" label="^BalRec^Balance Rec^BalRec^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="TrxID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Trx^Trx#^Trx^" readOnly="true" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" />
+    <field name="JobScheduledID" type="Decimal" label="^JobScheduled^Job Scheduled#^JobScheduled^" showInSummary="true" />
+    <field name="Job_ID" type="Decimal" label="^Job^Job#^Job^" showInSummary="true" />
+    <field name="Qty_Accepted" type="Decimal" label="^QtyAccepted^Qty Accepted^QtyAccepted^" showInSummary="true" dataFormatString="N2" />
+    <field name="Qty_Rejected" type="Decimal" label="^QtyRejected^Qty Rejected^QtyRejected^" showInSummary="true" dataFormatString="N2" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="Remarks" type="String" allowQBE="false" allowSorting="false" label="^Remarks^Remarks^Remarks^" />
+    <field name="RawCost" type="Decimal" label="^RawCost^Raw Cost^RawCost^" dataFormatString="N2" />
+    <field name="DeliverYN" type="Int32" label="^DeliverYN^Deliver YN^DeliverYN^" />
+    <field name="ReceivedYN" type="Int32" label="^ReceivedYN^Received YN^ReceivedYN^" />
+    <field name="ResourcesCost" type="Decimal" label="^ResourcesCost^Resources Cost^ResourcesCost^" dataFormatString="N2" />
+    <field name="Unit_Price" type="Decimal" label="^UnitPrice^Unit Price^UnitPrice^" readOnly="true" dataFormatString="N2" />
+    <field name="Balance_Rec" type="Decimal" label="^BalanceRec^Balance Rec^BalanceRec^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^OdmOpmJobFinTra^ODMOPM  Job Final Transactions^OdmOpmJobFinTra^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="ODMOPM dbo Job Final Transactions" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Item_Code" columns="20" />
@@ -47,7 +47,7 @@
         <dataField fieldName="ResourcesCost" dataFormatString="c" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevOdmOpmJobFinTra^Review ODMOPM  Job Final Transactions^RevOdmOpmJobFinTra^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review ODMOPM dbo Job Final Transactions" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="ODMOPM dbo Job Final Transactions" flow="NewColumn">
@@ -73,7 +73,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewOdmOpmJobFinTra^New ODMOPM  Job Final Transactions^NewOdmOpmJobFinTra^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New ODMOPM dbo Job Final Transactions" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New ODMOPM dbo Job Final Transactions" flow="NewColumn">
@@ -125,7 +125,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

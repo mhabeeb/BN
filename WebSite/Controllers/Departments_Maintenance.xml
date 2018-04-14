@@ -20,20 +20,20 @@ from "dbo"."Departments_Maintenance" "Departments_Maintenance"
     </command>
   </commands>
   <fields>
-    <field name="Dept_Code" type="String" allowNulls="false" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" />
-    <field name="Dept_Name" type="String" label="^DepNam^Dept Name^DepNam^" length="50" showInSummary="true" />
-    <field name="AdditionalNotes" type="String" allowQBE="false" allowSorting="false" label="^AddNot^Additional Notes^AddNot^" showInSummary="true" />
-    <field name="HospitalID" type="Int32" label="^HosId^Hospital#^HosId^" showInSummary="true" />
-    <field name="DepartmentInCharge" type="Decimal" label="^DepInCha^Department In Charge^DepInCha^" showInSummary="true" />
-    <field name="CreatedBy" type="String" label="^CreBy^Created By^CreBy^" length="128" />
-    <field name="CreatedDateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="ModifiedBy" type="String" label="^ModBy^Modified By^ModBy^" length="138" />
-    <field name="ModifiedDateTime" type="DateTime" label="^ModDatTim^Modified Date Time^ModDatTim^" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" />
-    <field name="Dept_Code_Ref_No" type="String" label="^DepCodRefNo^Dept Code Ref No^DepCodRefNo^" length="15" />
+    <field name="Dept_Code" type="String" allowNulls="false" label="Dept Code" length="50" showInSummary="true" />
+    <field name="Dept_Name" type="String" label="Dept Name" length="50" showInSummary="true" />
+    <field name="AdditionalNotes" type="String" allowQBE="false" allowSorting="false" label="Additional Notes" showInSummary="true" />
+    <field name="HospitalID" type="Int32" label="Hospital#" showInSummary="true" />
+    <field name="DepartmentInCharge" type="Decimal" label="Department In Charge" showInSummary="true" />
+    <field name="CreatedBy" type="String" label="Created By" length="128" />
+    <field name="CreatedDateTime" type="DateTime" label="Created Date Time" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="138" />
+    <field name="ModifiedDateTime" type="DateTime" label="Modified Date Time" />
+    <field name="InActive" type="Int32" label="In Active" />
+    <field name="Dept_Code_Ref_No" type="String" label="Dept Code Ref No" length="15" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DepMai^Departments Maintenance^DepMai^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Departments Maintenance" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Dept_Code" columns="50" />
@@ -48,7 +48,7 @@ from "dbo"."Departments_Maintenance" "Departments_Maintenance"
         <dataField fieldName="InActive" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDepMai^Review Departments Maintenance^RevDepMai^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Departments Maintenance" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Departments Maintenance" flow="NewColumn">
@@ -69,7 +69,7 @@ from "dbo"."Departments_Maintenance" "Departments_Maintenance"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^RevDepMai^New Departments Maintenance^RevDepMai^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Departments Maintenance" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Departments Maintenance" flow="NewColumn">
@@ -117,7 +117,7 @@ from "dbo"."Departments_Maintenance" "Departments_Maintenance"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

@@ -1,61 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="CashFlowStatments" conflictDetection="overwriteChanges" label="^CasFloSta^CashFlowStatments^CasFloSta^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="CashFlowStatments" conflictDetection="overwriteChanges" label="CashFlowStatments" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.CashFlowStatmentsBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="CashFlowStatments" custom="true">
-      <text><![CDATA[SELECT * FROM CashFlowStatments]]></text>
+      <text><![CDATA[SELECT CashFlowStatments.*,CAST(CashFlowStatments.LineID as varchar(50)) 
+"ZZ_Filter_Value" FROM CashFlowStatments
+
+
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="LineID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^LinId^Line#^LinId^" readOnly="true" />
-    <field name="AccountDesription" type="String" label="^AccDes^Account Desription^AccDes^" length="2000" showInSummary="true" htmlEncode="false" />
-    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" showInSummary="true" />
-    <field name="Amount" type="Decimal" label="^Amo^Amount^Amo^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" showInSummary="true" />
-    <field name="TrxMonths" type="Int32" label="^TrxMon^Trx Months^TrxMon^" showInSummary="true" />
-    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" />
-    <field name="LineNumber" type="Int32" label="^LinNum^Line Number^LinNum^" />
-    <field name="AccountDesription1" type="String" label="^AccDes1^Account Desription 1^AccDes1^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="2000" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="LineID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^Line^Line#^Line^" readOnly="true" />
+    <field name="AccountDesription" type="String" label="^AccountDesription^Account Desription^AccountDesription^" length="2000" showInSummary="true" htmlEncode="false" />
+    <field name="UserID" type="Int32" label="^User^User#^User^" showInSummary="true" />
+    <field name="Amount" type="Decimal" label="^Amount^Amount^Amount^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="TrxMonths" type="Int32" label="^TrxMonths^Trx Months^TrxMonths^" showInSummary="true" />
+    <field name="TrxYear" type="Int32" label="^TrxYear^Trx Year^TrxYear^" />
+    <field name="LineNumber" type="Int32" label="^LineNumber^Line Number^LineNumber^" />
+    <field name="AccountDesription1" type="String" label="^AccountDesription 1^Account Desription 1^AccountDesription 1^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="2000" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ZZ_Controller" type="String" label="XX Controller" computed="true">
+      <formula>'CashFlowStatments'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'CashFlowStatments_grid1'</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^CasFloSta^Cash Flow Statement^CasFloSta^" filter="OPU_Code=@Session_OPU_Code" sortExpression="LineNumber asc" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Cash Flow Statement" filter="OPU_Code=@Session_OPU_Code" sortExpression="LineNumber asc" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="AccountDesription" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="UserID" columns="15" hidden="true" />
         <dataField fieldName="Amount" dataFormatString="N2" columns="15" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="TrxMonths" columns="15" />
         <dataField fieldName="TrxYear" columns="15" />
         <dataField fieldName="LineNumber" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^ReCasFloSta^Review Cash Flow Statments^ReCasFloSta^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Cash Flow Statments" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Cash Flow Statments" flow="NewColumn">
@@ -72,7 +86,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCasFloSta^New Cash Flow Statments^NewCasFloSta^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Cash Flow Statments" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New Cash Flow Statments" flow="NewColumn">
@@ -89,7 +103,7 @@
         </category>
       </categories>
     </view>
-    <view id="ViewCashFlow" commandId="command1" type="Chart" label="^VieCasFlo^View Cash Flow^VieCasFlo^" filter="UserID=@BusinessRules_UserId">
+    <view id="ViewCashFlow" commandId="command1" type="Chart" label="View Cash Flow" filter="UserID=@BusinessRules_UserId">
       <dataFields>
         <dataField fieldName="Amount" dataFormatString="D" columns="15" aggregate="Sum" chart="Bar" />
         <dataField fieldName="TrxMonths" columns="15" />
@@ -144,6 +158,9 @@
         <data><![CDATA[EXEC [dbo].[GENERATE_CASH_FLOW_STATMENTS]  @Parameters_EndDate,1,@BusinessRules_UserId]]></data>
       </action>
     </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintCashFlowStatments" headerText="^PriCasFloSta^Print Cash Flow Statements^PriCasFloSta^" id="a100" cssClass="glyphicon glyphicon-print" />
+    </actionGroup>
   </actions>
   <businessRules>
     <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
@@ -157,5 +174,6 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
+    <rule id="r102" commandName="Custom" commandArgument="PrintCashFlowStatments" type="Code" phase="Execute" />
   </businessRules>
 </dataController>

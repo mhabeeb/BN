@@ -1,30 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="UserCrossValidationAccess" conflictDetection="overwriteChanges" label="^UseCroValAcc^UserCrossValidationAccess^UseCroValAcc^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="UserCrossValidationAccess" conflictDetection="overwriteChanges" label="UserCrossValidationAccess" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="UserCrossValidationAccess" custom="true">
       <text><![CDATA[SELECT * FROM UserCrossValidationAccess]]></text>
     </command>
   </commands>
   <fields>
-    <field name="CVRID" type="Int64" allowNulls="false" label="^Cvrid^Cvrid^Cvrid^" showInSummary="true" isPrimaryKey="true">
+    <field name="CVRID" type="Int64" allowNulls="false" label="Cvrid" isPrimaryKey="true">
       <items style="Lookup" dataController="GL_Cross_Validation_Rule_Header" dataView="grid1" dataTextField="CVRID" dataValueField="CVRID" />
     </field>
-    <field name="UserID" type="Int32" allowNulls="false" label="^useId^User#^useId^" showInSummary="true" isPrimaryKey="true">
+    <field name="UserID" type="Int32" allowNulls="false" label="User#" showInSummary="true" isPrimaryKey="true">
       <items style="Lookup" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="InActive" type="Int32" label="^inAct^In Active^inAct^">
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="Updated By" showInSummary="true" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="InActive" type="Int32" label="In Active">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABranchAR^ABranch AR^ABranchAR^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^useCrovalAcc^User Cross Validation Access^useCrovalAcc^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="User Cross Validation Access" showInSelector="false" reportTemplate="true">
+      <headerText />
       <dataFields>
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="CVRID" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="UserID" columns="15" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
@@ -33,11 +57,11 @@
         <dataField fieldName="InActive" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevuseCroValAcc^Review User Cross Validation Access^RevuseCroValAcc^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review User Cross Validation Access" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="User Cross Validation Access" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiUseCroValAcc^Edit User Cross Validation Access^EdiUseCroValAcc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CVRID" columns="15" />
             <dataField fieldName="UserID" columns="15" />
@@ -50,11 +74,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewUseCroValAcc^New User Cross Validation Access^NewUseCroValAcc^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New User Cross Validation Access" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New User Cross Validation Access" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewUseCroValAcc^New User Cross Validation Access^NewUseCroValAcc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CVRID" columns="15" />
             <dataField fieldName="UserID" columns="15" />
@@ -87,11 +111,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

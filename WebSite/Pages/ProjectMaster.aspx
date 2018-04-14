@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContentPlaceHolder" runat="Server">^ProjectMaster^Project Master^ProjectMaster^</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div data-flow="row">
-    <div id="view1" data-controller="ProjectMaster" data-show-in-summary="true" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
+    <div id="view1" data-controller="ProjectMaster" data-show-in-summary="true" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true" data-auto-highlight-first-row="true"></div>
     <div data-activator="Tab|^InventoryTransactions^Inventory Transactions^InventoryTransactions^">
       <div id="view2" data-controller="View_Inventory_Lines" data-filter-source="view1" data-filter-fields="Project_Code" data-show-view-selector="false" data-show-modal-forms="true" data-roles="Super Admin,HIDE"></div>
     </div>
@@ -22,7 +22,13 @@
       <div id="view7" data-controller="ViewAccounting" data-filter-source="view1" data-filter-fields="Project_Code" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
     <div data-activator="Tab|^ProjectSites^Project Sites^ProjectSites^">
-      <div id="view8" data-controller="ProjectsSites" data-view="grid1" data-filter-source="view1" data-filter-fields="Project_Code" data-page-size="5" data-show-view-selector="false"></div>
+      <div id="view8" data-controller="ProjectsSites" data-view="grid1" data-filter-source="view1" data-filter-fields="Project_Code" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
+    </div>
+    <div data-activator="Tab|^BudgetObligations^Budget Obligations^BudgetObligations^">
+      <div id="view10" data-controller="View_PR_Lines_Bud" data-view="grid1" data-show-in-summary="true" data-filter-source="view1" data-filter-fields="Project_Code" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true" data-auto-highlight-first-row="true"></div>
+    </div>
+    <div data-activator="Tab|^BudgetComitments^Budget Commitments^BudgetComitments^">
+      <div id="view11" data-controller="View_PO_Lines_Bud" data-view="grid1" data-show-in-summary="true" data-filter-source="view1" data-filter-fields="Project_Code" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true" data-auto-highlight-first-row="true"></div>
     </div>
   </div>
 </asp:Content>

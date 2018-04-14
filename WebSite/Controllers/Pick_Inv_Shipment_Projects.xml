@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Inv_Shipment_Projects" label="^PicInvShiPro^Pick_Inv_Shipment_Projects^PicInvShiPro^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Inv_Shipment_Projects" label="Pick_Inv_Shipment_Projects" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Transactions_Line" custom="true">
       <text><![CDATA[SELECT  dbo.tbl_Transactions_Line.Item_Code, dbo.tbl_Transactions_Line.Transaction_ID, dbo.tbl_Transactions_Line.Qty, dbo.tbl_Transactions_Line.QtyEnter, dbo.tbl_Transactions_Line.Item_Serial_No, dbo.tbl_Transactions_Line.Line_Remarks, 
@@ -16,79 +16,79 @@ WHERE   (dbo.tbl_Transactions_Line.Invoice_Balance_Qty > 0)]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Item_Code" type="String" label="^IteCod^Item No.^IteCod^" length="20" showInSummary="true" />
-    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction#^TraId^" showInSummary="true" />
+    <field name="Item_Code" type="String" label="^ItemNo^Item No.^ItemNo^" length="20" showInSummary="true" />
+    <field name="Transaction_ID" type="Decimal" label="^Transaction^Transaction#^Transaction^" showInSummary="true" />
     <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" showInSummary="true" />
-    <field name="QtyEnter" type="Decimal" label="^QtyEnt^Shiped Qty^QtyEnt^" showInSummary="true" />
-    <field name="Item_Serial_No" type="String" label="^IteSerNo^Item Serial No^IteSerNo^" length="255" showInSummary="true" />
-    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" />
-    <field name="Line_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^LinId^Line#^LinId^" readOnly="true" />
-    <field name="Source_LineID" type="Decimal" label="^SouLinId^Source Line#^SouLinId^" />
-    <field name="StoreID" type="Int32" label="^StoId^Store#^StoId^" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" />
-    <field name="Unit_Cost" type="Decimal" label="^UniCos^Unit Cost^UniCos^" />
-    <field name="PO_NO" type="Decimal" label="^PoNo^PO No.^PoNo^" />
-    <field name="SO_NO" type="Decimal" label="^SoNo^SO No.^SoNo^" />
-    <field name="PostYN" type="Int32" label="^PosYn^Post YN^PosYn^" />
-    <field name="InvoicedYN" type="Int32" label="^InvYn^Invoiced YN^InvYn^" />
-    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" />
-    <field name="Line_Disc_Percent" type="Decimal" label="^LinDisPer^Line Disc Percent^LinDisPer^" />
-    <field name="Line_Disc_Amount" type="Decimal" label="^LinDisAmo^Line Disc Amount^LinDisAmo^" />
+    <field name="QtyEnter" type="Decimal" label="^ShipedQty^Shiped Qty^ShipedQty^" showInSummary="true" />
+    <field name="Item_Serial_No" type="String" label="^ItemSerialNo^Item Serial No^ItemSerialNo^" length="255" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="^LineRemarks^Line Remarks^LineRemarks^" length="255" />
+    <field name="Line_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Line^Line#^Line^" readOnly="true" />
+    <field name="Source_LineID" type="Decimal" label="^SourceLine^Source Line#^SourceLine^" />
+    <field name="StoreID" type="Int32" label="^Store^Store#^Store^" />
+    <field name="Unit_Price" type="Decimal" label="^UnitPrice^Unit Price^UnitPrice^" />
+    <field name="Unit_Cost" type="Decimal" label="^UnitCost^Unit Cost^UnitCost^" />
+    <field name="PO_NO" type="Decimal" label="^PONo^PO No.^PONo^" />
+    <field name="SO_NO" type="Decimal" label="^SONo^SO No.^SONo^" />
+    <field name="PostYN" type="Int32" label="^PostYN^Post YN^PostYN^" />
+    <field name="InvoicedYN" type="Int32" label="^InvoicedYN^Invoiced YN^InvoicedYN^" />
+    <field name="Line_Total" type="Decimal" label="^LineTotal^Line Total^LineTotal^" readOnly="true" />
+    <field name="Line_Disc_Percent" type="Decimal" label="^LineDiscPercent^Line Disc Percent^LineDiscPercent^" />
+    <field name="Line_Disc_Amount" type="Decimal" label="^LineDiscAmount^Line Disc Amount^LineDiscAmount^" />
     <field name="Pick" type="Int32" label="^Pick^Pick^Pick^" hidden="true">
       <items style="CheckBox" />
     </field>
-    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
-    <field name="Additional_Cost" type="Decimal" label="^AddCos^Additional Cost^AddCos^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="Multiply" type="Decimal" label="^Mul^Multiply^Mul^" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
-    <field name="Transaction_No" type="Decimal" label="^TraNo^Transaction No^TraNo^" />
-    <field name="Dr_AC" type="String" label="^DrAc^Dr AC^DrAc^" length="50" />
-    <field name="Cr_AC" type="String" label="^CrAc^Cr AC^CrAc^" length="50" />
-    <field name="ReturnFlag" type="String" label="^RetFla^Return Flag^RetFla^" length="15" />
-    <field name="Order_Price" type="Decimal" label="^OrdPri^Order Price^OrdPri^" />
-    <field name="Invoice_Balance_Qty" type="Decimal" label="^InvBalQty^Unbilled Qty^InvBalQty^" readOnly="true" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Part" type="String" label="^SupParNo^Supplier Part No.^SupParNo^" length="50" />
-    <field name="UOM" type="String" label="^Uom^UOM^Uom^" length="50" />
-    <field name="Avg_Cost" type="Decimal" label="^AvgCos^Avg Cost^AvgCos^" />
-    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" readOnly="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" readOnly="true" />
-    <field name="APAR_Flag" type="Int32" allowNulls="false" label="^ApaFla^APAR Flag^ApaFla^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Trx_OPU_Code" type="Int32" label="^TrxOpuCod^Trx OPU Code^TrxOpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="Pick_Qty" type="Decimal" label="^PickQty^Pick Qty^PickQty^" />
+    <field name="Pick_Doc" type="Decimal" label="^PickDoc^Pick Doc^PickDoc^" />
+    <field name="Additional_Cost" type="Decimal" label="^AdditionalCost^Additional Cost^AdditionalCost^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="Multiply" type="Decimal" label="^Multiply^Multiply^Multiply^" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" />
+    <field name="Currency_Code" type="String" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" />
+    <field name="Transaction_No" type="Decimal" label="^TransactionNo^Transaction No^TransactionNo^" />
+    <field name="Dr_AC" type="String" label="^DrAC^Dr AC^DrAC^" length="50" />
+    <field name="Cr_AC" type="String" label="^CrAC^Cr AC^CrAC^" length="50" />
+    <field name="ReturnFlag" type="String" label="^ReturnFlag^Return Flag^ReturnFlag^" length="15" />
+    <field name="Order_Price" type="Decimal" label="^OrderPrice^Order Price^OrderPrice^" />
+    <field name="Invoice_Balance_Qty" type="Decimal" label="^UnbilledQty^Unbilled Qty^UnbilledQty^" readOnly="true" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Part" type="String" label="^SupplierPartNo^Supplier Part No.^SupplierPartNo^" length="50" />
+    <field name="UOM" type="String" label="^UOM^UOM^UOM^" length="50" />
+    <field name="Avg_Cost" type="Decimal" label="^AvgCost^Avg Cost^AvgCost^" />
+    <field name="Line_Net" type="Decimal" label="^LineNet^Line Net^LineNet^" readOnly="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^Trx^Trx#^Trx^" readOnly="true" />
+    <field name="APAR_Flag" type="Int32" allowNulls="false" label="^APARFlag^APAR Flag^APARFlag^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Trx_OPU_Code" type="Int32" label="^TrxOPUCode^Trx OPU Code^TrxOPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
     <field name="Location_Name" type="String" label="Location Name" length="150" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^UnbShi^Unbilled Shipment^UnbShi^" sortExpression="PO_NO desc " filter="Trx_OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Unbilled Shipment" sortExpression="PO_NO desc " filter="Trx_OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="Trx_ID" columns="15" readOnly="true" />
@@ -104,27 +104,27 @@ WHERE   (dbo.tbl_Transactions_Line.Invoice_Balance_Qty > 0)]]></text>
         <dataField fieldName="Sys_Number" columns="15" readOnly="true" />
         <dataField fieldName="Invoice_Balance_Qty" dataFormatString="N2" columns="15" readOnly="true" />
         <dataField fieldName="Line_Net" dataFormatString="N2" columns="15" readOnly="true" aggregate="Sum" />
+        <dataField fieldName="SO_NO" columns="15" readOnly="true" />
         <dataField fieldName="Transaction_No" columns="15" readOnly="true" />
         <dataField fieldName="PO_NO" columns="15" readOnly="true" />
-        <dataField fieldName="SO_NO" columns="15" readOnly="true" />
         <dataField fieldName="Project_Code" columns="50" readOnly="true" />
         <dataField fieldName="Dept_Code" columns="50" readOnly="true" />
         <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
         <dataField fieldName="Trx_OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="Updated_By" columns="15" hidden="true" />
         <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Location_Name" rows="1" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevTraLin^Review Transactions Line^RevTraLin^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Transactions Line" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Transactions Line" flow="NewColumn">
@@ -176,7 +176,7 @@ WHERE   (dbo.tbl_Transactions_Line.Invoice_Balance_Qty > 0)]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTraLin^New Transactions Line^NewTraLin^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Transactions Line" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New tbl Transactions Line" flow="NewColumn">

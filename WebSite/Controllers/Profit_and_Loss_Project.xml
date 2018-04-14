@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Profit_and_Loss_Project" conflictDetection="overwriteChanges" label="^ProAndLosPro^Profit_and_Loss_Project^ProAndLosPro^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Profit_and_Loss_Project" conflictDetection="overwriteChanges" label="Profit_and_Loss_Project" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.Profit_and_Loss_ProjectBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="GL_Transaction_Line" custom="true">
       <text><![CDATA[SELECT OPU_Code_Ln,
@@ -16,7 +16,8 @@
        IsNull([September], 0) [September],
        IsNull([October], 0) [October],
        IsNull([November], 0) [November],
-       IsNull([December], 0) [December]
+       IsNull([December], 0) [December],
+	   CAST(TrxYear as varchar(50)) "ZZ_Filter_Value"
 FROM
 (
     SELECT OPU_Code_Ln,
@@ -43,46 +44,53 @@ FROM
   </commands>
   <fields>
     <field name="OPU_Code_Ln" type="Int32" label="^OPUCodeLn^OPU Code Ln^OPUCodeLn^" showInSummary="true" />
-    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" allowNulls="false" isPrimaryKey="true" />
-    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" readOnly="true" length="50" isPrimaryKey="true" />
-    <field name="January" type="Decimal" allowNulls="false" label="^Jan^January^Jan^" readOnly="true" />
-    <field name="February" type="Decimal" allowNulls="false" label="^Feb^February^Feb^" readOnly="true" />
+    <field name="TrxYear" type="Int32" label="^TrxYear^Trx Year^TrxYear^" allowNulls="false" isPrimaryKey="true" />
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProjectCode^Project Code^ProjectCode^" readOnly="true" length="50" isPrimaryKey="true" />
+    <field name="January" type="Decimal" allowNulls="false" label="^January^January^January^" readOnly="true" />
+    <field name="February" type="Decimal" allowNulls="false" label="^February^February^February^" readOnly="true" />
     <field name="March" type="Decimal" allowNulls="false" label="^March^March^March^" readOnly="true" />
     <field name="April" type="Decimal" allowNulls="false" label="^April^April^April^" readOnly="true" />
     <field name="May" type="Decimal" allowNulls="false" label="^May^May^May^" readOnly="true" />
     <field name="June" type="Decimal" allowNulls="false" label="^June^June^June^" readOnly="true" />
     <field name="July" type="Decimal" allowNulls="false" label="^July^July^July^" readOnly="true" />
-    <field name="August" type="Decimal" allowNulls="false" label="^Aug^August^Aug^" readOnly="true" />
-    <field name="September" type="Decimal" allowNulls="false" label="^Sep^September^Sep^" readOnly="true" />
-    <field name="October" type="Decimal" allowNulls="false" label="^Oct^October^Oct^" readOnly="true" />
-    <field name="November" type="Decimal" allowNulls="false" label="^Nov^November^Nov^" readOnly="true" />
-    <field name="December" type="Decimal" allowNulls="false" label="^Dec^December^Dec^" readOnly="true" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraAr^Branch Name^ABraAr^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABrAr^ABranch AR^ABrAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="August" type="Decimal" allowNulls="false" label="^August^August^August^" readOnly="true" />
+    <field name="September" type="Decimal" allowNulls="false" label="^September^September^September^" readOnly="true" />
+    <field name="October" type="Decimal" allowNulls="false" label="^October^October^October^" readOnly="true" />
+    <field name="November" type="Decimal" allowNulls="false" label="^November^November^November^" readOnly="true" />
+    <field name="December" type="Decimal" allowNulls="false" label="^December^December^December^" readOnly="true" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ZZ_Controller" type="String" label="XX Controller" computed="true">
+      <formula>'Profit_and_Loss_Project'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'Profit_and_Loss_Project_grid1'</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^GlTraLin^GL Transaction Line^GlTraLin^" filter="OPU_Code_Ln=@Session_OPU_Code " reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="GL Transaction Line" filter="OPU_Code_Ln=@Session_OPU_Code " reportTemplate="true" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
         <dataField fieldName="TrxYear" columns="15" />
@@ -98,12 +106,15 @@ FROM
         <dataField fieldName="October" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="November" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="December" dataFormatString="N2" columns="15" aggregate="Sum" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevGlTraLin^Review GL Transaction Line^RevGlTraLin^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review GL Transaction Line" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="GL Transaction Line" flow="NewColumn">
@@ -128,7 +139,7 @@ FROM
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewGlTraLin^New GL Transaction Line^NewGlTraLin^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New GL Transaction Line" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New GL Transaction Line" flow="NewColumn">
@@ -194,5 +205,11 @@ FROM
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintProjectWiseIncomeStatement" headerText="^PriSta^Print Statement^PriSta^" id="a100" cssClass="glyphicon glyphicon-report" />
+    </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Custom" commandArgument="PrintProjectWiseIncomeStatement" type="Code" phase="Execute" />
+  </businessRules>
 </dataController>

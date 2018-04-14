@@ -127,10 +127,10 @@ Namespace MyCompany.Models
         Private m_OPU_Code As Nullable(Of Integer)
         
         <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
-        Private m_Company_Code As Nullable(Of Integer)
+        Private m_Store_ID As Nullable(Of Integer)
         
         <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
-        Private m_Store_ID As Nullable(Of Integer)
+        Private m_Company_Code As Nullable(Of Integer)
         
         <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
         Private m_BranchCode As Nullable(Of Integer)
@@ -533,16 +533,6 @@ Namespace MyCompany.Models
             End Set
         End Property
         
-        Public Property Company_Code() As Nullable(Of Integer)
-            Get
-                Return m_Company_Code
-            End Get
-            Set
-                m_Company_Code = value
-                UpdateFieldValue("Company_Code", value)
-            End Set
-        End Property
-        
         Public Property Store_ID() As Nullable(Of Integer)
             Get
                 Return m_Store_ID
@@ -550,6 +540,16 @@ Namespace MyCompany.Models
             Set
                 m_Store_ID = value
                 UpdateFieldValue("Store_ID", value)
+            End Set
+        End Property
+        
+        Public Property Company_Code() As Nullable(Of Integer)
+            Get
+                Return m_Company_Code
+            End Get
+            Set
+                m_Company_Code = value
+                UpdateFieldValue("Company_Code", value)
             End Set
         End Property
         

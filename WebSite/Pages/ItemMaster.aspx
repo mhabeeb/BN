@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContentPlaceHolder" runat="Server">^ItemMaster^Item Master^ItemMaster^</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div data-flow="row">
-    <div id="view1" data-controller="ItemMaster" data-show-in-summary="true" data-show-view-selector="false" data-show-modal-forms="true" data-auto-highlight-first-row="true"></div>
+    <div id="view1" data-controller="ItemMaster" data-show-in-summary="true" data-refresh-interval="15" data-show-view-selector="false" data-show-modal-forms="true" data-auto-highlight-first-row="true"></div>
     <div data-activator="Tab|^PurchaseRequisitions^View PR^PurchaseRequisitions^">
       <div id="view2" data-controller="View_PR_Lines" data-view="grid1" data-filter-source="view1" data-filter-fields="Item_Code" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
@@ -32,6 +32,9 @@
     </div>
     <div data-activator="Tab|^ViewAccounting^View Accounting^ViewAccounting^">
       <div id="view7" data-controller="ViewAccounting" data-filter-source="view1" data-filter-fields="Item_Code" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
+    </div>
+    <div data-activator="Tab|^Bin^Bin Location^Bin^">
+      <div id="view12" data-controller="tbl_Item_Warehouse" data-view="grid1" data-filter-source="view1" data-filter-fields="Item_Code" data-page-size="5" data-show-modal-forms="true"></div>
     </div>
   </div>
 </asp:Content>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="rpt_Tax_Ledger" conflictDetection="overwriteChanges" label="^RptTaxLed^rpt Tax Ledger^RptTaxLed^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="rpt_Tax_Ledger" conflictDetection="overwriteChanges" label="rpt Tax Ledger" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -25,25 +25,25 @@ from "dbo"."rpt_Tax_Ledger" "rpt_Tax_Ledger"
     </command>
   </commands>
   <fields>
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
-    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" showInSummary="true" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" showInSummary="true" />
-    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" showInSummary="true" />
-    <field name="Invoice_NO" type="Decimal" label="^InvNo^Invoice NO^InvNo^" showInSummary="true" />
-    <field name="Invoice_Date" type="DateTime" label="^InvDat^Invoice Date^InvDat^" />
-    <field name="Line_Remarks" type="String" label="^LInRem^Line Remarks^LInRem^" length="400" />
-    <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" />
-    <field name="PO_NO" type="Decimal" label="^PoNo^Po No^PoNo^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
-    <field name="INOUT_Tax_Amt" type="Decimal" label="^IntOutTaxamt^INOUT Tax Amt^IntOutTaxamt^" readOnly="true" />
-    <field name="Item_Desc" type="String" label="^ItmDes^Item Desc^ItmDes^" length="50" />
-    <field name="Item_Part" type="String" label="^ItmPar^Item Part^ItmPar^" length="50" />
-    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" />
-    <field name="Distribution_AccountID" type="String" label="^DisAccId^Distribution Account#^DisAccId^" length="50" />
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" />
+    <field name="Item_Code" type="String" label="Item Code" length="20" showInSummary="true" />
+    <field name="Qty" type="Decimal" label="Qty" showInSummary="true" />
+    <field name="Unit_Price" type="Decimal" label="Unit Price" showInSummary="true" />
+    <field name="Line_Total" type="Decimal" label="Line Total" showInSummary="true" />
+    <field name="Invoice_NO" type="Decimal" label="Invoice NO" showInSummary="true" />
+    <field name="Invoice_Date" type="DateTime" label="Invoice Date" />
+    <field name="Line_Remarks" type="String" label="Line Remarks" length="400" />
+    <field name="SO_NO" type="Decimal" label="So No" />
+    <field name="PO_NO" type="Decimal" label="Po No" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" length="150" />
+    <field name="INOUT_Tax_Amt" type="Decimal" label="INOUT Tax Amt" readOnly="true" />
+    <field name="Item_Desc" type="String" label="Item Desc" length="50" />
+    <field name="Item_Part" type="String" label="Item Part" length="50" />
+    <field name="UOM" type="String" label="Uom" length="10" />
+    <field name="Distribution_AccountID" type="String" label="Distribution Account#" length="50" />
+    <field name="APAR_Flag" type="Int32" label="APAR Flag" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RptTaxLed^rpt Tax Ledger^RptTaxLed^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="rpt Tax Ledger" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Item_Code" columns="20" />
@@ -58,7 +58,7 @@ from "dbo"."rpt_Tax_Ledger" "rpt_Tax_Ledger"
         <dataField fieldName="Vendor_Name" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRptTaxLed^Review rpt Tax Ledger^RevRptTaxLed^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review rpt Tax Ledger" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="rpt Tax Ledger" flow="NewColumn">
@@ -84,7 +84,7 @@ from "dbo"."rpt_Tax_Ledger" "rpt_Tax_Ledger"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTaxLed^New rpt Tax Ledger^NewTaxLed^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New rpt Tax Ledger" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New rpt Tax Ledger" flow="NewColumn">
@@ -136,7 +136,7 @@ from "dbo"."rpt_Tax_Ledger" "rpt_Tax_Ledger"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

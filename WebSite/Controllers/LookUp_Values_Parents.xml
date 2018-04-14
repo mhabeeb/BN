@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="LookUp_Values_Parents" conflictDetection="overwriteChanges" label="^LooValPar^LookUp_Values_Parents^LooValPar^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="LookUp_Values_Parents" conflictDetection="overwriteChanges" label="LookUp_Values_Parents" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="LookUp_Type" custom="true">
       <text><![CDATA[SELECT     LookUpType, Looup_Description, Created_DateTime, Updated_By, Created_By, Updated_DateTime,Module
@@ -9,13 +9,13 @@ WHERE     (ISNULL(Module, 0) = 1) OR
     </command>
   </commands>
   <fields>
-    <field name="LookUpType" type="Int32" allowNulls="false" isPrimaryKey="true" label="^LooTyp^Look Up Type^LooTyp^" readOnly="true" />
-    <field name="Looup_Description" type="String" label="^LooDes^Looup Description^LooDes^" length="100" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="Module" type="Int32" label="^Mod^Module^Mod^" allowNulls="false">
+    <field name="LookUpType" type="Int32" allowNulls="false" isPrimaryKey="true" label="^LookUpType^Look Up Type^LookUpType^" readOnly="true" />
+    <field name="Looup_Description" type="String" label="^LooupDescription^Looup Description^LooupDescription^" length="100" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" showInSummary="true" />
+    <field name="Module" type="Int32" label="^Module^Module^Module^" allowNulls="false">
       <items style="RadioButtonList">
         <item value="0" text="Global" />
         <item value="1" text="Fin/SCM" />
@@ -23,7 +23,7 @@ WHERE     (ISNULL(Module, 0) = 1) OR
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^LooUpType^Look Up Type^LooUpType^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Look Up Type" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="LookUpType" columns="15" />
@@ -35,11 +35,11 @@ WHERE     (ISNULL(Module, 0) = 1) OR
         <dataField fieldName="Module" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevLooUpTyp^Review Look Up Type^RevLooUpTyp^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Look Up Type" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Look Up Type" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevLooUpTyp^Review Look Up Type^RevLooUpTyp^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Looup_Description" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
@@ -51,11 +51,11 @@ WHERE     (ISNULL(Module, 0) = 1) OR
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewLooTyp^New Look Up Type^NewLooTyp^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Look Up Type" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Look Up Type" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewLooTyp^New Look Up Type^NewLooTyp^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Looup_Description" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
@@ -87,10 +87,10 @@ WHERE     (ISNULL(Module, 0) = 1) OR
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" whenClientScript="[Dummy] == 0" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

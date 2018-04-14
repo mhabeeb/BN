@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Team_Header" conflictDetection="overwriteChanges" label="^TeaHea^Team Header^TeaHea^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Team_Header" conflictDetection="overwriteChanges" label="Team Header" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -27,26 +27,26 @@ from "dbo"."Team_Header" "Team_Header"
     </command>
   </commands>
   <fields>
-    <field name="TeamID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^TeaId^Team#^TeaId^" readOnly="true" />
-    <field name="TotalTarget" type="Decimal" label="^TotTar^Total Target^TotTar^" showInSummary="true" />
-    <field name="TeamManager" type="Int32" label="^TeaMan^Team Manager^TeaMan^" showInSummary="true" />
-    <field name="Commission" type="Decimal" label="^Com^Commission^Com^" showInSummary="true" />
-    <field name="Created_By" type="Decimal" default="((-1))" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" default="(getdate())" label="^CreDat^Created Date Time^CreDat^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDat^Updated Date Time^UpdDat^" />
-    <field name="TeamType" type="Int32" label="^TeaTyp^Team Type^TeaTyp^" />
-    <field name="TeamName" type="String" label="^TeaNam^Team Name^TeaNam^" length="50" />
-    <field name="FieldManager" type="Int32" label="^FieMan^Field Manager^FieMan^" />
-    <field name="EscalationDays" type="Int32" label="^EscDay^Escalation Days^EscDay^" />
+    <field name="TeamID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Team#" readOnly="true" />
+    <field name="TotalTarget" type="Decimal" label="Total Target" showInSummary="true" />
+    <field name="TeamManager" type="Int32" label="Team Manager" showInSummary="true" />
+    <field name="Commission" type="Decimal" label="Commission" showInSummary="true" />
+    <field name="Created_By" type="Decimal" default="((-1))" label="Created By" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" default="(getdate())" label="Created Date Time" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="TeamType" type="Int32" label="Team Type" />
+    <field name="TeamName" type="String" label="Team Name" length="50" />
+    <field name="FieldManager" type="Int32" label="Field Manager" />
+    <field name="EscalationDays" type="Int32" label="Escalation Days" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^TeaHea^Team Header^TeaHea^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Team Header" showInSelector="false">
+      <headerText />
       <dataFields>
-        <dataField fieldName="TotalTarget" dataFormatString="c" columns="15" />
+        <dataField fieldName="TotalTarget" dataFormatString="N2" columns="15" />
         <dataField fieldName="TeamManager" columns="15" />
-        <dataField fieldName="Commission" dataFormatString="c" columns="15" />
+        <dataField fieldName="Commission" dataFormatString="N2" columns="15" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Updated_By" hidden="true" columns="15" />
@@ -54,17 +54,18 @@ from "dbo"."Team_Header" "Team_Header"
         <dataField fieldName="TeamType" columns="15" />
         <dataField fieldName="TeamName" columns="50" />
         <dataField fieldName="FieldManager" columns="15" />
+        <dataField fieldName="TeamID" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevTeaHea^Review Team Header^RevTeaHea^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Team Header" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Team Header" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevTeaHea^Review Team Header^RevTeaHea^" flow="NewColumn">
+          <description />
           <dataFields>
-            <dataField fieldName="TotalTarget" dataFormatString="c" columns="15" />
+            <dataField fieldName="TotalTarget" dataFormatString="N2" columns="15" />
             <dataField fieldName="TeamManager" columns="15" />
-            <dataField fieldName="Commission" dataFormatString="c" columns="15" />
+            <dataField fieldName="Commission" dataFormatString="N2" columns="15" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
@@ -77,15 +78,15 @@ from "dbo"."Team_Header" "Team_Header"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTeamHea^New Team Header^NewTeamHea^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Team Header" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Team Header" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewTeamHea^New Team Header^NewTeamHea^" flow="NewColumn">
+          <description />
           <dataFields>
-            <dataField fieldName="TotalTarget" dataFormatString="c" columns="15" />
+            <dataField fieldName="TotalTarget" dataFormatString="N2" columns="15" />
             <dataField fieldName="TeamManager" columns="15" />
-            <dataField fieldName="Commission" dataFormatString="c" columns="15" />
+            <dataField fieldName="Commission" dataFormatString="N2" columns="15" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
@@ -124,10 +125,10 @@ from "dbo"."Team_Header" "Team_Header"
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

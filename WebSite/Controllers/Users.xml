@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Users" conflictDetection="overwriteChanges" label="^Use^Users^Use^" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.UsersBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Users" conflictDetection="overwriteChanges" label="Users" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.UsersBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Users" custom="true">
       <text><![CDATA[SELECT * FROM Users where UserName NOT IN ('adminsu', 'sysadmin')
@@ -8,85 +8,98 @@
   </commands>
   <fields>
     <field name="UserID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^UseId^User#^UseId^" readOnly="true" />
-    <field name="UserFullName" type="String" allowNulls="false" label="^UseFullNam^User Full Name^UseFullNam^" htmlEncode="false" hidden="false" length="150" />
-    <field name="UserName" type="String" allowNulls="false" label="^UseNam^User Name^UseNam^" length="128" />
-    <field name="Password" type="String" allowNulls="false" label="^Pas^Password^Pas^" length="128" />
-    <field name="Email" type="String" label="^Emai^Email^Emai^" length="128" />
-    <field name="Comment" type="String" allowQBE="false" allowSorting="false" label="^Com^Comment^Com^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^Primary Branch^OpuCod^" allowNulls="false">
+    <field name="UserFullName" type="String" allowNulls="false" label="^UserFullName^User Full Name^UserFullName^" htmlEncode="false" hidden="false" length="150" />
+    <field name="UserName" type="String" allowNulls="false" label="^UserName^User Name^UserName^" length="128" />
+    <field name="Password" type="String" allowNulls="false" label="^Password^Password^Password^" length="128" />
+    <field name="Email" type="String" label="^Email^Email^Email^" length="128" />
+    <field name="Comment" type="String" allowQBE="false" allowSorting="false" label="^Comment^Comment^Comment^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^PrimaryBranch^Primary Branch^PrimaryBranch^" allowNulls="false">
       <items dataView="grid1" copy="Company_Code=CompanyID" style="Lookup" dataController="Pick_Branch" dataTextField="BranchID" dataValueField="BranchID" />
     </field>
-    <field name="Company_Code" type="Int32" label="^CompCod^Company Code^CompCod^" />
-    <field name="Store_ID" type="Int32" label="^StoId^Store#^StoId^" contextFields="OPU_Code=OPU_Code" allowQBE="false" allowSorting="false">
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="Store_ID" type="Int32" label="^Store^Store#^Store^" contextFields="OPU_Code=OPU_Code" allowQBE="false" allowSorting="false">
       <items style="DropDownList" dataController="Pick_Store" dataView="grid1" dataTextField="Store_Name" dataValueField="Store_ID" />
     </field>
-    <field name="Price_List_Name" type="String" allowNulls="false" label="^PriLisName^Price List Name^PriLisName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+    <field name="Price_List_Name" type="String" allowNulls="false" label="^PriceListName^Price List Name^PriceListName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="Lookup" dataController="tbl_Price_List_Master" dataView="grid1" dataTextField="Price_List_Name" dataValueField="Price_List_Name" />
     </field>
-    <field name="IsSalesTeamYN" type="Int32" allowNulls="false" label="^IsSalTeaYn^Is Sales Team YN^IsSalTeaYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="IsSalesTeamYN" type="Int32" allowNulls="false" label="^IsSalesTeamYN^Is Sales Team YN^IsSalesTeamYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="IsReadOnly" type="Int32" allowNulls="false" label="^IsReaOnl^Is Read Only^IsReaOnl^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="IsReadOnly" type="Int32" allowNulls="false" label="^IsReadOnly^Is Read Only^IsReadOnly^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="IsWriteOnly" type="Int32" allowNulls="false" label="^IsWriOnl^Is Write Only^IsWriOnl^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="IsWriteOnly" type="Int32" allowNulls="false" label="^IsWriteOnly^Is Write Only^IsWriteOnly^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Report_To" type="Int32" label="^RepTo^Report To-Direct Manager^RepTo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Report_To" type="Int32" label="^ReportTo^Report To-Direct Manager^ReportTo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDat^Created Date Time^CreDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDat^Updated Date Time^UpdDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
-    <field name="PasswordQuestion" type="String" label="^PasQue^Password Question^PasQue^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="256" />
-    <field name="PasswordAnswer" type="String" label="^PasAns^Password Answer^PasAns^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="128" />
-    <field name="IsApproved" type="Int16" allowNulls="false" label="^IsApp^Is Approved^IsApp^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
+    <field name="PasswordQuestion" type="String" label="^PQn^Password Question^PQn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="256" />
+    <field name="PasswordAnswer" type="String" label="^PAns^Password Answer^PAns^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="128" />
+    <field name="IsApproved" type="Int16" allowNulls="false" label="^IsApproved^Is Approved^IsApproved^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="LastActivityDate" type="DateTime" label="^LasActDat^Last Activity Date^LasActDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="LastLoginDate" type="DateTime" label="^LasLogDat^Last Login Date^LasLogDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="LastPasswordChangedDate" type="DateTime" label="^LasPasChaDat^Last Password Changed Date^LasPasChaDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="CreationDate" type="DateTime" label="^CreDat^Creation Date^CreDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="IsLockedOut" type="Int16" label="^IsLocOut^Is Locked Out^IsLocOut^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="LastActivityDate" type="DateTime" label="^LAD^Last Activity Date^LAD^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="LastLoginDate" type="DateTime" label="^LLD^Last Login Date^LLD^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="LastPasswordChangedDate" type="DateTime" label="^LPCD^Last Password Changed Date^LPCD^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="CreationDate" type="DateTime" label="^CreationDate^Creation Date^CreationDate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="IsLockedOut" type="Int16" label="^IsLockedOut^Is Locked Out^IsLockedOut^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="LastLockedOutDate" type="DateTime" label="^LasLocOutDat^Last Locked Out Date^LasLocOutDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="FailedPasswordAttemptCount" type="Int16" allowNulls="false" label="^FaiPasAttCou^Failed Password Attempt Count^FaiPasAttCou^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="FailedPasswordAttemptWindowStart" type="DateTime" label="^FaiPasAttWinSta^Failed Password Attempt Window Start^FaiPasAttWinSta^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="FailedPasswordAnswerAttemptCount" type="Int16" label="^FailPasAnsAttWinCou^Failed Password Answer Attempt Count^FailPasAnsAttWinCou^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="FailedPasswordAnswerAttemptWindowStart" type="DateTime" label="^FaiPasAnsAttWinSta^Failed Password Answer Attempt Window Start^FaiPasAnsAttWinSta^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="CashBankID" type="Decimal" label="^CasBanId^Cash Bank^CasBanId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="LastLockedOutDate" type="DateTime" label="^LLOD^Last Locked Out Date^LLOD^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="FailedPasswordAttemptCount" type="Int16" allowNulls="false" label="^FPAC^Failed Password Attempt Count^FPAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="FailedPasswordAttemptWindowStart" type="DateTime" label="^FPAWS^Failed Password Attempt Window Start^FPAWS^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="FailedPasswordAnswerAttemptCount" type="Int16" label="^FPAAC^Failed Password Answer Attempt Count^FPAAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="FailedPasswordAnswerAttemptWindowStart" type="DateTime" label="^FPAAWS^Failed Password Answer Attempt Window Start^FPAAWS^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="CashBankID" type="Decimal" label="^CashBank^Cash Bank^CashBank^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="DropDownList" dataController="Pick_Bank" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" />
     </field>
     <field name="Rpt_Group_ID" type="Int16" label="^RptGroupID^Rpt Group ID^RptGroupID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="DropDownList" dataController="Rpt_Group_Information" dataView="grid1" dataTextField="Rpt_Group_Name" dataValueField="Rpt_Group_ID" />
     </field>
-    <field name="DefaultProject" type="String" label="^DefPro^Default Project^DefPro^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+    <field name="DefaultProject" type="String" label="^DefaultProject^Default Project^DefaultProject^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="DropDownList" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
       <formula>SELECT @Session_BranchName </formula>
     </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABranchAR^ABranch AR^ABranchAR^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="UserProfile" type="Byte[]" label="^UsePro^User Profile^UsePro^" sourceFields="UserID" onDemand="true" onDemandHandler="UsersUserProfile" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Use^Users^Use^" reportTemplate="true" sortExpression="UserID DESC" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Users" reportTemplate="true" sortExpression="UserID DESC" showInSelector="false">
       <headerText />
       <dataFields>
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="UserFullName" rows="5" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="UserFullName" rows="5" />
         <dataField fieldName="UserID" columns="15" />
         <dataField fieldName="UserName" />
         <dataField fieldName="Email" />
@@ -94,20 +107,21 @@
         <dataField fieldName="OPU_Code" columns="15" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="Store_ID" columns="15" />
-        <dataField fieldName="Created_By" columns="15" hidden="true" />
         <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
         <dataField fieldName="Updated_By" columns="15" hidden="true" />
+        <dataField fieldName="Created_By" columns="15" hidden="true" />
         <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
         <dataField fieldName="Rpt_Group_ID" columns="15" />
         <dataField fieldName="IsReadOnly" columns="15" />
         <dataField fieldName="IsWriteOnly" columns="15" />
+        <dataField fieldName="UserProfile" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevUse^Review Users^RevUse^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Users" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Users" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^Users^Edit Users^Users^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="UserFullName" rows="1" columns="50" />
             <dataField fieldName="UserName" />
@@ -118,47 +132,48 @@
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
             <dataField fieldName="Price_List_Name" columns="50" />
             <dataField fieldName="IsSalesTeamYN" />
-            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Store_ID" columns="15" hidden="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="DefaultProject" columns="50" />
           </dataFields>
         </category>
-        <category headerText="Permission" id="c2">
+        <category headerText="^Permission^Permission^Permission^" id="c2">
           <dataFields>
             <dataField fieldName="IsReadOnly" columns="15" />
             <dataField fieldName="IsWriteOnly" columns="15" />
-            <dataField fieldName="Created_By" columns="15" hidden="true" />
-            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
-            <dataField fieldName="Updated_By" columns="15" hidden="true" />
             <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
-            <dataField fieldName="PasswordQuestion" columns="25" />
-            <dataField fieldName="PasswordAnswer" columns="25" />
+            <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
             <dataField fieldName="IsApproved" columns="15" />
+            <dataField fieldName="PasswordAnswer" columns="25" />
+            <dataField fieldName="PasswordQuestion" columns="25" />
             <dataField fieldName="IsLockedOut" columns="15" />
           </dataFields>
         </category>
-        <category headerText="Auditing Information" id="c3">
+        <category headerText="^AudInf^Auditing Information^AudInf^" id="c3">
           <dataFields>
-            <dataField fieldName="LastActivityDate" columns="10" readOnly="true" />
-            <dataField fieldName="LastLoginDate" columns="10" readOnly="true" />
             <dataField fieldName="LastPasswordChangedDate" columns="10" readOnly="true" />
+            <dataField fieldName="LastLoginDate" columns="10" readOnly="true" />
+            <dataField fieldName="LastActivityDate" columns="10" readOnly="true" />
             <dataField fieldName="CreationDate" columns="10" readOnly="true" />
-            <dataField fieldName="LastLockedOutDate" columns="10" readOnly="true" />
-            <dataField fieldName="FailedPasswordAttemptCount" columns="15" readOnly="true" />
-            <dataField fieldName="FailedPasswordAttemptWindowStart" columns="10" readOnly="true" />
             <dataField fieldName="FailedPasswordAnswerAttemptCount" columns="15" readOnly="true" />
             <dataField fieldName="FailedPasswordAnswerAttemptWindowStart" columns="10" readOnly="true" />
-            <dataField fieldName="CashBankID" columns="15" />
-            <dataField fieldName="Rpt_Group_ID" columns="15" />
+            <dataField fieldName="FailedPasswordAttemptWindowStart" columns="10" readOnly="true" />
+            <dataField fieldName="LastLockedOutDate" columns="10" readOnly="true" />
+            <dataField fieldName="FailedPasswordAttemptCount" columns="15" readOnly="true" />
+            <dataField fieldName="CashBankID" columns="15" hidden="true" />
+            <dataField fieldName="Rpt_Group_ID" columns="15" hidden="true" />
+            <dataField fieldName="UserProfile" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewUse^New Users^NewUse^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Users" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Users" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewUse^New Users^NewUse^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="UserName" />
             <dataField fieldName="Password" textMode="Password" />
@@ -174,41 +189,42 @@
             <dataField fieldName="IsSalesTeamYN" />
           </dataFields>
         </category>
-        <category headerText="Permission" id="c2">
+        <category headerText="^Permission^Permission^Permission^" id="c2">
           <dataFields>
-            <dataField fieldName="IsReadOnly" columns="15" />
             <dataField fieldName="IsWriteOnly" columns="15" />
-            <dataField fieldName="Created_By" columns="15" hidden="true" />
+            <dataField fieldName="IsReadOnly" columns="15" />
             <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
-            <dataField fieldName="Updated_By" columns="15" hidden="true" />
+            <dataField fieldName="Created_By" columns="15" hidden="true" />
             <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
-            <dataField fieldName="PasswordQuestion" columns="25" />
-            <dataField fieldName="PasswordAnswer" columns="25" />
-            <dataField fieldName="IsApproved" columns="15" hidden="true" />
-            <dataField fieldName="LastActivityDate" columns="10" hidden="true" />
-            <dataField fieldName="LastLoginDate" columns="10" hidden="true" />
-            <dataField fieldName="LastPasswordChangedDate" columns="10" hidden="true" />
-            <dataField fieldName="CreationDate" columns="10" hidden="true" />
-            <dataField fieldName="IsLockedOut" columns="15" hidden="true" />
-            <dataField fieldName="LastLockedOutDate" columns="10" hidden="true" />
+            <dataField fieldName="Updated_By" columns="15" hidden="true" />
             <dataField fieldName="FailedPasswordAttemptCount" columns="15" hidden="true" />
-            <dataField fieldName="FailedPasswordAttemptWindowStart" columns="10" hidden="true" />
-            <dataField fieldName="FailedPasswordAnswerAttemptCount" columns="15" hidden="true" />
+            <dataField fieldName="LastLockedOutDate" columns="10" hidden="true" />
+            <dataField fieldName="IsLockedOut" columns="15" hidden="true" />
             <dataField fieldName="FailedPasswordAnswerAttemptWindowStart" columns="10" hidden="true" />
-            <dataField fieldName="CashBankID" columns="15" />
-            <dataField fieldName="Rpt_Group_ID" columns="15" />
+            <dataField fieldName="FailedPasswordAnswerAttemptCount" columns="15" hidden="true" />
+            <dataField fieldName="FailedPasswordAttemptWindowStart" columns="10" hidden="true" />
+            <dataField fieldName="CreationDate" columns="10" hidden="true" />
+            <dataField fieldName="IsApproved" columns="15" hidden="true" />
+            <dataField fieldName="PasswordAnswer" columns="25" />
+            <dataField fieldName="PasswordQuestion" columns="25" />
+            <dataField fieldName="LastPasswordChangedDate" columns="10" hidden="true" />
+            <dataField fieldName="LastLoginDate" columns="10" hidden="true" />
+            <dataField fieldName="LastActivityDate" columns="10" hidden="true" />
+            <dataField fieldName="CashBankID" columns="15" hidden="true" />
+            <dataField fieldName="Rpt_Group_ID" columns="15" hidden="true" />
+            <dataField fieldName="UserProfile" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
+    <view id="About" commandId="command1" type="Form" label="Record History" showInSelector="false">
       <categories>
-        <category id="c1" headerText="Users" flow="NewColumn">
+        <category id="c1" headerText="^Users^Users^Users^" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Created_By" columns="15" />
             <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
-            <dataField fieldName="Updated_By" columns="15" />
             <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Created_By" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -233,10 +249,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -267,11 +283,11 @@
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
-    <actionGroup id="ag102" scope="ActionBar" headerText="About Record" flat="true">
-      <action commandName="EditModal" commandArgument="About" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />
+    <actionGroup id="ag102" scope="ActionBar" headerText="^AboRec^About Record^AboRec^" flat="true">
+      <action commandName="EditModal" commandArgument="About" headerText="^AboRec^About Record^AboRec^" id="a100" cssClass="glyphicon-eye-open" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Archival Messages" flat="true">
-      <action commandName="SQL" headerText="Archive Messages" id="a100">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^ArcMes^Archival Messages^ArcMes^" flat="true">
+      <action commandName="SQL" headerText="^ArcMes^Archival Messages^ArcMes^" id="a100" cssClass="glyphicon glyphicon-floppy-saved">
         <data><![CDATA[EXEC dbo.ARACHIVE_INBOX_DATA]]></data>
       </action>
     </actionGroup>
@@ -292,7 +308,7 @@
     SET @FailedPasswordAnswerAttemptWindowStart=GETDATE()
 	--EXEC DB_LIST_UPDATE @Password, @UserName]]></rule>
     <rule id="r101" commandName="Update" type="Sql" phase="Before"><![CDATA[--EXEC DB_LIST_UPDATE @Password, @UserName]]></rule>
-    <rule id="r100" commandName="Insert|Update" type="Code" phase="Before" />
+    <rule id="r100" commandName="Insert|Update" type="Code" phase="Before"><![CDATA[]]></rule>
     <rule id="r104" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @OPU_Code=@Session_OPU_Code
 SET @Price_List_Name='Standard'
 SET @IsSalesTeamYN=0

@@ -11,7 +11,7 @@ Partial Public Class Pages_OtherApplications
     
     Public ReadOnly Property CssClass() As String
         Get
-            Return ""
+            Return "Wide"
         End Get
     End Property
     

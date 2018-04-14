@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="rpt_Item_Category" conflictDetection="overwriteChanges" label="^RptItmCat^rpt Item Category^RptItmCat^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="rpt_Item_Category" conflictDetection="overwriteChanges" label="rpt Item Category" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -15,15 +15,15 @@ from "dbo"."rpt_Item_Category" "rpt_Item_Category"
     </command>
   </commands>
   <fields>
-    <field name="Item_Category" type="String" allowNulls="false" label="^IteCat^Item Category^IteCat^" length="255" showInSummary="true" />
-    <field name="Item_Category_Major" type="String" label="^IteCatMaj^Item Category Major^IteCatMaj^" length="255" showInSummary="true" />
-    <field name="MajorYN" type="Int32" label="^MajYN^Major YN^MajYN^" showInSummary="true" />
-    <field name="Category_Details" type="String" allowQBE="false" allowSorting="false" label="^CatDet^Category Details^CatDet^" showInSummary="true" />
-    <field name="CategoryType" type="Int32" label="^CatTyp^Category Type^CatTyp^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="Item_Category" type="String" allowNulls="false" label="Item Category" length="255" showInSummary="true" />
+    <field name="Item_Category_Major" type="String" label="Item Category Major" length="255" showInSummary="true" />
+    <field name="MajorYN" type="Int32" label="Major YN" showInSummary="true" />
+    <field name="Category_Details" type="String" allowQBE="false" allowSorting="false" label="Category Details" showInSummary="true" />
+    <field name="CategoryType" type="Int32" label="Category Type" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RptItmCat^rpt Item Category^RptItmCat^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="rpt Item Category" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Item_Category" />
@@ -34,7 +34,7 @@ from "dbo"."rpt_Item_Category" "rpt_Item_Category"
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRptItmCat^Review rpt Item Category^RevRptItmCat^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review rpt Item Category" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="rpt Item Category" flow="NewColumn">
@@ -50,7 +50,7 @@ from "dbo"."rpt_Item_Category" "rpt_Item_Category"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRptIteCat^New rpt Item Category^NewRptIteCat^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New rpt Item Category" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New rpt Item Category" flow="NewColumn">
@@ -93,7 +93,7 @@ from "dbo"."rpt_Item_Category" "rpt_Item_Category"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

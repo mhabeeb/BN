@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="TBL_EmailInBox" conflictDetection="overwriteChanges" label="^EmaInBox^Email In Box^EmaInBox^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="TBL_EmailInBox" conflictDetection="overwriteChanges" label="TBL Email In Box" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -25,19 +25,19 @@ from "dbo"."TBL_EmailInBox" "TBL_EmailInBox"
     </command>
   </commands>
   <fields>
-    <field name="Mail_From" type="String" allowQBE="false" allowSorting="false" label="^MaiFro^Mail From^MaiFro^" length="2000" showInSummary="true" />
-    <field name="CreatedDateTime" type="DateTime" default="(getdate())" label="^CreDat^Created Date Time^CreDat^" showInSummary="true" />
-    <field name="Subject" type="String" allowQBE="false" allowSorting="false" label="^Sub^Subject^Sub^" length="2000" showInSummary="true" />
-    <field name="Mail_To" type="String" allowQBE="false" allowSorting="false" label="^MaiTo^Mail To^MaiTo^" length="2000" showInSummary="true" />
-    <field name="Mail_Message" type="String" allowQBE="false" allowSorting="false" label="^MaiMes^Mail Message^MaiMes^" showInSummary="true" />
-    <field name="EmailInID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^EmaiInId^Email In#^EmaiInId^" readOnly="true" />
-    <field name="ReadUnread" type="Int32" default="((0))" label="^ReaUnre^Read Unread^ReaUnre^" />
-    <field name="SeenDate" type="DateTime" label="^SeeDat^Seen Date^SeeDat^" />
+    <field name="Mail_From" type="String" allowQBE="false" allowSorting="false" label="^MailFrom^Mail From^MailFrom^" length="2000" showInSummary="true" />
+    <field name="CreatedDateTime" type="DateTime" default="(getdate())" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Subject" type="String" allowQBE="false" allowSorting="false" label="^Subject^Subject^Subject^" length="2000" showInSummary="true" />
+    <field name="Mail_To" type="String" allowQBE="false" allowSorting="false" label="^MailTo^Mail To^MailTo^" length="2000" showInSummary="true" />
+    <field name="Mail_Message" type="String" allowQBE="false" allowSorting="false" label="^MailMessage^Mail Message^MailMessage^" showInSummary="true" />
+    <field name="EmailInID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^EmailIn^Email In#^EmailIn^" readOnly="true" />
+    <field name="ReadUnread" type="Int32" default="((0))" label="^ReadUnread^Read Unread^ReadUnread^" />
+    <field name="SeenDate" type="DateTime" label="^SeenDate^Seen Date^SeenDate^" />
     <field name="URL" type="String" label="^Url^Url^Url^" length="150" />
-    <field name="DocumentID" type="Decimal" label="^DocId^Document#^DocId^" />
+    <field name="DocumentID" type="Decimal" label="^Document^Document#^Document^" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^EmaiInBox^Email In Box^EmaiInBox^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="TBL Email In Box" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Mail_From" rows="5" />
@@ -51,7 +51,7 @@ from "dbo"."TBL_EmailInBox" "TBL_EmailInBox"
         <dataField fieldName="DocumentID" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevEmaiInBox^Review Email In Box^RevEmaiInBox^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review TBL Email In Box" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="TBL Email In Box" flow="NewColumn">
@@ -70,7 +70,7 @@ from "dbo"."TBL_EmailInBox" "TBL_EmailInBox"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewEmaiInBox^New Email In Box^NewEmaiInBox^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New TBL Email In Box" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New TBL Email In Box" flow="NewColumn">
@@ -115,7 +115,7 @@ from "dbo"."TBL_EmailInBox" "TBL_EmailInBox"
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

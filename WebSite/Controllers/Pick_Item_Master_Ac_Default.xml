@@ -1,47 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Item_Master_Ac_Default" conflictDetection="overwriteChanges" label="^PicIteMasAcDef^Pick_Item_Master_Ac_Default^PicIteMasAcDef^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Item_Master_Ac_Default" conflictDetection="overwriteChanges" label="Pick_Item_Master_Ac_Default" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.tbl_Item_Master" custom="true">
-      <text><![CDATA[SELECT        dbo.tbl_Item_Master.Item_Code, dbo.tbl_Item_Master.Part_No, dbo.tbl_Item_Master.Item_Description, dbo.tbl_Item_Master.UOM, 
-                         dbo.tbl_Item_Master.Item_Category, dbo.tbl_Item_Master.Bin_Location, dbo.tbl_Item_Master.BranchID, dbo.tbl_Item_Master.IsAssets, 
-                         dbo.tbl_Item_Master.Stock_On_Hand, dbo.tbl_Item_Master.IsItemSerialized, dbo.tbl_Item_Master.IsServiceItem, dbo.Default_Accouts.AccountID, 
-                         dbo.Default_Accouts.S1, dbo.Default_Accouts.S2, dbo.Default_Accouts.S3, dbo.Default_Accouts.S4, dbo.Default_Accouts.S5, dbo.Default_Accouts.S6, 
-                         dbo.Default_Accouts.S7, dbo.Default_Accouts.S8, dbo.Default_Accouts.S9, dbo.Default_Accouts.DefaultID
-FROM            dbo.Default_Accouts INNER JOIN
-                         dbo.tbl_Item_Master ON dbo.Default_Accouts.Item_Code = dbo.tbl_Item_Master.Item_Code AND 
-                         dbo.Default_Accouts.OPU_Code = dbo.tbl_Item_Master.BranchID
-WHERE        (dbo.Default_Accouts.DefaultID IN (6, 8))]]></text>
+      <text><![CDATA[SELECT * FROM C_ItemMaster_Pick]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" isPrimaryKey="true" />
-    <field name="Part_No" type="String" label="^ParNo^Part No^ParNo^" length="20" showInSummary="true" />
-    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" showInSummary="true" />
-    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" showInSummary="true" />
-    <field name="Item_Category" type="String" label="^IteCat^Item Category^IteCat^" length="255" showInSummary="true" />
-    <field name="Bin_Location" type="String" label="^BinLoc^Bin Location^BinLoc^" length="50" />
-    <field name="BranchID" type="Int32" label="^BraId^Branch#^BraId^" />
-    <field name="IsAssets" type="Int32" label="^IsAss^Is Assets^IsAss^" />
-    <field name="Stock_On_Hand" type="Decimal" label="^StoOnHan^Stock On Hand^StoOnHan^" dataFormatString="N2" />
-    <field name="IsItemSerialized" type="Int32" label="^IsIteSer^Is Item Serialized^IsIteSer^" />
-    <field name="IsServiceItem" type="Int32" label="^IsSerIte^Is Service Item^IsSerIte^" />
-    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" />
-    <field name="S1" type="String" label="^S1^S1^S1^" length="50" />
-    <field name="S2" type="String" label="^S2^S2^S2^" length="50" />
-    <field name="S3" type="String" label="^S3^S3^S3^" length="50" />
-    <field name="S4" type="String" label="^S4^S4^S4^" length="50" />
-    <field name="S5" type="String" label="^S5^S5^S5^" length="50" />
-    <field name="S6" type="String" label="^S6^S6^S6^" length="50" />
-    <field name="S7" type="String" label="^S7^S7^S7^" length="50" />
-    <field name="S8" type="String" label="^S8^S8^S8^" length="50" />
-    <field name="S9" type="String" label="^S9^S9^S9^" length="50" />
-    <field name="DefaultID" type="Decimal" allowNulls="false" label="^DefId^Default^DefId^" />
+    <field name="Item_Code" type="String" allowNulls="false" label="Item Code" length="20" showInSummary="true" isPrimaryKey="true" />
+    <field name="Part_No" type="String" label="Part No" length="20" showInSummary="true" />
+    <field name="Item_Description" type="String" label="Item Description" length="500" showInSummary="true" />
+    <field name="Item_Code_Ref_No" type="String" label="Item Code Ref No" length="20" />
+    <field name="UOM" type="String" label="Uom" length="10" showInSummary="true" />
+    <field name="Item_Category" type="String" label="Item Category" length="255" showInSummary="true" />
+    <field name="Bin_Location" type="String" label="Bin Location" length="50" />
+    <field name="BranchID" type="Int32" label="Branch#" />
+    <field name="IsAssets" type="Int32" label="Is Assets" />
+    <field name="Stock_On_Hand" type="Decimal" label="Stock On Hand" dataFormatString="N2" />
+    <field name="IsItemSerialized" type="Int32" label="Is Item Serialized" />
+    <field name="IsServiceItem" type="Int32" label="Is Service Item" />
+    <field name="AccountID" type="String" label="Account#" length="50" />
+    <field name="S1" type="String" label="S1" length="50" />
+    <field name="S2" type="String" label="S2" length="50" />
+    <field name="S3" type="String" label="S3" length="50" />
+    <field name="S4" type="String" label="S4" length="50" />
+    <field name="S5" type="String" label="S5" length="50" />
+    <field name="S6" type="String" label="S6" length="50" />
+    <field name="S7" type="String" label="S7" length="50" />
+    <field name="S8" type="String" label="S8" length="50" />
+    <field name="S9" type="String" label="S9" length="50" />
+    <field name="DefaultID" type="Decimal" allowNulls="false" label="Default" />
+    <field name="BudgetAccount" type="String" label="Budget Account" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="ItemMaster" showInSelector="false" filter="BranchID=@Session_OPU_Code">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Item Master" showInSelector="false" filter="BranchID=@Session_OPU_Code">
+      <headerText />
       <dataFields>
-        <dataField fieldName="Item_Code" columns="20" />
+        <dataField fieldName="Item_Code_Ref_No" columns="20" />
         <dataField fieldName="Part_No" columns="20" hidden="true" />
         <dataField fieldName="Item_Description" />
         <dataField fieldName="UOM" columns="10" />
@@ -62,11 +56,13 @@ WHERE        (dbo.Default_Accouts.DefaultID IN (6, 8))]]></text>
         <dataField fieldName="S7" columns="50" hidden="true" />
         <dataField fieldName="S8" columns="50" hidden="true" />
         <dataField fieldName="S9" columns="50" hidden="true" />
+        <dataField fieldName="Item_Code" columns="20" />
         <dataField fieldName="DefaultID" columns="15" hidden="true" />
+        <dataField fieldName="BudgetAccount" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIteMas^Review Item Master^RevIteMas^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review dbo tbl Item Master" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="dbo tbl Item Master" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -97,8 +93,8 @@ WHERE        (dbo.Default_Accouts.DefaultID IN (6, 8))]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewIteMas^New Item Master^NewIteMas^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New dbo tbl Item Master" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New dbo tbl Item Master" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -158,7 +154,7 @@ WHERE        (dbo.Default_Accouts.DefaultID IN (6, 8))]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

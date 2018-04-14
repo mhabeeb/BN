@@ -1,18 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Tax_Code_Setup" conflictDetection="overwriteChanges" label="^TaxCodSet^Tax_Code_Setup^TaxCodSet^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Tax_Code_Setup" conflictDetection="overwriteChanges" label="Tax_Code_Setup" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.Tax_Code_SetupBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Tax_Code_Setup" custom="true">
-      <text><![CDATA[SELECT * FROM Tax_Code_Setup]]></text>
+      <text><![CDATA[SELECT Tax_Code_Setup .*,CAST(Tax_Code_Setup.Tax_Code as varchar(50)) 
+"ZZ_Filter_Value"  FROM Tax_Code_Setup
+
+
+
+
+
+
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Tax_Code" type="Int32" allowNulls="false" isPrimaryKey="true" label="^TaxCod^Tax Code^TaxCod^" readOnly="true" />
-    <field name="Tax_Desc" type="String" label="^TaxDes^Tax Desc^TaxDes^" length="255" showInSummary="true" />
+    <field name="Tax_Code" type="Int32" allowNulls="false" isPrimaryKey="true" label="^TaxCode^Tax Code^TaxCode^" readOnly="true" />
+    <field name="Tax_Desc" type="String" label="^TaxDesc^Tax Desc^TaxDesc^" length="255" showInSummary="true" />
     <field name="Tax_Payable_AC" type="String" label="^TaxPayAC^Tax Payable AC^TaxPayAC^" length="50" showInSummary="true">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Tax_Input_Credit_AC" type="String" label="^TICAC^Tax AC^TICAC^" length="50" showInSummary="true">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    <field name="Tax_Input_Credit_AC" type="String" label="^TICAC^Tax AC^TICAC^" length="50" showInSummary="true" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
     <field name="TaxInPutYN" type="Int32" label="^TIPYN^Tax In Put YN^TIPYN^" showInSummary="true" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
@@ -20,25 +28,33 @@
     <field name="TaxOutPutYN" type="Int32" label="^TOPYN^Tax Out Put YN^TOPYN^" showInSummary="true" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="BranchID" type="Int32" label="^BraId^Branch#^BraId^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CrtDatTim^Created Date Time^CrtDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" allowNulls="false">
+    <field name="BranchID" type="Int32" label="^Branch^Branch#^Branch^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CrtdDtTm^Created Date Time^CrtdDtTm^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdtdDtTm^Updated Date Time^UpdtdDtTm^" />
+    <field name="InActive" type="Int32" label="^InActive^In Active^InActive^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Tax_Type" type="String" allowNulls="false" label="^TaxTyp^Tax Type^TaxTyp^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
+    <field name="Tax_Type" type="String" allowNulls="false" label="^TaxType^Tax Type^TaxType^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50">
       <items style="RadioButtonList" dataController="Pick_Tax_Type" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
     </field>
     <field name="IsIntegratedYN" type="Int32" allowNulls="false" label="^IsIYN^Is Integrated YN^IsIYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
+    <field name="ZZ_Controller" type="String" label="Controller" computed="true">
+      <formula>'Tax_Code_Setup'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'Tax_Code_Setup_grid1'</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^TaxCodSet^Tax Code Setup^TaxCodSet^" filter="BranchID=@Session_OPU_Code" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Tax Code Setup" filter="BranchID=@Session_OPU_Code" showInSelector="false" reportTemplate="true">
+      <headerText />
       <dataFields>
+        <dataField fieldName="Tax_Code" columns="15" />
         <dataField fieldName="Tax_Desc" />
         <dataField fieldName="Tax_Payable_AC" columns="50" hidden="true" />
         <dataField fieldName="Tax_Input_Credit_AC" columns="50" />
@@ -50,13 +66,16 @@
         <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="InActive" columns="15" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevTaxCodSet^Review Tax Code Setup^RevTaxCodSet^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Tax Code Setup" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Tax Code Setup" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevTaxCodSet^Review Tax Code Setup^RevTaxCodSet^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Tax_Type" columns="25" rows="3" />
             <dataField fieldName="Tax_Desc" />
@@ -75,11 +94,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTaxCodSet^New Tax Code Setup^NewTaxCodSet^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Tax Code Setup" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Tax Code Setup" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewTaxCodSet^New Tax Code Setup^NewTaxCodSet^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Tax_Type" columns="25" rows="3" />
             <dataField fieldName="Tax_Desc" />
@@ -120,11 +139,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" headerText="^NewTaxCodSet^New Tax Code Setup^NewTaxCodSet^" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="&#x9;glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -156,11 +174,15 @@
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
       <action id="a2" commandName="Delete" />
     </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintTaxCodeSetup" headerText="^PriTax^Print Tax CodeSetup^PriTax^" id="a100" cssClass="&#x9;glyphicon glyphicon-print" />
+    </actionGroup>
   </actions>
   <businessRules>
     <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @BranchID=@Session_OPU_Code
 SET @TaxInPutYN=1
 SET @TaxOutPutYN=1
 SET @InActive=0]]></rule>
+    <rule id="r101" commandName="Custom" commandArgument="PrintTaxCodeSetup" type="Code" phase="Execute" />
   </businessRules>
 </dataController>

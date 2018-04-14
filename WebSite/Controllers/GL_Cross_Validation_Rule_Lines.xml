@@ -1,63 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="GL_Cross_Validation_Rule_Lines" conflictDetection="overwriteChanges" label="^GlCroValRulLin^GL_Cross_Validation_Rule_Lines^GlCroValRulLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="GL_Cross_Validation_Rule_Lines" conflictDetection="overwriteChanges" label="GL_Cross_Validation_Rule_Lines" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="GL_Cross_Validation_Rule_Lines" custom="true">
       <text><![CDATA[SELECT * FROM GL_Cross_Validation_Rule_Lines WHERE IsNull(CVRType,0)=0]]></text>
     </command>
   </commands>
   <fields>
-    <field name="RuleID" type="Int64" allowNulls="false" isPrimaryKey="true" label="^RulId^Rule#^RulId^" readOnly="true" />
-    <field name="CVRID" type="Int64" allowNulls="false" label="^Cvrid^Cvrid^Cvrid^" />
-    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" allowNulls="false">
+    <field name="RuleID" type="Int64" allowNulls="false" isPrimaryKey="true" label="Rule#" readOnly="true" />
+    <field name="CVRID" type="Int64" allowNulls="false" label="Cvrid" />
+    <field name="AccountID" type="String" label="Account#" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50">
+    <field name="Account_Type" type="String" label="Account Type" length="50">
       <items style="DropDownList" dataController="Pick_Account_type" dataView="grid1" dataTextField="Account_Type" dataValueField="Account_Type" />
     </field>
-    <field name="IncludeYN" type="Int32" allowNulls="false" label="^IncYn^Include YN^IncYn^">
+    <field name="IncludeYN" type="Int32" allowNulls="false" label="Include YN">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="Created_By" type="Decimal" label="Created By" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^creDatTim^Created Date Time^creDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="Updated By" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDDatTim^Updated Date Time^UpdDDatTim^" showInSummary="true" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" allowNulls="false">
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" showInSummary="true" />
+    <field name="InActive" type="Int32" label="In Active" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="CVRType" type="Int32" label="^CvrTyp^CVR Type^CvrTyp^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^Abra^Branch Name^Abra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="CVRType" type="Int32" label="CVR Type" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraNam^ABranch Code^ABraNam^" computed="true">
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^GlCroValRul^GL Cross Validation Rule Lines^GlCroValRul^" reportTemplate="true" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="GL Cross Validation Rule Lines" reportTemplate="true" showInSelector="false">
+      <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="CVRID" columns="15" />
         <dataField fieldName="AccountID" columns="50" />
@@ -69,18 +69,18 @@
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="InActive" columns="15" />
         <dataField fieldName="CVRType" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevGlCroValRulLin^Review GL Cross Validation Rule Lines^RevGlCroValRulLin^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review GL Cross Validation Rule Lines" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="GL Cross Validation Rule Lines" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^GlCroValRulLin^GL Cross Validation Rule Lines^GlCroValRulLin^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CVRID" columns="15" />
             <dataField fieldName="AccountID" columns="50" />
@@ -96,11 +96,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewGlCroValRulLin^New GL Cross Validation Rule Lines^NewGlCroValRulLin^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New GL Cross Validation Rule Lines" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New GL Cross Validation Rule Lines" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewGlCroValRulLin^New GL Cross Validation Rule Lines^NewGlCroValRulLin^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="CVRID" columns="15" />
             <dataField fieldName="AccountID" columns="50" />
@@ -134,10 +134,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

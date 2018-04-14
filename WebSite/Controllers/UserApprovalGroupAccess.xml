@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="UserApprovalGroupAccess" conflictDetection="overwriteChanges" label="^UseAppGroAcc^UserApprovalGroupAccess" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="UserApprovalGroupAccess" conflictDetection="overwriteChanges" label="UserApprovalGroupAccess" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.UserApprovalGroupAccess" custom="true">
       <text><![CDATA[SELECT        dbo.UserApprovalGroupAccess.AppGroupID, dbo.UserApprovalGroupAccess.UserID, dbo.UserApprovalGroupAccess.DocTypeID, dbo.UserApprovalGroupAccess.OPU_Code, dbo.TBL_ApprovalGroups_Header.DocDescrition, 
@@ -9,24 +9,44 @@ FROM            dbo.UserApprovalGroupAccess INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="AppGroupID" type="Int32" label="^AppGroId^App Group ID^AppGroId^" allowNulls="false" isPrimaryKey="true">
+    <field name="AppGroupID" type="Int32" label="^AppGroId^Group ID^AppGroId^" allowNulls="false" isPrimaryKey="true">
       <items style="Lookup" dataController="TBL_ApprovalGroups_Header" dataView="grid1" dataTextField="DocDescrition" dataValueField="AppGroupID" copy="OPU_Code=OPU_Code&#xD;&#xA;DocTypeID=DocTypeID" />
     </field>
-    <field name="DocDescrition" type="String" label="^DocDes^Doc Descrition^DocDes^" length="50" showInSummary="true" readOnly="true" />
-    <field name="UserID" type="Int32" allowNulls="false" label="^UseId^User#^UseId^" showInSummary="true" isPrimaryKey="true" />
-    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" isPrimaryKey="true">
+    <field name="DocDescrition" type="String" label="Doc Descrition" length="50" showInSummary="true" readOnly="true" />
+    <field name="UserID" type="Int32" allowNulls="false" label="User#" showInSummary="true" isPrimaryKey="true" />
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="Doc Type#" showInSummary="true" isPrimaryKey="true">
       <items style="Lookup" dataController="TBL_DocumetTypes" dataView="grid1" dataTextField="DocDescrition" dataValueField="DocTypeID" />
     </field>
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" isPrimaryKey="true">
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="OPU Code" showInSummary="true" isPrimaryKey="true">
       <items style="DropDownList" dataController="Pick_Organization" dataView="grid1" dataTextField="BranchName" dataValueField="BranchID" />
     </field>
-    <field name="ApprovalGroupName" type="String" label="^AppGroNam^Approval Group Name^AppGroNam^" length="50" />
+    <field name="ApprovalGroupName" type="String" label="^AppGroNam^Group Name^AppGroNam^" length="50" />
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^UseAppGroAcc^User Approval Group Access^UseAppGroAcc^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Approval Group Acces" showInSelector="false">
+      <headerText />
       <dataFields>
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="DocDescrition" columns="50" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="ApprovalGroupName" columns="50" />
         <dataField fieldName="UserID" columns="15" hidden="true" />
         <dataField fieldName="DocTypeID" columns="15" hidden="true" />
@@ -34,11 +54,11 @@ FROM            dbo.UserApprovalGroupAccess INNER JOIN
         <dataField fieldName="AppGroupID" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevUseAppGroAcc^Review User Approval Group Access^RevUseAppGroAcc^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="^AppGroAcc^Approval Group Acces^AppGroAcc^" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="dbo User Approval Group Access" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^AppGroAcc^Approval Group Acces^AppGroAcc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="DocDescrition" columns="50" />
             <dataField fieldName="UserID" columns="15" hidden="true" />
@@ -49,11 +69,11 @@ FROM            dbo.UserApprovalGroupAccess INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewuseAppGroAcc^New User Approval Group Access^NewuseAppGroAcc^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="^AppGroAcc^Approval Group Acces^AppGroAcc^" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="New dbo User Approval Group Access" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^AppGroAcc^Approval Group Acces^AppGroAcc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="AppGroupID" columns="15" />
             <dataField fieldName="DocDescrition" columns="50" hidden="true" />
@@ -84,11 +104,11 @@ FROM            dbo.UserApprovalGroupAccess INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

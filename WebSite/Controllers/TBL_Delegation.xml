@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="TBL_Delegation" conflictDetection="overwriteChanges" label="^Del^Delegation^Del^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="TBL_Delegation" conflictDetection="overwriteChanges" label="TBL_Delegation" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="TBL_Delegation" custom="true">
       <text><![CDATA[SELECT * FROM TBL_Delegation]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Delegation_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DelId^Delegation#^DelId^" readOnly="true" />
-    <field name="Delegator_UserID" type="Int32" label="^DelUseId^Delegator User#^DelUseId^" showInSummary="true" allowNulls="false">
+    <field name="Delegation_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Delegation#" readOnly="true" />
+    <field name="Delegator_UserID" type="Int32" label="Delegator User#" showInSummary="true" allowNulls="false">
       <items style="Lookup" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Delegatee_UserID" type="Int32" label="^DelUseId^Delegatee User#^DelUseId^" showInSummary="true" allowNulls="false">
+    <field name="Delegatee_UserID" type="Int32" label="Delegatee User#" showInSummary="true" allowNulls="false">
       <items style="Lookup" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="From_Date" type="DateTime" label="^FroDat^From Date^FroDat^" showInSummary="true" allowNulls="false" />
-    <field name="To_Date" type="DateTime" label="^ToOpe^To Date^ToOpe^" showInSummary="true" allowNulls="false" />
-    <field name="Delegate_Open" type="Int32" label="^DelOpe^Delegate Open^DelOpe^" showInSummary="true">
+    <field name="From_Date" type="DateTime" label="From Date" showInSummary="true" allowNulls="false" />
+    <field name="To_Date" type="DateTime" label="To Date" showInSummary="true" allowNulls="false" />
+    <field name="Delegate_Open" type="Int32" label="Delegate Open" showInSummary="true">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="^UpdtBy^UpdatBy^UpdtBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^UpdatDatTim^UpdDatTim^" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Del^Delegation^Del^" filter="OPU_Code=@Session_OPU_Code">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Delegation" filter="OPU_Code=@Session_OPU_Code">
+      <headerText />
       <dataFields>
         <dataField fieldName="Delegator_UserID" columns="15" />
         <dataField fieldName="Delegatee_UserID" columns="15" />
@@ -42,11 +42,11 @@
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDel^Review Delegation^RevDel^">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Delegation">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Delegation" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiDel^Edit Delegation^EdiDel^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Delegator_UserID" columns="15" />
             <dataField fieldName="Delegatee_UserID" columns="15" />
@@ -63,11 +63,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDel^New Delegation^NewDel^">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Delegation">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Delegation" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewDel^New Delegation^NewDel^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Delegator_UserID" columns="15" />
             <dataField fieldName="Delegatee_UserID" columns="15" />
@@ -110,11 +110,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

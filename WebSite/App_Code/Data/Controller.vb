@@ -299,7 +299,11 @@ Namespace MyCompany.Data
             If String.IsNullOrEmpty(view) Then
                 iterator = m_Config.Select("/c:dataController/c:views/c:view[1]")
             Else
-                iterator = m_Config.Select("/c:dataController/c:views/c:view[@id='{0}']", view)
+                If (view = "offline") Then
+                    iterator = CreateOfflineView(controller)
+                Else
+                    iterator = m_Config.Select("/c:dataController/c:views/c:view[@id='{0}']", view)
+                End If
             End If
             If Not (iterator.MoveNext()) Then
                 iterator = m_Config.Select("/c:dataController/c:views/c:view[1]")
@@ -331,6 +335,31 @@ Namespace MyCompany.Data
                             "lly logout user after a period of inactivity.", m_ViewId, controller))
             End If
         End Sub
+        
+        Protected Overridable Function CreateOfflineView(ByVal controller As String) As XPathNodeIterator
+            If Not (m_Config.Navigator.CanEdit) Then
+                m_Config = m_Config.Virtualize(controller)
+            End If
+            Dim viewsNode As XPathNavigator = m_Config.SelectSingleNode("/c:dataController/c:views")
+            viewsNode.AppendChild("<view id=""offline"" type=""Grid"" commandId=""command1""><dataFields/></view>")
+            Dim offlineViewNode As XPathNavigator = m_Config.SelectSingleNode("/c:dataController/c:views/c:view[@id=""offline""]")
+            'create sort expression
+            Dim sortExpression As List(Of String) = New List(Of String)()
+            Dim fieldIterator As XPathNodeIterator = m_Config.Select("/c:dataController/c:fields/c:field[@isPrimaryKey=""true""]")
+            Do While fieldIterator.MoveNext()
+                sortExpression.Add(fieldIterator.Current.GetAttribute("name", String.Empty))
+            Loop
+            offlineViewNode.CreateAttribute(String.Empty, "sortExpression", String.Empty, String.Join(",", sortExpression.ToArray()))
+            'enumerate all fields
+            Dim dataFieldsNode As XPathNavigator = offlineViewNode.SelectSingleNode("c:dataFields", m_Config.Resolver)
+            fieldIterator = m_Config.Select("/c:dataController/c:fields/c:field")
+            Do While fieldIterator.MoveNext()
+                If Not ((fieldIterator.Current.GetAttribute("type", String.Empty) = "DataView")) Then
+                    dataFieldsNode.AppendChild(String.Format("<dataField fieldName=""{0}""/>", fieldIterator.Current.GetAttribute("name", String.Empty)))
+                End If
+            Loop
+            Return m_Config.Select("/c:dataController/c:views/c:view[@id=""offline""]")
+        End Function
         
         Protected Overloads Overridable Function CreateConnection() As DbConnection
             Return CreateConnection(true)

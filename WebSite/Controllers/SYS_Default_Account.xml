@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="SYS_Default_Account" conflictDetection="overwriteChanges" label="^SysDefAcc^SYS_Default_Account^SysDefAcc^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="SYS_Default_Account" conflictDetection="overwriteChanges" label="SYS_Default_Account" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Default_Accouts" custom="true">
       <text><![CDATA[SELECT        dbo.Default_Accouts.*, dbo.Accounting_Dimensions.Dimension1, dbo.Accounting_Dimensions.D1Caption, dbo.Accounting_Dimensions.Dimension2, 
@@ -12,102 +12,78 @@ FROM            dbo.Default_Accouts INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="SequenceNo" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^SeqNo^Sequence No^SeqNo^" readOnly="true" />
-    <field name="DefaultType" type="Int32" allowNulls="false" label="^DefTyp^Default Type^DefTyp^" showInSummary="true" />
-    <field name="DefaultID" type="Decimal" allowNulls="false" label="^DefId^Default#^DefId^" showInSummary="true" />
-    <field name="Company_Code" type="Int32" allowNulls="false" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" showInSummary="true" />
-    <field name="AccountName" type="String" label="^AccNam^Account Name^AccNam^" length="50" />
-    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50">
+    <field name="SequenceNo" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^SeqId^Sequence ^SeqId^" readOnly="true" />
+    <field name="DefaultType" type="Int32" allowNulls="false" label="^DefaultType^Default Type^DefaultType^" showInSummary="true" />
+    <field name="DefaultID" type="Decimal" allowNulls="false" label="^Default^Default#^Default^" showInSummary="true" />
+    <field name="Company_Code" type="Int32" allowNulls="false" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" showInSummary="true" />
+    <field name="AccountName" type="String" label="^AccountName^Account Name^AccountName^" length="50" />
+    <field name="AccountID" type="String" label="^Account^Account#^Account^" length="50" causesCalculate="true">
       <items style="Lookup" dataController="Pick_COA" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="S1" type="String" label="^S1^S1^S1^" length="50" contextFields="SEGMENT6='D1'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+    <field name="S1" type="String" label="^S1^S1^S1^" length="50" contextFields="AccountID=AccountID">
+      <items style="Lookup" dataController="COA_Sub_Account_child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID_Sub" />
       <configuration>HeaderText=D1Caption</configuration>
     </field>
     <field name="S2" type="String" label="^S2^S2^S2^" length="50" contextFields="SEGMENT6='D2'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
       <configuration>HeaderText=D2Caption</configuration>
     </field>
     <field name="S3" type="String" label="^S3^S3^S3^" length="50" contextFields="SEGMENT6='D3'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
       <configuration>HeaderText=D3Caption</configuration>
     </field>
     <field name="S4" type="String" label="^S4^S4^S4^" length="50" contextFields="SEGMENT6='D4'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
       <configuration>HeaderText=D4Caption</configuration>
     </field>
     <field name="S5" type="String" label="^S5^S5^S5^" length="50" contextFields="SEGMENT6='D5'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <items style="Lookup" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
       <configuration>HeaderText=D5Caption</configuration>
     </field>
-    <field name="S6" type="String" label="^S6^S6^S6^" length="50" contextFields="SEGMENT6='D6'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D6Caption</configuration>
-    </field>
-    <field name="S7" type="String" label="^S7^S7^S7^" length="50" contextFields="SEGMENT6='D7'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D7Caption</configuration>
-    </field>
-    <field name="S8" type="String" label="^S8^S8^S8^" length="50" contextFields="SEGMENT6='D8'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="editForm1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D8Caption</configuration>
-    </field>
-    <field name="S9" type="String" label="^S9^S9^S9^" length="50" contextFields="SEGMENT6='D9'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D9Caption</configuration>
-    </field>
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="50" />
-    <field name="CashBankID" type="Decimal" label="^CasBanId^Cash Bank#^CasBanId^" />
-    <field name="AssetCategoryID" type="Int32" label="^AssCatId^Asset Category#^AssCatId^" />
-    <field name="AssetID" type="Decimal" label="^AssId^Asset#^AssId^" />
-    <field name="Dimension1" type="Int32" label="^Dim1^Dimension1^Dim1^" />
-    <field name="D1Caption" type="String" label="^D1Cap^D1 Caption^D1Cap^" length="50" />
-    <field name="Dimension2" type="Int32" label="^Dim2^Dimension2^Dim2^" />
-    <field name="D2Caption" type="String" label="^D2Cap^D2 Caption^D2Cap^" length="50" />
-    <field name="Dimension3" type="Int32" label="^Dim3^Dimension3^Dim3^" />
-    <field name="D3Caption" type="String" label="^D3Cap^D3 Caption^D3Cap^" length="50" />
-    <field name="Dimension4" type="Int32" label="^Dim4^Dimension4^Dim4^" />
-    <field name="D4Caption" type="String" label="^D4Cap^D4 Caption^D4Cap^" length="50" />
-    <field name="Dimension5" type="Int32" label="^Dim5^Dimension5^Dim5^" />
-    <field name="D5Caption" type="String" label="^D5Cap^D5 Caption^D5Cap^" length="50" />
-    <field name="Dimension6" type="Int32" label="^Dim6^Dimension6^Dim6^" />
-    <field name="D6Caption" type="String" label="^D6Cap^D6 Caption^D6Cap^" length="50" />
-    <field name="Dimension7" type="Int32" label="^Dim7^Dimension7^Dim7^" />
-    <field name="D7Caption" type="String" label="^D7Cap^D7 Caption^D7Cap^" length="50" />
-    <field name="Dimension8" type="Int32" label="^Dim8^Dimension8^Dim8^" />
-    <field name="D8Caption" type="String" label="^D8Cap^D8 Caption^D8Cap^" length="50" />
-    <field name="Dimension9" type="Int32" label="^Dim9^Dimension9^Dim9^" />
-    <field name="D9Caption" type="String" label="^D9Cap^D9 Caption^D9Cap^" length="50" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="50" />
+    <field name="CashBankID" type="Decimal" label="^CashBank^Cash Bank#^CashBank^" />
+    <field name="AssetCategoryID" type="Int32" label="^AssetCategory^Asset Category#^AssetCategory^" />
+    <field name="AssetID" type="Decimal" label="^AssNo^Asset ^AssNo^" />
+    <field name="Dimension1" type="Int32" label="^Dimension1^Dimension1^Dimension1^" />
+    <field name="D1Caption" type="String" label="^D1Caption^D1 Caption^D1Caption^" length="50" />
+    <field name="Dimension2" type="Int32" label="^Dimension2^Dimension2^Dimension2^" />
+    <field name="D2Caption" type="String" label="^D2Caption^D2 Caption^D2Caption^" length="50" />
+    <field name="Dimension3" type="Int32" label="^Dimension3^Dimension3^Dimension3^" />
+    <field name="D3Caption" type="String" label="^D3Caption^D3 Caption^D3Caption^" length="50" />
+    <field name="Dimension4" type="Int32" label="^Dimension4^Dimension4^Dimension4^" />
+    <field name="D4Caption" type="String" label="^D4Caption^D4 Caption^D4Caption^" length="50" />
+    <field name="Dimension5" type="Int32" label="^Dimension5^Dimension5^Dimension5^" />
+    <field name="D5Caption" type="String" label="^D5Caption^D5 Caption^D5Caption^" length="50" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
     </field>
     <field name="LocationID" type="Decimal" label="Location ID" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DefAcc^Default Accouts^DefAcc^" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Default Accouts" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="DefaultType" columns="15" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="DefaultID" columns="15" hidden="true" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -124,12 +100,12 @@ FROM            dbo.Default_Accouts INNER JOIN
             <expression test="[Dimension2]==1" type="ClientScript" />
           </visibility>
         </dataField>
-        <dataField fieldName="S3" columns="50">
+        <dataField fieldName="S3" columns="50" hidden="true">
           <visibility>
             <expression test="[Dimension3]==1" type="ClientScript" />
           </visibility>
         </dataField>
-        <dataField fieldName="S4" columns="50">
+        <dataField fieldName="S4" columns="50" hidden="true">
           <visibility>
             <expression test="[Dimension4]==1" type="ClientScript" />
           </visibility>
@@ -137,26 +113,6 @@ FROM            dbo.Default_Accouts INNER JOIN
         <dataField fieldName="S5" columns="50" hidden="true">
           <visibility>
             <expression test="[Dimension5]==1" type="ClientScript" />
-          </visibility>
-        </dataField>
-        <dataField fieldName="S6" columns="50" hidden="true">
-          <visibility>
-            <expression test="[Dimension6]==1" type="ClientScript" />
-          </visibility>
-        </dataField>
-        <dataField fieldName="S7" columns="50" hidden="true">
-          <visibility>
-            <expression test="[Dimension7]==1" type="ClientScript" />
-          </visibility>
-        </dataField>
-        <dataField fieldName="S8" columns="50" hidden="true">
-          <visibility>
-            <expression test="[Dimension8]==1" type="ClientScript" />
-          </visibility>
-        </dataField>
-        <dataField fieldName="S9" columns="50" hidden="true">
-          <visibility>
-            <expression test="[Dimension9]==1" type="ClientScript" />
           </visibility>
         </dataField>
         <dataField fieldName="Item_Code" columns="50" hidden="true" />
@@ -173,25 +129,17 @@ FROM            dbo.Default_Accouts INNER JOIN
         <dataField fieldName="D4Caption" columns="50" readOnly="true" hidden="true" />
         <dataField fieldName="Dimension5" columns="15" readOnly="true" hidden="true" />
         <dataField fieldName="D5Caption" columns="50" readOnly="true" hidden="true" />
-        <dataField fieldName="Dimension6" columns="15" readOnly="true" hidden="true" />
-        <dataField fieldName="D6Caption" columns="50" readOnly="true" hidden="true" />
-        <dataField fieldName="Dimension7" columns="15" readOnly="true" hidden="true" />
-        <dataField fieldName="D7Caption" columns="50" readOnly="true" hidden="true" />
-        <dataField fieldName="Dimension8" columns="15" readOnly="true" hidden="true" />
-        <dataField fieldName="D8Caption" columns="50" readOnly="true" hidden="true" />
-        <dataField fieldName="Dimension9" columns="15" readOnly="true" hidden="true" />
-        <dataField fieldName="D9Caption" columns="50" readOnly="true" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
-        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="LocationID" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDefAcc^Review Default Accouts^RevDefAcc^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Default Accouts" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Default Accouts" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^DefAcc^Default Accouts^DefAcc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="DefaultType" columns="15" hidden="true" />
             <dataField fieldName="DefaultID" columns="15" hidden="true" />
@@ -200,46 +148,54 @@ FROM            dbo.Default_Accouts INNER JOIN
             <dataField fieldName="Sys_Number" columns="15" hidden="true" />
             <dataField fieldName="AccountID" columns="50" />
             <dataField fieldName="AccountName" columns="50" readOnly="true" />
-            <dataField fieldName="S1" columns="50" />
-            <dataField fieldName="S2" columns="50" />
-            <dataField fieldName="S3" columns="50" />
-            <dataField fieldName="S4" columns="50" />
-            <dataField fieldName="S5" columns="50" hidden="true" />
-            <dataField fieldName="S6" columns="50" hidden="true" />
-            <dataField fieldName="S7" columns="50" hidden="true" />
-            <dataField fieldName="S8" columns="50" hidden="true" />
-            <dataField fieldName="S9" columns="50" hidden="true" />
+            <dataField fieldName="S1" columns="50">
+              <visibility>
+                <expression test="[Dimension1] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S2" columns="50">
+              <visibility>
+                <expression test="[Dimension2] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S3" columns="50">
+              <visibility>
+                <expression test="[Dimension3] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S4" columns="50">
+              <visibility>
+                <expression test="[Dimension4] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S5" columns="50" hidden="true">
+              <visibility>
+                <expression test="[Dimension5] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
             <dataField fieldName="Item_Code" columns="50" hidden="true" />
             <dataField fieldName="CashBankID" columns="15" hidden="true" />
             <dataField fieldName="AssetCategoryID" columns="15" hidden="true" />
             <dataField fieldName="AssetID" columns="15" hidden="true" />
-            <dataField fieldName="Dimension1" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="D5Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension5" columns="15" readOnly="true" hidden="true" />
             <dataField fieldName="D1Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension2" columns="15" readOnly="true" hidden="true" />
             <dataField fieldName="D2Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension3" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D3Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension2" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension1" columns="15" readOnly="true" hidden="true" />
             <dataField fieldName="Dimension4" columns="15" readOnly="true" hidden="true" />
             <dataField fieldName="D4Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension5" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D5Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension6" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D6Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension7" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D7Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension8" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D8Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension9" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D9Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="D3Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension3" columns="15" readOnly="true" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDefAcc^New Default Accouts^NewDefAcc^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Default Accouts" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Default Accouts" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewDefAcc^New Default Accouts^NewDefAcc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="DefaultType" columns="15" />
             <dataField fieldName="DefaultID" columns="15" />
@@ -247,38 +203,46 @@ FROM            dbo.Default_Accouts INNER JOIN
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Sys_Number" columns="15" />
             <dataField fieldName="AccountName" columns="50" />
+            <dataField fieldName="D1Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension1" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="D4Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension4" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="D5Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension5" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="D2Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension2" columns="15" readOnly="true" hidden="true" />
+            <dataField fieldName="D3Caption" columns="50" readOnly="true" hidden="true" />
+            <dataField fieldName="Dimension3" columns="15" readOnly="true" hidden="true" />
             <dataField fieldName="AccountID" columns="50" />
-            <dataField fieldName="S1" columns="50" />
-            <dataField fieldName="S2" columns="50" />
-            <dataField fieldName="S3" columns="50" />
-            <dataField fieldName="S4" columns="50" />
-            <dataField fieldName="S5" columns="50" />
-            <dataField fieldName="S6" columns="50" />
-            <dataField fieldName="S7" columns="50" />
-            <dataField fieldName="S8" columns="50" />
-            <dataField fieldName="S9" columns="50" />
+            <dataField fieldName="S1" columns="50">
+              <visibility>
+                <expression test="[Dimension1] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S2" columns="50">
+              <visibility>
+                <expression test="[Dimension2] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S3" columns="50">
+              <visibility>
+                <expression test="[Dimension3] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S4" columns="50">
+              <visibility>
+                <expression test="[Dimension4] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="S5" columns="50">
+              <visibility>
+                <expression test="[Dimension5] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
             <dataField fieldName="Item_Code" columns="50" />
             <dataField fieldName="CashBankID" columns="15" />
             <dataField fieldName="AssetCategoryID" columns="15" />
             <dataField fieldName="AssetID" columns="15" />
-            <dataField fieldName="Dimension1" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D1Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension2" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D2Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension3" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D3Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension4" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D4Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension5" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D5Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension6" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D6Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension7" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D7Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension8" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D8Caption" columns="50" readOnly="true" hidden="true" />
-            <dataField fieldName="Dimension9" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="D9Caption" columns="50" readOnly="true" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -304,7 +268,7 @@ FROM            dbo.Default_Accouts INNER JOIN
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true" />
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -336,4 +300,55 @@ FROM            dbo.Default_Accouts INNER JOIN
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[	IF [dbo].[Get_Accounts_require] ( @BusinessRules_UserId , 1 , @S1 ) = 1
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1;
+        SET @Result_Focus = 'S1,Value cannot be Default or Null';
+    END;
+	
+	IF [dbo].[Get_Accounts_require] ( @BusinessRules_UserId , 2 , @S2 ) = 1
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1;
+        SET @Result_Focus = 'S2,Value cannot be Default or Null';
+    END;
+	
+	IF [dbo].[Get_Accounts_require] ( @BusinessRules_UserId , 3 , @S3 ) = 1
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1;
+        SET @Result_Focus = 'S3,Value cannot be Default or Null';
+    END;
+	
+	
+	IF [dbo].[Get_Accounts_require] ( @BusinessRules_UserId , 4 , @S4 ) = 1
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1;
+        SET @Result_Focus = 'S4,Value cannot be Default or Null';
+    END;
+	
+	IF [dbo].[Get_Accounts_require] ( @BusinessRules_UserId , 5, @S5 ) = 1
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1;
+        SET @Result_Focus = 'S5,Value cannot be Default or Null';
+    END;]]></rule>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @Dimension1 = @Session_Dimension1
+SET @D1Caption = @Session_D1Caption
+SET @Dimension2 = @Session_Dimension2
+SET @D2Caption = @Session_D2Caption
+
+SET @Dimension3 = @Session_Dimension3
+SET @D3Caption = @Session_D3Caption
+SET @Dimension4 = @Session_Dimension4
+SET @D4Caption = @Session_D4Caption
+
+SET @Dimension5 = @Session_Dimension5
+SET @D5Caption = @Session_D5Caption
+
+
+SET @S1=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,1)
+SET @S2=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,2)
+SET @S3=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,3)
+SET @S4=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,4)
+SET @S5=dbo.Get_Accounts_DefaultValues (@BusinessRules_UserId,5)]]></rule>
+  </businessRules>
 </dataController>

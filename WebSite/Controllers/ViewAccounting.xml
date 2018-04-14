@@ -1,168 +1,160 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="ViewAccounting" conflictDetection="overwriteChanges" label="^VieAcc^ViewAccounting^VieAcc^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ViewAccounting" conflictDetection="overwriteChanges" label="ViewAccounting" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.GL_Transaction_Line" custom="true">
-      <text><![CDATA[SELECT        dbo.GL_Transaction_Header.GL_NO, dbo.GL_Transaction_Header.Transaction_Date, dbo.GL_Transaction_Line.Remark, dbo.GL_Transaction_Header.Tran_Type, dbo.GL_Transaction_Line.Debit_Amount, 
-                         dbo.GL_Transaction_Line.Credit_Amount, dbo.GL_Transaction_Line.Dept_Code, dbo.GL_Transaction_Line.Ac_Description, dbo.GL_Transaction_Line.Project_Code, dbo.GL_Transaction_Line.Created_By, 
-                         dbo.GL_Transaction_Line.Created_DateTime, dbo.GL_Transaction_Line.Line_NO, dbo.GL_Transaction_Line.TrxYear, dbo.GL_Transaction_Line.TrxMonths, dbo.GL_Transaction_Line.CalcDate, 
-                         dbo.GL_Transaction_Line.Transaction_ID, dbo.GL_Transaction_Line.Trx_ID, dbo.GL_Transaction_Line.PaymentID, dbo.GL_Transaction_Line.Account_Type, dbo.GL_Transaction_Line.Lineage, dbo.GL_Transaction_Line.Line_ID, 
-                         dbo.GL_Transaction_Line.AccountID, dbo.COA_Natural_Account.Ref_Account_No, dbo.GL_Transaction_Line.Item_Code, dbo.GL_Transaction_Line.AssetID, dbo.GL_Transaction_Line.ApplicationID, 
-                         dbo.GL_Transaction_Header.GL_Serial_No, dbo.GL_Transaction_Line.OPU_Code_Ln, dbo.GL_Transaction_Line.S1, dbo.GL_Transaction_Line.S2, dbo.GL_Transaction_Line.S3, dbo.GL_Transaction_Line.S4, 
-                         dbo.GL_Transaction_Line.S5, dbo.GL_Transaction_Line.S6, dbo.GL_Transaction_Line.S7, dbo.GL_Transaction_Line.S8, dbo.GL_Transaction_Line.S9, dbo.Accounting_Dimensions.Dimension1, 
-                         dbo.Accounting_Dimensions.D1Caption, dbo.Accounting_Dimensions.Dimension2, dbo.Accounting_Dimensions.D2Caption, dbo.Accounting_Dimensions.Dimension3, dbo.Accounting_Dimensions.D3Caption, 
-                         dbo.Accounting_Dimensions.Dimension4, dbo.Accounting_Dimensions.D4Caption, dbo.Accounting_Dimensions.Dimension5, dbo.Accounting_Dimensions.D5Caption, dbo.Accounting_Dimensions.Dimension6, 
-                         dbo.Accounting_Dimensions.D6Caption, dbo.Accounting_Dimensions.Dimension7, dbo.Accounting_Dimensions.D7Caption, dbo.Accounting_Dimensions.Dimension8, dbo.Accounting_Dimensions.D8Caption, 
-                         dbo.Accounting_Dimensions.Dimension9, dbo.Accounting_Dimensions.D9Caption, dbo.GL_Transaction_Line.GL_Line_No, dbo.GL_Transaction_Line.Company_Code_Ln, dbo.GL_Transaction_Header.Int_OPU_Code, 
-                         dbo.GL_Transaction_Header.Trx_YYYYMM, dbo.GL_Transaction_Header.Batch_Name, dbo.GL_Transaction_Header.Int_Company_Code, dbo.GL_Transaction_Header.InterCompanyYN, dbo.GL_Transaction_Line.BudgetCode, 
-                         dbo.GL_Transaction_Line.BudgetAccount,dbo.GL_Transaction_Header.OPU_Code,dbo.GL_Transaction_Line.Sys_Number, IsNUll(dbo.GL_Transaction_Line.PostType,0) AS PostType,dbo.GL_Transaction_Line.Store_ID,dbo.GL_Transaction_Line.CashBankID
-FROM            dbo.GL_Transaction_Header INNER JOIN
-                         dbo.GL_Transaction_Line ON dbo.GL_Transaction_Header.GL_Serial_No = dbo.GL_Transaction_Line.GL_Serial_No INNER JOIN
-                         dbo.COA_Natural_Account ON dbo.GL_Transaction_Line.AccountID = dbo.COA_Natural_Account.AccountID INNER JOIN
-                         dbo.Accounting_Dimensions ON dbo.GL_Transaction_Header.Company_Code = dbo.Accounting_Dimensions.Company_Code]]></text>
+      <text><![CDATA[SELECT * FROM C_ViewAccounting]]></text>
     </command>
   </commands>
   <fields>
-    <field name="GL_NO" type="Decimal" allowNulls="false" label="^GlNo^Gl No^GlNo^" showInSummary="true" />
-    <field name="Transaction_Date" type="DateTime" allowNulls="false" label="^TraDat^Transaction Date^TraDat^" showInSummary="true" />
-    <field name="Remark" type="String" label="^Rem^Remark^Rem^" length="500" showInSummary="true" />
-    <field name="Tran_Type" type="String" allowNulls="false" label="^TraTyp^Tran Type^TraTyp^" length="50" showInSummary="true" />
-    <field name="Debit_Amount" type="Decimal" allowNulls="false" label="^DebAmt^Debit Amount^DebAmt^" showInSummary="true" />
-    <field name="Credit_Amount" type="Decimal" allowNulls="false" label="^CreAmo^Credit Amount^CreAmo^" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50">
+    <field name="GL_NO" type="Decimal" allowNulls="false" label="^GlNo^Gl No^GlNo^" showInSummary="true" isPrimaryKey="true" />
+    <field name="Transaction_Date" type="DateTime" allowNulls="false" label="^TransDate^Transaction Date^TransDate^" showInSummary="true" />
+    <field name="Remark" type="String" label="^Remark^Remark^Remark^" length="500" showInSummary="true" />
+    <field name="Tran_Type" type="String" allowNulls="false" label="^TranType^Tran Type^TranType^" length="50" showInSummary="true" />
+    <field name="Debit_Amount" type="Decimal" allowNulls="false" label="^DebitAmt^Debit Amount^DebitAmt^" showInSummary="true" />
+    <field name="Credit_Amount" type="Decimal" allowNulls="false" label="^CreditAmount^Credit Amount^CreditAmount^" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50">
       <items style="DropDownList" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
     </field>
-    <field name="Ac_Description" type="String" label="^AccDes^Ac Description^AccDes^" length="250" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50">
-      <items style="DropDownList" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
-    </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CredBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CredDatTim^" />
-    <field name="Line_NO" type="Decimal" label="^LinNO^Line NO^LinNO^" />
-    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" />
-    <field name="TrxMonths" type="Int32" label="^TrxMon^Trx Months^TrxMon^" />
-    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" />
-    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction#^TraId^" />
-    <field name="Trx_ID" type="Decimal" label="^TrxId^Trx#^TrxId^" />
-    <field name="PaymentID" type="Decimal" label="^PayId^Payment#^PayId^" />
-    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50" />
-    <field name="Lineage" type="String" label="^Linage^Lineage^Linage^" length="255" />
-    <field name="Line_ID" type="Decimal" label="^LinId^Line#^LinId^" />
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" />
+    <field name="Ac_Description" type="String" label="^AcDescription^Ac Description^AcDescription^" length="250" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Line_NO" type="Decimal" label="^LineNO^Line NO^LineNO^" isPrimaryKey="true" />
+    <field name="TrxYear" type="Int32" label="^TrxYear^Trx Year^TrxYear^" />
+    <field name="TrxMonths" type="Int32" label="^TrxMonths^Trx Months^TrxMonths^" />
+    <field name="CalcDate" type="Int32" label="^CalcDate^Calc Date^CalcDate^" />
+    <field name="Transaction_ID" type="Decimal" label="^Transaction^Transaction#^Transaction^" />
+    <field name="Trx_ID" type="Decimal" label="^Trx^Trx#^Trx^" />
+    <field name="PaymentID" type="Decimal" label="^Payment^Payment#^Payment^" />
+    <field name="Account_Type" type="String" label="^AccountType^Account Type^AccountType^" length="50" />
+    <field name="Lineage" type="String" label="^Lineage^Lineage^Lineage^" length="255" />
+    <field name="Line_ID" type="Decimal" label="^Line^Line#^Line^" allowNulls="false" isPrimaryKey="true" />
+    <field name="AccountID" type="String" allowNulls="false" label="^Account^Account#^Account^" length="50" />
     <field name="Ref_Account_No" type="String" label="^RefAccNo^Ref Account No^RefAccNo^" length="50" />
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" />
-    <field name="AssetID" type="Decimal" label="^AssId^Asset#^AssId^" />
-    <field name="ApplicationID" type="Decimal" label="^AppId^Application#^AppId^" />
-    <field name="GL_Serial_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^GLSerNo^GL Serial No^GLSerNo^" readOnly="true" />
-    <field name="OPU_Code_Ln" type="Int32" label="^OPUCodLn^OPU Code Ln^OPUCodLn^" />
-    <field name="Dimension1" type="Int32" label="^Dim1^Dimension1^Dim1^" />
-    <field name="D1Caption" type="String" label="^Dim1Cap^D1 Caption^Dim1Cap^" length="50" />
-    <field name="Dimension2" type="Int32" label="^Dim2^Dimension2^Dim2^" />
-    <field name="D2Caption" type="String" label="^Dim2Cap^D2 Caption^Dim2Cap^" length="50" />
-    <field name="Dimension3" type="Int32" label="^Dim3^Dimension3^Dim3^" />
-    <field name="D3Caption" type="String" label="^Dim3Cap^D3 Caption^Dim3Cap^" length="50" />
-    <field name="Dimension4" type="Int32" label="^Dim4^Dimension4^Dim4^" />
-    <field name="D4Caption" type="String" label="^Dim4Cap^D4 Caption^Dim4Cap^" length="50" />
-    <field name="Dimension5" type="Int32" label="^Dim5^Dimension5^Dim5^" />
-    <field name="D5Caption" type="String" label="^Dim5Cap^D5 Caption^Dim5Cap^" length="50" />
-    <field name="Dimension6" type="Int32" label="^Dim6^Dimension6^Dim6^" />
-    <field name="D6Caption" type="String" label="^Dim6Cap^D6 Caption^Dim6Cap^" length="50" />
-    <field name="Dimension7" type="Int32" label="^Dim7^Dimension7^Dim7^" />
-    <field name="D7Caption" type="String" label="^Dim7Cap^D7 Caption^Dim7Cap^" length="50" />
-    <field name="Dimension8" type="Int32" label="^Dim8^Dimension8^Dim8^" />
-    <field name="D8Caption" type="String" label="^Dim8Cap^D8 Caption^Dim8Cap^" length="50" />
-    <field name="Dimension9" type="Int32" label="^Dim9^Dimension9^Dim9^" />
-    <field name="D9Caption" type="String" label="^Dim9Cap^D9 Caption^Dim9Cap^" length="50" />
-    <field name="S1" type="String" label="^S1^S1^S1^" length="50" contextFields="SEGMENT6='D1'">
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" />
+    <field name="AssetID" type="Decimal" label="^Asset^Asset#^Asset^" />
+    <field name="ApplicationID" type="Decimal" label="^Application^Application#^Application^" />
+    <field name="GL_Serial_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^GLSerialNo^GL Serial No^GLSerialNo^" readOnly="true" />
+    <field name="OPU_Code_Ln" type="Int32" label="^OPUCodeLn^OPU Code Ln^OPUCodeLn^" allowNulls="false" isPrimaryKey="true" />
+    <field name="Dimension1" type="Int32" label="^Dimension1^Dimension1^Dimension1^" />
+    <field name="D1Caption" type="String" label="^D1Caption^D1 Caption^D1Caption^" length="50" />
+    <field name="Dimension2" type="Int32" label="^Dimension2^Dimension2^Dimension2^" />
+    <field name="D2Caption" type="String" label="^D2Caption^D2 Caption^D2Caption^" length="50" />
+    <field name="Dimension3" type="Int32" label="^Dimension3^Dimension3^Dimension3^" />
+    <field name="D3Caption" type="String" label="^D3Caption^D3 Caption^D3Caption^" length="50" />
+    <field name="Dimension4" type="Int32" label="^Dimension4^Dimension4^Dimension4^" />
+    <field name="D4Caption" type="String" label="^D4Caption^D4 Caption^D4Caption^" length="50" />
+    <field name="Dimension5" type="Int32" label="^Dimension5^Dimension5^Dimension5^" />
+    <field name="D5Caption" type="String" label="^D5Caption^D5 Caption^D5Caption^" length="50" />
+    <field name="Dimension6" type="Int32" label="^Dimension6^Dimension6^Dimension6^" />
+    <field name="D6Caption" type="String" label="^D6Caption^D6 Caption^D6Caption^" length="50" />
+    <field name="Dimension7" type="Int32" label="^Dimension7^Dimension7^Dimension7^" />
+    <field name="D7Caption" type="String" label="^D7Caption^D7 Caption^D7Caption^" length="50" />
+    <field name="Dimension8" type="Int32" label="^Dimension8^Dimension8^Dimension8^" />
+    <field name="D8Caption" type="String" label="^D8Caption^D8 Caption^D8Caption^" length="50" />
+    <field name="Dimension9" type="Int32" label="^Dimension9^Dimension9^Dimension9^" />
+    <field name="D9Caption" type="String" label="^D9Caption^D9 Caption^D9Caption^" length="50" />
+    <field name="S8" type="String" label="^S8^S8^S8^" length="50" contextFields="SEGMENT6='D8'">
       <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D1Caption</configuration>
-    </field>
-    <field name="S2" type="String" label="^S2^S2^S2^" length="50" contextFields="SEGMENT6='D2'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D2Caption</configuration>
-    </field>
-    <field name="S3" type="String" label="^S3^S3^S3^" length="50" contextFields="SEGMENT6='D3'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D3Caption</configuration>
-    </field>
-    <field name="S4" type="String" label="^S4^S4^S4^" length="50" contextFields="SEGMENT6='D4'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D4Caption</configuration>
-    </field>
-    <field name="S5" type="String" label="^S5^S5^S5^" length="50" contextFields="SEGMENT6='D5'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D5Caption</configuration>
-    </field>
-    <field name="S6" type="String" label="^S6^S6^S6^" length="50" contextFields="SEGMENT6='D6'">
-      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D6Caption</configuration>
+      <configuration>HeaderText=D8Caption</configuration>
     </field>
     <field name="S7" type="String" label="^S7^S7^S7^" length="50" contextFields="SEGMENT6='D7'">
       <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
       <configuration>HeaderText=D7Caption</configuration>
     </field>
-    <field name="S8" type="String" label="^S8^S8^S8^" length="50" contextFields="SEGMENT6='D8'">
+    <field name="S1" type="String" label="^S1^S1^S1^" length="50" contextFields="SEGMENT6='D1'">
       <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
-      <configuration>HeaderText=D8Caption</configuration>
+      <configuration>HeaderText=D1Caption</configuration>
     </field>
     <field name="S9" type="String" label="^S9^S9^S9^" length="50" contextFields="SEGMENT6='D9'">
       <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
       <configuration>HeaderText=D9Caption</configuration>
     </field>
-    <field name="GL_Line_No" type="Decimal" allowNulls="false" label="^GLLinNo^GL Line No^GLLinNo^" readOnly="true" />
-    <field name="Company_Code_Ln" type="Decimal" label="^ComCodLn^Company Code Ln^ComCodLn^" />
-    <field name="Int_OPU_Code" type="Int32" allowNulls="false" label="^IntOPUCod^Int OPU Code^IntOPUCod^" />
-    <field name="Trx_YYYYMM" type="Int64" label="^TrxYyyMmm^Trx YYYYMM^TrxYyyMmm^" />
-    <field name="Batch_Name" type="String" label="^BatNam^Batch Name^BatNam^" length="104" />
-    <field name="BudgetAccount" type="String" label="^BudAcc^Budget Account^BudAcc^" length="50" />
+    <field name="S6" type="String" label="^S6^S6^S6^" length="50" contextFields="SEGMENT6='D6'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D6Caption</configuration>
+    </field>
+    <field name="S3" type="String" label="^S3^S3^S3^" length="50" contextFields="SEGMENT6='D3'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D3Caption</configuration>
+    </field>
+    <field name="S2" type="String" label="^S2^S2^S2^" length="50" contextFields="SEGMENT6='D2'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D2Caption</configuration>
+    </field>
+    <field name="S5" type="String" label="^S5^S5^S5^" length="50" contextFields="SEGMENT6='D5'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D5Caption</configuration>
+    </field>
+    <field name="S4" type="String" label="^S4^S4^S4^" length="50" contextFields="SEGMENT6='D4'">
+      <items style="DropDownList" dataController="Dimension_Values_Child" dataView="grid1" dataTextField="Descriptions" dataValueField="Descriptions" />
+      <configuration>HeaderText=D4Caption</configuration>
+    </field>
+    <field name="GL_Line_No" type="Decimal" allowNulls="false" label="^GLLineNo^GL Line No^GLLineNo^" readOnly="true" />
+    <field name="Company_Code_Ln" type="Decimal" label="^CompanyCodeLn^Company Code Ln^CompanyCodeLn^" allowNulls="false" isPrimaryKey="true" />
+    <field name="Int_OPU_Code" type="Int32" allowNulls="false" label="^IntOPUCode^Int OPU Code^IntOPUCode^" />
+    <field name="Trx_YYYYMM" type="Int64" label="Trx YYYYMM" />
+    <field name="Batch_Name" type="String" label="Batch Name" length="104" />
     <field name="BudgetCode" type="Int64" label="Budget Code" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
-    </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="BudgetAccount" type="String" label="Budget Account" length="50" />
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
-    <field name="PostType" type="Int16" label="^PosTyp^Post Type^PosTyp^">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Vendor ^SysNum^" />
+    <field name="PostType" type="Int16" label="Post Type">
       <items style="RadioButtonList" dataController="GL_Posting_Type" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Store_ID" type="Int16" label="^StoId^Store ID^StoId^" />
-    <field name="CashBankID" type="Int16" label="^CasBanId^Cash Bank ID^CasBanId^" />
+    <field name="Store_ID" type="Int16" label="Store ID" />
+    <field name="CashBankID" type="Int16" label="Cash Bank ID" />
+    <field name="ProjTasksID" type="Decimal" label="Proj Tasks ID" />
+    <field name="RecurringID" type="Decimal" label="Recurring ID" />
+    <field name="SiteCode" type="String" label="Site Code" length="50" />
+    <field name="Combination" type="String" label="Combination" readOnly="true" />
+    <field name="BatchHeaderID" type="Int64" label="Batch Header ID" />
+    <field name="ReversalYN" type="Int16" label="Reversal YN">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^VieAcc^View Accouting^VieAcc^" sortExpression="GL_Serial_No DESC" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="View Accouting" sortExpression="GL_Serial_No DESC" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="GL_NO" columns="15" />
         <dataField fieldName="PostType" columns="15" />
+        <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="Ac_Description" />
+        <dataField fieldName="Ref_Account_No" columns="50" />
         <dataField fieldName="Sys_Number" columns="15" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="AccountID" columns="50" />
         <dataField fieldName="CalcDate" columns="15" hidden="true" />
-        <dataField fieldName="GL_NO" columns="15" />
-        <dataField fieldName="Transaction_Date" columns="10" />
-        <dataField fieldName="Tran_Type" columns="50" />
-        <dataField fieldName="Ac_Description" />
         <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
-        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Transaction_Date" columns="10" />
+        <dataField fieldName="Tran_Type" columns="50" />
+        <dataField fieldName="Dept_Code" columns="20" />
         <dataField fieldName="Project_Code" columns="50" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
@@ -172,10 +164,8 @@ FROM            dbo.GL_Transaction_Header INNER JOIN
         <dataField fieldName="Transaction_ID" columns="15" hidden="true" />
         <dataField fieldName="Trx_ID" columns="15" hidden="true" />
         <dataField fieldName="PaymentID" columns="15" hidden="true" />
-        <dataField fieldName="Account_Type" columns="50" />
         <dataField fieldName="Lineage" hidden="true" />
         <dataField fieldName="Line_ID" columns="15" hidden="true" />
-        <dataField fieldName="Ref_Account_No" columns="50" />
         <dataField fieldName="Item_Code" columns="20" hidden="true" />
         <dataField fieldName="AssetID" columns="15" hidden="true" />
         <dataField fieldName="ApplicationID" columns="15" hidden="true" />
@@ -184,19 +174,25 @@ FROM            dbo.GL_Transaction_Header INNER JOIN
         <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
         <dataField fieldName="Batch_Name" rows="5" hidden="true" />
         <dataField fieldName="BudgetAccount" columns="50" />
-        <dataField fieldName="BudgetCode" columns="15" />
         <dataField fieldName="Trx_YYYYMM" columns="15" hidden="true" />
+        <dataField fieldName="BudgetCode" columns="15" />
         <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="Store_ID" columns="15" hidden="true" />
         <dataField fieldName="CashBankID" columns="15" hidden="true" />
-        <dataField fieldName="Int_OPU_Code" columns="15" />
+        <dataField fieldName="Int_OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="ProjTasksID" columns="15" hidden="true" />
+        <dataField fieldName="RecurringID" columns="15" hidden="true" />
+        <dataField fieldName="SiteCode" columns="50" />
+        <dataField fieldName="Combination" rows="5" hidden="true" />
+        <dataField fieldName="BatchHeaderID" columns="15" hidden="true" />
+        <dataField fieldName="ReversalYN" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^VieAcc^View Accouting^VieAcc^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="View Accouting" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="View Accouting" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -294,12 +290,13 @@ FROM            dbo.GL_Transaction_Header INNER JOIN
             <dataField fieldName="GL_Line_No" columns="15" hidden="true" />
             <dataField fieldName="Company_Code_Ln" columns="15" hidden="true" />
             <dataField fieldName="Int_OPU_Code" columns="15" hidden="true" />
+            <dataField fieldName="Combination" rows="5" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewGlTraLin^New GL Transaction Line^NewGlTraLin^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New GL Transaction Line" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New GL Transaction Line" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -360,41 +357,19 @@ FROM            dbo.GL_Transaction_Header INNER JOIN
             <dataField fieldName="D9Caption" columns="50" />
             <dataField fieldName="Company_Code_Ln" columns="15" />
             <dataField fieldName="Int_OPU_Code" columns="15" />
+            <dataField fieldName="Combination" rows="5" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="grid1ar" commandId="command1" type="Grid" label="^VieAcc^View Accounting^VieAcc^" reportTemplate="true" showInSelector="false">
-      <dataFields>
-        <dataField fieldName="AccountID" columns="50" />
-        <dataField fieldName="GL_NO" columns="15" />
-        <dataField fieldName="Transaction_Date" columns="10" />
-        <dataField fieldName="Tran_Type" columns="50" />
-        <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
-        <dataField fieldName="Credit_Amount" dataFormatString="N2" columns="15" aggregate="Sum" />
-        <dataField fieldName="Dept_Code" columns="50" />
-        <dataField fieldName="Ac_Description" />
-        <dataField fieldName="Project_Code" columns="50" />
-        <dataField fieldName="Created_By" hidden="true" columns="15" />
-        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
-        <dataField fieldName="Line_NO" columns="15" hidden="true" />
-        <dataField fieldName="TrxYear" columns="15" hidden="true" />
-        <dataField fieldName="TrxMonths" columns="15" hidden="true" />
-        <dataField fieldName="CalcDate" columns="15" hidden="true" />
-        <dataField fieldName="Transaction_ID" columns="15" hidden="true" />
-        <dataField fieldName="Trx_ID" columns="15" hidden="true" />
-        <dataField fieldName="PaymentID" columns="15" hidden="true" />
-        <dataField fieldName="Account_Type" columns="50" />
-        <dataField fieldName="Lineage" hidden="true" />
-        <dataField fieldName="Line_ID" columns="15" hidden="true" />
-        <dataField fieldName="Ref_Account_No" columns="50" />
-        <dataField fieldName="Item_Code" columns="20" hidden="true" />
-        <dataField fieldName="AssetID" columns="15" hidden="true" />
-        <dataField fieldName="ApplicationID" columns="15" hidden="true" />
-        <dataField fieldName="GL_Serial_No" columns="15" />
-        <dataField fieldName="Remark" />
-        <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
-      </dataFields>
+    <view id="AccountDescription" commandId="command1" type="Form" label="Account Description">
+      <categories>
+        <category id="c1" headerText="Account Description" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Combination" rows="1" columns="255" readOnly="true" />
+          </dataFields>
+        </category>
+      </categories>
     </view>
   </views>
   <actions>
@@ -432,7 +407,7 @@ FROM            dbo.GL_Transaction_Header INNER JOIN
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" flat="false">
+    <actionGroup id="ag100" scope="ActionBar" flat="false" headerText="Print">
       <action id="a1" commandName="ReportAsPdf">
         <data><![CDATA[_controller=ViewAccounting
 _view=grid1ar ]]></data>
@@ -449,6 +424,9 @@ _view=grid1ar ]]></data>
         <data><![CDATA[_controller=ViewAccounting
 _view=grid1ar ]]></data>
       </action>
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="Account Desc" flat="true">
+      <action commandName="EditModal" commandArgument="AccountDescription" id="a100" headerText="Account Combination" cssClass="glyphicon glyphicon-comment" />
     </actionGroup>
   </actions>
 </dataController>

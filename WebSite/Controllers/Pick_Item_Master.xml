@@ -1,91 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Item_Master" conflictDetection="overwriteChanges" label="^PicItmMas^Pick_Item_Master^PicItmMas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Item_Master" conflictDetection="overwriteChanges" label="Pick_Item_Master" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName=" tbl_Item_Master" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Item_Master WHERE IsNull(OverHeadElements,0) = 0]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
-    <field name="Part_No" type="String" label="^ParNo^Part No^ParNo^" length="20" showInSummary="true" />
-    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" showInSummary="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^ItemC^Item Code^ItemC^" length="20" showInSummary="true" />
+    <field name="Part_No" type="String" label="^PartNo^Part No^PartNo^" length="20" showInSummary="true" />
+    <field name="Item_Description" type="String" label="^ItemDescription^Item Description^ItemDescription^" length="500" showInSummary="true" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" showInSummary="true" />
     <field name="Item_Code_Ref_No" type="String" allowNulls="false" label="^IteCodRefNo^Item Code^IteCodRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
-    <field name="Secondry_UOM" type="String" label="^SecUom^Secondry UOM^SecUom^" length="10" showInSummary="true" />
-    <field name="Item_Category" type="String" label="^ItmCat^Item Category^ItmCat^" length="255" />
+    <field name="Secondry_UOM" type="String" label="^SUOM^Secondry UOM^SUOM^" length="10" showInSummary="true" />
+    <field name="Item_Category" type="String" label="^ICat^Item Category^ICat^" length="255" />
     <field name="Bin_Location" type="String" label="^BinLoc^Bin Location^BinLoc^" length="50" />
-    <field name="Re_Order_Qty" type="Decimal" label="^ReOrdQty^Re Order Qty^ReOrdQty^" />
-    <field name="CountedQty" type="Decimal" label="^CouQty^Counted Qty^CouQty^" />
-    <field name="Item_Active" type="Int32" label="^IteAct^Item Active^IteAct^" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" readOnly="true" />
-    <field name="CreatedDate" type="DateTime" label="^CreDat^Created Date^CreDat^" />
-    <field name="CreatedBy" type="String" label="^CreBy^Created By^CreBy^" length="255" />
-    <field name="Inventory_AC" type="String" label="^InvAcc^Inventory AC^InvAcc^" length="50" />
-    <field name="CostOfSales_AC" type="String" label="^CosOfSal^Cost Of Sales AC^CosOfSal^" length="50" />
-    <field name="Revenue_AC" type="String" label="^RevAcc^Revenue AC^RevAcc^" length="50" />
-    <field name="Misc_Issue_AC" type="String" label="^MisIssAcc^Misc Issue AC^MisIssAcc^" length="50" />
-    <field name="Misc_Receipt_AC" type="String" label="^MisRecAcc^Misc Receipt AC^MisRecAcc^" length="50" />
-    <field name="Expence_AC" type="String" label="^ExpAcc^Expence AC^ExpAcc^" length="50" />
-    <field name="BranchID" type="Int32" label="^BraId^Branch#^BraId^" />
+    <field name="Re_Order_Qty" type="Decimal" label="^ReOQty^Re Order Qty^ReOQty^" />
+    <field name="CountedQty" type="Decimal" label="^CounQty^Counted Qty^CounQty^" />
+    <field name="Item_Active" type="Int32" label="^ItemAc^Item Active^ItemAc^" />
+    <field name="Unit_Price" type="Decimal" label="^UnitPrice^Unit Price^UnitPrice^" readOnly="true" />
+    <field name="CreatedDate" type="DateTime" label="^CrDate^Created Date^CrDate^" />
+    <field name="CreatedBy" type="String" label="^CrBy^Created By^CrBy^" length="255" />
+    <field name="Inventory_AC" type="String" label="^InvAC^Inventory AC^InvAC^" length="50" />
+    <field name="CostOfSales_AC" type="String" label="^COGS^Cost Of Sales AC^COGS^" length="50" />
+    <field name="Revenue_AC" type="String" label="^RevAC^Revenue AC^RevAC^" length="50" />
+    <field name="Misc_Issue_AC" type="String" label="^MIssAC^Misc Issue AC^MIssAC^" length="50" />
+    <field name="Misc_Receipt_AC" type="String" label="^MrctAC^Misc Receipt AC^MrctAC^" length="50" />
+    <field name="Expence_AC" type="String" label="^ExpeAC^Expence AC^ExpeAC^" length="50" />
+    <field name="BranchID" type="Int32" label="^Branch^Branch#^Branch^" />
     <field name="Reserved_Qty" type="Decimal" label="^ResQty^Reserved Qty^ResQty^" readOnly="true" />
-    <field name="Item_Category_Major" type="String" label="^IteCatMaj^Item Category Major^IteCatMaj^" length="255" />
-    <field name="Stock_On_Hand" type="Decimal" label="^StaOnHan^Qty^StaOnHan^" />
-    <field name="Unit_Cost" type="Decimal" label="^UniCos^Unit Cost^UniCos^" />
-    <field name="IsItemSerialized" type="Int32" label="^IsIteSer^IsItemSerialized^IsIteSer^">
+    <field name="Item_Category_Major" type="String" label="^ICatMjr^Item Category Major^ICatMjr^" length="255" />
+    <field name="Stock_On_Hand" type="Decimal" label="^SOnHnd^Qty^SOnHnd^" />
+    <field name="Unit_Cost" type="Decimal" label="^UnitCost^Unit Cost^UnitCost^" />
+    <field name="IsItemSerialized" type="Int32" label="^IsItmSer^IsItemSerialized^IsItmSer^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
     <field name="IsServiceItem" type="Int32" label="^IsSerItm^IsServiceItem^IsSerItm^">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ItemType" type="Int32" label="^IteTyp^Item Type^IteTyp^" />
-    <field name="Point_Of_SaleYN" type="Int32" label="^PoiOfSalYn^Point Of Sale YN^PoiOfSalYn^" />
-    <field name="RefreshITM" type="Int32" label="^RefItm^Refresh ITM^RefItm^" />
-    <field name="BOQYN" type="Int32" label="^BoqYn^Boqyn^BoqYn^">
+    <field name="ItemType" type="Int32" label="^ItmTyp^Item Type^ItmTyp^" />
+    <field name="Point_Of_SaleYN" type="Int32" label="^POS^Point Of Sale YN^POS^" />
+    <field name="RefreshITM" type="Int32" label="^RefITM^Refresh ITM^RefITM^" />
+    <field name="BOQYN" type="Int32" label="^Boqyn^Boqyn^Boqyn^">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Job_Issuance_Intransit_AC" type="String" label="^JobIssIntAcc^Job Issuance Intransit AC^JobIssIntAcc^" length="50" />
-    <field name="Item_Code_Scrap" type="String" label="^IteCodScr^Item Code Scrap^IteCodScr^" length="20" />
-    <field name="Assets_Clearing_AC" type="String" label="^AssCleAcc^Assets Clearing AC^AssCleAcc^" length="50" />
-    <field name="IsAssets" type="Int32" label="^IsAss^Is Assets^IsAss^">
+    <field name="Job_Issuance_Intransit_AC" type="String" label="^JIAC^Job Issuance Intransit AC^JIAC^" length="50" />
+    <field name="Item_Code_Scrap" type="String" label="^IScrap^Item Code Scrap^IScrap^" length="20" />
+    <field name="Assets_Clearing_AC" type="String" label="^ACAC^Assets Clearing AC^ACAC^" length="50" />
+    <field name="IsAssets" type="Int32" label="^IsAssets^Is Assets^IsAssets^">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="IsBatchControl" type="Int32" label="^IsBatCon^Is Batch Control^IsBatCon^">
+    <field name="IsBatchControl" type="Int32" label="^IsBCtr^Is Batch Control^IsBCtr^">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="AutoGenLotSerialYN" type="Int32" label="^AutGenLotSerYn^Auto Gen Lot Serial YN^AutGenLotSerYn^" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="BudgetAccount" type="String" label="^BudAcc^Budget Account^BudAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AcomNam^Company Name^AcomNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABr^Branch Name^ABr^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStorNam^Store Name^AStorNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABrAr^ABranch AR^ABrAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AutoGenLotSerialYN" type="Int32" label="^ALSYN^Auto Gen Lot Serial YN^ALSYN^" />
+    <field name="Company_Code" type="Int32" label="^CCode^Company Code^CCode^" />
+    <field name="BudgetAccount" type="String" label="^BAC^Budget Account^BAC^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABrCod^ABranch Code^ABrCod^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABrLog^ABranch Logo^ABrLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^IteMas^Item Master^IteMas^" showInSelector="false" filter="BranchID=@Session_OPU_Code" reportTemplate="true">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Item Master" showInSelector="false" filter="BranchID=@Session_OPU_Code" reportTemplate="true">
+      <headerText>^StockOnHand^Stock On Hand^StockOnHand^</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Item_Code_Ref_No" columns="20" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Item_Code" columns="20" hidden="true" />
         <dataField fieldName="Part_No" columns="20" />
         <dataField fieldName="Item_Description" />
@@ -103,15 +102,15 @@
         <dataField fieldName="ItemType" columns="15" hidden="true" />
         <dataField fieldName="AutoGenLotSerialYN" columns="15" hidden="true" />
         <dataField fieldName="BudgetAccount" columns="20" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
-        <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="Unit_Cost" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIteMas^Review Item Master^RevIteMas^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Item Master" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="tbl Item Master" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -157,8 +156,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewIteMas^New Item Master^NewIteMas^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Item Master" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New tbl Item Master" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -205,15 +204,8 @@
     </view>
   </views>
   <actions>
-    <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
-    </actionGroup>
     <actionGroup id="ag2" scope="Form">
-      <action id="a1" commandName="Edit" />
-      <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
-      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
@@ -225,10 +217,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
-    </actionGroup>
-    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -256,8 +245,6 @@
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
-    </actionGroup>
+    <actionGroup id="ag9" scope="ActionColumn" />
   </actions>
 </dataController>

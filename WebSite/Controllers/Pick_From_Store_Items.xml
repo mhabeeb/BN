@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_From_Store_Items" conflictDetection="overwriteChanges" label="^PicFroStoIte^Pick_From_Store_Items^PicFroStoIte^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_From_Store_Items" conflictDetection="overwriteChanges" label="Pick_From_Store_Items" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.tbl_Item_Warehouse" custom="true">
       <text><![CDATA[SELECT     dbo.tbl_Item_Warehouse.*, dbo.tbl_Transactions_Header.Transaction_ID
@@ -8,21 +8,21 @@ FROM         dbo.tbl_Item_Warehouse INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="StoreID" type="Int32" allowNulls="false" label="^StoId^Store#^StoId^" showInSummary="true" isPrimaryKey="true" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" isPrimaryKey="true" />
-    <field name="Bin_Location" type="String" label="^BinLoc^Bin Location^BinLoc^" length="50" showInSummary="true" />
-    <field name="CountedQty" type="Decimal" label="^CouQty^Counted Qty^CouQty^" showInSummary="true" />
-    <field name="Stock_On_Hand" type="Decimal" label="^StoOnHan^Stock On Hand^StoOnHan^" showInSummary="true" />
-    <field name="Unit_Cost" type="Decimal" label="^UniCos^Unit Cost^UniCos^" />
-    <field name="Pick" type="Int32" label="^Pic^Pick^Pic^" />
-    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" />
-    <field name="Transaction_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TraId^Transaction#^TraId^" readOnly="true" />
+    <field name="StoreID" type="Int32" allowNulls="false" label="Store#" showInSummary="true" isPrimaryKey="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="Item Code" length="20" showInSummary="true" isPrimaryKey="true" />
+    <field name="Bin_Location" type="String" label="Bin Location" length="50" showInSummary="true" />
+    <field name="CountedQty" type="Decimal" label="Counted Qty" showInSummary="true" />
+    <field name="Stock_On_Hand" type="Decimal" label="Stock On Hand" showInSummary="true" />
+    <field name="Unit_Cost" type="Decimal" label="Unit Cost" />
+    <field name="Pick" type="Int32" label="Pick" />
+    <field name="Pick_Qty" type="Decimal" label="Pick Qty" />
+    <field name="Pick_Doc" type="Decimal" label="Pick Doc" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Item_Description" type="String" label="Item Description" length="500" />
+    <field name="Transaction_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Transaction#" readOnly="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^IteWar^Item Warehouse^IteWar^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="dbo tbl Item Warehouse" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="StoreID" columns="15" />
@@ -39,7 +39,7 @@ FROM         dbo.tbl_Item_Warehouse INNER JOIN
         <dataField fieldName="Transaction_ID" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIteWar^Review  Item Warehouse^RevIteWar^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review dbo tbl Item Warehouse" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="dbo tbl Item Warehouse" flow="NewColumn">
@@ -60,7 +60,7 @@ FROM         dbo.tbl_Item_Warehouse INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewIteWar^New  Item Warehouse^NewIteWar^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New dbo tbl Item Warehouse" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New dbo tbl Item Warehouse" flow="NewColumn">
@@ -110,7 +110,7 @@ FROM         dbo.tbl_Item_Warehouse INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

@@ -1,96 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="COA_Natural_Account" conflictDetection="overwriteChanges" label="^CoaNatAcc^COA_Natural_Account^CoaNatAcc^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="COA_Natural_Account" conflictDetection="overwriteChanges" label="COA_Natural_Account" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="COA_Natural_Account" custom="true">
       <text><![CDATA[SELECT     dbo.COA_Natural_Account.*, dbo.V_Account_Tree.Account_Desc_Html
 FROM         dbo.COA_Natural_Account INNER JOIN
-                      dbo.V_Account_Tree ON dbo.COA_Natural_Account.AccountID = dbo.V_Account_Tree.AccountID]]></text>
+                      dbo.V_Account_Tree ON dbo.COA_Natural_Account.AccountID = dbo.V_Account_Tree.AccountID
+					  AND dbo.COA_Natural_Account.Company_Code = dbo.V_Account_Tree.Company_Code]]></text>
     </command>
   </commands>
   <fields>
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" isPrimaryKey="true" causesCalculate="true" contextFields="Account_Type,Natural_AccountID_Parent" />
-    <field name="Account_Type" type="String" allowNulls="false" label="^AccTyp^Account Type^AccTyp^" length="50">
+    <field name="AccountID" type="String" allowNulls="false" label="^Account^Account#^Account^" length="50" isPrimaryKey="true" causesCalculate="true" contextFields="Account_Type,Natural_AccountID_Parent" />
+    <field name="Account_Type" type="String" allowNulls="false" label="^AccountType^Account Type^AccountType^" length="50" causesCalculate="true">
       <items style="Lookup" dataController="Pick_Account_type" dataView="grid1" dataValueField="Account_Type" dataTextField="Account_Type" copy="RequiredYN=RequiredYN&#xD;&#xA;DeptYN=DeptYN" />
     </field>
-    <field name="Natural_AccountID_Parent" type="String" label="^NatAccIdPar^Parent Account ID ^NatAccIdPar^" length="50" contextFields="Account_Type=Account_Type" causesCalculate="true">
+    <field name="Natural_AccountID_Parent" type="String" label="^ParentAccountID^Parent Account ID ^ParentAccountID^" length="50" contextFields="Account_Type=Account_Type" causesCalculate="true">
       <items style="DropDownList" dataController="Pick_COA_Parent" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" letters="true" />
     </field>
-    <field name="Account_Desc_Html" type="String" allowNulls="false" label="^AccDesHtm^Account Desc Html^AccDesHtm^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Account_Description" type="String" allowNulls="false" label="^AccDes^Account Description^AccDes^" length="200" />
-    <field name="Account_DescriptionAr" type="String" label="^AccDesAr^Account Description Ar^AccDesAr^" length="500" showInSummary="true" />
-    <field name="PostableYN" type="Int32" allowNulls="false" label="^PosYn^Postable YN^PosYn^">
+    <field name="Account_Desc_Html" type="String" allowNulls="false" label="^Account_Desc_Html^Account Desc Html^Account_Desc_Html^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Account_Description" type="String" allowNulls="false" label="^Account_Description^Account Description^Account_Description^" length="200" causesCalculate="true" />
+    <field name="Account_DescriptionAr" type="String" label="^AccDesAR^Account Desc AR^AccDesAR^" length="500" />
+    <field name="PostableYN" type="Int32" allowNulls="false" label="^PostableYN^Postable YN^PostableYN^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ParantYN" type="Int32" allowNulls="false" label="^ParYn^Parant YN^ParYn^">
+    <field name="ParantYN" type="Int32" allowNulls="false" label="^ParantYN^Parant YN^ParantYN^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="BugdetingYN" type="Int32" allowNulls="false" label="^BugYn^Bugdeting YN^BugYn^">
+    <field name="BugdetingYN" type="Int32" allowNulls="false" label="^BugdetingYN^Bugdeting YN^BugdetingYN^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" hidden="false" showInSummary="true">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" hidden="false" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" hidden="false" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" hidden="false" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" hidden="false" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" hidden="false" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" hidden="false" showInSummary="true" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" allowNulls="false">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" hidden="false" showInSummary="true" />
+    <field name="InActive" type="Int32" label="^InActive^In Active^InActive^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Accounts_Int_ID" type="Int32" allowNulls="false" label="^AccIntId^Accounts Int#^AccIntId^" readOnly="true" />
-    <field name="RequiredYN" type="Int32" label="^ProYn^Project Required^ProYn^" allowNulls="false">
+    <field name="Accounts_Int_ID" type="Int32" allowNulls="false" label="^AccountsInt^Accounts Int#^AccountsInt^" readOnly="true" />
+    <field name="RequiredYN" type="Int32" label="^ProjectRequired^Project Required^ProjectRequired^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="DeptYN" type="Int32" label="^DepYn^Dept Required^DepYn^" allowNulls="false">
+    <field name="DeptYN" type="Int32" label="^DeptRequired^Dept Required^DeptRequired^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Ref_Account_No" type="String" label="^RefAccNo^Ref Account No^RefAccNo^" htmlEncode="false" hidden="false" />
-    <field name="ParentType" type="String" label="^ParTyp^Parent Type^ParTyp^" htmlEncode="false" hidden="false" length="50" />
-    <field name="ABranchId" type="Int32" label="^ABraId^ABranch Id^ABraId^" computed="true" readOnly="true">
+    <field name="Ref_Account_No" type="String" label="^RefAccountNo^Ref Account No^RefAccountNo^" htmlEncode="false" hidden="false" />
+    <field name="ParentType" type="String" label="^ParentType^Parent Type^ParentType^" htmlEncode="false" hidden="false" length="50" />
+    <field name="ABranchId" type="Int32" label="ABranch Id" computed="true" readOnly="true">
       <formula>Select  @Session_OPU_Code</formula>
     </field>
-    <field name="LegacyAccount" type="String" label="^LegAcc^Legacy Account^LegAcc^" htmlEncode="false" hidden="false" length="15" />
-    <field name="SubAccount" type="String" label="^SubAcc^Sub Account^SubAcc^" htmlEncode="false" hidden="false" length="15" />
-    <field name="BudgetCode" type="String" label="^BudCod^Budget Code^BudCod^" htmlEncode="false" hidden="false" length="15" />
-    <field name="BudgetCode_Description" type="String" label="^BudCodDes^Budget Code Description^BudCodDes^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="200" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+    <field name="LegacyAccount" type="String" label="^LegacyAccount^Legacy Account^LegacyAccount^" htmlEncode="false" hidden="false" length="15" />
+    <field name="SubAccount" type="String" label="^SubAccount^Sub Account^SubAccount^" htmlEncode="false" hidden="false" length="15" />
+    <field name="BudgetCode" type="String" label="^BudgetCode^Budget Code^BudgetCode^" htmlEncode="false" hidden="false" length="15" />
+    <field name="BudgetCode_Description" type="String" label="^BudgetCodeDescription^Budget Code Description^BudgetCodeDescription^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="200" />
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
       <formula>SELECT @Session_BranchName_Ar</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="Company_Code" type="Int16" label="^ComCod^Company Code^ComCod^" />
+    <field name="Company_Code" type="Int16" label="Company Code" allowNulls="false" isPrimaryKey="true" />
+    <field name="SubAccountRequiredYN" type="Int16" label="Sub Account Required YN" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ChaOfAcc^Chart of Accounts^ChaOfAcc^" reportLabel="Chart Of Account" reportTemplate="true" showInSelector="false" filter="Company_Code=@Session_Company_Code">
+    <view id="grid1" type="Grid" commandId="command1" label="Chart of Accounts" reportLabel="Chart Of Account" reportTemplate="true" showInSelector="false" filter="Company_Code=@Session_Company_Code">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="AccountID" columns="50" />
-        <dataField fieldName="Ref_Account_No" />
-        <dataField fieldName="Account_Description" hidden="true" />
-        <dataField fieldName="Account_Desc_Html" rows="5" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Account_Type" columns="50" />
+        <dataField fieldName="Account_Description" hidden="true" />
+        <dataField fieldName="Ref_Account_No" />
+        <dataField fieldName="SubAccount" columns="15" />
+        <dataField fieldName="LegacyAccount" columns="15" />
+        <dataField fieldName="Account_Desc_Html" rows="5" />
         <dataField fieldName="Account_DescriptionAr" hidden="true" />
         <dataField fieldName="Natural_AccountID_Parent" columns="50" />
         <dataField fieldName="ParentType" rows="5" />
-        <dataField fieldName="LegacyAccount" columns="15" />
-        <dataField fieldName="SubAccount" columns="15" />
         <dataField fieldName="BudgetCode" columns="15" />
         <dataField fieldName="BudgetCode_Description" rows="5" />
         <dataField fieldName="InActive" columns="15" />
@@ -98,24 +102,27 @@ FROM         dbo.COA_Natural_Account INNER JOIN
         <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" hidden="true" />
         <dataField fieldName="Updated_By" columns="15" hidden="true" />
         <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="Company_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchId" columns="15" hidden="true" />
+        <dataField fieldName="SubAccountRequiredYN" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^EdiChaOfAcc^Edit Chart of Accounts^EdiChaOfAcc^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Edit Chart of Accounts" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Edit Chart of Accounts" flow="NewColumn">
+        <category id="c1" headerText="^EdiChaOfAcc^Edit Chart of Account^EdiChaOfAcc^" flow="NewColumn">
           <description />
           <dataFields>
             <dataField fieldName="Account_Type" columns="50" />
-            <dataField fieldName="Ref_Account_No" />
-            <dataField fieldName="Natural_AccountID_Parent" columns="50" />
             <dataField fieldName="AccountID" columns="50" readOnly="true" />
-            <dataField fieldName="Account_Description" />
+            <dataField fieldName="Ref_Account_No" columns="25" />
+            <dataField fieldName="Account_Description" columns="25" />
             <dataField fieldName="Account_DescriptionAr" />
+            <dataField fieldName="ParentType" rows="5" readOnly="true" />
+            <dataField fieldName="Natural_AccountID_Parent" columns="50" />
             <dataField fieldName="PostableYN" columns="15" hidden="true" />
             <dataField fieldName="ParantYN" columns="15">
               <headerText>Parent YN</headerText>
@@ -123,47 +130,45 @@ FROM         dbo.COA_Natural_Account INNER JOIN
             <dataField fieldName="BugdetingYN" columns="15">
               <headerText>Budgeting YN</headerText>
             </dataField>
-            <dataField fieldName="RequiredYN" columns="15" />
-            <dataField fieldName="DeptYN" columns="15" />
             <dataField fieldName="Created_By" columns="15" hidden="true" />
             <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" hidden="true" />
             <dataField fieldName="Updated_By" columns="15" hidden="true" />
             <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" hidden="true" />
-            <dataField fieldName="ParentType" rows="5" readOnly="true" />
           </dataFields>
         </category>
-        <category headerText="Status and Additional Information" id="c2">
+        <category headerText="^StaAndAddInf^Status and Additional Information^StaAndAddInf^" id="c2" flow="NewColumn">
           <dataFields>
+            <dataField fieldName="DeptYN" columns="15" />
+            <dataField fieldName="RequiredYN" columns="15" />
             <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="BudgetCode" columns="15" hidden="true" />
+            <dataField fieldName="BudgetCode_Description" rows="2" columns="35" hidden="true" />
             <dataField fieldName="LegacyAccount" columns="15" />
-            <dataField fieldName="SubAccount" columns="15" />
-            <dataField fieldName="BudgetCode" columns="15" />
-            <dataField fieldName="BudgetCode_Description" rows="2" columns="45" />
+            <dataField fieldName="SubAccount" columns="15" hidden="true" />
+            <dataField fieldName="SubAccountRequiredYN" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewChaOfAcc^New Chart of Accounts^NewChaOfAcc^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Chart of Accounts" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Chart of Accounts" flow="NewColumn">
+        <category id="c1" headerText="^NewChaOfAcc^New Chart of Accounts^NewChaOfAcc^" flow="NewColumn">
           <description />
           <dataFields>
-            <dataField fieldName="Account_Type" columns="50" />
             <dataField fieldName="Natural_AccountID_Parent" columns="50" />
+            <dataField fieldName="Account_Type" columns="50" />
             <dataField fieldName="AccountID" columns="50" />
-            <dataField fieldName="Account_Description" />
+            <dataField fieldName="Account_Description" columns="35" />
             <dataField fieldName="Account_DescriptionAr" />
-            <dataField fieldName="Ref_Account_No" />
-            <dataField fieldName="PostableYN" columns="15" hidden="true" />
+            <dataField fieldName="Ref_Account_No" columns="35" />
             <dataField fieldName="ParantYN" columns="15">
               <headerText>Parent YN</headerText>
             </dataField>
+            <dataField fieldName="PostableYN" columns="15" hidden="true" />
             <dataField fieldName="BugdetingYN" columns="15">
               <headerText>Budgeting YN</headerText>
             </dataField>
-            <dataField fieldName="RequiredYN" columns="15" />
-            <dataField fieldName="DeptYN" columns="15" />
             <dataField fieldName="Created_By" columns="15" hidden="true" />
             <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" hidden="true" />
             <dataField fieldName="Updated_By" columns="15" hidden="true" />
@@ -171,14 +176,17 @@ FROM         dbo.COA_Natural_Account INNER JOIN
             <dataField fieldName="ParentType" rows="5" hidden="true" />
           </dataFields>
         </category>
-        <category headerText="Additional Information" id="c2">
+        <category headerText="^AddInf^Additional Information^AddInf^" id="c2" flow="NewColumn">
           <dataFields>
+            <dataField fieldName="BudgetCode" columns="15" hidden="true" />
+            <dataField fieldName="BudgetCode_Description" rows="2" columns="35" hidden="true" />
+            <dataField fieldName="DeptYN" columns="15" />
+            <dataField fieldName="RequiredYN" columns="15" />
             <dataField fieldName="InActive" columns="15" />
             <dataField fieldName="LegacyAccount" columns="15" />
-            <dataField fieldName="SubAccount" columns="15" />
-            <dataField fieldName="BudgetCode" columns="15" />
-            <dataField fieldName="BudgetCode_Description" rows="2" columns="45" />
+            <dataField fieldName="SubAccount" columns="15" hidden="true" />
             <dataField fieldName="Company_Code" columns="15" hidden="true" />
+            <dataField fieldName="SubAccountRequiredYN" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -203,10 +211,10 @@ FROM         dbo.COA_Natural_Account INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -236,9 +244,18 @@ FROM         dbo.COA_Natural_Account INNER JOIN
     </actionGroup>
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
-      <action commandName="SQL" id="a100" headerText="Ledger" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
+      <action commandName="SQL" id="a100" headerText="^Ledger^Ledger^Ledger^" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
         <data><![CDATA[Set @Session_AccountID=@AccountID
 Set @Session_Date=IsNull(@Parameters_EndDate,GetDate())]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Import" flat="true">
+      <action commandName="Import" headerText="Import" id="a100" />
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="Add Sub Account Range" flat="true">
+      <action commandName="SQL" id="a100" headerText="Add Sub Account Range" confirmation="_controller=Param_SubAccount_Range&#xD;&#xA;_title=Enter Sub Account Range&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-menu-hamburger" whenClientScript="[ParentType] != 'Parent'">
+        <data><![CDATA[EXEC dbo.COA_SUB_ACC_RANGE @AccountID, @Company_Code,
+@Parameters_FromSubAccount, @Parameters_ToSubAccount, @BusinessRules_UserId]]></data>
       </action>
     </actionGroup>
   </actions>
@@ -250,7 +267,8 @@ SET @BugdetingYN=0
 SET @InActive=0
 SET @RequiredYN=0
 SET @DeptYN=0
-SET @Company_Code=@Session_Company_Code]]></rule>
+SET @Company_Code=@Session_Company_Code
+SET @SubAccountRequiredYN=0]]></rule>
     <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @ParentType='Child'
 SET @PostableYN=1
 IF IsNull(@ParantYN,0)=1 
@@ -273,7 +291,7 @@ begin
 	
 end
 ]]></rule>
-    <rule id="r106" type="Sql" commandName="Calculate" phase="Execute" name="Natural_AccountID_Parent_Converter"><![CDATA[SET @AccountID=dbo.Get_Next_Account_Number(@Account_Type,@Natural_AccountID_Parent) 
+    <rule id="r106" type="Sql" commandName="Calculate" phase="Execute" name="Natural_AccountID_Parent_Converter"><![CDATA[SET @AccountID=dbo.Get_Next_Account_Number(@Account_Type,@Natural_AccountID_Parent,@Session_Company_Code) 
 
 ]]></rule>
   </businessRules>

@@ -1,50 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Profit_and_Loss_View" conflictDetection="overwriteChanges" label="^ProAndLosvie^Profit_and_Loss_View^ProAndLosVie^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Profit_and_Loss_View" conflictDetection="overwriteChanges" label="Profit_and_Loss_View" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName=" End_Period" custom="true">
-      <text><![CDATA[select * from End_Period where Mtotal> 0 and ReportID=10]]></text>
+      <text><![CDATA[select End_Period .*,CAST(End_Period.RowID as varchar(50)) 
+"ZZ_Filter_Value" from End_Period where Mtotal> 0 and ReportID=10
+
+
+
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Row" type="Int32" label="^Row^Row^Row^" />
-    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" />
-    <field name="ReportID" type="Int32" label="^RepId^Report#^RepId^" />
-    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" />
-    <field name="Account_Description" type="String" label="^AccDes^Account Description^AccDes^" length="4000" htmlEncode="false" />
-    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" />
-    <field name="Debit_Amount" type="Decimal" label="^DebAmo^Debit Amount^DebAmo^" />
-    <field name="Credit_Amount" type="Decimal" label="^CreAmo^Credit Amount^CreAmo^" />
-    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" />
-    <field name="YTD" type="Decimal" label="^Ytd^Ytd^Ytd^" />
-    <field name="MTD" type="Decimal" label="^Mtd^Mtd^Mtd^" />
-    <field name="Lineage" type="String" label="^Lin^Lineage^Lin^" length="255" />
-    <field name="Mtotal" type="Decimal" label="^Mtot^Mtotal^Mtot^" />
-    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50" />
-    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" />
-    <field name="To_Date" type="DateTime" label="^ToDat^To Date^ToDat^" />
-    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" />
-    <field name="TrxMonths" type="Int32" label="^TrxMon^Trx Months^TrxMon^" />
-    <field name="PostableYN" type="String" label="^PosYn^Postable YN^PosYn^" length="1" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="500" />
-    <field name="Transaction_Type" type="String" label="^TraTyp^Transaction Type^TraTyp^" length="50" />
-    <field name="Transaction_No" type="Decimal" label="^TraNo^Transaction No^TraNo^" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" />
-    <field name="RowID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^RowId^Row#^RowId^" readOnly="true" />
-    <field name="RunID" type="Decimal" label="^RunId^Run#^RunId^" />
-    <field name="Ref_Account_No" type="String" label="^RefAccNo^Ref Account No^RefAccNo^" length="50" />
-    <field name="Trx_Date" type="DateTime" label="^TrxDat^Trx Date^TrxDat^" />
-    <field name="Account_Description_Plain" type="String" label="^AccDesPla^Account Description Plain^AccDesPla^" length="4000" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="FromEPFormat" type="Int32" label="^FroEoFor^From EP Format^FroEoFor^" />
-    <field name="ToEPFormat" type="Int32" label="^ToEpFor^To EP Format^ToEpFor^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
+    <field name="Row" type="Int32" label="Row" />
+    <field name="UserID" type="Int32" label="User#" />
+    <field name="ReportID" type="Int32" label="Report#" />
+    <field name="AccountID" type="String" label="Account#" length="50" />
+    <field name="Account_Description" type="String" label="Account Description" length="4000" htmlEncode="false" />
+    <field name="OpeningBalance" type="Decimal" label="Opening Balance" />
+    <field name="Debit_Amount" type="Decimal" label="Debit Amount" />
+    <field name="Credit_Amount" type="Decimal" label="Credit Amount" />
+    <field name="Closing_Amount" type="Decimal" label="Closing Amount" />
+    <field name="YTD" type="Decimal" label="Ytd" />
+    <field name="MTD" type="Decimal" label="Mtd" />
+    <field name="Lineage" type="String" label="Lineage" length="255" />
+    <field name="Mtotal" type="Decimal" label="Mtotal" />
+    <field name="Account_Type" type="String" label="Account Type" length="50" />
+    <field name="CalcDate" type="Int32" label="Calc Date" />
+    <field name="To_Date" type="DateTime" label="To Date" />
+    <field name="TrxYear" type="Int32" label="Trx Year" />
+    <field name="TrxMonths" type="Int32" label="Trx Months" />
+    <field name="PostableYN" type="String" label="Postable YN" length="1" />
+    <field name="Remarks" type="String" label="Remarks" length="500" />
+    <field name="Transaction_Type" type="String" label="Transaction Type" length="50" />
+    <field name="Transaction_No" type="Decimal" label="Transaction No" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" readOnly="true" length="150" />
+    <field name="RowID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Row#" readOnly="true" />
+    <field name="RunID" type="Decimal" label="Run#" />
+    <field name="Ref_Account_No" type="String" label="Ref Account No" length="50" />
+    <field name="Trx_Date" type="DateTime" label="Trx Date" />
+    <field name="Account_Description_Plain" type="String" label="Account Description Plain" length="4000" />
+    <field name="Project_Code" type="String" label="Project Code" length="50" />
+    <field name="Dept_Code" type="String" label="Dept Code" length="50" />
+    <field name="FromEPFormat" type="Int32" label="From EP Format" />
+    <field name="ToEPFormat" type="Int32" label="To EP Format" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ProLosSta^Profit and Loss Statement^ProLosSta^" filter="UserID=@BusinessRules_UserId&#xD;&#xA;" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Profit and Loss Statement" filter="UserID=@BusinessRules_UserId&#xD;&#xA;" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
+        <dataField fieldName="Project_Code" columns="50" />
         <dataField fieldName="RunID" columns="15" hidden="true" />
         <dataField fieldName="Account_Type" columns="50" />
         <dataField fieldName="AccountID" columns="50" />
@@ -73,7 +79,7 @@
         <dataField fieldName="PostableYN" columns="1" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevEndPer^Review End Period^RevEndPer^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review End Period" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="End Period" flow="NewColumn">
@@ -116,7 +122,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewEndPer^New End Period^NewEndPer^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New End Period" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New End Period" flow="NewColumn">
@@ -198,42 +204,42 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="^RefreshParameter^Refresh Parameter^RefreshParameter^" flat="true">
-      <action commandName="SQL" headerText="Child A/C P&amp;L" id="a101" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
-        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details] @Parameters_EndDate,@BusinessRules_UserId,10,1,@Session_OPU_Code
+    <actionGroup id="ag104" scope="ActionBar" headerText="^ProjectParameter^Project Parameter^ProjectParameter^" flat="false">
+      <action commandName="SQL" headerText="^AllAcPl^All A/C  P&amp;L^AllAcPl^" id="a102" confirmation="_controller=Param_Pick_PROFIT_LOSS&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-th">
+        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details_Proj] @Parameters_EndDate,@BusinessRules_UserId,10,0,@Session_OPU_Code,@Parameters_Project_Code]]></data>
+      </action>
+      <action commandName="SQL" headerText="^ChiAcPl^Child A/C P&amp;L^ChiAcPl^" id="a101" confirmation="_controller=Param_Pick_PROFIT_LOSS&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="&#x9;glyphicon glyphicon-folder-close">
+        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details_Proj] @Parameters_EndDate,@BusinessRules_UserId,10,1,@Session_OPU_Code,@Parameters_Project_Code
                                              ]]></data>
       </action>
-      <action commandName="SQL" headerText="All A/C  P&amp;L" id="a102" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
-        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details] @Parameters_EndDate,@BusinessRules_UserId,10,0,@Session_OPU_Code]]></data>
+      <action commandName="SQL" headerText="^ParAcPl^Parent A/C  P&amp;L^ParAcPl^" id="a103" confirmation="_controller=Param_Pick_PROFIT_LOSS&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-th-list">
+        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details_Proj] @Parameters_EndDate,@BusinessRules_UserId,10,2,@Session_OPU_Code,@Parameters_Project_Code]]></data>
       </action>
-      <action commandName="SQL" headerText="Parent A/C  P&amp;L" id="a103" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
-        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details] @Parameters_EndDate,@BusinessRules_UserId,10,2,@Session_OPU_Code]]></data>
-      </action>
-      <action commandName="SQL" headerText="Flush Data" id="a104">
+      <action commandName="SQL" headerText="^FluDat^Flush Data^FluDat^" id="a104" cssClass="glyphicon glyphicon-unchecked">
         <data><![CDATA[TRUNCATE TABLE End_Period]]></data>
       </action>
     </actionGroup>
-    <actionGroup id="ag102" scope="ActionBar" headerText="Drilldown" flat="true">
-      <action commandName="SQL" id="a100" headerText="Opening Drilldown" whenLastCommandName="Select">
+    <actionGroup id="ag102" scope="ActionBar" headerText="^DriDow^Drilldown^DriDow^" flat="true">
+      <action commandName="SQL" id="a100" headerText="^OpeDriDow^Opening Drilldown^OpeDriDow^" whenLastCommandName="Select">
         <data><![CDATA[Set @Session_BType=1
 Set @Session_Report=2
 Set @Session_RowID=@RowID
 set @Result_NavigateUrl = 'AccountDetails.aspx']]></data>
       </action>
-      <action commandName="SQL" id="a103" headerText="Closing Drilldown" whenLastCommandName="Select">
+      <action commandName="SQL" id="a103" headerText="^CloDriDow^Closing Drilldown^CloDriDow^" whenLastCommandName="Select">
         <data><![CDATA[Set @Session_BType=2
 Set @Session_Report=2
 
 Set @Session_RowID=@RowID
 set @Result_NavigateUrl = 'AccountDetails.aspx']]></data>
       </action>
-      <action commandName="SQL" id="a102" headerText="YTD Drilldown" whenLastCommandName="Select">
+      <action commandName="SQL" id="a102" headerText="^YtdDriDow^YTD Drilldown^YtdDriDow^" whenLastCommandName="Select">
         <data><![CDATA[Set @Session_BType=3
 Set @Session_Report=2
 Set @Session_RowID=@RowID
 set @Result_NavigateUrl = 'AccountDetails.aspx']]></data>
       </action>
-      <action commandName="SQL" id="a101" headerText="MTD Drilldown" whenLastCommandName="Select">
+      <action commandName="SQL" id="a101" headerText="^MtdDriDow^MTD Drilldown^MtdDriDow^" whenLastCommandName="Select">
         <data><![CDATA[Set @Session_BType=4
 Set @Session_Report=2
 
@@ -241,24 +247,33 @@ Set @Session_RowID=@RowID
 set @Result_NavigateUrl = 'AccountDetails.aspx']]></data>
       </action>
     </actionGroup>
-    <actionGroup id="ag101" scope="ActionBar" headerText="P&amp;L Consolidated" flat="true">
-      <action commandName="SQL" headerText="P&amp;L Consolidated" id="a100" confirmation="_controller=Parameter_End_Period_Cons &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^RefreshParameter^Refresh Parameter^RefreshParameter^" flat="false">
+      <action commandName="SQL" headerText="^AllAcPl^All A/C  P&amp;L^AllAcPl^" id="a102" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-th">
+        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details] @Parameters_EndDate,@BusinessRules_UserId,10,0,@Session_OPU_Code]]></data>
+      </action>
+      <action commandName="SQL" headerText="^ChiAcPl^Child A/C P&amp;L^ChiAcPl^" id="a101" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="&#x9;glyphicon glyphicon-folder-close">
+        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details] @Parameters_EndDate,@BusinessRules_UserId,10,1,@Session_OPU_Code
+                                             ]]></data>
+      </action>
+      <action commandName="SQL" headerText="^ParAcPl^Parent A/C  P&amp;L^ParAcPl^" id="a103" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-th-list">
+        <data><![CDATA[EXEC [dbo].[Profit_Loss_Details] @Parameters_EndDate,@BusinessRules_UserId,10,2,@Session_OPU_Code]]></data>
+      </action>
+      <action commandName="SQL" headerText="^FluDat^Flush Data^FluDat^" id="a104" cssClass="glyphicon glyphicon-unchecked">
+        <data><![CDATA[TRUNCATE TABLE End_Period]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" headerText="^PlCon^P&amp;L Consolidated^PlCon^" flat="true">
+      <action commandName="SQL" headerText="^PlCon^P&amp;L Consolidated^PlCon^" id="a100" confirmation="_controller=Parameter_End_Period_Cons &#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-stats">
         <data><![CDATA[DELETE FROM End_Period WHERE ReportID=10 AND UserID=@BusinessRules_UserId
 
 EXEC [dbo].[Profit_Loss_Consolidation] @Parameters_EndDate,@BusinessRules_UserId,10,@Parameters_Cons_ID]]></data>
       </action>
     </actionGroup>
+    <actionGroup id="ag103" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintProfitandLossStatement" headerText="^PriPro^Print Profit and Loss Statement^PriPro^" id="a100" cssClass="glyphicon glyphicon-print" />
+    </actionGroup>
   </actions>
   <businessRules>
-    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
--- Enable caching of the result set. Duration is specified in seconds.
--- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
-    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[select * from End_Period where Mtotal > 0   and ReportID=10 
---and AccountID<>'999999999']]></rule>
-    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
--- implement insert here]]></rule>
-    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
--- implement update here]]></rule>
     <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
 -- implement delete here]]></rule>
     <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
@@ -272,5 +287,14 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[select * from End_Period where Mtotal > 0   and ReportID=10 
+--and AccountID<>'999999999']]></rule>
   </businessRules>
 </dataController>

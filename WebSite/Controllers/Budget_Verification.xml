@@ -1,42 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Budget_Verification" conflictDetection="overwriteChanges" label="^BudVer^Budget_Verification^BudVer^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Budget_Verification" conflictDetection="overwriteChanges" label="Budget_Verification" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="TrxType" type="String" allowNulls="false" label="^TrxTyp^Trx Type^TrxTyp^" readOnly="true" length="6" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" readOnly="true" />
-    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" readOnly="true" length="50" />
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" readOnly="true" length="50" />
-    <field name="Account_Description" type="String" label="^AccDes^Account Description^AccDes^" readOnly="true" length="250" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" readOnly="true" length="50">
+    <field name="TrxType" type="String" allowNulls="false" label="^TrxType^Trx Type^TrxType^" readOnly="true" length="6" />
+    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCode^" readOnly="true" />
+    <field name="Account_Type" type="String" label="^AccountType^Account Type^AccountType^" readOnly="true" length="50" />
+    <field name="AccountID" type="String" allowNulls="false" label="^Account^Account#^Account^" readOnly="true" length="50" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" readOnly="true" length="50">
       <items style="DropDownList" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
     </field>
     <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" readOnly="true" length="50">
       <items style="DropDownList" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
     </field>
-    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" readOnly="true" />
-    <field name="January" type="Decimal" label="^Jan^January^Jan^" readOnly="true" dataFormatString="N2" />
-    <field name="February" type="Decimal" label="^Feb^February^Feb^" readOnly="true" dataFormatString="N2" />
+    <field name="TrxYear" type="Int32" label="^TrxYear^Trx Year^TrxYear^" readOnly="true" />
+    <field name="January" type="Decimal" label="^January^January^January^" readOnly="true" dataFormatString="N2" />
+    <field name="February" type="Decimal" label="^February^February^February^" readOnly="true" dataFormatString="N2" />
     <field name="March" type="Decimal" label="^March^March^March^" readOnly="true" dataFormatString="N2" />
     <field name="April" type="Decimal" label="^April^April^April^" readOnly="true" dataFormatString="N2" />
     <field name="May" type="Decimal" label="^May^May^May^" readOnly="true" dataFormatString="N2" />
     <field name="June" type="Decimal" label="^June^June^June^" readOnly="true" dataFormatString="N2" />
     <field name="July" type="Decimal" label="^July^July^July^" readOnly="true" dataFormatString="N2" />
-    <field name="August" type="Decimal" label="^Augus^August^Augus^" readOnly="true" dataFormatString="N2" />
-    <field name="September" type="Decimal" label="^Sep^September^Sep^" readOnly="true" dataFormatString="N2" />
-    <field name="October" type="Decimal" label="^Oct^October^Oct^" readOnly="true" dataFormatString="N2" />
-    <field name="November" type="Decimal" label="^Nov^November^Nov^" readOnly="true" dataFormatString="N2" />
-    <field name="December" type="Decimal" label="^Dec^December^Dec^" readOnly="true" dataFormatString="N2" />
+    <field name="August" type="Decimal" label="^August^August^August^" readOnly="true" dataFormatString="N2" />
+    <field name="September" type="Decimal" label="^September^September^September^" readOnly="true" dataFormatString="N2" />
+    <field name="October" type="Decimal" label="^October^October^October^" readOnly="true" dataFormatString="N2" />
+    <field name="November" type="Decimal" label="^November^November^November^" readOnly="true" dataFormatString="N2" />
+    <field name="December" type="Decimal" label="^December^December^December^" readOnly="true" dataFormatString="N2" />
+    <field name="SiteCode" type="String" label="Site Code" length="50" />
+    <field name="BudgetCode" type="Int64" label="Budget Code" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^BudVie^Budget View^BudVie^" filter="OPU_Code=@Session_OPU_Code AND Project_Code IN (SELECT Project_Code  FROM UserProjectAccess where UserID=@BusinessRules_UserId) AND Tran_Type &lt;&gt; 'P&amp;L'&#xD;&#xA;" reportTemplate="true" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Budget View" filter="OPU_Code=@Session_OPU_Code AND Project_Code IN (SELECT Project_Code  FROM UserProjectAccess where UserID=@BusinessRules_UserId) AND Tran_Type &lt;&gt; 'P&amp;L'&#xD;&#xA;" reportTemplate="true" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="TrxType" columns="6" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="Account_Type" columns="50" />
         <dataField fieldName="AccountID" columns="50" />
-        <dataField fieldName="Account_Description" />
+        <dataField fieldName="BudgetCode" columns="15" />
         <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="SiteCode" columns="50" />
         <dataField fieldName="Dept_Code" columns="50" />
         <dataField fieldName="TrxYear" columns="15" />
         <dataField fieldName="January" dataFormatString="N" columns="15" />
@@ -53,8 +55,8 @@
         <dataField fieldName="December" dataFormatString="N2" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBudVie^Review Budget View^RevBudVie^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Budget View" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="Budget View" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -63,7 +65,6 @@
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Account_Type" columns="50" />
             <dataField fieldName="AccountID" columns="50" />
-            <dataField fieldName="Account_Description" />
             <dataField fieldName="Project_Code" columns="50" />
             <dataField fieldName="Dept_Code" columns="50" />
             <dataField fieldName="TrxYear" columns="15" />
@@ -83,8 +84,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBudVie^New Budget View^NewBudVie^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Budget View" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New Budget View" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -155,17 +156,18 @@
 FROM
 (
     SELECT 'Actual' AS TrxType,
-           OPU_Code_Ln AS OPU_Code,
+           [OPU_Code] AS OPU_Code,
            Account_Type,
            AccountID,
-           Ac_Description AS Account_Description,
            Project_Code,
+		 SiteCode,
            Dept_Code,
+		 BudgetCode,
            [TrxYear],
-           DATENAME(month, DATEADD(month, TrxMonths, 0) - 1) AS [MONTH],
+           DATENAME(month, DATEADD(month, cast(Right(cast(CalcDate as nvarchar),2) as int), 0) - 1) AS [MONTH],
            abs(ISNULL(Debit_Amount - Credit_Amount, 0)) * -1 AS Amount
-    FROM dbo.GL_Transaction_Line
-  --  WHERE Account_Type IN('Expense', 'Revenue', 'Cogs')
+    FROM [dbo].[GL_Budget_Balances]
+ WHERE AccountID IN (SELECT AccountID FROM GL_Budgeting WHERE BudgetCode=@Session_BudgetCode)
 ) AS s PIVOT(SUM(Amount) FOR [MONTH] IN([January],
                                         [February],
                                         [March],
@@ -186,15 +188,16 @@ FROM
            OPU_Code,
            Account_Type,
            AccountID,
-           Account_Description,
            Project_Code,
+		 SiteCode,
            Dept_Code,
+		 BudgetCode,
            [BudgetYear] AS TrxYear,
            DATENAME(month, DATEADD(month, BudgetMonth, 0) - 1) AS [MONTH],
            ISNULL(BudgetAmount, 0) Amount
     FROM dbo.GL_Budgeting
 --  WHERE Account_Type IN('Expense', 'Revenue', 'Cogs')
---WHERE BudgetCode IN (SELECT BudgetCode FROM GL_Budget_Master WHERE IsNull(InActive,0)=0)
+WHERE BudgetCode = @Session_BudgetCode
 ) AS s PIVOT(SUM(Amount) FOR [MONTH] IN([January],
                                         [February],
                                         [March],

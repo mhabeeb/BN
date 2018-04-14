@@ -1,88 +1,135 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Dimension_Values_Child" conflictDetection="overwriteChanges" label="^DimValChi^Dimension_Values_Child^DimValChi^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
-  <commands>
-    <command id="command1" type="Text" tableName="tbl_LookUp_Values" custom="true">
-      <text><![CDATA[SELECT LookUpType,Descriptions,InActive,Remarks ,Created_By,Created_DateTime,Updated_By,Updated_DateTime ,
-Company_Code,OPU_Code,LID,SEGMENT6,Fin
-FROM
-tbl_LookUp_Values]]></text>
-    </command>
-  </commands>
+<dataController name="Dimension_Values_Child" conflictDetection="overwriteChanges" label="Dimension_Values_Child" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
   <fields>
-    <field name="LookUpType" type="Int32" allowNulls="false" label="^LooUpTyp^Look Up Type^LooUpTyp^" showInSummary="true" />
-    <field name="Descriptions" type="String" label="^Des^Descriptions^Des^" length="150" showInSummary="true" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" showInSummary="true">
-      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
-    </field>
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="100" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^CreatedBy^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="LID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^Lid^Lid^Lid^" readOnly="true" />
-    <field name="SEGMENT6" type="String" label="^Seg6^Segment6^Seg6^" length="100" />
-    <field name="Fin" type="Int32" label="^Fin^Fin^Fin^" />
+    <field name="LookUpType" type="Int32" allowNulls="false" label="Look Up Type" showInSummary="true" />
+    <field name="Descriptions" type="String" label="Descriptions" length="150" showInSummary="true" />
+    <field name="LID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Lid" readOnly="true" />
+    <field name="InActive" type="Int32" label="In Active" showInSummary="true" />
+    <field name="NoDays" type="Int32" label="No Days" showInSummary="true" />
+    <field name="Remarks" type="String" label="Remarks" length="100" showInSummary="true" />
+    <field name="SEGMENT1" type="Decimal" label="Segment1" />
+    <field name="SEGMENT2" type="Decimal" label="Segment2" />
+    <field name="SEGMENT3" type="String" label="Segment3" length="100" />
+    <field name="SEGMENT4" type="String" label="Segment4" length="100" />
+    <field name="SEGMENT5" type="DateTime" label="Segment5" />
+    <field name="SEGMENT6" type="String" label="Segment6" length="100" />
+    <field name="SEGMENT7" type="String" label="Segment7" length="100" />
+    <field name="SEGMENT8" type="String" label="Segment8" length="100" />
+    <field name="SEGMENT9" type="String" label="Segment9" length="100" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="ReturnValueInt" type="Int32" label="Return Value Int" />
+    <field name="ReturnVarchar" type="String" label="Return Varchar" length="20" />
+    <field name="Approve_Ask" type="Int32" label="Approve Ask" />
+    <field name="Rec_Status" type="Int32" label="Rec Status" />
+    <field name="Module" type="Int32" label="Module" />
+    <field name="Fin" type="Int32" label="Fin" />
+    <field name="Company_Code" type="Decimal" label="Company Code" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DimVal^Dimension Values^DimVal^" filter="Company_Code=@Session_Company_Code" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Dimension Values Child">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="LookUpType" columns="15" />
         <dataField fieldName="Descriptions" />
+        <dataField fieldName="InActive" columns="15" />
+        <dataField fieldName="NoDays" columns="15" />
         <dataField fieldName="Remarks" />
+        <dataField fieldName="SEGMENT1" dataFormatString="c" columns="15" />
+        <dataField fieldName="SEGMENT2" dataFormatString="c" columns="15" />
+        <dataField fieldName="SEGMENT3" />
+        <dataField fieldName="SEGMENT4" />
+        <dataField fieldName="SEGMENT5" columns="10" />
+        <dataField fieldName="SEGMENT6" />
+        <dataField fieldName="SEGMENT7" />
+        <dataField fieldName="SEGMENT8" />
+        <dataField fieldName="SEGMENT9" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="ReturnValueInt" columns="15" />
+        <dataField fieldName="ReturnVarchar" columns="20" />
+        <dataField fieldName="Approve_Ask" columns="15" />
+        <dataField fieldName="Rec_Status" columns="15" />
+        <dataField fieldName="Module" columns="15" />
+        <dataField fieldName="Fin" columns="15" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-        <dataField fieldName="SEGMENT6" hidden="true" />
-        <dataField fieldName="InActive" columns="15" />
-        <dataField fieldName="Fin" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevVal^Review Values^RevVal^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Dimension Values Child">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Review Values" flow="NewColumn">
+        <category id="c1" headerText="Dimension Values Child" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="LookUpType" columns="15" />
             <dataField fieldName="Descriptions" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="NoDays" columns="15" />
             <dataField fieldName="Remarks" />
+            <dataField fieldName="SEGMENT1" dataFormatString="c" columns="15" />
+            <dataField fieldName="SEGMENT2" dataFormatString="c" columns="15" />
+            <dataField fieldName="SEGMENT3" />
+            <dataField fieldName="SEGMENT4" />
+            <dataField fieldName="SEGMENT5" columns="10" />
+            <dataField fieldName="SEGMENT6" />
+            <dataField fieldName="SEGMENT7" />
+            <dataField fieldName="SEGMENT8" />
+            <dataField fieldName="SEGMENT9" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="ReturnValueInt" columns="15" />
+            <dataField fieldName="ReturnVarchar" columns="20" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="Module" columns="15" />
+            <dataField fieldName="Fin" columns="15" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-            <dataField fieldName="SEGMENT6" />
-            <dataField fieldName="InActive" columns="15" />
-            <dataField fieldName="Fin" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewVal^New Values^NewVal^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Dimension Values Child">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="New Values" flow="NewColumn">
+        <category id="c1" headerText="New Dimension Values Child" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="LookUpType" columns="15" />
             <dataField fieldName="Descriptions" />
+            <dataField fieldName="InActive" columns="15" />
+            <dataField fieldName="NoDays" columns="15" />
             <dataField fieldName="Remarks" />
+            <dataField fieldName="SEGMENT1" dataFormatString="c" columns="15" />
+            <dataField fieldName="SEGMENT2" dataFormatString="c" columns="15" />
+            <dataField fieldName="SEGMENT3" />
+            <dataField fieldName="SEGMENT4" />
+            <dataField fieldName="SEGMENT5" columns="10" />
+            <dataField fieldName="SEGMENT6" />
+            <dataField fieldName="SEGMENT7" />
+            <dataField fieldName="SEGMENT8" />
+            <dataField fieldName="SEGMENT9" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="ReturnValueInt" columns="15" />
+            <dataField fieldName="ReturnVarchar" columns="20" />
+            <dataField fieldName="Approve_Ask" columns="15" />
+            <dataField fieldName="Rec_Status" columns="15" />
+            <dataField fieldName="Module" columns="15" />
+            <dataField fieldName="Fin" columns="15" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-            <dataField fieldName="SEGMENT6" hidden="true" />
-            <dataField fieldName="InActive" columns="15" />
-            <dataField fieldName="Fin" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -92,6 +139,12 @@ tbl_LookUp_Values]]></text>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -104,9 +157,7 @@ tbl_LookUp_Values]]></text>
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
-      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
-      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
@@ -138,8 +189,6 @@ tbl_LookUp_Values]]></text>
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
-      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
@@ -147,11 +196,16 @@ tbl_LookUp_Values]]></text>
     </actionGroup>
   </actions>
   <businessRules>
-    <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @OPU_Code=@Session_OPU_Code
-SET @Company_Code=@Session_Company_Code
-SET @Fin=1
-
-SELECT @SEGMENT6=Looup_Description FROM LookUp_Type
-WHERE Company_Code=@Session_Company_Code AND LookUpType=@LookUpType]]></rule>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[EXEC dbo.GET_DIMENSION_VALUES @Session_Company_Code
+                                      ]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
   </businessRules>
 </dataController>

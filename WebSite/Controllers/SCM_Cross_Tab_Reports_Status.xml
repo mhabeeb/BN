@@ -1,58 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="SCM_Cross_Tab_Reports_Status" label="^ScmCroTabRepSta^SCM_Cross_Tab_Reports_Status^ScmCroTabRepSta^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="SCM_Cross_Tab_Reports_Status" label="SCM_Cross_Tab_Reports_Status" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="SCM_Cross_Tab" custom="true">
       <text><![CDATA[SELECT * FROM SCM_Cross_Tab WHERE ReportID IN (100,101,102,103,104,105,106,107,108,109)]]></text>
     </command>
   </commands>
   <fields>
-    <field name="RptID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^RptId^Rpt#^RptId^" readOnly="true" />
-    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" showInSummary="true" />
+    <field name="RptID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Rpt^Rpt#^Rpt^" readOnly="true" />
+    <field name="UserID" type="Int32" label="^User^User#^User^" showInSummary="true" />
     <field name="ReportID" type="Int32" label="^Report^Report#^Report^" showInSummary="true" />
     <field name="Total" type="Decimal" label="^Total^Total^Total^" showInSummary="true" />
-    <field name="Trx_Type" type="String" label="^TrxTyp^Trx Type^TrxTyp^" length="20" showInSummary="true" />
+    <field name="Trx_Type" type="String" label="^TrxType^Trx Type^TrxType^" length="20" showInSummary="true" />
     <field name="YEAR" type="Int32" label="^Year^Year^Year^" showInSummary="true" />
     <field name="Number" type="String" label="^Number^Number^Number^" length="255" />
-    <field name="Description" type="String" label="^Des^Description^Des^" length="255" />
-    <field name="January" type="Decimal" label="^Jan^January^Jan^" />
-    <field name="February" type="Decimal" label="^Feb^February^Feb^" />
+    <field name="Description" type="String" label="^Description^Description^Description^" length="255" />
+    <field name="January" type="Decimal" label="^January^January^January^" />
+    <field name="February" type="Decimal" label="^February^February^February^" />
     <field name="March" type="Decimal" label="^March^March^March^" />
     <field name="April" type="Decimal" label="^April^April^April^" />
     <field name="May" type="Decimal" label="^May^May^May^" />
     <field name="June" type="Decimal" label="^June^June^June^" />
     <field name="July" type="Decimal" label="^July^July^July^" />
     <field name="August" type="Decimal" label="^August^August^August^" />
-    <field name="September" type="Decimal" label="^Sep^September^Sep^" />
-    <field name="October" type="Decimal" label="^Oct^October^Oct^" />
-    <field name="November" type="Decimal" label="^Nov^November^Nov^" />
-    <field name="December" type="Decimal" label="^Dec^December^Dec^" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStorNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="September" type="Decimal" label="^September^September^September^" />
+    <field name="October" type="Decimal" label="^October^October^October^" />
+    <field name="November" type="Decimal" label="^November^November^November^" />
+    <field name="December" type="Decimal" label="^December^December^December^" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ScmHeaSumRep^SCM Header Summary Reports^ScmHeaSumRep^" filter="UserID=@BusinessRules_UserId" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="SCM Header Summary Reports" filter="UserID=@BusinessRules_UserId" reportTemplate="true" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ReportID" columns="15" hidden="true" />
         <dataField fieldName="Trx_Type" columns="20" />
         <dataField fieldName="YEAR" columns="15" />
@@ -71,12 +71,12 @@
         <dataField fieldName="November" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="December" dataFormatString="N2" columns="15" aggregate="Sum" />
         <dataField fieldName="Total" dataFormatString="N2" columns="15" aggregate="Sum" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevScmCroTab^Review SCM Cross Tab^RevScmCroTab^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review SCM Cross Tab" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="SCM Cross Tab" flow="NewColumn">
@@ -105,7 +105,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewScmCroTab^New SCM Cross Tab^NewScmCroTab^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New SCM Cross Tab" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New SCM Cross Tab" flow="NewColumn">
@@ -177,37 +177,37 @@
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" headerText="^Quotation^Quotation^Quotation^" flat="true">
-      <action commandName="SQL" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" id="a100" headerText="^Quotations^Quotations^Quotations^">
+      <action commandName="SQL" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" id="a100" headerText="^Quotation^Quotation^Quotation^">
         <data><![CDATA[EXEC [dbo].[SCM_ANALYSIS_HEADERS]  100,@BusinessRules_UserId,@Parameters_FromDate,@Parameters_EndDate]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag101" scope="ActionBar" headerText="^SalesOrder^Sales Order^SalesOrder^" flat="true">
-      <action commandName="SQL" headerText="^SalesOrder^Sales Order^SalesOrder^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^SalesOrder^Sales Order^SalesOrder^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon-list">
         <data><![CDATA[EXEC [dbo].[SCM_ANALYSIS_HEADERS]  101,@BusinessRules_UserId,@Parameters_FromDate,@Parameters_EndDate]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag102" scope="ActionBar" headerText="^PurchaseOrder^Purchase Order^PurchaseOrder^" flat="true">
-      <action commandName="SQL" headerText="^PurchaseOrder^Purchase Order^PurchaseOrder^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^PurchaseOrder^Purchase Order^PurchaseOrder^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon-inbox">
         <data><![CDATA[EXEC [dbo].[SCM_ANALYSIS_HEADERS]  102,@BusinessRules_UserId,@Parameters_FromDate,@Parameters_EndDate]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag103" scope="ActionBar" headerText="^APInvoices^AP. Invoices^APInvoices^" flat="true">
-      <action commandName="SQL" headerText="^APInvoices^AP. Invoices^APInvoices^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^APInvoices^AP. Invoices^APInvoices^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon-edit">
         <data><![CDATA[EXEC [dbo].[SCM_ANALYSIS_HEADERS]  104,@BusinessRules_UserId,@Parameters_FromDate,@Parameters_EndDate]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag104" scope="ActionBar" headerText="^ARInvoices^AR Invoices^ARInvoices^" flat="true">
-      <action commandName="SQL" headerText="^ARInvoices^AR Invoices^ARInvoices^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^ARInvoices^AR Invoices^ARInvoices^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon-credit-card">
         <data><![CDATA[EXEC [dbo].[SCM_ANALYSIS_HEADERS]  105,@BusinessRules_UserId,@Parameters_FromDate,@Parameters_EndDate]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag105" scope="ActionBar" headerText="^CashSales^Cash Sales^CashSales^" flat="true">
-      <action commandName="SQL" headerText="^CashSales^Cash Sales^CashSales^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^CashSales^Cash Sales^CashSales^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon-object-align-bottom">
         <data><![CDATA[EXEC [dbo].[SCM_ANALYSIS_HEADERS]  106,@BusinessRules_UserId,@Parameters_FromDate,@Parameters_EndDate]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag106" scope="ActionBar" headerText="^CashPurchase^Cash Purchase^CashPurchase^" flat="true">
-      <action commandName="SQL" headerText="^CashPur^Cash Pur.^CashPur^ " id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^CashPurchase^Cash Purchase^CashPurchase^" id="a100" confirmation="_controller=Parameter_SCM&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" cssClass="glyphicon-tasks">
         <data><![CDATA[EXEC [dbo].[SCM_ANALYSIS_HEADERS]  107,@BusinessRules_UserId,@Parameters_FromDate,@Parameters_EndDate]]></data>
       </action>
     </actionGroup>

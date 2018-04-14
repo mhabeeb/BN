@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Employee_Postion" conflictDetection="overwriteChanges" label="^PicEmpPos^Pick_Employee_Postion^PicEmpPos^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Employee_Postion" conflictDetection="overwriteChanges" label="Pick_Employee_Postion" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" custom="true">
       <text><![CDATA[SELECT E.Emp_id,
@@ -19,15 +19,15 @@ GROUP BY E.Emp_id,
     </command>
   </commands>
   <fields>
-    <field name="Emp_id" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^EmpId^Emp#^EmpId^" readOnly="true" />
-    <field name="Emp_Name" type="String" label="^EmpNam^Emp Name^EmpNam^" length="150" showInSummary="true" />
-    <field name="Positions" type="String" label="^Pos^Positions^Pos^" length="200" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" showInSummary="true" />
-    <field name="UserName" type="String" allowNulls="false" label="^UseNam^User Name^UseNam^" length="128" showInSummary="true" />
+    <field name="Emp_id" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Emp#" readOnly="true" />
+    <field name="Emp_Name" type="String" label="Emp Name" length="150" showInSummary="true" />
+    <field name="Positions" type="String" label="Positions" length="200" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" showInSummary="true" />
+    <field name="UserID" type="Int32" label="User#" showInSummary="true" />
+    <field name="UserName" type="String" allowNulls="false" label="User Name" length="128" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^PicEmpPos^Pick Employee Postion^PicEmpPos^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Pick Employee Postion" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="UserName" />
@@ -37,7 +37,7 @@ GROUP BY E.Emp_id,
         <dataField fieldName="UserID" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPicEmpPos^Review Pick Employee Postion^RevPicEmpPos^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Pick Employee Postion" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Pick Employee Postion" flow="NewColumn">
@@ -52,7 +52,7 @@ GROUP BY E.Emp_id,
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPicEmpPos^New Pick Employee Postion^NewPicEmpPos^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Pick Employee Postion" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Pick Employee Postion" flow="NewColumn">
@@ -93,7 +93,7 @@ GROUP BY E.Emp_id,
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

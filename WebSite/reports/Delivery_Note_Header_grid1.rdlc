@@ -42,6 +42,14 @@
           <DataField>Sys_Number</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="LocationID">
+          <DataField>LocationID</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Location_Name">
+          <DataField>Location_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="OPU_Code">
           <DataField>OPU_Code</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -190,6 +198,22 @@
           <DataField>AddressAr</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SUB_DOC_TYPE_ID">
+          <DataField>SUB_DOC_TYPE_ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SUB_DOC_TYPE_NAME">
+          <DataField>SUB_DOC_TYPE_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AProjectEnabled">
+          <DataField>AProjectEnabled</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ASiteCodeEnabled">
+          <DataField>ASiteCodeEnabled</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>Delivery_Note_HeaderDataSource</DataSourceName>
@@ -223,7 +247,7 @@
         </Paragraphs>
         <Left>0.0in</Left>
         <Height>0.25in</Height>
-        <Width>7.5in</Width>
+        <Width>10in</Width>
         <ZIndex>1</ZIndex>
         <Visibility>
           <Hidden>=String.IsNullOrEmpty(Parameters!FilterDetails.Value)</Hidden>
@@ -242,28 +266,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.8450704225352112in</Width>
+              <Width>0.7920792079207921in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8450704225352112in</Width>
+              <Width>0.7920792079207921in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.5845070422535212in</Width>
+              <Width>1.4851485148514851in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8450704225352112in</Width>
+              <Width>1.4851485148514851in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8450704225352112in</Width>
+              <Width>0.7920792079207921in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8450704225352112in</Width>
+              <Width>0.7920792079207921in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8450704225352112in</Width>
+              <Width>0.7920792079207921in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.8450704225352112in</Width>
+              <Width>0.7920792079207921in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.7920792079207921in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.4851485148514851in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -346,6 +376,43 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="SUB_DOC_TYPE_NAMEHeaderTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>^SubDocTyp^Sub Doc Type^SubDocTyp^</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Vendor_NameHeaderTextBox">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -353,7 +420,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Customer Name</Value>
+                              <Value>^CusNam^Customer Name^CusNam^</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -390,7 +457,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>^TraNo^Ref. No^TraNo^</Value>
+                              <Value>^RefNo^Reference #^RefNo^</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -427,7 +494,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Customer No</Value>
+                              <Value>^CusNo^Customer No^CusNo^</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -538,7 +605,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>^AppAsk^Approve Ask^AppAsk^</Value>
+                              <Value>^AppAsk^Ask Approval^AppAsk^</Value>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -548,6 +615,43 @@
                           </TextRuns>
                           <Style>
                             <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Location_NameHeaderTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>^LocationName^Location Name^LocationName^</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -619,6 +723,45 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=String.Format("{0:d}", Fields!Transaction_Date.Value)</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>0.5pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="SUB_DOC_TYPE_NAMEDataTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!SUB_DOC_TYPE_NAME.Value</Value>
+                              <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontFamily>Arial Unicode MS</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -875,12 +1018,52 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Location_NameDataTextBox">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Location_Name.Value</Value>
+                              <Style>
+                                <FontFamily>Arial Unicode MS</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                          <Width>0.5pt</Width>
+                        </BottomBorder>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -909,7 +1092,7 @@
         <Top>0.25in</Top>
         <Left>0.0in</Left>
         <Height>1.2000000000000001in</Height>
-        <Width>7.5in</Width>
+        <Width>10in</Width>
         <Style>
           <BottomBorder>
             <Style>Solid</Style>
@@ -986,7 +1169,7 @@
           <rd:DefaultName>textbox5</rd:DefaultName>
           <Top>0.0in</Top>
           <Height>0.375in</Height>
-          <Width>7.5in</Width>
+          <Width>10in</Width>
           <Style>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
@@ -1074,9 +1257,9 @@
     <BottomMargin>0.5in</BottomMargin>
     <TopMargin>0.5in</TopMargin>
     <rd:ReportID>9168933f-7fe4-4dac-89eb-8714804b3c85</rd:ReportID>
-    <PageWidth>8.5in</PageWidth>
-    <PageHeight>11in</PageHeight>
+    <PageWidth>11in</PageWidth>
+    <PageHeight>8.5in</PageHeight>
   </Page>
-  <Width>7.5in</Width>
+  <Width>10in</Width>
   <Language>en-US</Language>
 </Report>

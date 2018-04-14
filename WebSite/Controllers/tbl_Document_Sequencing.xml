@@ -6,50 +6,50 @@
     </command>
   </commands>
   <fields>
-    <field name="YearID" type="Int64" allowNulls="false" label="^YeaId^Year#^YeaId^" showInSummary="true" />
-    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" isPrimaryKey="true">
-      <items style="Lookup" dataController="Document_Types" dataView="grid1" dataTextField="DocDescrition" dataValueField="DocTypeID" copy="DocName=DocDescrition" />
+    <field name="YearID" type="Int64" allowNulls="false" label="Year#" showInSummary="true" />
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="Doc Type#" showInSummary="true" isPrimaryKey="true">
+      <items style="Lookup" dataController="Pick_Document" dataView="grid1" dataTextField="DocDescrition" dataValueField="DocTypeID" copy="DocName=DocDescrition" />
     </field>
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" isPrimaryKey="true" />
-    <field name="StartNo" type="Int64" label="^StaNo^Start No^StaNo^" showInSummary="true" allowNulls="false" />
-    <field name="CurrentNo" type="Int64" label="^CurNo^Current No^CurNo^" showInSummary="true" />
-    <field name="DocPrefix" type="String" label="^DocPre^Doc Prefix^DocPre^" length="10" />
-    <field name="IsStartYN" type="Int32" label="^IsStaYn^Is Start YN^IsStaYn^" />
-    <field name="IsPaymentDoc" type="Int32" label="^IsPayDoc^Is Payment Doc^IsPayDoc^" />
-    <field name="DateFrom" type="DateTime" allowNulls="false" label="^DatFro^Date From^DatFro^" isPrimaryKey="true" />
-    <field name="DateTo" type="DateTime" allowNulls="false" label="^DatTo^Date To^DatTo^" isPrimaryKey="true" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^">
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="OPU Code" showInSummary="true" isPrimaryKey="true" />
+    <field name="StartNo" type="Int64" label="Start No" showInSummary="true" allowNulls="false" />
+    <field name="CurrentNo" type="Int64" label="Current No" showInSummary="true" />
+    <field name="DocPrefix" type="String" label="Doc Prefix" length="10" />
+    <field name="IsStartYN" type="Int32" label="Is Start YN" />
+    <field name="IsPaymentDoc" type="Int32" label="Is Payment Doc" />
+    <field name="DateFrom" type="DateTime" allowNulls="false" label="Date From" isPrimaryKey="true" />
+    <field name="DateTo" type="DateTime" allowNulls="false" label="Date To" isPrimaryKey="true" />
+    <field name="InActive" type="Int32" label="In Active">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="EndNo" type="Int64" label="^EndNo^End No^EndNo^" allowNulls="false" />
-    <field name="PayNumber" type="Int64" label="^PayNum^Pay Number^PayNum^" />
-    <field name="DocName" type="String" label="^DocNam^Doc Name^DocNam^" length="50" />
+    <field name="EndNo" type="Int64" label="End No" allowNulls="false" />
+    <field name="PayNumber" type="Int64" label="Pay Number" />
+    <field name="DocName" type="String" label="Doc Name" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DocSeq^Document Sequencing^DocSeq^" filter="OPU_Code=@Session_OPU_Code">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Document Sequencing" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="YearID" columns="15" hidden="true" />
-        <dataField fieldName="DocTypeID" columns="15" />
         <dataField fieldName="DocName" columns="50" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="StartNo" columns="15" />
+        <dataField fieldName="EndNo" columns="15" />
+        <dataField fieldName="DateTo" columns="10" />
+        <dataField fieldName="DateFrom" columns="10" />
         <dataField fieldName="CurrentNo" columns="15" />
         <dataField fieldName="DocPrefix" columns="10" hidden="true" />
-        <dataField fieldName="InActive" columns="15" />
         <dataField fieldName="IsStartYN" columns="15" hidden="true" />
         <dataField fieldName="IsPaymentDoc" columns="15" hidden="true" />
-        <dataField fieldName="DateFrom" columns="10" />
-        <dataField fieldName="DateTo" columns="10" />
-        <dataField fieldName="EndNo" columns="15" />
+        <dataField fieldName="DocTypeID" columns="15" />
+        <dataField fieldName="InActive" columns="15" />
         <dataField fieldName="PayNumber" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDocSeq^Review Document Sequencing^RevDocSeq^">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Document Sequencing" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Document Sequencing" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevDocSeq^Review Document Sequencing^RevDocSeq^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="YearID" columns="15" hidden="true" />
             <dataField fieldName="DocName" columns="50" readOnly="true" />
@@ -68,11 +68,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Document Sequencing">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="^NewDocSeq^New Document Sequencing^NewDocSeq^" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Document Sequencing" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewDocSeq^New Document Sequencing^NewDocSeq^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="YearID" columns="15" hidden="true" />
             <dataField fieldName="DocTypeID" columns="15" />
@@ -97,7 +97,6 @@
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
-      <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
@@ -106,10 +105,8 @@
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
-      <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
@@ -118,11 +115,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -150,7 +146,30 @@
     </actionGroup>
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
-      <action id="a2" commandName="Delete" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^StoSeq^Stop Sequence^StoSeq^" flat="true">
+      <action commandName="SQL" headerText="^StoSeq^Stop Sequence^StoSeq^" whenLastCommandName="Select" id="a100" cssClass="glyphicon glyphicon-leaf">
+        <data><![CDATA[UPDATE [dbo].[tbl_Document_Sequencing]
+       SET
+           [EndNo] = [CurrentNo] ,
+           DateTo = CASE
+                        WHEN DateFrom > GETDATE() - 1
+                        THEN DateFrom
+                        ELSE GETDATE() - 1
+                    END ,
+           Updated_By = @BusinessRules_UserId ,
+           Updated_DateTime = GETDATE()
+       WHERE
+             DocTypeID = @DocTypeID
+             AND
+             OPU_Code = @Session_OPU_Code
+             AND
+             [dbo].[RETURN_DATE] ( [DateFrom] ) = [dbo].[RETURN_DATE] ( @DateFrom )
+             AND
+             [dbo].[RETURN_DATE] ( [DateTo] ) = [dbo].[RETURN_DATE] ( @DateTo )
+             AND
+             ISNULL(InActive , 0) = 0]]></data>
+      </action>
     </actionGroup>
   </actions>
   <businessRules>
@@ -159,6 +178,19 @@ SET @InActive=0
 SET @YearID=YEAR(GETDATE())
 SET @PayNumber=0
 SET @IsPaymentDoc=0]]></rule>
+    <rule id="r102" type="Sql" commandName="Calculate|Insert|Update" phase="Before" name="EndNo_Converter"><![CDATA[if @EndNo <= @StartNo
+  
+begin
+     SET @BusinessRules_PreventDefault = 1
+     SET @Result_Focus = 'EndNo,End No Should be Greater Than StartNo' 
+end
+
+if @DateTo <= @DateFrom
+  
+begin
+     SET @BusinessRules_PreventDefault = 1
+     SET @Result_Focus = 'DateTo,DateTo Should be Greater Than From Date' 
+end]]></rule>
     <rule id="r101" type="Sql" commandName="Insert|Update" phase="Before" name="StartNo_Validator"><![CDATA[IF EXISTS
 (
     SELECT [DocTypeID]
@@ -188,18 +220,5 @@ SET @IsPaymentDoc=0]]></rule>
         SET @BusinessRules_PreventDefault = 1;
         SET @Result_Focus = 'StartNo,Start/End Number Cannot overlap existing sequences'
     END]]></rule>
-    <rule id="r102" type="Sql" commandName="Calculate|Insert|Update" phase="Before" name="EndNo_Converter"><![CDATA[if @EndNo <= @StartNo
-  
-begin
-     SET @BusinessRules_PreventDefault = 1
-     SET @Result_Focus = 'EndNo,End No Should be Greater Than StartNo' 
-end
-
-if @DateTo <= @DateFrom
-  
-begin
-     SET @BusinessRules_PreventDefault = 1
-     SET @Result_Focus = 'DateTo,DateTo Should be Greater Than From Date' 
-end]]></rule>
   </businessRules>
 </dataController>

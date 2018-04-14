@@ -1,73 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="FA_Assets_Catory" conflictDetection="overwriteChanges" label="^FaAssCat^FA_Assets_Catory^FaAssCat^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="FA_Assets_Catory" conflictDetection="overwriteChanges" label="FA_Assets_Catory" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.FA_Assets_CatoryBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="AssetCategories" custom="true">
-      <text><![CDATA[SELECT * FROM AssetCategories]]></text>
+      <text><![CDATA[SELECT AssetCategories .*,CAST(AssetCategories.AssetCategoryID as varchar(50)) 
+"ZZ_Filter_Value" FROM AssetCategories
+
+
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="AssetCategoryID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^AssCatId^Asset Category#^AssCatId^" readOnly="true" />
-    <field name="BookID" type="Int32" allowNulls="false" label="^BooId^Book ID^BooId^" htmlEncode="false" hidden="false">
+    <field name="AssetCategoryID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^AssCatId^Asset Category^AssCatId^" readOnly="true" />
+    <field name="BookID" type="Int32" allowNulls="false" label="^BookID^Book ID^BookID^" htmlEncode="false" hidden="false">
       <items style="DropDownList" dataController="AssetsValueSet" dataView="grid1" dataTextField="BookName" dataValueField="BookID" copy="OPU_Code=OPU_Code&#xD;&#xA;Company_Code=Company_Code&#xD;&#xA;" />
     </field>
-    <field name="AssetCategory" type="String" label="^AssCat^Asset Category^AssCat^" length="50" allowNulls="false" />
-    <field name="Assets_Cost_Account" type="String" label="^AssCosAc^Assets Cost A/C^AssCosAc^" length="50" allowNulls="false">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    <field name="AssetCategory" type="String" label="^AssetCategory^Asset Category^AssetCategory^" length="50" allowNulls="false" />
+    <field name="Assets_Cost_Account" type="String" label="^AssCosAc^Assets Cost Acct^AssCosAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Assets_Cost_Clearing_AC" type="String" label="^AssCosCleAc^Assets Cost Clearing A/C^AssCosCleAc^" length="50" allowNulls="false">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    <field name="Assets_Cost_Clearing_AC" type="String" label="^AssCosCleAc^Assets Cost Clearing Acct^AssCosCleAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Assets_Depr_Account" type="String" label="^AssDepAc^Assets Depr. A/C^AssDepAc^" length="50" allowNulls="false">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    <field name="Assets_Depr_Account" type="String" label="^AssDepAc^Assets Depr Acct^AssDepAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Assets_Sale_Account" type="String" label="^AssSalAc^Assets Sale A/C^AssSalAc^" length="50" allowNulls="false">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    <field name="Assets_Sale_Account" type="String" label="^AssSalAc^Assets Sale Acct^AssSalAc^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Assets_Accum_Depr_Account" type="String" label="^AssAccDepAc^Assets Accum Depr. A/C^AssAccDepAc^" length="50" allowNulls="false">
-      <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    <field name="Assets_Accum_Depr_Account" type="String" label="^AssetsAccumDeprAC^Assets Accum Depr. A/C^AssetsAccumDeprAC^" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Double" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Double" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="InActive" type="Int32" label="^InAct^In-Active^InAct^" allowNulls="false">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" showInSummary="true" />
+    <field name="InActive" type="Int32" label="^InActive^In-Active^InActive^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Assets_Loss_And_Gain_Account" type="String" label="^AssLosAndGaiAcc^Assets Loss And Gain Account^AssLosAndGaiAcc^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" allowNulls="false">
+    <field name="Assets_Loss_And_Gain_Account" type="String" label="^AssetsLossAndGainAccount^Assets Loss And Gain Account^AssetsLossAndGainAccount^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" allowNulls="false">
       <items style="Lookup" dataController="Pick_COA_Child" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
     </field>
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
     <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
       <formula>SELECT @Session_CompanyName</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
       <formula>SELECT @Session_BranchName </formula>
     </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
       <formula>SELECT @Session_BranchName_Ar</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
+    <field name="ZZ_Controller" type="String" label="Controller" computed="true">
+      <formula>'FA_Assets_Catory'</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'FA_Assets_Catory_grid1'</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
+    <field name="AssetsOpenPeriod" type="String" label="Open Period" readOnly="true" computed="true" showInSummary="true">
+      <formula>dbo.GET_FA_OPEN_PERIOD_NAME ( BookID )</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^AssCat^Asset Categories^AssCat^" reportTemplate="true" filter="BookID IN ( SELECT BookID FROM UserAssetsBookAccess WHERE UserID=@BusinessRules_UserId)" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Asset Categories" reportTemplate="true" filter="BookID IN ( SELECT BookID FROM UserAssetsBookAccess WHERE UserID=@BusinessRules_UserId)" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="BookID" columns="15" />
         <dataField fieldName="AssetCategoryID" columns="15" />
@@ -78,23 +92,27 @@
         <dataField fieldName="Assets_Sale_Account" columns="50" />
         <dataField fieldName="Assets_Accum_Depr_Account" columns="50" />
         <dataField fieldName="InActive" columns="15" />
-        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="Company_Code" columns="15" hidden="true" />
-        <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
+        <dataField fieldName="AssetsOpenPeriod" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevAsscat^Review Asset Categories^RevAsscat^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Asset Categories" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Asset Categories" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^AssCat^Asset Categories^AssCat^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="BookID" columns="15" />
             <dataField fieldName="AssetCategory" columns="50" />
@@ -110,7 +128,7 @@
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
           </dataFields>
         </category>
-        <category headerText="Posting" id="c2">
+        <category headerText="^Posting^Posting^Posting^" id="c2">
           <dataFields>
             <dataField fieldName="InActive" columns="15" />
             <dataField fieldName="OPU_Code" columns="15" hidden="true" />
@@ -119,11 +137,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewAssCat^New Asset Categories^NewAssCat^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Asset Categories" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Asset Categories" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewAssCat^New Asset Categories^NewAssCat^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="BookID" columns="15" />
             <dataField fieldName="AssetCategory" columns="50" />
@@ -138,8 +156,8 @@
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="InActive" columns="15" hidden="true" />
-            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="Company_Code" columns="15" hidden="true" />
+            <dataField fieldName="OPU_Code" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -164,10 +182,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="&#x9;glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -198,6 +216,9 @@
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintAssetsCategory" headerText="^PriAssCat^Print Assets Category^PriAssCat^" id="a100" cssClass="&#x9;glyphicon glyphicon-print" />
+    </actionGroup>
   </actions>
   <businessRules>
     <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
@@ -211,5 +232,6 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
+    <rule id="r102" commandName="Custom" commandArgument="PrintAssetsCategory" type="Code" phase="Execute" />
   </businessRules>
 </dataController>

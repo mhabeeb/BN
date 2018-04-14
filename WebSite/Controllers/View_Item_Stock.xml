@@ -1,60 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="View_Item_Stock" label="^VieIteSto^View_Item_Stock^VieIteSto^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="View_Item_Stock" label="View_Item_Stock" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Item_Warehouse" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Item_Warehouse]]></text>
     </command>
   </commands>
   <fields>
-    <field name="StoreID" type="Int32" allowNulls="false" label="^StoId^Store#^StoId^" showInSummary="true" isPrimaryKey="true">
+    <field name="StoreID" type="Int32" allowNulls="false" label="^StoId^Store ^StoId^" showInSummary="true" isPrimaryKey="true">
       <items style="DropDownList" dataController="Pick_Store" dataView="grid1" dataTextField="Store_Name" dataValueField="Store_ID" />
     </field>
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" isPrimaryKey="true" />
-    <field name="Stock_On_Hand" type="Decimal" label="^StoOnHan^Qty^StoOnHan^" showInSummary="true" />
-    <field name="Bin_Location" type="String" label="^BinLoc^Bin^BinLoc^" length="50" showInSummary="true" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^AbrAr^ABranch AR^AbrAr^" computed="true" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true" showInSummary="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true" showInSummary="true">
+    <field name="Item_Code" type="String" allowNulls="false" label="^ItemCode^Item Code^ItemCode^" length="20" showInSummary="true" isPrimaryKey="true" />
+    <field name="Stock_On_Hand" type="Decimal" label="^StockOnHand^Qty^StockOnHand^" showInSummary="true" />
+    <field name="Bin_Location" type="String" label="^BinLocation^Bin^BinLocation^" length="50" showInSummary="true" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true" showInSummary="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true" showInSummary="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^StoOnHan^Stock On Hand^StoOnHan^" showInSelector="false" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="Stock On Hand" showInSelector="false" reportTemplate="true" filter="StoreID IN ( SELECT Store_ID FROM tbl_Store&#xD;&#xA;WHERE OPU_Code=@Session_OPU_Code)">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="StoreID" columns="10" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Item_Code" columns="20" hidden="true" />
         <dataField fieldName="Stock_On_Hand" dataFormatString="N2" columns="10" aggregate="Sum" />
         <dataField fieldName="Bin_Location" columns="10" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
-        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIteWar^Review  Item Warehouse^RevIteWar^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Item Warehouse" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="tbl Item Warehouse" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -66,8 +66,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewIteWar^New Item Warehouse^NewIteWar^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Item Warehouse" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New tbl Item Warehouse" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>

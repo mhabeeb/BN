@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Apply_Invoices_From_Invoices" conflictDetection="overwriteChanges" label="^AppInvFroInv^Apply_Invoices_From_Invoices^AppInvFroInv^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Apply_Invoices_From_Invoices" conflictDetection="overwriteChanges" label="Apply_Invoices_From_Invoices" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="APAR_Payments" custom="true">
       <text><![CDATA[SELECT  dbo.Credit_Trx_Header.Trx_ID, dbo.APAR_Payments.PaymentID, dbo.Credit_Trx_Header.Sys_Number, dbo.Credit_Trx_Header.APAR_Flag, dbo.Credit_Trx_Header.APPLY_BAL, ISNULL(dbo.APAR_Payments.PMT_APPLY_BAL, 0) 
@@ -12,56 +12,62 @@ WHERE   (ISNULL(dbo.Credit_Trx_Header.APPLY_BAL, 0) > 0) AND (ISNULL(dbo.APAR_Pa
     </command>
   </commands>
   <fields>
-    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" readOnly="true" />
-    <field name="PaymentID" type="Decimal" allowNulls="false" label="^PayId^Payment#^PayId^" readOnly="true" showInSummary="true" isPrimaryKey="true" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" showInSummary="true" />
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" showInSummary="true" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" showInSummary="true" />
-    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Inv. Apply Bal^AppBal^" showInSummary="true" />
-    <field name="PMT_APPLY_BAL" type="Decimal" allowNulls="false" label="^PmtAppBal^Pmt Apply Bal^PmtAppBal^" readOnly="true" />
-    <field name="Pick_Amount" type="Decimal" label="^PicAmo^Apply Amt. In PMT Curr^PicAmo^" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TraId^Transaction ^TraId^" readOnly="true" />
+    <field name="PaymentID" type="Decimal" allowNulls="false" label="^PayId^Payment^PayId^" readOnly="true" isPrimaryKey="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNum^Vendor ^SysNum^" />
+    <field name="APAR_Flag" type="Int32" label="^APARFlag^APAR Flag^APARFlag^" />
+    <field name="Pick_Doc" type="Decimal" label="^PickDoc^Pick Doc^PickDoc^" />
+    <field name="APPLY_BAL" type="Decimal" label="^InvApplyBal^Inv. Apply Bal^InvApplyBal^" />
+    <field name="PMT_APPLY_BAL" type="Decimal" allowNulls="false" label="^PmtApplyBal^Pmt Apply Bal^PmtApplyBal^" readOnly="true" />
+    <field name="Pick_Amount" type="Decimal" label="^PicAmo^Apply Amt In PMT Curr^PicAmo^" />
     <field name="Pick" type="Int32" label="^Pick^Pick^Pick^" />
-    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" />
-    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount Paid^AmoPai^" />
-    <field name="CheckNo" type="Decimal" label="^CheNo^Check No^CheNo^" />
-    <field name="PaymentType" type="String" label="^PayTyp^Payment Type^PayTyp^" length="20" />
-    <field name="Cur_Rate" type="Decimal" label="^CurRat^PMT Cur Rate^CurRat^" />
-    <field name="CashBankID" type="Decimal" allowNulls="false" label="^CasBanId^Cash Bank ID^CasBanId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PaymentDate^Payment Date^PaymentDate^" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmountPaid^Amount Paid^AmountPaid^" />
+    <field name="CheckNo" type="Decimal" label="^CheckNo^Check No^CheckNo^" />
+    <field name="PaymentType" type="String" label="^PaymentType^Payment Type^PaymentType^" length="20" />
+    <field name="Cur_Rate" type="Decimal" label="^PMTCurRate^PMT Cur Rate^PMTCurRate^" />
+    <field name="CashBankID" type="Decimal" allowNulls="false" label="^CashBankID^Cash Bank ID^CashBankID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="DropDownList" dataController="BankCashInformation" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" />
     </field>
-    <field name="Currency_Code" type="String" allowNulls="false" label="^CurCod^PMT Curr^CurCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4" />
-    <field name="Inv_Cur_Rate" type="Decimal" label="^InvCurRat^Inv Cur Rate^InvCurRat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABra^ABranch AR^ABra^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="Currency_Code" type="String" allowNulls="false" label="^PMTCurr^PMT Curr^PMTCurr^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4" />
+    <field name="Inv_Cur_Rate" type="Decimal" label="^InvCurRate^Inv Cur Rate^InvCurRate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraCod^ABranch Logo^ABraCod^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
-    <field name="Doc_No" type="Int32" label="^DocNo^Doc No^DocNo^" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="Doc_No" type="Int32" label="Doc No" />
     <field name="Location_Name" type="String" label="Location Name" length="150" />
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^AvaPayToApp^Available Payments to Applied^AvaPayToApp^" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Available Payments to Applied" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Trx_ID" columns="15" />
         <dataField fieldName="Doc_No" columns="15" readOnly="true" />
@@ -69,9 +75,9 @@ WHERE   (ISNULL(dbo.Credit_Trx_Header.APPLY_BAL, 0) > 0) AND (ISNULL(dbo.APAR_Pa
         <dataField fieldName="APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
         <dataField fieldName="PMT_APPLY_BAL" dataFormatString="N2" columns="15" readOnly="true" />
         <dataField fieldName="PaymentID" columns="15" />
+        <dataField fieldName="CashBankID" columns="15" readOnly="true" />
         <dataField fieldName="Amount_Paid" dataFormatString="N2" columns="15" readOnly="true" />
         <dataField fieldName="Currency_Code" columns="4" readOnly="true" />
-        <dataField fieldName="CashBankID" columns="15" readOnly="true" />
         <dataField fieldName="Sys_Number" columns="15" hidden="true" />
         <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
         <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
@@ -81,15 +87,15 @@ WHERE   (ISNULL(dbo.Credit_Trx_Header.APPLY_BAL, 0) > 0) AND (ISNULL(dbo.APAR_Pa
         <dataField fieldName="PaymentType" columns="20" readOnly="true" />
         <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" readOnly="true" />
         <dataField fieldName="Inv_Cur_Rate" columns="15" readOnly="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="Location_Name" rows="1" readOnly="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevCreTraHea^Review Credit Trx Header^RevCreTraHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Credit Trx Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Credit Trx Header" flow="NewColumn">
@@ -114,7 +120,7 @@ WHERE   (ISNULL(dbo.Credit_Trx_Header.APPLY_BAL, 0) > 0) AND (ISNULL(dbo.APAR_Pa
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCreTraHea^New Credit Trx Header^NewCreTraHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Credit Trx Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New Credit Trx Header" flow="NewColumn">

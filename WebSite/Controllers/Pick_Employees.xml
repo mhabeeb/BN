@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Employees" conflictDetection="overwriteChanges" label="^PicEmp^Pick_Employees^PicEmp^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Employees" conflictDetection="overwriteChanges" label="Pick_Employees" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Employees" custom="true">
       <text><![CDATA[SELECT     OPU_Code,Emp_id, Emp_Name, Title, Dept_Code, Phone_Cell, Project_Code, Email, Nationality, Designation
@@ -7,19 +7,19 @@ FROM         dbo.Employees]]></text>
     </command>
   </commands>
   <fields>
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Emp_id" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^EmpId^Emp#^EmpId^" readOnly="true" />
-    <field name="Emp_Name" type="String" label="^EmpNam^Emp Name^EmpNam^" length="150" showInSummary="true" />
-    <field name="Title" type="String" label="^Tit^Title^Tit^" length="50" showInSummary="true" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" />
-    <field name="Phone_Cell" type="String" label="^PhoCel^Phone Cell^PhoCel^" length="50" showInSummary="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Email" type="String" label="^Ema^Email^Ema^" length="50" />
-    <field name="Nationality" type="String" label="^Nat^Nationality^Nat^" length="50" />
-    <field name="Designation" type="String" label="^Des^Designation^Des^" length="50" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" showInSummary="true" />
+    <field name="Emp_id" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Emp#" readOnly="true" />
+    <field name="Emp_Name" type="String" label="Emp Name" length="150" showInSummary="true" />
+    <field name="Title" type="String" label="Title" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="Dept Code" length="50" showInSummary="true" />
+    <field name="Phone_Cell" type="String" label="Phone Cell" length="50" showInSummary="true" />
+    <field name="Project_Code" type="String" label="Project Code" length="50" />
+    <field name="Email" type="String" label="Email" length="50" />
+    <field name="Nationality" type="String" label="Nationality" length="50" />
+    <field name="Designation" type="String" label="Designation" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Emp^Employees^Emp^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Employees" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -33,7 +33,7 @@ FROM         dbo.Employees]]></text>
         <dataField fieldName="Designation" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevEmp^Review Employees^RevEmp^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Employees" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Employees" flow="NewColumn">
@@ -52,7 +52,7 @@ FROM         dbo.Employees]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewEmp^New Employees^NewEmp^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Employees" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Employees" flow="NewColumn">
@@ -97,7 +97,7 @@ FROM         dbo.Employees]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

@@ -1,54 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="tbl_Price_List_Master" conflictDetection="overwriteChanges" label="^PriLisMas^tbl_Price_List_Master^PriLisMas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="tbl_Price_List_Master" conflictDetection="overwriteChanges" label="tbl_Price_List_Master" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Price_List_Master" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Price_List_Master]]></text>
     </command>
   </commands>
   <fields>
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Decimal" allowNulls="false" label="^ComCod^Company Code^ComCod^" />
-    <field name="Price_List_Name" type="String" allowNulls="false" label="^PriLisNam^Price List Name^PriLisNam^" length="30" isPrimaryKey="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Decimal" allowNulls="false" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="Price_List_Name" type="String" allowNulls="false" label="^PriceListName^Price List Name^PriceListName^" length="30" isPrimaryKey="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
     <field name="Updated_By" type="Decimal" label="^UpdatdBy^Updated By^UpdatdBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
     <field name="Updated_DateTime" type="DateTime" label="^UpdatdDatTim^Updated Date Time^UpdatdDatTim^" showInSummary="true" />
-    <field name="Amount_Add" type="Decimal" label="^AmoAdd^Amount Add^AmoAdd^" dataFormatString="N2" />
-    <field name="Amount_Deduct" type="Decimal" label="^AmoDed^Amount Deduct^AmoDed^" dataFormatString="N2" />
-    <field name="Margin_Percentage" type="Decimal" label="^MarPer^Margin Percentage^MarPer^" dataFormatString="N2" />
+    <field name="Amount_Add" type="Decimal" label="^AmountAdd^Amount Add^AmountAdd^" dataFormatString="N2" />
+    <field name="Amount_Deduct" type="Decimal" label="^AmountDeduct^Amount Deduct^AmountDeduct^" dataFormatString="N2" />
+    <field name="Margin_Percentage" type="Decimal" label="^MarginPercentage^Margin Percentage^MarginPercentage^" dataFormatString="N2" />
     <field name="InActive" type="Int16" label="^InAct^In Active^InAct^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="PriceBased" type="Int16" allowNulls="false" label="^PriBas^Price Based^PriBas^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="PriceBased" type="Int16" allowNulls="false" label="Price Based" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList">
         <item value="0" text="Cost Based" />
         <item value="1" text="Purc. Price Based" />
-        <item value="2" text="Batch Price Based" />
         <item value="3" text="Based On Item Price" />
       </items>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^BrName^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
     </field>
     <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
       <formula>SELECT @Session_CompanyName</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^BrName^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
     <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
+    <field name="ABranchAR" type="String" label="^ABranchAR^ABranch AR^ABranchAR^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^PriLisMas^Price List Master^PriLisMas^" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="^PriLisMas^Price List Master^PriLisMas^" reportTemplate="true" showInSelector="false" filter="OPU_Code=@Session_OPU_Code">
       <headerText />
       <dataFields>
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="OPU_Code" columns="15" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="Price_List_Name" columns="30" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
@@ -62,15 +73,15 @@
         <dataField fieldName="PriceBased" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPriLisMas^Review Price List Master^RevPriLisMas^">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Price List Master" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Price List Master" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiPriLisMas^Edit Price List Master^EdiPriLisMas^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
-            <dataField fieldName="Price_List_Name" columns="30" />
+            <dataField fieldName="Price_List_Name" columns="15" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
@@ -80,7 +91,7 @@
             <dataField fieldName="Margin_Percentage" dataFormatString="c" columns="15" />
           </dataFields>
         </category>
-        <category headerText="Posting" id="c2">
+        <category headerText="^Posting^Posting^Posting^" id="c2">
           <dataFields>
             <dataField fieldName="InActive" columns="15" />
             <dataField fieldName="PriceBased" columns="15" />
@@ -88,15 +99,15 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPricLisMas^New Price List Master^NewPricLisMas^">
+    <view id="createForm1" type="Form" commandId="command1" label="New Price List Master" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Price List" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewPricLisMas^New Price List Master^NewPricLisMas^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
-            <dataField fieldName="Price_List_Name" columns="30" />
+            <dataField fieldName="Price_List_Name" columns="15" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
@@ -130,10 +141,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -164,8 +175,8 @@
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="^PriUpdat^Price Update^PriUpdat^">
-      <action commandName="SQL" headerText="^PriceUpdate^Price Update^PriceUpdate^" confirmation="_controller=ParameterforPriceListUpdate&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" id="a100" cssClass="glyphicon-transfer">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^PriceUpdate^Price Update^PriceUpdate^">
+      <action commandName="SQL" headerText="^PriUpdat^Price Update^PriUpdat^" confirmation="_controller=ParameterforPriceListUpdate&#xD;&#xA;_title=Enter the Date&#xD;&#xA;_width=500" id="a100" cssClass="glyphicon glyphicon-upload">
         <data><![CDATA[EXEC dbo.UPDATE_ITEM_PRICE_PL(@Parameters_UpdateType, @Parameters_PricePercentage,
                                       @Parameters_frItem_Code,@Parameters_toItem_Code,@Parameters_frItem_Category,
                                       @Parameters_toItem_Category,
@@ -177,8 +188,11 @@
     <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
 begin
     SET @BusinessRules_PreventDefault = 1
-    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+    SET @Result_ShowAlert=' You Are ReadOnly User ....You Cannot Change Record'
 end
+
+SET @OPU_Code=@Session_OPU_Code
+SET @Company_Code=@Session_Company_Code
 ]]></rule>
     <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
 begin

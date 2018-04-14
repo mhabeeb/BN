@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="TBL_DocumetTypes" conflictDetection="overwriteChanges" label="^DocTyp^DocumetTypes^DocTyp^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="TBL_DocumetTypes" conflictDetection="overwriteChanges" label="TBL_DocumetTypes" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.TBL_DocumetTypes" custom="true">
       <text><![CDATA[SELECT *
@@ -8,41 +8,61 @@ WHERE DocDescrition IS NOT NULL AND IsNull([IsParent],0)=1]]></text>
     </command>
   </commands>
   <fields>
-    <field name="DocDescrition" type="String" label="^DocDes^Doc Descrition^DocDes^" length="50" showInSummary="true" allowNulls="false" isPrimaryKey="true" />
+    <field name="DocDescrition" type="String" label="^DocDescrition^Doc Descrition^DocDescrition^" length="50" allowNulls="false" isPrimaryKey="true" />
     <field name="DocTypeID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^DocTypId^Doc Type^DocTypId^" readOnly="true" />
-    <field name="ApprovalType" type="Int32" allowNulls="false" label="^AppTyp^Approval Type^AppTyp^">
+    <field name="ApprovalType" type="Int32" allowNulls="false" label="^ApprovalType^Approval Type^ApprovalType^">
       <items style="DropDownList">
         <item value="1" text="Horizantal" />
         <item value="2" text="Vertical" />
       </items>
     </field>
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Application_ID" type="Int32" allowNulls="false" label="^AppId^Application#^AppId^" showInSummary="true" />
-    <field name="DocShortName" type="String" label="^DocShoNam^Doc Short Name^DocShoNam^" length="10" showInSummary="true" />
-    <field name="BaseTableName" type="String" label="^BasTabNam^Base Table Name^BasTablNam^" length="1000" />
-    <field name="KeyField" type="String" label="^KeyFie^Key Field^KeyFie^" length="100" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" />
-    <field name="EditableURL" type="String" label="^EdiUrl^Editable URL^EdiUrl^" length="1000" />
-    <field name="InfoURL" type="String" label="^InfUrl^Info URL^InfUrl^" length="1000" />
-    <field name="CRKeyFields" type="String" label="^CRKeyFie^CR Key Fields^CRKeyFie^" length="100" />
-    <field name="IsASP" type="Int32" label="^IsAsp^Is ASP^IsAsp^" />
-    <field name="Required" type="Int32" label="^Req^Required^Req^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Company_Code" type="Decimal" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="Application_ID" type="Int32" allowNulls="false" label="^Application^Application#^Application^" />
+    <field name="DocShortName" type="String" label="^DocShortName^Doc Short Name^DocShortName^" length="10" />
+    <field name="BaseTableName" type="String" label="^BasTabNam^Base Table Name^BasTabNam^" length="1000" />
+    <field name="KeyField" type="String" label="^KeyField^Key Field^KeyField^" length="100" />
+    <field name="InActive" type="Int32" label="^InActive^In Active^InActive^" />
+    <field name="EditableURL" type="String" label="^EditableURL^Editable URL^EditableURL^" length="1000" />
+    <field name="InfoURL" type="String" label="^InfoURL^Info URL^InfoURL^" length="1000" />
+    <field name="CRKeyFields" type="String" label="^CRKeyFields^CR Key Fields^CRKeyFields^" length="100" />
+    <field name="IsASP" type="Int32" label="^IsASP^Is ASP^IsASP^" />
+    <field name="Required" type="Int32" label="^Required^Required^Required^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DocTyp^Documet Types^DocTyp^" sortExpression="DocDescrition" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Documet Types" sortExpression="DocDescrition" showInSelector="false" reportTemplate="true">
       <headerText />
       <dataFields>
-        <dataField fieldName="DocTypeID" columns="15" />
-        <dataField fieldName="Application_ID" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="DocDescrition" columns="50" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Application_ID" columns="15" hidden="true" />
         <dataField fieldName="DocShortName" columns="10" />
+        <dataField fieldName="DocTypeID" columns="15" />
         <dataField fieldName="ApprovalType" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^DocTyp^Documet Types^DocTyp^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Documet Types" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Documet Types" flow="NewColumn">
@@ -66,7 +86,7 @@ WHERE DocDescrition IS NOT NULL AND IsNull([IsParent],0)=1]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^DocTyp^Documet Types^DocTyp^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="Documet Types" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Documet Types" flow="NewColumn">
@@ -133,7 +153,7 @@ WHERE DocDescrition IS NOT NULL AND IsNull([IsParent],0)=1]]></text>
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" headerText="Edit" flat="true">
-      <action commandName="Edit" commandArgument="editForm1" id="a100" />
+      <action commandName="Edit" commandArgument="editForm1" id="a100" cssClass="glyphicon glyphicon-edit" />
     </actionGroup>
   </actions>
   <businessRules>

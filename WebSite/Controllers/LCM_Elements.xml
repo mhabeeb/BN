@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="LCM_Elements" conflictDetection="overwriteChanges" label="^LcmEle^LCM_Elements^LcmEle^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="LCM_Elements" conflictDetection="overwriteChanges" label="LCM_Elements" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Item_Master" custom="true">
       <text><![CDATA[SELECT        Item_Code, Item_Description, UOM, OverHeadElements, Item_Code_Ref_No, BudgetAccount,BranchID
@@ -8,17 +8,17 @@ WHERE        (OverHeadElements = 1)]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" isPrimaryKey="true" />
-    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" showInSummary="true" />
-    <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" showInSummary="true" />
-    <field name="OverHeadElements" type="Int32" label="^OveHeaEle^Over Head Elements^OveHeaEle^" showInSummary="true" />
-    <field name="Item_Code_Ref_No" type="String" label="^IteCodRefNo^Item Code Ref No^IteCodRefNo^" length="20" showInSummary="true" />
-    <field name="BudgetAccount" type="String" label="^BudAcc^Budget Account^BudAcc^" length="50" />
-    <field name="BranchID" type="Int16" label="^BraId^Branch ID^BraId^" />
+    <field name="Item_Code" type="String" allowNulls="false" label="Item Code" length="20" showInSummary="true" isPrimaryKey="true" />
+    <field name="Item_Description" type="String" label="Item Description" length="500" showInSummary="true" />
+    <field name="UOM" type="String" label="Uom" length="10" showInSummary="true" />
+    <field name="OverHeadElements" type="Int32" label="Over Head Elements" showInSummary="true" />
+    <field name="Item_Code_Ref_No" type="String" label="Item Code Ref No" length="20" showInSummary="true" />
+    <field name="BudgetAccount" type="String" label="Budget Account" length="50" />
+    <field name="BranchID" type="Int16" label="Branch ID" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="^OveEle^Overhead Elements^OveEle^" filter="BranchID=@Session_OPU_Code" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+      <headerText />
       <dataFields>
         <dataField fieldName="Item_Code" columns="20" />
         <dataField fieldName="Item_Description" />
@@ -29,11 +29,11 @@ WHERE        (OverHeadElements = 1)]]></text>
         <dataField fieldName="BranchID" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIteMas^Review Item Master^RevIteMas^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Item Master" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Over Head Elements" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevIteMas^Review Item Master^RevIteMas^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Item_Code" columns="20" readOnly="true" />
             <dataField fieldName="Item_Description" />
@@ -45,11 +45,11 @@ WHERE        (OverHeadElements = 1)]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewIteMas^New Item Master^NewIteMas^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Item Master" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New tbl Item Master" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewIteMas^New Item Master^NewIteMas^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Item_Code" columns="20" />
             <dataField fieldName="Item_Description" />
@@ -80,7 +80,7 @@ WHERE        (OverHeadElements = 1)]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -106,8 +106,8 @@ WHERE        (OverHeadElements = 1)]]></text>
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Create Landed Cost Elements" flat="true">
-      <action commandName="SQL" id="a100" headerText="Create Default LCM Elements">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^CreLanCosEle^Create Landed Cost Elements^CreLanCosEle^" flat="true">
+      <action commandName="SQL" id="a100" headerText="^CreDefLcmEle^Create Default LCM Elements^CreDefLcmEle^" cssClass="&#x9;glyphicon glyphicon-align-left">
         <data><![CDATA[ EXEC [dbo].[CREATE_LANDEDCOST_ITEMS] @Session_OPU_Code]]></data>
       </action>
     </actionGroup>

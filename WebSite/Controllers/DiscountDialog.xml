@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="DiscountDialog" label="^DisDia^DiscountDialog^DisDia^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="DiscountDialog" label="DiscountDialog" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <fields>
-    <field name="BankName" type="Int32" allowNulls="false" label="^BanNam^Bank Name^BanNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="BankName" type="Int32" allowNulls="false" label="^BankName^Bank Name^BankName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="Lookup" dataController="Pick_Bank" dataView="grid1" dataTextField="BankCashName" dataValueField="CashBankID" />
+    </field>
+    <field name="PayNumber" type="Decimal" label="^PayDoc^Pay Doc^PayDoc^" dataFormatString="N2" contextFields="CashBankID=BankName" causesCalculate="true" allowNulls="false">
+      <items style="Lookup" dataController="Pick_Pay_Doc" dataView="grid1" dataTextField="PayNumber" dataValueField="PayNumber" />
     </field>
   </fields>
   <actions />

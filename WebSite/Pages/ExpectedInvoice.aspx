@@ -7,7 +7,7 @@
       <div id="view2" data-controller="View_Inventory_Lines" data-filter-source="view1" data-filter-fields="Transaction_ID" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
     <div data-activator="Tab|^ViewAccounting^View Accounting^ViewAccounting^">
-      <div id="view3" data-controller="ViewAccounting" data-filter-source="view1" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
+      <div id="view3" data-controller="ViewAccounting" data-view="grid1" data-filter-source="view1" data-filter-fields="Transaction_ID" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
   </div>
 </asp:Content>

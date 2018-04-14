@@ -314,7 +314,7 @@ Namespace MyCompany.Data
             SelectView(controller, view)
             request.AssignContext(controller, Me.m_ViewId, m_Config)
             Dim page As ViewPage = New ViewPage(request)
-            If ((Not (page.FieldFilter) Is Nothing) AndAlso ((page.FieldFilter.Length > 0) AndAlso (Not (Config.SelectSingleNode("/c:dataController/c:businessRules/c:rule[@commandName='Select']")) Is Nothing))) Then
+            If (((Not (page.FieldFilter) Is Nothing) AndAlso Not (page.Distinct)) AndAlso ((page.FieldFilter.Length > 0) AndAlso (Not (Config.SelectSingleNode("/c:dataController/c:businessRules/c:rule[@commandName='Select']")) Is Nothing))) Then
                 page.FieldFilter = Nothing
             End If
             If (Not (m_Config.PlugIn) Is Nothing) Then
@@ -489,7 +489,7 @@ Namespace MyCompany.Data
                     m_ServerRules.ExecuteServerRules(request, ActionPhase.Execute, "New", page.NewRow)
                 End If
             Else
-                If m_ServerRules.SupportsCommand("Sql|Code", "Select") Then
+                If (m_ServerRules.SupportsCommand("Sql|Code", "Select") AndAlso Not (page.Distinct)) Then
                     For Each row() As Object in page.Rows
                         m_ServerRules.ExecuteServerRules(request, ActionPhase.Execute, "Select", row)
                     Next

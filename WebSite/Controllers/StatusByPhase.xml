@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="StatusByPhase" conflictDetection="overwriteChanges" label="^StaByPha^StatusByPhase^StaByPha^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="StatusByPhase" conflictDetection="overwriteChanges" label="StatusByPhase" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="BI_Project_Status_By_Phase" custom="true">
       <text><![CDATA[SELECT * FROM BI_Project_Status_By_Phase]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="Project_Name" type="String" allowNulls="false" label="^ProNam^Project Name^ProNam^" length="250" showInSummary="true" isPrimaryKey="true" />
-    <field name="Year_Code" type="Int32" allowNulls="false" label="^YeaCod^Year^YeaCod" showInSummary="true" isPrimaryKey="true" />
-    <field name="Month_Code" type="Int32" allowNulls="false" label="^Mon^Month^Mon^" showInSummary="true" isPrimaryKey="true" />
-    <field name="TrxDate" type="DateTime" label="^TrxDat^Trx Date^TrxDat^" showInSummary="true" />
-    <field name="EngineeringPlannedPer" type="Decimal" label="^EngPln^Engineering Planned (%)^EngPln^" />
-    <field name="EngineeringActualPer" type="Decimal" label="^EngAct^Engineering Actual (%)^EngAct^" />
-    <field name="ProcurmentPlannedPer" type="Decimal" label="^ProPla^Procurment Planned (%)^ProPla^" />
-    <field name="ProcurmentActualPer" type="Decimal" label="^ProAct^Procurment Actual (%)^ProAct^" />
-    <field name="ConstructionPlannedPer" type="Decimal" label="^ConPla^Construction Planned (%)^ConPla^" />
-    <field name="ConstructionActualPer" type="Decimal" label="^ConAct^Construction Actual (%)^ConAct^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
-    <field name="Approved" type="Int32" label="^App^Approved^App^">
+    <field name="Project_Code" type="String" allowNulls="false" label="Project Code" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Project_Name" type="String" allowNulls="false" label="Project Name" length="250" showInSummary="true" isPrimaryKey="true" />
+    <field name="Year_Code" type="Int32" allowNulls="false" label="Year" showInSummary="true" isPrimaryKey="true" />
+    <field name="Month_Code" type="Int32" allowNulls="false" label="Month" showInSummary="true" isPrimaryKey="true" />
+    <field name="TrxDate" type="DateTime" label="Trx Date" showInSummary="true" />
+    <field name="EngineeringPlannedPer" type="Decimal" label="Engineering Planned (%)" />
+    <field name="EngineeringActualPer" type="Decimal" label="Engineering Actual (%)" />
+    <field name="ProcurmentPlannedPer" type="Decimal" label="Procurment Planned (%)" />
+    <field name="ProcurmentActualPer" type="Decimal" label="Procurment Actual (%)" />
+    <field name="ConstructionPlannedPer" type="Decimal" label="Construction Planned (%)" />
+    <field name="ConstructionActualPer" type="Decimal" label="Construction Actual (%)" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Company_Code" type="Decimal" label="Company Code" />
+    <field name="Approved" type="Int32" label="Approved">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^AtaByPha^Status By Phase^AtaByPha^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Status By Phase" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="Project_Code" columns="50" />
@@ -79,7 +79,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewStaByPha^New Status By Phase^NewStaByPha^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Status By Phase" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New Status By Phase" flow="NewColumn">
@@ -134,7 +134,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

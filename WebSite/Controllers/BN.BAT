@@ -1,8 +1,36 @@
-XCOPY XYZ.txt AABranchLogo.xml
+XCOPY XYZ.txt  FSG_Report_Preview.xml.ar-SA.txt
+XCOPY XYZ.txt  SalesMan.xml.ar-SA.txt
+XCOPY XYZ.txt FSG_Row_Set_Detail.xml.ar-SA.txt
+XCOPY XYZ.txt FSG_Row_Group.xml.ar-SA.txt
+XCOPY XYZ.txt  FSG_Report_Output.xml.ar-SA.txt
+XCOPY XYZ.txt  FSG_Row_Set.xml.ar-SA.txt
+ XCOPY XYZ.txt FSG_Report_Define.xml.ar-SA.txt
+XCOPY XYZ.txt   FSG_Report_Request.xml.ar-SA.txt
+XCOPY XYZ.txt  Tax_InputOutPutRegister.xml.ar-SA.txt
+XCOPY XYZ.txt  GL_Import_Document.xml.ar-SA.txt
+XCOPY XYZ.txt  BI_Commision.xml.ar-SA.txt
+XCOPY XYZ.txt AABranchLogo.xml.ar-SA.txt
+XCOPY XYZ.txt UserApprovalGroupAccess.xml.ar-SA.txt
+XCOPY XYZ.txt tbl_Transactions_Locator_Readonly.xml.ar-SA.txt
+XCOPY XYZ.txt TBL_DocumetTypes_Child.xml.ar-SA.txt
+XCOPY XYZ.txt  View_Branch_Default_Approval.xml.ar-SA.txt
+ XCOPY XYZ.txt Pick_from_Locator.xml.ar-SA.txt
+ XCOPY XYZ.txt Dimension_Lookups_child.xml.ar-SA.txt
+XCOPY XYZ.txt BankReconciliationsAfterClear.xml.ar-SA.txt
+XCOPY XYZ.txt Assets_CostAdjustments.xml.ar-SA.txt
+XCOPY XYZ.txt SYS_Default_Account_Loc.xml.ar-SA.txt
+XCOPY XYZ.txt AP_FullPay.xml.ar-SA.txt
+XCOPY XYZ.txt TBL_Delegation.xml.ar-SA.txt
+XCOPY XYZ.txt Tax_Region_Master.xml.ar-SA.txt
+XCOPY XYZ.txt Dimension_Lookups_parent.xml.ar-SA.txt
+XCOPY XYZ.txt Netting_Agreement.xml.ar-SA.txt
+XCOPY XYZ.txt  tbl_Locator_OnHand.xml.ar-SA.txt
+XCOPY XYZ.txt Locator_Transfer.xml.ar-SA.txt
 XCOPY XYZ.txt AABranch_Logo.xml.ar-SA.txt
 XCOPY XYZ.txt Absence_Types.xml.ar-SA.txt
 XCOPY XYZ.txt Accouting_Dimensions.xml.ar-SA.txt
 XCOPY XYZ.txt Adv_UPLOAD_INVOICES.xml.ar-SA.txt
+XCOPY XYZ.txt tbl_Transactions_Locator.xml.ar-SA.txt
 XCOPY XYZ.txt APAR_Invoice_Apply_Lines.xml.ar-SA.txt
 XCOPY XYZ.txt APAR_Invoice_Apply_Lines1.xml.ar-SA.txt
 XCOPY XYZ.txt APAR_Inv_Line.xml.ar-SA.txt
@@ -28,7 +56,7 @@ XCOPY XYZ.txt App_HotelApproval.xml.ar-SA.txt
 XCOPY XYZ.txt App_HotelApproval_DSR.xml.ar-SA.txt
 XCOPY XYZ.txt App_HotelApproval_GL.xml.ar-SA.txt
 XCOPY XYZ.txt AP_Ageing.xml.ar-SA.txt
-XCOPY XYZ.txt AP_FullPay.xml.ar-SA.txt
+
 XCOPY XYZ.txt AP_Inv_Header.xml.ar-SA.txt
 XCOPY XYZ.txt AP_Inv_Header1.xml.ar-SA.txt
 XCOPY XYZ.txt AP_MiscCashExpence.xml.ar-SA.txt
@@ -211,7 +239,7 @@ XCOPY XYZ.txt ItemCategory.xml.ar-SA.txt
 XCOPY XYZ.txt ItemCategory_Major.xml.ar-SA.txt
 XCOPY XYZ.txt ItemImage.xml.ar-SA.txt
 XCOPY XYZ.txt ItemLedger.xml.ar-SA.txt
-XCOPY XYZ.txt ItemMaster.xml.ar-SA.txt
+
 XCOPY XYZ.txt Item_Reorder_List.xml.ar-SA.txt
 XCOPY XYZ.txt Item_tax_Category.xml.ar-SA.txt
 XCOPY XYZ.txt Job_Finish_Good_Receipt.xml.ar-SA.txt
@@ -226,7 +254,7 @@ XCOPY XYZ.txt Ledger_Consolidations_Pick.xml.ar-SA.txt
 XCOPY XYZ.txt Ledger_Consolidation_Details.xml.ar-SA.txt
 XCOPY XYZ.txt LookUp_PaymentTerms.xml.ar-SA.txt
 XCOPY XYZ.txt LookUp_Values_Child.xml.ar-SA.txt
-XCOPY XYZ.txt LookUp_Values_Parents.xml.ar-SA.txt
+
 XCOPY XYZ.txt Misc_Inventory_Issue.xml.ar-SA.txt
 XCOPY XYZ.txt Misc_Inventory_Line.xml.ar-SA.txt
 XCOPY XYZ.txt Misc_Inventory_Line1.xml.ar-SA.txt
@@ -335,6 +363,7 @@ XCOPY XYZ.txt PO_Receipt_Expected.xml.ar-SA.txt
 XCOPY XYZ.txt PO_Receipt_Expected1.xml.ar-SA.txt
 XCOPY XYZ.txt PO_Receipt_Header.xml.ar-SA.txt
 XCOPY XYZ.txt PO_Receipt_Header1.xml.ar-SA.txt
+XCOPY XYZ.txt PO_Receipt_line_Reject.xml.ar-SA.txt
 XCOPY XYZ.txt PO_Receipt_Header_Return.xml.ar-SA.txt
 XCOPY XYZ.txt PO_Receipt_LCM.xml.ar-SA.txt
 XCOPY XYZ.txt PO_Receipt_line.xml.ar-SA.txt
@@ -537,7 +566,7 @@ XCOPY XYZ.txt WeekDay_List.xml.ar-SA.txt
 XCOPY XYZ.txt XXEAI_AExchangeRate2.xml.ar-SA.txt
 XCOPY XYZ.txt XXX_SO_LINES_REPORTS.xml.ar-SA.txt
 XCOPY XYZ.txt XX_BANK_CASH_BOOK.xml.ar-SA.txt
-XCOPY XYZ.txt XX_Email_View.xml.ar-SA.txt
+
 XCOPY XYZ.txt XX_GSI_TRIAL_BALANCE.xml.ar-SA.txt
 XCOPY XYZ.txt XX_VIEW_CUST_SUP.xml.ar-SA.txt
 XCOPY XYZ.txt YesNo.xml.ar-SA.txt

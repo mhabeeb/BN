@@ -1,9 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Parameter_FA_DEP" label="^ParFaDep^Parameter_FA_DEP^ParFaDep^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Parameter_FA_DEP" label="Parameter_FA_DEP" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <fields>
-    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDat^End Date^EndDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="BookID" type="Int32" allowNulls="false" label="^BooId^Book ID^BooId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="EndDate" type="DateTime" allowNulls="false" label="^EndDate^End Date^EndDate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="BookID" type="Int32" allowNulls="false" label="Book ID" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="DropDownList" dataController="AssetsValueSet" dataView="grid1" dataTextField="BookName" dataValueField="BookID" />
     </field>
   </fields>
+  <businessRules>
+    <rule id="r100" type="Sql" commandName="Insert|Update" phase="Before" name="EndDate_Validator"><![CDATA[if @EndDate > GETDATE()
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'EndDate,End Date Cannot be Future Date'
+end
+]]></rule>
+  </businessRules>
 </dataController>

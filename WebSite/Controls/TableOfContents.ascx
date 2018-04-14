@@ -1,5 +1,4 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="TableOfContents.ascx.vb" Inherits="Controls_TableOfContents"  %>
-                
+﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="TableOfContents.ascx.vb" Inherits="Controls_TableOfContents"  %>                
 <div class="ParaInfo">
         ^TocInstruction^Please select a page link in the table of contents below.^TocInstruction^</div>
 <div class="ParaHeader">

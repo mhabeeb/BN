@@ -1,26 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="TBL_ApprovalGroups_Header" conflictDetection="overwriteChanges" label="^AppGroHea^ApprovalGroups_Header^AppGroHea^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="TBL_ApprovalGroups_Header" conflictDetection="overwriteChanges" label="TBL_ApprovalGroups_Header" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="TBL_ApprovalGroups_Header" custom="true">
       <text><![CDATA[SELECT * FROM TBL_ApprovalGroups_Header]]></text>
     </command>
   </commands>
   <fields>
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" showInSummary="true" />
     <field name="AppGroupID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^AppGroId^App Group ID^AppGroId^" />
     <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true">
       <items style="Lookup" dataController="TBL_DocumetTypes" dataView="grid1" dataTextField="DocDescrition" dataValueField="DocTypeID" copy="DocDescrition=DocDescrition" />
     </field>
-    <field name="ApprovalGroupName" type="String" label="^AppGroNam^Approval Group Name^AppGroNam^" length="50" showInSummary="true" allowNulls="false" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="DocDescrition" type="String" label="^DocDes^Doc Descrition^DocDes^" length="50" />
+    <field name="ApprovalGroupName" type="String" label="Approval Group Name" length="50" showInSummary="true" allowNulls="false" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="DocDescrition" type="String" label="Doc Descrition" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^AppGroHea^Approval Groups Heade^AppGroHea^r" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="^AppGroHea^Approval Groups Header^AppGroHea^r" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="DocTypeID" columns="15" />
@@ -32,11 +32,11 @@
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevAppGroHea^Review Approval Groups Header^RevAppGroHea^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Approval Groups Header" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Approval Groups Header" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevAppGroHea^Review Approval Groups Header^RevAppGroHea^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="DocTypeID" columns="15" />
@@ -50,11 +50,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewAppGroHea^New Approval Groups Header^NewAppGroHea^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Approval Groups Header" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Approval Groups Header" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewAppGroHea^New Approval Groups Header^NewAppGroHea^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="DocTypeID" columns="15" />
@@ -85,10 +85,10 @@
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

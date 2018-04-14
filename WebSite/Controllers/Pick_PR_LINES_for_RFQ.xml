@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_PR_LINES_for_RFQ" label="^PicPrLinforRfq^Pick_PR_LINES_for_RFQ^PicPrLinforRfq^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_PR_LINES_for_RFQ" label="Pick_PR_LINES_for_RFQ" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="PR_Line_Items" custom="true">
       <text><![CDATA[SELECT     dbo.PR_Line_Items.PR_NO, dbo.PR_Line_Items.SO_NO, dbo.PR_Line_Items.PR_Line_No, dbo.PR_Line_Items.Item_Code, dbo.PR_Line_Items.PR_Qty, dbo.PR_Line_Items.Unit_Price, 
@@ -17,63 +17,63 @@ FROM         dbo.PR_Line_Items INNER JOIN
     </command>
   </commands>
   <fields>
-    <field name="PR_NO" type="Decimal" allowNulls="false" label="^PrNo^PR No.^PrNo^" showInSummary="true" />
+    <field name="PR_NO" type="Decimal" allowNulls="false" label="^PRNo^PR No.^PRNo^" showInSummary="true" />
     <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" showInSummary="true" />
-    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PrLinNo^PR Line No^PrLinNo^" readOnly="true" />
-    <field name="Item_Code" type="String" label="^IteNo^Item No.^IteNo^" length="20" showInSummary="true">
+    <field name="PR_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PRLineNo^PR Line No^PRLineNo^" readOnly="true" />
+    <field name="Item_Code" type="String" label="^ItemNo^Item No.^ItemNo^" length="20" showInSummary="true">
       <items style="Lookup" dataController="Pick_Item_Master" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" copy="&#xD;&#xA;Item_Desc=Item_Description&#xD;&#xA;Part_No=Part_No&#xD;&#xA;UOM=UOM&#xD;&#xA;IsBatchControl=IsBatchControl&#xD;&#xA;IsItemSerialized=IsItemSerialized" />
     </field>
     <field name="PR_Qty" type="Decimal" allowNulls="false" label="^Qty^Qty^Qty^" showInSummary="true" />
-    <field name="Unit_Price" type="Decimal" allowNulls="false" label="^UniPri^Unit Price^UniPri^" showInSummary="true" />
-    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" />
+    <field name="Unit_Price" type="Decimal" allowNulls="false" label="^UnitPrice^Unit Price^UnitPrice^" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="^LineRemarks^Line Remarks^LineRemarks^" length="255" />
     <field name="Pick" type="Int16" label="^Pick^Pick^Pick^" />
-    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
-    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" />
-    <field name="Line_Disc_Percent" type="Decimal" label="^LinDisPer^Line Disc Percent^LinDisPer^" />
-    <field name="Line_Disc_Amount" type="Decimal" label="^LinDisAmo^Line Disc Amount^LinDisAmo^" />
-    <field name="Source_LineID" type="Decimal" label="^SouLinId^Source Line#^SouLinId^" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
-    <field name="CloseYN" type="Int32" label="^CloYn^Close YN^CloYn^" />
-    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" />
-    <field name="PO_Balance" type="Decimal" label="^PoBal^PO Balance^PoBal^" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Supplier Part No.^ItePar^" length="20" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^">
+    <field name="Pick_Qty" type="Decimal" label="^PickQty^Pick Qty^PickQty^" />
+    <field name="Line_Total" type="Decimal" label="^LineTotal^Line Total^LineTotal^" readOnly="true" />
+    <field name="Line_Disc_Percent" type="Decimal" label="^LineDiscPercent^Line Disc Percent^LineDiscPercent^" />
+    <field name="Line_Disc_Amount" type="Decimal" label="^LineDiscAmount^Line Disc Amount^LineDiscAmount^" />
+    <field name="Source_LineID" type="Decimal" label="^SourceLine^Source Line#^SourceLine^" />
+    <field name="Pick_Doc" type="Decimal" label="^PickDoc^Pick Doc^PickDoc^" />
+    <field name="CloseYN" type="Int32" label="^CloseYN^Close YN^CloseYN^" />
+    <field name="Line_Net" type="Decimal" label="^LineNet^Line Net^LineNet^" />
+    <field name="PO_Balance" type="Decimal" label="^POBalance^PO Balance^POBalance^" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Part" type="String" label="^SupplierPartNo^Supplier Part No.^SupplierPartNo^" length="20" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
     <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="UOM" type="String" label="^Uom^UOM^Uom^" length="10" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" allowNulls="false" allowLEV="true">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="UOM" type="String" label="^UOM^UOM^UOM^" length="10" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" allowNulls="false" allowLEV="true">
       <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" />
     </field>
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" allowNulls="false" allowLEV="true">
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" allowNulls="false" allowLEV="true">
       <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" />
     </field>
-    <field name="PR_Date" type="DateTime" allowNulls="false" label="^PrDat^PR Date^PrDat^" />
-    <field name="PR_Type" type="Int32" label="^PrTyp^PR Type^PrTyp^" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
-    <field name="Required_Date" type="DateTime" label="^ReqDat^Required Date^ReqDat^" />
-    <field name="TermsANDConditions" type="String" label="^TerAndCon^Terms &amp; Conditions^TerAndCon^" length="4000" />
-    <field name="Header_Net" type="Decimal" label="^HeaNet^Header Net^HeaNet^" readOnly="true" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" />
-    <field name="ADDRESS_ALL" type="String" label="^AddAll^Address All^AddAll^" readOnly="true" length="4000" />
-    <field name="Doc_Status" type="String" label="^DocSta^Doc Status^DocSta^" readOnly="true" length="15" />
-    <field name="PR_OPU_Code" type="Int32" label="^PropuCod^PR OPU Code^PropuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="BranchName" type="String" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
-    <field name="BuisnessSlogan" type="String" label="^BuiSlo^Buisness Slogan^BuiSlo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
-    <field name="Address_English" type="String" label="^AddEng^Address English^AddEng^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
-    <field name="Address_Arabic" type="String" label="^AddAra^Address Arabic^AddAra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
-    <field name="BranchID" type="Int32" label="^BraId^Branch ID^BraId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
-    <field name="LogoURL" type="String" label="^LogUrl^Logo URL^LogUrl^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
-    <field name="IsBatchControl" type="Int32" label="^IsBatCon^Is Batch Control^IsBatCon^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="IsItemSerialized" type="Int32" label="^IsIteSer^Is Item Serialized^IsIteSer^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="PR_Date" type="DateTime" allowNulls="false" label="^PRDate^PR Date^PRDate^" />
+    <field name="PR_Type" type="Int32" label="^PRType^PR Type^PRType^" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" />
+    <field name="Required_Date" type="DateTime" label="^RequiredDate^Required Date^RequiredDate^" />
+    <field name="TermsANDConditions" type="String" label="^Terms&amp;Conditions^Terms &amp; Conditions^Terms&amp;Conditions^" length="4000" />
+    <field name="Header_Net" type="Decimal" label="^HeaderNet^Header Net^HeaderNet^" readOnly="true" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" readOnly="true" length="150" />
+    <field name="ADDRESS_ALL" type="String" label="^AddressAll^Address All^AddressAll^" readOnly="true" length="4000" />
+    <field name="Doc_Status" type="String" label="^DocStatus^Doc Status^DocStatus^" readOnly="true" length="15" />
+    <field name="PR_OPU_Code" type="Int32" label="^PROPUCode^PR OPU Code^PROPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="BranchName" type="String" label="^BranchName^Branch Name^BranchName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
+    <field name="BuisnessSlogan" type="String" label="^BuisnessSlogan^Buisness Slogan^BuisnessSlogan^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="255" />
+    <field name="Address_English" type="String" label="^AddressEnglish^Address English^AddressEnglish^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
+    <field name="Address_Arabic" type="String" label="^AddressArabic^Address Arabic^AddressArabic^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" length="4000" />
+    <field name="BranchID" type="Int32" label="^BranchID^Branch ID^BranchID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="LogoURL" type="String" label="^LogoURL^Logo URL^LogoURL^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="50" />
+    <field name="IsBatchControl" type="Int32" label="Is Batch Control" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="IsItemSerialized" type="Int32" label="Is Item Serialized" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^PrLinIte^PR Line Items^PrLinIte^" reportTemplate="true" filter="PR_OPU_Code=@Session_OPU_Code" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="PR Line Items" reportTemplate="true" filter="PR_OPU_Code=@Session_OPU_Code" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="PR_Date" columns="10" />
@@ -111,15 +111,15 @@ FROM         dbo.PR_Line_Items INNER JOIN
         <dataField fieldName="ADDRESS_ALL" hidden="true" />
         <dataField fieldName="Doc_Status" columns="15" hidden="true" />
         <dataField fieldName="PR_OPU_Code" columns="15" />
-        <dataField fieldName="BranchName" rows="5" hidden="true" />
-        <dataField fieldName="BuisnessSlogan" rows="5" hidden="true" />
         <dataField fieldName="Address_English" rows="5" hidden="true" />
+        <dataField fieldName="BuisnessSlogan" rows="5" hidden="true" />
         <dataField fieldName="Address_Arabic" rows="5" hidden="true" />
+        <dataField fieldName="BranchName" rows="5" hidden="true" />
         <dataField fieldName="BranchID" columns="15" hidden="true" />
         <dataField fieldName="LogoURL" columns="50" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPrLinIte^Review PR Line Items^RevPrLinIte^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review PR Line Items" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="PR Line Items" flow="NewColumn">
@@ -160,13 +160,13 @@ FROM         dbo.PR_Line_Items INNER JOIN
             <dataField fieldName="PR_OPU_Code" columns="15" hidden="true" />
             <dataField fieldName="Project_Code" columns="50" />
             <dataField fieldName="Dept_Code" columns="50" />
-            <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
             <dataField fieldName="IsItemSerialized" columns="15" hidden="true" />
+            <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPrLinIte^New PR Line Items^NewPrLinIte^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New PR Line Items" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New PR Line Items" flow="NewColumn">
@@ -200,22 +200,22 @@ FROM         dbo.PR_Line_Items INNER JOIN
             <dataField fieldName="Sys_Number" columns="15" hidden="true" />
             <dataField fieldName="TermsANDConditions" hidden="true" />
             <dataField fieldName="PR_OPU_Code" columns="15" hidden="true" />
-            <dataField fieldName="Project_Code" columns="50" />
             <dataField fieldName="Dept_Code" columns="50" />
-            <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
+            <dataField fieldName="Project_Code" columns="50" />
             <dataField fieldName="IsItemSerialized" columns="15" hidden="true" />
+            <dataField fieldName="IsBatchControl" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
+    <view id="About" commandId="command1" type="Form" label="Record History" showInSelector="false">
       <categories>
         <category id="c1" headerText="PR Line Items" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Created_By" columns="15" />
             <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
-            <dataField fieldName="Updated_By" columns="15" />
             <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Created_By" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -244,7 +244,7 @@ FROM         dbo.PR_Line_Items INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

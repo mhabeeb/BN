@@ -1,93 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="PO_Receipt_LCM" conflictDetection="overwriteChanges" label="^PoRecLcm^PO_Receipt_LCM^PoRecLcm^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="PO_Receipt_LCM" conflictDetection="overwriteChanges" label="PO_Receipt_LCM" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Material_Overheads" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Material_Overheads]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction#^TraId^" showInSummary="true" />
-    <field name="OverHeadID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^OveHeaId^Over Head#^OveHeaId^" readOnly="true" />
-    <field name="OverHeadDate" type="DateTime" label="^OveHeaDat^Over Head Date^OveHeaDat^" showInSummary="true" allowNulls="false" />
-    <field name="OverHead_Remarks" type="String" label="^OveHeaRem^Over Head Remarks^OveHeaRem^" length="255" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="PostYN" type="Int16" label="^PosYN^Post YN^PosYN^" allowNulls="false">
+    <field name="Transaction_ID" type="Decimal" label="^Transaction^Transaction#^Transaction^" showInSummary="true" />
+    <field name="OverHeadID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^OverHead^Over Head#^OverHead^" readOnly="true" />
+    <field name="OverHeadDate" type="DateTime" label="^OverHeadDate^Over Head Date^OverHeadDate^" showInSummary="true" allowNulls="false" />
+    <field name="OverHead_Remarks" type="String" label="^OHeadR^Over Head Remarks^OHeadR^" length="255" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="PostYN" type="Int16" label="^PostYN^Post YN^PostYN^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="OverHead10" type="Decimal" label="^OveHea10^Saudi Custom^OveHea10^" dataFormatString="N2" />
-    <field name="OverHead11" type="Decimal" label="^OveHea11^Custom Clearence^OveHea11^" />
-    <field name="OverHead12" type="Decimal" label="^OveHea12^Commision Charges^OveHea12^" />
-    <field name="OverHead13" type="Decimal" label="^OveHea13^Delivery Order Fees^OveHea13^" />
-    <field name="OverHead14" type="Decimal" label="^OveHea14^Labour Charges^OveHea14^" />
-    <field name="OverHead15" type="Decimal" label="^OveHea15^Air/Sea Frieght^OveHea15^" />
-    <field name="OverHead16" type="Decimal" label="^OverHea16^Transport Charges^OverHea16^" />
-    <field name="OverHead17" type="Decimal" label="^OveHea17^Custome Demurrage^OveHea17^" />
-    <field name="OverHead18" type="Decimal" label="^OveHea18^Storage Charges^OveHea18^" />
-    <field name="OverHead19" type="Decimal" label="^OveHea19^Others^OveHea19^" />
-    <field name="TotalOverHeads" type="Decimal" label="^TotOveHea^Total Over Heads^TotOveHea^" readOnly="true" />
-    <field name="Line_ID" type="Decimal" label="^LinId^Line#^LinId^" hidden="true" />
+    <field name="OverHead10" type="Decimal" label="^Charges^Charges^Charges^" dataFormatString="N2" />
+    <field name="OverHead11" type="Decimal" label="^Charges^Charges^Charges^" />
+    <field name="OverHead12" type="Decimal" label="^Charges^Charges^Charges^" />
+    <field name="OverHead13" type="Decimal" label="^Charges^Charges^Charges^" />
+    <field name="OverHead14" type="Decimal" label="^Charges^Charges^Charges^" />
+    <field name="OverHead15" type="Decimal" label="^AirSF^Air/Sea Frieght^AirSF^" />
+    <field name="OverHead16" type="Decimal" label="^Charges^Charges^Charges^" />
+    <field name="OverHead17" type="Decimal" label="^Charges^Charges^Charges^" />
+    <field name="OverHead18" type="Decimal" label="^Charges^Charges^Charges^" />
+    <field name="OverHead19" type="Decimal" label="^Charges^Charges^Charges^" />
+    <field name="TotalOverHeads" type="Decimal" label="^TOHeads^Total Over Heads^TOHeads^" readOnly="true" />
+    <field name="Line_ID" type="Decimal" label="^Line^Line#^Line^" hidden="true" />
     <field name="Sys_Number" type="Decimal" label="^SysNum^All Charges for This Suppplier^SysNum^">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="Sys_Number10" type="Decimal" label="^SysNum^Sup(SaudiCustom)^SysNum^">
+    <field name="Sys_Number10" type="Decimal" label="^SupSaCus^Sup(SaudiCustom)^SupSaCus^">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="Sys_Number11" type="Decimal" label="^SysNum11^Sup(CustomClearence)^SysNum11^">
-      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" letters="true" />
-    </field>
-    <field name="Sys_Number12" type="Decimal" label="^SysNum12^CommisionCharges^SysNum12^">
-      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" letters="true" />
-    </field>
-    <field name="Sys_Number13" type="Decimal" label="^SysNum13^DeliveryOrderFees^SysNum13^">
+    <field name="Sys_Number11" type="Decimal" label="^CusCle^Custom Clearence^CusCle^">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="Sys_Number14" type="Decimal" label="^SysNum14^Sup(LabourCharges)^SysNum14^">
-      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" letters="true" />
-    </field>
-    <field name="Sys_Number15" type="Decimal" label="^SysNum15^Air/SeaFrieght^SysNum15^">
+    <field name="Sys_Number12" type="Decimal" label="^ComCha^Commision Charges^ComCha^">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="Sys_Number16" type="Decimal" label="^SysNum16^Sup(TransportCharges)^SysNum16^">
-      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" letters="true" />
-    </field>
-    <field name="Sys_Number17" type="Decimal" label="^SysNum17^Sup(CustomeDemurrage)^SysNum17^">
+    <field name="Sys_Number13" type="Decimal" label="^DelOrdFee^Delivery Order Fees^DelOrdFee^">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="Sys_Number18" type="Decimal" label="^SysNum18^Sup(StorageCharges)^SysNum18^">
+    <field name="Sys_Number14" type="Decimal" label="^LabCha^Labour Charges^LabCha^">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="Sys_Number19" type="Decimal" label="^SysNum19^Sup(Others)^SysNum19^">
+    <field name="Sys_Number15" type="Decimal" label="^AirSeaChar^Air/Sea Frieght^AirSeaChar^">
       <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="Sys_Number16" type="Decimal" label="^TraCha^Transport Charges^TraCha^">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="Sys_Number17" type="Decimal" label="^CusDem^Custom Demurrage^CusDem^">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="Sys_Number18" type="Decimal" label="^StoCha^Storage Charges^StoCha^">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="Sys_Number19" type="Decimal" label="^Others^Others^Others^">
+      <items style="Lookup" dataController="Pick_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
     </field>
     <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^ " allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
       <formula>SELECT @Session_CompanyName</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
       <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^LanCos^Landed Cost^LanCos^ " reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Landed Cost " reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Line_ID" columns="15" />
         <dataField fieldName="Transaction_ID" columns="15" />
         <dataField fieldName="OverHeadDate" columns="10" />
@@ -119,145 +119,144 @@
         <dataField fieldName="Sys_Number17" columns="15" hidden="true" />
         <dataField fieldName="Sys_Number18" columns="15" hidden="true" />
         <dataField fieldName="Sys_Number19" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^lanCosCha^Landed Cost Charges^lanCosCha^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Landed Cost Charges" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Main Information" floating="false" flow="NewColumn">
+        <category headerText="^ChaSup^Charges &amp; Supplier^ChaSup^" id="c2" floating="false" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="OverHead16" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number17" columns="15" />
+            <dataField fieldName="Sys_Number16" columns="15" />
+            <dataField fieldName="Sys_Number15" columns="15" />
+            <dataField fieldName="OverHead15" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number19" columns="15" />
+            <dataField fieldName="OverHead19" dataFormatString="N2" columns="20" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="OverHead18" dataFormatString="N2" columns="20" />
+            <dataField fieldName="OverHead17" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number18" columns="15" />
+            <dataField fieldName="Sys_Number14" columns="15" />
+            <dataField fieldName="OverHead14" dataFormatString="N2" columns="20" />
+          </dataFields>
+        </category>
+        <category id="c1" headerText="^MaiInf^Main Information^MaiInf^" floating="false">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="Transaction_ID" columns="15" />
-            <dataField fieldName="OverHeadDate" columns="10" />
-            <dataField fieldName="OverHead_Remarks" columns="25" rows="5" textMode="Note" />
+            <dataField fieldName="OverHeadDate" columns="20" />
+            <dataField fieldName="OverHead_Remarks" columns="20" rows="6" textMode="Note" />
+            <dataField fieldName="OverHead12" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number12" columns="15" />
+            <dataField fieldName="OverHead13" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number13" columns="15" />
+            <dataField fieldName="OverHead10" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number10" columns="12" />
+            <dataField fieldName="OverHead11" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number11" columns="15" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
             <dataField fieldName="Line_ID" columns="15" hidden="true" />
-            <dataField fieldName="PostYN" columns="15" />
-          </dataFields>
-        </category>
-        <category headerText="Charges &amp; Supplier" id="c2" floating="false" flow="NewColumn">
-          <dataFields>
-            <dataField fieldName="Sys_Number10" columns="12" />
-            <dataField fieldName="OverHead10" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number11" columns="15" />
-            <dataField fieldName="OverHead11" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number12" columns="15" />
-            <dataField fieldName="OverHead12" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number13" columns="15" />
-            <dataField fieldName="OverHead13" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number14" columns="15" />
-            <dataField fieldName="OverHead14" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number15" columns="15" />
-            <dataField fieldName="OverHead15" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number16" columns="15" />
-            <dataField fieldName="OverHead16" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number17" columns="15" />
-            <dataField fieldName="OverHead17" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number18" columns="15" />
-            <dataField fieldName="OverHead18" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number19" columns="15" />
-            <dataField fieldName="OverHead19" dataFormatString="N2" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^LanCosBoo^Landed Cost Booking^LanCosBoo^" reportTemplate="true" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="Landed Cost Booking" reportTemplate="true" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Main Information" floating="false" flow="NewColumn">
+        <category id="c1" headerText="^MaiInf^Main Information^MaiInf^" floating="false" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="Transaction_ID" columns="15" />
-            <dataField fieldName="OverHeadDate" columns="10" />
-            <dataField fieldName="OverHead_Remarks" columns="25" rows="5" textMode="Note" />
+            <dataField fieldName="OverHeadDate" columns="20" />
+            <dataField fieldName="OverHead_Remarks" columns="20" rows="6" textMode="Note" />
+            <dataField fieldName="OverHead12" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number12" columns="15" />
+            <dataField fieldName="OverHead13" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number13" columns="15" />
+            <dataField fieldName="OverHead10" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number10" columns="12" />
+            <dataField fieldName="OverHead11" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number11" columns="15" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Sys_Number" columns="15" />
+            <dataField fieldName="Sys_Number" columns="15" hidden="true" />
             <dataField fieldName="Line_ID" columns="15" hidden="true" />
-            <dataField fieldName="PostYN" columns="15" />
           </dataFields>
         </category>
-        <category headerText="Charges &amp; Supplier" id="c2" floating="false" flow="NewColumn">
+        <category headerText="^ChaSup^Charges &amp; Supplier^ChaSup^" id="c2" floating="false" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Sys_Number10" columns="12" />
-            <dataField fieldName="OverHead10" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number11" columns="15" />
-            <dataField fieldName="OverHead11" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number12" columns="15" />
-            <dataField fieldName="OverHead12" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number13" columns="15" />
-            <dataField fieldName="OverHead13" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number14" columns="15" />
-            <dataField fieldName="OverHead14" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number15" columns="15" />
-            <dataField fieldName="OverHead15" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number16" columns="15" />
-            <dataField fieldName="OverHead16" dataFormatString="N2" columns="15" />
+            <dataField fieldName="OverHead16" dataFormatString="N2" columns="20" />
             <dataField fieldName="Sys_Number17" columns="15" />
-            <dataField fieldName="OverHead17" dataFormatString="N2" columns="15" />
-            <dataField fieldName="Sys_Number18" columns="15" />
-            <dataField fieldName="OverHead18" dataFormatString="N2" columns="15" />
+            <dataField fieldName="Sys_Number16" columns="15" />
+            <dataField fieldName="Sys_Number15" columns="15" />
+            <dataField fieldName="OverHead15" dataFormatString="N2" columns="20" />
             <dataField fieldName="Sys_Number19" columns="15" />
-            <dataField fieldName="OverHead19" dataFormatString="N2" columns="15" />
+            <dataField fieldName="OverHead19" dataFormatString="N2" columns="20" />
+            <dataField fieldName="PostYN" columns="15" />
+            <dataField fieldName="OverHead18" dataFormatString="N2" columns="20" />
+            <dataField fieldName="OverHead17" dataFormatString="N2" columns="20" />
+            <dataField fieldName="Sys_Number18" columns="15" />
+            <dataField fieldName="Sys_Number14" columns="15" />
+            <dataField fieldName="OverHead14" dataFormatString="N2" columns="20" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="grid1ar" commandId="command1" type="Grid" label="^PoRecLcm^PO Receipt LCM^PoRecLcm^" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+    <view id="grid1ar" commandId="command1" type="Grid" label="PO Receipt LCM" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Sys_Number13" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number12" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number15" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number14" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number11" columns="15" hidden="true" />
+        <dataField fieldName="TotalOverHeads" dataFormatString="N2" columns="15" />
+        <dataField fieldName="OverHead19" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number10" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="Sys_Number16" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number18" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number17" columns="15" hidden="true" />
+        <dataField fieldName="Sys_Number19" columns="15" hidden="true" />
+        <dataField fieldName="OverHead_Remarks" />
+        <dataField fieldName="OverHead12" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Created_By" hidden="true" columns="15" />
+        <dataField fieldName="PostYN" columns="15" />
+        <dataField fieldName="OverHead11" dataFormatString="N2" columns="15" />
         <dataField fieldName="Line_ID" columns="15" />
         <dataField fieldName="Transaction_ID" columns="15" />
-        <dataField fieldName="OverHeadDate" columns="10" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="OverHead10" dataFormatString="N2" columns="15" />
-        <dataField fieldName="OverHead11" dataFormatString="N2" columns="15" />
-        <dataField fieldName="OverHead12" dataFormatString="N2" columns="15" />
-        <dataField fieldName="OverHead_Remarks" />
-        <dataField fieldName="PostYN" columns="15" />
-        <dataField fieldName="Created_By" hidden="true" columns="15" />
-        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
-        <dataField fieldName="Updated_By" hidden="true" columns="15" />
-        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-        <dataField fieldName="OverHead13" dataFormatString="N2" columns="15" hidden="true" />
-        <dataField fieldName="OverHead14" dataFormatString="N2" columns="15" hidden="true" />
-        <dataField fieldName="OverHead15" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="OverHeadDate" columns="10" />
         <dataField fieldName="OverHead16" dataFormatString="N2" columns="15" hidden="true" />
-        <dataField fieldName="OverHead17" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="OverHead15" dataFormatString="N2" columns="15" hidden="true" />
         <dataField fieldName="OverHead18" dataFormatString="N2" columns="15" hidden="true" />
-        <dataField fieldName="OverHead19" dataFormatString="N2" columns="15" hidden="true" />
-        <dataField fieldName="TotalOverHeads" dataFormatString="N2" columns="15" />
-        <dataField fieldName="Sys_Number" columns="15" />
-        <dataField fieldName="Sys_Number10" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number11" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number12" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number13" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number14" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number15" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number16" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number17" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number18" columns="15" hidden="true" />
-        <dataField fieldName="Sys_Number19" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="OverHead17" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="OverHead14" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="OverHead13" dataFormatString="N2" columns="15" hidden="true" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -273,10 +272,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="&#x9;glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -304,9 +303,6 @@
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
   </actions>
   <businessRules>

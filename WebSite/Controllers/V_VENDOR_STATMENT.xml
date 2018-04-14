@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="V_VENDOR_STATMENT" conflictDetection="overwriteChanges" label="^VVenSta^V_VENDOR_STATMENT^VVenSta^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="V_VENDOR_STATMENT" conflictDetection="overwriteChanges" label="V_VENDOR_STATMENT" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" showInSummary="true" />
-    <field name="DOC_Type" type="String" allowNulls="false" label="^DocTyp^DOC Type^DocTyp^" length="7" showInSummary="true" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" showInSummary="true" />
-    <field name="TRX_Date" type="DateTime" label="^TrxDat^TRX Date^TrxDat^" showInSummary="true" />
+    <field name="APAR_Flag" type="Int32" label="^APARFlag^APAR Flag^APARFlag^" showInSummary="true" />
+    <field name="DOC_Type" type="String" allowNulls="false" label="^DOCType^DOC Type^DOCType^" length="7" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" showInSummary="true" />
+    <field name="TRX_Date" type="DateTime" label="^TRXDate^TRX Date^TRXDate^" showInSummary="true" />
     <field name="DOC_NO" type="Decimal" label="^DocNo^Doc No^DocNo^" showInSummary="true" />
-    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
-    <field name="Invoice_Amt" type="Decimal" label="^InvAmt^Invoice Amt^InvAmt^" />
-    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount Paid^AmoPai^" />
-    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Apply Bal^AppBal^" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="500" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^Trx^Trx#^Trx^" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" length="150" />
+    <field name="Invoice_Amt" type="Decimal" label="^InvoiceAmt^Invoice Amt^InvoiceAmt^" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmountPaid^Amount Paid^AmountPaid^" />
+    <field name="APPLY_BAL" type="Decimal" label="^ApplyBal^Apply Bal^ApplyBal^" />
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="500" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^VVenSta^V Vendor Statment^VVenSta^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="V Vendor Statment" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="DOC_Type" columns="7" />
@@ -31,7 +31,7 @@
         <dataField fieldName="Remarks" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevVVenSta^Review V Vendor Statment^RevVVenSta^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review V Vendor Statment" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="V Vendor Statment" flow="NewColumn">
@@ -52,7 +52,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewVVenSta^New V Vendor Statment^NewVVenSta^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New V Vendor Statment" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New V Vendor Statment" flow="NewColumn">
@@ -94,7 +94,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

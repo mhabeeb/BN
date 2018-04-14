@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="rpt_PO_Details_Lines" conflictDetection="overwriteChanges" label="^RptPoDetLin^rpt PO Details Lines^RptPoDetLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="rpt_PO_Details_Lines" conflictDetection="overwriteChanges" label="rpt PO Details Lines" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -23,23 +23,23 @@ from "dbo"."rpt_PO_Details_Lines" "rpt_PO_Details_Lines"
     </command>
   </commands>
   <fields>
-    <field name="PO_Type" type="String" label="^PoTyp^PO Type^PoTyp^" length="30" showInSummary="true" />
-    <field name="PO_Date" type="DateTime" allowNulls="false" label="^poDat^PO Date^poDat^" showInSummary="true" />
-    <field name="PO_NO" type="Decimal" allowNulls="false" label="^PoNo^Po No^PoNo^" showInSummary="true" />
-    <field name="Supplier_No" type="Decimal" label="^SupNo^Supplier No^SupNo^" showInSummary="true" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" showInSummary="true" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
-    <field name="OPU_Code" type="Int32" label="^opuCod^OPU Code^opuCod^" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^ItmCod^Item Code^ItmCod^" length="20" />
-    <field name="Item_Desc" type="String" label="^ItmDes^Item Desc^ItmDes^" length="500" />
-    <field name="PO_Qty" type="Decimal" label="^PoQty^PO Qty^PoQty^" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" />
-    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" />
-    <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" />
-    <field name="PR_NO" type="Decimal" label="^PrNo^Pr No^PrNo^" />
+    <field name="PO_Type" type="String" label="PO Type" length="30" showInSummary="true" />
+    <field name="PO_Date" type="DateTime" allowNulls="false" label="PO Date" showInSummary="true" />
+    <field name="PO_NO" type="Decimal" allowNulls="false" label="Po No" showInSummary="true" />
+    <field name="Supplier_No" type="Decimal" label="Supplier No" showInSummary="true" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" length="150" showInSummary="true" />
+    <field name="Currency_Code" type="String" label="Currency Code" length="4" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Item_Code" type="String" allowNulls="false" label="Item Code" length="20" />
+    <field name="Item_Desc" type="String" label="Item Desc" length="500" />
+    <field name="PO_Qty" type="Decimal" label="PO Qty" />
+    <field name="Unit_Price" type="Decimal" label="Unit Price" />
+    <field name="Line_Total" type="Decimal" label="Line Total" readOnly="true" />
+    <field name="SO_NO" type="Decimal" label="So No" />
+    <field name="PR_NO" type="Decimal" label="Pr No" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RptPoDetLin^rpt PO Details Lines^RptPoDetLin^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="rpt PO Details Lines" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PO_Date" columns="10" />
@@ -54,7 +54,7 @@ from "dbo"."rpt_PO_Details_Lines" "rpt_PO_Details_Lines"
         <dataField fieldName="PO_Qty" dataFormatString="c" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRptPoDeTLin^Review rpt PO Details Lines^RevRptPoDeTLin^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review rpt PO Details Lines" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="rpt PO Details Lines" flow="NewColumn">
@@ -78,7 +78,7 @@ from "dbo"."rpt_PO_Details_Lines" "rpt_PO_Details_Lines"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRptPoDetLin^New rpt PO Details Lines^NewRptPoDetLin^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New rpt PO Details Lines" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New rpt PO Details Lines" flow="NewColumn">
@@ -128,7 +128,7 @@ from "dbo"."rpt_PO_Details_Lines" "rpt_PO_Details_Lines"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

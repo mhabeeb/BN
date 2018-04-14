@@ -1,48 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="DSR_Transaction_Header" label="^DsrTraHea^DSR_Transaction_Header^DsrTraHea^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="DSR_Transaction_Header" label="DSR_Transaction_Header" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="GL_Transaction_Header" custom="true">
       <text><![CDATA[SELECT * FROM GL_Transaction_Header WHERE Tran_Type='DSR']]></text>
     </command>
   </commands>
   <fields>
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OPUCod^OPU Code^OPUCod^" showInSummary="true" />
-    <field name="Company_Code" type="Decimal" allowNulls="false" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="GL_Serial_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^GlSerNo^DSR Serial No.^GlSerNo^" readOnly="true" />
-    <field name="GL_NO" type="Decimal" allowNulls="false" label="^GlNo^DSR Number^GlNo^" />
-    <field name="Transaction_Date" type="DateTime" allowNulls="false" label="^TraDat^Transaction Date^TraDat^" />
-    <field name="Remark" type="String" label="^Remark^Rem^Rem^" length="150" />
-    <field name="Tran_Type" type="String" allowNulls="false" label="^TraTyp^Tran Type^TraTyp^" length="50" />
-    <field name="GL_PostedYN" type="Int32" allowNulls="false" label="^GlPosYN^PostedYN^GlPosYN^">
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="Company_Code" type="Decimal" allowNulls="false" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="GL_Serial_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="DSR Serial No." readOnly="true" />
+    <field name="GL_NO" type="Decimal" allowNulls="false" label="DSR Number" />
+    <field name="Transaction_Date" type="DateTime" allowNulls="false" label="^TransactionDate^Transaction Date^TransactionDate^" />
+    <field name="Remark" type="String" label="^Remark^Remark^Remark^" length="150" />
+    <field name="Tran_Type" type="String" allowNulls="false" label="^TranType^Tran Type^TranType^" length="50" />
+    <field name="GL_PostedYN" type="Int32" allowNulls="false" label="^GLPostedYN^PostedYN^GLPostedYN^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction#^TraId^" showInSummary="true" />
-    <field name="Trx_ID" type="Decimal" label="^TrxId^Trx#^TrxId^" showInSummary="true" />
-    <field name="PaymentID" type="Decimal" label="^PayId^Payment#^PayId^" showInSummary="true" />
-    <field name="Sys_Number" type="Decimal" label="^SeqId^Seq #^SeqId^" showInSummary="true" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" showInSummary="true" />
-    <field name="Tot_Debit_Amount" type="Decimal" allowNulls="false" label="^TolDsrAmo^Total DSR Amount^TolDsrAmo^" htmlEncode="false" hidden="false" readOnly="true" dataFormatString="N2" />
-    <field name="Tot_Credit_Amount" type="Decimal" allowNulls="false" label="^CrAmo^Cr. Amount^CrAmo^" htmlEncode="false" hidden="false" readOnly="true" dataFormatString="N2" />
-    <field name="Tot_Diff" type="Decimal" allowNulls="false" label="^TotDif^Diff^TotDif^" htmlEncode="false" hidden="false" readOnly="true" dataFormatString="N2" />
-    <field name="Tot_Lines" type="Int32" allowNulls="false" label="^TotLinId^#Lines^TotLinId^" htmlEncode="false" hidden="false" readOnly="true" />
-    <field name="RefreshData" type="Int32" allowNulls="false" label="^RefreDat^Refresh Data^RefreDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
-    <field name="ApplicationID" type="Int32" label="^AppId^Application ID^AppId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Project_Code" type="String" label="^ProCod^Project^ProCod^" htmlEncode="false" hidden="false" length="50" allowNulls="false">
-      <items style="DropDownList" dataController="^PicPro^Pick_Project^PicPro^" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" copy="Currency_Code=Currency_Code" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" showInSummary="true" />
+    <field name="Transaction_ID" type="Decimal" label="^Transaction^Transaction#^Transaction^" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" label="^Trx^Trx#^Trx^" showInSummary="true" />
+    <field name="PaymentID" type="Decimal" label="^Payment^Payment#^Payment^" showInSummary="true" />
+    <field name="Sys_Number" type="Decimal" label="^Seq^Seq #^Seq^" showInSummary="true" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" readOnly="true" length="150" showInSummary="true" />
+    <field name="Tot_Debit_Amount" type="Decimal" allowNulls="false" label="Total DSR Amount" htmlEncode="false" hidden="false" readOnly="true" dataFormatString="N2" />
+    <field name="Tot_Credit_Amount" type="Decimal" allowNulls="false" label="Cr. Amount" htmlEncode="false" hidden="false" readOnly="true" dataFormatString="N2" />
+    <field name="Tot_Diff" type="Decimal" allowNulls="false" label="Diff" htmlEncode="false" hidden="false" readOnly="true" dataFormatString="N2" />
+    <field name="Tot_Lines" type="Int32" allowNulls="false" label="#Lines" htmlEncode="false" hidden="false" readOnly="true" />
+    <field name="RefreshData" type="Int32" allowNulls="false" label="^RefreshData^Refresh Data^RefreshData^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="ApplicationID" type="Int32" label="Application ID" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Project_Code" type="String" label="Project" htmlEncode="false" hidden="false" length="50" allowNulls="false">
+      <items style="DropDownList" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" copy="Currency_Code=Currency_Code" />
     </field>
-    <field name="Currency_Code" type="String" label="^CurCod^Curr.^CurCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4" />
-    <field name="Cur_Rate" type="Decimal" label="^CurRat^Cur Rate^CurRat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Currency_Code" type="String" label="Curr." allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="4" />
+    <field name="Cur_Rate" type="Decimal" label="Cur Rate" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DsrTraHea^DSR Transaction Header^DsrTraHea^" reportTemplate="true" sortExpression="GL_Serial_No desc" filter="OPU_Code=@Session_OPU_Code AND Project_Code IN (SELECT Project_Code  FROM UserProjectAccess where UserID=@BusinessRules_UserId) AND Tran_Type &lt;&gt; 'P&amp;L'&#xD;&#xA;" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="DSR Transaction Header" reportTemplate="true" sortExpression="GL_Serial_No desc" filter="OPU_Code=@Session_OPU_Code AND Project_Code IN (SELECT Project_Code  FROM UserProjectAccess where UserID=@BusinessRules_UserId) AND Tran_Type &lt;&gt; 'P&amp;L'&#xD;&#xA;" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="Tran_Type" columns="50">
@@ -66,9 +72,9 @@
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="Trx_ID" columns="15" hidden="true" />
         <dataField fieldName="PaymentID" columns="15" hidden="true" />
-        <dataField fieldName="Tot_Debit_Amount" columns="15" />
-        <dataField fieldName="Tot_Credit_Amount" columns="15" hidden="true" />
         <dataField fieldName="Tot_Diff" columns="15" hidden="true" />
+        <dataField fieldName="Tot_Credit_Amount" columns="15" hidden="true" />
+        <dataField fieldName="Tot_Debit_Amount" columns="15" />
         <dataField fieldName="Tot_Lines" columns="15" />
         <dataField fieldName="ApplicationID" columns="15" hidden="true" />
         <dataField fieldName="Project_Code" columns="50" />
@@ -76,7 +82,7 @@
         <dataField fieldName="Cur_Rate" columns="15" readOnly="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^EdiDirTraHea^Edit DSR Transaction Header^EdiDirTraHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Edit DSR Transaction Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Edit DSR Transaction Header" flow="NewColumn">
@@ -109,7 +115,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDsrTraHea^New DSR Transaction Header^NewDsrTraHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New DSR Transaction Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New DSR Transaction Header" flow="NewColumn">
@@ -142,9 +148,9 @@
         <category id="c1" headerText="Journal Voucher" flow="NewColumn">
           <dataFields>
             <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
             <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" columns="15" />
-            <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
           </dataFields>
         </category>
       </categories>
@@ -178,7 +184,7 @@ SET RefreshData=@A  WHERE GL_Serial_No=@GL_Serial_No]]></data>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" whenClientScript="[GL_PostedYN] != 'Yes'" />

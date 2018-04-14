@@ -453,7 +453,8 @@
                 },
                 'Update': {
                     HeaderText: 'حفظ',
-                    Description: 'حفظ التغييرات إلى قاعدة البيانات.'
+                    Description: 'حفظ التغييرات إلى قاعدة البيانات.',
+                    Notify: 'Saved - {0}'
                 },
                 'Insert': {
                     HeaderText: 'حفظ',
@@ -669,9 +670,10 @@
         ResetSearchConfirm: 'Reset search conditions?',
         FilterCleared: 'Cleared all filters.',
         AdvancedSearchInstruction: 'أدخل الشروط التي يجب أن يقابل وزر البحث الصحافة.',
+        Refreshed: 'Refreshed',
         Group: 'Group',
         Grouped: 'Grouped',
-        GroupedDefault: 'Grouping has been removed',
+        UnGrouped: 'Grouping has been removed',
         GroupedBy: 'Grouped by',
         GroupByField: 'Select a field to group \u003cb\u003e{0}\u003c/b\u003e.',
         Show: 'Show',

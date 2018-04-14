@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_SO_PO" conflictDetection="overwriteChanges" label="^PicSoPo^Pick_SO_PO^PicSoPo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_SO_PO" conflictDetection="overwriteChanges" label="Pick_SO_PO" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="SO_Line_Items" custom="true">
       <text><![CDATA[SELECT     dbo.SO_Line_Items.SO_NO, dbo.SO_Line_Items.SO_Line_No, dbo.SO_Line_Items.Item_Code, dbo.SO_Line_Items.SO_Qty, dbo.SO_Line_Items.Unit_Price, 
@@ -15,70 +15,70 @@ WHERE     (ISNULL(dbo.SO_Line_Items.CloseYN, 0) = 0) AND (dbo.SO_Line_Items.DV_B
     </command>
   </commands>
   <fields>
-    <field name="SO_NO" type="Decimal" allowNulls="false" label="^BoqSoId^BOQ/SO #^BoqSoId^" showInSummary="true" />
-    <field name="P_Doc_No" type="Int64" label="^BoqSo^BOQ/SO^BoqSo^" />
-    <field name="SO_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^SOLinNo^SO Line No^SOLinNo^" readOnly="true" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
-    <field name="SO_Qty" type="Decimal" label="^SoQty^BOQ/SO^SoQty^" showInSummary="true" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" showInSummary="true" />
-    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="255" showInSummary="true" />
-    <field name="Pick" type="Int16" label="^Pic^Pick^Pic^" />
-    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
-    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" />
+    <field name="SO_NO" type="Decimal" allowNulls="false" label="BOQ/SO #" showInSummary="true" />
+    <field name="P_Doc_No" type="Int64" label="BOQ/SO" />
+    <field name="SO_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^SOLineNo^SO Line No^SOLineNo^" readOnly="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^ItemCode^Item Code^ItemCode^" length="20" showInSummary="true" />
+    <field name="SO_Qty" type="Decimal" label="BOQ/SO" showInSummary="true" />
+    <field name="Unit_Price" type="Decimal" label="^UnitPrice^Unit Price^UnitPrice^" showInSummary="true" />
+    <field name="Line_Remarks" type="String" label="^LineRemarks^Line Remarks^LineRemarks^" length="255" showInSummary="true" />
+    <field name="Pick" type="Int16" label="^Pick^Pick^Pick^" />
+    <field name="Pick_Qty" type="Decimal" label="^PickQty^Pick Qty^PickQty^" />
+    <field name="Line_Total" type="Decimal" label="^LineTotal^Line Total^LineTotal^" readOnly="true" />
     <field name="QT_NO" type="Decimal" label="^QtNo^Qt No^QtNo^" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
-    <field name="DeliveryDate" type="DateTime" label="^DelDat^Delivery Date^DelDat^" />
-    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" readOnly="true" />
-    <field name="DV_Balance" type="Decimal" label="^DVBal^DV Balance^DVBal^" />
-    <field name="PR_Balance" type="Decimal" label="^PRBal^PR Balance^PRBal^" />
-    <field name="Source_LineID" type="Decimal" label="^SouLin^Source Line#^SourLin^" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="20" />
+    <field name="Pick_Doc" type="Decimal" label="^PickDoc^Pick Doc^PickDoc^" />
+    <field name="DeliveryDate" type="DateTime" label="^DeliveryDate^Delivery Date^DeliveryDate^" />
+    <field name="Line_Net" type="Decimal" label="^LineNet^Line Net^LineNet^" readOnly="true" />
+    <field name="DV_Balance" type="Decimal" label="^DVBalance^DV Balance^DVBalance^" />
+    <field name="PR_Balance" type="Decimal" label="^PRBalance^PR Balance^PRBalance^" />
+    <field name="Source_LineID" type="Decimal" label="^SourceLine^Source Line#^SourceLine^" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" length="20" />
     <field name="UOM" type="String" label="^UOM^UOM^UOM^" length="50" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
     <field name="PO_NO" type="Decimal" allowNulls="false" label="^PoNo^Po No^PoNo^" readOnly="true" />
-    <field name="PO_Balance" type="Decimal" label="^POBal^PO Balance^POBal^" />
-    <field name="YourRefrence" type="String" label="^RefId^Ref.#^RefId^" length="15" />
-    <field name="Doc_Status" type="String" label="^DocSta^Doc Status^DocSta^" readOnly="true" length="15" />
-    <field name="SO_OPU_Code" type="Int32" label="^SOOPUCod^SO OPU Code^SOOPUCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="PO_Balance" type="Decimal" label="^POBalance^PO Balance^POBalance^" />
+    <field name="YourRefrence" type="String" label="^Ref^Ref.#^Ref^" length="15" />
+    <field name="Doc_Status" type="String" label="^DocStatus^Doc Status^DocStatus^" readOnly="true" length="15" />
+    <field name="SO_OPU_Code" type="Int32" label="^SOOPUCode^SO OPU Code^SOOPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdtdDtTm^Updated Date Time^UpdtdDtTm^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Updated_By" type="Decimal" label="^UpdtdBy^Updated By^UpdtdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="ABranch" type="String" allowNulls="false" label="^BranchName^Branch Name^BranchName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompanyName^Company Name^CompanyName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^SoLinIte^SO Line Items^SoLinIte^" reportTemplate="true" filter="SO_OPU_Code=@Session_OPU_Code " showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="SO Line Items" reportTemplate="true" filter="SO_OPU_Code=@Session_OPU_Code " showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="P_Doc_No" columns="15" readOnly="true" />
         <dataField fieldName="SO_NO" columns="15" readOnly="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="Item_Code" columns="20" readOnly="true" />
         <dataField fieldName="Item_Desc" readOnly="true" />
         <dataField fieldName="Item_Part" columns="20" readOnly="true" />
@@ -109,7 +109,7 @@ WHERE     (ISNULL(dbo.SO_Line_Items.CloseYN, 0) = 0) AND (dbo.SO_Line_Items.DV_B
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevSoLinIte^Review SO Line Items^RevSoLinIte^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review SO Line Items" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="dbo SO Line Items" flow="NewColumn">
@@ -143,7 +143,7 @@ WHERE     (ISNULL(dbo.SO_Line_Items.CloseYN, 0) = 0) AND (dbo.SO_Line_Items.DV_B
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewSoLinIte^New SO Line Items^NewSoLinIte^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New SO Line Items" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New dbo SO Line Items" flow="NewColumn">

@@ -39,6 +39,12 @@ Namespace MyCompany.Data
         Private m_RowsAffected As Integer
         
         <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
+        Private m_KeepSelection As Boolean
+        
+        <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
+        Private m_ClearSelection As Boolean
+        
+        <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
         Private m_Filter() As String
         
         <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
@@ -106,6 +112,24 @@ Namespace MyCompany.Data
             End Get
             Set
                 m_RowsAffected = value
+            End Set
+        End Property
+        
+        Public Property KeepSelection() As Boolean
+            Get
+                Return Me.m_KeepSelection
+            End Get
+            Set
+                Me.m_KeepSelection = value
+            End Set
+        End Property
+        
+        Public Property ClearSelection() As Boolean
+            Get
+                Return Me.m_ClearSelection
+            End Get
+            Set
+                Me.m_ClearSelection = value
             End Set
         End Property
         

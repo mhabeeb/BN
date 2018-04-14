@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Document_Types_Header" conflictDetection="overwriteChanges" label="^DocTypHea^Document_Types_Header^DocTypHea^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Document_Types_Header" conflictDetection="overwriteChanges" label="Document_Types_Header" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="TBL_DocumetTypes" custom="true">
       <text><![CDATA[SELECT * FROM TBL_DocumetTypes]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" showInSummary="true" />
-    <field name="Application_ID" type="Int32" allowNulls="false" label="^AppId^Application#^AppId^" showInSummary="true" />
-    <field name="DocTypeID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^DocTypId^Doc Type#^DocTypId^" readOnly="true" />
-    <field name="DocDescrition" type="String" label="^DocDesc^Doc Descrition^DocDesc^" length="50" showInSummary="true" />
-    <field name="DocShortName" type="String" label="^DocShoNam^Doc Short Name^DocShoNam^" length="10" showInSummary="true" />
-    <field name="ApprovalType" type="Int32" allowNulls="false" label="^AppTyp^Approval Type^AppTyp^" />
-    <field name="BaseTableName" type="String" label="^BasTabNam^Base Table Name^BasTabNam^" length="1000" />
-    <field name="KeyField" type="String" label="^KeyFie^Key Field^KeyFie^" length="100" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" />
-    <field name="EditableURL" type="String" label="^EditabURL^Editable URL^EditabURL^" length="1000" />
+    <field name="Company_Code" type="Decimal" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="Application_ID" type="Int32" allowNulls="false" label="^Application^Application#^Application^" showInSummary="true" />
+    <field name="DocTypeID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^DocType^Doc Type#^DocType^" readOnly="true" />
+    <field name="DocDescrition" type="String" label="^DocDescrition^Doc Descrition^DocDescrition^" length="50" showInSummary="true" />
+    <field name="DocShortName" type="String" label="^DocShortName^Doc Short Name^DocShortName^" length="10" showInSummary="true" />
+    <field name="ApprovalType" type="Int32" allowNulls="false" label="^ApprovalType^Approval Type^ApprovalType^" />
+    <field name="BaseTableName" type="String" label="^BaseTableName^Base Table Name^BaseTableName^" length="1000" />
+    <field name="KeyField" type="String" label="^KeyField^Key Field^KeyField^" length="100" />
+    <field name="InActive" type="Int32" label="^InActive^In Active^InActive^" />
+    <field name="EditableURL" type="String" label="^EditableURL^Editable URL^EditableURL^" length="1000" />
     <field name="InfoURL" type="String" label="^InfoURL^Info URL^InfoURL^" length="1000" />
-    <field name="CRKeyFields" type="String" label="^CRKeyFie^CR Key Fields^CRKeyFie^" length="100" />
+    <field name="CRKeyFields" type="String" label="^CRKeyFields^CR Key Fields^CRKeyFields^" length="100" />
     <field name="IsASP" type="Int32" label="^IsASP^Is ASP^IsASP^" />
     <field name="IsSSHR" type="Int32" label="^IsSSHR^Is SSHR^IsSSHR^" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DocTyp^Documet Types^DocTyp^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="TBL Documet Types" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Application_ID" columns="15" />
@@ -42,7 +42,7 @@
         <dataField fieldName="IsSSHR" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDocTyp^Review Documet Types^RevDocTyp^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review TBL Documet Types" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="TBL Documet Types" flow="NewColumn">
@@ -66,7 +66,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDocTyp^New Documet Types^NewDocTyp^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New TBL Documet Types" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New TBL Documet Types" flow="NewColumn">
@@ -116,7 +116,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

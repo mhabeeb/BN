@@ -12,6 +12,7 @@ Imports System.Data
 Imports System.Data.Common
 Imports System.Drawing
 Imports System.Drawing.Imaging
+Imports System.Globalization
 Imports System.IO
 Imports System.IO.Compression
 Imports System.Linq
@@ -70,6 +71,28 @@ Namespace MyCompany.Services
         Public Overrides Function HandleRequest(ByVal service As DataControllerService, ByVal args As JObject) As Object
             Dim r As PageRequest = args("request").ToObject(Of PageRequest)()
             Return service.GetPage(CType(args("controller"),String), CType(args("view"),String), r)
+        End Function
+    End Class
+    
+    Public Class GetControllerListServiceRequestHandler
+        Inherits ServiceRequestHandler
+        
+        Public Overrides Function HandleRequest(ByVal service As DataControllerService, ByVal args As JObject) As Object
+            Dim jsonArray As StringBuilder = New StringBuilder("[")
+            Dim list() As String = args("controllers").ToObject(Of String())()
+            Dim first As Boolean = true
+            For Each name As String in list
+                If first Then
+                    first = false
+                Else
+                    jsonArray.Append(",")
+                End If
+                Dim config As ControllerConfiguration = DataControllerBase.CreateConfigurationInstance([GetType](), name)
+                Dim json As String = config.ToJson()
+                jsonArray.Append(json)
+            Next
+            jsonArray.Append("]")
+            Return jsonArray.ToString()
         End Function
     End Class
     
@@ -1090,15 +1113,15 @@ Namespace MyCompany.Services
                     EnsureJsonProperty(m_DefaultSettings, "charts.maxPivotRowCount", MaxPivotRowCount)
                     EnsureJsonProperty(m_DefaultSettings, "ui.theme.name", "Light")
                     Dim ui As JObject = CType(m_DefaultSettings("ui"),JObject)
-                    EnsureJsonProperty(ui, "theme.accent", "Social")
+                    EnsureJsonProperty(ui, "theme.accent", "Gravity")
                     EnsureJsonProperty(ui, "displayDensity.mobile", "Auto")
                     EnsureJsonProperty(ui, "displayDensity.desktop", "Comfortable")
                     EnsureJsonProperty(ui, "list.labels.display", "DisplayedBelow")
-                    EnsureJsonProperty(ui, "list.initialMode", "SeeAll")
+                    EnsureJsonProperty(ui, "list.initialMode", "Summary")
                     EnsureJsonProperty(ui, "menu.location", "sidebar")
                     EnsureJsonProperty(ui, "actions.promote", true)
                     EnsureJsonProperty(ui, "smartDates", true)
-                    EnsureJsonProperty(ui, "transitions.style", "")
+                    EnsureJsonProperty(ui, "transitions.style", "slide")
                     EnsureJsonProperty(ui, "sidebar.when", "Always")
                 End If
                 Return m_DefaultSettings
@@ -1265,6 +1288,7 @@ Namespace MyCompany.Services
             RegisterIgnoredRoutes(routes)
             RegisterContentServices(RouteTable.Routes)
             'Register service request handlers
+            RequestHandlers.Add("getcontrollerlist", New GetControllerListServiceRequestHandler())
             RequestHandlers.Add("getpage", New GetPageServiceRequestHandler())
             RequestHandlers.Add("getpagelist", New GetPageListServiceRequestHandler())
             RequestHandlers.Add("getlistofvalues", New GetListOfValuesServiceRequestHandler())
@@ -1491,6 +1515,15 @@ Namespace MyCompany.Services
         End Sub
         
         Public Overridable Function SiteContentFieldName(ByVal field As SiteContentFields) As String
+            If (field = SiteContentFields.SiteContentId) Then
+                Return "SiteContentID"
+            End If
+            If (field = SiteContentFields.DataFileName) Then
+                Return "FileName"
+            End If
+            If (field = SiteContentFields.DataContentType) Then
+                Return "ContentType"
+            End If
             Return field.ToString()
         End Function
         
@@ -2229,7 +2262,7 @@ Namespace MyCompany.Services
                     If (l.ID = "MyCompanyTheme") Then
                         Return
                     End If
-                    If l.Href.Contains("_Theme_Social.css") Then
+                    If l.Href.Contains("_Theme_Gravity.css") Then
                         l.ID = "MyCompanyTheme"
                         If Not (l.Href.Contains("?")) Then
                             l.Href = (l.Href + String.Format("?{0}", ApplicationServices.Version))
@@ -3238,6 +3271,8 @@ Namespace MyCompany.Services
         
         Private m_RefreshedToken As Boolean = false
         
+        Private m_SaasFile As SiteContentFile
+        
         Private m_ClientUri As String
         
         Private m_Config As SaasConfiguration = Nothing
@@ -3262,6 +3297,12 @@ Namespace MyCompany.Services
         
         Protected Overridable ReadOnly Property Config() As SaasConfiguration
             Get
+                If ((m_Config Is Nothing) AndAlso ApplicationServices.IsSiteContentEnabled) Then
+                    m_SaasFile = ApplicationServices.Current.ReadSiteContent(("sys/saas/" + GetHandlerName().ToLower()))
+                    If (Not (m_SaasFile) Is Nothing) Then
+                        m_Config = New SaasConfiguration(m_SaasFile.Text)
+                    End If
+                End If
                 Return m_Config
             End Get
         End Property
@@ -3386,6 +3427,16 @@ Namespace MyCompany.Services
         End Function
         
         Protected Overridable Sub StoreTokens(ByVal tokens() As String)
+            If (ApplicationServices.IsSiteContentEnabled AndAlso (Not (m_Config) Is Nothing)) Then
+                If (tokens.Length > 0) Then
+                    m_Config.AccessToken = tokens(0)
+                End If
+                If ((tokens.Length = 2) AndAlso Not (String.IsNullOrEmpty(tokens(1)))) Then
+                    m_Config.RefreshToken = tokens(1)
+                End If
+                m_SaasFile.Text = m_Config.ToString().Trim()
+                SiteContentFile.WriteAllText(String.Format("{0}/{1}", m_SaasFile.Path, m_SaasFile.Name), m_SaasFile.Text)
+            End If
         End Sub
         
         Protected Overridable Function GetAuthCode(ByVal request As HttpRequest) As String
@@ -3447,7 +3498,7 @@ Namespace MyCompany.Services
         Public Overridable Function SyncUser() As MembershipUser
             Dim username As String = GetUserName()
             Dim user As MembershipUser = Membership.GetUser(username)
-            If ((user Is Nothing) AndAlso Not ((Config("Sync User") = "false"))) Then
+            If ((user Is Nothing) AndAlso (Config("Sync User") = "true")) Then
                 'create user
                 Dim comment As String = ("Source: " + GetHandlerName())
                 Dim status As MembershipCreateStatus
@@ -3496,6 +3547,23 @@ Namespace MyCompany.Services
         End Function
         
         Public Overridable Sub SetUserAvatar(ByVal user As MembershipUser)
+            If ApplicationServices.IsSiteContentEnabled Then
+                Try 
+                    Dim url As String = GetUserImageUrl(user)
+                    If Not (String.IsNullOrEmpty(url)) Then
+                        Dim request As WebRequest = WebRequest.Create(url)
+                        Dim response As WebResponse = request.GetResponse()
+                        Using s As Stream = response.GetResponseStream()
+                            Dim b As Bitmap = CType(Bitmap.FromStream(s),Bitmap)
+                            Using ms As MemoryStream = New MemoryStream()
+                                b.Save(ms, ImageFormat.Png)
+                                SiteContentFile.WriteAllBytes(String.Format("sys/users/{0}.png", user.UserName), "image/png", ms.ToArray())
+                            End Using
+                        End Using
+                    End If
+                Catch __exception As Exception
+                End Try
+            End If
         End Sub
         
         Public Overridable Function GetUserImageUrl(ByVal user As MembershipUser) As String
@@ -3616,6 +3684,13 @@ Namespace MyCompany.Services
         End Function
         
         Public Overridable Function GetAutoLoginHandler() As OAuthHandler
+            If ApplicationServices.IsSiteContentEnabled Then
+                For Each file As SiteContentFile in ApplicationServices.Create().ReadSiteContent("sys/saas", "%")
+                    If (Not (String.IsNullOrEmpty(file.Text)) AndAlso Regex.IsMatch(file.Text, "Auto Login:\s*true")) Then
+                        Return GetHandler(file.Name)
+                    End If
+                Next
+            End If
             Return Nothing
         End Function
     End Class
@@ -3769,6 +3844,8 @@ Namespace MyCompany.Services
         Public Token As String
         
         Public Picture As String
+        
+        Public Claims As Dictionary(Of String, String) = New Dictionary(Of String, String)()
         
         Public Sub New()
             MyBase.New

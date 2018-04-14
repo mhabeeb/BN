@@ -1,66 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="View_Approval_Details" conflictDetection="overwriteChanges" label="^VieAppDet^View_Approval_Details^VieAppDet^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="View_Approval_Details" conflictDetection="overwriteChanges" label="View_Approval_Details" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="TBL_Document_Approvals_Detail" custom="true">
-      <text><![CDATA[SELECT     dbo.TBL_Document_Approvals_Detail.Hirarchy, dbo.TBL_Document_Approvals_Detail.ApprovalStatus, dbo.TBL_Document_Approvals_Detail.CurrentApp, 
-                      dbo.TBL_Document_Approvals_Detail.Updated_By, dbo.TBL_Document_Approvals_Detail.Updated_DateTime, dbo.Users.UserName, 
-                      dbo.TBL_Document_Approvals_Detail.DocumentID
-FROM         dbo.TBL_Document_Approvals_Detail INNER JOIN
-                      dbo.Users ON dbo.TBL_Document_Approvals_Detail.UserID = dbo.Users.UserID]]></text>
+      <text><![CDATA[SELECT dbo.TBL_Document_Approvals_Detail.Hirarchy, dbo.TBL_Document_Approvals_Detail.ApprovalStatus, dbo.TBL_Document_Approvals_Detail.CurrentApp, dbo.TBL_Document_Approvals_Detail.Updated_By, 
+                  dbo.TBL_Document_Approvals_Detail.Updated_DateTime, dbo.Users.UserName, dbo.TBL_Document_Approvals_Detail.DocumentID, dbo.TBL_Document_Header.DocRefNo, dbo.TBL_Document_Header.DocumentDate, 
+                  dbo.TBL_Document_Header.DocDescription, dbo.TBL_Document_Header.Doc_No, dbo.TBL_Document_Approvals_Detail.RejectedYN, dbo.TBL_Document_Approvals_Detail.ApprovalLimit, 
+                  dbo.TBL_Document_Approvals_Detail.Delegated_Flag, dbo.TBL_Document_Approvals_Detail.Delegator_UserID, dbo.TBL_DocumetTypes.DocDescrition
+FROM     dbo.TBL_Document_Approvals_Detail INNER JOIN
+                  dbo.Users ON dbo.TBL_Document_Approvals_Detail.UserID = dbo.Users.UserID INNER JOIN
+                  dbo.TBL_Document_Header ON dbo.TBL_Document_Approvals_Detail.DocumentID = dbo.TBL_Document_Header.DocumentID INNER JOIN
+                  dbo.TBL_DocumetTypes ON dbo.TBL_Document_Header.DocTypeID = dbo.TBL_DocumetTypes.DocTypeID]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Hirarchy" type="Int32" label="^Hir^Hirarchy^Hir^" showInSummary="true" />
-    <field name="ApprovalStatus" type="Int32" label="^AppSta^Approval Status^AppSta^" showInSummary="true" />
-    <field name="CurrentApp" type="Int32" label="^CurApp^Current App^CurApp^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="UserName" type="String" allowNulls="false" label="^UseNam^User Name^UseNam^" length="128" />
-    <field name="DocumentID" type="Decimal" allowNulls="false" label="^DocId^Document#^DocId^" />
+    <field name="Hirarchy" type="Int32" label="Hirarchy" showInSummary="true" />
+    <field name="ApprovalStatus" type="Int16" allowNulls="false" label="Approval Status">
+      <items style="DropDownList">
+        <item value="0" text="InProcess" />
+        <item value="1" text="Approved" />
+        <item value="2" text="Rejected" />
+      </items>
+    </field>
+    <field name="CurrentApp" type="Int32" label="Current App" showInSummary="true">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Updated_By" type="Decimal" label="Updated By" showInSummary="true" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" showInSummary="true" />
+    <field name="UserName" type="String" allowNulls="false" label="User Name" length="128" />
+    <field name="DocumentID" type="Decimal" allowNulls="false" label="Document#" />
+    <field name="DocRefNo" type="Decimal" label="Doc Ref No" />
+    <field name="DocumentDate" type="DateTime" label="Document Date" />
+    <field name="DocDescription" type="String" allowQBE="false" allowSorting="false" label="Doc Description" />
+    <field name="Doc_No" type="Int64" label="Doc No" />
+    <field name="RejectedYN" type="Int32" label="Rejected YN">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="ApprovalLimit" type="Decimal" label="Approval Limit" />
+    <field name="Delegated_Flag" type="Int32" label="Delegated Flag">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="Delegator_UserID" type="Int32" label="Delegator User#">
+      <items style="ListBox" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
+    </field>
+    <field name="DocDescrition" type="String" label="Doc Descrition" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DocAppDet^Document Approvals Detail^DocAppDet^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="TBL Document Approvals Detail">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="UserName" />
         <dataField fieldName="Hirarchy" columns="15" />
-        <dataField fieldName="ApprovalStatus" columns="15" />
         <dataField fieldName="CurrentApp" columns="15" />
         <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-        <dataField fieldName="DocumentID" columns="15" />
+        <dataField fieldName="DocumentID" columns="15" hidden="true" />
+        <dataField fieldName="DocRefNo" columns="15" hidden="true" />
+        <dataField fieldName="DocumentDate" columns="10" />
+        <dataField fieldName="DocDescription" rows="5" />
+        <dataField fieldName="Doc_No" columns="15" />
+        <dataField fieldName="RejectedYN" columns="15" />
+        <dataField fieldName="ApprovalLimit" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Delegated_Flag" columns="15" />
+        <dataField fieldName="Delegator_UserID" columns="15" />
+        <dataField fieldName="DocDescrition" columns="50" />
+        <dataField fieldName="ApprovalStatus" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDocApp^Review Document Approvals Detail^RevDocApp^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review TBL Document Approvals Detail">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="TBL Document Approvals Detail" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Hirarchy" columns="15" />
-            <dataField fieldName="ApprovalStatus" columns="15" />
             <dataField fieldName="CurrentApp" columns="15" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="UserName" />
             <dataField fieldName="DocumentID" columns="15" />
+            <dataField fieldName="DocRefNo" columns="15" />
+            <dataField fieldName="DocumentDate" columns="10" />
+            <dataField fieldName="DocDescription" rows="5" />
+            <dataField fieldName="Doc_No" columns="15" />
+            <dataField fieldName="RejectedYN" columns="15" />
+            <dataField fieldName="ApprovalLimit" dataFormatString="c" columns="15" />
+            <dataField fieldName="Delegated_Flag" columns="15" />
+            <dataField fieldName="Delegator_UserID" columns="15" />
+            <dataField fieldName="DocDescrition" columns="50" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDocApp^New Document Approvals Detail^NewDocApp^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New TBL Document Approvals Detail">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New TBL Document Approvals Detail" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="Hirarchy" columns="15" />
-            <dataField fieldName="ApprovalStatus" columns="15" />
             <dataField fieldName="CurrentApp" columns="15" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="UserName" />
             <dataField fieldName="DocumentID" columns="15" />
+            <dataField fieldName="DocRefNo" columns="15" />
+            <dataField fieldName="DocumentDate" columns="10" />
+            <dataField fieldName="DocDescription" rows="5" />
+            <dataField fieldName="Doc_No" columns="15" />
+            <dataField fieldName="RejectedYN" columns="15" />
+            <dataField fieldName="ApprovalLimit" dataFormatString="c" columns="15" />
+            <dataField fieldName="Delegated_Flag" columns="15" />
+            <dataField fieldName="Delegator_UserID" columns="15" />
+            <dataField fieldName="DocDescrition" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -68,33 +119,20 @@ FROM         dbo.TBL_Document_Approvals_Detail INNER JOIN
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
-      <action id="a6" />
-      <action id="a7" commandName="New" commandArgument="grid1" />
-      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
-      <action id="a9" />
-      <action id="a10" commandName="BatchEdit" />
-      <action id="a11" commandName="BatchEdit" commandArgument="editForm1" />
+      <action id="a1" commandName="Select" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
-      <action id="a11" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a12" whenLastCommandName="BatchEdit" commandName="Cancel" />
-      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
-    </actionGroup>
-    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
-    </actionGroup>
-    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -119,11 +157,6 @@ FROM         dbo.TBL_Document_Approvals_Detail INNER JOIN
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
-      <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
-      <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
   </actions>
 </dataController>

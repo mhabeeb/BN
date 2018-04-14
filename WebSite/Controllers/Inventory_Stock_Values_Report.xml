@@ -1,58 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Inventory_Stock_Values_Report" label="^InvStoValRep^Inventory_Stock_Values_Report^InvStoValRep^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Inventory_Stock_Values_Report" label="Inventory_Stock_Values_Report" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Item_Warehouse" custom="true">
-      <text><![CDATA[SELECT * FROM tbl_Item_Warehouse]]></text>
+      <text><![CDATA[SELECT * FROM tbl_Item_Warehouse WHERE Stock_On_Hand <> 0]]></text>
     </command>
   </commands>
   <fields>
-    <field name="StoreID" type="Int32" allowNulls="false" label="^StoId^Store#^StoId^" showInSummary="true" isPrimaryKey="true" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" isPrimaryKey="true" />
-    <field name="Bin_Location" type="String" label="^BinLoc^Bin Location^BinLoc^" length="50" showInSummary="true" />
-    <field name="CountedQty" type="Decimal" label="^CouQty^Counted Qty^CouQty^" showInSummary="true" />
-    <field name="Stock_On_Hand" type="Decimal" label="^StoOnHan^Stock On Hand^StoOnHan^" showInSummary="true" />
-    <field name="Unit_Cost" type="Decimal" label="^UniCos^Unit Cost^UniCos^" />
+    <field name="StoreID" type="Int32" allowNulls="false" label="^Store^Store#^Store^" isPrimaryKey="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^ItemCode^Item Code^ItemCode^" length="20" isPrimaryKey="true" />
+    <field name="Bin_Location" type="String" label="Bin Location" length="50" />
+    <field name="CountedQty" type="Decimal" label="^CountedQty^Counted Qty^CountedQty^" />
+    <field name="Stock_On_Hand" type="Decimal" label="^StockOnHand^Stock On Hand^StockOnHand^" />
+    <field name="Unit_Cost" type="Decimal" label="^UnitCost^Unit Cost^UnitCost^" />
     <field name="Pick" type="Int32" label="^Pick^Pick^Pick^" />
-    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Item_Description" type="String" label="^IteDes^Item Description^IteDes^" length="500" />
+    <field name="Pick_Qty" type="Decimal" label="^PickQty^Pick Qty^PickQty^" />
+    <field name="Pick_Doc" type="Decimal" label="^PickDoc^Pick Doc^PickDoc^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Item_Description" type="String" label="^ItemDescription^Item Description^ItemDescription^" length="500" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="10" />
-    <field name="Item_Category" type="String" label="^IteCat^Item Category^IteCat^" length="255" />
-    <field name="Stock_Values" type="Decimal" label="^StoVal^Stock Values^StoVal^" readOnly="true" />
-    <field name="Diff_Qty" type="Decimal" label="^DifQty^Diff Qty^DifQty^" readOnly="true" />
-    <field name="Diff_Amount" type="Decimal" label="^DifAmo^Diff Amount^DifAmo^" readOnly="true" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="Item_Category" type="String" label="^ItemCategory^Item Category^ItemCategory^" length="255" />
+    <field name="Stock_Values" type="Decimal" label="^StockValues^Stock Values^StockValues^" readOnly="true" />
+    <field name="Diff_Qty" type="Decimal" label="^DiffQty^Diff Qty^DiffQty^" readOnly="true" />
+    <field name="Diff_Amount" type="Decimal" label="^DiffAmount^Diff Amount^DiffAmount^" readOnly="true" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="ABranch_Code" />
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^IteWar^Item Warehouse^IteWar^" filter="StoreID=@Session_StoreID" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Item Warehouse" filter="StoreID=@Session_StoreID" reportTemplate="true" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="StoreID" columns="15" readOnly="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Item_Code" columns="20" readOnly="true" />
         <dataField fieldName="Item_Description" readOnly="true" />
         <dataField fieldName="UOM" columns="10" readOnly="true" />
@@ -65,14 +65,14 @@
         <dataField fieldName="Diff_Qty" dataFormatString="N2" columns="15" readOnly="true" hidden="true" />
         <dataField fieldName="Diff_Amount" dataFormatString="N2" columns="15" readOnly="true" aggregate="Sum" hidden="true" />
         <dataField fieldName="Item_Category" readOnly="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
-        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIteWar^Review Item Warehouse^RevIteWar^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Item Warehouse" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Item Warehouse" flow="NewColumn">
@@ -98,7 +98,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewIteWar^New Item Warehouse^NewIteWar^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Item Warehouse" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Item Warehouse" flow="NewColumn">
@@ -165,8 +165,8 @@
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Refresh Stock" flat="true">
-      <action commandName="SQL" headerText="Refresh Stock" id="a100">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^RefSto^Refresh Stock^RefSto^" flat="true">
+      <action commandName="SQL" headerText="^RefSto^Refresh Stock^RefSto^" id="a100" cssClass="&#x9;glyphicon glyphicon-refresh">
         <data><![CDATA[EXEC [UPDATE_ITEM_WAREHOUSE_SNAPSHOT] @Session_StoreID]]></data>
       </action>
     </actionGroup>

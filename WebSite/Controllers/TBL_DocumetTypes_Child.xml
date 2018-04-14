@@ -2,30 +2,51 @@
 <dataController name="TBL_DocumetTypes_Child" conflictDetection="overwriteChanges" label="TBL_DocumetTypes_Child" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.TBL_DocumetTypes" custom="true">
-      <text><![CDATA[SELECT  Company_Code, OPU_Code, Application_ID, DocTypeID, DocDescrition, DocShortName, BaseTableName, KeyField, ApprovalType,
-DocTypeID_Parent,IsParent
-FROM      dbo.TBL_DocumetTypes
-WHERE IsNull([IsParent],0)=0]]></text>
+      <text><![CDATA[SELECT * FROM C_Document_Types]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Application_ID" type="Int32" allowNulls="false" label="^AppId^Application#^AppId^" showInSummary="true" />
-    <field name="DocTypeID" type="Int32" allowNulls="false" label="^DocTypId^Doc Type#^DocTypId^" showInSummary="true" isPrimaryKey="true" />
-    <field name="DocDescrition" type="String" label="^DocDes^Doc Descrition^DocDes^" length="50" showInSummary="true" />
-    <field name="DocShortName" type="String" label="^DocShoNam^Doc Short Name^DocShoNam^" length="10" />
-    <field name="BaseTableName" type="String" label="^BasTabNam^Base Table Name^BasTabNam^" length="1000" />
-    <field name="KeyField" type="String" label="^KeyFie^Key Field^KeyFie^" length="100" />
-    <field name="ApprovalType" type="Int32" allowNulls="false" label="^AppTyp^Approval Type^AppTyp^" />
-    <field name="DocTypeID_Parent" type="Int32" label="^DocTypIdPar^Doc Type ID Parent^DocTypIdPar^" />
-    <field name="IsParent" type="Int16" label="^IsPar^Is Parent^IsPar^" />
+    <field name="Company_Code" type="Decimal" label="Company Code" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" showInSummary="true" />
+    <field name="Application_ID" type="Int32" allowNulls="false" label="Application#" showInSummary="true" />
+    <field name="DocTypeID" type="Int32" allowNulls="false" label="Doc Type#" showInSummary="true" isPrimaryKey="true" />
+    <field name="DocDescrition" type="String" label="Doc Descrition" length="50" showInSummary="true" />
+    <field name="DocShortName" type="String" label="Doc Short Name" length="10" />
+    <field name="BaseTableName" type="String" label="Base Table Name" length="1000" />
+    <field name="KeyField" type="String" label="Key Field" length="100" />
+    <field name="ApprovalType" type="Int32" allowNulls="false" label="Approval Type" />
+    <field name="DocTypeID_Parent" type="Int32" label="Doc Type ID Parent" allowNulls="false" isPrimaryKey="true" />
+    <field name="IsParent" type="Int16" label="Is Parent" />
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABranchAR^ABranch AR^ABranchAR^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^SubDoc^Sub Documents^SubDoc^" filter="OPU_Code=@Session_OPU_Code ">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Sub Documents" filter="OPU_Code=@Session_OPU_Code " reportTemplate="true">
+      <headerText />
       <dataFields>
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="Application_ID" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="DocTypeID" columns="15" />
@@ -34,34 +55,34 @@ WHERE IsNull([IsParent],0)=0]]></text>
         <dataField fieldName="BaseTableName" />
         <dataField fieldName="KeyField" />
         <dataField fieldName="ApprovalType" columns="15" hidden="true" />
-        <dataField fieldName="DocTypeID_Parent" columns="15" />
+        <dataField fieldName="DocTypeID_Parent" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevSubDoc^Review Sub Documents^RevSubDoc^">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Sub Documents">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Sub Documents" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiSubDoc^Edit Sub Documents^EdiSubDoc^" flow="NewColumn">
+          <description />
           <dataFields>
-            <dataField fieldName="Company_Code" hidden="true" columns="15" />
-            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-            <dataField fieldName="Application_ID" columns="15" hidden="true" />
-            <dataField fieldName="DocTypeID" columns="15" hidden="true" />
-            <dataField fieldName="DocDescrition" columns="50" />
-            <dataField fieldName="DocShortName" columns="10" />
-            <dataField fieldName="BaseTableName" hidden="true" />
             <dataField fieldName="KeyField" hidden="true" />
+            <dataField fieldName="BaseTableName" hidden="true" />
+            <dataField fieldName="DocTypeID_Parent" columns="15" hidden="true" />
             <dataField fieldName="ApprovalType" columns="15" hidden="true" />
-            <dataField fieldName="DocTypeID_Parent" columns="15" />
+            <dataField fieldName="DocShortName" columns="10" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="Application_ID" columns="15" hidden="true" />
+            <dataField fieldName="DocDescrition" columns="50" />
+            <dataField fieldName="DocTypeID" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewSubDoc^New Sub Documents^NewSubDoc^">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Sub Documents">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Sub Documents" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewSubDoc^New Sub Documents^NewSubDoc^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
@@ -72,7 +93,7 @@ WHERE IsNull([IsParent],0)=0]]></text>
             <dataField fieldName="BaseTableName" hidden="true" />
             <dataField fieldName="KeyField" hidden="true" />
             <dataField fieldName="ApprovalType" columns="15" hidden="true" />
-            <dataField fieldName="DocTypeID_Parent" columns="15" />
+            <dataField fieldName="DocTypeID_Parent" columns="15" hidden="true" />
             <dataField fieldName="IsParent" columns="15" hidden="true" />
           </dataFields>
         </category>
@@ -83,7 +104,6 @@ WHERE IsNull([IsParent],0)=0]]></text>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
-      <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
@@ -92,23 +112,19 @@ WHERE IsNull([IsParent],0)=0]]></text>
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
-      <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
-      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -136,7 +152,6 @@ WHERE IsNull([IsParent],0)=0]]></text>
     </actionGroup>
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
-      <action id="a2" commandName="Delete" />
     </actionGroup>
   </actions>
   <businessRules>
@@ -144,21 +159,18 @@ WHERE IsNull([IsParent],0)=0]]></text>
 SET @Company_Code=@Session_Company_Code 
 SET @IsParent=0
 
-SELECT @Application_ID = Application_ID,
-       @BaseTableName = BaseTableName,
-       @KeyField = KeyField,
-       @ApprovalType = ApprovalType
-FROM dbo.TBL_DocumetTypes
-WHERE DocTypeID = @DocTypeID_Parent]]></rule>
-    <rule id="r101" commandName="New" type="Sql" phase="Execute"><![CDATA[SELECT @DocTypeID = IsNull(MAX(DocTypeID), 0) + 1
-FROM dbo.TBL_DocumetTypes
+
 
 SELECT @Application_ID = Application_ID,
        @BaseTableName = BaseTableName,
        @KeyField = KeyField,
        @ApprovalType = ApprovalType
 FROM dbo.TBL_DocumetTypes
-WHERE DocTypeID = @DocTypeID_Parent
-]]></rule>
+WHERE DocTypeID = @DocTypeID
+
+SET @DocTypeID_Parent=@DocTypeID
+
+SELECT @DocTypeID = IsNull(MAX(DocTypeID), 0) + 1
+FROM dbo.TBL_DocumetTypes]]></rule>
   </businessRules>
 </dataController>

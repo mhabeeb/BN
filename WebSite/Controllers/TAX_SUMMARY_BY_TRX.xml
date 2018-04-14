@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="TAX_SUMMARY_BY_TRX" conflictDetection="overwriteChanges" label="^TaxSumByTRX^Tax Summary By Trx^TaxSumByTRX^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="TAX_SUMMARY_BY_TRX" conflictDetection="overwriteChanges" label="Tax Summary By Trx" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -17,17 +17,17 @@ from "dbo"."TAX_SUMMARY_BY_TRX" "TAX_SUMMARY_BY_TRX"
     </command>
   </commands>
   <fields>
-    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" showInSummary="true" />
-    <field name="Tax_Desc" type="String" label="^TaxDes^Tax Desc^TaxDes^" length="255" showInSummary="true" />
-    <field name="Tax_Type" type="String" label="^TaxTyp^Tax Type^TaxTyp^" length="50" showInSummary="true" />
-    <field name="Tax_Amount" type="Decimal" label="^TaxAmo^Tax Amount^TaxAmo^" showInSummary="true" />
-    <field name="Tax_Payable_AC" type="String" label="^TaxPay^Tax Payable AC^TaxPay^" length="50" showInSummary="true" />
-    <field name="Tax_Input_Credit_AC" type="String" label="^TaxInpCreAc^Tax Input Credit AC^TaxInpCreAc^" length="50" />
-    <field name="Tax_Percentage" type="Int32" label="^TaxPer^Tax Percentage^TaxPer^" />
-    <field name="IsIntegratedYN" type="Int32" label="^IsIntYn^Is Integrated YN^IsIntYn^" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="Trx#" showInSummary="true" />
+    <field name="Tax_Desc" type="String" label="Tax Desc" length="255" showInSummary="true" />
+    <field name="Tax_Type" type="String" label="Tax Type" length="50" showInSummary="true" />
+    <field name="Tax_Amount" type="Decimal" label="Tax Amount" showInSummary="true" />
+    <field name="Tax_Payable_AC" type="String" label="Tax Payable AC" length="50" showInSummary="true" />
+    <field name="Tax_Input_Credit_AC" type="String" label="Tax Input Credit AC" length="50" />
+    <field name="Tax_Percentage" type="Int32" label="Tax Percentage" />
+    <field name="IsIntegratedYN" type="Int32" label="Is Integrated YN" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^TaxSumByTrx^Tax Summary By Trx^TaxSumByTrx^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Tax Summary By Trx" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Trx_ID" columns="15" />
@@ -40,7 +40,7 @@ from "dbo"."TAX_SUMMARY_BY_TRX" "TAX_SUMMARY_BY_TRX"
         <dataField fieldName="IsIntegratedYN" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevTaxSumByTrx^Review Tax Summary By Trx^RevTaxSumByTrx^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Tax Summary By Trx" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Tax Summary By Trx" flow="NewColumn">
@@ -58,7 +58,7 @@ from "dbo"."TAX_SUMMARY_BY_TRX" "TAX_SUMMARY_BY_TRX"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTaxSumByTrx^New Tax Summary By Trx^NewTaxSumByTrx^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Tax Summary By Trx" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Tax Summary By Trx" flow="NewColumn">
@@ -103,7 +103,7 @@ from "dbo"."TAX_SUMMARY_BY_TRX" "TAX_SUMMARY_BY_TRX"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

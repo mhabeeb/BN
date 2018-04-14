@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_COA" conflictDetection="overwriteChanges" label="^PicCoa^Pick_COA^PicCoa^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_COA" conflictDetection="overwriteChanges" label="Pick_COA" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="AccountID" type="String" allowNulls="false" label="^AccId^Account#^AccId^" length="50" showInSummary="true" />
-    <field name="Account_Description" type="String" allowNulls="false" label="^AccDes^Account Description^AccDes^" length="200" showInSummary="true" />
-    <field name="Account_DescriptionAr" type="String" label="^AccDesAr^Account Description Ar^AccDesAr^" length="500" showInSummary="true" />
-    <field name="PostableYN" type="Int32" allowNulls="false" label="^PosYn^Postable YN^PosYn^" showInSummary="true" />
-    <field name="Account_Type" type="String" allowNulls="false" label="^AccTyp^Account Type^AccTyp^" length="50" showInSummary="true" />
-    <field name="ParentType" type="String" label="^ParTyp^Parent Type^ParTyp^" length="50" />
-    <field name="Accounts_Int_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^AccIntId^Accounts Int#^AccIntId^" readOnly="true" />
-    <field name="Ref_Account_No" type="String" label="^RefAccNo^Ref Account No^RefAccNo^" length="50" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" />
-    <field name="BudgetCode_Description" type="String" label="^BudCodDes^Budget Code Description^BudCodDes^" length="200" />
-    <field name="BudgetCode" type="String" label="^BudCod^Budget Code^BudCod^" length="15" />
-    <field name="SubAccount" type="String" label="^SubAcc^Sub Account^SubAcc^" length="15" />
+    <field name="AccountID" type="String" allowNulls="false" label="Account#" length="50" showInSummary="true" />
+    <field name="Account_Description" type="String" allowNulls="false" label="Account Description" length="200" showInSummary="true" />
+    <field name="Account_DescriptionAr" type="String" label="Account Description Ar" length="500" showInSummary="true" />
+    <field name="PostableYN" type="Int32" allowNulls="false" label="Postable YN" showInSummary="true" />
+    <field name="Account_Type" type="String" allowNulls="false" label="Account Type" length="50" showInSummary="true" />
+    <field name="ParentType" type="String" label="Parent Type" length="50" />
+    <field name="Accounts_Int_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Accounts Int#" readOnly="true" />
+    <field name="Ref_Account_No" type="String" label="Ref Account No" length="50" />
+    <field name="InActive" type="Int32" label="In Active" />
+    <field name="BudgetCode_Description" type="String" label="Budget Code Description" length="200" />
+    <field name="BudgetCode" type="String" label="Budget Code" length="15" />
+    <field name="SubAccount" type="String" label="Sub Account" length="15" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^PicCoa^Pick COA^PicCoa^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Pick COA" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="AccountID" columns="50" />
         <dataField fieldName="Account_Description" />
@@ -32,7 +32,7 @@
         <dataField fieldName="BudgetCode_Description" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPicCoa^Review Pick COA^RevPicCoa^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Pick COA" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Pick COA" flow="NewColumn">
@@ -53,7 +53,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPicCoa^New Pick COA^NewPicCoa^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Pick COA" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Pick COA" flow="NewColumn">
@@ -142,7 +142,8 @@
     <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[SELECT     AccountID, Account_Description, Account_DescriptionAr, PostableYN, Account_Type, ParentType, 
 Accounts_Int_ID, Ref_Account_No, InActive,BudgetCode_Description,BudgetCode,SubAccount
 FROM         dbo.COA_Natural_Account
-WHERE     (ParentType = N'Child') AND (ISNULL(InActive, 0) = 0) AND (PostableYN = 1)]]></rule>
+WHERE     (ParentType = N'Child') AND (ISNULL(InActive, 0) = 0) AND (PostableYN = 1)
+AND Company_Code=@Session_Company_Code]]></rule>
     <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
 -- implement insert here]]></rule>
     <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1

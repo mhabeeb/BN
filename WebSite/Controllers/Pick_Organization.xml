@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Organization" conflictDetection="overwriteChanges" label="^PicOrg^Pick_Organization^PicOrg^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Organization" conflictDetection="overwriteChanges" label="Pick_Organization" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_BranchInfo" custom="true">
       <text><![CDATA[SELECT a.* ,b.CompanyName from tbl_BranchInfo a ,tbl_CompanyInformation b
@@ -7,16 +7,16 @@ where a.CompanyID=b.CompanyID]]></text>
     </command>
   </commands>
   <fields>
-    <field name="BranchID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^BraId^Branch#^BraId^" readOnly="true" />
-    <field name="BranchName" type="String" label="^BraNam^Branch Name^BraNam^" length="255" showInSummary="true" />
-    <field name="Street" type="String" label="^Street^Street^Street^" length="50" showInSummary="true" />
-    <field name="PostalCode" type="String" label="^PosCod^Postal Code^PosCod^" length="50" showInSummary="true" />
-    <field name="City" type="String" label="^City^City^City^" length="50" showInSummary="true" />
-    <field name="Country" type="String" label="^Cou^Country^Cou^" length="50" showInSummary="true" />
-    <field name="Phone" type="String" label="^Phone^Phone^Phone^" length="50" />
-    <field name="Fax" type="String" label="^Fax^Fax^Fax^" length="50" />
-    <field name="eMailID" type="String" label="^eMaiId^e Mail#^eMaiId^" length="50" />
-    <field name="CompanyName" type="String" allowNulls="false" label="^ComNam^Company Name^ComNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="255" />
+    <field name="BranchID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Branch#" readOnly="true" />
+    <field name="BranchName" type="String" label="Branch Name" length="255" showInSummary="true" />
+    <field name="Street" type="String" label="Street" length="50" showInSummary="true" />
+    <field name="PostalCode" type="String" label="Postal Code" length="50" showInSummary="true" />
+    <field name="City" type="String" label="City" length="50" showInSummary="true" />
+    <field name="Country" type="String" label="Country" length="50" showInSummary="true" />
+    <field name="Phone" type="String" label="Phone" length="50" />
+    <field name="Fax" type="String" label="Fax" length="50" />
+    <field name="eMailID" type="String" label="e Mail#" length="50" />
+    <field name="CompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="255" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Organization" filter="BranchID In&#xD;&#xA;(Select OPU_Code from UserBranchAccess where UserID=@BusinessRules_UserId)&#xD;&#xA;" showInSelector="false">
@@ -30,7 +30,7 @@ where a.CompanyID=b.CompanyID]]></text>
         <dataField fieldName="CompanyName" rows="5" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBraInf^Review Branch Info^RevBraInf^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Branch Info" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Branch Info" flow="NewColumn">
@@ -48,7 +48,7 @@ where a.CompanyID=b.CompanyID]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBraInf^New Branch Info^NewBraInf^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Branch Info" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Branch Info" flow="NewColumn">
@@ -95,7 +95,7 @@ where a.CompanyID=b.CompanyID]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

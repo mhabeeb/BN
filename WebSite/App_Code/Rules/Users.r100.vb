@@ -10,13 +10,13 @@ Imports System.Web.Security
 Imports MyCompany.Security
 
 Namespace MyCompany.Rules
-
+    
     Partial Public Class UsersBusinessRules
-        Inherits MyCompany.Data.BusinessRules
+        Inherits MyCompany.Rules.SharedBusinessRules
 
         ''' <summary>
         ''' This method will execute in any view before an action
-        ''' with a command name that matches "Update|Insert".
+        ''' with a command name that matches "Insert|Update".
         ''' </summary>
         <Rule("r100")>
         Public Sub r100Implementation(ByVal userID As Nullable(Of Integer),

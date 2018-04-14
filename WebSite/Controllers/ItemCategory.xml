@@ -1,62 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="ItemCategory" conflictDetection="overwriteChanges" label="^IteCat^ItemCategory^IteCat^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ItemCategory" conflictDetection="overwriteChanges" label="ItemCategory" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Item_Category" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Item_Category where isNull(TaxItemsYN,0)=0 ]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Item_Category" type="String" label="^IteCat^Item Category^IteCat^" length="255" isPrimaryKey="true" />
-    <field name="Item_Category_Major" type="String" label="^IteCatMaj^Item Category Major^IteCatMaj^" length="255" contextFields="MajorYN=1">
-      <items style="Lookup" dataController="ItemCategory_Major" dataView="grid1" dataTextField="Item_Category_Name" dataValueField="Item_Category" letters="true" />
+    <field name="Item_Category" type="String" label="^ItemCategory^Item Category^ItemCategory^" length="255" isPrimaryKey="true" />
+    <field name="Item_Category_Major" type="String" label="^ItemCategoryMajor^Item Category Major^ItemCategoryMajor^" length="255" contextFields="MajorYN=1">
+      <items style="Lookup" dataController="ItemCategoryMajor" dataView="grid1" dataTextField="Item_Category_Name" dataValueField="Item_Category" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
     <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" showInSummary="true" />
-    <field name="MajorYN" type="Int32" label="^Maj^Major^Maj^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" allowNulls="false">
+    <field name="MajorYN" type="Int32" label="^Major^Major^Major^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Company_Code" type="Int64" label="^ComCod^Company Code^ComCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="OPU_Code" type="Int64" label="^OPUCod^OPU Code^OPUCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Tax_Slab_ID" type="Int64" label="^TaxSlaID^Tax Slab ID^TaxSlaID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Company_Code" type="Int64" label="^CompanyCode^Company Code^CompanyCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="OPU_Code" type="Int64" label="^OPUCode^OPU Code^OPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Tax_Slab_ID" type="Int64" label="^TaxSlabID^Tax Slab ID^TaxSlabID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items dataView="grid1" />
     </field>
-    <field name="TaxItemsYN" type="Int64" label="^TaxIteYN^Tax Items YN^TaxIteYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Item_Category_Name" type="String" allowNulls="false" label="^IteCatNam^Item Category Name^IteCatNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="255" />
-    <field name="CatPrefix" type="String" label="^IteCodPre^Item Code Prefix^IteCodPre^" length="5" allowNulls="false" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BraNam^Branch Name^BraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="TaxItemsYN" type="Int64" label="^TaxItemsYN^Tax Items YN^TaxItemsYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Item_Category_Name" type="String" allowNulls="false" label="^ItemCategoryDescription^Item Category Description^ItemCategoryDescription^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="255" />
+    <field name="CatPrefix" type="String" label="Item Code Prefix" length="5" allowNulls="false" />
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^IteCat^Item Category^IteCat^" reportTemplate="true" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Item Category" reportTemplate="true" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Item_Category_Name" rows="2" columns="20" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Item_Category" hidden="true" />
         <dataField fieldName="Item_Category_Major" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
@@ -67,19 +67,20 @@
         <dataField fieldName="Company_Code" columns="15" hidden="true" />
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
         <dataField fieldName="CatPrefix" columns="5" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIteCat^Review Item Category^RevIteCat^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Item Category" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Edit Item Category" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Item_Category_Name" rows="5" />
+            <dataField fieldName="Item_Category_Name" columns="20" />
+            <dataField fieldName="CatPrefix" columns="20" />
             <dataField fieldName="Item_Category" columns="30" hidden="true" />
             <dataField fieldName="Item_Category_Major" hidden="true" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
@@ -87,20 +88,20 @@
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="MajorYN" hidden="true" />
-            <dataField fieldName="Tax_Slab_ID" columns="15" hidden="true" />
             <dataField fieldName="TaxItemsYN" columns="15" hidden="true" />
-            <dataField fieldName="CatPrefix" columns="5" />
+            <dataField fieldName="Tax_Slab_ID" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewIteCat^New Item Category^NewIteCat^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Item Category" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New Item Category" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Item_Category_Name" rows="5" />
+            <dataField fieldName="Item_Category_Name" columns="20" />
+            <dataField fieldName="CatPrefix" columns="20" />
             <dataField fieldName="Item_Category" columns="30" hidden="true" />
             <dataField fieldName="Item_Category_Major" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
@@ -108,23 +109,22 @@
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="MajorYN" hidden="true" />
-            <dataField fieldName="Company_Code" columns="15" hidden="true" />
             <dataField fieldName="OPU_Code" columns="15" hidden="true" />
-            <dataField fieldName="Tax_Slab_ID" columns="15" hidden="true" />
             <dataField fieldName="TaxItemsYN" columns="15" hidden="true" />
-            <dataField fieldName="CatPrefix" columns="5" />
+            <dataField fieldName="Tax_Slab_ID" columns="15" hidden="true" />
+            <dataField fieldName="Company_Code" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
+    <view id="About" commandId="command1" type="Form" label="Record History" showInSelector="false">
       <categories>
         <category id="c1" headerText="Item Category" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Created_By" columns="15" />
             <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
-            <dataField fieldName="Updated_By" columns="15" />
             <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Created_By" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -146,10 +146,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="^NewItemCategory^New Item Category^NewItemCategory^" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" headerText="^NewItemCategory^New Item Category^NewItemCategory^" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -176,16 +176,13 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
-    </actionGroup>
     <actionGroup id="ag102" scope="ActionBar" headerText="^AboutRecord^About Record^AboutRecord^" flat="true">
       <action commandName="EditModal" commandArgument="About" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />
     </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" headerText="^ImportFromExcel^Import From Excel^ImportFromExcel^" flat="true">
-      <action commandName="Import" id="a100" cssClass="glyphicon-list-alt" />
+      <action commandName="Import" id="a100" cssClass="glyphicon glyphicon-import" />
     </actionGroup>
-    <actionGroup id="ag104" scope="ActionBar" headerText="Report">
+    <actionGroup id="ag104" scope="ActionBar" headerText="^Report^Report^Report^" flat="false">
       <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
       <action id="a3" commandName="ReportAsExcel" />

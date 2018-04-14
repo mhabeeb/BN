@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="TBL_EmailInBox_ARCHIVE" conflictDetection="overwriteChanges" label="^EmaInBoxAr^EmailInBox_ARCHIVE^EmaInBoxAr^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="TBL_EmailInBox_ARCHIVE" conflictDetection="overwriteChanges" label="TBL_EmailInBox_ARCHIVE" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="Mail_From" type="String" label="^MaiFro^Mail From^MaiFro^" length="2000" showInSummary="true" />
-    <field name="CreatedDateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Subject" type="String" label="^Sub^Subject^Sub^" length="2000" showInSummary="true" />
-    <field name="Mail_To" type="String" label="^MaiTo^Mail To^MaiTo^" length="2000" showInSummary="true" />
-    <field name="Mail_Message" type="String" allowQBE="false" allowSorting="false" label="^MaiMes^Mail Message^MaiMes^" showInSummary="true" />
-    <field name="EmailInID" type="Decimal" allowNulls="false" label="^EmaInId^Email In#^EmaInId^" />
-    <field name="ReadUnread" type="Int32" label="^ReaUnr^Read Unread^ReaUnr^" />
-    <field name="SeenDate" type="DateTime" label="^SeeDat^Seen Date^SeeDat^" />
-    <field name="URL" type="String" label="^Url^Url^Url^" length="150" />
-    <field name="DocumentID" type="Decimal" label="^DocId^Document#^DocId^" />
-    <field name="OwnerUser" type="String" label="^OwnUse^Owner User^OwnUse^" length="2000" />
-    <field name="ActionTakenYN" type="Int32" label="^ActTakYn^Action Taken YN^ActTakYn^" />
-    <field name="DocTypeID" type="Int32" label="^DocTypId^Doc Type#^DocTypId^" />
-    <field name="DocRefNo" type="Decimal" label="^DocRefNo^Doc Ref No^DocRefNo^" />
-    <field name="Remarks" type="String" allowQBE="false" allowSorting="false" label="^Rem^Remarks^Rem^" />
-    <field name="Comments" type="String" allowQBE="false" allowSorting="false" label="^Com^Comments^Com^" />
+    <field name="Mail_From" type="String" label="Mail From" length="2000" showInSummary="true" />
+    <field name="CreatedDateTime" type="DateTime" label="Created Date Time" showInSummary="true" />
+    <field name="Subject" type="String" label="Subject" length="2000" showInSummary="true" />
+    <field name="Mail_To" type="String" label="Mail To" length="2000" showInSummary="true" />
+    <field name="Mail_Message" type="String" allowQBE="false" allowSorting="false" label="Mail Message" showInSummary="true" />
+    <field name="EmailInID" type="Decimal" allowNulls="false" label="^EmaInId^Email In^EmaInId^" />
+    <field name="ReadUnread" type="Int32" label="Read Unread" />
+    <field name="SeenDate" type="DateTime" label="Seen Date" />
+    <field name="URL" type="String" label="Url" length="150" />
+    <field name="DocumentID" type="Decimal" label="Document#" />
+    <field name="OwnerUser" type="String" label="Owner User" length="2000" />
+    <field name="ActionTakenYN" type="Int32" label="Action Taken YN" />
+    <field name="DocTypeID" type="Int32" label="^DocTypId^Doc Type Id^DocTypId^" />
+    <field name="DocRefNo" type="Decimal" label="Doc Ref No" />
+    <field name="Remarks" type="String" allowQBE="false" allowSorting="false" label="Remarks" />
+    <field name="Comments" type="String" allowQBE="false" allowSorting="false" label="Comments" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^EmaInBoxAr^Email In Box ARCHIVE^EmaInBoxAr^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="TBL Email In Box ARCHIVE" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="EmailInID" columns="15" />
         <dataField fieldName="Mail_From" />
@@ -41,7 +41,7 @@
         <dataField fieldName="Comments" rows="5" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevEmaInBoxAr^Review Email In Box ARCHIVE^RevEmaInBoxAr^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review TBL Email In Box ARCHIVE" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="TBL Email In Box ARCHIVE" flow="NewColumn">
@@ -67,7 +67,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewEmaInBoxAr^New Email In Box ARCHIVE^NewEmaInBoxAr^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New TBL Email In Box ARCHIVE" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New TBL Email In Box ARCHIVE" flow="NewColumn">
@@ -113,11 +113,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

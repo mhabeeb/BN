@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="BNV_Calander" conflictDetection="overwriteChanges" label="^BnvCal^BNV Calander^BnvCal^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="BNV_Calander" conflictDetection="overwriteChanges" label="BNV Calander" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -10,16 +10,16 @@ from "dbo"."BNV_Calander" "BNV_Calander"
     </command>
   </commands>
   <fields>
-    <field name="NV_Date" type="DateTime" allowNulls="false" isPrimaryKey="true" label="^NVDat^NV Date^NVDat^" showInSummary="true" />
+    <field name="NV_Date" type="DateTime" allowNulls="false" isPrimaryKey="true" label="^NVDate^NV Date^NVDate^" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^BnvCal^BNV Calander^BnvCal^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="BNV Calander" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="NV_Date" columns="10" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBnvCal^Review BNV Calander^RevBnvCal^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review BNV Calander" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="BNV Calander" flow="NewColumn">
@@ -30,7 +30,7 @@ from "dbo"."BNV_Calander" "BNV_Calander"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBnvCal^New BNV Calander^NewBnvCal^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New BNV Calander" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New BNV Calander" flow="NewColumn">
@@ -67,7 +67,7 @@ from "dbo"."BNV_Calander" "BNV_Calander"
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

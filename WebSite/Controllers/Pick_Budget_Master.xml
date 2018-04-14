@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Budget_Master" conflictDetection="overwriteChanges" label="^PicBudMas^Pick_Budget_Master^PicBudMas^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Budget_Master" conflictDetection="overwriteChanges" label="Pick_Budget_Master" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="GL_Budget_Master" custom="true">
       <text><![CDATA[SELECT [BudgetCode],
@@ -14,20 +14,20 @@ WHERE IsNull([EnabledYN], 0) = 1 and [Rec_Status]=1]]></text>
     </command>
   </commands>
   <fields>
-    <field name="BudgetCode" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^BudCod^Budget Code^BudCod^" readOnly="true" />
-    <field name="BudgetName" type="String" allowNulls="false" label="^BudNam^Budget Name^BudNam^" length="50" showInSummary="true" />
-    <field name="Doc_No" type="Int64" label="^DocNo^Doc No^DocNo^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="IsDefault" type="Int32" label="^IsDef^Is Default^IsDef^" showInSummary="true">
+    <field name="BudgetCode" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Budget Code" readOnly="true" />
+    <field name="BudgetName" type="String" allowNulls="false" label="Budget Name" length="50" showInSummary="true" />
+    <field name="Doc_No" type="Int64" label="Doc No" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="OPU Code" showInSummary="true" />
+    <field name="IsDefault" type="Int32" label="Is Default" showInSummary="true">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="CtrlYN" type="Int32" label="^CtrYn^Ctrl YN^CtrYn^" showInSummary="true">
+    <field name="CtrlYN" type="Int32" label="Ctrl YN" showInSummary="true">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="BudgetAmount" type="Decimal" label="^BudAmo^Budget Amount^BudAmo^" />
+    <field name="BudgetAmount" type="Decimal" label="Budget Amount" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^GlBudMas^GL Budget Master^GlBudMas^" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="GL Budget Master" filter="OPU_Code=@Session_OPU_Code" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BudgetCode" columns="15" />
@@ -39,7 +39,7 @@ WHERE IsNull([EnabledYN], 0) = 1 and [Rec_Status]=1]]></text>
         <dataField fieldName="BudgetAmount" dataFormatString="N2" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevGlBudMas^Review GL Budget Master^RevGlBudMas^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review GL Budget Master" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="GL Budget Master" flow="NewColumn">
@@ -55,7 +55,7 @@ WHERE IsNull([EnabledYN], 0) = 1 and [Rec_Status]=1]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^GlBudMas^New GL Budget Master^GlBudMas^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New GL Budget Master" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New GL Budget Master" flow="NewColumn">

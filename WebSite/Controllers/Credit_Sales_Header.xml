@@ -1,71 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Credit_Sales_Header" label="^CreSalHea^Credit_Sales_Header^CreSalHea^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Credit_Sales_Header" label="Credit_Sales_Header" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Credit_Trx_Header" custom="true">
       <text><![CDATA[SELECT * FROM Credit_Trx_Header WHERE APAR_Flag=1]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Invoice_NO" type="Decimal" label="^InvNo^Doc No.^InvNo^" showInSummary="true" />
-    <field name="Invoice_Date" type="DateTime" label="^InvDat^Posting Date^InvDat^" showInSummary="true" />
-    <field name="Trx_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TrxId^Sequence #^TrxId^" readOnly="true" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Customer No.^SysNum^" showInSummary="true" allowNulls="false">
+    <field name="Invoice_NO" type="Decimal" label="^DocNo^Doc No.^DocNo^" showInSummary="true" />
+    <field name="Invoice_Date" type="DateTime" label="^PostingDate^Posting Date^PostingDate^" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Sequence^Sequence #^Sequence^" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" label="^CustomerNo^Customer No.^CustomerNo^" showInSummary="true" allowNulls="false">
       <items style="Lookup" dataController="Pick_Customer" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" letters="true" />
     </field>
-    <field name="Payment_Terms" type="Int32" label="^PayTer^Payment Terms^PayTer^" showInSummary="true" allowLEV="true">
+    <field name="Payment_Terms" type="Int32" label="^PaymentTerms^Payment Terms^PaymentTerms^" showInSummary="true" allowLEV="true">
       <items style="DropDownList" dataController="Pick_PaymentTerms" dataView="grid1" dataValueField="ReturnValueInt" dataTextField="Descriptions" letters="true" />
     </field>
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="500" showInSummary="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" allowNulls="false" allowLEV="true">
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="500" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" allowNulls="false" allowLEV="true">
       <items style="Lookup" dataController="Pick_Project" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" letters="true" />
     </field>
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" allowLEV="true">
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" allowLEV="true">
       <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_name" dataValueField="Dept_Code" letters="true" />
     </field>
-    <field name="InvoiceTypes" type="String" allowNulls="false" label="^InvTyp^Invoice Types^InvTyp^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" contextFields="APAR_Flag=1" allowLEV="true">
+    <field name="InvoiceTypes" type="String" allowNulls="false" label="^InvoiceTypes^Invoice Types^InvoiceTypes^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" contextFields="APAR_Flag=1" allowLEV="true">
       <items style="DropDownList" dataController="Pick_Invoice_Types" dataView="grid1" dataTextField="InvoiceTypes" dataValueField="InvoiceTypes" letters="true" />
     </field>
-    <field name="TermsANDConditions" type="String" label="^TerAndCon^Terms AND Conditions^TerAndCon^" length="4000" />
-    <field name="Header_Disc_Percent" type="Decimal" label="^HeaDisPer^Header Disc Percent^HeaDisPer^" hidden="true" />
-    <field name="Header_Disc_Amount" type="Decimal" label="^HeaDisAmo^Header Disc Amount^HeaDisAmo^" hidden="true" />
-    <field name="Approve" type="Boolean" label="^App^Approve^App^" allowNulls="false" hidden="true">
+    <field name="TermsANDConditions" type="String" label="^TermsANDConditions^Terms AND Conditions^TermsANDConditions^" length="4000" />
+    <field name="Header_Disc_Percent" type="Decimal" label="^HeaderDiscPercent^Header Disc Percent^HeaderDiscPercent^" hidden="true" />
+    <field name="Header_Disc_Amount" type="Decimal" label="^HeaderDiscAmount^Header Disc Amount^HeaderDiscAmount^" hidden="true" />
+    <field name="Approve" type="Boolean" label="^Approve^Approve^Approve^" allowNulls="false" hidden="true">
       <items style="CheckBox" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="HeaderDiscountYN" type="Boolean" label="^HeaDisYn^Header Discount YN^HeaDisYn^" allowNulls="false" hidden="true">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="HeaderDiscountYN" type="Boolean" label="^HeaderDiscountYN^Header Discount YN^HeaderDiscountYN^" allowNulls="false" hidden="true">
       <items style="CheckBox" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" />
-    <field name="PostYN" type="Boolean" label="^PosYn^Post YN^PosYn^" allowNulls="false">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="APAR_Flag" type="Int32" label="^APARFlag^APAR Flag^APARFlag^" />
+    <field name="PostYN" type="Boolean" label="^PostYN^Post YN^PostYN^" allowNulls="false">
       <items style="CheckBox" />
     </field>
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="ProjectName" type="String" label="^ProNam^Project Name^ProNam^" length="100" />
-    <field name="MonthAndYear" type="String" label="^MonAndYea^Month And Year^MonAndYea^" readOnly="true" length="12" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
-    <field name="Pick_Amount" type="Decimal" label="^PicAmo^Pick Amount^PicAmo^" hidden="true" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" readOnly="true" length="150" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="ProjectName" type="String" label="^ProjectName^Project Name^ProjectName^" length="100" />
+    <field name="MonthAndYear" type="String" label="^MonthAndYear^Month And Year^MonthAndYear^" readOnly="true" length="12" />
+    <field name="Currency_Code" type="String" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" />
+    <field name="Pick_Amount" type="Decimal" label="^PickAmount^Pick Amount^PickAmount^" hidden="true" />
     <field name="Pick" type="Int32" label="^Pick^Pick^Pick^" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" hidden="true" />
-    <field name="Header_Amount" type="Decimal" label="^HeaAmo^Header Amount^HeaAmo^" readOnly="true" calculated="true" />
-    <field name="Header_Net" type="Decimal" label="^NetAmo^Net Amount^NetAmo^" readOnly="true" />
-    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Apply Bal^AppBal^" readOnly="true" />
-    <field name="ADDRESS_ALL" type="String" label="^AddAll^Address All^AddAll^" readOnly="true" length="4000" />
-    <field name="Cur_Rate" type="Decimal" label="^CurRat^Cur Rate^CurRat^" />
-    <field name="OpenBalYN" type="Int32" label="^OpeBalYn^Open Bal YN^OpeBalYn^" />
-    <field name="OverHeadID" type="Decimal" label="^OveHeaId^Over Head#^OveHeaId^" />
-    <field name="RefreshBalance" type="Int32" allowNulls="false" label="^RefBal^Refresh Balance^RefBal^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="Pick_Doc" type="Decimal" label="^PickDoc^Pick Doc^PickDoc^" hidden="true" />
+    <field name="Header_Amount" type="Decimal" label="^HeaderAmount^Header Amount^HeaderAmount^" readOnly="true" calculated="true" />
+    <field name="Header_Net" type="Decimal" label="^NetAmount^Net Amount^NetAmount^" readOnly="true" />
+    <field name="APPLY_BAL" type="Decimal" label="^ApplyBal^Apply Bal^ApplyBal^" readOnly="true" />
+    <field name="ADDRESS_ALL" type="String" label="^AddressAll^Address All^AddressAll^" readOnly="true" length="4000" />
+    <field name="Cur_Rate" type="Decimal" label="^CurRate^Cur Rate^CurRate^" />
+    <field name="OpenBalYN" type="Int32" label="^OpenBalYN^Open Bal YN^OpenBalYN^" />
+    <field name="OverHeadID" type="Decimal" label="^OverHead^Over Head#^OverHead^" />
+    <field name="RefreshBalance" type="Int32" allowNulls="false" label="^RefreshBalance^Refresh Balance^RefreshBalance^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
     <field name="Ven_RefNo" type="String" allowNulls="false" label="^VenRefNo^Ven Ref No^VenRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="25" />
-    <field name="Approve_Ask" type="Boolean" allowNulls="false" label="^AppAsk^Approve Ask^AppAsk^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="Approve_Ask" type="Boolean" allowNulls="false" label="^ApproveAsk^Approve Ask^ApproveAsk^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="CheckBox" />
+    </field>
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^CusInv^Customer Invoice^CusInv^" reportTemplate="true" sortExpression="Trx_ID desc" filter="OPU_Code IN (SELECT [OPU_Code] FROM [UserBranchAccess] where [UserID]=@BusinessRules_UserId)" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Customer Invoice" reportTemplate="true" sortExpression="Trx_ID desc" filter="OPU_Code IN (SELECT [OPU_Code] FROM [UserBranchAccess] where [UserID]=@BusinessRules_UserId)" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Vendor_Name">
@@ -110,7 +116,7 @@
         <dataField fieldName="Trx_ID" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^EdiCusInv^Edit Customer Invoice^EdiCusInv^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Edit Customer Invoice" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Edit Customer Invoice" flow="NewColumn">
@@ -136,31 +142,31 @@
             <dataField fieldName="PostYN" columns="15" />
             <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" hidden="true" />
             <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" hidden="true" />
-            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
-            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-            <dataField fieldName="Company_Code" hidden="true" columns="15" />
-            <dataField fieldName="ProjectName" hidden="true" />
-            <dataField fieldName="MonthAndYear" columns="12" hidden="true" />
-            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
-            <dataField fieldName="Pick_Amount" dataFormatString="N2" columns="15" readOnly="true" hidden="true" />
-            <dataField fieldName="Pick" columns="15" hidden="true" />
-            <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
-            <dataField fieldName="ADDRESS_ALL" hidden="true" />
-            <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" hidden="true" />
             <dataField fieldName="OpenBalYN" columns="15" hidden="true" />
             <dataField fieldName="OverHeadID" columns="15" hidden="true" />
             <dataField fieldName="Approve" columns="15" hidden="true" />
+            <dataField fieldName="ADDRESS_ALL" hidden="true" />
+            <dataField fieldName="Cur_Rate" dataFormatString="N2" columns="15" hidden="true" />
+            <dataField fieldName="HeaderDiscountYN" columns="15" hidden="true" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
-            <dataField fieldName="HeaderDiscountYN" columns="15" hidden="true" />
-            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
+            <dataField fieldName="ProjectName" hidden="true" />
+            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+            <dataField fieldName="Pick" columns="15" hidden="true" />
+            <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
+            <dataField fieldName="MonthAndYear" columns="12" hidden="true" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+            <dataField fieldName="Pick_Amount" dataFormatString="N2" columns="15" readOnly="true" hidden="true" />
             <dataField fieldName="Approve_Ask" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCusInv^New Customer Invoice^NewCusInv^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Customer Invoice" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Customer Invoice" flow="NewColumn">
@@ -179,24 +185,24 @@
             <dataField fieldName="TermsANDConditions" hidden="true" />
             <dataField fieldName="Header_Disc_Percent" dataFormatString="c" columns="15" hidden="true" />
             <dataField fieldName="Header_Disc_Amount" dataFormatString="c" columns="15" hidden="true" />
-            <dataField fieldName="PostYN" columns="15" hidden="true" />
-            <dataField fieldName="Approve" columns="15" hidden="true" />
-            <dataField fieldName="HeaderDiscountYN" columns="15" hidden="true" />
-            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
-            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
-            <dataField fieldName="Company_Code" hidden="true" columns="15" />
-            <dataField fieldName="ProjectName" hidden="true" />
-            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
-            <dataField fieldName="Pick_Amount" dataFormatString="c" columns="15" hidden="true" />
-            <dataField fieldName="Pick" columns="15" hidden="true" />
-            <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
             <dataField fieldName="Cur_Rate" dataFormatString="c" columns="15" hidden="true" />
             <dataField fieldName="OpenBalYN" columns="15" hidden="true" />
+            <dataField fieldName="Pick" columns="15" hidden="true" />
+            <dataField fieldName="Pick_Doc" columns="15" hidden="true" />
             <dataField fieldName="OverHeadID" columns="15" hidden="true" />
-            <dataField fieldName="Created_By" hidden="true" columns="15" />
-            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Created_By" hidden="true" columns="15" />
+            <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Pick_Amount" dataFormatString="c" columns="15" hidden="true" />
+            <dataField fieldName="Approve" columns="15" hidden="true" />
+            <dataField fieldName="HeaderDiscountYN" columns="15" hidden="true" />
+            <dataField fieldName="PostYN" columns="15" hidden="true" />
+            <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+            <dataField fieldName="ProjectName" hidden="true" />
+            <dataField fieldName="Currency_Code" columns="4" hidden="true" />
+            <dataField fieldName="OPU_Code" hidden="true" columns="15" />
+            <dataField fieldName="Company_Code" hidden="true" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -222,7 +228,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -271,7 +277,10 @@ END]]></data>
   </actions>
   <businessRules>
     <rule id="r100" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @APAR_Flag=1
-SELECT @Currency_Code=IsNull(DefaultCurrency,'SAR')  from tbl_Customer_Supplier WHERE Sys_Number=@Sys_Number
+SELECT @Currency_Code=DefaultCurrency  from tbl_Customer_Supplier WHERE Sys_Number=@Sys_Number
+
+SET @Currency_Code=IsNull(@Currency_Code,@Session_DefaultCurrency)
+
 SET @Cur_Rate = [dbo].[Get_Curr_Rate] (@Currency_Code,@Invoice_Date)
 
 SELECT  @Invoice_NO=IsNull(MAX(A.Invoice_NO) + 1,MAX(B.StartInvoiceNumbaer)) 

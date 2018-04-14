@@ -1,67 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="UPLOAD_INVOICES" conflictDetection="overwriteChanges" label="^UplInv^UPLOAD_INVOICES^UplInv^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="UPLOAD_INVOICES" conflictDetection="overwriteChanges" label="UPLOAD_INVOICES" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.UPLOAD_INVOICES" custom="true">
       <text><![CDATA[SELECT * FROM dbo.UPLOAD_INVOICES]]></text>
     </command>
   </commands>
   <fields>
-    <field name="UploadID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^UplId^Upload#^UplId^" readOnly="true" />
-    <field name="InvoiceTypes" type="String" allowNulls="false" label="^InvTyp^InvoiceTypes^InvTyp^" length="50" showInSummary="true" />
-    <field name="Invoice_Date" type="DateTime" allowNulls="false" label="^InvDat^Invoice_Date^InvDat^" showInSummary="true" />
-    <field name="Invoice_NO" type="Decimal" allowNulls="false" label="^InvNo^Invoice_NO^InvNo^" showInSummary="true" />
-    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Sys_Number^SysNum^" showInSummary="true">
+    <field name="UploadID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="Upload#" readOnly="true" />
+    <field name="InvoiceTypes" type="String" allowNulls="false" label="InvoiceTypes" length="50" showInSummary="true" />
+    <field name="Invoice_Date" type="DateTime" allowNulls="false" label="^InvDat^Invoice Date^InvDat^" />
+    <field name="Invoice_NO" type="Decimal" allowNulls="false" label="^InvNo^Invoice No^InvNo^" />
+    <field name="Sys_Number" type="Decimal" allowNulls="false" label="^SysNum^Vendor ^SysNum^">
       <items style="Lookup" dataController="tbl_Customer_Supplier" dataView="grid1" dataTextField="Vendor_Name" dataValueField="Sys_Number" />
     </field>
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" showInSummary="true" />
-    <field name="LineID" type="Int64" allowNulls="false" label="^LinId^LineID^LinId^" />
-    <field name="Emp_id" type="Decimal" label="^EmpId^Emp_id^EmpId^" />
-    <field name="Project_Code" type="String" label="^ProCod^Project_Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept_Code^DepCod^" length="50" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item_Code^IteCod^" length="50">
+    <field name="APAR_Flag" type="Int32" label="APAR Flag" showInSummary="true" />
+    <field name="LineID" type="Int64" allowNulls="false" label="LineID" />
+    <field name="Emp_id" type="Decimal" label="Emp_id" />
+    <field name="Project_Code" type="String" label="Project_Code" length="50" />
+    <field name="Dept_Code" type="String" label="Dept_Code" length="50" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="50">
       <items style="Lookup" dataController="Pick_Item_Master" dataView="grid1" dataTextField="Item_Description" dataValueField="Item_Code" />
     </field>
-    <field name="Currency_Code" type="String" label="^CurCod^Currency_Code^CurCod^" length="4" />
-    <field name="Distribution_AccountID" type="String" label="^DisAccId^Distribution_AccountID^DisAccId^" length="50" />
-    <field name="Created_By" type="Int32" allowNulls="false" label="^CreBy^Created_By^CreBy^" />
-    <field name="Payment_Terms" type="Int32" label="^PayTer^Payment_Terms^PayTer^" />
-    <field name="PostedYN" type="Int32" label="^PosYn^PostedYN^PosYn^" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="150" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU_Code^OpuCod^" />
-    <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit_Price^UniPri^" />
-    <field name="Line_Disc_Percent" type="Decimal" label="^LinDisPer^Line_Disc_Percent^LinDisPer^" />
-    <field name="Line_Disc_Amount" type="Decimal" label="^LinDisAmo^Line_Disc_Amount^LinDisAmo^" />
-    <field name="IsAssets" type="Int32" label="^IsAss^IsAssets^IsAss^" />
-    <field name="S1" type="String" label="^S1^S1^S1^" length="50" />
-    <field name="S2" type="String" label="^S2^S2^S2^" length="50" />
-    <field name="S3" type="String" label="^S3^S3^S3^" length="50" />
-    <field name="S4" type="String" label="^S4^S4^S4^" length="50" />
-    <field name="ImportAction" type="Int32" label="^ImpAct^ImportAction^ImpAct^" />
-    <field name="UserNo" type="Int64" label="^UseNo^User ID^UseNo^" computed="true">
+    <field name="Currency_Code" type="String" label="Currency_Code" length="4" />
+    <field name="Distribution_AccountID" type="String" label="Distribution_AccountID" length="50" />
+    <field name="Created_By" type="Int32" allowNulls="false" label="Created_By" />
+    <field name="Payment_Terms" type="Int32" label="Payment_Terms" />
+    <field name="PostedYN" type="Int32" label="PostedYN" />
+    <field name="Remarks" type="String" label="Remarks" length="150" />
+    <field name="OPU_Code" type="Int32" label="OPU_Code" />
+    <field name="Qty" type="Decimal" label="Qty" />
+    <field name="Unit_Price" type="Decimal" label="Unit_Price" />
+    <field name="Line_Disc_Percent" type="Decimal" label="Line_Disc_Percent" />
+    <field name="Line_Disc_Amount" type="Decimal" label="Line_Disc_Amount" />
+    <field name="IsAssets" type="Int32" label="IsAssets" />
+    <field name="S1" type="String" label="S1" length="50" />
+    <field name="S2" type="String" label="S2" length="50" />
+    <field name="S3" type="String" label="S3" length="50" />
+    <field name="S4" type="String" label="S4" length="50" />
+    <field name="ImportAction" type="Int32" label="ImportAction" />
+    <field name="UserNo" type="Int64" label="User ID" computed="true">
       <formula>SELECT @BusinessRules_UserId</formula>
     </field>
+    <field name="Location_Name" type="String" label="Location Name" length="150" />
   </fields>
   <views>
-    <view id="grid1" type="DataSheet" commandId="command1" label="^UplInv^Upload Invoices^UplInv^" showInSelector="false">
+    <view id="grid1" type="DataSheet" commandId="command1" label="Upload Invoices" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="InvoiceTypes" columns="50" />
         <dataField fieldName="Invoice_Date" columns="10" />
         <dataField fieldName="Invoice_NO" columns="15" />
-        <dataField fieldName="Item_Code" columns="50" />
         <dataField fieldName="Sys_Number" columns="15" />
         <dataField fieldName="LineID" columns="15" />
         <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
         <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
         <dataField fieldName="Created_By" columns="15" />
+        <dataField fieldName="Item_Code" columns="50" />
+        <dataField fieldName="Location_Name" columns="50" />
+        <dataField fieldName="ImportAction" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevUplInv^Review Upload Invoices^RevUplInv^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Upload Invoices" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="Upload Invoices" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevUplInv^Review Upload Invoices^RevUplInv^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="InvoiceTypes" columns="50" />
             <dataField fieldName="Invoice_Date" columns="10" />
@@ -94,11 +97,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewUplInv^New Upload Invoices^NewUplInv^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Upload Invoices" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New Upload Invoices" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewUplInv^New Upload Invoices^NewUplInv^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="InvoiceTypes" columns="50" />
             <dataField fieldName="Invoice_Date" columns="10" />
@@ -109,26 +112,28 @@
             <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
             <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
             <dataField fieldName="Created_By" columns="15" />
+            <dataField fieldName="Location_Name" rows="5" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="gridMini" type="Grid" commandId="command1" label="^UplInv^Upload Invoices^UplInv^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="gridMini" type="Grid" commandId="command1" label="Upload Invoices" showInSelector="false">
+      <headerText />
       <dataFields>
-        <dataField fieldName="InvoiceTypes" columns="50" />
-        <dataField fieldName="Invoice_Date" columns="10" />
-        <dataField fieldName="Invoice_NO" columns="15" />
-        <dataField fieldName="Sys_Number" columns="15" />
-        <dataField fieldName="LineID" columns="15" />
-        <dataField fieldName="Project_Code" columns="50" />
-        <dataField fieldName="Dept_Code" columns="50" />
-        <dataField fieldName="Item_Code" columns="50" />
+        <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Payment_Terms" columns="15" />
         <dataField fieldName="Remarks" />
-        <dataField fieldName="Qty" dataFormatString="N2" columns="15" />
-        <dataField fieldName="Unit_Price" dataFormatString="N2" columns="15" />
+        <dataField fieldName="Invoice_NO" columns="15" />
+        <dataField fieldName="Sys_Number" columns="15" />
+        <dataField fieldName="LineID" columns="15" />
+        <dataField fieldName="InvoiceTypes" columns="50" />
+        <dataField fieldName="Invoice_Date" columns="10" />
+        <dataField fieldName="Item_Code" columns="50" />
+        <dataField fieldName="Project_Code" columns="50" />
+        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="Location_Name" columns="50" />
       </dataFields>
     </view>
   </views>
@@ -151,11 +156,11 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" headerText="^UpdInv^UPLOAD INVOICES^UpdInv^" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -185,16 +190,16 @@
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
       <action id="a2" commandName="Delete" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Import Actions" flat="true">
-      <action commandName="SQL" confirmation="uSERid : [UserNo] " id="a100" headerText="My User Details" />
-      <action commandName="Import" id="a101" headerText="Import ExcelSheet" commandArgument="createForm1" />
-      <action commandName="SQL" headerText="Validate The Data" id="a102">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^ImpAct^Import Actions^ImpAct^" flat="true">
+      <action commandName="SQL" confirmation="uSERid : [UserNo] " id="a100" headerText="^MyUseDet^My User Details^MyUseDet^" cssClass="glyphicon glyphicon-th" />
+      <action commandName="Import" id="a101" headerText="^ImpExcShe^Import ExcelSheet^ImpExcShe^" commandArgument="createForm1" cssClass="glyphicon glyphicon-import" />
+      <action commandName="SQL" headerText="^ValTheDat^Validate The Data^ValTheDat^" id="a102" cssClass="glyphicon glyphicon-random">
         <data><![CDATA[EXEC [dbo].[CREATE_APAR_INVOICE] @BusinessRules_UserId,1]]></data>
       </action>
-      <action commandName="SQL" headerText="Process the Data" id="a103">
+      <action commandName="SQL" headerText="^ProTheDat^Process the Data^ProTheDat^" id="a103" cssClass="glyphicon glyphicon-repeat" whenLastCommandName="Select" whenClientScript="[ImportAction]==1">
         <data><![CDATA[EXEC [dbo].[CREATE_APAR_INVOICE] @BusinessRules_UserId,3]]></data>
       </action>
-      <action commandName="SQL" headerText="Flush The Interface" id="a104">
+      <action commandName="SQL" headerText="^FluTheInt^Flush The Interface^FluTheInt^" id="a104" cssClass="&#x9;glyphicon glyphicon-saved">
         <data><![CDATA[EXEC [dbo].[CREATE_APAR_INVOICE] @BusinessRules_UserId,2]]></data>
       </action>
     </actionGroup>

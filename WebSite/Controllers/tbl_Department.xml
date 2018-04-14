@@ -1,84 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="tbl_Department" conflictDetection="overwriteChanges" label="^Dep^Department^Dep^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="tbl_Department" conflictDetection="overwriteChanges" label="tbl_Department" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Department" custom="true">
-      <text><![CDATA[SELECT * FROM tbl_Department]]></text>
+      <text><![CDATA[SELECT * FROM tbl_Department 
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Dept_Code_Ref_No" type="String" label="^DepCodRefNo^Dept Code^DepCodRefNo^" length="15" allowNulls="false" />
-    <field name="Dept_Code" type="String" allowNulls="false" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="Dept_name" type="String" label="^Depnam^Dept name^Depnam^" length="50" showInSummary="true" />
-    <field name="Dept_Manager_Id" type="Int32" label="^DepManId^Dept Manager#^DepManId^" showInSummary="true" />
+    <field name="Dept_Code_Ref_No" type="String" label="^DepCodRefNo^Dept Ref. Code^DepCodRefNo^" length="15" allowNulls="false" />
+    <field name="Dept_Code" type="String" allowNulls="false" label="^DeptCode^Dept Code^DeptCode^" length="50" showInSummary="true" isPrimaryKey="true" />
+    <field name="Dept_name" type="String" label="^Deptname^Dept name^Deptname^" length="50" showInSummary="true" allowNulls="false" />
+    <field name="Dept_name_AR" type="String" label="Dept name AR" length="250" />
+    <field name="Dept_Manager_Id" type="Int32" label="^DeptMan^Dept Manager#^DeptMan^" showInSummary="true" />
     <field name="IsActive" type="Int32" label="^IsAct^Is Active^IsAct^" showInSummary="true" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" showInSummary="true" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" showInSummary="true" />
-    <field name="IsItShared" type="Int32" label="^IsItSha^Is It Shared^IsItSha^" allowNulls="false">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" showInSummary="true" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdtdDtTm^Updated Date Time^UpdtdDtTm^" showInSummary="true" />
+    <field name="IsItShared" type="Int32" label="^IsItShared^Is It Shared^IsItShared^" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Evaluation_Limit" type="Decimal" label="^EvaLim^Evaluation Limit^EvaLim^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="BranchID" type="Int32" allowNulls="false" label="^BraId^Branch ID^BraId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="Evaluation_Limit" type="Decimal" label="^EvaluationLmt^Evaluation Limit^EvaluationLmt^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="BranchID" type="Int32" allowNulls="false" label="^BranchID^Branch ID^BranchID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="true" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="ABranch_Code" />
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="ABranch_Code" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="Dept_Code_Parent" type="String" label="Dept Code Parent" length="50">
+      <items style="Lookup" dataController="Pick_DepartmentParent" dataView="grid1" dataTextField="Dept_Code_Ref_No" dataValueField="Dept_Code" />
+    </field>
+    <field name="IsParent" type="Int32" label="Is Parent" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Dep^Department^Dep^" filter="BranchID=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Department" filter="BranchID=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="Dept_Code_Ref_No" columns="15" />
         <dataField fieldName="Dept_name" columns="50" />
-        <dataField fieldName="Dept_Code" columns="50" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="Dept_Code" columns="50" hidden="true" />
+        <dataField fieldName="Dept_Code_Parent" columns="50" />
         <dataField fieldName="Dept_Manager_Id" columns="15" hidden="true" />
         <dataField fieldName="IsActive" columns="15" />
         <dataField fieldName="IsItShared" columns="15" />
         <dataField fieldName="Evaluation_Limit" columns="15" hidden="true" />
         <dataField fieldName="BranchID" columns="15" hidden="true" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
-        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
-        <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
+        <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
-        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="IsParent" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDep^Review Department^RevDep^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Department" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Department" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiDep^Edit Department^EdiDep^" flow="NewColumn">
+          <description />
           <dataFields>
-            <dataField fieldName="Dept_Code_Ref_No" columns="15" />
-            <dataField fieldName="Dept_Code" columns="50" />
-            <dataField fieldName="Dept_name" columns="50" />
+            <dataField fieldName="IsParent" columns="15" />
+            <dataField fieldName="Dept_Code_Parent" columns="50">
+              <visibility>
+                <expression test="[IsParent]==0" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Dept_Code_Ref_No" columns="20" />
+            <dataField fieldName="Dept_Code" columns="20" hidden="true" />
+            <dataField fieldName="Dept_name" columns="20" />
+            <dataField fieldName="Dept_name_AR" rows="2" columns="20" />
             <dataField fieldName="Dept_Manager_Id" columns="15" hidden="true" />
             <dataField fieldName="Evaluation_Limit" columns="15" hidden="true" />
             <dataField fieldName="IsActive" columns="15" />
@@ -92,15 +110,22 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDep^New Department^NewDep^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Department" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Department" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewDep^New Department^NewDep^" flow="NewColumn">
+          <description />
           <dataFields>
-            <dataField fieldName="Dept_Code_Ref_No" columns="15" />
-            <dataField fieldName="Dept_Code" columns="50" hidden="true" />
-            <dataField fieldName="Dept_name" columns="50" />
+            <dataField fieldName="IsParent" columns="15" />
+            <dataField fieldName="Dept_Code_Parent" columns="50">
+              <visibility>
+                <expression test="[IsParent]==0" type="ClientScript" />
+              </visibility>
+            </dataField>
+            <dataField fieldName="Dept_Code_Ref_No" columns="20" />
+            <dataField fieldName="Dept_Code" columns="20" hidden="true" />
+            <dataField fieldName="Dept_name" columns="20" />
+            <dataField fieldName="Dept_name_AR" rows="2" columns="20" />
             <dataField fieldName="Dept_Manager_Id" columns="15" hidden="true" />
             <dataField fieldName="Evaluation_Limit" columns="15" hidden="true" />
             <dataField fieldName="IsActive" columns="15" />
@@ -118,7 +143,6 @@
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -134,10 +158,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -165,22 +189,36 @@
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
-    </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" headerText="^ImportFromExcel^Import From Excel^ImportFromExcel^" flat="true">
-      <action commandName="Import" id="a100" cssClass="glyphicon-list-alt" />
+      <action commandName="Import" id="a100" cssClass="glyphicon-import" />
     </actionGroup>
   </actions>
   <businessRules>
+    <rule id="r103" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @IsParent=0]]></rule>
+    <rule id="r102" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @Dept_Code=CAST(@Session_OPU_Code AS NVARCHAR(10))+@Dept_Code_Ref_No]]></rule>
     <rule id="r100" commandName="Insert|Update" type="Sql" phase="Before"><![CDATA[SET @BranchID=@Session_OPU_Code]]></rule>
-    <rule id="r101" type="Sql" commandName="Insert|Update" phase="Before" name="Dept_Code_Ref_No_Validator"><![CDATA[
-if @Dept_Code_Ref_No is null
+    <rule id="r101" type="Sql" commandName="Insert|Update" phase="Before" name="Dept_Code_Ref_No_Validator"><![CDATA[if @Dept_Code_Ref_No is null
 begin
     /* prevent the default action processing */
     set @BusinessRules_PreventDefault = 1
     /* set the focus on the field and display an error */
     set @Result_Focus = 'Dept_Code_Ref_No,Required field.'
+end
+
+IF LEN(@Dept_Code_Ref_No) <> dbo.DEFAULT_SEGMENT_LENGTH('Dept',@BusinessRules_UserId)
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Dept_Code_Ref_No,Length must be equal to Default Dept Length'
+end
+]]></rule>
+    <rule id="r104" type="Sql" commandName="Insert|Update" phase="Before" name="Dept_Code_Parent_Validator"><![CDATA[if @Dept_Code_Parent is null and IsNull(@IsParent,0)=0
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Dept_Code_Parent,Required field.'
 end
 ]]></rule>
   </businessRules>

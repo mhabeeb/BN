@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="V_Currency_Code" conflictDetection="overwriteChanges" label="^VCurCod^V Currency Code^VCurCod^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="V_Currency_Code" conflictDetection="overwriteChanges" label="V Currency Code" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -30,24 +30,24 @@ from "dbo"."V_Currency_Code" "V_Currency_Code"
     </command>
   </commands>
   <fields>
-    <field name="LookUpType" type="Int32" allowNulls="false" label="^LooUpTyp^Look Up Type^LooUpTyp^" showInSummary="true" />
-    <field name="Descriptions" type="String" label="^Des^Descriptions^Des^" length="150" showInSummary="true" />
+    <field name="LookUpType" type="Int32" allowNulls="false" label="^LookUpType^Look Up Type^LookUpType^" showInSummary="true" />
+    <field name="Descriptions" type="String" label="^Descriptions^Descriptions^Descriptions^" length="150" showInSummary="true" />
     <field name="LID" type="Int32" allowNulls="false" label="^Lid^Lid^Lid^" readOnly="true" showInSummary="true" />
-    <field name="InActive" type="Int32" label="^InAct^In Active^InAct^" showInSummary="true" />
-    <field name="NoDays" type="Int32" label="^NoDay^No Days^NoDay^" showInSummary="true" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="100" />
-    <field name="SEGMENT1" type="Decimal" label="^Seg1^Segment1^Seg1^" />
-    <field name="SEGMENT2" type="Decimal" label="^Seg2^Seg2^Seg2^" />
-    <field name="SEGMENT3" type="String" label="^Seg3^Seg3^Seg3^" length="100" />
-    <field name="SEGMENT4" type="String" label="^Seg4^Segment4^Seg4^" length="100" />
-    <field name="SEGMENT5" type="DateTime" label="^Seg5^Segment5^Seg5^" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDat^Created Date Time^CreDat^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDat^Updated Date Time^UpdDat^" />
+    <field name="InActive" type="Int32" label="^InActive^In Active^InActive^" showInSummary="true" />
+    <field name="NoDays" type="Int32" label="^NoDays^No Days^NoDays^" showInSummary="true" />
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="100" />
+    <field name="SEGMENT1" type="Decimal" label="^Segment1^Segment1^Segment1^" />
+    <field name="SEGMENT2" type="Decimal" label="^Segment2^Segment2^Segment2^" />
+    <field name="SEGMENT3" type="String" label="^Segment3^Segment3^Segment3^" length="100" />
+    <field name="SEGMENT4" type="String" label="^Segment4^Segment4^Segment4^" length="100" />
+    <field name="SEGMENT5" type="DateTime" label="^Segment5^Segment5^Segment5^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^VCurCode^V Currency Code^VCurCode^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="V Currency Code" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="LookUpType" columns="15" />
@@ -62,7 +62,7 @@ from "dbo"."V_Currency_Code" "V_Currency_Code"
         <dataField fieldName="SEGMENT4" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevVCurCod^Review V Currency Code^RevVCurCod^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review V Currency Code" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="V Currency Code" flow="NewColumn">
@@ -87,7 +87,7 @@ from "dbo"."V_Currency_Code" "V_Currency_Code"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewVCurCod^New V Currency Code^NewVCurCod^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New V Currency Code" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New V Currency Code" flow="NewColumn">
@@ -137,7 +137,7 @@ from "dbo"."V_Currency_Code" "V_Currency_Code"
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

@@ -328,7 +328,7 @@ Namespace MyCompany.Services
                                 "min.css', type: 'text/css', rel: 'stylesheet' }});", ApplicationServices.JqmVersion), baseUrl, ApplicationServices.JqmVersion)
                 Else
                     sb.AppendFormat(String.Format("$('<link></link>').appendTo($('head')).attr({{ href: '{0}/App_Themes/MyCompany/_T"& _ 
-                                "heme_Social.css?{0}', type: 'text/css', rel: 'stylesheet' }});", ApplicationServices.Version), baseUrl)
+                                "heme_Gravity.css?{0}', type: 'text/css', rel: 'stylesheet' }});", ApplicationServices.Version), baseUrl)
                 End If
                 Try 
                     Dim blankPage As StringBuilder = New StringBuilder()

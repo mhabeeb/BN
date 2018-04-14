@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="View_Invoices" conflictDetection="overwriteChanges" label="^VieInvo^View_Invoices^VieInvo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="View_Invoices" conflictDetection="overwriteChanges" label="View_Invoices" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Credit_Trx_Header" custom="true">
       <text><![CDATA[SELECT     Invoice_NO, Invoice_Date, Trx_ID, Sys_Number, Vendor_Name, Project_Code, Dept_Code, Header_Net, APPLY_BAL, Header_Net_BC, APPLY_BAL_BC, RetentionYN, 
@@ -8,64 +8,64 @@ FROM         dbo.Credit_Trx_Header]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Invoice_NO" type="Decimal" label="^InvNO^Invoice NO^InvNO^" showInSummary="true" />
-    <field name="Invoice_Date" type="DateTime" label="^InvDat^Invoice Date^InvDat^" showInSummary="true" />
-    <field name="Trx_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TrxId^Trx#^TrxId^" readOnly="true" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" showInSummary="true" />
-    <field name="Vendor_Name" type="String" label="^ParNam^Party Name^ParNam^" length="150" showInSummary="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="Header_Net" type="Decimal" label="^InvNet^Invoice Net^InvNet^" dataFormatString="N2" />
-    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Apply Bal^AppBal^" />
-    <field name="Header_Net_BC" type="Decimal" label="^InvNetBC^Invoice Net (BC)^InvNetBC^" readOnly="true" />
-    <field name="APPLY_BAL_BC" type="Decimal" label="^AppBalBC^Apply Bal (BC)^AppBalBC^" />
-    <field name="RetentionYN" type="Int32" label="^RetYN^Retention YN^RetYN^">
+    <field name="Invoice_NO" type="Decimal" label="^InvNO^Invoice No^InvNO^" />
+    <field name="Invoice_Date" type="DateTime" label="^InvoiceDate^Invoice Date^InvoiceDate^" showInSummary="true" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TraId^Transaction ^TraId^" readOnly="true" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" showInSummary="true" />
+    <field name="Vendor_Name" type="String" label="Party Name" length="150" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Header_Net" type="Decimal" label="^InvoiceNet^Invoice Net^InvoiceNet^" dataFormatString="N2" />
+    <field name="APPLY_BAL" type="Decimal" label="^ApplyBal^Apply Bal^ApplyBal^" />
+    <field name="Header_Net_BC" type="Decimal" label="^InvoiceNetBC^Invoice Net (BC)^InvoiceNetBC^" readOnly="true" />
+    <field name="APPLY_BAL_BC" type="Decimal" label="^ApplyBalBC^Apply Bal (BC)^ApplyBalBC^" />
+    <field name="RetentionYN" type="Int32" label="^RetentionYN^Retention YN^RetentionYN^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
     <field name="Retention_ReleasedYN" type="Int32" label="^RetRelYN^Ret. Rel. YN^RetRelYN^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="RefreshBalance" type="Int32" label="^RefBal^Refresh Balance^RefBal^" />
-    <field name="Cur_Rate" type="Decimal" allowNulls="false" label="^CurRat^Cur Rate^CurRat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="Currency_Code" type="Decimal" allowNulls="false" label="^CurCod^Curr^CurCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^Module^ApaFla^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="RefreshBalance" type="Int32" label="^RefreshBalance^Refresh Balance^RefreshBalance^" />
+    <field name="Cur_Rate" type="Decimal" allowNulls="false" label="^CurRate^Cur Rate^CurRate^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="Currency_Code" type="Decimal" allowNulls="false" label="^Curr^Curr^Curr^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="APAR_Flag" type="Int32" label="^Module^Module^Module^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList">
         <item value="1" text="Receivable" />
         <item value="2" text="Payable" />
       </items>
     </field>
-    <field name="PostYN" type="Int32" label="^PosYN^Post YN^PosYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="CreditNote" type="Int32" label="^CreNot^Credit Note^CreNot^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="PostYN" type="Int32" label="^PostYN^Post YN^PostYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="CreditNote" type="Int32" label="^CreditNote^Credit Note^CreditNote^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStorNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
       <formula>SELECT @Session_Address_English</formula>
     </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
-      <formula>SELECT @Session_Address_Arabic</formula>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^VieInv^View Invoices^VieInv^" sortExpression="Trx_ID DESC" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="View Invoices" sortExpression="Trx_ID DESC" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Invoice_NO" columns="15" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Invoice_Date" columns="10" />
         <dataField fieldName="Sys_Number" columns="15" />
         <dataField fieldName="Vendor_Name" />
@@ -81,12 +81,12 @@ FROM         dbo.Credit_Trx_Header]]></text>
         <dataField fieldName="Retention_ReleasedYN" columns="15" />
         <dataField fieldName="RefreshBalance" columns="15" hidden="true" />
         <dataField fieldName="OPU_Code" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevCreTraHea^Review Credit Trx Header^RevCreTraHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Credit Trx Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Credit Trx Header" flow="NewColumn">
@@ -109,7 +109,7 @@ FROM         dbo.Credit_Trx_Header]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCreTraHea^New Credit Trx Header^NewCreTraHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Credit Trx Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New Credit Trx Header" flow="NewColumn">

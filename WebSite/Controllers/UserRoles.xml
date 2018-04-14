@@ -1,57 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="UserRoles" conflictDetection="overwriteChanges" label="^UseRol^UserRoles^UseRol^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="UserRoles" conflictDetection="overwriteChanges" label="UserRoles" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="UserRoles" custom="true">
       <text><![CDATA[SELECT * FROM UserRoles ]]></text>
     </command>
   </commands>
   <fields>
-    <field name="UserID" type="Int32" allowNulls="false" label="^UseId^User#^UseId^" isPrimaryKey="true">
+    <field name="UserID" type="Int32" allowNulls="false" label="^User^User#^User^" isPrimaryKey="true">
       <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="RoleID" type="Int32" allowNulls="false" label="^RolId^Role#^RolId^" isPrimaryKey="true">
+    <field name="RoleID" type="Int32" allowNulls="false" label="^Role^Role#^Role^" isPrimaryKey="true">
       <items style="Lookup" dataController="Role_Active" dataView="grid1" dataTextField="RoleID" dataValueField="RoleID" copy="RoleDescription=RoleDescription" />
     </field>
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^Branch Name^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDat^Created Date Time^CreDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDat^Updated Date Time^UpdDat^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" showInSummary="true" />
-    <field name="RoleDescription" type="String" label="^RolDes^Role Description^RolDes^" length="50" />
+    <field name="RoleDescription" type="String" label="Role Description" length="50" />
+    <field name="AddressAr" type="String" readOnly="true" label="^AddressAr^Address Ar^AddressAr^" computed="true">
+      <formula>SELECT @Session_Address_Arabic</formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="^AddressEn^Address En^AddressEn^" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="^ABranchAR^ABranch AR^ABranchAR^" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^UseRol^User Roles^UseRol^" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="User Roles" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
-        <dataField fieldName="UserID" columns="15" />
-        <dataField fieldName="RoleID" columns="15" />
         <dataField fieldName="RoleDescription" columns="50" />
         <dataField fieldName="Created_By" columns="15" hidden="true" />
         <dataField fieldName="Created_DateTime" columns="10" hidden="true" />
         <dataField fieldName="Updated_By" columns="15" hidden="true" />
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
+        <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="RoleID" columns="15" />
         <dataField fieldName="Updated_DateTime" columns="10" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevUseRol^Review User Roles^RevUseRol^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review User Roles" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="User Roles" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiUseRol^Edit User Roles^EdiUseRol^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="UserID" columns="15" />
             <dataField fieldName="RoleID" columns="15" />
@@ -60,11 +72,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewUseRol^New User Roles^NewUseRol^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New User Roles" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New User Roles" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewUseRol^New User Roles^NewUseRol^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="UserID" columns="15" />
             <dataField fieldName="RoleID" columns="15" />
@@ -93,10 +105,10 @@
       <action commandName="Delete" id="a101" whenLastCommandName="Edit" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

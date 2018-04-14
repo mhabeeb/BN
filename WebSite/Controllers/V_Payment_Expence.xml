@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="V_Payment_Expence" conflictDetection="overwriteChanges" label="^VPayExp^V Payment Expence^VPayExp^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="V_Payment_Expence" conflictDetection="overwriteChanges" label="V Payment Expence" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -20,20 +20,20 @@ from "dbo"."V_Payment_Expence" "V_Payment_Expence"
     </command>
   </commands>
   <fields>
-    <field name="PaymentID" type="Decimal" allowNulls="false" label="^PayId^Payment#^PayId^" showInSummary="true" />
-    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PayDat^Payment Date^PayDat^" showInSummary="true" />
-    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmoPai^Amount Paid^AmoPai^" showInSummary="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="200" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
-    <field name="BankCashName" type="String" label="^BanCasNam^Bank Cash Name^BanCasNam^" length="50" />
-    <field name="Account_Description" type="String" allowNulls="false" label="^AccDes^Account Description^AccDes^" length="200" />
-    <field name="PaymentType" type="String" label="^PayTyp^Payment Type^PayTyp^" length="20" />
+    <field name="PaymentID" type="Decimal" allowNulls="false" label="^Payment^Payment#^Payment^" showInSummary="true" />
+    <field name="Payment_Date" type="DateTime" allowNulls="false" label="^PaymentDate^Payment Date^PaymentDate^" showInSummary="true" />
+    <field name="Amount_Paid" type="Decimal" allowNulls="false" label="^AmountPaid^Amount Paid^AmountPaid^" showInSummary="true" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" showInSummary="true" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" showInSummary="true" />
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="200" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Decimal" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="BankCashName" type="String" label="^BankCashName^Bank Cash Name^BankCashName^" length="50" />
+    <field name="Account_Description" type="String" allowNulls="false" label="^AccountDescription^Account Description^AccountDescription^" length="200" />
+    <field name="PaymentType" type="String" label="^PaymentType^Payment Type^PaymentType^" length="20" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^VPayExp^V Payment Expence^VPayExp^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="V Payment Expence" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PaymentID" columns="15" />
@@ -48,7 +48,7 @@ from "dbo"."V_Payment_Expence" "V_Payment_Expence"
         <dataField fieldName="Account_Description" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevVPayExp^Review V Payment Expence^RevVPayExp^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review V Payment Expence" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="V Payment Expence" flow="NewColumn">
@@ -69,7 +69,7 @@ from "dbo"."V_Payment_Expence" "V_Payment_Expence"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewVPayExp^New V Payment Expence^NewVPayExp^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New V Payment Expence" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New V Payment Expence" flow="NewColumn">
@@ -116,7 +116,7 @@ from "dbo"."V_Payment_Expence" "V_Payment_Expence"
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

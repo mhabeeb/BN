@@ -983,7 +983,7 @@ Namespace MyCompany.Data
         
         Public Shared SqlFieldFilterOperationRegex As Regex = New Regex("^(?'Name'\w+?)_Filter_((?'Operation'\w+?)(?'Index'\d*))?$")
         
-        Public Shared SystemSqlParameters() As String = New String() {"BusinessRules_PreventDefault", "Result_Continue", "Result_Refresh", "Result_RefreshChildren", "Result_ShowAlert", "Result_ShowMessage", "Result_ShowViewMessage", "Result_Focus", "Result_Error", "Result_ExecuteOnClient", "Result_NavigateUrl"}
+        Public Shared SystemSqlParameters() As String = New String() {"BusinessRules_PreventDefault", "Result_Continue", "Result_Refresh", "Result_RefreshChildren", "Result_ClearSelection", "Result_KeepSelection", "Result_ShowAlert", "Result_ShowMessage", "Result_ShowViewMessage", "Result_Focus", "Result_Error", "Result_ExecuteOnClient", "Result_NavigateUrl"}
         
         <System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)>  _
         Private m_RequiresRowCount As Boolean
@@ -2704,7 +2704,10 @@ Namespace MyCompany.Data
             End If
             If propertyName.StartsWith("Url_") Then
                 propertyName = propertyName.Substring(4)
-                Dim query As String = Context.Request.UrlReferrer.Query
+                Dim query As String = Nothing
+                If (Not (Context.Request.UrlReferrer) Is Nothing) Then
+                    query = Context.Request.UrlReferrer.Query
+                End If
                 If String.IsNullOrEmpty(query) Then
                     query = Context.Request.Url.Query
                 End If
@@ -2794,7 +2797,8 @@ Namespace MyCompany.Data
             If ((systemParameterIndex = -1) AndAlso Not (isProperty)) Then
                 Return false
             End If
-            If ((systemParameterIndex >= 0) AndAlso (systemParameterIndex <= 3)) Then
+            'system bool parameters between BusinessRules_PreventDefault and Result_KeepSelection
+            If ((systemParameterIndex >= 0) AndAlso (systemParameterIndex <= 5)) Then
                 sql.AddParameter(parameterName, 0).Direction = ParameterDirection.InputOutput
             Else
                 Dim value As Object = String.Empty
@@ -2828,48 +2832,60 @@ Namespace MyCompany.Data
                     PreventDefault()
                 End If
             Else
-                If (nameWithoutMarker = "Result_Continue") Then
-                    'continue standard processing on the client
+                If (nameWithoutMarker = "Result_ClearSelection") Then
                     If Not (0.Equals(p.Value)) Then
-                        Result.Continue()
+                        Result.ClearSelection = true
                     End If
                 Else
-                    If isProperty Then
-                        Dim currentValue As Object = GetProperty(nameWithoutMarker)
-                        If Not ((Convert.ToString(currentValue) = Convert.ToString(p.Value))) Then
-                            SetProperty(nameWithoutMarker, p.Value)
+                    If (nameWithoutMarker = "Result_KeepSelection") Then
+                        If Not (0.Equals(p.Value)) Then
+                            Result.KeepSelection = true
                         End If
                     Else
-                        Dim s As String = Convert.ToString(p.Value)
-                        If Not (String.IsNullOrEmpty(s)) Then
-                            If (nameWithoutMarker = "Result_Focus") Then
-                                Dim m As Match = Regex.Match(s, "^\s*(?'FieldName'\w+)\s*(,\s*(?'Message'.+))?$")
-                                Result.Focus(m.Groups("FieldName").Value, m.Groups("Message").Value)
-                            End If
-                            If (nameWithoutMarker = "Result_ShowViewMessage") Then
-                                Result.ShowViewMessage(s)
-                            End If
-                            If (nameWithoutMarker = "Result_ShowMessage") Then
-                                Result.ShowMessage(s)
-                            End If
-                            If (nameWithoutMarker = "Result_ShowAlert") Then
-                                Result.ShowAlert(s)
-                            End If
-                            If (nameWithoutMarker = "Result_Error") Then
-                                Throw New Exception(s)
-                            End If
-                            If (nameWithoutMarker = "Result_ExecuteOnClient") Then
-                                Result.ExecuteOnClient(s)
-                            End If
-                            If (nameWithoutMarker = "Result_NavigateUrl") Then
-                                Result.NavigateUrl = s
+                        If (nameWithoutMarker = "Result_Continue") Then
+                            'continue standard processing on the client
+                            If Not (0.Equals(p.Value)) Then
                                 Result.Continue()
                             End If
-                            If (nameWithoutMarker = "Result_Refresh") Then
-                                Result.Refresh()
-                            End If
-                            If (nameWithoutMarker = "Result_RefreshChildren") Then
-                                Result.RefreshChildren()
+                        Else
+                            If isProperty Then
+                                Dim currentValue As Object = GetProperty(nameWithoutMarker)
+                                If Not ((Convert.ToString(currentValue) = Convert.ToString(p.Value))) Then
+                                    SetProperty(nameWithoutMarker, p.Value)
+                                End If
+                            Else
+                                Dim s As String = Convert.ToString(p.Value)
+                                If Not (String.IsNullOrEmpty(s)) Then
+                                    If (nameWithoutMarker = "Result_Focus") Then
+                                        Dim m As Match = Regex.Match(s, "^\s*(?'FieldName'\w+)\s*(,\s*(?'Message'.+))?$")
+                                        Result.Focus(m.Groups("FieldName").Value, m.Groups("Message").Value)
+                                    End If
+                                    If (nameWithoutMarker = "Result_ShowViewMessage") Then
+                                        Result.ShowViewMessage(s)
+                                    End If
+                                    If (nameWithoutMarker = "Result_ShowMessage") Then
+                                        Result.ShowMessage(s)
+                                    End If
+                                    If (nameWithoutMarker = "Result_ShowAlert") Then
+                                        Result.ShowAlert(s)
+                                    End If
+                                    If (nameWithoutMarker = "Result_Error") Then
+                                        Throw New Exception(s)
+                                    End If
+                                    If (nameWithoutMarker = "Result_ExecuteOnClient") Then
+                                        Result.ExecuteOnClient(s)
+                                    End If
+                                    If (nameWithoutMarker = "Result_NavigateUrl") Then
+                                        Result.NavigateUrl = s
+                                        Result.Continue()
+                                    End If
+                                    If (nameWithoutMarker = "Result_Refresh") Then
+                                        Result.Refresh()
+                                    End If
+                                    If (nameWithoutMarker = "Result_RefreshChildren") Then
+                                        Result.RefreshChildren()
+                                    End If
+                                End If
                             End If
                         End If
                     End If

@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Auto_Unbilled_Shipment_AR" label="^AutUnbilShiAr^Auto_Unbilled_Shipment_AR^AutUnbilShiAr^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Auto_Unbilled_Shipment_AR" label="Auto_Unbilled_Shipment_AR" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.Auto_Unbilled_Shipment_ARBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="dbo.tbl_Transactions_Header" custom="true">
       <text><![CDATA[SELECT     Transaction_ID, Transaction_Type, Transaction_Date, Sys_Number, Vendor_Name, Dept_Code, Project_Code, Transaction_No, PostYN, APAR_Flag, Approve, 
-                      OPU_Code, Company_Code, StoreID, Payment_Terms, RefreshTrx
+                      OPU_Code, Company_Code, StoreID, Payment_Terms, RefreshTrx,
+					  CAST(Transaction_ID as varchar(50))"ZZ_Filter_Value"     
 FROM         dbo.tbl_Transactions_Header
 WHERE     (Transaction_ID IN
                           (SELECT     Transaction_ID
@@ -13,52 +14,65 @@ WHERE     (Transaction_ID IN
     </command>
   </commands>
   <fields>
-    <field name="Transaction_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TraId^Transaction#^TraId^" readOnly="true" />
-    <field name="Transaction_No" type="Decimal" label="^TraNo^Transaction No^TraNo^" />
-    <field name="Transaction_Type" type="String" label="^TraTyp^Transaction Type^TraTyp^" length="25" showInSummary="true" />
-    <field name="Transaction_Date" type="DateTime" label="^TraDat^Transaction Date^TraDat^" showInSummary="true" />
-    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" showInSummary="true" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" showInSummary="true" />
-    <field name="Dept_Code" type="String" label="^DeptCod^Dept Code^DeptCod^" length="50" showInSummary="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
+    <field name="Transaction_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^TraId^Transaction ^TraId^" readOnly="true" />
+    <field name="Transaction_No" type="Decimal" label="^TransactionNo^Transaction No^TransactionNo^" />
+    <field name="Transaction_Type" type="String" label="^TransactionType^Transaction Type^TransactionType^" length="25" />
+    <field name="Transaction_Date" type="DateTime" label="^TransactionDate^Transaction Date^TransactionDate^" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Party Name^VenNam^" readOnly="true" length="150" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
     <field name="PostYN" type="Int32" label="^PosYn^Post YN^PosYn^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="APAR_Flag" type="Int32" label="^APARFla^APAR Flag^APARFla^" />
-    <field name="Approve" type="Int32" label="^App^Approve^App^" />
-    <field name="Payment_Terms" type="Int32" label="^PayTer^Payment Terms^PayTer^" />
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="StoreID" type="Int32" label="^StoId^Store#^StoId^" />
-    <field name="RefreshTrx" type="Decimal" allowNulls="false" label="^RefTrx^Refresh Trx^RefTrx^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^AStoNam^Store Name^AStoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="APAR_Flag" type="Int32" label="^APARFlag^APAR Flag^APARFlag^" />
+    <field name="Approve" type="Int32" label="^Approve^Approve^Approve^" />
+    <field name="Payment_Terms" type="Int32" label="^PaymentTerms^Payment Terms^PaymentTerms^" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="StoreID" type="Int32" label="^StoId^Store ^StoId^" />
+    <field name="RefreshTrx" type="Decimal" allowNulls="false" label="^RefreshTrx^Refresh Trx^RefreshTrx^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="OPU_Code" />
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" sourceFields="OPU_Code" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
+    <field name="ZZ_Controller" type="String" label="Controller" computed="true">
+      <formula>'Auto_Unbilled_Shipment_AR'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'Auto_Unbilled_Shipment_AR_grid1'</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^UnbilShi^Unbilled Shipment^UnbilShi^" filter="OPU_Code=@Session_OPU_Code" sortExpression="Transaction_ID DESC" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Unbilled Shipment" filter="OPU_Code=@Session_OPU_Code" sortExpression="Transaction_ID DESC" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Transaction_ID" columns="15" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Transaction_No" columns="15" />
         <dataField fieldName="Vendor_Name" />
         <dataField fieldName="Transaction_Type" columns="25" />
@@ -74,13 +88,16 @@ WHERE     (Transaction_ID IN
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="StoreID" columns="15" />
         <dataField fieldName="RefreshTrx" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevTraHea^Review Transactions Header^RevTraHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Transactions Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="dbo tbl Transactions Header" flow="NewColumn">
@@ -104,7 +121,7 @@ WHERE     (Transaction_ID IN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewTraHea^New Transactions Header^NewTraHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Transactions Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New dbo tbl Transactions Header" flow="NewColumn">
@@ -179,6 +196,9 @@ UPDATE tbl_Transactions_Header
 SET RefreshTrx=@A  WHERE Transaction_ID=@Transaction_ID]]></data>
       </action>
     </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintAutoUnbilledShipmentAR" headerText="^PriUnbInvAr^Print Unbilled Invoices AR^PriUnbInvAr^" id="a100" cssClass="glyphicon glyphicon-print" />
+    </actionGroup>
   </actions>
   <businessRules>
     <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
@@ -191,5 +211,6 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
+    <rule id="r102" commandName="Custom" commandArgument="PrintAutoUnbilledShipmentAR" type="Code" phase="Execute" />
   </businessRules>
 </dataController>

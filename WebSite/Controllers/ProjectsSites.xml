@@ -1,63 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="ProjectsSites" conflictDetection="overwriteChanges" label="^ProSit^ProjectsSites^ProSit^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ProjectsSites" conflictDetection="overwriteChanges" label="ProjectsSites" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="ProjectsSites" custom="true">
       <text><![CDATA[SELECT * FROM ProjectsSites]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Project_Code" type="String" allowNulls="false" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" isPrimaryKey="true">
+    <field name="Project_Code" type="String" allowNulls="false" label="^ProjectCode^Project Code^ProjectCode^" length="50" showInSummary="true" isPrimaryKey="true">
       <items style="Lookup" dataController="ProjectMaster" dataView="grid1" dataTextField="Project_Name" dataValueField="Project_Code" copy="BudgetCode=BudgetCode&#xD;&#xA;OPU_Code_Ln=OPU_Code" />
     </field>
-    <field name="SiteCode" type="String" allowNulls="false" label="^SitCod^Site Code^SitCod^" length="50" showInSummary="true" isPrimaryKey="true" />
-    <field name="JOBNO" type="String" label="^JOBNO^JOBNO^JOBNO^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="25" />
-    <field name="SiteName" type="String" label="^SitNam^Site Name^SitNam^" length="500" showInSummary="true" allowNulls="false" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" showInSummary="true">
+    <field name="SiteCode" type="String" label="^SiteCode^Site Code^SiteCode^" length="50" showInSummary="true" isPrimaryKey="true" allowNulls="false" />
+    <field name="JOBNO" type="String" label="^JobNum^Job No.^JobNum^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="25" />
+    <field name="SiteName" type="String" label="^SiteName^Site Name^SiteName^" length="500" showInSummary="true" allowNulls="false" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" showInSummary="true">
       <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserFullName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" showInSummary="true" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^">
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" showInSummary="true" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^">
       <items style="DropDownList" dataController="Users" dataView="grid1" dataTextField="UserFullName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="Site_Start_Date" type="DateTime" label="^SitStaDat^Site Start Date^SitStaDat^" allowNulls="false" />
-    <field name="Site_End_Date" type="DateTime" label="^SitEndDat^Site End Date^SitEndDat^" allowNulls="false" />
-    <field name="Site_Location" type="String" label="^SitLoc^Site Location^SitLoc^" length="50" />
-    <field name="Site_Status" type="String" label="^SitSta^Site Status^SitSta^" length="50" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^CompNam^Company Name^CompNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^BrNam^BranchName^BrNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="Site_Start_Date" type="DateTime" label="^SiteStartDate^Site Start Date^SiteStartDate^" allowNulls="false" />
+    <field name="Site_End_Date" type="DateTime" label="^SiteEndDate^Site End Date^SiteEndDate^" allowNulls="false" />
+    <field name="Site_Location" type="String" label="^SiteLocation^Site Location^SiteLocation^" length="50" />
+    <field name="Site_Status" type="String" label="^SiteStatus^Site Status^SiteStatus^" length="50" />
+    <field name="ABranch" type="String" allowNulls="false" label="^BrName^BranchName^BrName^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
       <formula>SELECT @Session_BranchName </formula>
     </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrNam^Store Name^StrNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StrName^Store Name^StrName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
       <formula>SELECT  @Session_StoreName</formula>
     </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
+    <field name="ACompanyName" type="String" allowNulls="false" label="^CompName^Company Name^CompName^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
     </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="BudgetCode" type="Decimal" label="^BudCod^Budget Code^BudCod^">
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="BudgetCode" type="Decimal" label="^BudCod^Est. Cost Budget^BudCod^">
       <items style="Lookup" dataController="Pick_Budget_Master" dataView="grid1" dataTextField="BudgetCode" dataValueField="BudgetCode" />
     </field>
-    <field name="Site_Value" type="Decimal" label="^SitVal^Site Value^SitVal^" allowNulls="false" />
-    <field name="OPU_Code_Ln" type="Int32" allowNulls="false" label="^OPUCod^OPU Code Ln^OPUCod^" />
+    <field name="Site_Value" type="Decimal" label="Site Value" allowNulls="false" />
+    <field name="OPU_Code_Ln" type="Int32" allowNulls="false" label="OPU Code Ln" />
+    <field name="IsRollover" type="Int16" allowNulls="false" label="Is Rollover">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="CompletePer" type="Decimal" label="Complete Per" />
+    <field name="Cost_Budget" type="Decimal" label="Cost Budget" />
+    <field name="AccountID" type="String" label="Account ID" length="50" allowNulls="false">
+      <items style="Lookup" dataController="Pick_COA_Cross_Rules" dataView="grid1" dataTextField="Account_Description" dataValueField="AccountID" />
+    </field>
+    <field name="Dept_Code" type="String" label="Dept Code" length="50">
+      <items style="Lookup" dataController="Pick_Department" dataView="grid1" dataTextField="Dept_Code" dataValueField="Dept_Code" />
+    </field>
+    <field name="S1" type="String" label="S1" length="50" />
+    <field name="S2" type="String" label="S2" length="50" />
+    <field name="S3" type="String" label="S3" length="50" />
+    <field name="S4" type="String" label="S4" length="50" />
+    <field name="S5" type="String" label="S5" length="50" />
+    <field name="SiteName_AR" type="String" label="Site Name AR" length="250" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ProSit^Projects Sites^ProSit^" showInSelector="false" reportTemplate="true" filter="OPU_Code_Ln=@Session_OPU_Code">
+    <view id="grid1" type="Grid" commandId="command1" label="Projects Sites" showInSelector="false" reportTemplate="true" filter="OPU_Code_LN=@Session_OPU_Code AND Project_Code IN (SELECT&#xD;&#xA;       [Project_Code]&#xD;&#xA;       FROM [dbo].[UserProjectAccess]&#xD;&#xA;       WHERE [UserID] = @BusinessRules_UserId)">
       <headerText />
       <dataFields>
+        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Project_Code" columns="50" />
         <dataField fieldName="SiteCode" columns="50" />
         <dataField fieldName="SiteName" />
@@ -65,74 +82,85 @@
         <dataField fieldName="Site_End_Date" columns="10" />
         <dataField fieldName="Site_Location" columns="50" />
         <dataField fieldName="Site_Status" columns="50" hidden="true" />
+        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="Updated_By" hidden="true" columns="15" />
         <dataField fieldName="Created_By" hidden="true" columns="15" />
         <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
-        <dataField fieldName="Updated_By" hidden="true" columns="15" />
-        <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="AddressAr" rows="5" hidden="true" />
         <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
-        <dataField fieldName="AddressAr" rows="5" hidden="true" />
-        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
         <dataField fieldName="Site_Value" columns="15" />
         <dataField fieldName="BudgetCode" columns="15" />
+        <dataField fieldName="IsRollover" columns="15" />
+        <dataField fieldName="OPU_Code_Ln" columns="15" />
+        <dataField fieldName="CompletePer" columns="15" dataFormatString="N2" />
+        <dataField fieldName="Cost_Budget" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevProSit^Review Projects Sites^RevProSit^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Projects Sites" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="Projects Sites" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^EdiProSit^Edit Projects Sites^EdiProSit^" flow="NewColumn">
+          <description />
           <dataFields>
+            <dataField fieldName="Cost_Budget" columns="20" />
+            <dataField fieldName="BudgetCode" columns="15" />
+            <dataField fieldName="JOBNO" columns="20" />
+            <dataField fieldName="Site_End_Date" columns="20" />
+            <dataField fieldName="Site_Location" columns="20" />
+            <dataField fieldName="IsRollover" columns="15" />
+            <dataField fieldName="Site_Status" columns="50" hidden="true" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="SiteName_AR" columns="20" />
+            <dataField fieldName="Site_Value" columns="20" />
+            <dataField fieldName="SiteName" columns="20" />
             <dataField fieldName="Project_Code" columns="50" />
-            <dataField fieldName="SiteCode" columns="50" />
-            <dataField fieldName="SiteName" />
+            <dataField fieldName="SiteCode" columns="20" />
+            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
+            <dataField fieldName="Site_Start_Date" columns="20" />
+            <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Updated_By" hidden="true" columns="15" />
-            <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Site_Start_Date" columns="10" />
-            <dataField fieldName="Site_End_Date" columns="10" />
-            <dataField fieldName="Site_Location" columns="25" rows="2" />
-            <dataField fieldName="Site_Status" columns="50" hidden="true" />
-            <dataField fieldName="JOBNO" columns="25" />
-            <dataField fieldName="Site_Value" columns="15" />
-            <dataField fieldName="BudgetCode" columns="15" />
-            <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewProSit^New Projects Sites^NewProSit^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Projects Sites" showInSelector="false">
       <headerText />
       <categories>
-        <category id="c1" headerText="New Projects Sites" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewProSit^New Projects Sites^NewProSit^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Project_Code" columns="50" />
-            <dataField fieldName="SiteCode" columns="50" />
-            <dataField fieldName="SiteName" />
+            <dataField fieldName="SiteCode" columns="20" />
+            <dataField fieldName="SiteName" columns="20" />
+            <dataField fieldName="SiteName_AR" columns="20" />
+            <dataField fieldName="Site_Value" columns="20" />
             <dataField fieldName="Created_By" hidden="true" columns="15" />
             <dataField fieldName="Created_DateTime" hidden="true" dataFormatString="t" columns="10" />
             <dataField fieldName="Updated_By" hidden="true" columns="15" />
             <dataField fieldName="Updated_DateTime" hidden="true" dataFormatString="t" columns="10" />
-            <dataField fieldName="Site_Start_Date" columns="10" />
-            <dataField fieldName="Site_End_Date" columns="10" />
-            <dataField fieldName="Site_Location" columns="25" rows="2" />
-            <dataField fieldName="Site_Status" columns="50" hidden="true" />
-            <dataField fieldName="JOBNO" columns="25" />
-            <dataField fieldName="Site_Value" columns="15" />
+            <dataField fieldName="Site_Start_Date" columns="20" />
+            <dataField fieldName="Site_End_Date" columns="20" />
+            <dataField fieldName="Site_Location" columns="20" />
+            <dataField fieldName="JOBNO" columns="20" />
+            <dataField fieldName="Cost_Budget" columns="20" />
             <dataField fieldName="BudgetCode" columns="15" />
             <dataField fieldName="OPU_Code_Ln" columns="15" hidden="true" />
+            <dataField fieldName="Dept_Code" columns="50" />
+            <dataField fieldName="AccountID" columns="50" />
+            <dataField fieldName="IsRollover" columns="15" />
+            <dataField fieldName="Site_Status" columns="50" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
   </views>
   <actions>
-    <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
-    </actionGroup>
+    <actionGroup id="ag1" scope="Grid" />
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
       <action id="a3" commandName="Cancel" />
@@ -147,10 +175,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -178,8 +206,15 @@
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+    <actionGroup id="ag100" scope="ActionBar" headerText="^CopTas^Copy Task^CopTas^" flat="true">
+      <action commandName="SQL" headerText="Copy Tasks From Templates" id="a102" confirmation="_controller=Param_Pick_Project_and_Sites &#xD;&#xA;_title=Copy Tasks From Project&#xD;&#xA;_width=500" whenLastCommandName="Select">
+        <data><![CDATA[EXEC [dbo].[COPY_PROJECT_TASKS]
+     @Project_Code ,
+     @SiteCode ,
+     @Parameters_Project_Code ,
+     @Parameters_SiteCode ,
+     @BusinessRules_UserId]]></data>
+      </action>
     </actionGroup>
   </actions>
   <businessRules>
@@ -194,6 +229,56 @@ end]]></rule>
 begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
+end]]></rule>
+    <rule id="r103" type="Sql" commandName="Insert|Update" phase="Before" name="Site_End_Date_Validator"><![CDATA[if @Site_Start_Date >= @Site_End_Date
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Site_End_Date,Site End Date Should be greater then Start Date'
+end
+]]></rule>
+    <rule id="r104" type="Sql" commandName="Insert|Update" phase="Before" name="Site_Start_Date_Validator"><![CDATA[DECLARE @IIsRollover         INT ,
+        @Project_Start_Date DATETIME ,
+        @Project_End_Date   DATETIME
+
+SELECT
+       @IIsRollover = IsNull(IsRollover , 0) ,
+       @Project_Start_Date = Project_Start_Date ,
+       @Project_End_Date = Project_End_Date
+       FROM tbl_Projects
+       WHERE Project_Code = @Project_Code
+
+IF @Site_Start_Date < @Project_Start_Date
+   AND
+   IsNull(@IIsRollover , 0) = 0
+    BEGIN
+        SET @BusinessRules_PreventDefault = 1
+        SET @Result_Focus = 'Site_Start_Date,Site Start date Cannot be Before Project Start Date '
+		+CAST(@Project_Start_Date AS NVARCHAR(12))
+    END
+
+IF @Site_End_Date > @Project_End_Date
+   AND
+   IsNull(@IIsRollover , 0) = 0
+    BEGIN
+       SET @BusinessRules_PreventDefault = 1
+       SET @Result_Focus = 'Site_End_Date,Site End date Cannot be after Project End Date '
+	   +CAST(@Project_End_Date AS NVARCHAR(12))
+    END
+	IF @Site_End_Date < @Site_Start_Date
+ 
+    BEGIN
+       SET @BusinessRules_PreventDefault = 1
+       SET @Result_Focus = 'Site_End_Date,Site End date Cannot be after Site Start Date '
+	   +CAST(@Project_End_Date AS NVARCHAR(12))
+    END]]></rule>
+    <rule id="r105" type="Sql" commandName="Insert|Update" phase="Before" name="SiteCode_Validator"><![CDATA[IF LEN(@SiteCode) <> dbo.DEFAULT_SEGMENT_LENGTH('Site',@BusinessRules_UserId)
+begin
+    /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'SiteCode,Length must be equal to Default Site Length'
 end]]></rule>
   </businessRules>
 </dataController>

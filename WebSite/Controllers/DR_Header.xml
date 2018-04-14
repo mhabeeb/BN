@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="DR_Header" conflictDetection="overwriteChanges" label="^DepHea^DR_Header^DepHea^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="DR_Header" conflictDetection="overwriteChanges" label="DR_Header" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="DR_Header" custom="true">
       <text><![CDATA[SELECT        DR_No, DR_ID, DR_Type, DR_Date, OPU_Code, Company_Code, Remarks, ReleaseDR, Created_By, Created_DateTime, Updated_By, Updated_DateTime, StoreID, Approve_Ask, Rec_Status, DOC_TYPE_ID, 
@@ -10,37 +10,43 @@ WHERE        (DR_Type = N'Sales')]]></text>
   </commands>
   <fields>
     <field name="DR_No" type="Decimal" label="^DRNo^DR No^DRNo^" showInSummary="true" />
-    <field name="DR_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DrId^Dr#^DrId^" readOnly="true" showInSummary="true" />
-    <field name="DR_Type" type="String" label="^DRTyp^DR Type^DRTyp^" length="25" showInSummary="true" />
-    <field name="DR_Date" type="DateTime" label="^DRDat^DR Date^DRDat^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OPUCod^OPU Code^OPUCod^" showInSummary="true" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="50" />
-    <field name="ReleaseDR" type="Boolean" label="^RelDR^Release DR^RelDR^" allowNulls="false">
+    <field name="DR_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Dr^Dr#^Dr^" readOnly="true" showInSummary="true" />
+    <field name="DR_Type" type="String" label="^DRType^DR Type^DRType^" length="25" showInSummary="true" />
+    <field name="DR_Date" type="DateTime" label="^DRDate^DR Date^DRDate^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="50" />
+    <field name="ReleaseDR" type="Boolean" label="^ReleaseDR^Release DR^ReleaseDR^" allowNulls="false">
       <items style="CheckBox" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^">
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^">
+    <field name="Created_DateTime" type="DateTime" label="^CretdDtTm^Created Date Time^CretdDtTm^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^">
       <items style="DropDownList" dataController="Pick_Users" dataView="grid1" dataTextField="UserName" dataValueField="UserID" />
     </field>
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTime^Updated Date Time^UpdDatTme^" />
-    <field name="StoreID" type="Int32" label="^StoId^Store#^StoId^" />
-    <field name="DOC_TYPE_ID" type="Int32" label="^DocTypId^DOC TYPE ID^DocTypId^" />
-    <field name="Approve_Ask" type="Int32" label="^AppAsk^Approve Ask^AppAsk^">
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="StoreID" type="Int32" label="^Store^Store#^Store^" />
+    <field name="DOC_TYPE_ID" type="Int32" label="DOC TYPE ID" />
+    <field name="Approve_Ask" type="Int32" label="^ApproveAsk^Approve Ask^ApproveAsk^">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="Rec_Status" type="Int32" label="^RecSta^Rec Status^RecSta^">
+    <field name="Rec_Status" type="Int32" label="^RecStatus^Rec Status^RecStatus^">
       <items style="RadioButtonList" dataController="Rec_Status" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="App_Group_ID" type="Int64" label="^AppGroId^App Group ID^AppGroId^" contextFields="DOC_TYPE_ID=DOC_TYPE_ID">
+    <field name="App_Group_ID" type="Int64" label="App Group ID" contextFields="DOC_TYPE_ID=DOC_TYPE_ID">
       <items style="DropDownList" dataController="Pick_Approval_Hirarchy" dataView="grid1" dataTextField="ApprovalGroupName" dataValueField="App_Group_ID" />
+    </field>
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^DrHea^DR Header^DrHea^" sortExpression="DR_No desc" reportTemplate="true" filter="OPU_Code=@Session_OPU_Code " showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="DR Header" sortExpression="DR_No desc" reportTemplate="true" filter="OPU_Code=@Session_OPU_Code " showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="DR_No" columns="15" />
@@ -61,7 +67,7 @@ WHERE        (DR_Type = N'Sales')]]></text>
         <dataField fieldName="App_Group_ID" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevDrHea^Review DR Header^RevDrHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review DR Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="DR Header" flow="NewColumn">
@@ -87,7 +93,7 @@ WHERE        (DR_Type = N'Sales')]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewDrHea^New DR Header^NewDrHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New DR Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New DR Header" flow="NewColumn">
@@ -113,14 +119,14 @@ WHERE        (DR_Type = N'Sales')]]></text>
         </category>
       </categories>
     </view>
-    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
+    <view id="About" commandId="command1" type="Form" label="Record History" showInSelector="false">
       <categories>
         <category id="c1" headerText="SO Header" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Created_By" columns="15" />
             <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
-            <dataField fieldName="Updated_By" columns="15" />
             <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Created_By" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -129,7 +135,6 @@ WHERE        (DR_Type = N'Sales')]]></text>
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -145,10 +150,10 @@ WHERE        (DR_Type = N'Sales')]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -176,9 +181,6 @@ WHERE        (DR_Type = N'Sales')]]></text>
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
-    </actionGroup>
     <actionGroup id="ag102" scope="ActionBar" headerText="^AboutRecord^About Record^AboutRecord^" flat="true">
       <action commandName="EditModal" commandArgument="About" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />
     </actionGroup>
@@ -186,7 +188,7 @@ WHERE        (DR_Type = N'Sales')]]></text>
       <action commandName="SQL" headerText="Re-Open" id="a101" cssClass="glyphicon glyphicon-ok" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==1">
         <data><![CDATA[EXECUTE [dbo].[REOPEN_DOCUMENT_STATUS] @DR_ID,@DOC_TYPE_ID]]></data>
       </action>
-      <action commandName="SQL" headerText="Ask Approval" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0">
+      <action commandName="SQL" headerText="Ask Approval" id="a100" whenLastCommandName="Select" whenClientScript="[Approve_Ask]==0" cssClass="glyphicon glyphicon-question-sign">
         <data><![CDATA[EXEC XX_UPDATE_ASK_STATUS @DR_ID, @DOC_TYPE_ID,1,@BusinessRules_UserId]]></data>
       </action>
     </actionGroup>

@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="CustomerLedger" conflictDetection="overwriteChanges" label="^CusLed^CustomerLedger^CusLed^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="CustomerLedger" conflictDetection="overwriteChanges" label="CustomerLedger" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="Row" type="Int32" label="^Row^Row^Row^" showInSummary="true" />
-    <field name="Ven_RefNo" type="String" label="^VenRefNo^Ven Ref No^VenRefNo^" length="25" showInSummary="true" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" showInSummary="true" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" showInSummary="true" />
-    <field name="APAR_Flag" type="Int32" label="^ApaFla^APAR Flag^ApaFla^" showInSummary="true" />
-    <field name="DOC_Type" type="String" label="^DocTyp^DOC Type^DocTyp^" length="7" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
-    <field name="TRX_Date" type="DateTime" label="^TrxDat^TRX Date^TrxDat^" />
-    <field name="DOC_NO" type="Decimal" label="^DocNo^Doc No^DocNo^" />
-    <field name="Trx_ID" type="Decimal" label="^TrxId^Trx#^TrxId^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
-    <field name="Invoice_Amt" type="Decimal" label="^InvAmt^Invoice Amt^InvAmt^" />
-    <field name="Amount_Paid" type="Decimal" label="^AmoPai^Amount Paid^AmoPai^" />
-    <field name="APPLY_BAL" type="Decimal" label="^AppBal^Apply Bal^AppBal^" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="200" />
-    <field name="Company_Code" type="Decimal" label="^ComCod^Company Code^ComCod^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="Trx_Type" type="String" label="^TrxTyp^Trx Type^TrxTyp^" length="50" />
-    <field name="RunningTotal" type="Decimal" label="^RunTot^Running Total^RunTot^" />
-    <field name="Opening" type="Decimal" label="^Ope^Opening^Ope^" readOnly="true" />
+    <field name="Row" type="Int32" label="Row" />
+    <field name="Ven_RefNo" type="String" label="^VenRefNo^Party Ref No^VenRefNo^" length="25" />
+    <field name="Project_Code" type="String" label="Project Code" length="50" />
+    <field name="Dept_Code" type="String" label="Dept Code" length="50" />
+    <field name="APAR_Flag" type="Int32" label="APAR Flag" />
+    <field name="DOC_Type" type="String" label="DOC Type" length="7" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="TRX_Date" type="DateTime" label="TRX Date" />
+    <field name="DOC_NO" type="Decimal" label="Doc No" />
+    <field name="Trx_ID" type="Decimal" label="Trx#" />
+    <field name="Vendor_Name" type="String" label="^VenNam^Party Name^VenNam^" length="150" />
+    <field name="Invoice_Amt" type="Decimal" label="Invoice Amt" />
+    <field name="Amount_Paid" type="Decimal" label="Amount Paid" />
+    <field name="APPLY_BAL" type="Decimal" label="Apply Bal" />
+    <field name="Remarks" type="String" label="Remarks" length="200" />
+    <field name="Company_Code" type="Decimal" label="Company Code" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="Trx_Type" type="String" label="Trx Type" length="50" />
+    <field name="AMOUNT_BC" type="Decimal" label="^AmoBc^AMOUNT BC^AmoBc^" />
+    <field name="Location_Name" type="String" label="^LocNam^Location Name^LocNam^" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^CusLed^Customer Ledger^CusLed^" reportTemplate="true" showInSelector="false" filter="APAR_Flag=1">
+    <view id="grid1" type="Grid" commandId="command1" label="Customer Ledger" reportTemplate="true" showInSelector="false" filter="APAR_Flag=1">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Row" columns="15" hidden="true" />
@@ -43,13 +43,13 @@
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="Trx_Type" columns="50" />
-        <dataField fieldName="RunningTotal" dataFormatString="N2" columns="15" />
         <dataField fieldName="Remarks" />
-        <dataField fieldName="Opening" dataFormatString="N2" columns="15" hidden="true" />
         <dataField fieldName="APAR_Flag" columns="15" hidden="true" />
+        <dataField fieldName="Location_Name" columns="50" />
+        <dataField fieldName="AMOUNT_BC" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevCusLed^Review Customer Ledger^RevCusLed^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Customer Ledger" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Customer Ledger" flow="NewColumn">
@@ -73,13 +73,11 @@
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Trx_Type" columns="50" />
-            <dataField fieldName="RunningTotal" dataFormatString="c" columns="15" />
-            <dataField fieldName="Opening" dataFormatString="c" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCusLed^New Customer Ledger^NewCusLed^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Customer Ledger" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New Customer Ledger" flow="NewColumn">
@@ -103,7 +101,6 @@
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Trx_Type" columns="50" />
-            <dataField fieldName="RunningTotal" dataFormatString="c" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -131,8 +128,8 @@
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="&#x9;glyphicon glyphicon-trash" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -158,10 +155,12 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Refresh Report" flat="true">
-      <action commandName="SQL" headerText="Refresh Report" id="a100" confirmation="_controller=Parameter_Cust_Ledger&#xD;&#xA;_title=Select Customer Details&#xD;&#xA;_width=500">
-        <data><![CDATA[EXEC [dbo].[VENDOR_STATMENT_FINAL] @Parameters_PartyName,@Parameters_FromDate,@Parameters_EndDate
-]]></data>
+    <actionGroup id="ag100" scope="ActionBar" headerText="^RefRep^Refresh Report^RefRep^" flat="true">
+      <action commandName="SQL" headerText="^RefRep^Refresh Report^RefRep^" id="a100" confirmation="_controller=Parameter_Cust_Ledger_enddate&#xD;&#xA;_title=Select Party Details&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-refresh">
+        <data><![CDATA[--EXEC [dbo].[VENDOR_STATMENT_FINAL] @Parameters_PartyName,@Parameters_FromDate,@Parameters_EndDate
+SET @Session_FromDate = DATEADD(YEAR,-30,GETDATE())
+SET @Session_EndDate =@Parameters_EndDate
+SET @Session_LocationID =@Parameters_LocationID]]></data>
       </action>
     </actionGroup>
   </actions>
@@ -189,18 +188,80 @@ if (@Parameters_PartyName is not null)
     <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[--DECLARE @Session_FromDate DATETIME, @Session_EndDate DATETIME, @Session_PartyName NUMERIC(18, 0)
 
 IF(@Session_FromDate IS NULL)
-    SET @Session_FromDate = GETDATE() - 30
+    SET @Session_FromDate = DATEADD(YEAR,-30,GETDATE())
 IF(@Session_EndDate IS NULL)
     SET @Session_EndDate = GETDATE()
-IF(@Session_PartyName IS NULL)
-    SELECT @Session_PartyName = MAX(Sys_Number)
-    FROM Credit_Trx_Header
-    WHERE OPU_Code = @Session_OPU_Code
-          AND APAR_Flag = 1
-EXEC [dbo].[VENDOR_STATMENT_FINAL]
-     @Session_PartyName,
-     @Session_FromDate,
-     @Session_EndDate]]></rule>
+
+IF(@Session_EndDate IS NULL)
+    SET @Session_EndDate = GETDATE()
+
+	
+IF (@Session_PartyName IS NULL)
+Set @Session_PartyName=99999999
+
+IF @Session_LocationID IS NULL 
+SET @Session_LocationID=0
+
+	 
+	 SELECT
+       ROW_NUMBER() OVER(ORDER BY TRX_Date ASC) AS Row ,
+       *
+       FROM ( SELECT
+                     [Header_Net_BC]   AMOUNT_BC ,
+                     Ven_RefNo ,
+                     Project_Code ,
+                     Dept_Code ,
+                     APAR_Flag ,
+                     'Invoice'         DOC_Type ,
+                     Sys_Number ,
+                     Invoice_Date      TRX_Date ,
+                     Doc_No            DOC_NO ,
+                     Trx_ID ,
+                     Vendor_Name ,
+                     Header_Net        Invoice_Amt ,
+                     0                 Amount_Paid ,
+                     APPLY_BAL ,
+                     Remarks ,
+                     Company_Code ,
+                     OPU_Code ,
+                     InvoiceTypes      Trx_Type ,
+                     [LocationID] ,
+                     [Location_Name] ,
+                     [Currency_Code_T] Currency_Code,[Cur_Rate]
+                     FROM [dbo].[Credit_Trx_Header]
+                     WHERE IsNull(Sys_Number , 0) = @Session_PartyName and Rec_Status=1 AND PostYN=1
+			 and LocationID=@Session_LocationID
+			 AND APAR_Flag=1
+			 AND Invoice_Date <= @Session_EndDate
+              UNION
+              SELECT
+                     [Amount_Paid_BC] * -1 AMOUNT_BC ,
+                     Ven_RefNo ,
+                     Project_Code ,
+                     Dept_Code ,
+                     APAR_Flag ,
+                     'Payment'        DOC_Type ,
+                     Sys_Number ,
+                     Payment_Date     TRX_Date ,
+                     Doc_No           DOC_NO ,
+                     PaymentID ,
+                     Vendor_Name ,
+                     0                Invoice_Amt ,
+                     Amount_Paid ,
+                     PMT_APPLY_BAL ,
+                     Remarks ,
+                     Company_Code ,
+                     OPU_Code ,
+                     PaymentType      Trx_Type ,
+                     [LocationID] ,
+                     [Location_Name] ,
+                     [Currency_Code],[Cur_Rate]
+                     FROM APAR_Payments
+                     WHERE IsNull(Sys_Number , 0) = @Session_PartyName and Rec_Status=1 AND GL_PostedYN=1
+			 and LocationID=@Session_LocationID
+			 AND APAR_Flag=1
+			 AND Payment_Date <=@Session_EndDate
+                                                     ) AS S;]]></rule>
     <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
 -- implement insert here]]></rule>
     <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1

@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="AABranch_Logo" conflictDetection="overwriteChanges" label="^AaBraLog^AABranch_Logo^AaBraLog^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="AABranch_Logo" conflictDetection="overwriteChanges" label="AABranch_Logo" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="AABranch_Logo" custom="true">
       <text><![CDATA[SELECT * FROM AABranch_Logo]]></text>
     </command>
   </commands>
   <fields>
-    <field name="BranchID" type="Int32" allowNulls="false" label="^BraId^Branch#^BraId^" showInSummary="true" isPrimaryKey="true" />
-    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="BranchID" onDemandHandler="AABranch_LogoBranchLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BraLog^Branch Logo^BraLog^" showInSummary="true" />
+    <field name="BranchID" type="Int32" allowNulls="false" label="Branch#" showInSummary="true" isPrimaryKey="true" />
+    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="BranchID" onDemandHandler="AABranch_LogoBranchLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Branch Logo" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^AaBraLog^AA Branch Logo^AaBraLog^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="AA Branch Logo" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="BranchID" columns="15" />
         <dataField fieldName="BranchLogo" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevAaBraLog^Review AA Branch Logo^RevAaBraLog^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review AA Branch Logo" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="AA Branch Logo" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevAaBraLog^Review AA Branch Logo^RevAaBraLog^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="BranchID" columns="15" />
             <dataField fieldName="BranchLogo" columns="15" />
@@ -29,11 +29,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewAaBraLog^New AA Branch Logo^NewAaBraLog^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New AA Branch Logo" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New AA Branch Logo" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewAaBraLog^New AA Branch Logo^NewAaBraLog^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="BranchID" columns="15" />
             <dataField fieldName="BranchLogo" columns="15" />
@@ -58,7 +58,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />

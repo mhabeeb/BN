@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="po_lINESV1" conflictDetection="overwriteChanges" label="^PoLinSv1^po_lINESV1^PoLinSv1^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="po_lINESV1" conflictDetection="overwriteChanges" label="po_lINESV1" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="PO_Line_Items" custom="true">
       <text><![CDATA[SELECT     dbo.PO_Line_Items.PO_NO, dbo.PO_Line_Items.SO_NO, dbo.PO_Line_Items.SO_Line_No, dbo.PO_Line_Items.Item_Code, dbo.PO_Line_Items.PR_NO, 
@@ -30,79 +30,85 @@ FROM         dbo.PO_Header INNER JOIN
   <fields>
     <field name="PO_NO" type="Decimal" allowNulls="false" label="^PoNo^Po No^PoNo^" showInSummary="true" />
     <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" showInSummary="true" />
-    <field name="SO_Line_No" type="Decimal" label="^SoLinNo^SO Line No^SoLinNo^" showInSummary="true" />
-    <field name="Item_Code" type="String" allowNulls="false" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
+    <field name="SO_Line_No" type="Decimal" label="^SOLineNo^SO Line No^SOLineNo^" showInSummary="true" />
+    <field name="Item_Code" type="String" allowNulls="false" label="^ItemCode^Item Code^ItemCode^" length="20" showInSummary="true" />
     <field name="PR_NO" type="Decimal" label="^PrNo^Pr No^PrNo^" showInSummary="true" />
-    <field name="PO_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^PoLinNo^PO Line No^PoLinNo^" readOnly="true" />
-    <field name="PO_Qty" type="Decimal" label="^PoQty^PO Qty^PoQty^" />
-    <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" />
-    <field name="Pick" type="Int16" label="^Pic^Pick^Pic^" />
-    <field name="Pick_Qty" type="Decimal" label="^PicQty^Pick Qty^PicQty^" />
-    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" />
-    <field name="Line_Disc_Percent" type="Decimal" label="^LinDisPer^Line Disc Percent^LinDisPer^" />
-    <field name="Line_Disc_Amount" type="Decimal" label="^LinDisAmo^Line Disc Amount^LinDisAmo^" />
-    <field name="Source_LineID" type="Decimal" label="^SouLinId^Source Line#^SouLinId^" />
-    <field name="Pick_Doc" type="Decimal" label="^PicDoc^Pick Doc^PicDoc^" />
-    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LineRem^" length="255" />
-    <field name="DeliveryDate" type="DateTime" label="^DelDat^Delivery Date^DelDat^" />
-    <field name="CloseYN" type="Int32" label="^CloYn^Close YN^CloYn^" />
-    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" readOnly="true" />
-    <field name="RV_Balance" type="Decimal" label="^RvBal^RV Balance^RvBal^" />
-    <field name="Invoice_Balance" type="Decimal" label="^InvBal^Invoice Balance^InvBal^" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" length="50" />
+    <field name="PO_Line_No" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^POLineNo^PO Line No^POLineNo^" readOnly="true" />
+    <field name="PO_Qty" type="Decimal" label="^POQty^PO Qty^POQty^" />
+    <field name="Unit_Price" type="Decimal" label="^UnitPrice^Unit Price^UnitPrice^" />
+    <field name="Pick" type="Int16" label="^Pick^Pick^Pick^" />
+    <field name="Pick_Qty" type="Decimal" label="^PickQty^Pick Qty^PickQty^" />
+    <field name="Line_Total" type="Decimal" label="^LineTotal^Line Total^LineTotal^" readOnly="true" />
+    <field name="Line_Disc_Percent" type="Decimal" label="^LineDiscPercent^Line Disc Percent^LineDiscPercent^" />
+    <field name="Line_Disc_Amount" type="Decimal" label="^LineDiscAmount^Line Disc Amount^LineDiscAmount^" />
+    <field name="Source_LineID" type="Decimal" label="^SourceLine^Source Line#^SourceLine^" />
+    <field name="Pick_Doc" type="Decimal" label="^PickDoc^Pick Doc^PickDoc^" />
+    <field name="Line_Remarks" type="String" label="^LineRemarks^Line Remarks^LineRemarks^" length="255" />
+    <field name="DeliveryDate" type="DateTime" label="^DeliveryDate^Delivery Date^DeliveryDate^" />
+    <field name="CloseYN" type="Int32" label="^CloseYN^Close YN^CloseYN^" />
+    <field name="Line_Net" type="Decimal" label="^LineNet^Line Net^LineNet^" readOnly="true" />
+    <field name="RV_Balance" type="Decimal" label="^RVBalance^RV Balance^RVBalance^" />
+    <field name="Invoice_Balance" type="Decimal" label="^InvoiceBalance^Invoice Balance^InvoiceBalance^" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" length="500" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" length="50" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" length="50" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CredBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="Sys_Number" type="Decimal" label="^SysNum^Sys Number^SysNum^" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="IsServiceItem" type="Int32" label="^IsSerIte^Is Service Item^IsSerIte^" />
-    <field name="FulFillmentBalance" type="Decimal" label="^FulBal^Ful Fillment Balance^FulBal^" />
-    <field name="DR_Line_ID" type="Decimal" label="^DrLinId^DR Line#^DrLinId^" />
-    <field name="Job_ID" type="Decimal" label="^JobId^Job#^JobId^" />
-    <field name="PO_OPU_Code" type="Int32" label="^PoOpuCod^PO OPU Code^PoOpuCod^" />
-    <field name="PO_Type" type="String" label="^PoTyp^PO Type^PoTyp^" length="30" />
-    <field name="PO_Date" type="DateTime" allowNulls="false" label="^PoDat^PO Date^PoDat^" />
-    <field name="Supplier_QT_No" type="String" label="^SupQtNo^Supplier QT No^SupQtNo^" length="15" />
-    <field name="H_Sys_Number" type="Decimal" label="^HSysNum^H Sys Number^HSysNum^" />
-    <field name="Currency_Code" type="String" label="^CurCod^Currency Code^CurCod^" length="4" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" />
-    <field name="TermsANDConditions" type="String" label="^TerAndCon^Terms AND Conditions^TerAndCon^" length="4000" />
-    <field name="Payment_Terms" type="Int32" label="^PayTer^Payment Terms^PayTer^" />
-    <field name="Header_Amount" type="Decimal" label="^HeaAmo^Header Amount^HeaAmo^" readOnly="true" />
-    <field name="Header_Net" type="Decimal" label="^HeaNet^Header Net^HeaNet^" readOnly="true" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" readOnly="true" length="150" />
-    <field name="ADDRESS_ALL" type="String" label="^AddAll^Address All^AddAll^" readOnly="true" length="4000" />
-    <field name="Header_Disc_Amount" type="Decimal" label="^HeaDisAmo^Header Disc Amount^HeaDisAmo^" />
-    <field name="Header_Disc_Percent" type="Decimal" label="^HeaDisPer^Header Disc Percent^HeaDisPer^" />
-    <field name="Doc_Status" type="String" label="^DocSta^Doc Status^DocSta^" readOnly="true" length="15" />
-    <field name="ContactName" type="String" label="^ConNam^Contact Name^ConNam^" length="30" />
-    <field name="ContactTitle" type="String" label="^ConTit^Contact Title^ConTit^" length="30" />
-    <field name="ContacteMailID" type="String" label="^ConMaiId^Contacte Mail#^ConMaiId^" length="50" />
-    <field name="ConactPhone" type="String" label="^ConPho^Conact Phone^ConPho^" length="50" />
-    <field name="Location_Name" type="String" label="^LocNam^Location Name^LocNam^" length="150" />
-    <field name="Loc_ContactName" type="String" label="^LocConNam^Loc Contact Name^LocConNam^" length="30" />
-    <field name="Loc_ContactTitle" type="String" label="^LocConTit^Loc Contact Title^LocConTit^" length="30" />
-    <field name="Loc_Street" type="String" label="^LocStr^Loc Street^LocStr^" length="50" />
-    <field name="Loc_PostalCode" type="String" label="^LocPosCod^Loc Postal Code^LocPosCod^" length="50" />
-    <field name="Loc_City" type="String" label="^LocCit^Loc City^LocCit^" length="50" />
-    <field name="Loc_Country" type="String" label="^LocCou^Loc Country^LocCou^" length="50" />
-    <field name="Loc_Phone" type="String" label="^LocPho^Loc Phone^LocPho^" length="50" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="Sys_Number" type="Decimal" label="^SysNumber^Sys Number^SysNumber^" />
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="IsServiceItem" type="Int32" label="^IsServiceItem^Is Service Item^IsServiceItem^" />
+    <field name="FulFillmentBalance" type="Decimal" label="^FulFillmentBalance^Ful Fillment Balance^FulFillmentBalance^" />
+    <field name="DR_Line_ID" type="Decimal" label="^DRLine^DR Line#^DRLine^" />
+    <field name="Job_ID" type="Decimal" label="^Job^Job#^Job^" />
+    <field name="PO_OPU_Code" type="Int32" label="^POOPUCode^PO OPU Code^POOPUCode^" />
+    <field name="PO_Type" type="String" label="^POType^PO Type^POType^" length="30" />
+    <field name="PO_Date" type="DateTime" allowNulls="false" label="^PODate^PO Date^PODate^" />
+    <field name="Supplier_QT_No" type="String" label="^SupplierQTNo^Supplier QT No^SupplierQTNo^" length="15" />
+    <field name="H_Sys_Number" type="Decimal" label="^HSysNumber^H Sys Number^HSysNumber^" />
+    <field name="Currency_Code" type="String" label="^CurrencyCode^Currency Code^CurrencyCode^" length="4" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" />
+    <field name="TermsANDConditions" type="String" label="^TermsANDConditions^Terms AND Conditions^TermsANDConditions^" length="4000" />
+    <field name="Payment_Terms" type="Int32" label="^PaymentTerms^Payment Terms^PaymentTerms^" />
+    <field name="Header_Amount" type="Decimal" label="^HeaderAmount^Header Amount^HeaderAmount^" readOnly="true" />
+    <field name="Header_Net" type="Decimal" label="^HeaderNet^Header Net^HeaderNet^" readOnly="true" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" readOnly="true" length="150" />
+    <field name="ADDRESS_ALL" type="String" label="^AddressAll^Address All^AddressAll^" readOnly="true" length="4000" />
+    <field name="Header_Disc_Amount" type="Decimal" label="^HeaderDiscAmount^Header Disc Amount^HeaderDiscAmount^" />
+    <field name="Header_Disc_Percent" type="Decimal" label="^HeaderDiscPercent^Header Disc Percent^HeaderDiscPercent^" />
+    <field name="Doc_Status" type="String" label="^DocStatus^Doc Status^DocStatus^" readOnly="true" length="15" />
+    <field name="ContactName" type="String" label="^ContactName^Contact Name^ContactName^" length="30" />
+    <field name="ContactTitle" type="String" label="^ContactTitle^Contact Title^ContactTitle^" length="30" />
+    <field name="ContacteMailID" type="String" label="^ContacteMail^Contacte Mail#^ContacteMail^" length="50" />
+    <field name="ConactPhone" type="String" label="^ConactPhone^Conact Phone^ConactPhone^" length="50" />
+    <field name="Location_Name" type="String" label="^LocationName^Location Name^LocationName^" length="150" />
+    <field name="Loc_ContactName" type="String" label="^LocContactName^Loc Contact Name^LocContactName^" length="30" />
+    <field name="Loc_ContactTitle" type="String" label="^LocContactTitle^Loc Contact Title^LocContactTitle^" length="30" />
+    <field name="Loc_Street" type="String" label="^LocStreet^Loc Street^LocStreet^" length="50" />
+    <field name="Loc_PostalCode" type="String" label="^LocPostalCode^Loc Postal Code^LocPostalCode^" length="50" />
+    <field name="Loc_City" type="String" label="^LocCity^Loc City^LocCity^" length="50" />
+    <field name="Loc_Country" type="String" label="^LocCountry^Loc Country^LocCountry^" length="50" />
+    <field name="Loc_Phone" type="String" label="^LocPhone^Loc Phone^LocPhone^" length="50" />
     <field name="Loc_Fax" type="String" label="^LocFax^Loc Fax^LocFax^" length="50" />
-    <field name="Loc_eMailID" type="String" label="^LoceMaiId^Loc e Mail#^LoceMaiId^" length="50" />
-    <field name="Loc_Address" type="String" label="^LocAdd^Loc Address^LocAdd^" readOnly="true" length="4000" />
-    <field name="BranchName" type="String" label="^BraNam^Branch Name^BraNam^" length="255" />
-    <field name="BuisnessSlogan" type="String" label="^BuiSlo^Buisness Slogan^BuiSlo^" length="255" />
-    <field name="Address_English" type="String" label="^AddEn^Address English^AddEn^" length="4000" />
-    <field name="Address_Arabic" type="String" label="^AddAr^Address Arabic^AddAr^" length="4000" />
-    <field name="BranchLogo" type="Byte[]" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BraLog^Branch Logo^BraLog^" />
+    <field name="Loc_eMailID" type="String" label="^LoceMail^Loc e Mail#^LoceMail^" length="50" />
+    <field name="Loc_Address" type="String" label="^LocAddress^Loc Address^LocAddress^" readOnly="true" length="4000" />
+    <field name="BranchName" type="String" label="^BranchName^Branch Name^BranchName^" length="255" />
+    <field name="BuisnessSlogan" type="String" label="^BuisnessSlogan^Buisness Slogan^BuisnessSlogan^" length="255" />
+    <field name="Address_English" type="String" label="^AddressEnglish^Address English^AddressEnglish^" length="4000" />
+    <field name="Address_Arabic" type="String" label="^AddressArabic^Address Arabic^AddressArabic^" length="4000" />
+    <field name="BranchLogo" type="Byte[]" onDemand="true" onDemandHandler="tbl_BranchInfoBranchLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BranchLogo^Branch Logo^BranchLogo^" />
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^PoLinIte^PO Line Items^PoLinIte^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="PO Line Items" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PO_NO" columns="15" />
@@ -178,7 +184,7 @@ FROM         dbo.PO_Header INNER JOIN
         <dataField fieldName="BranchLogo" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevPoLinIte^Review PO Line Items^RevPoLinIte^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review PO Line Items" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="PO Line Items" flow="NewColumn">
@@ -259,7 +265,7 @@ FROM         dbo.PO_Header INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewPoLinIte^New PO Line Items^NewPoLinIte^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New PO Line Items" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New PO Line Items" flow="NewColumn">
@@ -358,7 +364,7 @@ FROM         dbo.PO_Header INNER JOIN
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

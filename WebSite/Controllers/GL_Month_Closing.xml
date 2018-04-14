@@ -1,39 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="GL_Month_Closing" conflictDetection="overwriteChanges" label="^GlMonClo^GL_Month_Closing^GlMonClo^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="GL_Month_Closing" conflictDetection="overwriteChanges" label="GL_Month_Closing" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="GL_Month_Closing" custom="true">
       <text><![CDATA[SELECT * FROM GL_Month_Closing]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Year_Code" type="Int32" allowNulls="false" label="^YeaCod^Year Code^YeaCod^" showInSummary="true" isPrimaryKey="true" />
-    <field name="Month_Code" type="Int32" allowNulls="false" label="^MonCod^Month Code^MonCod^" showInSummary="true" isPrimaryKey="true" />
-    <field name="Company_Code" type="Decimal" allowNulls="false" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" isPrimaryKey="true" />
-    <field name="End_Date" type="DateTime" label="^EndDat^End Date^EndDat^" showInSummary="true" />
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="Start_Date" type="DateTime" label="^StaDat^Start Date^StaDat^" />
-    <field name="LedgerCloseYN" type="Int32" label="^LedCloYn^Ledger Close YN^LedCloYn^">
+    <field name="Year_Code" type="Int32" allowNulls="false" label="^YearCode^Year Code^YearCode^" showInSummary="true" isPrimaryKey="true" />
+    <field name="Month_Code" type="Int32" allowNulls="false" label="^MonthCode^Month Code^MonthCode^" showInSummary="true" isPrimaryKey="true" />
+    <field name="Company_Code" type="Decimal" allowNulls="false" label="^CompCode^Company Code^CompCode^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" allowNulls="false" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" isPrimaryKey="true" />
+    <field name="End_Date" type="DateTime" label="End Date" showInSummary="true" />
+    <field name="Created_By" type="Decimal" label="Created By" />
+    <field name="Created_DateTime" type="DateTime" label="Created Date Time" />
+    <field name="Updated_By" type="Decimal" label="Updated By" />
+    <field name="Updated_DateTime" type="DateTime" label="Updated Date Time" />
+    <field name="Start_Date" type="DateTime" label="Start Date" />
+    <field name="LedgerCloseYN" type="Int32" label="Ledger Close YN">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="SubLedgerCloseYN" type="Int32" label="^SubLedCloYn^Sub Ledger Close YN^SubLedCloYn^">
+    <field name="SubLedgerCloseYN" type="Int32" label="Sub Ledger Close YN">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="FY_Code" type="Int32" label="^FyCod^FY Code^FyCod^" />
-    <field name="RefreshDW" type="Int32" label="^RefDw^Refresh DW^RefDw^" />
-    <field name="AssetsCloseYN" type="Int32" label="^AssCloYn^Assets Close YN^AssCloYn^">
+    <field name="FY_Code" type="Int32" label="FY Code" />
+    <field name="RefreshDW" type="Int32" label="Refresh DW" />
+    <field name="AssetsCloseYN" type="Int32" label="Assets Close YN">
       <items style="DropDownList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="PayRollYN" type="Int32" label="^PayRolYn^Pay Roll YN^PayRolYn^" />
-    <field name="Period_Name" type="String" label="^ProNam^Period Name^ProNam^" readOnly="true" length="12" />
-    <field name="CalenderID" type="Int32" label="^CalId^Calender#^CalId^" />
-    <field name="AdjYN" type="Int64" label="^AdjYn^Adj YN^AdjYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
+    <field name="PayRollYN" type="Int32" label="Pay Roll YN" />
+    <field name="Period_Name" type="String" label="Period Name" readOnly="true" length="12" />
+    <field name="CalenderID" type="Int32" label="Calender#" />
+    <field name="AdjYN" type="Int64" label="Adj YN" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^GlMonClo^GL Month Closing^GlMonClo^" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="GL Month Closing" filter="OPU_Code=@Session_OPU_Code" reportTemplate="true" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Year_Code" columns="15" />
@@ -57,11 +57,11 @@
         <dataField fieldName="AdjYN" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevGlMonClo^Review GL Month Closing^RevGlMonClo^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review GL Month Closing" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="GL Month Closing" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^GlMonClo^ Edit GL Month Closing^GlMonClo^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Year_Code" columns="15" readOnly="true" />
             <dataField fieldName="Month_Code" columns="15" readOnly="true" />
@@ -85,11 +85,11 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewGlMonClo^New GL Month Closing^NewGlMonClo^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New GL Month Closing" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New GL Month Closing" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewGlMonClo^New GL Month Closing^NewGlMonClo^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Year_Code" columns="15" />
             <dataField fieldName="Month_Code" columns="15" />
@@ -166,57 +166,61 @@ UPDATE GL_Month_Closing
 SET RefreshDW=@A  WHERE Year_Code=@Year_Code and Month_Code=@Month_Code]]></data>
       </action>
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Period Control" flat="true">
-      <action commandName="SQL" headerText="Open Ledger" whenLastCommandName="Select" id="a100" whenClientScript="[LedgerCloseYN]==1">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^PerCon^Period Control^PerCon^" flat="true">
+      <action commandName="SQL" headerText="^OpeLed^Open Ledger^OpeLed^" whenLastCommandName="Select" id="a100" whenClientScript="[LedgerCloseYN]==1" cssClass="&#x9;glyphicon glyphicon-export">
         <data><![CDATA[UPDATE GL_Month_Closing
   SET
       LedgerCloseYN = 0
 WHERE Year_Code = @Year_Code
       AND Month_Code = @Month_Code
       AND OPU_Code = @OPU_Code
-      AND AdjYN = @AdjYN]]></data>
+      AND AdjYN = @AdjYN
+     AND CalenderID=@CalenderID]]></data>
       </action>
-      <action commandName="SQL" headerText="Close Ledger" whenLastCommandName="Select" id="a101" whenClientScript="[LedgerCloseYN]==0">
+      <action commandName="SQL" headerText="^CloLed^Close Ledger^CloLed^" whenLastCommandName="Select" id="a101" whenClientScript="[LedgerCloseYN]==0" cssClass="&#x9;glyphicon glyphicon-floppy-remove">
         <data><![CDATA[UPDATE GL_Month_Closing
   SET
       LedgerCloseYN = 1
 WHERE Year_Code = @Year_Code
       AND Month_Code = @Month_Code
       AND OPU_Code = @OPU_Code
-      AND AdjYN = @AdjYN]]></data>
+      AND AdjYN = @AdjYN
+AND CalenderID=@CalenderID]]></data>
       </action>
-      <action commandName="SQL" headerText="Close Sub Ledger" whenLastCommandName="Select" id="a102" whenClientScript="[SubLedgerCloseYN]==0">
+      <action commandName="SQL" headerText="^CloSubLed^Close Sub Ledger^CloSubLed^" whenLastCommandName="Select" id="a102" whenClientScript="[SubLedgerCloseYN]==0" cssClass="glyphicon glyphicon-remove-sign">
         <data><![CDATA[UPDATE GL_Month_Closing
   SET
       SubLedgerCloseYN = 1
 WHERE Year_Code = @Year_Code
       AND Month_Code = @Month_Code
       AND OPU_Code = @OPU_Code
-      AND AdjYN = @AdjYN]]></data>
+      AND AdjYN = @AdjYN
+AND CalenderID=@CalenderID]]></data>
       </action>
-      <action commandName="SQL" headerText="Open Sub Ledger" whenLastCommandName="Select" id="a103" whenClientScript="[SubLedgerCloseYN]==1">
+      <action commandName="SQL" headerText="^OpeSubLed^Open Sub Ledger^OpeSubLed^" whenLastCommandName="Select" id="a103" whenClientScript="[SubLedgerCloseYN]==1" cssClass="glyphicon glyphicon-save">
         <data><![CDATA[UPDATE GL_Month_Closing
   SET
      SubLedgerCloseYN = 0
 WHERE Year_Code = @Year_Code
       AND Month_Code = @Month_Code
       AND OPU_Code = @OPU_Code
-      AND AdjYN = @AdjYN]]></data>
+      AND AdjYN = @AdjYN
+AND CalenderID=@CalenderID]]></data>
       </action>
     </actionGroup>
   </actions>
   <businessRules>
-    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
-begin
-    SET @BusinessRules_PreventDefault = 1
-    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
-end]]></rule>
+    <rule id="r102" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @OPU_Code=@Session_OPU_Code
+SET @Company_Code=@Session_Company_Code]]></rule>
     <rule id="r101" commandName="Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsWriteOnly,0)=1
 begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
-    <rule id="r102" commandName="Insert" type="Sql" phase="Before"><![CDATA[SET @OPU_Code=@Session_OPU_Code
-SET @Company_Code=@Session_Company_Code]]></rule>
+    <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
+begin
+    SET @BusinessRules_PreventDefault = 1
+    SET @Result_ShowViewMessage='Sorry!, You Are ReadOnly User ....You Cannot Change Record'
+end]]></rule>
   </businessRules>
 </dataController>

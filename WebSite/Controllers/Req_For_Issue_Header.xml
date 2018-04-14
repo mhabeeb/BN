@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Req_For_Issue_Header" label="^ReqForIssHea^Req_For_Issue_Header^ReqForIssHea^" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Req_For_Issue_Header" label="Req_For_Issue_Header" conflictDetection="overwriteChanges" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="DR_Header" custom="true">
       <text><![CDATA[SELECT     DR_No, DR_ID, DR_Type, DR_Date, OPU_Code, Company_Code, Remarks, ReleaseDR, Created_By, Created_DateTime, Updated_By, Updated_DateTime, 
@@ -9,24 +9,30 @@ WHERE     (DR_Type = N'Direct Issue Request')]]></text>
     </command>
   </commands>
   <fields>
-    <field name="DR_No" type="Decimal" label="^DrNo^DR No^DrNo^" showInSummary="true" />
-    <field name="DR_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^DrId^Dr#^DrId^" readOnly="true" showInSummary="true" />
-    <field name="DR_Type" type="String" label="^DrTyp^DR Type^DrTyp^" length="25" showInSummary="true" />
-    <field name="DR_Date" type="DateTime" label="^DrDat^DR Date^DrDat^" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" showInSummary="true" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="50" />
-    <field name="ReleaseDR" type="Boolean" label="^RelDr^Release DR^RelDr^" allowNulls="false">
+    <field name="DR_No" type="Decimal" label="^DRNo^DR No^DRNo^" showInSummary="true" />
+    <field name="DR_ID" type="Decimal" allowNulls="false" isPrimaryKey="true" label="^Dr^Dr#^Dr^" readOnly="true" showInSummary="true" />
+    <field name="DR_Type" type="String" label="^DRType^DR Type^DRType^" length="25" showInSummary="true" />
+    <field name="DR_Date" type="DateTime" label="^DRDate^DR Date^DRDate^" showInSummary="true" />
+    <field name="OPU_Code" type="Int32" label="^OPUCode^OPU Code^OPUCode^" showInSummary="true" />
+    <field name="Company_Code" type="Int32" label="^CompanyCode^Company Code^CompanyCode^" showInSummary="true" />
+    <field name="Remarks" type="String" label="^Remarks^Remarks^Remarks^" length="50" />
+    <field name="ReleaseDR" type="Boolean" label="^ReleaseDR^Release DR^ReleaseDR^" allowNulls="false">
       <items style="CheckBox" />
     </field>
-    <field name="Created_By" type="Decimal" label="^CreBy^Created By^CreBy^" />
-    <field name="Created_DateTime" type="DateTime" label="^CreDatTim^Created Date Time^CreDatTim^" />
-    <field name="Updated_By" type="Decimal" label="^UpdBy^Updated By^UpdBy^" />
-    <field name="Updated_DateTime" type="DateTime" label="^UpdDatTim^Updated Date Time^UpdDatTim^" />
-    <field name="StoreID" type="Int32" label="^StoId^Store#^StoId^" />
+    <field name="Created_By" type="Decimal" label="^CreatedBy^Created By^CreatedBy^" />
+    <field name="Created_DateTime" type="DateTime" label="^CreatedDateTime^Created Date Time^CreatedDateTime^" />
+    <field name="Updated_By" type="Decimal" label="^UpdatedBy^Updated By^UpdatedBy^" />
+    <field name="Updated_DateTime" type="DateTime" label="^UpdatedDateTime^Updated Date Time^UpdatedDateTime^" />
+    <field name="StoreID" type="Int32" label="^Store^Store#^Store^" />
+    <field name="ASiteCodeEnabled" type="Int32" label="Site Code Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_SiteCodeEnabled</formula>
+    </field>
+    <field name="AProjectEnabled" type="Int32" label="AProject Enabled" computed="true" readOnly="true">
+      <formula>SELECT @Session_ProjectEnabled</formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^IssHea^Issuance Header^IssHea^" reportTemplate="true" filter="OPU_Code=@Session_OPU_Code " showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Issuance Header" reportTemplate="true" filter="OPU_Code=@Session_OPU_Code " showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="DR_No" columns="15" />
@@ -43,7 +49,7 @@ WHERE     (DR_Type = N'Direct Issue Request')]]></text>
         <dataField fieldName="OPU_Code" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevIssHea^Review Issuance Header^RevIssHea^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Issuance Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="Issuance Header" flow="NewColumn">
@@ -65,7 +71,7 @@ WHERE     (DR_Type = N'Direct Issue Request')]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewIssHea^New Issuance Header^NewIssHea^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New Issuance Header" showInSelector="false">
       <headerText />
       <categories>
         <category id="c1" headerText="New Issuance Header" flow="NewColumn">
@@ -87,14 +93,14 @@ WHERE     (DR_Type = N'Direct Issue Request')]]></text>
         </category>
       </categories>
     </view>
-    <view id="About" commandId="command1" type="Form" label="^RecHis^Record History^RecHis^" showInSelector="false">
+    <view id="About" commandId="command1" type="Form" label="Record History" showInSelector="false">
       <categories>
         <category id="c1" headerText="Issuance Header" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Created_By" columns="15" />
             <dataField fieldName="Created_DateTime" dataFormatString="t" columns="10" />
-            <dataField fieldName="Updated_By" columns="15" />
             <dataField fieldName="Updated_DateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="Updated_By" columns="15" />
+            <dataField fieldName="Created_By" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -103,7 +109,6 @@ WHERE     (DR_Type = N'Direct Issue Request')]]></text>
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -119,10 +124,10 @@ WHERE     (DR_Type = N'Direct Issue Request')]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Cancel" commandArgument="createForm1" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-list-alt" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -149,9 +154,6 @@ WHERE     (DR_Type = N'Direct Issue Request')]]></text>
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
       <action id="a8" whenLastCommandName="BatchEdit" commandName="Update" />
       <action id="a9" whenLastCommandName="BatchEdit" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag9" scope="ActionColumn">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag102" scope="ActionBar" headerText="^AboutRecord^About Record^AboutRecord^" flat="true">
       <action commandName="EditModal" commandArgument="About" headerText="^AboutRecord^About Record^AboutRecord^" id="a100" cssClass="glyphicon-eye-open" />

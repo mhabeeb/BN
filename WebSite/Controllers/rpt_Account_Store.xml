@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="rpt_Account_Store" conflictDetection="overwriteChanges" label="^RepAccSto^rpt_Account_Store^RepAccSto^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="rpt_Account_Store" conflictDetection="overwriteChanges" label="rpt_Account_Store" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="Store_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^StoId^Store#^StoId^" readOnly="true" />
-    <field name="Store_Name" type="String" label="^StoNam^Store Name^StoNam^" length="255" showInSummary="true" />
-    <field name="Store_Address" type="String" label="^StoAdd^Store Address^StoAdd^" length="255" showInSummary="true" />
-    <field name="Store_Ref_No" type="String" label="^StoRefNo^Store Ref No^StoRefNo^" length="15" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="CalcDate" type="Int32" label="^CalDat^Calc Date^CalDat^" showInSummary="true" />
-    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" readOnly="true" />
-    <field name="Period_Debit" type="Decimal" label="^PerDeb^Period Debit^PerDeb^" readOnly="true" />
-    <field name="Period_Credit" type="Decimal" label="^PerCre^Period Credit^PerCre^" readOnly="true" />
-    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" readOnly="true" />
+    <field name="Store_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Store#" readOnly="true" />
+    <field name="Store_Name" type="String" label="Store Name" length="255" />
+    <field name="Store_Address" type="String" label="Store Address" length="255" />
+    <field name="Store_Ref_No" type="String" label="Store Ref No" length="15" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" />
+    <field name="CalcDate" type="Int32" label="Calc Date" />
+    <field name="OpeningBalance" type="Decimal" label="Opening Balance" readOnly="true" />
+    <field name="Period_Debit" type="Decimal" label="Period Debit" readOnly="true" />
+    <field name="Period_Credit" type="Decimal" label="Period Credit" readOnly="true" />
+    <field name="Closing_Amount" type="Decimal" label="Closing Amount" readOnly="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^RepAccSto^rpt Account Store^RepAccSto^" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="rpt Account Store" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="Store_Name" />
         <dataField fieldName="Store_Address" />
@@ -28,8 +28,8 @@
         <dataField fieldName="Closing_Amount" dataFormatString="N2" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevRepAccSto^Review rpt Account Store^RevRepAccSto^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review rpt Account Store" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="rpt Account Store" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -47,8 +47,8 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewRepAccSto^New rpt Account Store^NewRepAccSto^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New rpt Account Store" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New rpt Account Store" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
@@ -111,8 +111,8 @@
       <action id="a6" whenLastCommandName="New" commandName="Insert" />
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Parameter" flat="true">
-      <action commandName="SQL" headerText="Parameter" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500">
+    <actionGroup id="ag100" scope="ActionBar" headerText="^Par^Parameter^Par^" flat="true">
+      <action commandName="SQL" headerText="^Par^Parameter^Par^" id="a100" confirmation="_controller=Parameter_End_Period &#xD;&#xA;_title=Enter the Month and Year&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-align-right">
         <data><![CDATA[SET @Session_LedDate=@Parameters_EndDate
 SET @Result_NavigateUrl = 'StoreAccountLedger.aspx']]></data>
       </action>
@@ -185,7 +185,7 @@ SELECT A.[Store_ID],
                 AND ISNULL(O.OPU_Code_Ln, 0) = A.[OPU_Code] FOR XML PATH('')
             ) AS MONEY)) Closing_Amount
 FROM [dbo].[tbl_Store] A,
-     [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE](@Session_LedDate) c
+	 [dbo].[GET_CALNDAR_NUM_YYYYMM_BY_DATE_V1](@Session_LedDate,@Session_CalenderID) c
 WHERE A.[OPU_Code] = @Session_OPU_Code;]]></rule>
     <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
 -- implement insert here]]></rule>

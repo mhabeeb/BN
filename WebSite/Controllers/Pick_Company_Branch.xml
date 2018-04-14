@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Pick_Company_Branch" conflictDetection="overwriteChanges" label="^PicComBra^Pick_Company_Branch^PicComBra^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Pick_Company_Branch" conflictDetection="overwriteChanges" label="Pick_Company_Branch" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_BranchInfo" custom="true">
       <text><![CDATA[SELECT a.CompanyID,a.CompanyName,a.DefaultCurrency,b.BranchID,b.BranchName
@@ -8,14 +8,14 @@ WHERE  b.CompanyID=a.CompanyID]]></text>
     </command>
   </commands>
   <fields>
-    <field name="CompanyID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^ComId^Company#^ComId^" readOnly="true" />
-    <field name="CompanyName" type="String" label="^ComNam^Company Name^ComNam^" length="255" showInSummary="true" />
-    <field name="DefaultCurrency" type="String" label="^DefCur^Default Currency^DefCur^" length="4" showInSummary="true" />
-    <field name="BranchID" type="Int32" allowNulls="false" label="^BraId^Branch#^BraId^" readOnly="true" showInSummary="true" />
-    <field name="BranchName" type="String" label="^BraNam^Branch Name^BraNam^" length="255" showInSummary="true" />
+    <field name="CompanyID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Company#" readOnly="true" />
+    <field name="CompanyName" type="String" label="Company Name" length="255" showInSummary="true" />
+    <field name="DefaultCurrency" type="String" label="Default Currency" length="4" showInSummary="true" />
+    <field name="BranchID" type="Int32" allowNulls="false" label="Branch#" readOnly="true" showInSummary="true" />
+    <field name="BranchName" type="String" label="Branch Name" length="255" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^ComAndBraInf^Company &amp; Branch Info.^ComAndBraInf^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Company &amp; Branch Info." showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BranchID" columns="15" />
@@ -24,7 +24,7 @@ WHERE  b.CompanyID=a.CompanyID]]></text>
         <dataField fieldName="BranchName" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevBraInf^Review Branch Info^RevBraInf^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Branch Info" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Branch Info" flow="NewColumn">
@@ -38,7 +38,7 @@ WHERE  b.CompanyID=a.CompanyID]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewBraInf^New Branch Info^NewBraInf^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Branch Info" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Branch Info" flow="NewColumn">
@@ -80,7 +80,7 @@ WHERE  b.CompanyID=a.CompanyID]]></text>
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="tbl_Store" conflictDetection="overwriteChanges" label="^Store^Store^Store^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="tbl_Store" conflictDetection="overwriteChanges" label="tbl_Store" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_Store" custom="true">
       <text><![CDATA[SELECT * FROM tbl_Store]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Store_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="^StoId^Store#^StoId^" readOnly="true" />
-    <field name="Store_Name" type="String" label="^StoNam^Store Name^StoNam^" length="255" showInSummary="true" />
-    <field name="Store_Address" type="String" label="^StoAdd^Store Address^StoAdd^" length="255" showInSummary="true" />
-    <field name="OPU_Code" type="Int32" label="^OpuCod^OPU Code^OpuCod^" showInSummary="true" />
-    <field name="Store_Ref_No" type="String" label="^StoRefNo^Store Ref No^StoRefNo^" length="15" />
-    <field name="Company_Code" type="Int32" label="^ComCod^Company Code^ComCod^" />
-    <field name="OrganizationType" type="Int32" label="^OrgTyp^Organization Type^OrgTyp^" showInSummary="true" allowNulls="false">
+    <field name="Store_ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Store#" readOnly="true" />
+    <field name="Store_Name" type="String" label="Store Name" length="255" showInSummary="true" allowNulls="false" />
+    <field name="Store_Address" type="String" label="Store Address" length="255" showInSummary="true" allowNulls="false" />
+    <field name="OPU_Code" type="Int32" label="OPU Code" showInSummary="true" />
+    <field name="Store_Ref_No" type="String" label="Store Ref No" length="15" allowNulls="false" />
+    <field name="Company_Code" type="Int32" label="Company Code" />
+    <field name="OrganizationType" type="Int32" label="^OrganizationType^Organization Type^OrganizationType^" showInSummary="true" allowNulls="false">
       <items style="DropDownList">
         <item value="1" text="WareHouse" />
         <item value="2" text="Showroom" />
@@ -21,74 +21,80 @@
         <item value="5" text="Shop" />
       </items>
     </field>
-    <field name="NegativeAllowedYN" type="Int32" label="^NegAllYn^Negative Allowed YN^NegAllYn^">
+    <field name="NegativeAllowedYN" type="Int32" label="Negative Allowed YN" allowNulls="false">
       <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
-    <field name="PlanID" type="Decimal" label="^PlaId^Plan ID^PlaId^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
+    <field name="QAQCRequiredYN" type="Int32" label="^QAQCRYN^QAQCRequired YN^QAQCRYN^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" allowNulls="false">
+      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    </field>
+    <field name="PlanID" type="Decimal" label="^PlanID^Plan ID^PlanID^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
       <items style="Lookup" dataController="QAQC_Plan" dataView="grid1" dataTextField="PlanDescription" dataValueField="PlanID" />
     </field>
-    <field name="QAQCRequiredYN" type="Int32" label="^QaqReqYn^QAQCRequired YN^QaqReqYn^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false">
-      <items style="RadioButtonList" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
+    <field name="LocatorYN" type="Int16" label="^LocCon^Locator Controlled (Y/N)^LocCon^" allowNulls="false">
+      <items style="Lookup" dataController="YesNo" dataView="grid1" dataTextField="Descriptions" dataValueField="ReturnValueInt" />
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^Store^Store^Store^">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Store" showInSelector="false">
+      <headerText />
       <dataFields>
         <dataField fieldName="Store_Name" />
         <dataField fieldName="Store_Address" />
         <dataField fieldName="OPU_Code" hidden="true" columns="15" />
         <dataField fieldName="Store_Ref_No" columns="15" />
         <dataField fieldName="Company_Code" hidden="true" columns="15" />
+        <dataField fieldName="QAQCRequiredYN" columns="15" />
         <dataField fieldName="OrganizationType" columns="15" />
         <dataField fieldName="NegativeAllowedYN" columns="15" />
         <dataField fieldName="PlanID" columns="15" />
-        <dataField fieldName="QAQCRequiredYN" columns="15" />
         <dataField fieldName="Store_ID" columns="15" />
+        <dataField fieldName="LocatorYN" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevSto^Review Store^RevSto^">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Store" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="tbl Store" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" headerText="^RevSto^Review Store^RevSto^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Store_Name" />
-            <dataField fieldName="Store_Address" />
+            <dataField fieldName="Store_Address" columns="45" rows="4" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Store_Ref_No" columns="15" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
-            <dataField fieldName="OrganizationType" columns="15" />
-            <dataField fieldName="NegativeAllowedYN" columns="15" />
             <dataField fieldName="QAQCRequiredYN" columns="15" />
             <dataField fieldName="PlanID" columns="15">
               <visibility>
                 <expression test="[QAQCRequiredYN] &gt; 0" type="ClientScript" />
               </visibility>
             </dataField>
+            <dataField fieldName="OrganizationType" columns="15" />
+            <dataField fieldName="NegativeAllowedYN" columns="15" />
+            <dataField fieldName="LocatorYN" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewSto^New Store^NewSto^">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Store" showInSelector="false">
+      <headerText />
       <categories>
-        <category id="c1" headerText="New tbl Store" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="^NewSto^New Store^NewSto^" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Store_Name" />
-            <dataField fieldName="Store_Address" />
+            <dataField fieldName="Store_Address" columns="45" rows="4" />
             <dataField fieldName="OPU_Code" hidden="true" columns="15" />
             <dataField fieldName="Store_Ref_No" columns="15" />
             <dataField fieldName="Company_Code" hidden="true" columns="15" />
-            <dataField fieldName="OrganizationType" columns="15" />
-            <dataField fieldName="NegativeAllowedYN" columns="15" />
             <dataField fieldName="QAQCRequiredYN" columns="15" />
             <dataField fieldName="PlanID" columns="15">
               <visibility>
                 <expression test="[QAQCRequiredYN] &gt; 0" type="ClientScript" />
               </visibility>
             </dataField>
+            <dataField fieldName="OrganizationType" columns="15" />
+            <dataField fieldName="NegativeAllowedYN" columns="15" />
+            <dataField fieldName="LocatorYN" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -98,7 +104,6 @@
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
-      <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
@@ -107,10 +112,8 @@
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
-      <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
@@ -119,11 +122,10 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-file" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="glyphicon glyphicon-edit" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -151,10 +153,18 @@
     </actionGroup>
     <actionGroup id="ag9" scope="ActionColumn">
       <action id="a1" commandName="Edit" commandArgument="editForm1" />
-      <action id="a2" commandName="Delete" />
     </actionGroup>
   </actions>
   <businessRules>
+    <rule id="r103" commandName="Insert" type="Sql" phase="Before"><![CDATA[SELECT @Company_Code=CompanyID FROM tbl_BranchInfo WHERE BranchID=@OPU_Code]]></rule>
+    <rule id="r102" type="Sql" commandName="Insert" phase="Before" name="Store_Ref_No_Validator"><![CDATA[IF EXISTS (SELECT Store_Ref_No FROM tbl_Store WHERE Store_Ref_No=@Store_Ref_No)
+BEGIN
+  /* prevent the default action processing */
+    set @BusinessRules_PreventDefault = 1
+    /* set the focus on the field and display an error */
+    set @Result_Focus = 'Store_Ref_No,Duplicate Reference No..'
+END
+]]></rule>
     <rule id="r100" commandName="Insert|Update|Delete" type="Sql" phase="Before"><![CDATA[if IsNull(@Session_IsReadOnly,0)=1
 begin
     SET @BusinessRules_PreventDefault = 1
@@ -166,14 +176,6 @@ begin
     SET @BusinessRules_PreventDefault = 1
     SET @Result_ShowViewMessage='Sorry!, You Are WriteOnly User ....You Cannot Change Record'
 end]]></rule>
-    <rule id="r102" type="Sql" commandName="Insert" phase="Before" name="Store_Ref_No_Validator"><![CDATA[IF EXISTS (SELECT Store_Ref_No FROM tbl_Store WHERE Store_Ref_No=@Store_Ref_No)
-BEGIN
-  /* prevent the default action processing */
-    set @BusinessRules_PreventDefault = 1
-    /* set the focus on the field and display an error */
-    set @Result_Focus = 'Store_Ref_No,Duplicate Reference No..'
-END
-]]></rule>
-    <rule id="r103" commandName="Insert" type="Sql" phase="Before"><![CDATA[SELECT @Company_Code=CompanyID FROM tbl_BranchInfo WHERE BranchID=@OPU_Code]]></rule>
+    <rule id="r104" commandName="Update" type="Sql" phase="After"><![CDATA[SET @Result_NavigateUrl='Home.aspx']]></rule>
   </businessRules>
 </dataController>

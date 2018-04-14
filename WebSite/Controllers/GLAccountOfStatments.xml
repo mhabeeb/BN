@@ -1,63 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="GLAccountOfStatments" conflictDetection="overwriteChanges" label="GLAccountOfStatments" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="GLAccountOfStatments" conflictDetection="overwriteChanges" label="GLAccountOfStatments" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.GLAccountOfStatmentsBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="End_Period" custom="true">
       <text><![CDATA[SELECT     Row, Trx_Date, AccountID, Account_Description, OpeningBalance, Debit_Amount, Credit_Amount, Closing_Amount, Account_Type, Transaction_Type, Transaction_No, 
-                      Sys_Number, Vendor_Name, Ref_Account_No, UserID, ReportID, Remarks, TrxMonths, TrxYear,Project_Code,Dept_Code
-FROM         dbo.End_Period
-WHERE     (ReportID =11)]]></text>
+                      Sys_Number, Vendor_Name, Ref_Account_No, UserID, ReportID, Remarks, TrxMonths, TrxYear,Project_Code,Dept_Code,
+					  CAST(AccountID as varchar(50)) "ZZ_Filter_Value"
+					FROM         dbo.End_Period
+WHERE     (ReportID =11)
+
+
+]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Row" type="Int32" label="^Row^Row^Row^" showInSummary="true" />
-    <field name="Trx_Date" type="DateTime" label="^TrxDat^Trx Date^TrxDat^" showInSummary="true" />
-    <field name="AccountID" type="String" label="^AccId^Account#^AccId^" length="50" showInSummary="true" />
-    <field name="Account_Description" type="String" label="^Accdes^Account Description^Accdes^" length="4000" showInSummary="true" htmlEncode="false" />
-    <field name="OpeningBalance" type="Decimal" label="^OpeBal^Opening Balance^OpeBal^" showInSummary="true" />
-    <field name="Debit_Amount" type="Decimal" label="^DebAmo^Debit Amount^DebAmo^" />
-    <field name="Credit_Amount" type="Decimal" label="^CreAmo^Credit Amount^CreAmo^" />
-    <field name="Closing_Amount" type="Decimal" label="^CloAmo^Closing Amount^CloAmo^" />
-    <field name="Account_Type" type="String" label="^AccTyp^Account Type^AccTyp^" length="50" />
-    <field name="Transaction_Type" type="String" label="^TraTyp^Transaction Type^TraTyp^" length="50" />
-    <field name="Transaction_No" type="Decimal" label="^TraNo^Transaction No^TraNo^" />
-    <field name="Sys_Number" type="Decimal" label="^sysNum^Sys Number^sysNum^" />
-    <field name="Vendor_Name" type="String" label="^venNam^Vendor Name^venNam^" readOnly="true" length="150" />
-    <field name="Ref_Account_No" type="String" label="^RefAccNo^Ref Account No^RefAccNo^" length="50" />
-    <field name="UserID" type="Int32" label="^UseId^User#^UseId^" />
-    <field name="ReportID" type="Int32" label="^RepId^Report#^RepId^" />
-    <field name="Remarks" type="String" label="^Rem^Remarks^Rem^" length="500" />
-    <field name="TrxMonths" type="Int32" label="^TrxMon^Trx Months^TrxMon^" />
-    <field name="TrxYear" type="Int32" label="^TrxYea^Trx Year^TrxYea^" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABra^Branch Name^ABra^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="aOPU_Code" type="Int16" readOnly="true" label="^aOpuCod^aOPU Code^aOpuCod^" computed="true">
+    <field name="Row" type="Int32" label="Row" showInSummary="true" />
+    <field name="Trx_Date" type="DateTime" label="Trx Date" showInSummary="true" />
+    <field name="AccountID" type="String" label="Account#" length="50" showInSummary="true" />
+    <field name="Account_Description" type="String" label="Account Description" length="4000" showInSummary="true" htmlEncode="false" />
+    <field name="OpeningBalance" type="Decimal" label="Opening Balance" showInSummary="true" />
+    <field name="Debit_Amount" type="Decimal" label="Debit Amount" />
+    <field name="Credit_Amount" type="Decimal" label="Credit Amount" />
+    <field name="Closing_Amount" type="Decimal" label="Closing Amount" />
+    <field name="Account_Type" type="String" label="Account Type" length="50" />
+    <field name="Transaction_Type" type="String" label="Transaction Type" length="50" />
+    <field name="Transaction_No" type="Decimal" label="Transaction No" />
+    <field name="Sys_Number" type="Decimal" label="Sys Number" />
+    <field name="Vendor_Name" type="String" label="Vendor Name" readOnly="true" length="150" />
+    <field name="Ref_Account_No" type="String" label="Ref Account No" length="50" />
+    <field name="UserID" type="Int32" label="User#" />
+    <field name="ReportID" type="Int32" label="Report#" />
+    <field name="Remarks" type="String" label="Remarks" length="500" />
+    <field name="TrxMonths" type="Int32" label="Trx Months" />
+    <field name="TrxYear" type="Int32" label="Trx Year" />
+    <field name="Project_Code" type="String" label="Project Code" length="50" />
+    <field name="Dept_Code" type="String" label="Dept Code" length="50" />
+    <field name="aOPU_Code" type="Int16" readOnly="true" label="aOPU Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="aOPU_Code" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BraLog^Branch Logo^BraLog^" readOnly="true" computed="true" showInSummary="true" />
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
+    <field name="BranchLogo" type="Byte[]" onDemand="true" sourceFields="aOPU_Code" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="^BrLogo^Branch Logo^BrLogo^" readOnly="true" computed="true" showInSummary="true" />
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="ZZ_Controller" type="String" label="Controller" computed="true">
+      <formula>'GLAccountOfStatments'</formula>
+    </field>
+    <field name="ZZ_Template" type="String" label="XX Template" computed="true">
+      <formula>'GLAccountOfStatments_grid1'</formula>
+    </field>
+    <field name="ZZ_Filter_Value" type="String" label="XX Filter" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^AccSta^Account Statement^AccSta^" filter="UserID=@BusinessRules_UserId" reportTemplate="true" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="Account Statement" filter="UserID=@BusinessRules_UserId" reportTemplate="true" showInSelector="false">
       <headerText />
       <dataFields>
         <dataField fieldName="Row" columns="15" />
         <dataField fieldName="Trx_Date" columns="10" />
-        <dataField fieldName="Ref_Account_No" columns="50" />
         <dataField fieldName="AccountID" columns="50" />
+        <dataField fieldName="Ref_Account_No" columns="50" />
         <dataField fieldName="Account_Description" />
         <dataField fieldName="OpeningBalance" dataFormatString="N2" columns="15" />
         <dataField fieldName="Debit_Amount" dataFormatString="N2" columns="15" />
@@ -70,21 +81,24 @@ WHERE     (ReportID =11)]]></text>
         <dataField fieldName="Vendor_Name" hidden="true" />
         <dataField fieldName="UserID" columns="15" hidden="true" />
         <dataField fieldName="ReportID" columns="15" hidden="true" />
-        <dataField fieldName="Remarks" />
         <dataField fieldName="TrxMonths" columns="15" hidden="true" />
         <dataField fieldName="TrxYear" columns="15" hidden="true" />
         <dataField fieldName="Project_Code" columns="50" />
         <dataField fieldName="Dept_Code" columns="50" />
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="Remarks" />
         <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="aOPU_Code" columns="15" hidden="true" />
         <dataField fieldName="BranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Template" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Filter_Value" rows="5" hidden="true" />
+        <dataField fieldName="ZZ_Controller" rows="5" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevEndPer^Review End Period^RevEndPer^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review End Period" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="End Period" flow="NewColumn">
@@ -186,14 +200,14 @@ WHERE     (ReportID =11)]]></text>
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag100" scope="ActionBar" headerText="^RunReports^Run Reports^RunReports^" flat="true">
-      <action commandName="SQL" id="a100" headerText="^ByAccount^By Account^ByAccount^" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500">
+      <action commandName="SQL" id="a100" headerText="^ByAccount^By Account^ByAccount^" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-pencil">
         <data><![CDATA[EXECUTE [dbo].[Account_Statments] 
    @Parameters_AccountID
   ,@Parameters_FromDate
   ,@Parameters_EndDate
   ,@BusinessRules_UserId]]></data>
       </action>
-      <action commandName="SQL" headerText="^ByAccountProject^By Account &amp; Project^ByAccountProject^" id="a101" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^ByAccountProject^By Account &amp; Project^ByAccountProject^" id="a101" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-signal">
         <data><![CDATA[EXECUTE [dbo].[Account_Statments_BY_PROJECT] 
    @Parameters_AccountID
   ,@Parameters_FromDate
@@ -201,7 +215,7 @@ WHERE     (ReportID =11)]]></text>
   ,@BusinessRules_UserId
   ,@Parameters_PROJECT_CODE]]></data>
       </action>
-      <action commandName="SQL" headerText="^ByAccountDept^By Account &amp; Dept^ByAccountDept^" id="a102" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^ByAccountDept^By Account &amp; Dept^ByAccountDept^" id="a102" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-list-alt">
         <data><![CDATA[EXECUTE [dbo].[Account_Statments_BY_DEPT] 
    @Parameters_AccountID
   ,@Parameters_FromDate
@@ -209,7 +223,7 @@ WHERE     (ReportID =11)]]></text>
   ,@BusinessRules_UserId
   ,@Parameters_DEPT_CODE]]></data>
       </action>
-      <action commandName="SQL" headerText="^ByAccountProjectDept^By Account, Project &amp; Dept^ByAccountProjectDept^" id="a103" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500">
+      <action commandName="SQL" headerText="^ByAccountProjectDept^By Account, Project &amp; Dept^ByAccountProjectDept^" id="a103" confirmation="_controller=Parameter_Account_Stat &#xD;&#xA;_title=Account Statment&#xD;&#xA;_width=500" cssClass="glyphicon glyphicon-barcode">
         <data><![CDATA[EXECUTE [dbo].[Account_Statments_BY_PROJECT_DEPT] 
    @Parameters_AccountID
   ,@Parameters_FromDate
@@ -219,5 +233,17 @@ WHERE     (ReportID =11)]]></text>
   ,@Parameters_DEPT_CODE]]></data>
       </action>
     </actionGroup>
+    <actionGroup id="ag101" scope="ActionBar" flat="true">
+      <action commandName="Custom" commandArgument="PrintAccountStatement" headerText="^PriAccSta^Print Account Statement^PriAccSta^" id="a100" cssClass="&#x9;glyphicon glyphicon-print" />
+    </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Custom" commandArgument="PrintAccountStatement" type="Code" phase="Execute" />
+    <rule id="GetData" commandName="SELECT" type="Sql" phase="Before"><![CDATA[SELECT     Row, Trx_Date, AccountID, Account_Description, OpeningBalance, Debit_Amount, Credit_Amount, Closing_Amount, Account_Type, Transaction_Type, Transaction_No, 
+                      Sys_Number, Vendor_Name, Ref_Account_No, UserID, ReportID, Remarks, TrxMonths, TrxYear,Project_Code,Dept_Code,
+					  CAST(AccountID as varchar(50)) "ZZ_Filter_Value"
+					FROM         dbo.End_Period
+WHERE     (ReportID =11)
+]]></rule>
+  </businessRules>
 </dataController>

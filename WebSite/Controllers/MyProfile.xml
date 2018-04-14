@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="MyProfile" conflictDetection="overwriteChanges" label="^MyPro^My Profile^MyPro^" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.MyProfileBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="MyProfile" conflictDetection="overwriteChanges" label="My Profile" plugIn="MyCompany.Data.AnnotationPlugIn" handler="MyCompany.Rules.MyProfileBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="UserName" type="String" allowNulls="false" label="^UseNam^User Name^UseNam^" />
-    <field name="RememberMe" type="Boolean" allowNulls="false" default="0" label="^RemMe^Remember me next time^RemMe^">
+    <field name="UserName" type="String" allowNulls="false" label="^UserName^User Name^UserName^" />
+    <field name="RememberMe" type="Boolean" allowNulls="false" default="0" label="^RememberMe^Remember me next time^RememberMe^">
       <items style="CheckBox" />
     </field>
-    <field name="Password" type="String" allowNulls="false" label="^Pas^Password^Pas^" />
-    <field name="ConfirmPassword" type="String" allowNulls="false" label="^ConPas^Confirm Password^ConPas^" />
-    <field name="OldPassword" type="String" allowNulls="false" label="^OldPas^Old Password^OldPas^" />
-    <field name="Email" type="String" label="^Ema^Email^Ema^" allowNulls="false" />
-    <field name="PasswordQuestion" type="String" label="^PasQue^Password Question^PasQue^" allowNulls="false" />
-    <field name="PasswordAnswer" type="String" label="^PasAns^Password Answer^PasAns^" allowNulls="false" />
+    <field name="Password" type="String" allowNulls="false" label="^Password^Password^Password^" />
+    <field name="ConfirmPassword" type="String" allowNulls="false" label="^ConfirmPassword^Confirm Password^ConfirmPassword^" />
+    <field name="OldPassword" type="String" allowNulls="false" label="^OldPassword^Old Password^OldPassword^" />
+    <field name="Email" type="String" label="^Email^Email^Email^" allowNulls="false" />
+    <field name="PasswordQuestion" type="String" label="^PasswordQuestion^Password Question^PasswordQuestion^" allowNulls="false" />
+    <field name="PasswordAnswer" type="String" label="^PasswordAnswer^Password Answer^PasswordAnswer^" allowNulls="false" />
   </fields>
   <views>
-    <view id="loginForm" type="Form" access="Public" label="^LogLin^Login^LogLin^" tags="modal-fit-content modal-max-xs material-icon-lock-outline discard-changes-prompt-none" showInSelector="false">
+    <view id="loginForm" type="Form" access="Public" label="^LoginLink^Login^LoginLink^" tags="modal-fit-content modal-max-xs material-icon-lock-outline discard-changes-prompt-none" showInSelector="false">
       <categories>
         <category id="c1" headerText="" flow="NewColumn">
           <dataFields>
@@ -25,7 +25,7 @@
         </category>
       </categories>
     </view>
-    <view id="signUpForm" type="Form" commandId="command1" access="Public" label="^AccSigUp^Account Sign Up^AccSigUp^" tags="material-icon-person-add" showInSelector="false">
+    <view id="signUpForm" type="Form" commandId="command1" access="Public" label="^SignUpViewLabel^Account Sign Up^SignUpViewLabel^" tags="material-icon-person-add" showInSelector="false">
       <headerText>^SignUpViewHeaderText^Please fill this form and click OK button to sign up for an account. Click Cancel to return to the previous screen.^SignUpViewHeaderText^</headerText>
       <categories>
         <category id="c1" headerText="^SignUpViewNewUserInfoCategoryHeaderText^New User Information^SignUpViewNewUserInfoCategoryHeaderText^" flow="NewColumn">
@@ -51,7 +51,7 @@
         </category>
       </categories>
     </view>
-    <view id="passwordRequestForm" type="Form" commandId="command1" access="Public" label="^PasRec^Password Recovery: Step 1 of 2^PasRec^" tags="material-icon-lock discard-changes-prompt-none" showInSelector="false">
+    <view id="passwordRequestForm" type="Form" commandId="command1" access="Public" label="^PasswordRequestViewLabel^Password Recovery: Step 1 of 2^PasswordRequestViewLabel^" tags="material-icon-lock discard-changes-prompt-none" showInSelector="false">
       <headerText>^PasswordRequestViewHeaderText^Please fill this form and click Continue button to recover the forgotten password. Click Cancel to return to the previous screen.^PasswordRequestViewHeaderText^</headerText>
       <categories>
         <category id="c1" headerText="^PasswordRequestViewForgotPasswordCategoryHeaderText^Forgot your password?^PasswordRequestViewForgotPasswordCategoryHeaderText^" flow="NewColumn">
@@ -62,7 +62,7 @@
         </category>
       </categories>
     </view>
-    <view id="identityConfirmationForm" type="Form" commandId="command1" access="Public" label="^PasRec^Password Recovery: Step 2 of 2^PasRec^" tags="material-icon-lock-open discard-changes-prompt-none" showInSelector="false">
+    <view id="identityConfirmationForm" type="Form" commandId="command1" access="Public" label="^IdentityConfirmViewLabel^Password Recovery: Step 2 of 2^IdentityConfirmViewLabel^" tags="material-icon-lock-open discard-changes-prompt-none" showInSelector="false">
       <headerText>^IdentityConfirmViewHeaderText^Please fill this form and click Submit button to recover the forgotten password. Click Cancel to return to the previous screen.^IdentityConfirmViewHeaderText^</headerText>
       <categories>
         <category id="c1" headerText="^IdentityConfirmationViewIdentityConfirmCategoryHeaderText^Identity Confirmation^IdentityConfirmationViewIdentityConfirmCategoryHeaderText^" flow="NewColumn">
@@ -75,7 +75,7 @@
         </category>
       </categories>
     </view>
-    <view id="myAccountForm" type="Form" commandId="command1" label="^MyAccFor^My Account^MyAccFor^" tags="material-icon-perm-identity discard-changes-prompt-none" showInSelector="false">
+    <view id="myAccountForm" type="Form" commandId="command1" label="^MyAccountViewLabel^My Account^MyAccountViewLabel^" tags="material-icon-perm-identity discard-changes-prompt-none" showInSelector="false">
       <headerText>^MyAccountViewHeaderText^Please review your membership information below. Click Update My Account to change this record, or click Cancel to return back.^MyAccountViewHeaderText^</headerText>
       <categories>
         <category id="c1" headerText="^MyAccountViewCurrentPasswordCategoryHeaderText^1. Current Password^MyAccountViewCurrentPasswordCategoryHeaderText^" flow="NewColumn">

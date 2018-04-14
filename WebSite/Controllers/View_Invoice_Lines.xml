@@ -1,72 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="View_Invoice_Lines" conflictDetection="overwriteChanges" label="^VieInvLin^View_Invoice_Lines^VieInvLin^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="View_Invoice_Lines" conflictDetection="overwriteChanges" label="View_Invoice_Lines" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="Credit_Trx_Line_Items" custom="true">
-      <text><![CDATA[SELECT        dbo.Credit_Trx_Line_Items.Item_Code, dbo.Credit_Trx_Line_Items.Qty, dbo.Credit_Trx_Line_Items.Unit_Price, dbo.Credit_Trx_Line_Items.Line_Total, dbo.Credit_Trx_Line_Items.Cr_OPU_Code, 
-                         dbo.Credit_Trx_Line_Items.Transaction_ID, dbo.Credit_Trx_Line_Items.Line_Remarks, dbo.Credit_Trx_Line_Items.PO_NO, dbo.Credit_Trx_Line_Items.Trx_ID, dbo.Credit_Trx_Line_Items.SO_NO, 
-                         dbo.Credit_Trx_Line_Items.Line_Net, dbo.Credit_Trx_Line_Items.Item_Desc, dbo.Credit_Trx_Line_Items.Item_Part, dbo.Credit_Trx_Line_Items.UOM, dbo.Credit_Trx_Line_Items.Project_Code, 
-                         dbo.Credit_Trx_Line_Items.Dept_Code, dbo.Credit_Trx_Header.Invoice_Date, dbo.Credit_Trx_Header.Invoice_NO, dbo.Credit_Trx_Header.Vendor_Name, 
-                         (CASE dbo.Credit_Trx_Header.APAR_Flag WHEN 1 THEN 'Customer Invoice' WHEN 2 THEN 'Supplier Invoice' END) AS InvoiceType, dbo.Credit_Trx_Line_Items.Source_SOPO_LineID AS PO_Line_No, 
-                         dbo.Credit_Trx_Line_Items.Source_SOPO_LineID AS SO_Line_No, dbo.Credit_Trx_Line_Items.Item_Code_Ref_No
-FROM            dbo.Credit_Trx_Line_Items INNER JOIN
-                         dbo.Credit_Trx_Header ON dbo.Credit_Trx_Line_Items.Trx_ID = dbo.Credit_Trx_Header.Trx_ID]]></text>
+      <text><![CDATA[SELECT dbo.Credit_Trx_Line_Items.Item_Code, dbo.Credit_Trx_Line_Items.Qty, dbo.Credit_Trx_Line_Items.Unit_Price, dbo.Credit_Trx_Line_Items.Line_Total, dbo.Credit_Trx_Line_Items.Cr_OPU_Code, dbo.Credit_Trx_Line_Items.Transaction_ID, 
+                  dbo.Credit_Trx_Line_Items.Line_Remarks, dbo.Credit_Trx_Line_Items.PO_NO, dbo.Credit_Trx_Line_Items.Trx_ID, dbo.Credit_Trx_Line_Items.SO_NO, dbo.Credit_Trx_Line_Items.Line_Net, dbo.Credit_Trx_Line_Items.Item_Desc, 
+                  dbo.Credit_Trx_Line_Items.Item_Part, dbo.Credit_Trx_Line_Items.UOM, dbo.Credit_Trx_Line_Items.Project_Code, dbo.Credit_Trx_Line_Items.Dept_Code, dbo.Credit_Trx_Header.Invoice_Date, dbo.Credit_Trx_Header.Invoice_NO, 
+                  dbo.Credit_Trx_Header.Vendor_Name, (CASE dbo.Credit_Trx_Header.APAR_Flag WHEN 1 THEN 'Customer Invoice' WHEN 2 THEN 'Supplier Invoice' END) AS InvoiceType, dbo.Credit_Trx_Line_Items.Source_SOPO_LineID AS PO_Line_No, 
+                  dbo.Credit_Trx_Line_Items.Source_SOPO_LineID AS SO_Line_No, dbo.Credit_Trx_Line_Items.Item_Code_Ref_No, dbo.Credit_Trx_Line_Items.ProjTasksID, dbo.Credit_Trx_Line_Items.SiteCode, dbo.Credit_Trx_Line_Items.BudgetCode, 
+                  dbo.Credit_Trx_Line_Items.BudgetAccount
+FROM     dbo.Credit_Trx_Line_Items INNER JOIN
+                  dbo.Credit_Trx_Header ON dbo.Credit_Trx_Line_Items.Trx_ID = dbo.Credit_Trx_Header.Trx_ID]]></text>
     </command>
   </commands>
   <fields>
-    <field name="Item_Code" type="String" label="^IteCod^Item Code^IteCod^" length="20" showInSummary="true" />
+    <field name="Item_Code" type="String" label="^ItemCode^Item Code^ItemCode^" length="20" showInSummary="true" />
     <field name="Qty" type="Decimal" label="^Qty^Qty^Qty^" showInSummary="true" />
     <field name="Unit_Price" type="Decimal" label="^UniPri^Unit Price^UniPri^" showInSummary="true" />
-    <field name="Line_Total" type="Decimal" label="^LinTot^Line Total^LinTot^" readOnly="true" showInSummary="true" />
-    <field name="Cr_OPU_Code" type="Int32" label="^CrOPUCod^Cr OPU Code^CrOPUCod^" showInSummary="true" />
-    <field name="Transaction_ID" type="Decimal" label="^TraId^Transaction#^TraId^" />
-    <field name="Line_Remarks" type="String" label="^LinRem^Line Remarks^LinRem^" length="555" />
+    <field name="Line_Total" type="Decimal" label="^LineTotal^Line Total^LineTotal^" readOnly="true" showInSummary="true" />
+    <field name="Cr_OPU_Code" type="Int32" label="^CrOPUCode^Cr OPU Code^CrOPUCode^" showInSummary="true" />
+    <field name="Transaction_ID" type="Decimal" label="^Transaction^Transaction#^Transaction^" />
+    <field name="Line_Remarks" type="String" label="^LineRemarks^Line Remarks^LineRemarks^" length="555" />
     <field name="PO_NO" type="Decimal" label="^PoNo^Po No^PoNo^" />
-    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^TrxId^Trx#^TrxId^" />
+    <field name="Trx_ID" type="Decimal" allowNulls="false" label="^Trx^Trx#^Trx^" />
     <field name="SO_NO" type="Decimal" label="^SoNo^So No^SoNo^" />
-    <field name="Line_Net" type="Decimal" label="^LinNet^Line Net^LinNet^" readOnly="true" />
-    <field name="Item_Desc" type="String" label="^IteDes^Item Desc^IteDes^" readOnly="true" length="500" />
-    <field name="Item_Part" type="String" label="^ItePar^Item Part^ItePar^" readOnly="true" length="20" />
+    <field name="Line_Net" type="Decimal" label="^LineNet^Line Net^LineNet^" readOnly="true" />
+    <field name="Item_Desc" type="String" label="^ItemDesc^Item Desc^ItemDesc^" readOnly="true" length="500" />
+    <field name="Item_Part" type="String" label="^ItemPart^Item Part^ItemPart^" readOnly="true" length="20" />
     <field name="UOM" type="String" label="^Uom^Uom^Uom^" readOnly="true" length="10" />
-    <field name="Project_Code" type="String" label="^ProCod^Project Code^ProCod^" length="50" />
-    <field name="Dept_Code" type="String" label="^DepCod^Dept Code^DepCod^" length="50" />
-    <field name="Invoice_Date" type="DateTime" label="^InvDat^Invoice Date^InvDat^" />
-    <field name="Invoice_NO" type="Decimal" label="^InvNO^Invoice NO^InvNO^" />
-    <field name="Vendor_Name" type="String" label="^VenNam^Vendor Name^VenNam^" length="150" />
-    <field name="InvoiceType" type="String" label="^InvTyp^Invoice Type^InvTyp^" readOnly="true" length="16" />
-    <field name="PO_Line_No" type="Decimal" label="^POLinNo^PO Line No^POLinNo^" />
-    <field name="SO_Line_No" type="Decimal" label="^SOLinNo^SO Line No^SOLinNo^" />
-    <field name="Item_Code_Ref_No" type="String" label="^IteRefNo^Item Code Ref No^IteRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
-    <field name="ACompanyName" type="String" allowNulls="false" label="^AComNam^Company Name^AComNam^" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_CompanyName</formula>
-    </field>
-    <field name="ABranch" type="String" allowNulls="false" label="^ABraNam^Branch Name^ABraNam^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName </formula>
-    </field>
-    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoNam^Store Name^StoNam^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
-      <formula>SELECT  @Session_StoreName</formula>
-    </field>
-    <field name="ABranchAR" type="String" label="^ABraAr^ABranch AR^ABraAr^" computed="true" readOnly="true" showInSummary="true">
-      <formula>SELECT @Session_BranchName_Ar</formula>
-    </field>
-    <field name="AddressEn" type="String" readOnly="true" label="^AddEn^Address En^AddEn^" computed="true" showInSummary="true">
-      <formula>SELECT @Session_Address_English</formula>
-    </field>
-    <field name="AddressAr" type="String" readOnly="true" label="^AddAr^Address Ar^AddAr^" computed="true" showInSummary="true">
+    <field name="Project_Code" type="String" label="^ProjectCode^Project Code^ProjectCode^" length="50" />
+    <field name="Dept_Code" type="String" label="^DeptCode^Dept Code^DeptCode^" length="50" />
+    <field name="Invoice_Date" type="DateTime" label="^InvoiceDate^Invoice Date^InvoiceDate^" />
+    <field name="Invoice_NO" type="Decimal" label="^InvoiceNO^Invoice NO^InvoiceNO^" />
+    <field name="Vendor_Name" type="String" label="^VendorName^Vendor Name^VendorName^" length="150" />
+    <field name="InvoiceType" type="String" label="^InvoiceType^Invoice Type^InvoiceType^" readOnly="true" length="16" />
+    <field name="PO_Line_No" type="Decimal" label="^POLineNo^PO Line No^POLineNo^" />
+    <field name="SO_Line_No" type="Decimal" label="^SOLineNo^SO Line No^SOLineNo^" />
+    <field name="Item_Code_Ref_No" type="String" label="^ItemRefNo^Item Code Ref No^ItemRefNo^" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="20" />
+    <field name="AddressAr" type="String" readOnly="true" label="Address Ar" computed="true" showInSummary="true">
       <formula>SELECT @Session_Address_Arabic</formula>
     </field>
-    <field name="ABranch_Code" type="Int32" label="^ABraCod^ABranch Code^ABraCod^" computed="true">
+    <field name="AddressEn" type="String" readOnly="true" label="Address En" computed="true" showInSummary="true">
+      <formula>SELECT @Session_Address_English</formula>
+    </field>
+    <field name="ABranchLogo" type="Byte[]" label="ABranch Logo" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch_Code" type="Int32" label="ABranch Code" computed="true">
       <formula>SELECT @Session_OPU_Code</formula>
     </field>
-    <field name="ABranchLogo" type="Byte[]" label="^ABraLog^ABranch Logo^ABraLog^" onDemand="true" onDemandHandler="tbl_BranchLogoOPULogo" onDemandStyle="Thumbnail" readOnly="true" allowQBE="false" showInSummary="true" sourceFields="ABranch_Code" />
+    <field name="ABranch" type="String" allowNulls="false" label="Branch Name" allowQBE="false" allowSorting="false" htmlEncode="false" hidden="false" length="100" readOnly="true" computed="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName </formula>
+    </field>
+    <field name="ACompanyName" type="String" allowNulls="false" label="Company Name" allowQBE="false" allowSorting="false" computed="true" htmlEncode="false" hidden="false" length="100" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_CompanyName</formula>
+    </field>
+    <field name="ABranchAR" type="String" label="ABranch AR" computed="true" readOnly="true" showInSummary="true">
+      <formula>SELECT @Session_BranchName_Ar</formula>
+    </field>
+    <field name="AStoreName" type="String" allowNulls="false" readOnly="true" label="^StoreName^Store Name^StoreName^" allowQBE="false" allowSorting="false" computed="true" showInSummary="true" htmlEncode="false" hidden="false" length="100">
+      <formula>SELECT  @Session_StoreName</formula>
+    </field>
+    <field name="ProjTasksID" type="Decimal" label="^ProTasId^Proj Tasks ID^ProTasId^" />
+    <field name="SiteCode" type="String" label="Site Code" length="50" />
+    <field name="BudgetCode" type="Int64" label="Budget Code" />
+    <field name="BudgetAccount" type="String" label="Budget Account" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^CreTrxLin^Credit Trx Line Items^CreTrxLin^" filter="Cr_OPU_Code=@Session_OPU_Code" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Credit Trx Line Items" filter="Cr_OPU_Code=@Session_OPU_Code" reportTemplate="true" reportOrientation="Landscape" showInSelector="false">
+      <headerText />
       <dataFields>
-        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
-        <dataField fieldName="ABranch" rows="5" hidden="true" />
         <dataField fieldName="AStoreName" rows="5" hidden="true" />
         <dataField fieldName="Invoice_Date" columns="10" />
+        <dataField fieldName="ABranch" rows="5" hidden="true" />
+        <dataField fieldName="ACompanyName" rows="5" hidden="true" />
         <dataField fieldName="Trx_ID" columns="15" />
         <dataField fieldName="Invoice_NO" columns="15" />
         <dataField fieldName="Item_Code_Ref_No" columns="20" />
@@ -89,15 +93,19 @@ FROM            dbo.Credit_Trx_Line_Items INNER JOIN
         <dataField fieldName="InvoiceType" columns="16" hidden="true" />
         <dataField fieldName="PO_Line_No" columns="15" hidden="true" />
         <dataField fieldName="SO_Line_No" columns="15" hidden="true" />
-        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
-        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="AddressAr" rows="5" hidden="true" />
-        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="AddressEn" rows="5" hidden="true" />
         <dataField fieldName="ABranchLogo" columns="15" hidden="true" />
+        <dataField fieldName="ABranch_Code" columns="15" hidden="true" />
+        <dataField fieldName="ABranchAR" rows="5" hidden="true" />
+        <dataField fieldName="ProjTasksID" columns="15" />
+        <dataField fieldName="SiteCode" columns="50" />
+        <dataField fieldName="BudgetCode" columns="15" />
+        <dataField fieldName="BudgetAccount" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevTrxLinIte^Review Credit Trx Line Items^RevTrxLinIte^" showInSelector="false">
-      <headerText>$DefaultEditViewDescription</headerText>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Credit Trx Line Items" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="Credit Trx Line Items" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
@@ -128,8 +136,8 @@ FROM            dbo.Credit_Trx_Line_Items INNER JOIN
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewCreTrxLinIte^New Credit Trx Line Items^NewCreTrxLinIte^" showInSelector="false">
-      <headerText>$DefaultCreateViewDescription</headerText>
+    <view id="createForm1" type="Form" commandId="command1" label="New Credit Trx Line Items" showInSelector="false">
+      <headerText />
       <categories>
         <category id="c1" headerText="New Credit Trx Line Items" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>

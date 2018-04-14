@@ -9,5 +9,7 @@
     <div data-activator="Tab|^ViewAccounting^View Accounting^ViewAccounting^">
       <div id="view3" data-controller="ViewAccounting" data-filter-source="view1" data-filter-fields="Transaction_ID" data-page-size="5" data-show-view-selector="false" data-show-modal-forms="true"></div>
     </div>
+    <div class="DataViewHeader">^Locator^Locator Control^Locator^</div>
+    <div id="view5" data-controller="tbl_Transactions_Locator" data-view="grid1" data-filter-source="view2" data-filter-fields="Trx_Line_ID,Item_Code" data-page-size="5" data-show-view-selector="false" data-auto-hide="self" data-show-modal-forms="true" data-auto-highlight-first-row="true"></div>
   </div>
 </asp:Content>

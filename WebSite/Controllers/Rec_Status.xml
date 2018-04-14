@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Rec_Status" conflictDetection="overwriteChanges" label="^RecSta^Rec_Status^RecSta^" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Rec_Status" conflictDetection="overwriteChanges" label="Rec_Status" plugIn="MyCompany.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text" tableName="tbl_LookUp_Values" custom="true">
       <text><![CDATA[select ReturnValueInt,Descriptions from tbl_LookUp_Values where LookUpType=136]]></text>
     </command>
   </commands>
   <fields>
-    <field name="ReturnValueInt" type="Int32" label="^RetValInt^Return Value Int^RetValInt^" showInSummary="true" />
-    <field name="Descriptions" type="String" label="^Des^Descriptions^Des^" length="150" showInSummary="true" />
+    <field name="ReturnValueInt" type="Int32" label="^ReturnValueInt^Return Value Int^ReturnValueInt^" showInSummary="true" />
+    <field name="Descriptions" type="String" label="^Descriptions^Descriptions^Descriptions^" length="150" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="^LooUpVal^Look Up Values^LooUpVal^" showInSelector="false">
+    <view id="grid1" type="Grid" commandId="command1" label="tbl Look Up Values" showInSelector="false">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ReturnValueInt" columns="15" />
         <dataField fieldName="Descriptions" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="^RevLooUpVal^Review Look Up Values^RevLooUpVal^" showInSelector="false">
+    <view id="editForm1" type="Form" commandId="command1" label="Review tbl Look Up Values" showInSelector="false">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="tbl Look Up Values" flow="NewColumn">
@@ -29,7 +29,7 @@
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="^NewLooUpVal^New Look Up Values^NewLooUpVal^" showInSelector="false">
+    <view id="createForm1" type="Form" commandId="command1" label="New tbl Look Up Values" showInSelector="false">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="New tbl Look Up Values" flow="NewColumn">
@@ -67,7 +67,7 @@
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="glyphicon glyphicon-user" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
